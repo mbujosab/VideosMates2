@@ -1,0 +1,4 @@
+#+TITLE: Vídeos para la asignatura Matemáticas II de GECO
+#+AUTHOR: Marcos Bujosa
+
+Repositorio con los fuentes para generar los vídeos con Manim. 
