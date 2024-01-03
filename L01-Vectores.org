@@ -88,7 +88,7 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
 	
         d = nc.Vector([1,2,3],'fila')
         Ej1 = MathTex( d.latex(), "\\ne", nc.Vector(reversed(d),'fila').latex() ) 
-        with self.voiceover(text=r"Por ejemplo, los vectores 1 2 3 y 3 2 1 son distintos.") as tracker:
+        with self.voiceover(text=r"Por ejemplo, los vectores, uno dos tres y tres dos uno, son distintos.") as tracker:
             self.play(FadeIn(Ej1))
             self.wait(tracker.duration-0.5)
             self.play(FadeOut(Ej1))
@@ -96,30 +96,31 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
         p = nc.Vector([sp.pi,sp.pi,sp.pi,sp.pi],'fila')
         Ej2 = MathTex(p.latex(), r"\ne", nc.Vector(p|(1,2),'fila').latex() )
         with self.voiceover(text=r"""También son distintos los vectores con distinta cantidad de
-        elementos. El vector de la izquierda pertenece a R 4, pues es
-        una lista de 4 números reales, mientras que el de la derecha
-        pertenece a R 2.""") as tracker:
+        elementos. Por ejemplo, el vector de la izquierda pertenece a R 4 por ser una lista de
+        4 números. El de la derecha pertenece a R
+        2.""") as tracker:
             self.add(Ej2)
             self.wait(tracker.duration-0.5)
             self.play(FadeOut(Ej2))
 	
         c = nc.Vector([sp.pi,nc.fracc(3,4),0,0.11],'fila')
         Ej3 = MathTex(c.latex(),"=",c.latex())
-        with self.voiceover(text=r"""Por tanto dos vectores serán
-        iguales, si y solo si, sus correspondientes listas son idénticas""") as tracker:
+        with self.voiceover(text=r"""En consecuencia, dos vectores serán iguales si, y solo si, sus correspondientes
+        listas son idénticas""") as tracker:
             self.play(FadeIn(Ej3))
             self.wait(tracker.duration)
-            self.play(FadeOut(Ej3))
-            
+            self.play(FadeOut(Ej3))            
         self.play(FadeOut(Ej))
-        self.wait(0.5)
+        self.wait()
         
 #+END_SRC
 
 
 #+call: rodando(fichero="L01_Vectores", escena="1")
+#+call: rodandoHD(fichero="L01_Vectores", escena="1")
 
 # file:./lib/media/videos/L01_Vectores/480p15/L01_01_VectoresDefinicion.mp4
+
 
 *** Escena 2 - Notación vectores de \R[n]
 
@@ -170,17 +171,14 @@ class L01_02_VectoresNotacion(VoiceoverScene):
         manuales no siguen este convenio de notación).""") as tracker:
             self.wait(tracker.duration+0.3)
 	
-        with self.voiceover(text=r"""Además, escribiremos la lista de
-        números encerrada entre paréntesis; y pondremos una coma
-        detrás de cada elemento cuando escribamos el vector en
-        horizontal.""") as tracker:
+        with self.voiceover(text=r"""Siempre escribiremos la lista de números encerrada entre
+        paréntesis; poniendo una coma detrás de cada elemento cuando
+        escribamos el vector en horizontal.""") as tracker:
             self.play(Indicate(grp1[0][0][::len(grp1[0][0])-1]),
-                      Indicate(grp1[2][0][0:2]),
-                      Indicate(grp1[2][0][-2:]),
+                      Indicate(grp1[2][0][0:2]), Indicate(grp1[2][0][-2:]),
                       run_time=tracker.duration/2)
             self.play(Flash(grp1[0][0][2]),
-                      Flash(grp1[0][0][4]),
-                      Flash(grp1[0][0][7]),
+                      Flash(grp1[0][0][4]), Flash(grp1[0][0][7]),
                       run_time=tracker.duration/8)
             self.wait(tracker.duration/8)
             self.play(Circumscribe(grp1[0]))
@@ -195,7 +193,6 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(Indicate(VectorNoNumero[3]),
                       Flash(definicion[2][-9]),
                       run_time=tracker.duration/3)
-            self.wait(0.5)
             self.play(FadeOut(VectorNoNumero))
             
         Vectores = MathTex(r"\Vect{a}, \Vect{b}, \Vect{c},\ldots\Vect{x}, \Vect{y}, \Vect{z}",
@@ -308,10 +305,9 @@ class L01_03_VectoresElementos(VoiceoverScene):
             self.play( Indicate(vector_c[1][1]),    Indicate(A[0]) )
         with self.voiceover(text = r"""con c 2 la segunda""") as tracker:
             self.play( Indicate(vector_c[1][3:6]),  Indicate(A[1]) )
-        with self.voiceover(text = r"""y del mismo modo""") as tracker:
-            self.play( Indicate(vector_c[1][7]),    Indicate(A[2]) )
-        with self.voiceover(text = r"""con el resto de componentes""") as tracker:
-            self.play( Indicate(vector_c[1][9:13]), Indicate(A[3]) )
+        with self.voiceover(text = r"""y del mismo modo con el resto de componentes""") as tracker:
+            self.play( Indicate(vector_c[1][7],    run_time=tracker.duration/2), Indicate(A[2], run_time=tracker.duration/2) )
+            self.play( Indicate(vector_c[1][9:13], run_time=tracker.duration/2), Indicate(A[3], run_time=tracker.duration/2) )
             self.wait(0.5)
             self.play( FadeOut(vector_c), FadeOut(B), FadeOut(A) )
             self.wait(0.5)
@@ -321,24 +317,25 @@ class L01_03_VectoresElementos(VoiceoverScene):
             self.add(cs)
             self.wait(tracker.duration)
             
-        with self.voiceover(text = r"""la negrita cursiva para el vector""" ) as tracker:
-            self.play( Circumscribe(cs[0][0]))
-            
-        with self.voiceover(text = r"""y solo la cursiva para sus
-        componentes, limita la operatividad de esta tradicional
-        notación.""" ) as tracker:
-            self.play( Circumscribe(cs[1][1]),
-                       Circumscribe(cs[1][4]),
-                       Circumscribe(cs[1][7]),
-                       Circumscribe(cs[1][10]))
+        with self.voiceover(text = r"""con negrita los vectores y sin negrita los
+        componentes, dificulta distinguirlos a primera vista""" ) as tracker:
+            self.play( Indicate(cs[0][ 0],scale_factor=2.),
+                       Indicate(cs[0][ 0],scale_factor=2.),
+                       Indicate(cs[1][ 1],scale_factor=2.),
+                       Indicate(cs[1][ 4],scale_factor=2.),
+                       Indicate(cs[1][ 7],scale_factor=2.),
+                       Indicate(cs[1][10],scale_factor=2.), run_time=tracker.duration*2/3)
 
         MTa = MathTex(r"\eleVR{a}{i}",tex_template = myTemplate).scale(3)
         MTb = MathTex(r"{a}_{i}=",tex_template = myTemplate).scale(3).next_to(MTa, LEFT)
         VG  = VGroup(MTb,MTa) 
-        with self.voiceover(text = r"""Es preferible una notación que
-        indique la selección de elementos mediante un operador.""" ) as tracker:
-            self.play(cs.animate.to_corner(DL), run_time=tracker.duration/2)
+        with self.voiceover(text = r"""Es más clara y operativa una notación que use un único tipo de fuente,
+        y que denote la selección de elementos con un operador (por
+        ejemplo con una barra vertical).""" ) as tracker:
+            self.play(cs.animate.to_corner(DL),
+                      run_time=tracker.duration*4/5)
             self.play(Indicate(VG[1][0][1]))
+            self.wait(0.5)
 
         def VectorGenerico(s,n):
             elem = lambda s,i: sp.Symbol(r'\eleVR{'+ s +'}{'+ str(i) + '}')
@@ -348,22 +345,20 @@ class L01_03_VectoresElementos(VoiceoverScene):
         cs2 = MathTex(r"=",
                      v_generico2.latex(),
                      tex_template = myTemplate,).next_to(cs, RIGHT)
-        csG  = VGroup(cs,cs2) 
         
         VGB = VGroup(*[MathTex(sp.latex(e) + "=\; & \eleVR{a}{" + str(i+1) + "}",
                                tex_template = myTemplate)
                        for i,e in enumerate(v_generico.lista)
                        ]).scale(3)
         
-        with self.voiceover( text = r"""Al escribir como subíndice una
-        barra vertical que media entre el vector y un índice,
-        indicamos la operación consistente en seleccionar una
-        componente, la indicada con dicho índice""" ) as tracker:
+        with self.voiceover( text = r"""Por ello, para denotar una componente, escribiremos un subíndice con una
+        barra que medie entre el vector y el índice de la
+        componente""" ) as tracker:
             self.play(FadeIn(VG[1]))
-            self.wait(0.3)
-            self.play(Indicate(VG[1][0][1:]))
-            self.wait(2*tracker.duration/3)
-            self.play(Indicate(VG[1][0][-1]))
+            self.wait(tracker.duration/3)
+            self.play(Indicate(VG[1][0][1:], run_time=tracker.duration/4))
+            #self.wait(tracker.duration/3)
+            self.play(Indicate(VG[1][0][-1], run_time=tracker.duration/5))
             self.play(Write(VG[0]))
             self.wait()
             self.play(VG.animate.move_to([0,0,0]))
@@ -381,27 +376,16 @@ class L01_03_VectoresElementos(VoiceoverScene):
             self.play(FadeIn(VGB[3]))
             self.play(FadeTransform(VGB[3][0][0:2],cs[1][10:12]),
                       FadeTransform(VGB[3][0][3:],cs2[1][19:24]), FadeOut(VGB[3][0][2]), run_time=1.5)
-            
-        with self.voiceover( text = r"""La notación tradicional distingue entre vectores y sus componentes
-        usando fuentes con y sin negrita. Con frecuencia es dificil
-        ver la diferencia a primera vista. Ese problema desaparece
-        cuando usamos la notación con el operador selector""" ) as tracker:
-            self.play(csG.animate.move_to([0,0,0]),  run_time=tracker.duration/4)
-            self.play( Indicate(cs[1][1]),
-                       Indicate(cs[1][4]),
-                       Indicate(cs[1][7]),
-                       Indicate(cs[1][10]),
-                       Indicate(csG[0][0][0]), run_time=tracker.duration/2)
-            self.play( Circumscribe(csG[1][1:]),   run_time=tracker.duration/4)
             self.play(FadeOut(Notac),FadeOut(cs),FadeOut(cs2))
-
-        MTLR = MathTex(r"\eleVR{x}{i}",r"\;=\eleVL{x}{i}",tex_template = myTemplate).scale(3)
-        with self.voiceover( text = r"""Además aceptaremos la selección de componentes operando tanto por la
-        derecha como por la izquierda.""" ) as tracker:   
+            
+        MTLR = MathTex(r"\eleVR{a}{i}",r"\;=\eleVL{a}{i}",tex_template = myTemplate).scale(3)
+        with self.voiceover( text = r"""Además, admitiremos que el operador selector actúe tanto por la derecha
+        como por la izquierda.""" ) as tracker:   
             self.play(FadeIn(MTLR[0]), run_time=2*tracker.duration/3)
             self.play(FadeIn(MTLR[1]))
             self.wait(tracker.duration/3+0.5)
             self.play(FadeOut(MTLR))
+            self.wait()
             
 #+END_SRC
 
@@ -411,17 +395,13 @@ class L01_03_VectoresElementos(VoiceoverScene):
 
 # file:./lib/media/videos/L01_Vectores/480p15/L01_03_VectoresElementos.mp4
 
-# https://ucmdrive.ucm.es/s/TXMfso4Y9iDwy85 directorio
-
-# https://ucmdrive.ucm.es/s/y8GHw7tF46XNsgY
-
 #+call: rodando(fichero="L01_Vectores", escena="1,2,3")
 
-#+call: montando(nombre="L01_Vectores")
+#+call: montando(video="L01_Vectores")
 
 #+call: rodandoHD(fichero="L01_Vectores", escena="1,2,3")
 
-#+call: montandoHD(nombre="L01_Vectores")
+#+call: montandoHD(video="L01_Vectores")
 
 # file:./L01_Vectores.mp4
 
@@ -481,7 +461,7 @@ class ZCreditos(Scene):
         github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
         CGG  = VGroup(copyright,github).scale(1.1)
         self.add(CGG)
-        self.wait(6)
+        self.wait(10)
 #+END_SRC
 
 #+call: rodando(fichero="L01_Vectores", escena="4")
@@ -491,35 +471,86 @@ class ZCreditos(Scene):
 
 * Rodando: 1,2,3\dots ¡acción!
 
-#+call: rodando(fichero="L01_Vectores", escena="1")
+**** Generamos un fichero ~mpeg~ por cada escena
+
+- Versión de poca calidad
+
+#+call: rodando(fichero="L01_Vectores", escena="1,2,3")
 
 #+name: rodando
-#+BEGIN_SRC sh :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+#+BEGIN_SRC bash :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
 echo $escena | manim -pql $fichero.py --disable_caching
 #+END_SRC
 
+- Versión calidad HD1080
 
 #+call: rodandoHD(fichero="L01_Vectores", escena="1,2,3")
 
 #+name: rodandoHD
-#+BEGIN_SRC sh :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+#+BEGIN_SRC bash :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
 echo $escena | manim -qh $fichero.py --disable_caching
 #+END_SRC
 
 
-#+call: montando(nombre="L01_Vectores")
+**** Concatenamos las escenas en un único fichero ~mpeg~ y añadimos música de fondo.
+
+- Montando la versión de baja resolución
+
+#+call: montando(video="L01_Vectores")
 
 #+name: montando
-#+BEGIN_SRC sh  :var subdir="lib/media/videos/" :var nombre="L01_Vectores" :var calidad="480p15"  :results silent
-rm -f $nombre.mp4 list.txt
-for f in $subdir/$nombre/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $nombre.mp4 && rm list.txt
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_Vectores" :var calidad="480p15"  :var music="music/3Blue1Brown-Zeta" :results silent
+rm -f $subdir/$video/$calidad/$video.mp4 list.txt
+for f in $subdir/$video/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
+
+mkdir -p tmp
+
+ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
 #+END_SRC
 
-#+call: montandoHD(nombre="L01_Vectores")
+- Montando la versión de resolución HD1080
+
+#+call: montandoHD(video="L01_Vectores")
 
 #+name: montandoHD
-#+BEGIN_SRC sh  :var subdir="lib/media/videos/" :var nombre="L01_Vectores" :var calidad="1080p60"  :results silent
-rm -f $nombre.mp4 list.txt
-for f in $subdir/$nombre/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $nombre.mp4 && rm list.txt
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_Vectores" :var calidad="1080p60" :var music="music/3Blue1Brown-Zeta" :results silent
+rm -f $subdir/$video/$calidad/$video.mp4 list.txt
+for f in $subdir/$video/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
+
+mkdir -p tmp
+
+ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
 #+END_SRC
 
+#+call: montandoHD(video="L01_Vectores")
+
+**** Fundimos a negro los últimos segundos del vídeo (y la música).
+
+#+call: fade(video="L01_Vectores")
+
+#+name: fade
+#+BEGIN_SRC bash :var video="L01_Vectores" :results silent
+dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4") && offset=$(bc -l <<< "$dur"-7) && ffmpeg -i "tmp/$video.mp4" -filter_complex "[0:v]fade=type=in:duration=1,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
+#+END_SRC
+
+***** COMMENT Este no vale                                        :noexports:
+#+BEGIN_SRC bash :var video="L01_Vectores" :var f="L01_Vectores.mp4" :results silent
+mkdir -p tmp
+
+for f in tmp/$video.mp4; do
+  dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "$f")
+  offset=$(bc -l <<< "$dur"-7)
+  ffmpeg -i "$f" -filter_complex "[0:v]fade=type=in:duration=1,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
+done
+#+END_SRC
+
+**** Copiamos el resultado a un lugar público
+
+#+call: publicar(video="L01_Vectores")
+
+#+name: publicar
+#+BEGIN_SRC sh :var subdir="/home/marcos/CloudStation/Nextcloud/pub/Mates2Videos" :var video="L01_Vectores"  :results silent
+cp -f $video.mp4 $subdir/$video.mp4
+#+END_SRC
+
+#+RESULTS:
