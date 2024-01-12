@@ -1,4 +1,4 @@
-#+TITLE: Lección 1 del curso
+#+TITLE: Lección 1 del curso - Vídeo 1
 #+AUTHOR: Marcos Bujosa
 #+LANGUAGE: es-es
 # +STARTUP: show3levels
@@ -28,22 +28,23 @@
 
 ** Español
 
-
 *** Escena 1 - Definición de vector de \R[n]
 
-#+call: rodando(fichero="L01_Vectores", escena="1")
+#+call: rodando(fichero="L01_V01_Vectores", escena="1")
 
-# file:./lib/media/videos/L01_Vectores/480p15/L01_01_VectoresDefinicion.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E01_VectoresDefinicion.mp4
 
-#+name: L01_01_VectoresDefinicion
-#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_Vectores.py
-<<Carga de la librería Manim y NacAL>>
+#+name: L01_V01_E01_VectoresDefinicion
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V01_Vectores.py
+<<Carga de la librería Manim y NacAL con AzureService>>
 
 <<copyright>>
 
-class L01_01_VectoresDefinicion(VoiceoverScene):
+class L01_V01_E01_VectoresDefinicion(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
 
@@ -64,7 +65,7 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
                          r" es una \emph{lista ordenada} de $n$ números",
                          tex_template = myTemplate,
                          ).to_edge(UP).set_width(13)
-        with self.voiceover(text=r"Un vector de R n es una lista ordenada de números.") as tracker:
+        with self.voiceover(text=r"Un vector de R n es una lista ordenada de números. ") as tracker:
             self.add(definicion)
 	
         # Aclaración de la notación
@@ -116,23 +117,25 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
 #+END_SRC
 
 
-#+call: rodando(fichero="L01_Vectores", escena="1")
-#+call: rodandoHD(fichero="L01_Vectores", escena="1")
+#+call: rodando(fichero="L01_V01_Vectores", escena="1")
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="1")
 
-# file:./lib/media/videos/L01_Vectores/480p15/L01_01_VectoresDefinicion.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E01_VectoresDefinicion.mp4
 
 
 *** Escena 2 - Notación vectores de \R[n]
 
-#+call: rodando(fichero="L01_Vectores", escena="2")
+#+call: rodando(fichero="L01_V01_Vectores", escena="2")
 
-# file:./lib/media/videos/L01_Vectores/480p15/L01_02_VectoresNotacion.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E02_VectoresNotacion.mp4
 
-#+name: L01_02_VectoresNotacion
-#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_Vectores.py
-class L01_02_VectoresNotacion(VoiceoverScene):
+#+name: L01_V01_E02_VectoresNotacion
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V01_Vectores.py
+class L01_V01_E02_VectoresNotacion(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
         
@@ -167,8 +170,10 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(Circumscribe(definicion[2][5:18]),run_time=tracker.duration)
             
         with self.voiceover(text=r"""Por este motivo podemos escribir un mismo vector tanto en
-        horizontal como en vertical (pero tenga en cuenta que muchos
-        manuales no siguen este convenio de notación).""") as tracker:
+        horizontal como en vertical. Pero tenga en cuenta que la
+        mayoría de manuales no respetan este convenio, y consideran,
+        al contrario de lo que haremos nosotros, que vectores fila y
+        vectores columna son objetos distintos.""") as tracker:
             self.wait(tracker.duration+0.3)
 	
         with self.voiceover(text=r"""Siempre escribiremos la lista de números encerrada entre
@@ -185,14 +190,15 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(FadeOut(grp1))
 	
         VectorNoNumero =  MathTex(r"(3)",r"\ne",(3*nc.V1(1)).latex(),r"\in\R[1]", tex_template = myTemplate,)
-        with self.voiceover(text=r"""Así podremos distinguir entre un número entre paréntesis y un
-        vector de R 1 (que es una lista con un solo número).""") as tracker:
+        with self.voiceover(text=r"""Así podremos distinguir un número entre paréntesis de un
+        vector de R 1;""") as tracker:
             self.add(VectorNoNumero)
-            self.play(Indicate(VectorNoNumero[0]),run_time=tracker.duration/3)
+            self.play(Indicate(VectorNoNumero[0]),run_time=tracker.duration*2/3)
             self.play(Indicate(VectorNoNumero[2]),run_time=tracker.duration/3)
+        with self.voiceover(text=r"""es decir, de una lista con un solo número.""") as tracker:
             self.play(Indicate(VectorNoNumero[3]),
                       Flash(definicion[2][-9]),
-                      run_time=tracker.duration/3)
+                      run_time=tracker.duration)
             self.play(FadeOut(VectorNoNumero))
             
         Vectores = MathTex(r"\Vect{a}, \Vect{b}, \Vect{c},\ldots\Vect{x}, \Vect{y}, \Vect{z}",
@@ -236,21 +242,25 @@ class L01_02_VectoresNotacion(VoiceoverScene):
 
 #+END_SRC
 
-#+call: rodando(fichero="L01_Vectores", escena="2")
+#+call: rodando(fichero="L01_V01_Vectores", escena="2")
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="2")
 
-# file:./lib/media/videos/L01_Vecto res/480p15/L01_02_VectoresNotacion.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E02_VectoresNotacion.mp4
+
 
 *** Escena 3 - Selección de elementos de un vector de \R[n]
   
-#+call: rodando(fichero="L01_Vectores", escena="3")
+#+call: rodando(fichero="L01_V01_Vectores", escena="3")
 
-# file:./lib/media/videos/L01_Vectores/480p15/L01_03_VectoresElementos.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E03_VectoresElementos.mp4
 
-#+name: L01_03_VectoresElementos
-#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_Vectores.py
-class L01_03_VectoresElementos(VoiceoverScene):
+#+name: L01_V01_E03_VectoresElementos
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V01_Vectores.py
+class L01_V01_E03_VectoresElementos(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))
         
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
@@ -330,8 +340,8 @@ class L01_03_VectoresElementos(VoiceoverScene):
         MTb = MathTex(r"{a}_{i}=",tex_template = myTemplate).scale(3).next_to(MTa, LEFT)
         VG  = VGroup(MTb,MTa) 
         with self.voiceover(text = r"""Es más clara y operativa una notación que use un único tipo de fuente,
-        y que denote la selección de elementos con un operador (por
-        ejemplo con una barra vertical).""" ) as tracker:
+        y que denote la selección de elementos con un operador. Por
+        ejemplo con una barra vertical.""" ) as tracker:
             self.play(cs.animate.to_corner(DL),
                       run_time=tracker.duration*4/5)
             self.play(Indicate(VG[1][0][1]))
@@ -390,29 +400,38 @@ class L01_03_VectoresElementos(VoiceoverScene):
 #+END_SRC
 
 
-#+call: rodando(fichero="L01_Vectores", escena="3")
-#+call: rodandoHD(fichero="L01_Vectores", escena="3")
+#+call: rodando(fichero="L01_V01_Vectores", escena="3")
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="3")
 
-# file:./lib/media/videos/L01_Vectores/480p15/L01_03_VectoresElementos.mp4
+# file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E03_VectoresElementos.mp4
 
-#+call: rodando(fichero="L01_Vectores", escena="1,2,3")
 
-#+call: montando(video="L01_Vectores")
+**** COMMENT En baja resolución                                   :noexports:
 
-#+call: rodandoHD(fichero="L01_Vectores", escena="1,2,3")
+#+call: rodando(fichero="L01_V01_Vectores", escena="1,2,3,4")
 
-#+call: montandoHD(video="L01_Vectores")
+#+call: montando(video="L01_V01_Vectores")
 
-# file:./L01_Vectores.mp4
+#+call: fade(video="L01_V01_Vectores")
+
+**** COMMENT En alta resolución                                   :noexports:
+
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="1,2,3,4")
+
+#+call: montandoHD(video="L01_V01_Vectores")
+
+#+call: fade(video="L01_V01_Vectores")
+
+# file:./L01_V01_Vectores.mp4
 
 
 ** Versión en inglés
 
-#+BEGIN_SRC sh :dir lib :var fichero="L01_Vectores" :var escena="L01_01_VectoresDefinicion"
+#+BEGIN_SRC sh :dir lib :var fichero="L01_V01_Vectores" :var escena="L01_V01_VectoresDefinicion"
 manim_render_translation $fichero.py -s $escena -d $escenaENG -l en -ql
 #+END_SRC
 
-# manim_render_translation L01_Vectores.py -s L01_01_VectoresDefinicion -d L01_01_VectoresDefinicionENG -l en -ql
+# manim_render_translation L01_V01_Vectores.py -s L01_V01_VectoresDefinicion -d L01_V01_VectoresDefinicionENG -l en -ql
 
 # 
    
@@ -442,12 +461,32 @@ import sympy as sp
 #_ = get_gettext()
 #+END_SRC
 
+#+name: Carga de la librería Manim y NacAL con AzureService
+#+BEGIN_SRC python
+from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.azure import AzureService
+import nacal as nc
+import sympy as sp
+
+# PARA LA TRADUCCIÓN (pero no me ha funcionado)
+
+#from manim_voiceover.translate import get_gettext
+# # It is good practice to get the LOCALE and DOMAIN from environment variables
+#import os
+#LOCALE = os.getenv("LOCALE")
+#DOMAIN = os.getenv("DOMAIN")
+# The following function uses LOCALE and DOMAIN to set the language, and
+# returns a gettext function that is used to insert translations.
+#_ = get_gettext()
+#+END_SRC
+
 
 ** Creditos
 
 #+name: copyrightLateral
 #+BEGIN_SRC python
-copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
 CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT).set_color(GRAY_D)
 self.add(CGG)
 #+END_SRC
@@ -457,49 +496,67 @@ self.add(CGG)
 #+BEGIN_SRC python :noweb tangle
 class ZCreditos(Scene):
     def construct(self):
-        copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+        copyright = Tex(r"\textcopyright{\;} 2024 \; Marcos Bujosa")
         github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
         CGG  = VGroup(copyright,github).scale(1.1)
         self.add(CGG)
         self.wait(10)
 #+END_SRC
 
-#+call: rodando(fichero="L01_Vectores", escena="4")
+#+call: rodando(fichero="L01_V01_Vectores", escena="4")
 
-#+call: rodandoHD(fichero="L01_Vectores", escena="4")
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="4")
+
+#+call: montandoHD(video="L01_V01_Vectores")
+
+#+call: fade(video="L01_V01_Vectores")
 
 
 * Rodando: 1,2,3\dots ¡acción!
+
+
+#+call: rodando(fichero="L01_V01_Vectores", escena="1,2,3,4")
+
+#+call: montando(video="L01_V01_Vectores")
+
+#+call: fade(video="L01_V01_Vectores")
+
+
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="1,2,3,4")
+
+#+call: montandoHD(video="L01_V01_Vectores")
+
+#+call: fade(video="L01_V01_Vectores")
+
 
 **** Generamos un fichero ~mpeg~ por cada escena
 
 - Versión de poca calidad
 
-#+call: rodando(fichero="L01_Vectores", escena="1,2,3")
+#+call: rodando(fichero="L01_V01_Vectores", escena="1,2,3,4")
 
 #+name: rodando
-#+BEGIN_SRC bash :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+#+BEGIN_SRC bash :var fichero="L01_V01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
 echo $escena | manim -pql $fichero.py --disable_caching
 #+END_SRC
 
 - Versión calidad HD1080
 
-#+call: rodandoHD(fichero="L01_Vectores", escena="1,2,3")
+#+call: rodandoHD(fichero="L01_V01_Vectores", escena="1,2,3,4")
 
 #+name: rodandoHD
-#+BEGIN_SRC bash :var fichero="L01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+#+BEGIN_SRC bash :var fichero="L01_V01_Vectores" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
 echo $escena | manim -qh $fichero.py --disable_caching
 #+END_SRC
-
 
 **** Concatenamos las escenas en un único fichero ~mpeg~ y añadimos música de fondo.
 
 - Montando la versión de baja resolución
 
-#+call: montando(video="L01_Vectores")
+#+call: montando(video="L01_V01_Vectores")
 
 #+name: montando
-#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_Vectores" :var calidad="480p15"  :var music="music/3Blue1Brown-Zeta" :results silent
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V01_Vectores" :var calidad="480p15"  :var music="music/3Blue1Brown-Zeta" :results silent
 rm -f $subdir/$video/$calidad/$video.mp4 list.txt
 for f in $subdir/$video/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
 
@@ -510,10 +567,10 @@ ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a
 
 - Montando la versión de resolución HD1080
 
-#+call: montandoHD(video="L01_Vectores")
+#+call: montandoHD(video="L01_V01_Vectores")
 
 #+name: montandoHD
-#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_Vectores" :var calidad="1080p60" :var music="music/3Blue1Brown-Zeta" :results silent
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V01_Vectores" :var calidad="1080p60" :var music="music/3Blue1Brown-Zeta" :results silent
 rm -f $subdir/$video/$calidad/$video.mp4 list.txt
 for f in $subdir/$video/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
 
@@ -522,34 +579,23 @@ mkdir -p tmp
 ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
 #+END_SRC
 
-#+call: montandoHD(video="L01_Vectores")
+#+call: montandoHD(video="L01_V01_Vectores")
 
 **** Fundimos a negro los últimos segundos del vídeo (y la música).
 
-#+call: fade(video="L01_Vectores")
+#+call: fade(video="L01_V01_Vectores")
 
 #+name: fade
-#+BEGIN_SRC bash :var video="L01_Vectores" :results silent
-dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4") && offset=$(bc -l <<< "$dur"-7) && ffmpeg -i "tmp/$video.mp4" -filter_complex "[0:v]fade=type=in:duration=1,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
-#+END_SRC
-
-***** COMMENT Este no vale                                        :noexports:
-#+BEGIN_SRC bash :var video="L01_Vectores" :var f="L01_Vectores.mp4" :results silent
-mkdir -p tmp
-
-for f in tmp/$video.mp4; do
-  dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "$f")
-  offset=$(bc -l <<< "$dur"-7)
-  ffmpeg -i "$f" -filter_complex "[0:v]fade=type=in:duration=1,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
-done
+#+BEGIN_SRC bash :var video="L01_V01_Vectores" :results silent
+dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4") && offset=$(bc -l <<< "$dur"-7) && ffmpeg -i "tmp/$video.mp4" -filter_complex "[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
 #+END_SRC
 
 **** Copiamos el resultado a un lugar público
 
-#+call: publicar(video="L01_Vectores")
+#+call: publicar(video="L01_V01_Vectores")
 
 #+name: publicar
-#+BEGIN_SRC sh :var subdir="/home/marcos/CloudStation/Nextcloud/pub/Mates2Videos" :var video="L01_Vectores"  :results silent
+#+BEGIN_SRC sh :var subdir="/home/marcos/CloudStation/Nextcloud/pub/Mates2Videos" :var video="L01_V01_Vectores"  :results silent
 cp -f $video.mp4 $subdir/$video.mp4
 #+END_SRC
 
