@@ -1,6 +1,6 @@
 from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.gtts import GTTSService
+from manim_voiceover.services.azure import AzureService
 import nacal as nc
 import sympy as sp
 
@@ -17,20 +17,22 @@ import sympy as sp
 
 class ZCreditos(Scene):
     def construct(self):
-        copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+        copyright = Tex(r"\textcopyright{\;} 2024 \; Marcos Bujosa")
         github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
         CGG  = VGroup(copyright,github).scale(1.1)
         self.add(CGG)
         self.wait(10)
 
-class L01_01_VectoresDefinicion(VoiceoverScene):
+class L01_V01_E01_VectoresDefinicion(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
 
         # Copyright lateral
-        copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+        copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
         CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT).set_color(GRAY_D)
         self.add(CGG)
         
@@ -48,7 +50,7 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
                          r" es una \emph{lista ordenada} de $n$ números",
                          tex_template = myTemplate,
                          ).to_edge(UP).set_width(13)
-        with self.voiceover(text=r"Un vector de R n es una lista ordenada de números.") as tracker:
+        with self.voiceover(text=r"Un vector de R n es una lista ordenada de números. ") as tracker:
             self.add(definicion)
 	
         # Aclaración de la notación
@@ -97,14 +99,16 @@ class L01_01_VectoresDefinicion(VoiceoverScene):
         self.play(FadeOut(Ej))
         self.wait()
 
-class L01_02_VectoresNotacion(VoiceoverScene):
+class L01_V01_E02_VectoresNotacion(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
         
         # Copyright lateral
-        copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+        copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
         CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT).set_color(GRAY_D)
         self.add(CGG)
         
@@ -136,8 +140,10 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(Circumscribe(definicion[2][5:18]),run_time=tracker.duration)
             
         with self.voiceover(text=r"""Por este motivo podemos escribir un mismo vector tanto en
-        horizontal como en vertical (pero tenga en cuenta que muchos
-        manuales no siguen este convenio de notación).""") as tracker:
+        horizontal como en vertical. Pero tenga en cuenta que la
+        mayoría de manuales no respetan este convenio, y consideran,
+        al contrario de lo que haremos nosotros, que vectores fila y
+        vectores columna son objetos distintos.""") as tracker:
             self.wait(tracker.duration+0.3)
 	
         with self.voiceover(text=r"""Siempre escribiremos la lista de números encerrada entre
@@ -154,14 +160,15 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(FadeOut(grp1))
 	
         VectorNoNumero =  MathTex(r"(3)",r"\ne",(3*nc.V1(1)).latex(),r"\in\R[1]", tex_template = myTemplate,)
-        with self.voiceover(text=r"""Así podremos distinguir entre un número entre paréntesis y un
-        vector de R 1 (que es una lista con un solo número).""") as tracker:
+        with self.voiceover(text=r"""Así podremos distinguir un número entre paréntesis de un
+        vector de R 1;""") as tracker:
             self.add(VectorNoNumero)
-            self.play(Indicate(VectorNoNumero[0]),run_time=tracker.duration/3)
+            self.play(Indicate(VectorNoNumero[0]),run_time=tracker.duration*2/3)
             self.play(Indicate(VectorNoNumero[2]),run_time=tracker.duration/3)
+        with self.voiceover(text=r"""es decir, de una lista con un solo número.""") as tracker:
             self.play(Indicate(VectorNoNumero[3]),
                       Flash(definicion[2][-9]),
-                      run_time=tracker.duration/3)
+                      run_time=tracker.duration)
             self.play(FadeOut(VectorNoNumero))
             
         Vectores = MathTex(r"\Vect{a}, \Vect{b}, \Vect{c},\ldots\Vect{x}, \Vect{y}, \Vect{z}",
@@ -203,15 +210,17 @@ class L01_02_VectoresNotacion(VoiceoverScene):
             self.play(FadeOut(grp2),FadeOut(Notac),FadeOut(definicion))
             self.wait(1.5)
 
-class L01_03_VectoresElementos(VoiceoverScene):
+class L01_V01_E03_VectoresElementos(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(GTTSService(lang="es", tld="com"))
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))
         
         myTemplate = TexTemplate()
         myTemplate.add_to_preamble(r"\usepackage{nacal}")
         
         # Copyright lateral
-        copyright = Tex(r"Copyright \textcopyright{\;} Marcos Bujosa\;  2023--2024")
+        copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
         CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT).set_color(GRAY_D)
         self.add(CGG)
         
@@ -287,8 +296,8 @@ class L01_03_VectoresElementos(VoiceoverScene):
         MTb = MathTex(r"{a}_{i}=",tex_template = myTemplate).scale(3).next_to(MTa, LEFT)
         VG  = VGroup(MTb,MTa) 
         with self.voiceover(text = r"""Es más clara y operativa una notación que use un único tipo de fuente,
-        y que denote la selección de elementos con un operador (por
-        ejemplo con una barra vertical).""" ) as tracker:
+        y que denote la selección de elementos con un operador. Por
+        ejemplo con una barra vertical.""" ) as tracker:
             self.play(cs.animate.to_corner(DL),
                       run_time=tracker.duration*4/5)
             self.play(Indicate(VG[1][0][1]))
