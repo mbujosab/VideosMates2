@@ -7,7 +7,7 @@
 #+LATEX_HEADER: \usepackage[spanish]{babel}
 #+LaTeX_HEADER: \usepackage{pdfpages}
 
-# Para que no ejecute todo el código al exportar a pdf
+# Para que no ejecute todo el código al exportar a pdfL01_V02_E02_PropiedadConmutativa
 #+PROPERTY: header-args :eval never-export
 
 \maketitle
@@ -23,7 +23,7 @@
 #+END_SRC
 
 
-* Vectores de \R[n] - T01
+* Vectores de \R[n] - V01
 
 
 ** Español
@@ -487,7 +487,7 @@ import sympy as sp
 #+name: copyrightLateral
 #+BEGIN_SRC python
 copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
-CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT).set_color(GRAY_D)
+CGG  = VGroup(copyright).rotate(PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
 self.add(CGG)
 #+END_SRC
 
@@ -531,7 +531,7 @@ class ZCreditos(Scene):
 
 **** Generamos un fichero ~mpeg~ por cada escena
 
-- Versión de poca calidad
+# Versión de poca calidad
 
 #+call: rodando(fichero="L01_V01_Vectores", escena="1,2,3,4")
 
@@ -540,7 +540,7 @@ class ZCreditos(Scene):
 echo $escena | manim -pql $fichero.py --disable_caching
 #+END_SRC
 
-- Versión calidad HD1080
+# Versión calidad HD1080
 
 #+call: rodandoHD(fichero="L01_V01_Vectores", escena="1,2,3,4")
 
@@ -550,7 +550,7 @@ echo $escena | manim -qh $fichero.py --disable_caching
 #+END_SRC
 
 **** Concatenamos las escenas en un único fichero ~mpeg~ y añadimos música de fondo.
-
+     
 - Montando la versión de baja resolución
 
 #+call: montando(video="L01_V01_Vectores")
@@ -564,6 +564,85 @@ mkdir -p tmp
 
 ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
 #+END_SRC
+
+ 1) La primera parte de este script concatena todos los archivos de
+    video ~.mp4~ encontrados en una carpeta específica en un solo
+    archivo de video. Lo hace en dos pasos:
+
+  + *Genera un archivo de lista de archivos (~list.txt~):*
+
+    - Utiliza un bucle ~for~ para iterar sobre todos los archivos con
+      extensión ~.mp4~ en la carpeta especificada por la variable
+      ~$subdir/$video/$calidad/~.
+    
+    - Por cada archivo encontrado, agrega una línea al archivo
+      ~list.txt~ que contiene la ruta completa del archivo.
+    
+    - Utiliza el operador =>= =>= para redirigir la salida al final del
+      archivo ~list.txt~.
+       
+  + *Utiliza ffmpeg para concatenar los archivos de video listados en ~list.txt~:*
+    - Utiliza ~ffmpeg~ con la opción ~-f concat~ para indicar que se
+      está utilizando un archivo de lista para concatenar.
+    - ~-safe 0~ se usa para permitir la lectura de archivos de
+      cualquier ruta.
+    - ~-i list.txt~ especifica el archivo de lista generado
+      anteriormente como entrada.
+    - ~-c copy~ indica a ~ffmpeg~ que simplemente copie los flujos de
+      audio y video de entrada sin realizar ninguna conversión.
+    - Finalmente, el resultado se guarda en un nuevo archivo de video
+      con el mismo nombre que la variable ~$video~, pero con la
+      extensión ~.mp4~, en la carpeta especificada por
+      ~$subdir/$video/$calidad/~.
+  
+ 2) En la segunda parte el comando de `ffmpeg` realiza varias acciones
+    para procesar un video junto con un archivo de audio y generar un
+    nuevo archivo de video:
+
+  a. *Entradas de archivos de video y audio:*
+     - ~-i $subdir/$video/$calidad/$video.mp4~: Especifica el archivo
+       de video de entrada.
+     - ~-i $music.mp3~: Especifica el archivo de audio de entrada que
+       se usará como música de fondo.
+  
+  b. *Filtro de complejidad (~-filter_complex~):*
+     - ~[0:a]apad[main]~: Añade un silencio al audio del video de
+       entrada (~[0:a]~) y lo asigna a la etiqueta ~[main]~.
+     - ~[1:a]volume=0.04,apad[A]~: Ajusta el volumen del audio de
+       entrada (~[1:a]~) al 4% del volumen original, añade un silencio
+       y lo asigna a la etiqueta ~[A]~.
+     - ~[main][A]amerge[out]~: Fusiona los flujos de audio etiquetados
+       como ~[main]~ y ~[A]~ en un solo flujo de audio, asignado a la
+       etiqueta ~[out]~.
+  
+  c. *Configuración de códecs y opciones de salida:*
+     - ~-c:v libx264~: Utiliza el códec de video H.264 para codificar
+       el video de salida.
+     - ~-c:a aac~: Utiliza el códec de audio AAC para codificar el
+       audio de salida.
+     - ~-map 0:v -map "[out]"~: Mapea el flujo de video del archivo de
+       video de entrada y el flujo de audio resultante del filtro
+       complejo.
+     - ~-preset ultrafast~: Establece el preset de codificación en
+       "ultrafast" para una codificación más rápida.
+     - ~-threads 0~: Utiliza el número máximo de hilos disponibles
+       para la codificación.
+     - ~-profile:v baseline~: Especifica el perfil de codificación de
+       video como "baseline".
+     - ~-ac 2~: Establece el número de canales de audio a 2 (estéreo).
+     - ~-pix_fmt yuv420p~: Especifica el formato de píxeles del video
+       de salida como yuv420p.
+     - ~-shortest~: Hace que la duración del video de salida sea igual
+       a la duración del archivo de video de entrada más corto o la
+       duración del audio de entrada más corto.
+     - ~-y tmp/$video.mp4~: Especifica el nombre del archivo de video
+       de salida y la ruta donde se guardará.
+
+  En resumen, este comando de ~ffmpeg~ combina un video con un archivo
+  de audio de fondo, ajustando el volumen del audio de fondo y
+  fusionando los flujos de audio para crear un nuevo archivo de video
+  con las especificaciones dadas.
+
 
 - Montando la versión de resolución HD1080
 
@@ -579,7 +658,6 @@ mkdir -p tmp
 ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
 #+END_SRC
 
-#+call: montandoHD(video="L01_V01_Vectores")
 
 **** Fundimos a negro los últimos segundos del vídeo (y la música).
 
@@ -590,6 +668,24 @@ ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a
 dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4") && offset=$(bc -l <<< "$dur"-7) && ffmpeg -i "tmp/$video.mp4" -filter_complex "[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4
 #+END_SRC
 
+Este código es un script que utiliza las herramientas ~ffprobe~ y ~ffmpeg~ para aplicar efectos de fundido a un video.Aquí está desglosado paso a paso:
+
+
+1) ~dur=$(ffprobe -loglevel error -show_entries format=duration -of
+   default=nk=1:nw=1 "tmp/$video.mp4")~: Este comando utiliza
+   ~ffprobe~ para obtener la duración del video especificado por la
+   variable ~$video~. La duración se guarda en la variable ~dur~.
+
+2) =offset=$(bc -l \<\<\< "$dur"-7)=: Luego, se calcula un valor de
+   desplazamiento (~offset~) restando 7 segundos de la duración del
+   video. Esto sugiere que el objetivo es aplicar los efectos de
+   fundido durante los últimos 7 segundos del video.
+
+3) ~ffmpeg -i "tmp/$video.mp4" -filter_complex "[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" -map "[v]" -map "[a]" -y $video.mp4~: Finalmente, se utiliza ~ffmpeg~ para aplicar los efectos de fundido. El filtro ~-filter_complex~ se utiliza para aplicar un fundido de entrada (~fade=type=in~) y un fundido de salida (~fade=type=out~) tanto al video como al audio. El fundido de entrada del audio (~afade=type=in:duration=1~) tiene una duración de 1 segundo. Los fundidos de salida de audio y video tienen una duración de 6 segundos y comienzan en el tiempo especificado por el ~offset~. El resultado se guarda en un nuevo archivo de video con el nombre ~$video.mp4~.
+
+En resumen, este script toma un video, calcula su duración, y luego aplica efectos de fundido de entrada y salida tanto al video como al audio, comenzando 7 segundos antes del final del video.
+
+
 **** Copiamos el resultado a un lugar público
 
 #+call: publicar(video="L01_V01_Vectores")
@@ -599,4 +695,3 @@ dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=
 cp -f $video.mp4 $subdir/$video.mp4
 #+END_SRC
 
-#+RESULTS:
