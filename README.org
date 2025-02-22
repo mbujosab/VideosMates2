@@ -18,10 +18,16 @@ con el módulo [[https://www.manim.community/][Manim]] de python.
 
 *** Vídeo 1
 - Fichero de python [[./lib/L01_V01_Vectores.py][~L01_V01_Vectores.py~]]
-- Fichero [[file:./L01-V01-Vectores.pdf][pdf]] con el código
-- Enlace al [[https://ucmdrive.ucm.es/s/rqPSoaiYW4dmTyx][vídeo]]
+- Fichero [[file:L01-V01-Vectores.html][html]] con el código
+- Enlace al [[https://youtu.be/HWaQrbSc8WA][vídeo]] 
 
 *** Vídeo 2
-- Fichero de python [[./lib/L01_V02_SumaDeVectores.py][~L01_V02_SumaDeVectores.py~]]
-- Fichero [[file:./L01-V02_SumaDeVectores.pdf][pdf]] con el código
-- Enlace al [[https://ucmdrive.ucm.es/s/9LTcbLSW3HknBMa][vídeo]]
+- Fichero de python [[file:lib/L01_V02_SumaDeVectores-I.py]] 
+- Fichero [[file:L01-V02-SumaDeVectores-I.html][html]] con el código
+- Enlace al [[https://youtu.be/LvcerzXX3IM][vídeo]]
+
+*** Vídeo 3
+- Fichero de python [[file:lib/L01_V03_SumaDeVectores-II.py]] 
+- Fichero [[file:L01-V03-SumaDeVectores-II.html][html]] con el código
+- Enlace al [[https://youtu.be/HWaQrbSc8WA][vídeo]]
+
