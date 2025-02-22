@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2025-01-02 jue 15:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 3</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 3</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org202d820">1. Interpretación geométrica de la suma de Vectores de \R[n] - V03</a>
+<ul>
+<li><a href="#org7d13108">1.1. Escena 1 - Interpretación geométrica de la suma en \(\R[2]\)</a></li>
+<li><a href="#orgeba923f">1.2. Escena 2 - Interpretación geométrica de la suma en \(\R[3]\)</a>
+<ul>
+<li><a href="#orgbc1ec46">1.2.1. Miniescena (la Visión 3D)</a></li>
+</ul>
+</li>
+<li><a href="#org17d32d2">1.3. Escena 3 - Interpretación geométrica de la suma en \(\R[n]\)</a>
+<ul>
+<li><a href="#org833e62d">1.3.1. Miniescena (la Visión nD)</a></li>
+</ul>
+</li>
+<li><a href="#orgc40ebc7">1.4. Escena 4 - Resumen</a></li>
+</ul>
+</li>
+<li><a href="#orgaca4d12">2. Trozos comunes de código</a>
+<ul>
+<li><a href="#org0902281">2.1. Carga de la librería Manim y NacAL</a></li>
+<li><a href="#org5fc99f2">Definición de algunas subclases con definiciones generales</a>
+<ul>
+<li><a href="#org3857386">Definición Vectores en R2 y R3</a></li>
+<li><a href="#org10a4dcf">Insertar un vídeo en una escena</a></li>
+<li><a href="#org9500daa">Mover miniescenas a un subdirectorio auxiliar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7937d96">3. Rodando: 1,2,3&hellip; ¡acción!</a></li>
+</ul>
+</div>
+</div>
+<p>
+\maketitle
+</p>
+<div id="outline-container-org202d820" class="outline-2">
+<h2 id="org202d820"><span class="section-number-2">1.</span> Interpretación geométrica de la suma de Vectores de \R[n] - V03</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org7d13108" class="outline-3">
+<h3 id="org7d13108"><span class="section-number-3">1.1.</span> Escena 1 - Interpretación geométrica de la suma en \(\R[2]\)</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-python">&lt;&lt;Carga de la librer&#237;a Manim y NacAL con AzureService&gt;&gt;
+&lt;&lt;Definici&#243;n de mi escena con voz&gt;&gt;
+&lt;&lt;Definici&#243;n de VectorR2&gt;&gt;
+&lt;&lt;Definici&#243;n de VectorR3&gt;&gt;
+&lt;&lt;Definici&#243;n de VideoStatus y VideoMobject&gt;&gt;
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E01_SumaEnR2</span>(MiEscenaConVoz):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+        
+        <span style="color: #0000FF;">self</span>.creditos()
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Portada</span>
+        <span style="color: #BA36A5;">titulo</span> = Title(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica de la suma"</span>),
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        <span style="color: #0000FF;">self</span>.play(Write(titulo))
+        <span style="color: #0000FF;">self</span>.pausa_media()
+        <span style="color: #0000FF;">self</span>.play(FadeOut(titulo))
+        
+        <span style="color: #BA36A5;">axes</span> = NumberPlane(x_range=(-4.5, 6.5, 1),
+                           y_range=(-1.5, 6.5, 1),
+                           background_line_style={
+                               <span style="color: #008000;">"stroke_width"</span>:  3,
+                               <span style="color: #008000;">"stroke_opacity"</span>: 0.4 }
+                           ).add_coordinates()
+
+        <span style="color: #BA36A5;">item0</span> = MathTex(r<span style="color: #008000;">"\elemRp*{\Vect{a}+\Vect{b}}{i} = \eleVR{a}{i} + \eleVR{b}{i}"</span>,
+                        tex_template = myTemplate)
+        <span style="color: #BA36A5;">item1</span> = MathTex(r<span style="color: #008000;">"\Vect{a}+\Vect{x} = \Vect{x}+\Vect{a}"</span>,
+                        tex_template = myTemplate).next_to(item0, DOWN, buff=0.5)
+        <span style="color: #BA36A5;">props_suma</span> = VGroup(item0,item1).scale(1.5)
+
+        <span style="color: #BA36A5;">cabecera</span> = Tex(_(<span style="color: #008000;">"Base de la interpretaci&#243;n"</span>),
+                         tex_template = myTemplate, font_size=70
+                         ).to_edge(UP).set_color(BLUE)
+        
+        <span style="color: #0000FF;">self</span>.add(cabecera)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Que la operaci&#243;n suma sea una operaci&#243;n componente a</span>
+<span style="color: #008000;">        componente"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(props_suma[0]),
+                      run_time=tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y que sea conmutativa"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Write(props_suma[1], run_time=tracker.duration/5))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""dota a la suma de interpretaci&#243;n geom&#233;trica tanto en R 2 como</span>
+<span style="color: #008000;">        en R 3."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(props_suma),
+                      FadeOut(cabecera))
+            
+        <span style="color: #BA36A5;">x</span>     = VectorR2([4,5], color=GREEN_B)
+        <span style="color: #BA36A5;">x_dot</span> = x.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">x_tex</span> = x.tex.scale(1.4)
+        <span style="color: #BA36A5;">vgr_x</span> = VGroup(x.tex).next_to(x_dot, RIGHT).shift(RIGHT*.1)
+        <span style="color: #BA36A5;">x_v_line</span> = x.v_line(axes)
+        <span style="color: #BA36A5;">x_h_line</span> = x.h_line(axes)       
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">""" Para verlo debemos interpretar los vectores como puntos en</span>
+<span style="color: #008000;">        el espacio, de manera que las componentes de cada vector sean las coordenadas de un</span>
+<span style="color: #008000;">        punto."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Create(axes), run_time=tracker.duration/2)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En R 2, el convenio es considerar que la primera componente</span>
+<span style="color: #008000;">        es la coordenada respecto al eje horizontal"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(vgr_x)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(x_tex[0][1]),
+                      Indicate(x_v_line),
+                      run_time=tracker.duration*2/3)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y la segunda como la coordenada respecto al eje vertical.</span>
+<span style="color: #008000;">        """</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(x_tex[0][2]),
+                      Indicate(x_h_line),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.add(x_dot)
+            <span style="color: #0000FF;">self</span>.play(Indicate(x_dot),
+                      run_time=tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Consecuentemente, vectores con distintas componentes corresponden</span>
+<span style="color: #008000;">        a puntos distintos."""</span>)) <span style="color: #0000FF;">as</span> tracker: 
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(vgr_x, x_dot, x_h_line, x_v_line))
+            
+        <span style="color: #BA36A5;">a</span> = VectorR2([0,0], rpr=<span style="color: #008000;">'colum'</span>, color=YELLOW)
+        <span style="color: #BA36A5;">a_dot</span> = a.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">a_tex</span> = a.tex
+        <span style="color: #BA36A5;">vgr_a</span> = VGroup(a.tex).next_to(a_dot, DOWN).shift(LEFT*.5)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El vector cero corresponde con el origen del sistema de</span>
+<span style="color: #008000;">        coordenadas"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(a_dot), Indicate(a_tex), run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa
+
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">a&#241;ado punto en el eje horizontal quitando el anterior</span>
+        <span style="color: #BA36A5;">b1</span> = VectorR2([3,0], rpr=<span style="color: #008000;">'colum'</span>)
+        <span style="color: #BA36A5;">b1_dot</span> = b1.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">b1_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(b1_dot)
+        <span style="color: #BA36A5;">b1_tex</span> = b1.tex
+        <span style="color: #BA36A5;">vgr_b1</span>= VGroup(b1_tex).next_to(b1_dot, DOWN)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La primera componente de un vector indica su coordenada respecto</span>
+<span style="color: #008000;">        al eje horizontal. Los valores positivos corresponden a posiciones a la derecha del origen de</span>
+<span style="color: #008000;">        coordenadas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(a_dot, a_tex), FadeIn(b1_diamond))
+
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">lo muevo y le pongo etiqueta</span>
+        <span style="color: #BA36A5;">b1n</span>    = VectorR2([-2.5,0])
+        <span style="color: #BA36A5;">vgr_b1n</span>= VGroup(b1n.tex).next_to(b1n.dot(axes, radio=0.12), DOWN)
+        <span style="color: #BA36A5;">b1n_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                             fill_color=ORANGE).rotate(45*DEGREES).move_to(b1n.dot(axes))
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y valores negativos a posiciones a la izquierda. As&#237;, el vector</span>
+<span style="color: #008000;">        3 0 corresponde al punto del eje horizontal que est&#225; 3 unidades a la derecha del origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(b1_diamond, b1n_diamond),
+                      rate_function=exponential_decay,
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(b1n_diamond, b1_dot),
+                      FadeIn(b1.tex),
+                      rate_function=smooth,
+                      run_time=2*tracker.duration/3)
+
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">a&#241;ado punto inicial en el eje vertical</span>
+        <span style="color: #BA36A5;">b2i</span>    = VectorR2([0,4])
+        <span style="color: #BA36A5;">vgr_b2i</span>= VGroup(b2i.tex).next_to(b2i.dot(axes, radio=0.12), LEFT)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">b2i_dot = b2i.dot(axes, radio=0.12)</span>
+        <span style="color: #BA36A5;">b2i_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                             fill_color=ORANGE).rotate(45*DEGREES).move_to(b2i.dot(axes))
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La segunda componente indica la coordenada respecto al eje vertical.</span>
+<span style="color: #008000;">        Valores positivos corresponden a posiciones por encima del origen de coordenadas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(b2i_diamond)
+            <span style="color: #0000FF;">self</span>.pausa
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">punto con oordenada negativa</span>
+        <span style="color: #BA36A5;">b2n</span>    = VectorR2([0,-1])
+        <span style="color: #BA36A5;">vgr_b2n</span>= VGroup(b2n.tex).next_to(b2n.dot(axes, radio=0.12), DOWN)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">b2n_dot = b2n.dot(axes, radio=0.12)</span>
+        <span style="color: #BA36A5;">b2n_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                             fill_color=ORANGE).rotate(45*DEGREES).move_to(b2n.dot(axes))
+        
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">lo muevo y pongo etiqueta</span>
+        <span style="color: #BA36A5;">b2</span>    = VectorR2([0,2], rpr=<span style="color: #008000;">'colum'</span>)
+        <span style="color: #BA36A5;">b2_dot</span> = b2.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">b2_tex</span> = b2.tex
+        <span style="color: #BA36A5;">vgr_b2</span>= VGroup(b2_tex).next_to(b2_dot, LEFT)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y valores negativos a posiciones por debajo. Por tanto el vector</span>
+<span style="color: #008000;">        0 2 corresponde al punto del eje vertical que est&#225; 2 unidades por encima del origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(b2i_diamond,
+                                           b2n_diamond,
+                                           rate_function=exponential_decay,
+                                           run_time= tracker.duration/4))
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(b2n_diamond,
+                                           b2_dot,
+                                           rate_function=smooth,
+                                           run_time=2*tracker.duration/3))
+            <span style="color: #0000FF;">self</span>.add(b2_tex)
+            <span style="color: #0000FF;">self</span>.pausa(n=3)
+        
+        <span style="color: #BA36A5;">b</span>     = VectorR2([3,2], color=TEAL_A)
+        <span style="color: #BA36A5;">b_dot</span> = b.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">b_tex</span> = b.tex
+        <span style="color: #BA36A5;">vgr_b</span> = VGroup(b_tex).next_to(b_dot, RIGHT)
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">arriba a&#241;adir (0,3)+(1,0) = (3,1)</span>
+        <span style="color: #BA36A5;">suma1_gr</span> = VGroup(VectorR2([3,0]).tex,
+                          MathTex(r<span style="color: #008000;">"+"</span>),
+                          VectorR2([0,2]).tex,
+                          MathTex(r<span style="color: #008000;">"="</span>),
+                          b.tex.copy(),
+                          ).arrange(RIGHT).to_corner(UL)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Ahora consideremos la suma de estos dos vectores.</span>
+<span style="color: #008000;">        Se realiza componente a componente."""</span>))  <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(suma1_gr[:3])
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.pausa(3*tracker.duration/4)</span>
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.play(FadeIn(suma1_gr[3:]), run_time=tracker.duration/4)</span>
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.pausa_larga</span>
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por una parte se suman las coordenadas respecto al</span>
+<span style="color: #008000;">        eje horizontal, y por otra las coordenadas correspondientes al eje vertical. As&#237;,</span>
+<span style="color: #008000;">        el vector suma es el vector 3 2."""</span>))  <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(suma1_gr[0][0][1]),
+                      Circumscribe(suma1_gr[2][0][1]),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(suma1_gr[0][0][2]),
+                      Circumscribe(suma1_gr[2][0][2]),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(suma1_gr[3:]), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa_larga
+            
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">pintar b con un punto y ejes y etiqueta</span>
+        <span style="color: #BA36A5;">b_v_line</span> = b.v_line(axes)
+        <span style="color: #BA36A5;">b_h_line</span> = b.h_line(axes)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Sus componentes nos indican que el punto est&#225; tres unidades a</span>
+<span style="color: #008000;">        la derecha del origen y dos unidades por encima."""</span>))  <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(b_dot, b_tex, b_v_line, b_h_line))
+            <span style="color: #0000FF;">self</span>.pausa
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A&#241;adir flechas ejes (quitando puntos) y desplazar para mostrar suma</span>
+        <span style="color: #BA36A5;">flechab1</span> = b1.arrow(axes)
+        <span style="color: #BA36A5;">flechab2</span> = b2.arrow(axes)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Se&#241;alando la posici&#243;n de cada sumando con una flecha,</span>
+<span style="color: #008000;">        podemos interpretar dicha flecha como una indicaci&#243;n para llegar al punto."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(GrowArrow(flechab1),
+                      FadeOut(b1_dot),
+                      GrowArrow(flechab2),
+                      FadeOut(b2_dot),
+                      FadeOut(b_dot) )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por ejemplo, al primer sumando se llega desplazandose desde el</span>
+<span style="color: #008000;">        origen tres unidades a la derecha. De este modo dotamos a la suma de interpretaci&#243;n geom&#233;trica.</span>
+<span style="color: #008000;">        """</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(b1_tex),
+                      run_time=tracker.duration/2)
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">SUMA b1 + b2</span>
+        <span style="color: #BA36A5;">a_dot_copy</span>  = a_dot.copy()
+        <span style="color: #BA36A5;">b1_dot_copy</span> = b1_dot.copy()
+        <span style="color: #BA36A5;">b_dot_copy</span>  = b_dot.copy()
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Sumar el primer vector con el segundo corresponde a seguir las</span>
+<span style="color: #008000;">        indicaciones del primer vector"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">Indicate(flechab1),</span>
+                      Indicate(b1_tex),
+                      Indicate(suma1_gr[0]),
+                      ReplacementTransform(a_dot_copy, b1_dot_copy),
+                      run_time=tracker.duration)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y luego seguir las indicaciones del segundo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(b2_tex),
+                      Indicate(suma1_gr[2]),
+                      <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">Wiggle(flechab2),</span>
+                      ReplacementTransform(b1_dot_copy, b_dot_copy),
+                      run_time=tracker.duration)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeOut(b_dot_copy))
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">SUMA b2 + b1</span>
+        <span style="color: #BA36A5;">a_dot_copy</span>  = a_dot.copy()
+        <span style="color: #BA36A5;">b2_dot_copy</span> = b2_dot.copy()
+        <span style="color: #BA36A5;">b_dot_copy</span>  = b_dot.copy()        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero invertir el orden y seguir primero las indicaciones del</span>
+<span style="color: #008000;">        segundo vector"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">Wiggle(flechab2),</span>
+                      Indicate(b2_tex),
+                      Indicate(suma1_gr[2]),
+                      ReplacementTransform(a_dot_copy, b2_dot_copy),
+                      run_time=tracker.duration)
+        
+        <span style="color: #BA36A5;">flechab</span> = b.arrow(axes)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y despu&#233;s las indicaciones del primero, nos conduce al mismo</span>
+<span style="color: #008000;">        vector suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(b1_tex),
+                      Indicate(suma1_gr[0]),
+                      ReplacementTransform(b2_dot_copy, b_dot_copy),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(GrowArrow(flechab),
+                      FadeOut(b_dot_copy),
+                      FadeOut(flechab1, b1_tex),
+                      FadeOut(flechab2, b2_tex),
+                      run_time=tracker.duration/2)
+            
+        <span style="color: #0000FF;">self</span>.pausa
+        <span style="color: #0000FF;">self</span>.play(FadeOut(flechab), FadeIn(b_dot))
+        <span style="color: #0000FF;">self</span>.pausa_media
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">arriba a&#241;adir (3,2)+(-2,1) = (1,3)</span>
+        <span style="color: #BA36A5;">c</span>     = VectorR2([-2,1], color=PURPLE_A)
+        <span style="color: #BA36A5;">c_dot</span> = c.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">c_tex</span> = c.tex
+        <span style="color: #BA36A5;">c_v_line</span> = c.v_line(axes)
+        <span style="color: #BA36A5;">c_h_line</span> = c.h_line(axes)
+        <span style="color: #BA36A5;">vgr_c</span> = VGroup(c.tex).next_to(c.dot(axes, radio=0.12), LEFT)
+
+        <span style="color: #BA36A5;">d</span>     = VectorR2([1,3], color=YELLOW_A)
+        <span style="color: #BA36A5;">d_dot</span> = d.dot(axes, radio=0.12)
+        <span style="color: #BA36A5;">d_tex</span> = d.tex
+        <span style="color: #BA36A5;">d_v_line</span> = d.v_line(axes)
+        <span style="color: #BA36A5;">d_h_line</span> = d.h_line(axes)
+        <span style="color: #BA36A5;">vgr_d</span> = VGroup(d.tex).next_to(d.dot(axes, radio=0.12), UP)
+
+        <span style="color: #BA36A5;">suma2_gr</span> = VGroup(b.tex.copy(),
+                          MathTex(r<span style="color: #008000;">"+"</span>),
+                          c.tex.copy(),
+                          MathTex(r<span style="color: #008000;">"="</span>),
+                          d.tex.copy(),
+                          ).arrange(RIGHT).to_corner(UL)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Veamos otro ejemplo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(suma1_gr),
+                      run_time=tracker.duration )
+            <span style="color: #0000FF;">self</span>.pausa_corta
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Sumemos el &#250;ltimo vector con el</span>
+<span style="color: #008000;">        vector -2 1."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(c_dot, c_tex, c_v_line, c_h_line))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La suma de ambos es el vector 1 3."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(suma2_gr)
+            <span style="color: #0000FF;">self</span>.pausa
+            <span style="color: #0000FF;">self</span>.play(FadeOut(b_h_line, b_v_line, c_h_line, c_v_line))
+            <span style="color: #0000FF;">self</span>.add(d_dot, d.tex, d_v_line, d_h_line)
+            <span style="color: #0000FF;">self</span>.pausa_larga                
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A&#241;adir flechas ejes (quitando puntos) y desplazar para mostrar suma</span>
+        <span style="color: #BA36A5;">flechab</span> = b.arrow(axes)
+        <span style="color: #BA36A5;">flechac</span> = c.arrow(axes)
+        <span style="color: #BA36A5;">flechad</span> = d.arrow(axes)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Una vez m&#225;s, se&#241;alemos los vectores con flechas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(d_dot), <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">d_h_line, d_v_line),</span>
+                      GrowArrow(flechab),
+                      FadeOut(b_dot),
+                      GrowArrow(flechac),
+                      FadeOut(c_dot))
+            <span style="color: #0000FF;">self</span>.pausa_corta
+
+        <span style="color: #BA36A5;">line_graph_b</span> = axes.plot_line_graph(
+            x_values = [-2, 1],
+            y_values = [1, 3],
+            line_color=TEAL_E,
+            add_vertex_dots=<span style="color: #D0372D;">False</span>,
+            stroke_width = 3,
+        )
+
+        <span style="color: #BA36A5;">line_graph_c</span> = axes.plot_line_graph(
+            x_values = [3, 1],
+            y_values = [2, 3],
+            line_color=PURPLE_E,
+            add_vertex_dots=<span style="color: #D0372D;">False</span>,
+            stroke_width = 3,
+        )
+
+        <span style="color: #0000FF;">self</span>.add(line_graph_b,line_graph_c)
+        <span style="color: #BA36A5;">a_dot_copy</span>  = a_dot.copy()
+        <span style="color: #BA36A5;">b_dot_copy</span>  = b_dot.copy()
+        <span style="color: #BA36A5;">d_dot_copy</span>  = d_dot.copy()
+
+        <span style="color: #BA36A5;">a1_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(a_dot)
+        <span style="color: #BA36A5;">a2_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(a_dot)
+        <span style="color: #BA36A5;">a1_diamond_copy</span> = a1_diamond.copy()
+        <span style="color: #BA36A5;">a2_diamond_copy</span> = a2_diamond.copy()
+        <span style="color: #BA36A5;">b1_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(b1_dot)
+        <span style="color: #BA36A5;">b2_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(b2_dot)
+        <span style="color: #BA36A5;">c1_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(Dot(axes.c2p(-2,0)))
+        <span style="color: #BA36A5;">c2_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(Dot(axes.c2p(0,1)))
+        <span style="color: #BA36A5;">d1_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(Dot(axes.c2p(1,0)))
+        <span style="color: #BA36A5;">d2_diamond</span> = Square(color=BLUE, fill_opacity=1, side_length=.12,
+                            fill_color=ORANGE).rotate(45*DEGREES).move_to(Dot(axes.c2p(0,3)))
+
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De nuevo, sumar el primer vector con el segundo corresponde</span>
+<span style="color: #008000;">        a seguir las indicaciones del primer vector"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(suma2_gr[0]),
+                      ReplacementTransform(a_dot_copy, b_dot_copy),
+                      ReplacementTransform(a1_diamond, b1_diamond),
+                      ReplacementTransform(a2_diamond, b2_diamond),
+                      GrowArrow(flechab1),
+                      GrowArrow(flechab2),
+                      run_time=3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(flechab1,
+                              flechab2))
+
+        <span style="color: #BA36A5;">c1</span> = VectorR2([-2,0])
+        <span style="color: #BA36A5;">c2</span> = VectorR2([0,1])
+        <span style="color: #BA36A5;">flechac1</span> = c1.arrow(axes)
+        <span style="color: #BA36A5;">flechac2</span> = c2.arrow(axes)
+        <span style="color: #BA36A5;">flechac1d</span> = flechac1.copy().move_to(axes.c2p(2,2,0))
+        <span style="color: #BA36A5;">flechac2d</span> = flechac2.copy().move_to(axes.c2p(3,2.5,0))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y luego seguir las indicaciones del segundo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(suma2_gr[2]),
+                      ReplacementTransform(b_dot_copy, d_dot_copy),
+                      ReplacementTransform(b1_diamond, d1_diamond),
+                      ReplacementTransform(b2_diamond, d2_diamond),
+                      GrowArrow(flechac1d),
+                      GrowArrow(flechac2d),
+                      run_time=3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(d_dot_copy,
+                              d1_diamond,
+                              d2_diamond,
+                              flechac1d,
+                              flechac2d))
+
+        <span style="color: #BA36A5;">a_dot_copy</span>  = a_dot.copy()
+        <span style="color: #BA36A5;">c_dot_copy</span>  = c_dot.copy()
+        <span style="color: #BA36A5;">d_dot_copy</span>  = d_dot.copy()
+        <span style="color: #BA36A5;">flechab1d</span> = flechab1.copy().move_to(axes.c2p(-0.5,1,0))
+        <span style="color: #BA36A5;">flechab2d</span> = flechab2.copy().move_to(axes.c2p(- 2,2,0))
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero invertir el orden y seguir primero las indicaciones</span>
+<span style="color: #008000;">        del segundo vector"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(suma2_gr[2]),
+                      ReplacementTransform(a_dot_copy, c_dot_copy),
+                      ReplacementTransform(a1_diamond_copy, c1_diamond),
+                      ReplacementTransform(a2_diamond_copy, c2_diamond),
+                      GrowArrow(flechac1),
+                      GrowArrow(flechac2),
+                      run_time=3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(flechac1,
+                              flechac2))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y despu&#233;s las indicaciones del primero, nos conduce al mismo punto.</span>
+<span style="color: #008000;">        """</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(suma2_gr[0]),
+                      ReplacementTransform(c_dot_copy, d_dot_copy),
+                      ReplacementTransform(c1_diamond, d1_diamond),
+                      ReplacementTransform(c2_diamond, d2_diamond),
+                      GrowArrow(flechab1d),
+                      GrowArrow(flechab2d),
+                      run_time=2*tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(d_dot_copy),                     
+                      FadeOut(d1_diamond),
+                      FadeOut(d2_diamond),
+                      FadeOut(d_v_line),
+                      FadeOut(d_h_line),
+                      FadeOut(flechab1d,
+                              flechab2d))
+            <span style="color: #0000FF;">self</span>.play(GrowArrow(flechad),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa_larga                
+
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta descripci&#243;n geom&#233;trica de la suma, donde los sumandos</span>
+<span style="color: #008000;">        forman un v&#233;rtice de un paralelogramo, y su suma es la diagonal que parte de dicho v&#233;rtice</span>
+<span style="color: #008000;">        se denomina regla del paralelogramo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(flechab),
+                      Indicate(flechac),
+                      run_time=tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.play(Indicate(flechad),
+                      run_time=tracker.duration/2 )
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""A pesar de la utilidad de las flechas, recuerde que un vector</span>
+<span style="color: #008000;">        es una lista de n&#250;meros, y que podemos hacer corresponder dichos n&#250;meros con las coordenadas</span>
+<span style="color: #008000;">        de un punto en el espacio. Por ello, la representaci&#243;n geom&#233;trica del vector es el punto.</span>
+<span style="color: #008000;">        La flecha tan solo lo se&#241;ala."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(b_tex),
+                      Indicate(c_tex),
+                      Indicate(d_tex),
+                      run_time=tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.play(FadeOut(flechab,
+                              flechac,
+                              flechad,
+                              line_graph_b,
+                              line_graph_c),
+                      FadeIn(b_dot, c_dot, d_dot),
+                      run_time=tracker.duration/2 ) 
+
+        <span style="color: #BA36A5;">b_dot_copia</span>=Dot(axes.c2p(*b.coords), radius=0.01)
+        <span style="color: #BA36A5;">c_dot_copia</span>=Dot(axes.c2p(*c.coords), radius=0.01)
+        <span style="color: #BA36A5;">d_dot_copia</span>=Dot(axes.c2p(*d.coords), radius=0.01)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Una de las dificultades para representar los puntos es que su</span>
+<span style="color: #008000;">        dimensi&#243;n es cero."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(
+                Transform(b_dot, b_dot_copia),
+                Transform(c_dot, c_dot_copia),
+                Transform(d_dot, d_dot_copia),
+                run_time = 6*tracker.duration/5 )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Una soluci&#243;n es indicar para cada punto su coordenada en el eje</span>
+<span style="color: #008000;">        horizontal (es decir, el primer n&#250;mero de la lista)."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(b_v_line),
+                      FadeIn(c_v_line),
+                      FadeIn(d_v_line),
+                      run_time = tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(b_tex[0][1]),
+                      Circumscribe(c_tex[0][1:3]),
+                      Circumscribe(d_tex[0][1]),
+                      run_time = tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y su coordenada en el eje vertical (es decir, el segundo n&#250;mero</span>
+<span style="color: #008000;">        de la lista)."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(b_h_line),
+                      FadeIn(c_h_line),
+                      FadeIn(d_h_line),
+                      run_time = tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(b_tex[0][2]),
+                      Circumscribe(c_tex[0][3]),
+                      Circumscribe(d_tex[0][2]),
+                      run_time = tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Sin embargo, la representaci&#243;n m&#225;s frecuente son las flechas.</span>
+<span style="color: #008000;">        Se ven bien y arrojan una interpretaci&#243;n intuitiva de la suma de</span>
+<span style="color: #008000;">        vectores."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(flechab,flechac,flechad),
+                      FadeOut(b_h_line, b_v_line),
+                      FadeOut(c_h_line, c_v_line),
+                      FadeOut(d_h_line, d_v_line),
+                      run_time = tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.play(FadeIn(line_graph_b, line_graph_c),
+                      run_time = tracker.duration/2 )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero no debe olvidar que nuestra definici&#243;n de vector de Rn</span>
+<span style="color: #008000;">        es que es una lista de n&#250;meros. Y que su representaci&#243;n geom&#233;trica hace corresponder dichos</span>
+<span style="color: #008000;">        n&#250;meros con las coordenadas de puntos en el espacio. Por tanto, cuando veamos un vector </span>
+<span style="color: #008000;">        representado con una flecha, debemos recordar que el vector no es la flecha. El vector es</span>
+<span style="color: #008000;">        el punto se&#241;alado por la flecha."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(line_graph_b, line_graph_c),
+                      Indicate(b_tex),
+                      Indicate(c_tex),
+                      Indicate(d_tex),
+                      run_time=tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.play(FadeOut(flechab, flechac, flechad,),
+                      FadeIn(b.dot(axes)),
+                      FadeIn(c.dot(axes)),
+                      FadeIn(d.dot(axes)),
+                      run_time=tracker.duration/2)
+
+            <span style="color: #0000FF;">self</span>.pausa_larga()
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeba923f" class="outline-3">
+<h3 id="orgeba923f"><span class="section-number-3">1.2.</span> Escena 2 - Interpretación geométrica de la suma en \(\R[3]\)</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E02_SumaEnR3</span>(MiEscenaConVoz):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+        
+        <span style="color: #BA36A5;">titulo</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n de la suma en "</span>) + r<span style="color: #008000;">"$\R[3]$"</span>,
+                       tex_template = myTemplate,
+                       font_size=60).set_color(BLUE).to_edge(UP)
+
+        <span style="color: #BA36A5;">video1</span> = VideoMobject(
+            filename=r<span style="color: #008000;">"./media/videos/L01_V03_SumaDeVectores-II/1080p60/aux_movie_files/L01_V03_E02_SumaEnR3_3D.mp4"</span>,
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V03_SumaDeVectores-II/1080p60/L01_V03_E02_SumaEnR3_3D.mp4",</span>
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V03_SumaDeVectores-II/480p15/L01_V03_E02_SumaEnR3_3D.mp4",</span>
+            speed=1.0
+        ).scale_to_fit_width(6.5).next_to(titulo, DOWN, buff=0)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">v1 = Group(video1, SurroundingRectangle(video1))</span>
+
+        <span style="color: #BA36A5;">a</span>    = nc.Vector(sp.symbols(<span style="color: #008000;">'a:4'</span>)[1:])
+        <span style="color: #BA36A5;">b</span>    = nc.Vector(sp.symbols(<span style="color: #008000;">'b:4'</span>)[1:])
+        <span style="color: #BA36A5;">s1</span> = MathTex(a.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">mas</span>= MathTex(r<span style="color: #008000;">"+"</span>,             tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s3</span> = MathTex(b.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,          tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s5</span> = MathTex((a+b).latex(),    tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(s1,
+                      mas,
+                      s3,
+                      igual,
+                      s5,
+                      igual.copy(),
+                      s3.copy(),
+                      mas.copy(),
+                      s1.copy()).arrange(RIGHT).next_to(video1, DOWN).scale(.9)
+       
+        <span style="color: #0000FF;">self</span>.creditos(17)
+      
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La representaci&#243;n geom&#233;trica en R3 es similar. """</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(titulo)
+            <span style="color: #0000FF;">self</span>.add(video1)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[0]))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El convenio es interpretar las dos primeras componentes como</span>
+<span style="color: #008000;">        coordenadas respecto a un plano horizontal"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(grp1[0][0][2:6], scale_factor=2),
+                      run_time=tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y la tercera como la coordenada respecto a un eje perpendicular </span>
+<span style="color: #008000;">        al plano."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(grp1[0][0][6:8], scale_factor=2),
+                      run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De nuevo, como la suma se realiza componente a componente y</span>
+<span style="color: #008000;">        es conmutativa"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[1:5]),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[5:]),
+                      run_time=tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""su representaci&#243;n geom&#233;trica en R3 tambi&#233;n verifica la regla</span>
+<span style="color: #008000;">        del paralelogramo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration+2)
+
+            <span style="color: #0000FF;">self</span>.pausa_media()
+
+</pre>
+</div>
+</div>
+<div id="outline-container-orgbc1ec46" class="outline-4">
+<h4 id="orgbc1ec46"><span class="section-number-4">1.2.1.</span> Miniescena (la Visión 3D)</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E02_SumaEnR3_3D</span>(ThreeDScene):
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #BA36A5;">axes</span> = ThreeDAxes()
+        <span style="color: #BA36A5;">x_label</span> = axes.get_x_axis_label(Tex(<span style="color: #008000;">"1&#170; comp."</span>))
+        <span style="color: #BA36A5;">y_label</span> = axes.get_y_axis_label(Tex(<span style="color: #008000;">"2&#170; comp."</span>)).shift(UP * 2.4).shift(LEFT * 0.6)
+       
+        <span style="color: #0000FF;">self</span>.creditos(17)       
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">zoom out so we see the axes</span>
+        <span style="color: #0000FF;">self</span>.set_camera_orientation(zoom=0.5)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeIn(axes), FadeIn(x_label), FadeIn(y_label))
+        <span style="color: #0000FF;">self</span>.wait(1)
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">animate the move of the camera to properly see the axes</span>
+        <span style="color: #0000FF;">self</span>.move_camera(phi=75 * DEGREES, theta=60 * DEGREES, zoom=1, run_time=1.5)
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">built-in updater which begins camera rotation</span>
+        <span style="color: #0000FF;">self</span>.begin_ambient_camera_rotation(rate=0.2)
+        <span style="color: #0000FF;">self</span>.wait(2)
+
+        <span style="color: #BA36A5;">b</span>     = VectorR3([3,2,3], color=TEAL_A)
+        <span style="color: #BA36A5;">c</span>     = VectorR3([-2,1,1], color=PURPLE_A)
+        <span style="color: #BA36A5;">d</span>     = VectorR3([1,3,4], color=YELLOW_A)
+
+        <span style="color: #BA36A5;">b_dot</span> = b.dot(axes)
+        <span style="color: #BA36A5;">c_dot</span> = c.dot(axes)
+        <span style="color: #BA36A5;">d_dot</span> = d.dot(axes)
+        
+        <span style="color: #BA36A5;">line_x</span> = Line3D(start=np.array(axes.c2p(3,0,0,)), end=np.array(axes.c2p(3,2,0)), thickness=0.01)
+        <span style="color: #BA36A5;">line_y</span> = Line3D(start=np.array(axes.c2p(0,2,0,)), end=np.array(axes.c2p(3,2,0)), thickness=0.01)
+        <span style="color: #BA36A5;">line_z</span> = Line3D(start=np.array(axes.c2p(3,2,0,)), end=np.array(axes.c2p(3,2,3)), thickness=0.01)
+        
+        <span style="color: #BA36A5;">flechab</span> = b.arrow(axes)        
+        <span style="color: #BA36A5;">flechac</span> = c.arrow(axes)
+        <span style="color: #BA36A5;">flechad</span> = d.arrow(axes)
+        
+        <span style="color: #BA36A5;">linebd</span> = Line3D(start=np.array(axes.c2p(*b.coords)), end=np.array(axes.c2p(*d.coords)), thickness=0.01)
+        <span style="color: #BA36A5;">linecd</span> = Line3D(start=np.array(axes.c2p(*c.coords)), end=np.array(axes.c2p(*d.coords)), thickness=0.01)
+
+        <span style="color: #0000FF;">self</span>.play(FadeIn(line_x))
+        <span style="color: #0000FF;">self</span>.play(FadeIn(line_y))
+        <span style="color: #0000FF;">self</span>.wait(4)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeIn(line_z))
+        <span style="color: #0000FF;">self</span>.add(b_dot)       
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+
+        <span style="color: #0000FF;">self</span>.play(FadeIn(flechab),
+                  FadeOut(b_dot),)
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+
+        <span style="color: #0000FF;">self</span>.play(FadeIn(flechac))
+        <span style="color: #0000FF;">self</span>.play(FadeOut(line_x, line_y, line_z))
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+
+        <span style="color: #0000FF;">self</span>.play(FadeIn(linebd),
+                  FadeIn(linecd),)
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeIn(flechad))
+        <span style="color: #0000FF;">self</span>.wait(4)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org17d32d2" class="outline-3">
+<h3 id="org17d32d2"><span class="section-number-3">1.3.</span> Escena 3 - Interpretación geométrica de la suma en \(\R[n]\)</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E03_SumaEnRn</span>(MiEscenaConVoz):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+        
+        <span style="color: #BA36A5;">titulo</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n de la suma en "</span>) + r<span style="color: #008000;">"$\R[n]$"</span>,
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE).to_edge(UP)
+
+        <span style="color: #BA36A5;">video1</span> = VideoMobject(
+            filename=r<span style="color: #008000;">"./media/videos/L01_V03_SumaDeVectores-II/1080p60/aux_movie_files/L01_V03_E03_SumaEnRn_3D.mp4"</span>,
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V03_SumaDeVectores-II/1080p60/L01_V03_E03_SumaEnRn_3D.mp4",</span>
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V03_SumaDeVectores-II/480p15/L01_V03_E03_SumaEnRn_3D.mp4",</span>
+            speed=1.0
+        ).scale_to_fit_width(6.5).next_to(titulo, DOWN, buff=0)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">v1 = Group(video1, SurroundingRectangle(video1))</span>
+
+        <span style="color: #BA36A5;">a</span>    = nc.Vector(sp.symbols(<span style="color: #008000;">'a:6'</span>)[1:])
+        <span style="color: #BA36A5;">b</span>    = nc.Vector(sp.symbols(<span style="color: #008000;">'b:6'</span>)[1:])
+        <span style="color: #BA36A5;">s1</span> = MathTex(a.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">mas</span>= MathTex(r<span style="color: #008000;">"+"</span>,             tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s3</span> = MathTex(b.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,          tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s5</span> = MathTex((a+b).latex(),    tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(s1,
+                      mas,
+                      s3,
+                      igual,
+                      s5,
+                      igual.copy(),
+                      s3.copy(),
+                      mas.copy(),
+                      s1.copy()).arrange(RIGHT).next_to(video1, DOWN).scale(.8).shift(UP*0.7)
+        
+        <span style="color: #0000FF;">self</span>.creditos(3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Los vectores en Rn son puntos en un espacio ene-dimensional. Para</span>
+<span style="color: #008000;">        representarlos ser&#237;a necesario dibujar tantos ejes de coordenadas como elementos tiene el vector.</span>
+<span style="color: #008000;">        Esto no es posible cuando el n&#250;mero de componentes es mayor a tres. No obstante, s&#237; que podemos</span>
+<span style="color: #008000;">        recurrir a una interpretaci&#243;n geom&#233;trica."""</span>))  <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(titulo)
+            <span style="color: #0000FF;">self</span>.add(video1)          
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[0]),
+                      FadeIn(grp1[2]),
+                      run_time=tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Dicha interpretaci&#243;n no describe literalmente las componentes de</span>
+<span style="color: #008000;">        cada vector. Es tan  solo un ESQUEMA geom&#233;trico. En dicho esquema, los vectores son puntos de</span>
+<span style="color: #008000;">        un espacio ene-dimensional."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Como en los casos anteriores, se suman componente a componente,</span>
+<span style="color: #008000;">        es decir, se suman las coordenadas respecto a cada eje de manera separada,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[1]),
+                      FadeIn(grp1[3:5]),
+                      run_time=tracker.duration/2)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y su suma es conmutativa."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[5:]),
+                      run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Consecuentemente, como esquema geom&#233;trico, la regla del</span>
+<span style="color: #008000;">        paralelogramo es v&#225;lida incluso en espacios de dimension arbitraria. Lo es incluso en</span>
+<span style="color: #008000;">        dimensi&#243;n infinita."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            
+            <span style="color: #0000FF;">self</span>.pausa_larga()
+
+</pre>
+</div>
+</div>
+<div id="outline-container-org833e62d" class="outline-4">
+<h4 id="org833e62d"><span class="section-number-4">1.3.1.</span> Miniescena (la Visión nD)</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E03_SumaEnRn_3D</span>(ThreeDScene):
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+        
+        <span style="color: #BA36A5;">axes</span> = ThreeDAxes()
+
+        <span style="color: #BA36A5;">b</span>     = VectorR3([2,2,3], color=PURE_RED)
+        <span style="color: #BA36A5;">c</span>     = VectorR3([-3,1,-1], color=PURE_GREEN)
+        <span style="color: #BA36A5;">d</span>     = VectorR3([-1,3,2], color=PURE_BLUE)
+        
+        <span style="color: #BA36A5;">b_dot</span> = b.dot(axes)
+        <span style="color: #BA36A5;">c_dot</span> = c.dot(axes)
+        <span style="color: #BA36A5;">d_dot</span> = d.dot(axes)
+        
+        <span style="color: #BA36A5;">flechab</span> = b.arrow(axes)        
+        <span style="color: #BA36A5;">flechac</span> = c.arrow(axes)
+        <span style="color: #BA36A5;">flechad</span> = d.arrow(axes)
+
+        <span style="color: #BA36A5;">linebd</span> = Line3D(start=np.array(axes.c2p(*b.coords)), end=np.array(axes.c2p(*d.coords)))
+        <span style="color: #BA36A5;">linecd</span> = Line3D(start=np.array(axes.c2p(*c.coords)), end=np.array(axes.c2p(*d.coords)))
+
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.add(axes, plane)</span>
+
+        <span style="color: #0000FF;">self</span>.move_camera(phi=75 * DEGREES, theta=60 * DEGREES, zoom=1, run_time=1)
+        <span style="color: #0000FF;">self</span>.add(b_dot, c_dot)
+        <span style="color: #0000FF;">self</span>.begin_ambient_camera_rotation(rate=0.2)
+        <span style="color: #0000FF;">self</span>.wait(23)
+
+        <span style="color: #0000FF;">self</span>.play(FadeIn(flechab, flechac),
+                  FadeOut(b_dot, c_dot))
+        
+        <span style="color: #0000FF;">self</span>.wait(7)
+        <span style="color: #0000FF;">self</span>.play(FadeIn(flechad))
+        
+        <span style="color: #0000FF;">self</span>.wait(8)
+        <span style="color: #0000FF;">self</span>.add(linebd, linecd)
+
+        <span style="color: #0000FF;">self</span>.wait(2)
+        
+        <span style="color: #0000FF;">self</span>.begin_ambient_camera_rotation(rate=0.6, about=<span style="color: #008000;">'gamma'</span>)
+        <span style="color: #0000FF;">self</span>.wait(5)
+
+        <span style="color: #0000FF;">self</span>.begin_ambient_camera_rotation(rate=0.6, about=<span style="color: #008000;">'theta'</span>)
+        <span style="color: #0000FF;">self</span>.play(FadeIn(b_dot,
+                         c_dot,
+                         d_dot),
+                  FadeOut(flechab,
+                          flechac,
+                          flechad,
+                          linebd,
+                          linecd))
+        <span style="color: #0000FF;">self</span>.wait(5)
+        
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc40ebc7" class="outline-3">
+<h3 id="orgc40ebc7"><span class="section-number-3">1.4.</span> Escena 4 - Resumen</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+<pre class="src src-python">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V03_E04_Resumen</span>(MiEscenaConVoz):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+        
+        <span style="color: #0000FF;">self</span>.creditos()
+        
+        <span style="color: #BA36A5;">titulo</span> = Title(_(<span style="color: #008000;">"Suma de vectores de "</span>) + r<span style="color: #008000;">"$\R[n]$"</span>,
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        <span style="color: #0000FF;">self</span>.add(titulo)
+        <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Resumen</span>
+        <span style="color: #BA36A5;">resumen</span> = Tex(_(r<span style="color: #008000;">"\textbf{Lo m&#225;s importante:}"</span>),
+                 tex_template = myTemplate,
+                 font_size=50).set_color(ORANGE).next_to(titulo, DOWN, aligned_edge=LEFT)
+
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por &#250;ltimo, quiero subrayar que la interpretaci&#243;n geom&#233;trica se</span>
+<span style="color: #008000;">        deriva de la definici&#243;n de la suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(resumen)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+
+        <span style="color: #BA36A5;">cvab</span>  = MathTex(r<span style="color: #008000;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cva</span>   = MathTex(r<span style="color: #008000;">"\eleVR{a}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cvb</span>   = MathTex(r<span style="color: #008000;">"\eleVR{b}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,            tex_template = myTemplate)
+        <span style="color: #BA36A5;">mas</span>   = MathTex(r<span style="color: #008000;">"+"</span>,            tex_template = myTemplate)
+        <span style="color: #BA36A5;">eq_suma</span> = VGroup(cvab,igual,cva,mas,cvb).arrange(RIGHT).scale(1.5)
+        <span style="color: #BA36A5;">cva_copy</span>   = cva.copy().move_to(cvb)
+        <span style="color: #BA36A5;">cvb_copy</span>   = cvb.copy().move_to(cva)
+
+        <span style="color: #BA36A5;">item1</span> = MathTex(r<span style="color: #008000;">"\Vect{a}+\Vect{x} = \Vect{x}+\Vect{a}"</span>,
+                        tex_template = myTemplate).next_to(eq_suma,
+                                                           DOWN,
+                                                           buff=1.5).scale(1.5)
+        
+        <span style="color: #BA36A5;">props_suma</span> = VGroup(eq_suma, item1)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, lo fundamental no es la interpretaci&#243;n geom&#233;trica; lo</span>
+<span style="color: #008000;">        fundamental es que la suma es una operaci&#243;n componente a componente."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(props_suma[0]),
+                      run_time=tracker.duration+0.3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Ello se traduce en la siguiente regla de c&#225;lculo</span>
+<span style="color: #008000;">        simb&#243;lico:"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El operador selector es distributivo respecto de la</span>
+<span style="color: #008000;">        suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][-3:]),
+                      Indicate(eq_suma[2][0][-2:]),
+                      Indicate(eq_suma[4][0][-2:]),
+                      run_time = tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Adem&#225;s, como las componentes son n&#250;meros reales, la suma es</span>
+<span style="color: #008000;">        conmutativa"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Transform(cva,cva_copy),
+                      Transform(cvb,cvb_copy),
+                      run_time = 3*tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.play(Indicate(item1),
+                      run_time = 3*tracker.duration/10)
+            
+        <span style="color: #0000FF;">self</span>.pausa_larga()
+        
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaca4d12" class="outline-2">
+<h2 id="orgaca4d12"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org0902281" class="outline-3">
+<h3 id="org0902281"><span class="section-number-3">2.1.</span> Carga de la librería Manim y NacAL</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python" id="orgf363572"><span style="color: #0000FF;">from</span> manim <span style="color: #0000FF;">import</span> *
+<span style="color: #0000FF;">from</span> manim_voiceover <span style="color: #0000FF;">import</span> VoiceoverScene
+<span style="color: #0000FF;">from</span> manim_voiceover.services.azure <span style="color: #0000FF;">import</span> AzureService
+<span style="color: #0000FF;">import</span> nacal <span style="color: #0000FF;">as</span> nc
+<span style="color: #0000FF;">import</span> sympy <span style="color: #0000FF;">as</span> sp
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">PARA LA TRADUCCI&#211;N (pero no s&#233; generar los v&#237;deos traducidos)</span>
+<span style="color: #0000FF;">from</span> manim_voiceover.translate <span style="color: #0000FF;">import</span> get_gettext
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">It is good practice to get the LOCALE and DOMAIN from environment variables</span>
+<span style="color: #0000FF;">import</span> os
+<span style="color: #BA36A5;">LOCALE</span> = os.getenv(<span style="color: #008000;">"LOCALE"</span>)
+<span style="color: #BA36A5;">DOMAIN</span> = os.getenv(<span style="color: #008000;">"DOMAIN"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">The following function uses LOCALE and DOMAIN to set the language, and</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">returns a gettext function that is used to insert translations.</span>
+<span style="color: #BA36A5;">_</span> = get_gettext()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5fc99f2" class="outline-3">
+<h3 id="org5fc99f2">Definición de algunas subclases con definiciones generales</h3>
+<div class="outline-text-3" id="text-org5fc99f2">
+<div class="org-src-container">
+<pre class="src src-python" id="org9dfc381">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">MiEscenaConVoz</span>(VoiceoverScene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_corta</span>(<span style="color: #0000FF;">self</span>, n=0.3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_corta</span>(<span style="color: #0000FF;">self</span>, n=0.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa</span>(<span style="color: #0000FF;">self</span>, n=1):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_media</span>(<span style="color: #0000FF;">self</span>, n=1.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_larga</span>(<span style="color: #0000FF;">self</span>, n=3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_larga</span>(<span style="color: #0000FF;">self</span>, n=5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+         
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgbf105fd"><span style="color: #0000FF;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF;">self</span>, variante=1):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">analisis_opcion_elegida</span>(tipo):
+        <span style="color: #036A07;">'An&#225;lisis de las opciones de eliminaci&#243;n elegidas'</span>
+        <span style="color: #BA36A5;">lista</span> = [100,20,10,4,2,1]
+        <span style="color: #BA36A5;">opcion</span> = <span style="color: #006FE0;">set</span>()
+        <span style="color: #0000FF;">for</span> t <span style="color: #0000FF;">in</span> lista:
+            <span style="color: #0000FF;">if</span> (tipo - (tipo % t)) <span style="color: #0000FF;">in</span> lista:
+                opcion.add(tipo - (tipo % t))
+                <span style="color: #BA36A5;">tipo</span> = tipo % t
+        <span style="color: #0000FF;">return</span> opcion    
+    <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2024\; Marcos Bujosa  "</span>)
+    <span style="color: #0000FF;">if</span> 1 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampDcha</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampDcha)
+    <span style="color: #0000FF;">if</span> 2 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampIzda</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampIzda)
+    <span style="color: #0000FF;">if</span> 4 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampBottom</span>= VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampBottom)
+    <span style="color: #0000FF;">if</span> 10 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampTop</span>   = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampTop)
+        
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgd22b434"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ZCreditos</span>(Scene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2024 \; Marcos Bujosa"</span>)
+        <span style="color: #BA36A5;">github</span> = Tex(r<span style="color: #008000;">"\texttt{https://github.com/mbujosab}"</span>).next_to(<span style="color: #D0372D;">copyright</span>, DOWN)
+        <span style="color: #BA36A5;">CGG</span>  = VGroup(<span style="color: #D0372D;">copyright</span>,github).scale(1.1)
+        <span style="color: #0000FF;">self</span>.add(CGG)
+        <span style="color: #0000FF;">self</span>.wait(10)
+</pre>
+</div>
+</div>
+<div id="outline-container-org3857386" class="outline-4">
+<h4 id="org3857386">Definición Vectores en R2 y R3</h4>
+<div class="outline-text-4" id="text-org3857386">
+<p>
+Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados con dibujos.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgb97bbb6">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VectorR2</span>():
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
+        <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
+        <span style="color: #BA36A5;">coords</span> = lista + [0] <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(lista)&lt;3 <span style="color: #0000FF;">else</span> lista
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">color</span>  = color
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">coords</span> = <span style="color: #006FE0;">tuple</span>(coords)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">Vector</span> = nc.Vector(<span style="color: #0000FF;">self</span>.coords[:2], rpr)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">tex</span>    = MathTex(<span style="color: #0000FF;">self</span>.Vector.latex(), color=<span style="color: #0000FF;">self</span>.color).scale(0.8)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(<span style="color: #0000FF;">self</span>, ejes, radio=0.08):
+        <span style="color: #0000FF;">return</span> Dot(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), radius=radio, color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">v_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vertical_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">h_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">arrow</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vector(<span style="color: #0000FF;">self</span>.Vector.lista, stroke_color = <span style="color: #0000FF;">self</span>.color, stroke_width=4)
+        
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgde430d8">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VectorR3</span>():
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
+        <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
+        <span style="color: #BA36A5;">coords</span> = lista + [0] <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(lista)&lt;3 <span style="color: #0000FF;">else</span> lista
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">color</span>  = color
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">coords</span> = <span style="color: #006FE0;">tuple</span>(coords)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">Vector</span> = nc.Vector(<span style="color: #0000FF;">self</span>.coords, rpr)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">tex</span>    = MathTex(<span style="color: #0000FF;">self</span>.Vector.latex(), color=<span style="color: #0000FF;">self</span>.color).scale(0.8)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(<span style="color: #0000FF;">self</span>, ejes, radio=0.08):
+        <span style="color: #0000FF;">return</span> Dot3D(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), radius=radio, color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">v_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vertical_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">h_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">arrow</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Arrow3D(
+            start=np.array([0, 0, 0]),
+            end=np.array(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords)),
+            resolution=8,
+            color = <span style="color: #0000FF;">self</span>.color )
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org10a4dcf" class="outline-4">
+<h4 id="org10a4dcf">Insertar un vídeo en una escena</h4>
+<div class="outline-text-4" id="text-org10a4dcf">
+<div class="org-src-container">
+<pre class="src src-python" id="orgf3dddf6"><span style="color: #0000FF;">import</span> cv2 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needs opencv-python https://pypi.org/project/opencv-python/</span>
+<span style="color: #0000FF;">from</span> PIL <span style="color: #0000FF;">import</span> Image, ImageOps
+<span style="color: #0000FF;">from</span> dataclasses <span style="color: #0000FF;">import</span> dataclass
+
+<span style="color: #6434A3;">@dataclass</span>
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VideoStatus</span>:
+    <span style="color: #BA36A5;">time</span>: <span style="color: #006FE0;">float</span> = 0
+    <span style="color: #BA36A5;">videoObject</span>: cv2.VideoCapture = <span style="color: #D0372D;">None</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__deepcopy__</span>(<span style="color: #0000FF;">self</span>, memo):
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">self</span>
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VideoMobject</span>(ImageMobject):
+    <span style="color: #036A07;">'''</span>
+<span style="color: #036A07;">    Following a discussion on Discord about animated GIF images.</span>
+<span style="color: #036A07;">    Modified for videos</span>
+
+<span style="color: #036A07;">    Parameters</span>
+<span style="color: #036A07;">    ----------</span>
+<span style="color: #036A07;">    filename</span>
+<span style="color: #036A07;">        the filename of the video file</span>
+
+<span style="color: #036A07;">    imageops</span>
+<span style="color: #036A07;">        (optional) possibility to include a PIL.ImageOps operation, e.g.</span>
+<span style="color: #036A07;">        PIL.ImageOps.mirror</span>
+
+<span style="color: #036A07;">    speed</span>
+<span style="color: #036A07;">        (optional) speed-up/slow-down the playback</span>
+
+<span style="color: #036A07;">    loop</span>
+<span style="color: #036A07;">        (optional) replay the video from the start in an endless loop</span>
+
+<span style="color: #036A07;">    https://discord.com/channels/581738731934056449/1126245755607339250/1126245755607339250</span>
+<span style="color: #036A07;">    2023-07-06 Uwe Zimmermann &amp; Abulafia</span>
+<span style="color: #036A07;">    2024-03-09 Uwe Zimmermann</span>
+<span style="color: #036A07;">    '''</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, filename=<span style="color: #D0372D;">None</span>, imageops=<span style="color: #D0372D;">None</span>, speed=1.0, loop=<span style="color: #D0372D;">False</span>, **kwargs):
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">filename</span> = filename
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">imageops</span> = imageops
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">speed</span>    = speed
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">loop</span>     = loop
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">_id</span> = <span style="color: #006FE0;">id</span>(<span style="color: #0000FF;">self</span>)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">status</span> = VideoStatus()
+        <span style="color: #0000FF;">self</span>.status.<span style="color: #BA36A5;">videoObject</span> = cv2.VideoCapture(filename)
+
+        <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_FRAMES, 1)
+        <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #BA36A5;">frame</span> = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(frame)
+
+            <span style="color: #0000FF;">if</span> imageops != <span style="color: #D0372D;">None</span>:
+                <span style="color: #BA36A5;">img</span> = imageops(img)
+        <span style="color: #0000FF;">else</span>:
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(np.uint8([[63, 0, 0, 0],
+                                        [0, 127, 0, 0],
+                                        [0, 0, 191, 0],
+                                        [0, 0, 0, 255]
+                                        ]))
+        <span style="color: #006FE0;">super</span>().__init__(img, **kwargs)
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #0000FF;">self</span>.add_updater(<span style="color: #0000FF;">self</span>.videoUpdater)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">videoUpdater</span>(<span style="color: #0000FF;">self</span>, mobj, dt):
+        <span style="color: #0000FF;">if</span> dt == 0:
+            <span style="color: #0000FF;">return</span>
+        <span style="color: #BA36A5;">status</span> = <span style="color: #0000FF;">self</span>.status
+        status.<span style="color: #BA36A5;">time</span> += 1000*dt*mobj.speed
+        <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_MSEC, status.time)
+        <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> (ret == <span style="color: #D0372D;">False</span>) <span style="color: #0000FF;">and</span> <span style="color: #0000FF;">self</span>.loop:
+            status.<span style="color: #BA36A5;">time</span> = 0
+            <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_MSEC, status.time)
+            <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #BA36A5;">frame</span> = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needed here?        </span>
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(frame)
+
+            <span style="color: #0000FF;">if</span> mobj.imageops != <span style="color: #D0372D;">None</span>:
+                <span style="color: #BA36A5;">img</span> = mobj.imageops(img)
+            mobj.<span style="color: #BA36A5;">pixel_array</span> = change_to_rgba_array(
+                np.asarray(img), mobj.pixel_array_dtype
+            )
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9500daa" class="outline-4">
+<h4 id="org9500daa">Mover miniescenas a un subdirectorio auxiliar</h4>
+<div class="outline-text-4" id="text-org9500daa">
+<div class="org-src-container">
+<pre class="src src-bash" id="org4c7725a">mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgc69494b">mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org7937d96" class="outline-2">
+<h2 id="org7937d96"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgb85e5c1"></a>Generamos un fichero <code>mpeg</code> por cada escena<br />
+<div class="outline-text-5" id="text-3-0-0-1">
+<ul class="org-ul">
+<li>Versión de poca calidad</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org27d1bc6"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Versión calidad HD1080</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgb5a99a9"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org861dd8c"></a>Concatenamos las escenas en un único fichero <code>mpeg</code> y añadimos música de fondo.<br />
+<div class="outline-text-5" id="text-3-0-0-2">
+<ul class="org-ul">
+<li>Montando la versión de baja resolución</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org3c0bbfd">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3 -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Montando la versión de resolución HD1080</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org822a947">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4 ; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3 -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgab635dc"></a>Fundimos a negro los últimos segundos del vídeo (y la música).<br />
+<div class="outline-text-5" id="text-3-0-0-3">
+<div class="org-src-container">
+<pre class="src src-bash" id="orga172791"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
+<span style="color: #BA36A5;">offset</span>=$(<span style="color: #FF1493;">bc -l &lt;&lt;&lt; "$dur"-7</span>)
+ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="color: #008000;">\</span>
+       -filter_complex <span style="color: #008000;">"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]"</span> <span style="color: #008000;">\</span>
+       -map <span style="color: #008000;">"[v]"</span> -map <span style="color: #008000;">"[a]"</span> -y $<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org8c3f35f"></a>Traducción<br />
+<div class="outline-text-5" id="text-3-0-0-4">
+<div class="org-src-container">
+<pre class="src src-bash" id="orge7a1fd1">xgettext -o locale/$<span style="color: #BA36A5;">fichero</span>.pot $<span style="color: #BA36A5;">fichero</span>.py
+
+msginit -i locale/$<span style="color: #BA36A5;">fichero</span>.pot -o locale/en/LC_MESSAGES/$<span style="color: #BA36A5;">fichero</span>.po --locale=es --no-translator
+
+manim_translate -s es -t en -d $<span style="color: #BA36A5;">fichero</span> -l locale $<span style="color: #BA36A5;">fichero</span>.py
+
+manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<span style="color: #BA36A5;">escena</span> -d $<span style="color: #BA36A5;">fichero</span> -l en
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2025-01-02 jue 15:53</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

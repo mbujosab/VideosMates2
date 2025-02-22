@@ -1,0 +1,2525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2025-02-22 sáb 20:28 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 4</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 4</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3cada4b">1. Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</a>
+<ul>
+<li><a href="#org9ff8e44">1.1. Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</a></li>
+<li><a href="#orgb15b133">1.2. Escena 2 - Interpretación geométrica del producto de números</a></li>
+<li><a href="#org702ea04">1.3. Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</a></li>
+<li><a href="#org76fb258">1.4. Escena 4 - Interpretación geométrica del producto de tres números (3D)</a>
+<ul>
+<li><a href="#org6f84c31">1.4.1. Escena 3D</a></li>
+</ul>
+</li>
+<li><a href="#orgf197b98">1.5. Escena 4 - Interpretación geométrica del producto de tres números (explicación)</a></li>
+<li><a href="#org03d8bcc">1.6. Escena 5 - Interpretación geométrica del producto por escalares en de \(\mathbb{R}^3\) (3D)</a>
+<ul>
+<li><a href="#org223b840">1.6.1. Escena 3D</a></li>
+</ul>
+</li>
+<li><a href="#org13f53aa">1.7. Escena 5 - Interpretación geométrica del producto por escalares en de \(\mathbb{R}^3\) (explicación)</a></li>
+</ul>
+</li>
+<li><a href="#org790e522">2. Trozos comunes de código</a>
+<ul>
+<li><a href="#org834f41e">2.1. Carga de la librería Manim y NacAL</a></li>
+<li><a href="#org3ec92df">Definición de algunas subclases con definiciones generales</a>
+<ul>
+<li><a href="#org8dfedca">Definición Vectores en R2 y R3</a></li>
+<li><a href="#orgb7a6c6e">Insertar un vídeo en una escena</a></li>
+<li><a href="#orgef83ad2">Mover miniescenas a un subdirectorio auxiliar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org2316e75">3. Rodando: 1,2,3&hellip; ¡acción!</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3cada4b" class="outline-2">
+<h2 id="org3cada4b"><span class="section-number-2">1.</span> Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org9ff8e44" class="outline-3">
+<h3 id="org9ff8e44"><span class="section-number-3">1.1.</span> Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-python" id="org9b139b0">&lt;&lt;Carga de la librer&#237;a Manim y NacAL con AzureService&gt;&gt;
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">&lt;&lt;Carga de la librer&#237;a Manim y NacAL&gt;&gt;</span>
+&lt;&lt;Definici&#243;n de mi escena con voz&gt;&gt;
+&lt;&lt;Definici&#243;n de VectorR2&gt;&gt;
+&lt;&lt;Definici&#243;n de VectorR3&gt;&gt;
+&lt;&lt;<span style="color: #D0372D;">copyright</span>&gt;&gt;
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E01_ProductoPorEscalares</span>(MiEscenaConVoz):    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))       </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos()
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Portada</span>
+        <span style="color: #BA36A5;">titulo</span> = Title(_(<span style="color: #008000;">"Producto de vectores de "</span>) + r<span style="color: #008000;">"\R[n]"</span> + _(<span style="color: #008000;">"por escalares"</span>),
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        <span style="color: #0000FF;">self</span>.play(Write(titulo))
+        <span style="color: #0000FF;">self</span>.pausa_media()
+        <span style="color: #0000FF;">self</span>.play(FadeOut(titulo))
+        
+        <span style="color: #BA36A5;">operacionProducto</span> = Tex(_(<span style="color: #008000;">"Producto por escalares"</span>),
+                         tex_template = myTemplate, font_size=70
+                         ).to_edge(UP).set_color(BLUE)
+
+        <span style="color: #BA36A5;">operacionDescripcion</span> = Tex(_(<span style="color: #008000;">"El producto se define componente a componente."</span>),
+                         tex_template = myTemplate,
+                         ).move_to([0,2.5,0]).to_edge(LEFT)
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Ejemplos</span>
+        <span style="color: #BA36A5;">EjR3</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Ejemplo en "</span>) + r<span style="color: #008000;">"\R[3]:}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+
+        <span style="color: #BA36A5;">EjR4</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Ejemplo en "</span>) + r<span style="color: #008000;">"\R[4]:}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+        
+        <span style="color: #BA36A5;">a</span>    = 3
+        <span style="color: #BA36A5;">b</span>    = nc.Vector( [0, 1, 2])        
+        <span style="color: #BA36A5;">s1</span> = MathTex(a,                tex_template = myTemplate,)
+        <span style="color: #BA36A5;">por</span>= MathTex(r<span style="color: #008000;">"\cdot"</span>,         tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s3</span> = MathTex(b.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,          tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s5</span> = MathTex((a*b).latex(),    tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(s1,por,s3,igual,s5).arrange(RIGHT)
+       
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Adem&#225;s de sumar vectores,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa_corta(tracker.duration)
+            
+        <span style="color: #0000FF;">self</span>.add(operacionProducto)
+        <span style="color: #0000FF;">self</span>.add(operacionDescripcion)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""tambi&#233;n podemos reescalarlos, es decir, podemos multiplicarlos</span>
+<span style="color: #008000;">        por alg&#250;n escalar para obtener un m&#250;ltiplo del vector original."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(EjR3)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[2]), run_time=tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[:2]), run_time=tracker.duration*3/4)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El resultado es otro vector que se define componente a</span>
+<span style="color: #008000;">        componente."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa_media()
+            <span style="color: #0000FF;">self</span>.add(grp1[3])
+            <span style="color: #0000FF;">self</span>.add(grp1[4][0][:2])
+            <span style="color: #0000FF;">self</span>.add(grp1[4][0][-2:])
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La primera componente del m&#250;ltiplo es el producto del escalar</span>
+<span style="color: #008000;">        por la primera componente del vector."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][2]), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0]),
+                      Circumscribe(grp1[2][0][2]),
+                      Indicate(grp1[4][0][2]),                      
+                      run_time=tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De manera similar se calculan tanto la segunda</span>
+<span style="color: #008000;">        componente, como las restantes componentes del m&#250;ltiplo del vector."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][3]), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0]),
+                      Circumscribe(grp1[2][0][3]),
+                      Indicate(grp1[4][0][3]),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][4]),
+                      run_time=tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0]),
+                      Circumscribe(grp1[2][0][4]),
+                      Indicate(grp1[4][0][4]),
+                      run_time=tracker.duration/3 )
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp1))
+
+        <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+        <span style="color: #BA36A5;">vga</span> = MathTex(escalar, tex_template = myTemplate)
+        
+        <span style="color: #BA36A5;">v_generico_b</span>  = nc.Vector(sp.symbols(<span style="color: #008000;">'b:5'</span>)[1:])
+        <span style="color: #BA36A5;">vgb</span> = MathTex(v_generico_b.latex(), tex_template = myTemplate)
+
+        <span style="color: #BA36A5;">vgab</span> = MathTex((escalar * v_generico_b).latex(), tex_template = myTemplate)
+
+        <span style="color: #BA36A5;">grp2</span> = VGroup(vga,por,vgb,igual,vgab).arrange(RIGHT)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""As&#237;, la siguiente expresi&#243;n describe</span>
+<span style="color: #008000;">        el producto de un vector de R 4 por un escalar."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeTransform(EjR3,EjR4))
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp2))
+            <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Lo habitual es simplificar la notaci&#243;n,</span>
+<span style="color: #008000;">        omitiendo el punto que denota la operaci&#243;n producto"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp2[1]),
+                      grp2[0].animate.move_to(grp2[1]),
+                      run_time=2*tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Como en el caso de la suma,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""para definir la operaci&#243;n en R n necesitamos una</span>
+<span style="color: #008000;">        estrategia que no requiera escribir la lista de componentes. Recuerde que n puede</span>
+<span style="color: #008000;">        ser muy grande."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(Indicate(vga[0][4:-4]),
+                      Indicate(vgb[0][4:-4]),
+                      Indicate(vgab[0][4:-4]),
+                      run_time=2*tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.wait(1.5*tracker.duration/6)
+
+        <span style="color: #BA36A5;">Defn</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Definici&#243;n"</span>) + <span style="color: #008000;">":}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(RED).next_to(operacionDescripcion,
+                                                      DOWN,
+                                                      aligned_edge=LEFT)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Una alternativa es definir el producto usando el operador</span>
+<span style="color: #008000;">        selector. Con ella podemos expresar"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp2),
+                      FadeOut(EjR4),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.add(Defn)
+
+        <span style="color: #BA36A5;">cvab</span> = MathTex(r<span style="color: #008000;">"\elemRp{\lambda\Vect{a}}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cvb</span>  = MathTex(r<span style="color: #008000;">"\lambda\eleVRpE{a}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">eq_suma</span> = VGroup(cvab,igual,cvb).arrange(RIGHT).scale(1.5)
+        
+        <span style="color: #BA36A5;">donde</span> = Tex(_(<span style="color: #008000;">"donde"</span>))
+        <span style="color: #BA36A5;">indices</span> = MathTex(r<span style="color: #008000;">"i=1:n"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">pc_indices</span> = VGroup(donde,indices).arrange(RIGHT, buff=1)
+        <span style="color: #BA36A5;">grp3</span> = VGroup(eq_suma, pc_indices).arrange(RIGHT, buff=1)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""que la i-&#233;sima componente del</span>
+<span style="color: #008000;">        m&#250;ltiplo del vector es igual"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[0][0],
+                             scale=1.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=tracker.duration-1.5)            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[0][1],
+                             scale=1.5,
+                             rate_func=rate_functions.exponential_decay))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""al escalar por la i-&#233;sima</span>
+<span style="color: #008000;">        componente del vector."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[0][2:],
+                             scale=0.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=tracker.duration+0.2)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""(donde el &#237;ndice recorre los n&#250;meros naturales entre uno</span>
+<span style="color: #008000;">        y n)"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[1]))
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""Esta definici&#243;n abstracta  arroja una segunda regla de</span>
+<span style="color: #008000;">        c&#225;lculo simb&#243;lico:"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][3]),
+                      Indicate(eq_suma[2][0][1]),
+                      Indicate(eq_suma[2][0][5]),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""que la i-&#233;sima componente del producto se puede sustituir por</span>
+<span style="color: #008000;">        el producto del escalar por la i-&#233;sima componente."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #BA36A5;">source0</span> = MathTex(r<span style="color: #008000;">"\elemRp{\lambda\Vect{a}}{i}"</span>,
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            <span style="color: #BA36A5;">target0</span> = MathTex(r<span style="color: #008000;">"\lambda\eleVRpE{a}{i}"</span>,
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            <span style="color: #BA36A5;">source1</span> = target0.copy()
+            <span style="color: #BA36A5;">target1</span> = source0.copy()
+
+            <span style="color: #BA36A5;">source2</span> = source0.copy()
+            <span style="color: #BA36A5;">target2</span> = target0.copy()
+
+            <span style="color: #BA36A5;">VG0</span> = VGroup(source0,target0)
+            <span style="color: #0000FF;">self</span>.add(source0)
+            <span style="color: #BA36A5;">transform_index0</span> = [[0,1,2,3,4,5],
+                                [1,0,2,5,3,4]]
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(source0[i],target0[j], rate_func=rate_functions.smooth)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index0)
+                ],
+                run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y que el escalar por la i-&#233;sima componente se puede</span>
+<span style="color: #008000;">        sustituir por la i-&#233;sima componente del producto."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(target0,source1))
+            
+            <span style="color: #BA36A5;">VG1</span> = VGroup(source1,target1)
+            <span style="color: #BA36A5;">transform_index1</span> = [[0,1,2,3,4,5],
+                                [1,0,2,4,5,3]]
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(source1[i],target1[j], rate_func=rate_functions.smooth)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index1)
+                ],
+                run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Es decir, que los par&#233;ntesis pueden desplazarse para dejar</span>
+<span style="color: #008000;">        fuera al escalar y dentro el operador selector, y viceversa."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(target1,source2))
+            <span style="color: #BA36A5;">VG2</span> = VGroup(source2,target2)
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(source2[i],target2[j], rate_func=rate_functions.there_and_back_with_pause)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index0)
+                ],
+                run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta regla se denomina propiedad asociativa del operador selector</span>
+<span style="color: #008000;">        respecto del producto."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.remove(target1,source2,target2)
+            <span style="color: #0000FF;">self</span>.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][3]),
+                      Indicate(eq_suma[2][0][1]),
+                      Indicate(eq_suma[2][0][5]),
+                      run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp3), run_time=0.3)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, los par&#233;ntesis no son</span>
+<span style="color: #008000;">        necesarios, pues la expresi&#243;n sin ellos tiene pleno sentido;</span>
+<span style="color: #008000;">        tal y como ocurre con el producto entre n&#250;meros."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">target3</span> = MathTex(r<span style="color: #008000;">"\lambda\eleVR{a}{i}"</span>,
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=0).scale(1.5)[0]
+            <span style="color: #BA36A5;">grp4</span> = VGroup(cvab,igual,cvb,igual.copy(),target3).arrange(RIGHT, buff=1)
+
+            <span style="color: #BA36A5;">producto</span> = MathTex(r<span style="color: #008000;">"(ab)c\;=\;a(bc)\;=\;abc"</span>,
+                               tex_template = myTemplate).next_to(grp4, DOWN, buff=1.2).scale(1.5)[0]
+
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp4),
+                      run_time=tracker.duration/3)
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(target3), run_time=tracker.duration/3)
+
+            <span style="color: #0000FF;">self</span>.play(FadeIn(producto))
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3+1)
+                        
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb15b133" class="outline-3">
+<h3 id="orgb15b133"><span class="section-number-3">1.2.</span> Escena 2 - Interpretación geométrica del producto de números</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E02_InterpretacionGeometricaDelProductoDeDosNumeros</span>(MiEscenaConVoz):   
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+       
+        <span style="color: #BA36A5;">cabecera</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto"</span>),
+                            tex_template = myTemplate,
+                            font_size=70).to_edge(UP).set_color(BLUE)
+
+        <span style="color: #BA36A5;">cabecera2</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto de n&#250;meros"</span>),
+                       tex_template = myTemplate,
+                       font_size=70).to_edge(UP).set_color(BLUE).scale(0.6).shift(0.1*UP)
+        
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">coordenada_x</span>(x,ax, label=<span style="color: #008000;">''</span>, pos=0):
+            <span style="color: #0000FF;">if</span> x==<span style="color: #006FE0;">int</span>(x):
+                <span style="color: #BA36A5;">xlabel</span> = (ax[0][2][<span style="color: #006FE0;">int</span>(x)-1]).copy()
+            <span style="color: #0000FF;">else</span>:
+                <span style="color: #BA36A5;">label</span> = label <span style="color: #0000FF;">if</span> label <span style="color: #0000FF;">else</span> f<span style="color: #008000;">"</span>{x}<span style="color: #008000;">"</span>
+                <span style="color: #BA36A5;">xlabel</span> = Tex(label, font_size=30)
+                <span style="color: #BA36A5;">pos_label</span> = UP <span style="color: #0000FF;">if</span> pos <span style="color: #0000FF;">else</span> DOWN
+                xlabel.next_to(ax.c2p(x,0), pos_label, buff=0.6)
+            <span style="color: #0000FF;">return</span> xlabel
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">coordenada_y</span>(y,ax, label=<span style="color: #008000;">''</span>, pos=0):
+            <span style="color: #0000FF;">if</span> y==<span style="color: #006FE0;">int</span>(y):
+                <span style="color: #BA36A5;">ylabel</span> = (ax[1][2][<span style="color: #006FE0;">int</span>(y)-1]).copy()
+            <span style="color: #0000FF;">else</span>:
+                <span style="color: #BA36A5;">label</span> = label <span style="color: #0000FF;">if</span> label <span style="color: #0000FF;">else</span> f<span style="color: #008000;">"</span>{y}<span style="color: #008000;">"</span>
+                <span style="color: #BA36A5;">ylabel</span> = Tex(label, font_size=30)
+                <span style="color: #BA36A5;">pos_label</span> = RIGHT <span style="color: #0000FF;">if</span> pos <span style="color: #0000FF;">else</span> LEFT
+                ylabel.next_to(ax.c2p(0,y), pos_label, buff=0.5)
+            <span style="color: #0000FF;">return</span> ylabel
+                
+        <span style="color: #BA36A5;">coordenadas_xy</span> = <span style="color: #0000FF;">lambda</span> <span style="color: #BA36A5;">x</span>,<span style="color: #BA36A5;">y</span>,<span style="color: #BA36A5;">ax</span>,<span style="color: #BA36A5;">labelx</span>=<span style="color: #008000;">''</span>,<span style="color: #BA36A5;">labely</span>=<span style="color: #008000;">''</span>,<span style="color: #BA36A5;">posx</span>=0,<span style="color: #BA36A5;">posy</span>=0: (coordenada_x(x,ax,labelx,posx),
+                                                                           coordenada_y(y,ax,labely,posy))
+        
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">ret&#237;culaProducto</span>(a, b: <span style="color: #006FE0;">int</span>, ax: Axes) -&gt; VGroup:
+            <span style="color: #0000FF;">def</span> <span style="color: #006699;">cuadricula</span>(a: <span style="color: #006FE0;">int</span>, b: <span style="color: #006FE0;">int</span>, ax: Axes):
+                <span style="color: #BA36A5;">base</span> = VGroup(*[Square().scale(0.5) <span style="color: #0000FF;">for</span> s <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(0,<span style="color: #006FE0;">int</span>(a*b))])
+                base.arrange_in_grid(rows=b,
+                                     flow_order=<span style="color: #008000;">"ru"</span>,
+                                     buff=0).next_to(ax.coords_to_point(0, 0),
+                                                     UR,
+                                                     buff=0)
+                <span style="color: #0000FF;">return</span> Group(*[base[c[0]:c[1]] <span style="color: #0000FF;">for</span> c <span style="color: #0000FF;">in</span> [(a*i,a*(i+1)) <span style="color: #0000FF;">for</span> i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(b)]])
+            
+            <span style="color: #0000FF;">def</span> <span style="color: #006699;">rectangulo</span>(a, b: <span style="color: #006FE0;">int</span>, ax: Axes):
+                <span style="color: #BA36A5;">base</span>  = VGroup(*[Rectangle(height=2.0, width=2.0*a).scale(0.5) <span style="color: #0000FF;">for</span> s <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(0,b)])
+                <span style="color: #BA36A5;">posicion</span> = UR <span style="color: #0000FF;">if</span> a&gt;0 <span style="color: #0000FF;">else</span> UL
+                <span style="color: #BA36A5;">tabla</span> = base.arrange_in_grid(rows=b,
+                                             flow_order=<span style="color: #008000;">"ru"</span>,
+                                             buff=0).next_to(ax.coords_to_point(0, 0),
+                                                             posicion,
+                                                             buff=0)
+                <span style="color: #0000FF;">return</span> tabla
+            <span style="color: #0000FF;">return</span> cuadricula(a, b, ax) <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">isinstance</span>(a, <span style="color: #006FE0;">int</span>) <span style="color: #0000FF;">else</span> rectangulo(a, b, ax)
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">productoEnteros</span>(a,b,ax,tabla,duraci&#243;n=2):
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*a*RIGHT) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)], run_time=duraci&#243;n/2)
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*DOWN) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)], run_time=duraci&#243;n/2)
+        
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">producto</span>(a,b,ax,tabla,duraci&#243;n=3):
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*a*RIGHT) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)], run_time=duraci&#243;n/3)
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*DOWN) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)], run_time=duraci&#243;n/3)
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*UP) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)], run_time=duraci&#243;n/3)
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">multiplicaci&#243;n</span>(a, b: <span style="color: #006FE0;">int</span>, ax: Axes, tabla: VGroup, xtext=<span style="color: #008000;">''</span>, ytext=<span style="color: #008000;">''</span>, duraci&#243;n_de_las_rectas=1):
+            <span style="color: #BA36A5;">h_line</span> =ax.get_horizontal_line(ax.c2p(a*b,b), color=YELLOW)
+            <span style="color: #BA36A5;">v_line</span> =ax.get_vertical_line(ax.c2p(a*b,b), color=YELLOW)
+            <span style="color: #BA36A5;">xlabel</span> = Tex(xtext, font_size=32, color=YELLOW)
+            <span style="color: #BA36A5;">pos_x</span>  = DOWN <span style="color: #0000FF;">if</span> a*b &gt;0 <span style="color: #0000FF;">else</span> UP
+            xlabel.next_to(ax.c2p(a,0), pos_x, buff=0.5)
+            <span style="color: #BA36A5;">ylabel</span> = Tex(ytext, font_size=32, color=YELLOW)
+            <span style="color: #BA36A5;">pos_y</span>  = LEFT <span style="color: #0000FF;">if</span> a*b &gt;0 <span style="color: #0000FF;">else</span> RIGHT
+            ylabel.next_to(ax.c2p(0,b), pos_y, buff=0.5)
+            <span style="color: #BA36A5;">prod_label</span> = Tex(f<span style="color: #008000;">"</span>{b}<span style="color: #008000;">"</span>+xtext, font_size=32, color=YELLOW) <span style="color: #0000FF;">if</span> xtext <span style="color: #0000FF;">else</span> Tex(<span style="color: #008000;">''</span>)
+            prod_label.next_to(ax.c2p(a*b,0), DOWN, buff=0.5)
+            <span style="color: #0000FF;">self</span>.add(xlabel)
+            <span style="color: #0000FF;">self</span>.add(ylabel)
+            <span style="color: #0000FF;">self</span>.add(prod_label)            
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,
+                               run_time=1),
+                      Indicate(tabla[0],
+                               run_time=1))
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(h_line, scale_factor=2),
+                      run_time=1)
+            <span style="color: #0000FF;">self</span>.play(Indicate(v_line, scale_factor=2),
+                      run_time=2)
+            <span style="color: #0000FF;">self</span>.wait(duraci&#243;n_de_las_rectas)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(v_line),
+                      FadeOut(h_line))
+            
+
+        <span style="color: #0000FF;">self</span>.creditos(1)
+        
+        <span style="color: #BA36A5;">ax</span> = Axes(
+            x_length=12,
+            y_length=6,
+            x_range=[0, 12, 1],
+            y_range=[0, 6, 1],
+            tips=<span style="color: #D0372D;">False</span>,
+            axis_config={<span style="color: #008000;">"include_numbers"</span>: <span style="color: #D0372D;">True</span>}
+        )        
+        
+
+        <span style="color: #BA36A5;">resumen1</span> = Tex(_(r<span style="color: #008000;">"""Para interpretar geom&#233;tricamente el producto por escalares en \R[2],"""</span>),
+                       tex_template = myTemplate).scale_to_fit_width(config.frame_width*.9)
+        
+        <span style="color: #BA36A5;">resumen2</span> = Tex(_(r<span style="color: #008000;">"""antes interpretaremos geom&#233;tricamente el producto de dos n&#250;meros."""</span>),
+                       tex_template = myTemplate).next_to(resumen1, DOWN).scale_to_fit_width(config.frame_width*.9)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Antes de ver la interpretaci&#243;n</span>
+<span style="color: #008000;">        geom&#233;trica del reescalado de vectores en R2,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.add(cabecera)            
+            <span style="color: #0000FF;">self</span>.play(Write(resumen1), run_time=tracker.duration+0.2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""debemos dar una interpretaci&#243;n</span>
+<span style="color: #008000;">        geom&#233;trica al producto entre n&#250;meros reales."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Write(resumen2), run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(resumen1),
+                      FadeOut(resumen2))
+            
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Cuando los n&#250;meros son naturales</span>
+<span style="color: #008000;">        es habitual asociar sus magnitudes con longitudes, y los</span>
+<span style="color: #008000;">        productos con superficies"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.play(FadeIn(ax),
+                      FadeTransform(cabecera, cabecera2),
+                      run_time=tracker.duration/3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""As&#237;, el producto de uno por uno</span>
+<span style="color: #008000;">        se asocia con un cuadrado de lado 1"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=1
+            <span style="color: #BA36A5;">b</span>=1
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/6)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a,b,ax)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            [<span style="color: #0000FF;">self</span>.play(FadeIn(base), run_time=.5) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla]
+            <span style="color: #0000FF;">self</span>.play(Indicate(tabla), run_time=tracker.duration/3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Evidentemente el &#225;rea del</span>
+<span style="color: #008000;">        cuadrado coincide con la longitud de la base."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(tabla.animate.fade(0.8), run_time=tracker.duration/2)
+
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Podemos asociar el producto tres</span>
+<span style="color: #008000;">        por uno con un rect&#225;ngulo de base tres y altura uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=3.
+            <span style="color: #BA36A5;">b</span>=1
+            <span style="color: #BA36A5;">tabla2</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a,b,ax)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            [<span style="color: #0000FF;">self</span>.play(FadeIn(base), run_time=.5) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla2]
+            <span style="color: #0000FF;">self</span>.play(Indicate(tabla2), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/4)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y de nuevo el &#225;rea coincide con</span>
+<span style="color: #008000;">        la longitud de la base, pues la altura es uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla), run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(tabla2.animate.set_opacity(0.15), run_time=tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Multiplicar uno por tres</span>
+<span style="color: #008000;">        corresponde a apilar tres cuadrados de base uno. Si los</span>
+<span style="color: #008000;">        alineamos en una fila de altura uno, podemos comprobar que el</span>
+<span style="color: #008000;">        &#225;rea total (as&#237; como la longitud) es igual a la del rect&#225;ngulo</span>
+<span style="color: #008000;">        tres por uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=1
+            <span style="color: #BA36A5;">b</span>=3
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a,b,ax)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            <span style="color: #0000FF;">self</span>.play([FadeIn(base) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla],
+                      run_time=tracker.duration/3)
+            productoEnteros(a,b,ax,tabla)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla),
+                      FadeOut(tabla2))
+                                        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Para multiplicar tres por cuatro</span>
+<span style="color: #008000;">        apilamos cuatro rect&#225;ngulos de base tres y altura uno. De</span>
+<span style="color: #008000;">        nuevo, si los alineamos en una fila de altura 1, su longitud</span>
+<span style="color: #008000;">        total es el valor del producto."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=3.
+            <span style="color: #BA36A5;">b</span>=4
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a,b,ax)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            <span style="color: #0000FF;">self</span>.play([FadeIn(base) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla], run_time=tracker.duration/3)
+            productoEnteros(a,b,ax,tabla,duraci&#243;n=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta forma de multiplicar, donde</span>
+<span style="color: #008000;">        apilamos cierta cantidad de rect&#225;ngulos con altura uno y base</span>
+<span style="color: #008000;">        un n&#250;mero natural, para luego disponerlos horizontalmente y</span>
+<span style="color: #008000;">        medir la longitud total, se puede generalizar a rect&#225;ngulos</span>
+<span style="color: #008000;">        cuya base es un n&#250;mero real, pero solo si lo hacemos con</span>
+<span style="color: #008000;">        rect&#225;ngulos de altura uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=2.
+            <span style="color: #BA36A5;">b</span>=3
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a,b,ax)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            <span style="color: #0000FF;">self</span>.play([FadeIn(base) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla], run_time=tracker.duration/3)
+            productoEnteros(a,b,ax,tabla,duraci&#243;n=tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla),
+                      run_time=tracker.duration*4/12)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por ejemplo, podemos multiplicar</span>
+<span style="color: #008000;">        ra&#237;z de dos por cinco."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #BA36A5;">a</span>=np.sqrt(2)
+            <span style="color: #BA36A5;">a_label</span>=r<span style="color: #008000;">"$\sqrt{2}$"</span>
+            <span style="color: #BA36A5;">b</span>=5
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)           
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a, b, ax, labelx=a_label)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(ylabel)
+            <span style="color: #0000FF;">self</span>.play([FadeIn(base) <span style="color: #0000FF;">for</span> base <span style="color: #0000FF;">in</span> tabla], run_time=tracker.duration/3)
+            productoEnteros(a,b,ax,tabla)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El resultado es algo mayor que</span>
+<span style="color: #008000;">        siete."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)           
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero &#191;c&#243;mo podemos multiplicar</span>
+<span style="color: #008000;">        dos numeros reales?"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)           
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Para hacerlo debemos dar una</span>
+<span style="color: #008000;">        nueva interpretaci&#243;n del producto. Fij&#233;monos en lo que pasa si</span>
+<span style="color: #008000;">        nos quedamos a mitad de camino entre la pila inicial y la fila</span>
+<span style="color: #008000;">        final."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play([fila.animate.shift(i*UP) <span style="color: #0000FF;">for</span> i,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(tabla)],
+                      run_time=tracker.duration/3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En esta posici&#243;n los rect&#225;ngulos</span>
+<span style="color: #008000;">        tambi&#233;n est&#225;n alineados."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">recta</span> =  Line(start = tabla.get_corner(DL),
+                          end   = tabla.get_corner(UR),
+                          color = RED_B)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(recta))
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)           
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla,
+                              recta,
+                              xlabel)) 
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Usaremos este hecho para dar una</span>
+<span style="color: #008000;">        nueva interpretaci&#243;n geom&#233;trica del producto entre n&#250;meros."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Para verlo, volvamos primero a</span>
+<span style="color: #008000;">        un ejemplo con n&#250;meros enteros."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #BA36A5;">a</span>=3.
+            <span style="color: #BA36A5;">b</span>=4
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a, b, ax, labelx=a_label)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.remove(xlabel,
+                        ylabel)
+            <span style="color: #0000FF;">self</span>.add(tabla)
+            producto(a,b,ax,tabla,duraci&#243;n=tracker.duration)
+            
+            <span style="color: #BA36A5;">recta</span> =  Line(start = tabla.get_corner(DL),
+                          end   = tabla.get_corner(UR),
+                          color = RED_B)
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(recta)) 
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla[1:]))
+           
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""tres por cuatro es doce, y se puede</span>
+<span style="color: #008000;">        calcular directamente en la recta roja, pues la recta a la</span>
+<span style="color: #008000;">        altura 4 est&#225; sobre 12."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            multiplicaci&#243;n(a, b, ax, tabla, duraci&#243;n_de_las_rectas=4)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero tambi&#233;n se puede ver que</span>
+<span style="color: #008000;">        tres por dos es seis"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=3.
+            <span style="color: #BA36A5;">b</span>=2
+            multiplicaci&#243;n(a, b, ax, tabla)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""O que tres por cuatro tercios es</span>
+<span style="color: #008000;">        cuatro"""</span>)) <span style="color: #0000FF;">as</span> tracker:           
+            <span style="color: #BA36A5;">a</span>=3.
+            <span style="color: #BA36A5;">b</span>=4/3            
+            <span style="color: #BA36A5;">b_label</span>=r<span style="color: #008000;">"$\frac{4}{3}$"</span>
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a, b, ax, labely=b_label)
+            <span style="color: #0000FF;">self</span>.add(ylabel)
+            multiplicaci&#243;n(a, b, ax, tabla, duraci&#243;n_de_las_rectas=0.4)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla[0],
+                              recta,
+                              ylabel))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De este modo podemos multiplicar</span>
+<span style="color: #008000;">        dos numeros reales cualesquiera. Por ejemplo, dos veces ra&#237;z</span>
+<span style="color: #008000;">        de dos por ra&#237;z de diez."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">a</span>=2*np.sqrt(2)
+            <span style="color: #BA36A5;">a_label</span>=r<span style="color: #008000;">"$2\sqrt{2}$"</span>
+            <span style="color: #BA36A5;">b</span>=1
+            <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+            <span style="color: #BA36A5;">c</span>=np.sqrt(10)
+            <span style="color: #BA36A5;">c_label</span>=r<span style="color: #008000;">"$\sqrt{10}$"</span>
+            <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a, c, ax, labelx=a_label, labely=c_label)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=2.5))
+            <span style="color: #0000FF;">self</span>.add(tabla)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El resultado es algo menor que</span>
+<span style="color: #008000;">        9."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+     
+            <span style="color: #BA36A5;">recta</span> =  Line(start = tabla.get_corner(DL),
+                          end   = ax.c2p(12,12/a),
+                          color = RED_B)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(recta))
+            multiplicaci&#243;n(a, c, ax, tabla, duraci&#243;n_de_las_rectas=1)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla,
+                              recta,
+                              xlabel,
+                              ylabel,
+                              ax,
+                              cabecera2))
+            
+        <span style="color: #BA36A5;">ax</span> = Axes(
+            x_length=12,
+            y_length=6,
+            x_range=[-6, 6, 1],
+            y_range=[-3, 3, 1],
+            tips=<span style="color: #D0372D;">False</span>,
+            axis_config={<span style="color: #008000;">"include_numbers"</span>: <span style="color: #D0372D;">True</span>}
+        )        
+        <span style="color: #0000FF;">self</span>.add(ax)
+            
+        <span style="color: #BA36A5;">a</span>=-2.5
+        <span style="color: #BA36A5;">a_label</span>=r<span style="color: #008000;">"$\alpha$"</span>
+        <span style="color: #BA36A5;">b</span>=1
+        <span style="color: #BA36A5;">tabla</span> = ret&#237;culaProducto(a,b,ax)
+        <span style="color: #BA36A5;">c</span>=-1.5
+        <span style="color: #BA36A5;">c_label</span>=r<span style="color: #008000;">"$\beta$"</span>
+        <span style="color: #BA36A5;">xlabel</span>,<span style="color: #BA36A5;">ylabel</span>=coordenadas_xy(a, c, ax, labelx=a_label, labely=c_label)
+        xlabel.scale(1.5)
+        ylabel.scale(1.5)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, para multiplicar</span>
+<span style="color: #008000;">        gr&#225;ficamente un n&#250;mero alfa;"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=1.5))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""por un n&#250;mero beta:"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=1.5))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pintamos un rect&#225;ngulo cuya base</span>
+<span style="color: #008000;">        va desde cero hasta alfa, y con altura uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(tabla))
+
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Extendemos la diagonal que pasa</span>
+<span style="color: #008000;">        por el origen para obtener una recta infinita."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">recta</span> =  Line(start = ax.c2p(-6,-6/a),
+                          end   = ax.c2p( 6, 6/a),
+                          color = RED_B)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(recta),
+                      run_time=tracker.duration/3)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El punto de la recta cuya</span>
+<span style="color: #008000;">        coordenada vertical es beta"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">prod_label</span> = Tex(r<span style="color: #008000;">"$\alpha\beta$"</span>, font_size=30).scale(1.5)
+            prod_label.next_to(ax.c2p(a*c,0), UP, buff=0.3)
+
+            <span style="color: #BA36A5;">h_line</span> =ax.get_horizontal_line(ax.c2p(a*c,c), color=BLUE)
+            <span style="color: #BA36A5;">v_line</span> =ax.get_vertical_line(ax.c2p(a*c,c), color=BLUE)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(h_line),
+                      Indicate(ylabel))
+                      
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""tiene como coordenada horizontal</span>
+<span style="color: #008000;">        el valor alfa por beta"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(v_line),
+                      Indicate(prod_label,
+                               scale_factor=1.5))
+            <span style="color: #0000FF;">self</span>.pausa_larga()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta nueva interpretaci&#243;n de</span>
+<span style="color: #008000;">        producto implica que, los puntos de una recta que pasa por el</span>
+<span style="color: #008000;">        origen son aquellos que mantienen una proporci&#243;n constante</span>
+<span style="color: #008000;">        entre sus cordenadas vertical y horizontal."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #BA36A5;">c</span>=2.2
+            <span style="color: #BA36A5;">c_label</span>=r<span style="color: #008000;">"$y$"</span>
+            <span style="color: #BA36A5;">xlabel2</span>,<span style="color: #BA36A5;">ylabel2</span>=coordenadas_xy(a, c, ax, labelx=a_label, labely=c_label,posy=1)
+            xlabel2.scale(1.5)
+            ylabel2.scale(1.5)
+            <span style="color: #BA36A5;">prod_label2</span> = Tex(r<span style="color: #008000;">"$x=\alpha y$"</span>, font_size=30).scale(1.5)
+            prod_label2.next_to(ax.c2p(a*c,0), DOWN, buff=0.6)
+            <span style="color: #BA36A5;">h_line2</span> =ax.get_horizontal_line(ax.c2p(a*c,c), color=GREEN)
+            <span style="color: #BA36A5;">v_line2</span> =ax.get_vertical_line(ax.c2p(a*c,c), color=GREEN)
+
+            <span style="color: #BA36A5;">eq_recta</span> = Tex(r<span style="color: #008000;">"$\frac{\beta}{\alpha\beta}\;=\;\frac{1}{\alpha}$"</span>,
+                       tex_template = myTemplate,
+                       font_size=30).scale(2.5).set_color(BLUE_A).to_corner(UR)
+
+            <span style="color: #0000FF;">self</span>.play(FadeIn(eq_recta))
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(eq_recta[0][-3:]),
+                      Circumscribe(eq_recta[0][:3]),
+                      run_time=tracker.duration/2)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""F&#237;jese que esta representaci&#243;n</span>
+<span style="color: #008000;">        respeta los signos del producto:"""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""menos por m&#225;s es menos."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y menos por menos es m&#225;s. Por</span>
+<span style="color: #008000;">        eso alpha por beta es positivo en la figura."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=2),
+                      Indicate(ylabel,scale_factor=2),
+                      Indicate(prod_label,scale_factor=2),
+                      run_time=tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(tabla,
+                              recta,
+                              h_line,
+                              v_line,
+                              xlabel,
+                              ylabel,
+                              prod_label,
+                              eq_recta),
+                      run_time=tracker.duration/2)
+                
+        <span style="color: #BA36A5;">eje_y</span> =  Line(start = ax.c2p(0,3),
+                      end   = ax.c2p(0,-3),
+                      color = RED_B)
+        <span style="color: #BA36A5;">cerolabel</span> = Tex(<span style="color: #008000;">'$0$'</span>, font_size=32, color=YELLOW).scale(1.3)
+        cerolabel.next_to(ax.c2p(0,0), DOWN)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""N&#243;tese que en el caso en que</span>
+<span style="color: #008000;">        alfa es cero, empleamos como recta el eje vertical."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(eje_y),
+                      Indicate(cerolabel),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Indicate(eje_y),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(eje_y),
+                      FadeOut(cerolabel))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta interpretaci&#243;n del producto</span>
+<span style="color: #008000;">        entre n&#250;meros reales, que caracteriza las rectas en funci&#243;n de</span>
+<span style="color: #008000;">        la proporci&#243;n entre las coordenadas de sus puntos, nos va a</span>
+<span style="color: #008000;">        permitir interpretar el producto de un vector por un</span>
+<span style="color: #008000;">        escalar. Ve&#225;moslo"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(recta,
+                             h_line,
+                             v_line,
+                             xlabel,
+                             ylabel,
+                             prod_label,
+                             eq_recta))
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org702ea04" class="outline-3">
+<h3 id="org702ea04"><span class="section-number-3">1.3.</span> Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E03_InterpretacionGeometricaDelProductoPorEscalaresR2</span>(MiEscenaConVoz):    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos(7)
+                
+        <span style="color: #BA36A5;">cabecera</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto de vectores en $\R[2]$"</span>),
+                            tex_template = myTemplate,
+                            font_size=60).scale_to_fit_width(config.frame_width*.9).to_edge(UP).set_color(BLUE)        
+        <span style="color: #0000FF;">self</span>.add(cabecera)
+        <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #BA36A5;">axes</span> = NumberPlane(x_range=(-8, 8, 1),
+                           y_range=(-7, 7, 1),
+                           background_line_style={
+                               <span style="color: #008000;">"stroke_width"</span>:  3,
+                               <span style="color: #008000;">"stroke_opacity"</span>: 0.4 }
+                           ).add_coordinates()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Ahora ya podemos dar una</span>
+<span style="color: #008000;">        sencilla interpretaci&#243;n geom&#233;trica del reescalado de</span>
+<span style="color: #008000;">        vectores"""</span>)) <span style="color: #0000FF;">as</span> tracker: <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Comencemos por el producto de un vector no nulo de</span>
+<span style="color: #008000;">        R 2. Consideremos dos casos."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(axes),
+                      FadeOut(cabecera),
+                      run_time=tracker.duration)
+
+        <span style="color: #BA36A5;">eje_y</span> =  Line(start = [0, -5, 0.],
+                      end   = [0,  5, 0.],
+                      color = RED_B)
+        
+        <span style="color: #BA36A5;">b</span>  = nc.Vector([0,sp.symbols(<span style="color: #008000;">'a_2'</span>)])
+        <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+        <span style="color: #BA36A5;">w</span>  = b*escalar
+        <span style="color: #BA36A5;">lv</span> = MathTex(r<span style="color: #008000;">"\lambda\,\Vect{a} = "</span>,  tex_template = myTemplate)
+        <span style="color: #BA36A5;">s4</span> = MathTex(w.latex(),  tex_template = myTemplate)
+        <span style="color: #BA36A5;">s5</span> = MathTex(r<span style="color: #008000;">";\qquad a_2\ne0"</span>,  tex_template = myTemplate)
+        <span style="color: #BA36A5;">grp2</span> = VGroup(lv, s4, s5).arrange(RIGHT).to_corner(UL)
+        
+        <span style="color: #BA36A5;">c</span>       = VectorR2([0,2.5], color=RED_A)
+        <span style="color: #BA36A5;">dotc</span> = c.dot(axes)
+        <span style="color: #BA36A5;">dotc2</span> = dotc.copy()
+        <span style="color: #BA36A5;">flechac</span> = c.arrow(axes)
+        <span style="color: #BA36A5;">flechac2</span> = flechac.copy()
+        <span style="color: #BA36A5;">d</span>       = VectorR2([0,4.5], color=RED_A)
+        <span style="color: #BA36A5;">dotd</span> = d.dot(axes)
+        <span style="color: #BA36A5;">flechad</span> = d.arrow(axes)
+        <span style="color: #BA36A5;">e</span>       = VectorR2([0,-4.5], color=RED_A)
+        <span style="color: #BA36A5;">dote</span> = e.dot(axes)
+        <span style="color: #BA36A5;">flechae</span> = e.arrow(axes)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por una parte, si la primera componente de un vector no nulo es</span>
+<span style="color: #008000;">        cero,  el conjunto de sus m&#250;ltiplos constituye el eje vertical."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp2),
+                      FadeIn(dotc),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Transform(dotc,
+                                dotd),
+                      run_time=tracker.duration/7)
+            <span style="color: #0000FF;">self</span>.play(Transform(dotc,
+                                dote),
+                      run_time=tracker.duration/7)
+            <span style="color: #0000FF;">self</span>.play(Transform(dotc,
+                                dotc2),
+                      run_time=tracker.duration/7)
+            <span style="color: #0000FF;">self</span>.remove(dotc),
+            <span style="color: #0000FF;">self</span>.play(Wiggle(eje_y),
+                      run_time=1.5)
+            <span style="color: #0000FF;">self</span>.pausa()
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp2,eje_y))
+
+        <span style="color: #BA36A5;">Vect1</span> = nc.Vector([4,2])
+        <span style="color: #BA36A5;">vect1</span> = VectorR2(Vect1.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect1_dot</span> = vect1.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect1_tex</span> = vect1.tex
+        <span style="color: #BA36A5;">vgr_vect1</span> = VGroup(vect1.tex).next_to(vect1_dot, RIGHT, buff=0.25)
+        <span style="color: #BA36A5;">vect1_v_line</span> = vect1.v_line(axes)
+        <span style="color: #BA36A5;">vect1_h_line</span> = vect1.h_line(axes)
+        <span style="color: #BA36A5;">vect1_flecha</span> = vect1.arrow(axes)
+
+        <span style="color: #BA36A5;">a</span> = nc.Vector(sp.symbols(<span style="color: #008000;">'a:3'</span>)[1:])
+        <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+        <span style="color: #BA36A5;">v</span>  = a*escalar
+        <span style="color: #BA36A5;">lv</span> = MathTex(r<span style="color: #008000;">"\lambda\,\Vect{a} = "</span>,  tex_template = myTemplate)
+        <span style="color: #BA36A5;">s1</span> = MathTex(v.latex(),  tex_template = myTemplate)
+        <span style="color: #BA36A5;">s2</span> = MathTex(r<span style="color: #008000;">";\qquad"</span>,  tex_template = myTemplate)
+        <span style="color: #BA36A5;">s3</span> = MathTex(r<span style="color: #008000;">"a_1\ne0"</span>,  tex_template = myTemplate)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y ahora consideremos cualquier otro vector no nulo de</span>
+<span style="color: #008000;">        R 2."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1))
+            <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por ejemplo el 4 2"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(vect1_dot, vect1_tex, vect1_v_line, vect1_h_line))
+            <span style="color: #0000FF;">self</span>.pausa()
+    
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Al reescalarlo, aplicamos el mismo factor a todas sus</span>
+<span style="color: #008000;">        componentes"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(grp1[1][0][1]),
+                      Indicate(grp1[1][0][4]),
+                      run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #BA36A5;">Vect2</span> = Vect1*(nc.fracc(1,2))
+        <span style="color: #BA36A5;">vect2</span> = VectorR2(Vect2.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect2_dot</span> = vect2.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect2_tex</span> = vect2.tex
+        <span style="color: #BA36A5;">vgr_vect2</span> = VGroup(vect2.tex).next_to(vect2_dot, RIGHT, buff=0.25)
+        <span style="color: #BA36A5;">vect2_v_line</span> = vect2.v_line(axes)
+        <span style="color: #BA36A5;">vect2_h_line</span> = vect2.h_line(axes)
+        <span style="color: #BA36A5;">vect2_flecha</span> = vect2.arrow(axes)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""As&#237;, si multiplicamos el vector por un medio, reducimos sus</span>
+<span style="color: #008000;">        componentes a la mitad."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(TransformFromCopy(vect1_dot,
+                                        vect2_dot),
+                      TransformFromCopy(vect1_tex,
+                                        vect2_tex),
+                      TransformFromCopy(vect1_v_line,
+                                        vect2_v_line),
+                      TransformFromCopy(vect1_h_line,
+                                        vect2_h_line),
+                      run_time=tracker.duration/2)            
+
+        <span style="color: #BA36A5;">Vect3</span> = Vect2*3
+        <span style="color: #BA36A5;">vect3</span> = VectorR2(Vect3.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect3_dot</span> = vect3.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect3_tex</span> = vect3.tex
+        <span style="color: #BA36A5;">vgr_vect3</span> = VGroup(vect3.tex).next_to(vect3_dot, RIGHT, buff=0.25)
+        <span style="color: #BA36A5;">vect3_v_line</span> = vect3.v_line(axes)
+        <span style="color: #BA36A5;">vect3_h_line</span> = vect3.h_line(axes)
+        <span style="color: #BA36A5;">vect3_flecha</span> = vect3.arrow(axes)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Si ahora lo multiplicamos por tres, triplicamos sus</span>
+<span style="color: #008000;">        componentes."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(TransformFromCopy(vect2_dot,
+                                        vect3_dot),
+                      TransformFromCopy(vect2_tex,
+                                        vect3_tex),
+                      TransformFromCopy(vect2_v_line,
+                                        vect3_v_line),
+                      TransformFromCopy(vect2_h_line,
+                                        vect3_h_line),
+                      run_time=tracker.duration/2)
+
+        <span style="color: #BA36A5;">Vect4</span> = Vect3*nc.fracc(-2,3)
+        <span style="color: #BA36A5;">vect4</span> = VectorR2(Vect4.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect4_dot</span> = vect4.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect4_tex</span> = vect4.tex
+        <span style="color: #BA36A5;">vgr_vect4</span> = VGroup(vect4.tex).next_to(vect4_dot, LEFT, buff=0.25)
+        <span style="color: #BA36A5;">vect4_v_line</span> = vect4.v_line(axes)
+        <span style="color: #BA36A5;">vect4_h_line</span> = vect4.h_line(axes)
+        <span style="color: #BA36A5;">vect4_flecha</span> = vect4.arrow(axes)
+
+        <span style="color: #BA36A5;">Vect5</span> = Vect3*nc.fracc(-1,3)
+        <span style="color: #BA36A5;">vect5</span> = VectorR2(Vect5.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect5_dot</span> = vect5.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect5_tex</span> = vect5.tex
+        <span style="color: #BA36A5;">vgr_vect5</span> = VGroup(vect5.tex).next_to(vect5_dot, LEFT, buff=0.25)
+        <span style="color: #BA36A5;">vect5_v_line</span> = vect5.v_line(axes)
+        <span style="color: #BA36A5;">vect5_h_line</span> = vect5.h_line(axes)
+        <span style="color: #BA36A5;">vect5_flecha</span> = vect5.arrow(axes)
+
+        <span style="color: #BA36A5;">Vect6</span> = Vect3*(-1)
+        <span style="color: #BA36A5;">vect6</span> = VectorR2(Vect6.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect6_dot</span> = vect6.dot(axes, radio=0.06)
+        <span style="color: #BA36A5;">vect6_tex</span> = vect6.tex
+        <span style="color: #BA36A5;">vgr_vect6</span> = VGroup(vect6.tex).next_to(vect6_dot, LEFT, buff=0.26)
+        <span style="color: #BA36A5;">vect6_v_line</span> = vect6.v_line(axes)
+        <span style="color: #BA36A5;">vect6_h_line</span> = vect6.h_line(axes)
+        <span style="color: #BA36A5;">vect6_flecha</span> = vect6.arrow(axes)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y si lo multiplicamos por alg&#250;n n&#250;mero negativo, cambiamos el</span>
+<span style="color: #008000;">        signo de sus componentes."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(TransformFromCopy(vect3_dot,
+                                        vect4_dot),
+                      TransformFromCopy(vect3_tex,
+                                        vect4_tex),
+                      TransformFromCopy(vect3_v_line,
+                                        vect4_v_line),
+                      TransformFromCopy(vect3_h_line,
+                                        vect4_h_line),
+                      TransformFromCopy(vect3_dot,
+                                        vect5_dot),
+                      TransformFromCopy(vect3_tex,
+                                        vect5_tex),
+                      TransformFromCopy(vect3_v_line,
+                                        vect5_v_line),
+                      TransformFromCopy(vect3_h_line,
+                                        vect5_h_line),
+                      TransformFromCopy(vect3_dot,
+                                        vect6_dot),
+                      TransformFromCopy(vect3_tex,
+                                        vect6_tex),
+                      TransformFromCopy(vect3_v_line,
+                                        vect6_v_line),
+                      TransformFromCopy(vect3_h_line,
+                                        vect6_h_line),
+                      run_time=tracker.duration/2)
+            
+        <span style="color: #BA36A5;">Vect0</span> = Vect3*0
+        <span style="color: #BA36A5;">vect0</span> = VectorR2(Vect0.lista, rpr=<span style="color: #008000;">'colum'</span>, color=BLUE_B)
+        <span style="color: #BA36A5;">vect0_dot</span> = vect0.dot(axes, radio=0.05)
+        <span style="color: #BA36A5;">vect0_tex</span> = vect0.tex
+        <span style="color: #BA36A5;">vgr_vect0</span> = VGroup(vect0.tex).next_to(vect0_dot, RIGHT, buff=0.25)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Adem&#225;s, cualquier vector</span>
+<span style="color: #008000;">        multiplicado por cero es un vector nulo."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(TransformFromCopy(vect1_dot,
+                                vect0_dot),
+                      TransformFromCopy(vect1_tex,
+                                vect0_tex),
+                      run_time=tracker.duration/2)
+            
+        <span style="color: #BA36A5;">p1</span> = MathTex(r<span style="color: #008000;">"\frac{\lambda a_2}{\lambda a_1}="</span>,
+                     tex_template = myTemplate)
+        <span style="color: #BA36A5;">p2</span> = MathTex(r<span style="color: #008000;">"\frac{a_2}{a_1};\qquad "</span>,
+                     tex_template = myTemplate)
+        <span style="color: #BA36A5;">p3</span> = MathTex(r<span style="color: #008000;">"\lambda\ne0"</span>,
+                     tex_template = myTemplate)
+        <span style="color: #BA36A5;">pendiente</span> = VGroup(p1,
+                           p2,
+                           p3).arrange(RIGHT).next_to(grp1,
+                                                      DOWN,
+                                                      buff=0.7).scale(.9)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""N&#243;tese que si el escalar es distinto de cero, la</span>
+<span style="color: #008000;">        proporcionalidad entre ambas componentes se mantiene, pues ambas componentes se</span>
+<span style="color: #008000;">        multiplican por el mismo n&#250;mero."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(pendiente[-1])
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(Flash(grp1[1][0][1]),
+                      Flash(grp1[1][0][4]),
+                      run_time=tracker.duration/3)
+                    
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En el ejemplo, las primeras componentes son el doble de las</span>
+<span style="color: #008000;">        segundas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration/2)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Atendiendo a la interpretaci&#243;n</span>
+<span style="color: #008000;">        geom&#233;trica del producto entre n&#250;meros reales que vimos</span>
+<span style="color: #008000;">        anteriormente,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""sabemos que, los puntos que comparten</span>
+<span style="color: #008000;">        id&#233;ntica proporci&#243;n entre sus coordenadas vertical y</span>
+<span style="color: #008000;">        horizontal, constituyen una recta que pasa por el origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(pendiente[0:-1]),
+                      run_time=tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(Indicate(vect1_h_line),
+                      Indicate(vect2_h_line),
+                      Indicate(vect3_h_line),
+                      Indicate(vect4_h_line),
+                      Indicate(vect5_h_line),
+                      Indicate(vect6_h_line),
+                      Circumscribe(pendiente[0][0][:3]),
+                      run_time=tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(Indicate(vect1_v_line),
+                      Indicate(vect2_v_line),
+                      Indicate(vect3_v_line),
+                      Indicate(vect4_v_line),
+                      Indicate(vect5_v_line),
+                      Indicate(vect6_v_line),
+                      Circumscribe(pendiente[0][0][4:-1]),
+                      run_time=tracker.duration/6)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(vect1_v_line,
+                              vect2_v_line,
+                              vect3_v_line,
+                              vect4_v_line,
+                              vect5_v_line,
+                              vect6_v_line,
+                              vect1_h_line,
+                              vect2_h_line,
+                              vect3_h_line,
+                              vect4_h_line,
+                              vect5_h_line,
+                              vect6_h_line,
+                              vect0_tex,
+                              vect1_tex,
+                              vect2_tex,
+                              vect3_tex,
+                              vect4_tex,
+                              vect5_tex,
+                              vect6_tex),
+                      run_time=tracker.duration*1/6)
+                
+
+            <span style="color: #BA36A5;">a</span> = nc.Vector(sp.symbols(<span style="color: #008000;">'a:3'</span>)[1:])
+            <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+            <span style="color: #BA36A5;">v</span>  = a*escalar
+            <span style="color: #BA36A5;">lv</span> = MathTex(r<span style="color: #008000;">"\lambda\,\Vect{a} = "</span>,  tex_template = myTemplate)
+            <span style="color: #BA36A5;">s1</span> = MathTex(v.latex(),  tex_template = myTemplate)
+            <span style="color: #BA36A5;">s2</span> = MathTex(r<span style="color: #008000;">";\qquad"</span>,  tex_template = myTemplate)
+            <span style="color: #BA36A5;">s3</span> = MathTex(r<span style="color: #008000;">"a_1\ne0"</span>,  tex_template = myTemplate)
+            <span style="color: #BA36A5;">grp1</span> = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL).scale(.9)
+            
+            <span style="color: #BA36A5;">b</span>  = nc.Vector([0,sp.symbols(<span style="color: #008000;">'a_2'</span>)])
+            <span style="color: #BA36A5;">w</span>  = b*escalar
+            <span style="color: #BA36A5;">s4</span> = MathTex(w.latex(),  tex_template = myTemplate)
+            <span style="color: #BA36A5;">s5</span> = MathTex(r<span style="color: #008000;">"a_1=0"</span>,  tex_template = myTemplate)
+            <span style="color: #BA36A5;">grp2</span> = VGroup(lv, s4).arrange(RIGHT).to_corner(UL).scale(.9)
+            
+            <span style="color: #BA36A5;">recta</span> =  Line(start = [-8, -4, 0.],
+                          end   = [8, 4, 0.],
+                          color = BLUE_B)
+        
+            <span style="color: #0000FF;">self</span>.play(FadeOut(vect1_dot,
+                              vect2_dot,
+                              vect3_dot,
+                              vect4_dot,
+                              vect5_dot,
+                              vect6_dot),
+                      Indicate(recta, scale_factor=5))
+
+        <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #BA36A5;">resumen1</span> = Tex(_(r<span style="color: #008000;">"""El conjunto de m&#250;ltiplos de un vector no nulo de \R[2]"""</span>),
+                       tex_template = myTemplate)
+        <span style="color: #BA36A5;">resumen2</span> = Tex(_(r<span style="color: #008000;">"""se corresponde con una recta que pasa por el origen."""</span>),
+                       tex_template = myTemplate).next_to(resumen1, DOWN)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, el conjunto de</span>
+<span style="color: #008000;">        m&#250;ltiplos de cualquier vector no nulo de R 2 corresponde a</span>
+<span style="color: #008000;">        una recta que pasa por el origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(*[FadeOut(mob)<span style="color: #0000FF;">for</span> mob <span style="color: #0000FF;">in</span> <span style="color: #0000FF;">self</span>.mobjects] )            
+            <span style="color: #0000FF;">self</span>.play(Write(resumen1))
+            <span style="color: #0000FF;">self</span>.play(Write(resumen2))
+            
+        <span style="color: #0000FF;">self</span>.pausa(3)
+            
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org76fb258" class="outline-3">
+<h3 id="org76fb258"><span class="section-number-3">1.4.</span> Escena 4 - Interpretación geométrica del producto de tres números (3D)</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org6f84c31" class="outline-4">
+<h4 id="org6f84c31"><span class="section-number-4">1.4.1.</span> Escena 3D</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E04_3D_InterpretacionGeometricaDelProductoDeTresNumeros</span>(ThreeDScene):
+    
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #BA36A5;">lado</span> = 0.25
+        <span style="color: #BA36A5;">ejes</span> = ThreeDAxes(
+            x_range=(-28, 28, 1),
+            y_range=(-15, 15, 1),
+            z_range=(-10, 10, 1),
+            z_length=5,
+            x_length=lado*28*2,
+            y_length=lado*15*2,
+            tips=<span style="color: #D0372D;">False</span>,
+            axis_config={<span style="color: #008000;">"include_numbers"</span>: <span style="color: #D0372D;">True</span>,
+                         <span style="color: #008000;">"font_size"</span>: 12},
+        )
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">coordenada_x</span>(x, ax, label=<span style="color: #008000;">''</span>, pos=0):
+            <span style="color: #BA36A5;">label</span> = label <span style="color: #0000FF;">if</span> label <span style="color: #0000FF;">else</span> f<span style="color: #008000;">"</span>{x}<span style="color: #008000;">"</span>
+            <span style="color: #BA36A5;">xlabel</span> = Tex(label, font_size=30)
+            <span style="color: #BA36A5;">pos_label</span> = UP <span style="color: #0000FF;">if</span> pos <span style="color: #0000FF;">else</span> DOWN
+            xlabel.next_to(ax.c2p(x,0,0), pos_label, buff=0.35)
+            <span style="color: #0000FF;">return</span> xlabel
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">coordenada_y</span>(y, ax, label=<span style="color: #008000;">''</span>, pos=0):
+            <span style="color: #BA36A5;">label</span> = label <span style="color: #0000FF;">if</span> label <span style="color: #0000FF;">else</span> f<span style="color: #008000;">"</span>{y}<span style="color: #008000;">"</span>
+            <span style="color: #BA36A5;">ylabel</span> = Tex(label, font_size=30)
+            <span style="color: #BA36A5;">pos_label</span> = RIGHT <span style="color: #0000FF;">if</span> pos <span style="color: #0000FF;">else</span> LEFT
+            ylabel.next_to(ax.c2p(0,y,0), pos_label, buff=0.35)
+            <span style="color: #0000FF;">return</span> ylabel
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">coordenada_z</span>(z, ax, label=<span style="color: #008000;">''</span>, pos=0):
+            <span style="color: #BA36A5;">label</span> = label <span style="color: #0000FF;">if</span> label <span style="color: #0000FF;">else</span> f<span style="color: #008000;">"</span>{z}<span style="color: #008000;">"</span>
+            <span style="color: #BA36A5;">zlabel</span> = Tex(label, font_size=30)
+            <span style="color: #BA36A5;">pos_label</span> = RIGHT <span style="color: #0000FF;">if</span> pos <span style="color: #0000FF;">else</span> LEFT
+            zlabel.rotate(PI/2, axis=RIGHT).next_to(ax.c2p(0,0,z), pos_label, buff=0.35)
+            <span style="color: #0000FF;">return</span> zlabel
+        
+        <span style="color: #BA36A5;">coordenadas_xy</span> = <span style="color: #0000FF;">lambda</span> <span style="color: #BA36A5;">x</span>,<span style="color: #BA36A5;">y</span>,<span style="color: #BA36A5;">ax</span>,<span style="color: #BA36A5;">labelx</span>=<span style="color: #008000;">''</span>,<span style="color: #BA36A5;">labely</span>=<span style="color: #008000;">''</span>,<span style="color: #BA36A5;">posx</span>=0,<span style="color: #BA36A5;">posy</span>=0: (coordenada_x(x,ax,labelx,posx),
+                                                                           coordenada_y(y,ax,labely,posy))
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">ladrillo</span>(a, b, ax: Axes) -&gt; VGroup:
+            <span style="color: #BA36A5;">prisma</span> = Prism(dimensions=[<span style="color: #006FE0;">float</span>(a*b*lado), <span style="color: #006FE0;">float</span>(b*lado), <span style="color: #006FE0;">float</span>(1*lado)],
+                         fill_opacity=0.6,
+                         stroke_width=1).next_to(ax.coords_to_point(0, 0),
+                                                 UR,
+                                                 buff=0)
+            <span style="color: #0000FF;">return</span> Group(*[prisma.copy()])
+        
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">pila</span>(a, b, c: <span style="color: #006FE0;">int</span>, ax: Axes) -&gt; VGroup:
+            <span style="color: #BA36A5;">columna</span> = Group(*[ladrillo(a, b, ax).shift(s*lado*OUT) <span style="color: #0000FF;">for</span> s <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(0,c)]).shift([0, 0, lado/2])
+            columna.<span style="color: #BA36A5;">a</span> = a
+            columna.<span style="color: #BA36A5;">b</span> = b
+            columna.<span style="color: #BA36A5;">c</span> = c
+            <span style="color: #0000FF;">return</span> columna 
+                
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">producto</span>(pila,ritmo=0.6, pausa=8):
+            <span style="color: #BA36A5;">a</span> = <span style="color: #006FE0;">float</span>(pila.a)
+            <span style="color: #BA36A5;">b</span> = <span style="color: #006FE0;">float</span>(pila.b)
+            <span style="color: #BA36A5;">c</span> = pila.c
+            [<span style="color: #0000FF;">self</span>.play(piso.animate.shift([0, p*b*lado, 0]), run_time=ritmo) <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila)]
+            <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila):
+                <span style="color: #0000FF;">self</span>.play([fila.animate.shift([f*a*lado+p*a*b*lado, 0, 0]) <span style="color: #0000FF;">for</span> f,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(piso)], run_time=ritmo) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">alineados</span>
+            <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila):
+                <span style="color: #0000FF;">self</span>.play(piso.animate.shift([0, 0, -p*lado]), run_time=ritmo)
+            <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila):
+                <span style="color: #0000FF;">self</span>.play([fila.animate.shift([0, -(p*b+f)*lado, 0]) <span style="color: #0000FF;">for</span> f,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(piso)], run_time=ritmo)
+            <span style="color: #0000FF;">self</span>.wait(pausa)
+            <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila):
+                <span style="color: #0000FF;">self</span>.play(piso.animate.shift([0, 0, p*lado]), run_time=ritmo)
+            <span style="color: #0000FF;">for</span> p,piso <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(pila):
+                <span style="color: #0000FF;">self</span>.play([fila.animate.shift([0, (p*b+f)*lado, 0]) <span style="color: #0000FF;">for</span> f,fila <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(piso)], run_time=ritmo)
+                
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">multiplicaci&#243;n</span>(a, b, c, ax: Axes, pila: VGroup):
+            <span style="color: #BA36A5;">v_line</span> =ax.get_vertical_line(ax.c2p(<span style="color: #006FE0;">float</span>(a*b*c),<span style="color: #006FE0;">float</span>(b*c),<span style="color: #006FE0;">float</span>(c)), color=YELLOW)
+            <span style="color: #BA36A5;">recta</span> =  Line(start = ax.c2p(0,0,<span style="color: #006FE0;">float</span>(c)),
+                          end   = ax.c2p(<span style="color: #006FE0;">float</span>(a*b*c),<span style="color: #006FE0;">float</span>(b*c),<span style="color: #006FE0;">float</span>(c)))
+
+            <span style="color: #0000FF;">self</span>.play(Indicate(recta, scale_factor=2),
+                      run_time=2)
+            <span style="color: #0000FF;">self</span>.play(Indicate(v_line, scale_factor=2),
+                      run_time=2)
+            <span style="color: #0000FF;">self</span>.wait()
+            <span style="color: #0000FF;">self</span>.play(FadeOut(v_line))
+
+        <span style="color: #0000FF;">def</span> <span style="color: #006699;">multiplicacion3Num</span>(a, b, c, ax: Axes, pila: VGroup):
+                <span style="color: #BA36A5;">Vect</span> = nc.Vector([a*b*c,b*c,c])
+                <span style="color: #BA36A5;">v</span> = VectorR3(Vect.lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+                <span style="color: #BA36A5;">line_x</span> = v.x_line(ejes)
+                <span style="color: #BA36A5;">line_y</span> = v.y_line(ejes)
+                <span style="color: #BA36A5;">line_z</span> = v.z_line(ejes)
+                <span style="color: #BA36A5;">line_xy</span> = v.xy_line(ejes)
+                <span style="color: #BA36A5;">line_v</span> = v.v_line(ejes)
+                <span style="color: #0000FF;">return</span> line_x,line_y,line_z,line_xy,line_v
+        
+        <span style="color: #0000FF;">self</span>.add(ejes)
+        <span style="color: #BA36A5;">a</span>=2
+        <span style="color: #BA36A5;">b</span>=3
+        <span style="color: #BA36A5;">c</span>=4
+        <span style="color: #BA36A5;">columna</span> = pila(a, b, c, ejes)
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Set the camera orientation for a better view</span>
+        <span style="color: #0000FF;">self</span>.set_camera_orientation(theta=-90 * DEGREES,
+                                    zoom=3)
+
+        <span style="color: #BA36A5;">rectangulo</span> = Rectangle(height=lado,
+                               width=lado*a).next_to(ejes.coords_to_point(0, 0, 0),
+                                                     UR,
+                                                     buff=0)
+        <span style="color: #0000FF;">self</span>.play(FadeIn(rectangulo))
+
+        <span style="color: #BA36A5;">xlabel</span>=coordenada_x(a, ejes, label=r<span style="color: #008000;">"$\alpha$"</span>)        
+        <span style="color: #0000FF;">self</span>.play(Indicate(xlabel,scale_factor=1.5),
+                  run_time=.5)
+
+        <span style="color: #BA36A5;">ylabel</span>=coordenada_y(b, ejes, label=r<span style="color: #008000;">"$\beta$"</span>)
+        <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=1.5),
+                  run_time=.5)
+
+        <span style="color: #BA36A5;">recta0</span> =  Line(start = ejes.c2p(-10,-5,0),
+                      end   = ejes.c2p( 10, 5,0),
+                      color = RED_B,).set_opacity(0.5)
+
+        <span style="color: #0000FF;">self</span>.wait(2)
+        <span style="color: #0000FF;">self</span>.play(Indicate(rectangulo),
+                  run_time=2)
+        
+        <span style="color: #0000FF;">self</span>.wait(1)
+        <span style="color: #0000FF;">self</span>.play(FadeIn(recta0))
+        <span style="color: #0000FF;">self</span>.wait(6)
+
+        <span style="color: #BA36A5;">pila</span> = columna.copy()
+
+        <span style="color: #BA36A5;">prodxylabel</span>=coordenada_x(a*b, ejes, label=r<span style="color: #008000;">"$\alpha\beta$"</span>)
+        <span style="color: #0000FF;">self</span>.play(FadeIn(pila[0][0][0]))
+        <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=1.5),
+                  run_time=1.5)
+        <span style="color: #0000FF;">self</span>.play(Indicate(prodxylabel,scale_factor=1.5),
+                  run_time=1.5)
+
+        <span style="color: #0000FF;">self</span>.wait(5) 
+        <span style="color: #0000FF;">self</span>.move_camera(phi=65 * DEGREES, theta=-65 * DEGREES, zoom=2.5, run_time=2)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_camera_orientation(phi=65 * DEGREES, theta=-65 * DEGREES, zoom=2.5)</span>
+        
+        <span style="color: #0000FF;">self</span>.play(Indicate(pila[0][0][0], run_time=1.8),
+                  FadeOut(recta0),
+                  FadeOut(xlabel),
+                  FadeOut(rectangulo))
+
+        <span style="color: #0000FF;">self</span>.wait(1)
+        <span style="color: #0000FF;">self</span>.play(Indicate(prodxylabel,scale_factor=1.5),
+                  run_time=1.5)
+                
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+        <span style="color: #0000FF;">self</span>.play(Indicate(ylabel,scale_factor=1.5),
+                  run_time=1.5)
+        
+        <span style="color: #0000FF;">self</span>.wait(1.5)
+
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">mostramos el prisma</span>
+        <span style="color: #0000FF;">self</span>.play(FadeIn(pila[0][0][1:]),
+                  run_time=1)                
+
+        <span style="color: #0000FF;">self</span>.wait(2)
+        <span style="color: #0000FF;">self</span>.move_camera(zoom=1, run_time=2)
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_camera_orientation(phi=65 * DEGREES, theta=-65 * DEGREES, zoom=1)</span>
+                        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">mostramos una pila de prismas</span>
+        [<span style="color: #0000FF;">self</span>.play(FadeIn(piso)) <span style="color: #0000FF;">for</span> piso <span style="color: #0000FF;">in</span> columna[0:]]
+        
+        <span style="color: #BA36A5;">prodZlabel</span>=coordenada_z(c, ejes, label=r<span style="color: #008000;">"$\gamma$"</span>).set_color(YELLOW)
+        <span style="color: #BA36A5;">prodXYZlabel</span>=coordenada_x(a*b*c, ejes, label=r<span style="color: #008000;">"$\alpha\beta\gamma$"</span>).set_color(YELLOW)
+        <span style="color: #BA36A5;">prodYZlabel</span>=coordenada_y(b*c, ejes, label=r<span style="color: #008000;">"$\beta\gamma$"</span>).set_color(YELLOW)
+        <span style="color: #0000FF;">self</span>.add(prodXYZlabel)
+        
+        producto(columna, pausa=7)
+        <span style="color: #0000FF;">self</span>.wait(3)
+        
+        <span style="color: #BA36A5;">recta</span> =  Line(start = [<span style="color: #006FE0;">float</span>(-a*b*c*lado),<span style="color: #006FE0;">float</span>(-b*c*lado),<span style="color: #006FE0;">float</span>(-c*lado)],
+                      end   = [<span style="color: #006FE0;">float</span>(a*b*c*lado),<span style="color: #006FE0;">float</span>(b*c*lado),<span style="color: #006FE0;">float</span>(c*lado)],
+                      color = RED_B)
+        <span style="color: #0000FF;">self</span>.add(recta)
+        
+        <span style="color: #0000FF;">self</span>.wait(6)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeOut(columna))
+
+        <span style="color: #0000FF;">self</span>.wait(3)
+
+        <span style="color: #BA36A5;">line_x</span>,<span style="color: #BA36A5;">line_y</span>,<span style="color: #BA36A5;">line_z</span>,<span style="color: #BA36A5;">line_xy</span>,<span style="color: #BA36A5;">line_v</span> = multiplicacion3Num(a, b, c, ejes, columna)        
+        <span style="color: #0000FF;">self</span>.add(line_x)
+        <span style="color: #0000FF;">self</span>.add(line_z)
+        <span style="color: #0000FF;">self</span>.add(line_v)
+        <span style="color: #0000FF;">self</span>.add(prodZlabel)
+
+        <span style="color: #0000FF;">self</span>.wait(3)
+        <span style="color: #0000FF;">self</span>.play(Indicate(line_z,
+                           scale_factor=1.5),
+                  Indicate(prodZlabel,
+                           scale_factor=2.5))
+        <span style="color: #0000FF;">self</span>.wait(1.5)        
+        <span style="color: #0000FF;">self</span>.play(Indicate(line_x,
+                           scale_factor=1.5,
+                           run_time=2),
+                  Indicate(prodXYZlabel,
+                           scale_factor=2.5,
+                           run_time=2))
+        <span style="color: #0000FF;">self</span>.wait(12.5)
+
+        <span style="color: #0000FF;">self</span>.play(Indicate(line_x,scale_factor=2),
+                  Indicate(line_v,scale_factor=2),
+                  Indicate(prodXYZlabel,scale_factor=2.5),
+                  Indicate(prodZlabel,scale_factor=3),
+                  run_time=4)
+
+        <span style="color: #0000FF;">self</span>.play(Indicate(line_y,scale_factor=2),
+                  Indicate(prodYZlabel,scale_factor=3),
+                  Indicate(prodZlabel,scale_factor=3),
+                  Indicate(line_v,scale_factor=2),
+                  run_time=3.5)
+        
+        <span style="color: #BA36A5;">rectaPlanoXY</span> =  Line(start = ejes.c2p(     0,   0, 0),
+                             end   = ejes.c2p( a*b*c, b*c, 0),
+                             color = BLUE_B).set_opacity(0.5)
+        <span style="color: #0000FF;">self</span>.add(rectaPlanoXY)
+        <span style="color: #0000FF;">self</span>.play(Indicate(line_y,scale_factor=2),
+                  Indicate(prodXYZlabel,scale_factor=2.5),
+                  Indicate(prodYZlabel,scale_factor=3),
+                  Indicate(line_x,scale_factor=2),
+                  run_time=4)
+        
+        <span style="color: #0000FF;">self</span>.wait(7)
+
+        <span style="color: #0000FF;">self</span>.play(Indicate(recta,
+                           scale_factor=2.5,
+                           run_time=2))
+
+        <span style="color: #0000FF;">self</span>.wait(3)
+ 
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf197b98" class="outline-3">
+<h3 id="orgf197b98"><span class="section-number-3">1.5.</span> Escena 4 - Interpretación geométrica del producto de tres números (explicación)</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Antes es necesario compilar la escena anterior y mover el fichero
+<code>mp4</code> a <code>aux_movie_files</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E04_InterpretacionGeometricaDelProductoDeTresNumeros</span>(MiEscenaConVoz):    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos(1)
+
+        <span style="color: #BA36A5;">cabecera</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto por escalares en "</span>) + r<span style="color: #008000;">"$\R[3]$"</span>,
+                       tex_template = myTemplate,
+                       font_size=60).scale_to_fit_width(config.frame_width*.9).to_edge(UP).set_color(BLUE)
+
+        <span style="color: #0000FF;">self</span>.add(cabecera)
+        <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #BA36A5;">video1</span> = VideoMobject(
+            filename=r<span style="color: #008000;">"./media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/aux_movie_files/L01_V04_E04_3D_InterpretacionGeometricaDelProductoDeTresNumeros.mp4"</span>,
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/1080p60/aux_movie_files/L01_V04_E04_3D_InterpretacionGeometricaDelProductoDeTresNumeros.mp4",</span>
+            speed=1.0
+        ).scale_to_fit_width(config.frame_width*.95)
+
+        <span style="color: #BA36A5;">resumen1</span> = Tex(_(r<span style="color: #008000;">"""Para interpretar geom&#233;tricamente el producto por escalares en \R[3],"""</span>),
+        tex_template = myTemplate).scale_to_fit_width(config.frame_width*.9)
+        
+        <span style="color: #BA36A5;">resumen2</span> = Tex(_(r<span style="color: #008000;">"""antes interpretaremos geom&#233;tricamente el producto de tres n&#250;meros."""</span>),
+                       tex_template = myTemplate).next_to(resumen1, DOWN).scale_to_fit_width(config.frame_width*.9)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Para interpretar geom&#233;tricamente</span>
+<span style="color: #008000;">        el producto por escalares en R3,"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Write(resumen1), run_time=tracker.duration+0.2)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""antes interpretaremos</span>
+<span style="color: #008000;">        geom&#233;tricamente el producto de tres n&#250;meros."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Write(resumen2), run_time=tracker.duration+0.2)
+
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Recordemos que, para multiplicar</span>
+<span style="color: #008000;">        alfa por beta, comenzamos con un rect&#225;ngulo con una base que</span>
+<span style="color: #008000;">        va desde cero hasta alfa y altura uno"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(*[FadeOut(mob)<span style="color: #0000FF;">for</span> mob <span style="color: #0000FF;">in</span> <span style="color: #0000FF;">self</span>.mobjects])
+            <span style="color: #0000FF;">self</span>.add(video1)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y extendemos la diagonal que</span>
+<span style="color: #008000;">        pasa por el origen de coordenadas para obtener una recta</span>
+<span style="color: #008000;">        infinita."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+            <span style="color: #006FE0;">print</span>(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El punto de la recta con</span>
+<span style="color: #008000;">        coordenada beta en el eje y, tiene coordenada alfa por beta en</span>
+<span style="color: #008000;">        el eje x."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Pero para multiplicar tres</span>
+<span style="color: #008000;">        n&#250;meros (alfa, beta y gamma) comenzaremos con un prisma cuya</span>
+<span style="color: #008000;">        base rectangular tiene un lado sobre el eje x, que va desde</span>
+<span style="color: #008000;">        cero hasta alfa por beta, y el otro lado sobre el eje 'y', que</span>
+<span style="color: #008000;">        va desde cero hasta beta."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Adem&#225;s, la altura del prisma</span>
+<span style="color: #008000;">        ser&#225; uno."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""As&#237;, para multiplicar alfa beta</span>
+<span style="color: #008000;">        por un n&#250;mero natural gamma, apilaremos gamma copias del</span>
+<span style="color: #008000;">        citado prisma."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y luego alinearemos dichos</span>
+<span style="color: #008000;">        prismas a lo largo del eje x sin cambiar su orientaci&#243;n. La</span>
+<span style="color: #008000;">        longitud de la fila creada a lo largo del eje x es igual al</span>
+<span style="color: #008000;">        producto de los tres n&#250;meros. Pero este procedimiento solo</span>
+<span style="color: #008000;">        vale cuando apilamos un n&#250;mero  natural de prismas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration)            
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De nuevo, generalizaremos el</span>
+<span style="color: #008000;">        procedimiento alineando los prismas en una posici&#243;n intermedia</span>
+<span style="color: #008000;">        entre la pila inicial y la fila final."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.wait(7)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Si extendemos la diagonal del</span>
+<span style="color: #008000;">        primer prisma, obtenemos la recta a lo largo de la cual hemos</span>
+<span style="color: #008000;">        alineado los prismas. Dicha recta nos sirve para describir</span>
+<span style="color: #008000;">        geom&#233;tricamente el producto. El punto de la recta, cuya</span>
+<span style="color: #008000;">        coordenada en el eje z es gamma, tiene coordenada en el eje x</span>
+<span style="color: #008000;">        igual al producto de los tres n&#250;meros."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.wait(9)
+
+        <span style="color: #BA36A5;">xz</span> = MathTex(r<span style="color: #008000;">"\frac{z}{x}=\frac{\gamma}{\alpha\beta\gamma}=\frac{1}{\alpha\beta}"</span>,
+                     tex_template = myTemplate).to_corner(UL)
+        
+        <span style="color: #BA36A5;">yz</span> = MathTex(r<span style="color: #008000;">"\frac{z}{y}=\frac{\gamma}{\beta\gamma}=\frac{1}{\beta}"</span>,
+                     tex_template = myTemplate).next_to(xz,
+                                                        DOWN,
+                                                        aligned_edge=LEFT,
+                                                        buff=1.3)
+        
+        <span style="color: #BA36A5;">xy</span> = MathTex(r<span style="color: #008000;">"\frac{y}{x}=\frac{\beta\gamma}{\alpha\beta\gamma}=\frac{1}{\alpha}"</span>,
+                     tex_template = myTemplate).next_to(yz,
+                                                        DOWN,
+                                                        aligned_edge=LEFT,
+                                                        buff=1.3)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""De manera similar a lo visto con</span>
+<span style="color: #008000;">        el producto de dos n&#250;meros, para cada punto de la recta que</span>
+<span style="color: #008000;">        extiende la diagonal del prisma, la proporcionalidad entre las</span>
+<span style="color: #008000;">        coordenadas se mantiene. As&#237;:"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(video1.animate.scale(.7).to_corner(UR))
+            <span style="color: #0000FF;">self</span>.play(Write(xz))
+            <span style="color: #0000FF;">self</span>.play(Write(yz))
+            <span style="color: #0000FF;">self</span>.play(Write(xy))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""los ratios</span>
+<span style="color: #008000;">        entre la coordenada z y la coordenada x;"""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(xz),
+                      run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""la coordenada z y la</span>
+<span style="color: #008000;">        coordenada y;"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(yz),
+                  run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""y la coordenada 'y' y la</span>
+<span style="color: #008000;">        cooordenada x"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(Indicate(xy),
+                  run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""se mantienen en todos los puntos</span>
+<span style="color: #008000;">        de la recta. Es decir, los puntos que mantienen la misma</span>
+<span style="color: #008000;">        proporci&#243;n entre sus coordenadas se disponen a lo largo de una</span>
+<span style="color: #008000;">        recta que pasa por el origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration+2)
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org03d8bcc" class="outline-3">
+<h3 id="org03d8bcc"><span class="section-number-3">1.6.</span> Escena 5 - Interpretación geométrica del producto por escalares en de \(\mathbb{R}^3\) (3D)</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org223b840" class="outline-4">
+<h4 id="org223b840"><span class="section-number-4">1.6.1.</span> Escena 3D</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E05_3D_InterpretacionGeometricaDelProductoPorEscalaresEnR3</span>(ThreeDScene):
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #BA36A5;">axes</span> = ThreeDAxes()
+        <span style="color: #BA36A5;">x_label</span> = axes.get_x_axis_label(Tex(<span style="color: #008000;">"1&#170; comp."</span>))
+        <span style="color: #BA36A5;">y_label</span> = axes.get_y_axis_label(Tex(<span style="color: #008000;">"2&#170; comp."</span>)).shift(UP * 2.4).shift(LEFT * 0.6)
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">zoom out so we see the axes</span>
+        <span style="color: #0000FF;">self</span>.set_camera_orientation(zoom=0.5)
+        
+        <span style="color: #BA36A5;">c</span>       = VectorR3([0,0, 2.5], color=RED_B)
+        <span style="color: #BA36A5;">d</span>       = VectorR3([0,0, 4.5], color=RED_B)
+        <span style="color: #BA36A5;">e</span>       = VectorR3([0,0,-4.5], color=RED_B)
+        <span style="color: #BA36A5;">flechac</span> = c.arrow(axes)
+        <span style="color: #BA36A5;">flechad</span> = d.arrow(axes)
+        <span style="color: #BA36A5;">flechae</span> = e.arrow(axes)
+        <span style="color: #BA36A5;">flechac2</span>= flechac.copy()
+        <span style="color: #BA36A5;">c_dot</span> = c.dot(axes)
+        <span style="color: #BA36A5;">d_dot</span> = d.dot(axes)
+        <span style="color: #BA36A5;">e_dot</span> = e.dot(axes)
+        <span style="color: #BA36A5;">c_dot2</span> = c_dot.copy()
+        
+        <span style="color: #BA36A5;">eje_z</span> =  Line(start = [0, 0, -5],
+                      end   = [0, 0,  5],
+                      color = RED_B)
+        
+        
+        <span style="color: #0000FF;">self</span>.play(FadeIn(axes), FadeIn(x_label), FadeIn(y_label))
+        <span style="color: #0000FF;">self</span>.wait(1)
+        <span style="color: #0000FF;">self</span>.play(Indicate(c_dot,
+                           scale_factor=3,
+                           run_time=1.5))
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">animate the move of the camera to properly see the axes</span>
+        <span style="color: #0000FF;">self</span>.move_camera(phi=75 * DEGREES, theta=60 * DEGREES, zoom=1, run_time=1.5)
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">built-in updater which begins camera rotation</span>
+        <span style="color: #0000FF;">self</span>.begin_ambient_camera_rotation(rate=0.2)
+        <span style="color: #0000FF;">self</span>.wait(2)
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">caso 1</span>
+        <span style="color: #0000FF;">self</span>.wait(.5)
+        
+        <span style="color: #0000FF;">self</span>.play(Transform(c_dot,
+                            d_dot),
+                  run_time=1)
+        <span style="color: #0000FF;">self</span>.play(Transform(c_dot,
+                            e_dot),
+                  run_time=1)
+        <span style="color: #0000FF;">self</span>.play(Transform(c_dot,
+                            c_dot2),
+                  run_time=1)
+        <span style="color: #0000FF;">self</span>.play(FadeOut(c_dot)),
+                
+        <span style="color: #0000FF;">self</span>.play(Indicate(eje_z),
+                  run_time=1.5)
+        <span style="color: #0000FF;">self</span>.wait(2)
+        <span style="color: #0000FF;">self</span>.play(FadeOut(eje_z))
+        
+        <span style="color: #0000FF;">self</span>.wait(2)
+        
+        <span style="color: #BA36A5;">Vect</span> = nc.Vector([3,2,3])
+        <span style="color: #BA36A5;">b</span> = VectorR3(Vect.lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b1</span> = VectorR3((Vect*nc.fracc(3,2)).lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b2</span> = VectorR3((Vect*nc.fracc(1,2)).lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b3</span> = VectorR3((Vect*(-1)).lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b4</span> = VectorR3((Vect*nc.fracc(-1,2)).lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b5</span> = VectorR3((Vect*nc.fracc(-3,2)).lista, rpr=<span style="color: #008000;">'colum'</span>, color=TEAL_A)
+        <span style="color: #BA36A5;">b0</span> = VectorR3((Vect*0).lista, rpr=<span style="color: #008000;">'colum'</span>, color=YELLOW)
+
+        <span style="color: #BA36A5;">b_dot</span>  = b.dot(axes)
+        <span style="color: #BA36A5;">b_dot1</span> = b1.dot(axes)
+        <span style="color: #BA36A5;">b_dot2</span> = b2.dot(axes)
+        <span style="color: #BA36A5;">b_dot3</span> = b3.dot(axes)
+        <span style="color: #BA36A5;">b_dot4</span> = b4.dot(axes)
+        <span style="color: #BA36A5;">b_dot5</span> = b5.dot(axes)
+        <span style="color: #BA36A5;">b_dot0</span> = b0.dot(axes, radio=0.12)
+
+        <span style="color: #BA36A5;">extremo1</span> = VectorR3((Vect*5).lista).dot(axes)
+        <span style="color: #BA36A5;">extremo2</span> = VectorR3((Vect*(-5)).lista).dot(axes)
+        <span style="color: #BA36A5;">recta</span> =  Line(start = extremo1.get_center(),
+                      end   = extremo2.get_center(),
+                      color = BLUE_B)
+
+        <span style="color: #0000FF;">self</span>.play(Indicate(b_dot))
+        <span style="color: #BA36A5;">line_x</span> = b.x_line(axes)
+        <span style="color: #0000FF;">self</span>.add(line_x)
+        <span style="color: #BA36A5;">line_y</span> = b.y_line(axes)
+        <span style="color: #0000FF;">self</span>.add(line_y)
+        <span style="color: #BA36A5;">line_z</span> = b.z_line(axes)
+        <span style="color: #0000FF;">self</span>.add(line_z)
+        <span style="color: #BA36A5;">line_xy</span> = b.xy_line(axes)
+        <span style="color: #0000FF;">self</span>.add(line_xy)
+
+        <span style="color: #BA36A5;">line_v</span> = b.v_line(axes)
+        <span style="color: #0000FF;">self</span>.add(line_v)
+
+        <span style="color: #0000FF;">self</span>.wait(2.5)
+                
+        <span style="color: #0000FF;">self</span>.play(TransformFromCopy(b_dot,
+                                    b_dot1), run_time=3)
+        
+        <span style="color: #0000FF;">self</span>.play(TransformFromCopy(b_dot,
+                                    b_dot2), run_time=3)
+ 
+        <span style="color: #0000FF;">self</span>.play(TransformFromCopy(b_dot,
+                                    b_dot3),
+                  TransformFromCopy(b_dot,
+                                    b_dot4),
+                  TransformFromCopy(b_dot,
+                                    b_dot5), run_time=4.5)
+
+        <span style="color: #0000FF;">self</span>.wait(1)
+
+        <span style="color: #0000FF;">self</span>.play(TransformFromCopy(b_dot,
+                                    b_dot0), run_time=3.5)
+       
+        <span style="color: #0000FF;">self</span>.wait(15)
+        
+        <span style="color: #0000FF;">self</span>.play(FadeOut(b_dot),
+                  <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">FadeOut(b_dot0),</span>
+                  FadeOut(b_dot1),
+                  FadeOut(b_dot2),
+                  FadeOut(b_dot3),
+                  FadeOut(b_dot4),
+                  FadeOut(b_dot5),
+                  FadeIn(recta))
+
+        <span style="color: #0000FF;">self</span>.wait(10)
+        
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org13f53aa" class="outline-3">
+<h3 id="org13f53aa"><span class="section-number-3">1.7.</span> Escena 5 - Interpretación geométrica del producto por escalares en de \(\mathbb{R}^3\) (explicación)</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Antes es necesario compilar la escena anterior y mover el fichero
+<code>mp4</code> a <code>aux_movie_files</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">&lt;&lt;Definici&#243;n de VideoStatus y VideoMobject&gt;&gt;
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V04_E05_InterpretacionGeometricaDelProductoPorEscalaresEnR3</span>(MiEscenaConVoz):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos(1)
+
+        <span style="color: #BA36A5;">titulo</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto en "</span>) + r<span style="color: #008000;">"$\R[3]$"</span>,
+                       tex_template = myTemplate,
+                       font_size=60).set_color(BLUE).to_edge(UP)
+
+        <span style="color: #BA36A5;">video1</span> = VideoMobject(
+            filename=r<span style="color: #008000;">"./media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/aux_movie_files/L01_V04_E05_3D_InterpretacionGeometricaDelProductoPorEscalaresEnR3.mp4"</span>,
+            <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">filename=r"./media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/1080p60/aux_movie_files/L01_V04_E05_3D_InterpretacionGeometricaDelProductoPorEscalaresEnR3.mp4",</span>
+           speed=1.0
+        ).scale_to_fit_width(6.5).next_to(titulo, DOWN, buff=0)
+
+        <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+        <span style="color: #BA36A5;">c3</span>      = sp.symbols(<span style="color: #008000;">'a_3'</span>)
+        <span style="color: #BA36A5;">c</span>       = nc.Vector([0,0,c3])
+        <span style="color: #BA36A5;">s0</span>      = MathTex(r<span style="color: #008000;">"\lambda "</span> + c.latex(),   tex_template = myTemplate,)
+        <span style="color: #BA36A5;">igual</span>   = MathTex(r<span style="color: #008000;">"="</span>,        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s05</span>     = MathTex((escalar*c).latex(), tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp0</span> = VGroup(s0,
+                      igual,
+                      s05).arrange(RIGHT).next_to(video1, DOWN).scale(.9)
+       
+        <span style="color: #BA36A5;">escalar</span> = sp.symbols(<span style="color: #008000;">'\lambda'</span>)
+        <span style="color: #BA36A5;">a</span>  = nc.Vector(sp.symbols(<span style="color: #008000;">'a:4'</span>)[1:])
+        <span style="color: #BA36A5;">s1</span> = MathTex(r<span style="color: #008000;">"\lambda "</span> + a.latex(),
+                     tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s5</span> = MathTex((escalar*a).latex(),
+                     tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(s1,
+                      igual.copy(),
+                      s5).arrange(RIGHT).next_to(video1, DOWN).scale(.9)
+        
+        <span style="color: #0000FF;">self</span>.creditos(17)
+      
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La interpretaci&#243;n geom&#233;trica del</span>
+<span style="color: #008000;">        producto por escalares en R3 es similar a la de R2."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.add(titulo)
+            <span style="color: #0000FF;">self</span>.add(video1)
+            <span style="color: #0000FF;">self</span>.pausa(4)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En el caso en el que todas las</span>
+<span style="color: #008000;">        componentes salvo la &#250;ltima son cero."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp0))
+            <span style="color: #0000FF;">self</span>.pausa(3)
+                        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El conjunto de m&#250;ltiplos</span>
+<span style="color: #008000;">        constituye el eje vertical."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(7.7)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp0))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En cuanto a cualquier otro tipo</span>
+<span style="color: #008000;">        de vector no nulo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1))
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Dependiendo del valor del</span>
+<span style="color: #008000;">        escalar, las componentes del m&#250;ltiplo ser&#225;n mayores o</span>
+<span style="color: #008000;">        menores."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(1)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y si el escalar es negativo,</span>
+<span style="color: #008000;">        cambiar&#225; el signo de las componentes del vector."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Adem&#225;s, cualquier vector</span>
+<span style="color: #008000;">        multiplicado por cero es un vector nulo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp1))
+            <span style="color: #0000FF;">self</span>.pausa(1)
+
+        <span style="color: #BA36A5;">cvab</span> = MathTex(r<span style="color: #008000;">"\elemRp{\lambda\Vect{a}}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cvb</span>  = MathTex(r<span style="color: #008000;">"\lambda\eleVRpE{a}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">eq_suma</span> = VGroup(cvab,igual,cvb).arrange(RIGHT).scale(1.5)
+        
+        <span style="color: #BA36A5;">grp3</span> = VGroup(eq_suma,).arrange(RIGHT,
+                                          buff=1).next_to(video1,
+                                                          DOWN).scale(1)
+
+        <span style="color: #BA36A5;">r1</span> =  MathTex(r<span style="color: #008000;">"""\frac{\lambda a_j}{\lambda a_k}=\frac{a_j}{a_k}\qquad</span>
+<span style="color: #008000;">        \text{para todo}\; \lambda, j, k,\;</span>
+<span style="color: #008000;">        \text{ si }\; a_k\ne0"""</span>,
+                      tex_template = myTemplate).next_to(video1,
+                                                         DOWN).scale(1)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Como las componentes del vector</span>
+<span style="color: #008000;">        son multiplicadas por un mismo valor, las proporciones entre</span>
+<span style="color: #008000;">        las cordenadas no nulas se mantienen entre todos los</span>
+<span style="color: #008000;">        m&#250;ltiplos."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3))
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration*2/5)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp3))           
+            <span style="color: #0000FF;">self</span>.play(FadeIn(r1))
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""As&#237;, dada la interpretaci&#243;n del</span>
+<span style="color: #008000;">        producto entre tres n&#250;meros vista anteriormente, los m&#250;ltiplos</span>
+<span style="color: #008000;">        de un vector no nulo de R3 se corresponden con los puntos de</span>
+<span style="color: #008000;">        una recta que pasa por el origen de coordenadas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(r1),
+                      FadeOut(video1))
+
+        <span style="color: #BA36A5;">resumen1</span> = Tex(_(r<span style="color: #008000;">"""El conjunto de m&#250;ltiplos de un vector no nulo de \R[3]"""</span>),
+                       tex_template = myTemplate)
+        <span style="color: #BA36A5;">resumen2</span> = Tex(_(r<span style="color: #008000;">"""se corresponde con una recta que pasa por el origen."""</span>),
+                       tex_template = myTemplate).next_to(resumen1, DOWN)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, el conjunto de</span>
+<span style="color: #008000;">        m&#250;ltiplos de cualquier vector no nulo de R 3 es una recta que</span>
+<span style="color: #008000;">        pasa por el origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Write(resumen1),
+                      run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Write(resumen2),
+                      run_time=tracker.duration/2)
+
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+            <span style="color: #0000FF;">self</span>.play(FadeOut(resumen1),
+                      FadeOut(resumen2))
+
+        <span style="color: #BA36A5;">titulo2</span> = Tex(_(<span style="color: #008000;">"Interpretaci&#243;n geom&#233;trica del producto en "</span>) + r<span style="color: #008000;">"$\R[n]$"</span>,
+                       tex_template = myTemplate,
+                       font_size=60).set_color(BLUE).to_edge(UP)
+
+        <span style="color: #BA36A5;">resumenRn_1</span> = Tex(_(r<span style="color: #008000;">"""El conjunto de m&#250;ltiplos de un vector no nulo de \R[n]"""</span>),
+                          tex_template = myTemplate)
+        <span style="color: #BA36A5;">resumenRn_2</span> = Tex(_(r<span style="color: #008000;">"""se corresponde con una recta que pasa por el origen."""</span>),
+                          tex_template = myTemplate).next_to(resumenRn_1, DOWN)
+                
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Reescalar un vector en R n</span>
+<span style="color: #008000;">        mantiene la proporci&#243;n entre sus coordenadas. Aunque no</span>
+<span style="color: #008000;">        podemos visualizar una recta en m&#225;s de tres dimensiones,</span>
+<span style="color: #008000;">        abusando del lenguaje diremos que: los m&#250;ltiplos de un vector</span>
+<span style="color: #008000;">        en R n se corresponden con una recta que pasa por el</span>
+<span style="color: #008000;">        origen."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+
+            <span style="color: #0000FF;">self</span>.play(FadeOut(titulo))
+            <span style="color: #0000FF;">self</span>.play(FadeIn(titulo2))
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(Write(resumenRn_1))
+            <span style="color: #0000FF;">self</span>.play(Write(resumenRn_2))
+            <span style="color: #0000FF;">self</span>.pausa(2)
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org790e522" class="outline-2">
+<h2 id="org790e522"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org834f41e" class="outline-3">
+<h3 id="org834f41e"><span class="section-number-3">2.1.</span> Carga de la librería Manim y NacAL</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python" id="orgfd492d0"><span style="color: #0000FF;">from</span> manim <span style="color: #0000FF;">import</span> *
+<span style="color: #0000FF;">from</span> manim_voiceover <span style="color: #0000FF;">import</span> VoiceoverScene
+<span style="color: #0000FF;">from</span> manim_voiceover.services.azure <span style="color: #0000FF;">import</span> AzureService
+<span style="color: #0000FF;">import</span> nacal <span style="color: #0000FF;">as</span> nc
+<span style="color: #0000FF;">import</span> sympy <span style="color: #0000FF;">as</span> sp
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">PARA LA TRADUCCI&#211;N (pero no s&#233; generar los v&#237;deos traducidos)</span>
+<span style="color: #0000FF;">from</span> manim_voiceover.translate <span style="color: #0000FF;">import</span> get_gettext
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">It is good practice to get the LOCALE and DOMAIN from environment variables</span>
+<span style="color: #0000FF;">import</span> os
+<span style="color: #BA36A5;">LOCALE</span> = os.getenv(<span style="color: #008000;">"LOCALE"</span>)
+<span style="color: #BA36A5;">DOMAIN</span> = os.getenv(<span style="color: #008000;">"DOMAIN"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">The following function uses LOCALE and DOMAIN to set the language, and</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">returns a gettext function that is used to insert translations.</span>
+<span style="color: #BA36A5;">_</span> = get_gettext()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3ec92df" class="outline-3">
+<h3 id="org3ec92df">Definición de algunas subclases con definiciones generales</h3>
+<div class="outline-text-3" id="text-org3ec92df">
+<div class="org-src-container">
+<pre class="src src-python" id="org683fd1d">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">MiEscenaConVoz</span>(VoiceoverScene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_corta</span>(<span style="color: #0000FF;">self</span>, n=0.3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_corta</span>(<span style="color: #0000FF;">self</span>, n=0.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa</span>(<span style="color: #0000FF;">self</span>, n=1):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_media</span>(<span style="color: #0000FF;">self</span>, n=1.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_larga</span>(<span style="color: #0000FF;">self</span>, n=3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_larga</span>(<span style="color: #0000FF;">self</span>, n=5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+         
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="org7a3a4bd"><span style="color: #0000FF;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF;">self</span>, variante=1):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">analisis_opcion_elegida</span>(tipo):
+        <span style="color: #036A07;">'An&#225;lisis de las opciones de eliminaci&#243;n elegidas'</span>
+        <span style="color: #BA36A5;">lista</span> = [100,20,10,4,2,1]
+        <span style="color: #BA36A5;">opcion</span> = <span style="color: #006FE0;">set</span>()
+        <span style="color: #0000FF;">for</span> t <span style="color: #0000FF;">in</span> lista:
+            <span style="color: #0000FF;">if</span> (tipo - (tipo % t)) <span style="color: #0000FF;">in</span> lista:
+                opcion.add(tipo - (tipo % t))
+                <span style="color: #BA36A5;">tipo</span> = tipo % t
+        <span style="color: #0000FF;">return</span> opcion    
+    <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2025\; Marcos Bujosa  "</span>)
+    <span style="color: #0000FF;">if</span> 1 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampDcha</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampDcha)
+    <span style="color: #0000FF;">if</span> 2 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampIzda</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampIzda)
+    <span style="color: #0000FF;">if</span> 4 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampBottom</span>= VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampBottom)
+    <span style="color: #0000FF;">if</span> 10 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampTop</span>   = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampTop)
+        
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org83d29d6"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ZCreditos</span>(Scene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2025 \; Marcos Bujosa"</span>)
+        <span style="color: #BA36A5;">github</span> = Tex(r<span style="color: #008000;">"\texttt{https://github.com/mbujosab}"</span>).next_to(<span style="color: #D0372D;">copyright</span>, DOWN)
+        <span style="color: #BA36A5;">CGG</span>  = VGroup(<span style="color: #D0372D;">copyright</span>,github).scale(1.1)
+        <span style="color: #0000FF;">self</span>.add(CGG)
+        <span style="color: #0000FF;">self</span>.wait(10)
+</pre>
+</div>
+</div>
+<div id="outline-container-org8dfedca" class="outline-4">
+<h4 id="org8dfedca">Definición Vectores en R2 y R3</h4>
+<div class="outline-text-4" id="text-org8dfedca">
+<p>
+Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados con dibujos.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org35e5a90">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VectorR2</span>():
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
+        <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
+        <span style="color: #BA36A5;">coords</span> = lista + [0] <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(lista)&lt;3 <span style="color: #0000FF;">else</span> lista        
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">color</span>  = color
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.coords = tuple(coords)</span>
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.coords = tuple([float(i) for i in coords])</span>
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">coords</span> = <span style="color: #006FE0;">tuple</span>([<span style="color: #006FE0;">int</span>(i) <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">float</span>(i)==<span style="color: #006FE0;">int</span>(i) <span style="color: #0000FF;">else</span> <span style="color: #006FE0;">float</span>(i) <span style="color: #0000FF;">for</span> i <span style="color: #0000FF;">in</span> coords])
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">Vector</span> = nc.Vector(<span style="color: #0000FF;">self</span>.coords[:2], rpr)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">tex</span>    = MathTex(<span style="color: #0000FF;">self</span>.Vector.latex(), color=<span style="color: #0000FF;">self</span>.color).scale(0.8)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(<span style="color: #0000FF;">self</span>, ejes, radio=0.08):
+        <span style="color: #0000FF;">return</span> Dot(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), radius=radio, color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">v_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vertical_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">h_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">arrow</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vector(<span style="color: #0000FF;">self</span>.Vector.lista, stroke_color = <span style="color: #0000FF;">self</span>.color, stroke_width=4)
+        
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="org54667a8">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VectorR3</span>():
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
+        <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
+        <span style="color: #BA36A5;">coords</span> = lista + [0] <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(lista)&lt;3 <span style="color: #0000FF;">else</span> lista
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">color</span>  = color
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.coords = tuple(coords)</span>
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">coords</span> = <span style="color: #006FE0;">tuple</span>([<span style="color: #006FE0;">int</span>(i) <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">float</span>(i)==<span style="color: #006FE0;">int</span>(i) <span style="color: #0000FF;">else</span> <span style="color: #006FE0;">float</span>(i) <span style="color: #0000FF;">for</span> i <span style="color: #0000FF;">in</span> coords])
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">Vector</span> = nc.Vector(<span style="color: #0000FF;">self</span>.coords, rpr)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">tex</span>    = MathTex(<span style="color: #0000FF;">self</span>.Vector.latex(), color=<span style="color: #0000FF;">self</span>.color).scale(0.8)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">proyXY</span> = <span style="color: #0000FF;">self</span>.coords[:-1] + (0,)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">proyZ</span>  = (0,0,) + (<span style="color: #0000FF;">self</span>.coords[-1],)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">dot</span>(<span style="color: #0000FF;">self</span>, ejes, radio=0.08):
+        <span style="color: #0000FF;">return</span> Dot3D(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), radius=radio, color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">x_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_vertical_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.proyXY), color=<span style="color: #0000FF;">self</span>.color)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">y_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.proyXY), color=<span style="color: #0000FF;">self</span>.color)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">z_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Line3D(start=ejes.c2p(*<span style="color: #0000FF;">self</span>.proyZ), end=ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), thickness=0.01)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">v_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Line3D(start=ejes.c2p(*<span style="color: #0000FF;">self</span>.proyXY), end=ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), thickness=0.01)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">xy_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Line3D(start=np.array([0,0,0]), end=ejes.c2p(*<span style="color: #0000FF;">self</span>.proyXY), thickness=0.01)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">proy_x_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.proyXY), color=<span style="color: #0000FF;">self</span>.color)
+    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">proy_y_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> ejes.get_horizontal_line(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), color=<span style="color: #0000FF;">self</span>.color)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">proy_y_line</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Line3D(start=ejes.c2p(*<span style="color: #0000FF;">self</span>.proyZ), end=ejes.c2p(*<span style="color: #0000FF;">self</span>.coords), thickness=0.01)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">arrow</span>(<span style="color: #0000FF;">self</span>, ejes):
+        <span style="color: #0000FF;">return</span> Arrow3D(
+            start=np.array([0, 0, 0]),
+            end=np.array(ejes.c2p(*<span style="color: #0000FF;">self</span>.coords)),
+            resolution=8,
+            color = <span style="color: #0000FF;">self</span>.color )
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb7a6c6e" class="outline-4">
+<h4 id="orgb7a6c6e">Insertar un vídeo en una escena</h4>
+<div class="outline-text-4" id="text-orgb7a6c6e">
+<div class="org-src-container">
+<pre class="src src-python" id="org1d254d6"><span style="color: #0000FF;">import</span> cv2 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needs opencv-python https://pypi.org/project/opencv-python/</span>
+<span style="color: #0000FF;">from</span> PIL <span style="color: #0000FF;">import</span> Image, ImageOps
+<span style="color: #0000FF;">from</span> dataclasses <span style="color: #0000FF;">import</span> dataclass
+
+<span style="color: #6434A3;">@dataclass</span>
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VideoStatus</span>:
+    <span style="color: #BA36A5;">time</span>: <span style="color: #006FE0;">float</span> = 0
+    <span style="color: #BA36A5;">videoObject</span>: cv2.VideoCapture = <span style="color: #D0372D;">None</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__deepcopy__</span>(<span style="color: #0000FF;">self</span>, memo):
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">self</span>
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">VideoMobject</span>(ImageMobject):
+    <span style="color: #036A07;">'''</span>
+<span style="color: #036A07;">    Following a discussion on Discord about animated GIF images.</span>
+<span style="color: #036A07;">    Modified for videos</span>
+
+<span style="color: #036A07;">    Parameters</span>
+<span style="color: #036A07;">    ----------</span>
+<span style="color: #036A07;">    filename</span>
+<span style="color: #036A07;">        the filename of the video file</span>
+
+<span style="color: #036A07;">    imageops</span>
+<span style="color: #036A07;">        (optional) possibility to include a PIL.ImageOps operation, e.g.</span>
+<span style="color: #036A07;">        PIL.ImageOps.mirror</span>
+
+<span style="color: #036A07;">    speed</span>
+<span style="color: #036A07;">        (optional) speed-up/slow-down the playback</span>
+
+<span style="color: #036A07;">    loop</span>
+<span style="color: #036A07;">        (optional) replay the video from the start in an endless loop</span>
+
+<span style="color: #036A07;">    https://discord.com/channels/581738731934056449/1126245755607339250/1126245755607339250</span>
+<span style="color: #036A07;">    2023-07-06 Uwe Zimmermann &amp; Abulafia</span>
+<span style="color: #036A07;">    2024-03-09 Uwe Zimmermann</span>
+<span style="color: #036A07;">    '''</span>
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF;">self</span>, filename=<span style="color: #D0372D;">None</span>, imageops=<span style="color: #D0372D;">None</span>, speed=1.0, loop=<span style="color: #D0372D;">False</span>, **kwargs):
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">filename</span> = filename
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">imageops</span> = imageops
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">speed</span>    = speed
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">loop</span>     = loop
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">_id</span> = <span style="color: #006FE0;">id</span>(<span style="color: #0000FF;">self</span>)
+        <span style="color: #0000FF;">self</span>.<span style="color: #BA36A5;">status</span> = VideoStatus()
+        <span style="color: #0000FF;">self</span>.status.<span style="color: #BA36A5;">videoObject</span> = cv2.VideoCapture(filename)
+
+        <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_FRAMES, 1)
+        <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #BA36A5;">frame</span> = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(frame)
+
+            <span style="color: #0000FF;">if</span> imageops != <span style="color: #D0372D;">None</span>:
+                <span style="color: #BA36A5;">img</span> = imageops(img)
+        <span style="color: #0000FF;">else</span>:
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(np.uint8([[63, 0, 0, 0],
+                                        [0, 127, 0, 0],
+                                        [0, 0, 191, 0],
+                                        [0, 0, 0, 255]
+                                        ]))
+        <span style="color: #006FE0;">super</span>().__init__(img, **kwargs)
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #0000FF;">self</span>.add_updater(<span style="color: #0000FF;">self</span>.videoUpdater)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">videoUpdater</span>(<span style="color: #0000FF;">self</span>, mobj, dt):
+        <span style="color: #0000FF;">if</span> dt == 0:
+            <span style="color: #0000FF;">return</span>
+        <span style="color: #BA36A5;">status</span> = <span style="color: #0000FF;">self</span>.status
+        status.<span style="color: #BA36A5;">time</span> += 1000*dt*mobj.speed
+        <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_MSEC, status.time)
+        <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> (ret == <span style="color: #D0372D;">False</span>) <span style="color: #0000FF;">and</span> <span style="color: #0000FF;">self</span>.loop:
+            status.<span style="color: #BA36A5;">time</span> = 0
+            <span style="color: #0000FF;">self</span>.status.videoObject.<span style="color: #006FE0;">set</span>(cv2.CAP_PROP_POS_MSEC, status.time)
+            <span style="color: #BA36A5;">ret</span>, <span style="color: #BA36A5;">frame</span> = <span style="color: #0000FF;">self</span>.status.videoObject.read()
+        <span style="color: #0000FF;">if</span> ret:
+            <span style="color: #BA36A5;">frame</span> = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needed here?        </span>
+            <span style="color: #BA36A5;">img</span> = Image.fromarray(frame)
+
+            <span style="color: #0000FF;">if</span> mobj.imageops != <span style="color: #D0372D;">None</span>:
+                <span style="color: #BA36A5;">img</span> = mobj.imageops(img)
+            mobj.<span style="color: #BA36A5;">pixel_array</span> = change_to_rgba_array(
+                np.asarray(img), mobj.pixel_array_dtype
+            )
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgef83ad2" class="outline-4">
+<h4 id="orgef83ad2">Mover miniescenas a un subdirectorio auxiliar</h4>
+<div class="outline-text-4" id="text-orgef83ad2">
+<div class="org-src-container">
+<pre class="src src-bash" id="orgc87ca01">mkdir -p /home/marcos/SynologyDrive/ReposGH/Docencia/VideosMates2/lib/media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/aux_movie_files
+mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orga14f448">mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org2316e75" class="outline-2">
+<h2 id="org2316e75"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<ol class="org-ol">
+<li><a id="orgd6a8ef9"></a>Generamos un fichero <code>mpeg</code> por cada escena<br />
+<div class="outline-text-5" id="text-3-0-0-1">
+<ul class="org-ul">
+<li>Versión de poca calidad:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org51cae23"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Versión con calidad HD1080:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orge2cfb48"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org5a064e0"></a>Concatenamos las escenas en un único fichero <code>mpeg</code> y añadimos música de fondo.<br />
+<div class="outline-text-5" id="text-3-0-0-2">
+<ul class="org-ul">
+<li>Montando la versión de baja resolución</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org1a9ae22">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3  -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Montando la versión de resolución HD1080</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org76e873e">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4 ; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3 -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgff193e2"></a>Fundimos a negro los últimos segundos del vídeo (y la música).<br />
+<div class="outline-text-5" id="text-3-0-0-3">
+<div class="org-src-container">
+<pre class="src src-bash" id="org7a256e7"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
+<span style="color: #BA36A5;">offset</span>=$(<span style="color: #FF1493;">bc -l &lt;&lt;&lt; "$dur"-7</span>)
+ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="color: #008000;">\</span>
+       -filter_complex <span style="color: #008000;">"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]"</span> <span style="color: #008000;">\</span>
+       -map <span style="color: #008000;">"[v]"</span> -map <span style="color: #008000;">"[a]"</span> -y $<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org8fc013a"></a>Traducción<br />
+<div class="outline-text-5" id="text-3-0-0-4">
+<div class="org-src-container">
+<pre class="src src-bash" id="orgf95a50a">xgettext -o locale/$<span style="color: #BA36A5;">fichero</span>.pot $<span style="color: #BA36A5;">fichero</span>.py
+
+msginit -i locale/$<span style="color: #BA36A5;">fichero</span>.pot -o locale/en/LC_MESSAGES/$<span style="color: #BA36A5;">fichero</span>.po --locale=es --no-translator
+
+manim_translate -s es -t en -d $<span style="color: #BA36A5;">fichero</span> -l locale $<span style="color: #BA36A5;">fichero</span>.py
+
+manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<span style="color: #BA36A5;">escena</span> -d $<span style="color: #BA36A5;">fichero</span> -l en
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<span style="color: #BA36A5;">escena</span> -d $<span style="color: #BA36A5;">fichero</span> -l en -ql
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2025-02-22 sáb 20:28</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

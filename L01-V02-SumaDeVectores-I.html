@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2024-12-23 lun 15:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 2</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 2</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga99c304">1. Suma de Vectores de \R[n] - Vídeo 02</a>
+<ul>
+<li><a href="#org3dbd89e">1.1. Escena 1 - Suma de vectores de \R[n]</a></li>
+<li><a href="#org9dd0ee6">1.2. Escena 2 - Propiedad conmutativa de la suma</a></li>
+</ul>
+</li>
+<li><a href="#orgf71fdc5">2. Trozos comunes de código</a>
+<ul>
+<li><a href="#org0997ddd">2.1. Carga de la librería Manim y NacAL</a></li>
+<li><a href="#orgb633191">Definición de algunas subclases con definiciones generales</a></li>
+</ul>
+</li>
+<li><a href="#org4d070db">3. Rodando: 1,2,3&hellip; ¡acción!</a></li>
+</ul>
+</div>
+</div>
+<p>
+\maketitle
+</p>
+<div id="outline-container-orga99c304" class="outline-2">
+<h2 id="orga99c304"><span class="section-number-2">1.</span> Suma de Vectores de \R[n] - Vídeo 02</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org3dbd89e" class="outline-3">
+<h3 id="org3dbd89e"><span class="section-number-3">1.1.</span> Escena 1 - Suma de vectores de \R[n]</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-python" id="org72d9404">&lt;&lt;Carga de la librer&#237;a Manim y NacAL con AzureService&gt;&gt;
+&lt;&lt;Definici&#243;n de mi escena con voz&gt;&gt;
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V02_E01_SumaDeVectores</span>(MiEscenaConVoz):    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))       </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos()
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Portada</span>
+        <span style="color: #BA36A5;">titulo</span> = Title(_(<span style="color: #008000;">"Suma de vectores en "</span>) + r<span style="color: #008000;">"\R[n]"</span>,
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        <span style="color: #0000FF;">self</span>.play(Write(titulo))
+        <span style="color: #0000FF;">self</span>.pausa_media()
+        <span style="color: #0000FF;">self</span>.play(FadeOut(titulo))
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Definici&#243;n de vector suma</span>
+        <span style="color: #BA36A5;">operacionSuma</span> = Tex(_(<span style="color: #008000;">"Suma de vectores"</span>),
+                         tex_template = myTemplate, font_size=70
+                         ).to_edge(UP).set_color(BLUE)
+
+        <span style="color: #BA36A5;">operacionDescripcion</span> = Tex(_(<span style="color: #008000;">"La suma se define componente a componente."</span>),
+                         tex_template = myTemplate,
+                         ).move_to([0,2.5,0]).to_edge(LEFT)
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Ejemplos</span>
+        <span style="color: #BA36A5;">EjR3</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Ejemplo en "</span>) + r<span style="color: #008000;">"\R[3]:}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+
+        <span style="color: #BA36A5;">EjR4</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Ejemplo en "</span>) + r<span style="color: #008000;">"\R[4]:}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+        
+        <span style="color: #BA36A5;">a</span>    = nc.Vector( [0, 3, 6])        
+        <span style="color: #BA36A5;">b</span>    = nc.Vector( [5, 1, 2])        
+        <span style="color: #BA36A5;">s1</span> = MathTex(a.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">mas</span>= MathTex(r<span style="color: #008000;">"+"</span>,             tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s3</span> = MathTex(b.latex(),        tex_template = myTemplate,)
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,             tex_template = myTemplate,)
+        <span style="color: #BA36A5;">s5</span> = MathTex((a+b).latex(),    tex_template = myTemplate,)
+        <span style="color: #BA36A5;">grp1</span> = VGroup(s1,mas,s3,igual,s5).arrange(RIGHT)
+       
+        <span style="color: #0000FF;">self</span>.add(operacionSuma)
+        <span style="color: #0000FF;">self</span>.add(operacionDescripcion)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Podemos sumar dos vectores si ambos poseen el mismo n&#250;mero de</span>
+<span style="color: #008000;">        componentes."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(EjR3)
+            <span style="color: #0000FF;">self</span>.add(grp1[0])
+            <span style="color: #0000FF;">self</span>.add(grp1[2])
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""El resultado es otro vector que se define componente a</span>
+<span style="color: #008000;">        componente."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.add(grp1[1])
+            <span style="color: #0000FF;">self</span>.pausa_media()
+            <span style="color: #0000FF;">self</span>.add(grp1[3])
+            <span style="color: #0000FF;">self</span>.add(grp1[4][0][:2])
+            <span style="color: #0000FF;">self</span>.add(grp1[4][0][-2:])
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La primera es la suma de las primeras componentes de ambos</span>
+<span style="color: #008000;">        vectores."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][2]), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0][0][2]), Circumscribe(grp1[2][0][2]), run_time=tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""La segunda es la suma de las segundas."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][3]), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0][0][3]), Circumscribe(grp1[2][0][3]), run_time=tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y as&#237; con todas las componentes del vector suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp1[4][0][4]))
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+            <span style="color: #0000FF;">self</span>.play(Circumscribe(grp1[0][0][4]), Circumscribe(grp1[2][0][4]) )
+            <span style="color: #0000FF;">self</span>.pausa_corta(.3)
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp1))
+
+        <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #BA36A5;">v_generico_a</span>  = nc.Vector(sp.symbols(<span style="color: #008000;">'a:5'</span>)[1:])
+        <span style="color: #BA36A5;">vga</span> = MathTex(v_generico_a.latex(), tex_template = myTemplate)
+        
+        <span style="color: #BA36A5;">v_generico_b</span>  = nc.Vector(sp.symbols(<span style="color: #008000;">'b:5'</span>)[1:])
+        <span style="color: #BA36A5;">vgb</span> = MathTex(v_generico_b.latex(), tex_template = myTemplate)
+
+        <span style="color: #BA36A5;">vgab</span> = MathTex((v_generico_a + v_generico_b).latex(), tex_template = myTemplate)
+
+        <span style="color: #BA36A5;">grp2</span> = VGroup(vga,mas,vgb,igual,vgab).arrange(RIGHT)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por tanto, la siguiente expresi&#243;n describe</span>
+<span style="color: #008000;">        la suma de vectores en R 4."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeTransform(EjR3,EjR4))
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp2))
+            <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Definir la suma en R n requiere una estrategia distinta; una que no</span>
+<span style="color: #008000;">        necesite escribir la lista completa de componentes. Piense que</span>
+<span style="color: #008000;">        la lista puede ser muy larga cuando n es grande."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.wait(tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.play(Indicate(vga[0][4:-4]), Indicate(vgb[0][4:-4]), Indicate(vgab[0][4:-4]), run_time=2)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #BA36A5;">Defn</span> = Tex(r<span style="color: #008000;">"\textbf{"</span> + _(<span style="color: #008000;">"Definici&#243;n"</span>) + <span style="color: #008000;">":}"</span>,
+                 tex_template = myTemplate,
+                 font_size=50).set_color(RED).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Una alternativa es definir la suma usando la notaci&#243;n</span>
+<span style="color: #008000;">        descrita en el v&#237;deo anterior. Con ella podemos expresar"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeOut(grp2), FadeOut(EjR4), run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.add(Defn)
+
+        <span style="color: #BA36A5;">cvab</span> = MathTex(r<span style="color: #008000;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cva</span>  = MathTex(r<span style="color: #008000;">"\eleVR{a}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">cvb</span>  = MathTex(r<span style="color: #008000;">"\eleVR{b}{i}"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">eq_suma</span> = VGroup(cvab,igual,cva,mas,cvb).arrange(RIGHT).scale(1.5)
+        
+        <span style="color: #BA36A5;">donde</span> = Tex(_(<span style="color: #008000;">"donde"</span>))
+        <span style="color: #BA36A5;">indices</span> = MathTex(r<span style="color: #008000;">"i=1:n"</span>, tex_template = myTemplate)
+        <span style="color: #BA36A5;">pc_indices</span> = VGroup(donde,indices).arrange(RIGHT, buff=1)
+        <span style="color: #BA36A5;">grp3</span> = VGroup(eq_suma, pc_indices).arrange(RIGHT, buff=1)
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""que la componente i-&#233;sima del vector suma es igual a la suma</span>
+<span style="color: #008000;">        de las i-&#233;simas componentes de los vectores."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[0][:2],
+                             scale=1.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=2*tracker.duration/5)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[0][2:],
+                             scale=0.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=3*tracker.duration/5)
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""(donde el &#237;ndice recorre los n&#250;meros naturales entre uno</span>
+<span style="color: #008000;">        y n)"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(grp3[1]))
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""Esta definici&#243;n abstracta ser&#225; muy util para demostrar algunas</span>
+<span style="color: #008000;">        propiedades de las operaciones con vectores, pues arroja una</span>
+<span style="color: #008000;">        primera regla de c&#225;lculo simb&#243;lico:"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration*2/3)
+            <span style="color: #0000FF;">self</span>.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][-3:]),
+                      Indicate(eq_suma[2][0][-2:]),
+                      Indicate(eq_suma[4][0][-2:]),
+                      run_time=tracker.duration/3)
+            <span style="color: #0000FF;">self</span>.pausa_muy_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(r<span style="color: #008000;">"""que la suma de las i-&#233;simas componentes se puede sustituir por</span>
+<span style="color: #008000;">        la i-&#233;sima componente del vector suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #BA36A5;">source0</span> = MathTex(r<span style="color: #008000;">"\eleVR{a}{i}+\eleVR{b}{i}"</span>,
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            <span style="color: #BA36A5;">target0</span> = MathTex(r<span style="color: #008000;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>,
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            <span style="color: #BA36A5;">source1</span> = target0.copy()
+            <span style="color: #BA36A5;">target1</span> = source0.copy()
+            
+            VGroup(source0,target0)
+            <span style="color: #0000FF;">self</span>.add(source0)
+            <span style="color: #BA36A5;">transform_index0</span> = [[0,1,2,3,4,5,6],
+                                [1,0,4,2,3,5,6]]
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(source0[i],target0[j], rate_func=rate_functions.smooth)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index0)
+                ],
+                run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Y la i-&#233;sima componente de una suma se puede sustituir por la</span>
+<span style="color: #008000;">        suma de las i-&#233;simas componentes."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(ReplacementTransform(target0,source1))
+            
+            VGroup(source1,target1)
+            <span style="color: #BA36A5;">transform_index1</span> = [[0,1,2,3,4,5,6],
+                                [1,0,3,4,2,5,6]]
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(source1[i],target1[j], rate_func=rate_functions.smooth)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index1)
+                ],
+                run_time=tracker.duration)
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Esta regla se denomina propiedad distributiva del operador selector</span>
+<span style="color: #008000;">        respecto de la suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(FadeOut(target1))
+            <span style="color: #0000FF;">self</span>.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][-3:]),
+                      Indicate(eq_suma[2][0][-2:]),
+                      Indicate(eq_suma[4][0][-2:]),
+                      run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa()
+            
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9dd0ee6" class="outline-3">
+<h3 id="org9dd0ee6"><span class="section-number-3">1.2.</span> Escena 2 - Propiedad conmutativa de la suma</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">L01_V02_E02_PropiedadConmutativaDeLaSuma</span>(MiEscenaConVoz):    
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #0000FF;">self</span>.set_speech_service( AzureService(voice=<span style="color: #008000;">"es-ES-AlvaroNeural"</span> ) )       
+        <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">self.set_speech_service(GTTSService(lang="es", tld="com"))        </span>
+        <span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+        myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+
+        <span style="color: #0000FF;">self</span>.creditos(7)
+                
+        <span style="color: #BA36A5;">operacionSuma</span> = Tex(_(<span style="color: #008000;">"Suma de vectores en "</span>) + r<span style="color: #008000;">"\R[n]"</span>,
+                            tex_template = myTemplate,
+                            font_size=70).to_edge(UP).set_color(BLUE)        
+        <span style="color: #0000FF;">self</span>.add(operacionSuma)
+        
+        <span style="color: #BA36A5;">source0</span>  = MathTex(r<span style="color: #008000;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>, tex_template = myTemplate).scale(2)[0]
+        <span style="color: #BA36A5;">source1</span>  = source0.copy()
+        <span style="color: #BA36A5;">target0</span>  = MathTex(r<span style="color: #008000;">"\elemRp{\Vect{b}+\Vect{a}}{i}"</span>, tex_template = myTemplate).scale(2)[0]
+        <span style="color: #BA36A5;">igual</span> = MathTex(r<span style="color: #008000;">"="</span>,             tex_template = myTemplate,).scale(2)[0]
+        <span style="color: #BA36A5;">vgr0</span>  = VGroup(source0, igual, source1).arrange(RIGHT, buff=1)
+        <span style="color: #BA36A5;">vgr1</span>  = VGroup(source0, igual, target0).arrange(RIGHT, buff=1)
+        <span style="color: #BA36A5;">transform_index0</span> = [[1,2,3],
+                            [3,2,1]]
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Usemos la anterior regla de c&#225;lculo simb&#243;lico para demostrar la</span>
+<span style="color: #008000;">        propiedad conmutativa de la suma. Es decir, que el orden en que se sumen los vectores es</span>
+<span style="color: #008000;">        irrelevante."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeIn(source0[1:-3]), FadeIn(vgr1[1]), FadeIn(source1[1:-3]))
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.play(
+                *[
+                    ReplacementTransform(vgr0[2][i],vgr1[2][j], rate_func=rate_functions.smooth)
+                    <span style="color: #0000FF;">for</span> i,j <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">zip</span>(*transform_index0)
+                ],
+                run_time=tracker.duration/2)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Sabemos que dos vectores son iguales si lo son sus correspondientes</span>
+<span style="color: #008000;">        listas de componentes. Por tanto, para demostrar la igualdad entre vectores debemos probar</span>
+<span style="color: #008000;">        la igualdad componente a componente."""</span>)) <span style="color: #0000FF;">as</span> tracker:           
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration*2/5)
+            <span style="color: #0000FF;">self</span>.play(FadeIn(source0[0]), FadeIn(source0[-3:]), FadeIn(target0[0]), FadeIn(target0[-3:]) )
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.play(Indicate(source0[-2:]), Indicate(target0[-2:]), run_time=tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.pausa_corta()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Para ello comenzaremos escribiendo uno cualquiera de sus lados.</span>
+<span style="color: #008000;">        Despu&#233;s operaremos hasta obtener la expresi&#243;n del lado opuesto de la igualdad."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.pausa(tracker.duration/4)
+            <span style="color: #0000FF;">self</span>.play(Indicate(vgr0[0]))
+            <span style="color: #0000FF;">self</span>.play(Indicate(vgr1[2]))
+
+        <span style="color: #BA36A5;">vgr2</span>=vgr1.copy().scale(1/2).next_to(operacionSuma, DOWN).to_edge(LEFT)
+        <span style="color: #BA36A5;">vgr3</span>=vgr1.copy().scale(1/2).to_edge(LEFT)
+        <span style="color: #BA36A5;">item1</span> = MathTex(r<span style="color: #008000;">"\eleVR{x}{i} \in \R"</span>,tex_template = myTemplate)
+        <span style="color: #BA36A5;">item2</span> = MathTex(r<span style="color: #008000;">"\alpha + \beta = \beta + \alpha\quad (\alpha,\beta\in\R)"</span>,
+                        tex_template = myTemplate)
+        <span style="color: #BA36A5;">item3</span> = MathTex(r<span style="color: #008000;">"\elemRp*{\Vect{x}+\Vect{y}}{i} = \eleVR{x}{i} + \eleVR{y}{i}"</span>,
+                        tex_template = myTemplate)
+        <span style="color: #BA36A5;">items</span> = VGroup(item1,
+                       item2,
+                       item3).arrange(DOWN).scale(.8).align_to(vgr2, UP).to_edge(RIGHT).shift(DOWN*0.15)        
+        <span style="color: #BA36A5;">box</span> =  SurroundingRectangle(items, color=YELLOW )
+
+        <span style="color: #BA36A5;">paso1</span> = MathTex(r<span style="color: #008000;">"=\eleVR{a}{i}+\eleVR{b}{i}"</span>,
+                        tex_template = myTemplate).next_to(vgr3[0], RIGHT)
+        <span style="color: #BA36A5;">paso2</span> = MathTex(r<span style="color: #008000;">"=\eleVR{b}{i}+\eleVR{a}{i}"</span>,
+                        tex_template = myTemplate).next_to(paso1, DOWN, aligned_edge=LEFT)
+        <span style="color: #BA36A5;">paso3</span> = MathTex(r<span style="color: #008000;">"=\elemRp{\Vect{b}+\Vect{a}}{i}"</span>,
+                        tex_template = myTemplate).next_to(paso2, DOWN, aligned_edge=LEFT)
+        <span style="color: #BA36A5;">demo</span> = VGroup(paso1, paso2, paso3)
+        
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Con operar nos referimos a sustituir una expresi&#243;n por otra que sabemos</span>
+<span style="color: #008000;">        que es equivalente. Para esta demostraci&#243;n solo necesitamos considerar tres cosas"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeTransformPieces(vgr1,vgr2),
+                      run_time=tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.add(box,items)
+            <span style="color: #0000FF;">self</span>.pausa_muy_larga()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""que los elementos de un vector son n&#250;meros reales,</span>
+<span style="color: #008000;">        que entre n&#250;meros reales la suma es conmutativa,</span>
+<span style="color: #008000;">        y que el operador selector es distributivo respecto de la suma"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[0]), run_time=tracker.duration/3 )
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[1]), run_time=tracker.duration/3 )
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[2]), run_time=tracker.duration/3 )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Comencemos escribiendo uno de los lados,</span>
+<span style="color: #008000;">        por ejemplo el izquierdo."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play( FadeTransformPieces(vgr2[0].copy(),vgr3[0]),
+                       FadeToColor(vgr2[0], color=TEAL),
+                       run_time=tracker.duration/2 )
+            <span style="color: #0000FF;">self</span>.pausa_media()
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En primer lugar,</span>
+<span style="color: #008000;">        el operador selector es distributivo respecto de la suma"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[2], run_time=tracker.duration/2) )
+            <span style="color: #0000FF;">self</span>.play(FadeIn(demo[0],    run_time=tracker.duration/2) )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En segundo lugar, dado que los componentes son n&#250;meros reales,</span>
+<span style="color: #008000;">        el resultado no cambia si intercambiamos el orden de su suma."""</span>)) <span style="color: #0000FF;">as</span> tracker:            
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[:2], run_time=tracker.duration/2) )
+            <span style="color: #0000FF;">self</span>.play(FadeIn(demo[1],     run_time=tracker.duration/2) )
+            
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Por &#250;ltimo,</span>
+<span style="color: #008000;">        el operador selector es distributivo respecto de la suma"""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(Indicate(items[2], run_time=tracker.duration/2) )
+            <span style="color: #0000FF;">self</span>.play(FadeIn(demo[2],    run_time=tracker.duration/2) )
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""Con esto termina la demostraci&#243;n."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.play(FadeToColor(vgr2[0], color=TEAL))
+            <span style="color: #0000FF;">self</span>.play(Indicate(vgr3[0]),
+                      Indicate(demo[2]),
+                      FadeToColor(vgr2[1:], color=TEAL),
+                      run_time=tracker.duration)
+            <span style="color: #0000FF;">self</span>.pausa()
+
+        <span style="color: #0000FF;">with</span> <span style="color: #0000FF;">self</span>.voiceover(text=_(<span style="color: #008000;">"""En el pr&#243;ximo v&#237;deo daremos una interprtaci&#243;n</span>
+<span style="color: #008000;">        geom&#233;trica de la suma de vectores."""</span>)) <span style="color: #0000FF;">as</span> tracker:
+            <span style="color: #0000FF;">self</span>.pausa_muy_larga()
+            
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf71fdc5" class="outline-2">
+<h2 id="orgf71fdc5"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org0997ddd" class="outline-3">
+<h3 id="org0997ddd"><span class="section-number-3">2.1.</span> Carga de la librería Manim y NacAL</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python" id="org60c531c"><span style="color: #0000FF;">from</span> manim <span style="color: #0000FF;">import</span> *
+<span style="color: #0000FF;">from</span> manim_voiceover <span style="color: #0000FF;">import</span> VoiceoverScene
+<span style="color: #0000FF;">from</span> manim_voiceover.services.azure <span style="color: #0000FF;">import</span> AzureService
+<span style="color: #0000FF;">import</span> nacal <span style="color: #0000FF;">as</span> nc
+<span style="color: #0000FF;">import</span> sympy <span style="color: #0000FF;">as</span> sp
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">PARA LA TRADUCCI&#211;N (pero no s&#233; generar los v&#237;deos traducidos)</span>
+<span style="color: #0000FF;">from</span> manim_voiceover.translate <span style="color: #0000FF;">import</span> get_gettext
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">It is good practice to get the LOCALE and DOMAIN from environment variables</span>
+<span style="color: #0000FF;">import</span> os
+<span style="color: #BA36A5;">LOCALE</span> = os.getenv(<span style="color: #008000;">"LOCALE"</span>)
+<span style="color: #BA36A5;">DOMAIN</span> = os.getenv(<span style="color: #008000;">"DOMAIN"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">The following function uses LOCALE and DOMAIN to set the language, and</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">returns a gettext function that is used to insert translations.</span>
+<span style="color: #BA36A5;">_</span> = get_gettext()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb633191" class="outline-3">
+<h3 id="orgb633191">Definición de algunas subclases con definiciones generales</h3>
+<div class="outline-text-3" id="text-orgb633191">
+<div class="org-src-container">
+<pre class="src src-python" id="org96ab3b3">
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">MiEscenaConVoz</span>(VoiceoverScene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_corta</span>(<span style="color: #0000FF;">self</span>, n=0.3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_corta</span>(<span style="color: #0000FF;">self</span>, n=0.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa</span>(<span style="color: #0000FF;">self</span>, n=1):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_media</span>(<span style="color: #0000FF;">self</span>, n=1.5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_larga</span>(<span style="color: #0000FF;">self</span>, n=3):
+        <span style="color: #0000FF;">self</span>.wait(n)
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">pausa_muy_larga</span>(<span style="color: #0000FF;">self</span>, n=5):
+        <span style="color: #0000FF;">self</span>.wait(n)
+
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+         
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python" id="org85cb0d2"><span style="color: #0000FF;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF;">self</span>, variante=1):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">analisis_opcion_elegida</span>(tipo):
+        <span style="color: #036A07;">'An&#225;lisis de las opciones de eliminaci&#243;n elegidas'</span>
+        <span style="color: #BA36A5;">lista</span> = [100,20,10,4,2,1]
+        <span style="color: #BA36A5;">opcion</span> = <span style="color: #006FE0;">set</span>()
+        <span style="color: #0000FF;">for</span> t <span style="color: #0000FF;">in</span> lista:
+            <span style="color: #0000FF;">if</span> (tipo - (tipo % t)) <span style="color: #0000FF;">in</span> lista:
+                opcion.add(tipo - (tipo % t))
+                <span style="color: #BA36A5;">tipo</span> = tipo % t
+        <span style="color: #0000FF;">return</span> opcion    
+    <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2024\; Marcos Bujosa  "</span>)
+    <span style="color: #0000FF;">if</span> 1 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampDcha</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampDcha)
+    <span style="color: #0000FF;">if</span> 2 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampIzda</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampIzda)
+    <span style="color: #0000FF;">if</span> 4 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampBottom</span>= VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampBottom)
+    <span style="color: #0000FF;">if</span> 10 <span style="color: #0000FF;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampTop</span>   = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF;">self</span>.add(stampTop)
+        
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org3c8f25c"><span style="color: #0000FF;">class</span> <span style="color: #6434A3;">ZCreditos</span>(Scene):
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF;">self</span>):
+        <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2024 \; Marcos Bujosa"</span>)
+        <span style="color: #BA36A5;">github</span> = Tex(r<span style="color: #008000;">"\texttt{https://github.com/mbujosab}"</span>).next_to(<span style="color: #D0372D;">copyright</span>, DOWN)
+        <span style="color: #BA36A5;">CGG</span>  = VGroup(<span style="color: #D0372D;">copyright</span>,github).scale(1.1)
+        <span style="color: #0000FF;">self</span>.add(CGG)
+        <span style="color: #0000FF;">self</span>.wait(10)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org4d070db" class="outline-2">
+<h2 id="org4d070db"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<ol class="org-ol">
+<li><a id="org1a1c421"></a>Generamos un fichero <code>mpeg</code> por cada escena<br />
+<div class="outline-text-5" id="text-3-0-0-1">
+<ul class="org-ul">
+<li>Versión de poca calidad:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org809aebb"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Versión con calidad HD1080:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgef62eae"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org682d38e"></a>Concatenamos las escenas en un único fichero <code>mpeg</code> y añadimos música de fondo.<br />
+<div class="outline-text-5" id="text-3-0-0-2">
+<ul class="org-ul">
+<li>Montando la versión de baja resolución</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org30faa96">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3  -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Montando la versión de resolución HD1080</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org271dc33">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
+<span style="color: #0000FF;">for</span> f<span style="color: #0000FF;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4 ; <span style="color: #0000FF;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF;">done</span>
+ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
+mkdir -p tmp
+ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3 -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgfd0a9b2"></a>Fundimos a negro los últimos segundos del vídeo (y la música).<br />
+<div class="outline-text-5" id="text-3-0-0-3">
+<div class="org-src-container">
+<pre class="src src-bash" id="org7baa26e"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
+<span style="color: #BA36A5;">offset</span>=$(<span style="color: #FF1493;">bc -l &lt;&lt;&lt; "$dur"-7</span>)
+ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="color: #008000;">\</span>
+       -filter_complex <span style="color: #008000;">"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]"</span> <span style="color: #008000;">\</span>
+       -map <span style="color: #008000;">"[v]"</span> -map <span style="color: #008000;">"[a]"</span> -y $<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org945e129"></a>Traducción<br />
+<div class="outline-text-5" id="text-3-0-0-4">
+<div class="org-src-container">
+<pre class="src src-bash" id="org142c6bb">xgettext -o locale/$<span style="color: #BA36A5;">fichero</span>.pot $<span style="color: #BA36A5;">fichero</span>.py
+
+msginit -i locale/$<span style="color: #BA36A5;">fichero</span>.pot -o locale/en/LC_MESSAGES/$<span style="color: #BA36A5;">fichero</span>.po --locale=es --no-translator
+
+manim_translate -s es -t en -d $<span style="color: #BA36A5;">fichero</span> -l locale $<span style="color: #BA36A5;">fichero</span>.py
+
+manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<span style="color: #BA36A5;">escena</span> -d $<span style="color: #BA36A5;">fichero</span> -l en
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<span style="color: #BA36A5;">escena</span> -d $<span style="color: #BA36A5;">fichero</span> -l en -ql
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2024-12-23 lun 15:30</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

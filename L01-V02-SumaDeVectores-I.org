@@ -1,0 +1,659 @@
+#+TITLE: Lección 1 del curso - Vídeo 2
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LaTeX_HEADER: \usepackage{pdfpages}
+#+LATEX_HEADER: \usepackage{fontspec}
+
+# Para que no ejecute todo el código al exportar a pdf
+#+PROPERTY: header-args :eval never-export
+
+\maketitle
+
+*** COMMENT Ajustes para la compilación de la documentación
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results silent
+(setq org-babel-exp-code-template
+         (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template)
+               )
+#+END_SRC
+
+
+* Suma de Vectores de \R[n] - Vídeo 02
+
+
+# ** Español
+
+
+** Escena 1 - Suma de vectores de \R[n]
+
+# <<Carga de la librería Manim y NacAL>>
+
+#+call: rodando(fichero="L01_V02_SumaDeVectores-I", escena="1")
+# +call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="1")
+
+# [[file:lib/media/videos/L01_V02_SumaDeVectores-I/480p15/L01_V02_E01_SumaDeVectores.mp4]]
+
+# Añadir esto tras <<Definición de mi escena con voz>>
+# <<Obtención de subíndices de caracteres en expresiones>>
+
+#+name: L01_V02_E01_SumaDeVectores
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V02_SumaDeVectores-I.py
+<<Carga de la librería Manim y NacAL con AzureService>>
+<<Definición de mi escena con voz>>
+
+class L01_V02_E01_SumaDeVectores(MiEscenaConVoz):    
+    def construct(self):
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )       
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))       
+        myTemplate = TexTemplate()
+        myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+
+        self.creditos()
+        
+        # Portada
+        titulo = Title(_("Suma de vectores en ") + r"\R[n]",
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        self.play(Write(titulo))
+        self.pausa_media()
+        self.play(FadeOut(titulo))
+	
+        # Definición de vector suma
+        operacionSuma = Tex(_("Suma de vectores"),
+                         tex_template = myTemplate, font_size=70
+                         ).to_edge(UP).set_color(BLUE)
+
+        operacionDescripcion = Tex(_("La suma se define componente a componente."),
+                         tex_template = myTemplate,
+                         ).move_to([0,2.5,0]).to_edge(LEFT)
+        # Ejemplos
+        EjR3 = Tex(r"\textbf{" + _("Ejemplo en ") + r"\R[3]:}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+
+        EjR4 = Tex(r"\textbf{" + _("Ejemplo en ") + r"\R[4]:}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+        
+        a    = nc.Vector( [0, 3, 6])        
+        b    = nc.Vector( [5, 1, 2])        
+        s1 = MathTex(a.latex(),        tex_template = myTemplate,)
+        mas= MathTex(r"+",             tex_template = myTemplate,)
+        s3 = MathTex(b.latex(),        tex_template = myTemplate,)
+        igual = MathTex(r"=",             tex_template = myTemplate,)
+        s5 = MathTex((a+b).latex(),    tex_template = myTemplate,)
+        grp1 = VGroup(s1,mas,s3,igual,s5).arrange(RIGHT)
+       
+        self.add(operacionSuma)
+        self.add(operacionDescripcion)
+        
+        with self.voiceover(text=_("""Podemos sumar dos vectores si ambos poseen el mismo número de
+        componentes.""")) as tracker:
+            self.add(EjR3)
+            self.add(grp1[0])
+            self.add(grp1[2])
+
+        with self.voiceover(text=_("""El resultado es otro vector que se define componente a
+        componente.""")) as tracker:
+            self.add(grp1[1])
+            self.pausa_media()
+            self.add(grp1[3])
+            self.add(grp1[4][0][:2])
+            self.add(grp1[4][0][-2:])
+
+        with self.voiceover(text=_("""La primera es la suma de las primeras componentes de ambos
+        vectores.""")) as tracker:
+            self.play(FadeIn(grp1[4][0][2]), run_time=tracker.duration/3)
+            self.play(Circumscribe(grp1[0][0][2]), Circumscribe(grp1[2][0][2]), run_time=tracker.duration*2/3)
+            self.pausa_corta()
+            
+        with self.voiceover(text=_("""La segunda es la suma de las segundas.""")) as tracker:
+            self.play(FadeIn(grp1[4][0][3]), run_time=tracker.duration/3)
+            self.play(Circumscribe(grp1[0][0][3]), Circumscribe(grp1[2][0][3]), run_time=tracker.duration*2/3)
+            self.pausa_corta()
+            
+        with self.voiceover(text=_("""Y así con todas las componentes del vector suma.""")) as tracker:            
+            self.play(FadeIn(grp1[4][0][4]))
+            self.pausa_corta()
+            self.play(Circumscribe(grp1[0][0][4]), Circumscribe(grp1[2][0][4]) )
+            self.pausa_corta(.3)
+            self.play(FadeOut(grp1))
+
+        self.pausa()
+
+        v_generico_a  = nc.Vector(sp.symbols('a:5')[1:])
+        vga = MathTex(v_generico_a.latex(), tex_template = myTemplate)
+        
+        v_generico_b  = nc.Vector(sp.symbols('b:5')[1:])
+        vgb = MathTex(v_generico_b.latex(), tex_template = myTemplate)
+
+        vgab = MathTex((v_generico_a + v_generico_b).latex(), tex_template = myTemplate)
+
+        grp2 = VGroup(vga,mas,vgb,igual,vgab).arrange(RIGHT)
+        with self.voiceover(text=_("""Por tanto, la siguiente expresión describe
+        la suma de vectores en R 4.""")) as tracker:
+            self.play(FadeTransform(EjR3,EjR4))
+            self.play(FadeIn(grp2))
+            self.pausa()
+
+        with self.voiceover(text=_("""Definir la suma en R n requiere una estrategia distinta; una que no
+        necesite escribir la lista completa de componentes. Piense que
+        la lista puede ser muy larga cuando n es grande.""")) as tracker:
+            self.wait(tracker.duration/3)
+            self.play(Indicate(vga[0][4:-4]), Indicate(vgb[0][4:-4]), Indicate(vgab[0][4:-4]), run_time=2)
+            self.pausa_corta()
+
+        Defn = Tex(r"\textbf{" + _("Definición") + ":}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(RED).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+        
+        with self.voiceover(text=_("""Una alternativa es definir la suma usando la notación
+        descrita en el vídeo anterior. Con ella podemos expresar""")) as tracker:
+            self.play(FadeOut(grp2), FadeOut(EjR4), run_time=tracker.duration/3)
+            self.add(Defn)
+
+        cvab = MathTex(r"\elemRp{\Vect{a}+\Vect{b}}{i}", tex_template = myTemplate)
+        cva  = MathTex(r"\eleVR{a}{i}", tex_template = myTemplate)
+        cvb  = MathTex(r"\eleVR{b}{i}", tex_template = myTemplate)
+        eq_suma = VGroup(cvab,igual,cva,mas,cvb).arrange(RIGHT).scale(1.5)
+        
+        donde = Tex(_("donde"))
+        indices = MathTex(r"i=1:n", tex_template = myTemplate)
+        pc_indices = VGroup(donde,indices).arrange(RIGHT, buff=1)
+        grp3 = VGroup(eq_suma, pc_indices).arrange(RIGHT, buff=1)
+
+        with self.voiceover(text=_("""que la componente i-ésima del vector suma es igual a la suma
+        de las i-ésimas componentes de los vectores.""")) as tracker:
+            self.play(FadeIn(grp3[0][:2],
+                             scale=1.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=2*tracker.duration/5)
+            self.play(FadeIn(grp3[0][2:],
+                             scale=0.5,
+                             rate_func=rate_functions.exponential_decay),
+                      run_time=3*tracker.duration/5)
+        with self.voiceover(text=_(r"""(donde el índice recorre los números naturales entre uno
+        y n)""")) as tracker:
+            self.play(FadeIn(grp3[1]))
+            self.pausa_corta()
+
+        with self.voiceover(text=_(r"""Esta definición abstracta será muy util para demostrar algunas
+        propiedades de las operaciones con vectores, pues arroja una
+        primera regla de cálculo simbólico:""")) as tracker:
+            self.pausa(tracker.duration*2/3)
+            self.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][-3:]),
+                      Indicate(eq_suma[2][0][-2:]),
+                      Indicate(eq_suma[4][0][-2:]),
+                      run_time=tracker.duration/3)
+            self.pausa_muy_corta()
+
+        with self.voiceover(text=_(r"""que la suma de las i-ésimas componentes se puede sustituir por
+        la i-ésima componente del vector suma.""")) as tracker:            
+            source0 = MathTex(r"\eleVR{a}{i}+\eleVR{b}{i}",
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            target0 = MathTex(r"\elemRp{\Vect{a}+\Vect{b}}{i}",
+                              tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+            source1 = target0.copy()
+            target1 = source0.copy()
+            
+            VGroup(source0,target0)
+            self.add(source0)
+            transform_index0 = [[0,1,2,3,4,5,6],
+                                [1,0,4,2,3,5,6]]
+            self.play(
+                ,*[
+                    ReplacementTransform(source0[i],target0[j], rate_func=rate_functions.smooth)
+                    for i,j in zip(*transform_index0)
+                ],
+                run_time=tracker.duration)
+            
+        with self.voiceover(text=_("""Y la i-ésima componente de una suma se puede sustituir por la
+        suma de las i-ésimas componentes.""")) as tracker:            
+            self.play(ReplacementTransform(target0,source1))
+            
+            VGroup(source1,target1)
+            transform_index1 = [[0,1,2,3,4,5,6],
+                                [1,0,3,4,2,5,6]]
+            self.play(
+                ,*[
+                    ReplacementTransform(source1[i],target1[j], rate_func=rate_functions.smooth)
+                    for i,j in zip(*transform_index1)
+                ],
+                run_time=tracker.duration)
+	    
+        with self.voiceover(text=_("""Esta regla se denomina propiedad distributiva del operador selector
+        respecto de la suma.""")) as tracker:            
+            self.play(FadeOut(target1))
+            self.play(Indicate(eq_suma[0][0][0]),
+                      Indicate(eq_suma[0][0][-3:]),
+                      Indicate(eq_suma[2][0][-2:]),
+                      Indicate(eq_suma[4][0][-2:]),
+                      run_time=tracker.duration)
+            self.pausa()
+            
+#+END_SRC
+
+#+RESULTS: L01_V02_E01_SumaDeVectores
+
+# +call: rodando(fichero="L01_V02_SumaDeVectores-I", escena="1")
+# +call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="1")
+
+# [[file:lib/media/videos/L01_V02_SumaDeVectores-I/480p15/L01_V02_E01_SumaDeVectores.mp4]]
+
+** Escena 2 - Propiedad conmutativa de la suma
+
+# +call: rodando(fichero="L01_V02_SumaDeVectores-I", escena=" 2")
+# +call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="2")
+
+# file:lib/media/videos/L01_V02_SumaDeVectores-I/480p15/L01_V02_E02_PropiedadConmutativaDeLaSuma.mp4]]
+
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V02_SumaDeVectores-I.py
+class L01_V02_E02_PropiedadConmutativaDeLaSuma(MiEscenaConVoz):    
+    def construct(self):
+        self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )       
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        myTemplate = TexTemplate()
+        myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+
+        self.creditos(7)
+        	
+        operacionSuma = Tex(_("Suma de vectores en ") + r"\R[n]",
+                            tex_template = myTemplate,
+                            font_size=70).to_edge(UP).set_color(BLUE)        
+        self.add(operacionSuma)
+        
+        source0  = MathTex(r"\elemRp{\Vect{a}+\Vect{b}}{i}", tex_template = myTemplate).scale(2)[0]
+        source1  = source0.copy()
+        target0  = MathTex(r"\elemRp{\Vect{b}+\Vect{a}}{i}", tex_template = myTemplate).scale(2)[0]
+        igual = MathTex(r"=",             tex_template = myTemplate,).scale(2)[0]
+        vgr0  = VGroup(source0, igual, source1).arrange(RIGHT, buff=1)
+        vgr1  = VGroup(source0, igual, target0).arrange(RIGHT, buff=1)
+        transform_index0 = [[1,2,3],
+                            [3,2,1]]
+
+        with self.voiceover(text=_("""Usemos la anterior regla de cálculo simbólico para demostrar la
+        propiedad conmutativa de la suma. Es decir, que el orden en que se sumen los vectores es
+        irrelevante.""")) as tracker:
+            self.play(FadeIn(source0[1:-3]), FadeIn(vgr1[1]), FadeIn(source1[1:-3]))
+            self.pausa(tracker.duration/2)
+            self.play(
+                ,*[
+                    ReplacementTransform(vgr0[2][i],vgr1[2][j], rate_func=rate_functions.smooth)
+                    for i,j in zip(*transform_index0)
+                ],
+                run_time=tracker.duration/2)
+            self.pausa_corta()
+            
+        with self.voiceover(text=_("""Sabemos que dos vectores son iguales si lo son sus correspondientes
+        listas de componentes. Por tanto, para demostrar la igualdad entre vectores debemos probar
+        la igualdad componente a componente.""")) as tracker:           
+            self.pausa(tracker.duration*2/5)
+            self.play(FadeIn(source0[0]), FadeIn(source0[-3:]), FadeIn(target0[0]), FadeIn(target0[-3:]) )
+            self.pausa(tracker.duration/4)
+            self.play(Indicate(source0[-2:]), Indicate(target0[-2:]), run_time=tracker.duration/4)
+            self.pausa_corta()
+
+        with self.voiceover(text=_("""Para ello comenzaremos escribiendo uno cualquiera de sus lados.
+        Después operaremos hasta obtener la expresión del lado opuesto de la igualdad.""")) as tracker:            
+            self.pausa(tracker.duration/4)
+            self.play(Indicate(vgr0[0]))
+            self.play(Indicate(vgr1[2]))
+
+        vgr2=vgr1.copy().scale(1/2).next_to(operacionSuma, DOWN).to_edge(LEFT)
+        vgr3=vgr1.copy().scale(1/2).to_edge(LEFT)
+        item1 = MathTex(r"\eleVR{x}{i} \in \R",tex_template = myTemplate)
+        item2 = MathTex(r"\alpha + \beta = \beta + \alpha\quad (\alpha,\beta\in\R)",
+                        tex_template = myTemplate)
+        item3 = MathTex(r"\elemRp*{\Vect{x}+\Vect{y}}{i} = \eleVR{x}{i} + \eleVR{y}{i}",
+                        tex_template = myTemplate)
+        items = VGroup(item1,
+                       item2,
+                       item3).arrange(DOWN).scale(.8).align_to(vgr2, UP).to_edge(RIGHT).shift(DOWN*0.15)        
+        box =  SurroundingRectangle(items, color=YELLOW )
+
+        paso1 = MathTex(r"=\eleVR{a}{i}+\eleVR{b}{i}",
+                        tex_template = myTemplate).next_to(vgr3[0], RIGHT)
+        paso2 = MathTex(r"=\eleVR{b}{i}+\eleVR{a}{i}",
+                        tex_template = myTemplate).next_to(paso1, DOWN, aligned_edge=LEFT)
+        paso3 = MathTex(r"=\elemRp{\Vect{b}+\Vect{a}}{i}",
+                        tex_template = myTemplate).next_to(paso2, DOWN, aligned_edge=LEFT)
+        demo = VGroup(paso1, paso2, paso3)
+        
+        with self.voiceover(text=_("""Con operar nos referimos a sustituir una expresión por otra que sabemos
+        que es equivalente. Para esta demostración solo necesitamos considerar tres cosas""")) as tracker:
+            self.play(FadeTransformPieces(vgr1,vgr2),
+                      run_time=tracker.duration/2 )
+            self.add(box,items)
+            self.pausa_muy_larga()
+
+        with self.voiceover(text=_("""que los elementos de un vector son números reales,
+        que entre números reales la suma es conmutativa,
+        y que el operador selector es distributivo respecto de la suma""")) as tracker:
+            self.play(Indicate(items[0]), run_time=tracker.duration/3 )
+            self.play(Indicate(items[1]), run_time=tracker.duration/3 )
+            self.play(Indicate(items[2]), run_time=tracker.duration/3 )
+            
+        with self.voiceover(text=_("""Comencemos escribiendo uno de los lados,
+        por ejemplo el izquierdo.""")) as tracker:
+            self.play( FadeTransformPieces(vgr2[0].copy(),vgr3[0]),
+                       FadeToColor(vgr2[0], color=TEAL),
+                       run_time=tracker.duration/2 )
+            self.pausa_media()
+            
+        with self.voiceover(text=_("""En primer lugar,
+        el operador selector es distributivo respecto de la suma""")) as tracker:
+            self.play(Indicate(items[2], run_time=tracker.duration/2) )
+            self.play(FadeIn(demo[0],    run_time=tracker.duration/2) )
+            
+        with self.voiceover(text=_("""En segundo lugar, dado que los componentes son números reales,
+        el resultado no cambia si intercambiamos el orden de su suma.""")) as tracker:            
+            self.play(Indicate(items[:2], run_time=tracker.duration/2) )
+            self.play(FadeIn(demo[1],     run_time=tracker.duration/2) )
+            
+        with self.voiceover(text=_("""Por último,
+        el operador selector es distributivo respecto de la suma""")) as tracker:
+            self.play(Indicate(items[2], run_time=tracker.duration/2) )
+            self.play(FadeIn(demo[2],    run_time=tracker.duration/2) )
+
+        with self.voiceover(text=_("""Con esto termina la demostración.""")) as tracker:
+            self.play(FadeToColor(vgr2[0], color=TEAL))
+            self.play(Indicate(vgr3[0]),
+                      Indicate(demo[2]),
+                      FadeToColor(vgr2[1:], color=TEAL),
+                      run_time=tracker.duration)
+            self.pausa()
+
+        with self.voiceover(text=_("""En el próximo vídeo daremos una interprtación
+        geométrica de la suma de vectores.""")) as tracker:
+            self.pausa_muy_larga()
+            
+#+END_SRC
+
+#+RESULTS:
+
+# +call: rodando(fichero="L01_V02_SumaDeVectores-I", escena=" 2")
+# +call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="2")
+
+# file:lib/media/videos/L01_V02_SumaDeVectores-I/480p15/L01_V02_E02_PropiedadConmutativaDeLaSuma.mp4]]
+
+# +latex: \newpage
+
+
+* Trozos comunes de código
+
+** Carga de la librería Manim y NacAL
+
+#+name: Carga de la librería Manim y NacAL
+#+BEGIN_SRC python :exports none :results discard
+from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.gtts import GTTSService
+import nacal as nc
+import sympy as sp
+
+# PARA LA TRADUCCIÓN (pero no me ha funcionado)
+
+#from manim_voiceover.translate import get_gettext
+# # It is good practice to get the LOCALE and DOMAIN from environment variables
+#import os
+#LOCALE = os.getenv("LOCALE")
+#DOMAIN = os.getenv("DOMAIN")
+# The following function uses LOCALE and DOMAIN to set the language, and
+# returns a gettext function that is used to insert translations.
+#_ = get_gettext()
+#+END_SRC
+
+
+#+name: Carga de la librería Manim y NacAL con AzureService
+#+BEGIN_SRC python :results discard
+from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.azure import AzureService
+import nacal as nc
+import sympy as sp
+# PARA LA TRADUCCIÓN (pero no sé generar los vídeos traducidos)
+from manim_voiceover.translate import get_gettext
+# It is good practice to get the LOCALE and DOMAIN from environment variables
+import os
+LOCALE = os.getenv("LOCALE")
+DOMAIN = os.getenv("DOMAIN")
+# The following function uses LOCALE and DOMAIN to set the language, and
+# returns a gettext function that is used to insert translations.
+_ = get_gettext()
+#+END_SRC
+
+#+RESULTS: Carga de la librería Manim y NacAL con AzureService
+
+** Definición de algunas subclases con definiciones generales 
+  :PROPERTIES:  
+  :UNNUMBERED: t  
+  :END:  
+
+#+name: Definición de mi escena con voz
+#+BEGIN_SRC python :noweb no-export :results discard
+
+class MiEscenaConVoz(VoiceoverScene):
+    def pausa_muy_corta(self, n=0.3):
+        self.wait(n)
+    def pausa_corta(self, n=0.5):
+        self.wait(n)
+    def pausa(self, n=1):
+        self.wait(n)
+    def pausa_media(self, n=1.5):
+        self.wait(n)
+    def pausa_larga(self, n=3):
+        self.wait(n)
+    def pausa_muy_larga(self, n=5):
+        self.wait(n)
+
+    <<Créditos en distintas partes de la pantalla>>
+         
+#+END_SRC
+
+#    mas    = MathTex("+")
+#    igual  = MathTex("=")
+#    donde  = Tex("donde")
+#    pycoma = Tex(";")
+
+
+#+name: Créditos en distintas partes de la pantalla
+#+BEGIN_SRC python :results discard
+def creditos(self, variante=1):
+    def analisis_opcion_elegida(tipo):
+        'Análisis de las opciones de eliminación elegidas'
+        lista = [100,20,10,4,2,1]
+        opcion = set()
+        for t in lista:
+            if (tipo - (tipo % t)) in lista:
+                opcion.add(tipo - (tipo % t))
+                tipo = tipo % t
+        return opcion    
+    copyright = Tex(r"\textcopyright{\;} 2024\; Marcos Bujosa  ")
+    if 1 in analisis_opcion_elegida(variante):
+        stampDcha  = VGroup(copyright.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        self.add(stampDcha)
+    if 2 in analisis_opcion_elegida(variante):
+        stampIzda  = VGroup(copyright.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        self.add(stampIzda)
+    if 4 in analisis_opcion_elegida(variante):
+        stampBottom= VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        self.add(stampBottom)
+    if 10 in analisis_opcion_elegida(variante):
+        stampTop   = VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        self.add(stampTop)
+        
+#+END_SRC
+
+# ** Creditos
+
+#+name: copyright
+#+BEGIN_SRC python :noweb tangle :results discard
+class ZCreditos(Scene):
+    def construct(self):
+        copyright = Tex(r"\textcopyright{\;} 2024 \; Marcos Bujosa")
+        github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
+        CGG  = VGroup(copyright,github).scale(1.1)
+        self.add(CGG)
+        self.wait(10)
+#+END_SRC
+
+# +call: rodando(fichero="L01_V02_SumaDeVectores-I", escena="4")
+
+# +call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="4")
+
+# +call: montandoHD(video="L01_V02_SumaDeVectores-I")
+
+# +call: fade(video="L01_V02_SumaDeVectores-I")
+
+*** COMMENT Código obtener subíndices de caracteres en expresiones
+
+Este código indexa los elementos de expresiones en \LaTeX para
+facilitar la transformación de una expresión en otra mediante la
+transformación de unos elementos en otros.
+
+#+name: Obtención de subíndices de caracteres en expresiones
+#+BEGIN_SRC python  :results discard
+
+import itertools
+def get_sub_indexes(tex):
+    ni = VGroup()
+    colors = itertools.cycle([RED,TEAL,GREEN,BLUE,PURPLE])
+    for i in range(len(tex)):
+        n = Text(f"{i}",color=next(colors)).scale(0.7)
+        n.next_to(tex[i],DOWN,buff=0.01)
+        ni.add(n)
+    return ni
+
+#+END_SRC
+
+
+
+* Rodando: 1,2,3\dots ¡acción!
+
+
+#+call: rodando(fichero="L01_V02_SumaDeVectores-I", escena="1,2")
+
+# +call: FusionSumaR3()
+
+# +call: FusionSumaRn()
+
+#+call: montando(video="L01_V02_SumaDeVectores-I")
+
+#+call: fade(video="L01_V02_SumaDeVectores-I")
+
+
+#+call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="1,2,3,4,5,6,7,8")
+
+# +call: FusionSumaR3_HD()
+
+# +call: FusionSumaRn_HD()
+
+#+call: montandoHD(video="L01_V02_SumaDeVectores-I")
+
+#+call: fade(video="L01_V02_SumaDeVectores-I")
+
+**** Generamos un fichero ~mpeg~ por cada escena
+
+- Versión de poca calidad:
+
+#+call: rodando(fichero="L01_V02_SumaDeVectores-I", escena="1,2")
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V02_SumaDeVectores-I" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+echo $escena | manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+- Versión con calidad HD1080:
+
+#+call: rodandoHD(fichero="L01_V02_SumaDeVectores-I", escena="1,2")
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V02_SumaDeVectores-I" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+echo $escena | manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+**** Concatenamos las escenas en un único fichero ~mpeg~ y añadimos música de fondo.
+
+- Montando la versión de baja resolución
+
+#+call: montando(video="L01_V02_SumaDeVectores-I")
+
+#+name: montando
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V02_SumaDeVectores-I" :var calidad="480p15"  :var music="music/3Blue1Brown-Zeta-X2" :results silent
+ln -s -f "$(pwd)/$subdir/ZCreditos/$calidad/ZCreditos.mp4" "$(pwd)/$subdir/$video/$calidad/ZCreditos.mp4"
+rm -f $subdir/$video/$calidad/$video.mp4 list.txt
+for f in $subdir/$video/$calidad/*.mp4; do echo file \'$f\' >> list.txt; done
+ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
+mkdir -p tmp
+ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3  -filter_complex "[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+#+END_SRC
+
+- Montando la versión de resolución HD1080
+
+#+call: montandoHD(video="L01_V02_SumaDeVectores-I")
+
+#+name: montandoHD
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V02_SumaDeVectores-I" :var calidad="1080p60" :var music="music/3Blue1Brown-Zeta-X2" :results silent
+ln -s -f "$(pwd)/$subdir/ZCreditos/$calidad/ZCreditos.mp4" "$(pwd)/$subdir/$video/$calidad/ZCreditos.mp4"
+rm -f $subdir/$video/$calidad/$video.mp4 list.txt
+for f in $subdir/$video/$calidad/*.mp4 ; do echo file \'$f\' >> list.txt; done
+ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$calidad/$video.mp4
+mkdir -p tmp
+ffmpeg -i $subdir/$video/$calidad/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.05,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+#+END_SRC
+
+**** Fundimos a negro los últimos segundos del vídeo (y la música).
+
+#+call: fade(video="L01_V02_SumaDeVectores-I")
+
+#+name: fade
+#+BEGIN_SRC bash :var video="L01_Vectores" :results silent
+dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4")
+offset=$(bc -l <<< "$dur"-7)
+ffmpeg -i "tmp/$video.mp4" \
+       -filter_complex "[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=in:duration=1,afade=type=out:duration=6:start_time='$offset'[a]" \
+       -map "[v]" -map "[a]" -y $video.mp4
+#+END_SRC
+
+**** Traducción
+
+#+call: translate(escena="L01_V02_E01_SumaDeVectores")
+#+call: translate(escena="L01_V02_E02_PropiedadConmutativaDeLaSuma")
+
+#+name: translate
+#+BEGIN_SRC bash :dir ./lib :results silent :var fichero="L01_V02_SumaDeVectores-I" :var escena="L01_V02_E01_SumaDeVectores" 
+xgettext -o locale/$fichero.pot $fichero.py
+
+msginit -i locale/$fichero.pot -o locale/en/LC_MESSAGES/$fichero.po --locale=es --no-translator
+
+manim_translate -s es -t en -d $fichero -l locale $fichero.py
+
+manim_render_translation $fichero.py -s $escena -d $fichero -l en
+#+END_SRC
+
+#+BEGIN_SRC sh :dir lib :var fichero="L01_V02_SumaDeVectores-I" :var escena="L01_V02_E01_SumaDeVectores"
+manim_render_translation $fichero.py -s $escena -d $fichero -l en -ql
+#+END_SRC
+
+#+RESULTS:
+: Rendering L01_V02_E01_SumaDeVectores in en...
+
+
+**** COMMENT Copiamos el resultado a un lugar público
+
+#+call: publicar(video="L01_V02_SumaDeVectores-I")
+
+#+name: publicar
+#+BEGIN_SRC sh :var subdir="/home/marcos/CloudStation/Nextcloud/pub/Mates2Videos" :var video="L01_Vectores"  :results silent
+cp -f $video.mp4 $subdir/$video.mp4
+#+END_SRC
+
+
+

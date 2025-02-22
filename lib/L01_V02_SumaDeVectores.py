@@ -393,7 +393,7 @@ class L01_V02_E02_PropiedadConmutativaDeLaSuma(MiEscenaConVoz):
         with self.voiceover(text=r"""Con esto hemos terminado la demostración.""") as tracker:
             self.play(FadeToColor(vgr2[0], color=TEAL))
             self.play(Indicate(vgr3[0]), Indicate(demo[2]), FadeToColor(vgr2[1:], color=TEAL), run_time=tracker.duration)
-            self.pausa()
+            self.pausa_muy_larga()
 
 class L01_V02_E03_SumaEnR2(MiEscenaConVoz):
     def construct(self):
