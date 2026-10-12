@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-04-26 dom 17:36 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección XX del curso - Vídeo YY</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección XX del curso - Vídeo YY</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org7b95008">1. Tema del vídeo - VXX</a>
+<ul>
+<li><a href="#orga321d5a">1.1. Full video - Titulo vídeo</a>
+<ul>
+<li><a href="#org841b7a9">1.1.1. Carga de las librerías de python necesarias</a></li>
+</ul>
+</li>
+<li><a href="#org5346fa4">1.2. Estructura del vídeo completo (todas las escenas sin interrupción)</a></li>
+<li><a href="#org35a9ffd">1.3. Código de cada escena</a>
+<ul>
+<li><a href="#org6c96047">1.3.1. Primera escena</a></li>
+<li><a href="#orge240c59">1.3.2. Segunda escena</a></li>
+<li><a href="#org17890cc">1.3.3. Tercera escena</a></li>
+<li><a href="#orgb68472f">1.3.4. Cuarta escena</a></li>
+<li><a href="#orge729e01">1.3.5. Quinta escena</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org22b97f9">2. Escenas en vídeos separados</a>
+<ul>
+<li><a href="#org519d676">2.1. Scene 1 - Introduction</a></li>
+<li><a href="#orgab57ea6">2.2. Scene 2 - Tema escena</a></li>
+<li><a href="#orgeb41c1e">2.3. Scene 3 - Tema escena</a></li>
+<li><a href="#org4fa7bfc">2.4. Scene 4 - Tema escena</a></li>
+<li><a href="#org589cb19">2.5. Scene 5 - Resumen</a></li>
+</ul>
+</li>
+<li><a href="#orgd33ee5a">3. Trozos comunes de código</a>
+<ul>
+<li><a href="#org6c7bcb5">3.1. Carga de las librerías Manim, manim_voiceover y NacAL</a>
+<ul>
+<li><a href="#orge87e83f">3.1.1. Servicios de voz  <code>text to audio</code></a></li>
+<li><a href="#org4c6697c">3.1.2. Servicios de voz (voces)</a></li>
+</ul>
+</li>
+<li><a href="#org8615dd4">3.2. Uso del paquete de \(\LaTeX{}\) con la notación del curso (<code>nacal.sty</code>)</a></li>
+<li><a href="#orgf5ffa2a">Definición de algunas subclases con definiciones generales</a>
+<ul>
+<li><a href="#org7375622">MiEscenaConVoz</a></li>
+<li><a href="#orgebd672c">Pantalla final de creditos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8ab421b">4. Rodando: 1,2,3&hellip; ¡acción!</a>
+<ul>
+<li><a href="#org256be94">4.1. Generamos un fichero <code>mpeg</code> por cada escena</a></li>
+<li><a href="#org4d6dcaa">4.2. Añadimos música de fondo.</a></li>
+<li><a href="#org4827c70">4.3. Fundimos a negro los últimos segundos del vídeo (y la música).</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7b95008" class="outline-2">
+<h2 id="org7b95008"><span class="section-number-2">1.</span> Tema del vídeo - VXX</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orga321d5a" class="outline-3">
+<h3 id="orga321d5a"><span class="section-number-3">1.1.</span> Full video - Titulo vídeo</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org841b7a9" class="outline-4">
+<h4 id="org841b7a9"><span class="section-number-4">1.1.1.</span> Carga de las librerías de python necesarias</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Este bloque contiene la carga de librerías y las definiciones comunes a todas las escenas.
+</p>
+<div class="org-src-container">
+<pre class="src src-python">&lt;&lt;Carga de la librer&#237;a Manim y NacAL&gt;&gt;
+
+&lt;&lt;Definici&#243;n de mi escena con voz&gt;&gt;
+
+&lt;&lt;Servicio de voz AzureService&gt;&gt;
+
+&lt;&lt;Servicio de voz de Google&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5346fa4" class="outline-3">
+<h3 id="org5346fa4"><span class="section-number-3">1.2.</span> Estructura del vídeo completo (todas las escenas sin interrupción)</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Este bloque contiene el vídeo con todas las escenas sin interrupción.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_NombreVideo</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+
+        &lt;&lt;Primera escena&gt;&gt;
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+</span>        
+        &lt;&lt;Segunda escena&gt;&gt;
+         
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+</span>         
+        &lt;&lt;Tercera escena&gt;&gt;
+         
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+</span>        
+        &lt;&lt;Cuarta escena&gt;&gt;
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+</span>        
+        &lt;&lt;Quinta escena&gt;&gt;
+        
+        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+</span>        
+        &lt;&lt;Cr&#233;ditos finales&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org35a9ffd" class="outline-3">
+<h3 id="org35a9ffd"><span class="section-number-3">1.3.</span> Código de cada escena</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org6c96047" class="outline-4">
+<h4 id="org6c96047"><span class="section-number-4">1.3.1.</span> Primera escena</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Definición de la operación producto por un escalar.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">self</span>.creditos()
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge240c59" class="outline-4">
+<h4 id="orge240c59"><span class="section-number-4">1.3.2.</span> Segunda escena</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<div class="org-src-container">
+<pre class="src src-python">
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org17890cc" class="outline-4">
+<h4 id="org17890cc"><span class="section-number-4">1.3.3.</span> Tercera escena</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<div class="org-src-container">
+<pre class="src src-python">
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb68472f" class="outline-4">
+<h4 id="orgb68472f"><span class="section-number-4">1.3.4.</span> Cuarta escena</h4>
+<div class="outline-text-4" id="text-1-3-4">
+<div class="org-src-container">
+<pre class="src src-python">
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge729e01" class="outline-4">
+<h4 id="orge729e01"><span class="section-number-4">1.3.5.</span> Quinta escena</h4>
+<div class="outline-text-4" id="text-1-3-5">
+<div class="org-src-container">
+<pre class="src src-python">
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org22b97f9" class="outline-2">
+<h2 id="org22b97f9"><span class="section-number-2">2.</span> Escenas en vídeos separados</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org519d676" class="outline-3">
+<h3 id="org519d676"><span class="section-number-3">2.1.</span> Scene 1 - Introduction</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_E01_Introducci&#243;n</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+        
+        &lt;&lt;Primera escena&gt;&gt;        
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgab57ea6" class="outline-3">
+<h3 id="orgab57ea6"><span class="section-number-3">2.2.</span> Scene 2 - Tema escena</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_E02_Tema_escena</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+        
+        &lt;&lt;Segunda escena&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb41c1e" class="outline-3">
+<h3 id="orgeb41c1e"><span class="section-number-3">2.3.</span> Scene 3 - Tema escena</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_E03_Tema_escena</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+       
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+        
+        &lt;&lt;Tercera escena&gt;&gt;        
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4fa7bfc" class="outline-3">
+<h3 id="org4fa7bfc"><span class="section-number-3">2.4.</span> Scene 4 - Tema escena</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_E04_Tema_escena</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+        
+        &lt;&lt;Cuarta escena&gt;&gt;        
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org589cb19" class="outline-3">
+<h3 id="org589cb19"><span class="section-number-3">2.5.</span> Scene 5 - Resumen</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">LXX_VYY_E05_Resumen</span>(MiEscenaConVoz):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
+        &lt;&lt;Azure Voice&gt;&gt;
+
+        &lt;&lt;TexTemplate con LaTeX-nacal&gt;&gt;
+        
+        &lt;&lt;Quinta escena&gt;&gt;        
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd33ee5a" class="outline-2">
+<h2 id="orgd33ee5a"><span class="section-number-2">3.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org6c7bcb5" class="outline-3">
+<h3 id="org6c7bcb5"><span class="section-number-3">3.1.</span> Carga de las librerías Manim, manim_voiceover y NacAL</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Es lo primero que se tiene que cargar
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">from</span> manim <span style="color: #0000FF; font-weight: bold;">import</span> *
+<span style="color: #0000FF; font-weight: bold;">from</span> manim_voiceover <span style="color: #0000FF; font-weight: bold;">import</span> VoiceoverScene
+<span style="color: #0000FF; font-weight: bold;">import</span> nacal <span style="color: #0000FF; font-weight: bold;">as</span> nc
+<span style="color: #0000FF; font-weight: bold;">import</span> sympy <span style="color: #0000FF; font-weight: bold;">as</span> sp
+</pre>
+</div>
+</div>
+<div id="outline-container-orge87e83f" class="outline-4">
+<h4 id="orge87e83f"><span class="section-number-4">3.1.1.</span> Servicios de voz  <code>text to audio</code></h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+No es necesario cargar ambos. Basta cargar el que realmente se va a utilizar.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">from</span> manim_voiceover.services.azure <span style="color: #0000FF; font-weight: bold;">import</span> AzureService
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">from</span> manim_voiceover.services.gtts <span style="color: #0000FF; font-weight: bold;">import</span> GTTSService
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4c6697c" class="outline-4">
+<h4 id="org4c6697c"><span class="section-number-4">3.1.2.</span> Servicios de voz (voces)</h4>
+<div class="outline-text-4" id="text-3-1-2">
+</div>
+<ol class="org-ol">
+<li><a id="org07d5d03"></a>Servicio Azure (funciona bastante bien, pero es de pago)<br />
+<div class="outline-text-5" id="text-3-1-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">self</span>.set_speech_service(AzureService(voice=<span style="color: #008000;">"en-GB-RyanNeural"</span>))
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">def slow(text, rate="-10%"):
+</span><span style="color: #8D8D84;">#      </span><span style="color: #8D8D84; font-style: italic;">return f'&lt;speak&gt;&lt;prosody rate="{rate}"&gt;{text}&lt;/prosody&gt;&lt;/speak&gt;'</span>
+</pre>
+</div>
+<dl class="org-dl">
+<dt>Para audio en español</dt><dd>usar <code>self.set_speech_service(AzureService(voice="es-ES-AlvaroNeural"))</code></dd>
+<dt>Para audio en inglés</dt><dd>usar <code>self.set_speech_service(AzureService(voice="en-GB-RyanNeural"))</code></dd>
+</dl>
+</div>
+</li>
+<li><a id="orgef631a8"></a>Servicio de Google (funciona regular, pero es gratis)<br />
+<div class="outline-text-5" id="text-3-1-2-2">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">self</span>.set_speech_service(GTTSService()) 
+</pre>
+</div>
+<dl class="org-dl">
+<dt>Para audio en español</dt><dd>usar <code>self.set_speech_service(GTTSService(lang="es", tld="com"))</code></dd>
+<dt>Para audio en inglés</dt><dd>usar <code>self.set_speech_service(GTTSService())</code></dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8615dd4" class="outline-3">
+<h3 id="org8615dd4"><span class="section-number-3">3.2.</span> Uso del paquete de \(\LaTeX{}\) con la notación del curso (<code>nacal.sty</code>)</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Descargable desde <a href="https://github.com/mbujosab/nacal-latex-package">https://github.com/mbujosab/nacal-latex-package</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #BA36A5;">myTemplate</span> = TexTemplate()
+myTemplate.add_to_preamble(r<span style="color: #008000;">"""\usepackage{nacal} """</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf5ffa2a" class="outline-3">
+<h3 id="orgf5ffa2a">Definición de algunas subclases con definiciones generales</h3>
+<div class="outline-text-3" id="text-orgf5ffa2a">
+<p>
+Esto se puede simplificar, no es necesario definir una subclase (bastaría incorporar un chunk de códio). Por ahora lo dejo así.
+</p>
+</div>
+<div id="outline-container-org7375622" class="outline-4">
+<h4 id="org7375622">MiEscenaConVoz</h4>
+<div class="outline-text-4" id="text-org7375622">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">MiEscenaConVoz</span>(VoiceoverScene):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_muy_corta</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=0.3):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_corta</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=0.5):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=1):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_media</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=1.5):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_larga</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=3):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_muy_larga</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=5):
+        <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
+
+    &lt;&lt;Cr&#233;ditos en distintas partes de la pantalla&gt;&gt;
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, variante=1):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">analisis_opcion_elegida</span>(tipo):
+        <span style="color: #036A07;">'An&#225;lisis de las opciones de eliminaci&#243;n elegidas'</span>
+        <span style="color: #BA36A5;">lista</span> = [100,20,10,4,2,1]
+        <span style="color: #BA36A5;">opcion</span> = <span style="color: #006FE0;">set</span>()
+        <span style="color: #0000FF; font-weight: bold;">for</span> t <span style="color: #0000FF; font-weight: bold;">in</span> lista:
+            <span style="color: #0000FF; font-weight: bold;">if</span> (tipo - (tipo % t)) <span style="color: #0000FF; font-weight: bold;">in</span> lista:
+                opcion.add(tipo - (tipo % t))
+                <span style="color: #BA36A5;">tipo</span> = tipo % t
+        <span style="color: #0000FF; font-weight: bold;">return</span> opcion
+    
+    <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2026\; Marcos Bujosa  "</span>)
+    
+    <span style="color: #0000FF; font-weight: bold;">if</span> 1 <span style="color: #0000FF; font-weight: bold;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampDcha</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF; font-weight: bold;">self</span>.add(stampDcha)
+    <span style="color: #0000FF; font-weight: bold;">if</span> 2 <span style="color: #0000FF; font-weight: bold;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampIzda</span>  = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF; font-weight: bold;">self</span>.add(stampIzda)
+    <span style="color: #0000FF; font-weight: bold;">if</span> 4 <span style="color: #0000FF; font-weight: bold;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampBottom</span>= VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF; font-weight: bold;">self</span>.add(stampBottom)
+    <span style="color: #0000FF; font-weight: bold;">if</span> 10 <span style="color: #0000FF; font-weight: bold;">in</span> analisis_opcion_elegida(variante):
+        <span style="color: #BA36A5;">stampTop</span>   = VGroup(<span style="color: #D0372D;">copyright</span>.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        <span style="color: #0000FF; font-weight: bold;">self</span>.add(stampTop)        
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgebd672c" class="outline-4">
+<h4 id="orgebd672c">Pantalla final de creditos</h4>
+<div class="outline-text-4" id="text-orgebd672c">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2026 \; Marcos Bujosa"</span>)
+<span style="color: #BA36A5;">github</span> = Tex(r<span style="color: #008000;">"\texttt{https://github.com/mbujosab}"</span>).next_to(<span style="color: #D0372D;">copyright</span>, DOWN)
+<span style="color: #BA36A5;">CGG</span>  = VGroup(<span style="color: #D0372D;">copyright</span>, github).scale(1.1)
+<span style="color: #0000FF; font-weight: bold;">self</span>.add(CGG)
+<span style="color: #0000FF; font-weight: bold;">self</span>.wait(10)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8ab421b" class="outline-2">
+<h2 id="org8ab421b"><span class="section-number-2">4.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org256be94" class="outline-3">
+<h3 id="org256be94"><span class="section-number-3">4.1.</span> Generamos un fichero <code>mpeg</code> por cada escena</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Versión de poca calidad:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Versión con calidad HD1080:</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4d6dcaa" class="outline-3">
+<h3 id="org4d6dcaa"><span class="section-number-3">4.2.</span> Añadimos música de fondo.</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-bash">ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">carpeta</span>/$<span style="color: #BA36A5;">quality</span>/$<span style="color: #BA36A5;">video</span>.mp4 -i $<span style="color: #BA36A5;">music</span>.mp3 -filter_complex <span style="color: #008000;">"[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]"</span> -c:v libx264 -c:a aac -map 0:v -map <span style="color: #008000;">"[out]"</span> -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4827c70" class="outline-3">
+<h3 id="org4827c70"><span class="section-number-3">4.3.</span> Fundimos a negro los últimos segundos del vídeo (y la música).</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
+<span style="color: #BA36A5;">offset</span>=$(<span style="color: #FF1493;">bc -l &lt;&lt;&lt; "$dur"-7</span>)
+ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="color: #008000;">\</span>
+       -filter_complex <span style="color: #008000;">"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=out:duration=6:start_time='$offset'[a]"</span> <span style="color: #008000;">\</span>
+       -map <span style="color: #008000;">"[v]"</span> -map <span style="color: #008000;">"[a]"</span> -y $<span style="color: #BA36A5;">video</span>.mp4
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2026-04-26 dom 17:36</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1691,8 +1691,7 @@ class L01_V04_E03_InterpretacionGeometricaDelProductoPorEscalaresR2(MiEscenaConV
 # [[file:lib/media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/L01_V04_E03_InterpretacionGeometricaDelProductoPorEscalaresR2.mp4]]
 
 
-** Escena 4 - Interpretación geométrica del producto de tres números (3D)
-
+** Escena 4 - Interpretación geométrica del producto de vectores de de $\mathbb{R}^3$
 
 *** Escena 3D
 

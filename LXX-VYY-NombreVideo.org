@@ -1,0 +1,897 @@
+#+TITLE: Lección XX del curso - Vídeo YY
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+#+LATEX: \maketitle
+
+****** COMMENT Para exportar a pdf
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results none :exports none
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+#+END_SRC
+
+* Cómo funciona esta plantilla (fuente única bilingüe)
+
+Este fichero org genera, mediante =org-babel-tangle= (=C-c C-v t=), *dos*
+ficheros de python idénticos salvo por una línea:
+
+- =./lib/LXX_VYY_FileName.py= con ~LANG = "es"~ (vídeo en español).
+- =../videoMath2/lib/LXX_VYY_FileName.py= con ~LANG = "en"~ (vídeo en inglés).
+
+Las reglas para que el código sea bilingüe son tres:
+
+1. Toda narración y todo texto que aparezca en pantalla se escribe con
+   ~tr("texto en español", "text in English")~. Las fórmulas con
+   notación =nacal= son comunes a ambos idiomas y no se traducen.
+2. La voz la fija automáticamente =MiEscenaConVoz.setup()= llamando a
+   ~self.voz()~, que elige la voz de Azure del idioma (o la de Google
+   si la variable de entorno =VOZ= vale =gtts=, útil para pruebas, pues
+   Azure cobra por carácter).
+4. El bloque [[guion]] extrae la narración de un idioma en prosa para
+   revisarla sin leer código.
+5. La portada es una escena propia (sobre ella suena la música) y el
+   vídeo final se monta con [[montaje]] a partir de los mp4 de las
+   escenas: concatenación, música de entrada y salida, normalización de
+   la voz, fundido final y un único fichero de subtítulos.
+3. Los bloques de la sección [[*Rodando: 1,2,3\dots ¡acción!][Rodando]] reciben el idioma como
+   parámetro y se encargan de renderizar en el repositorio que toca.
+
+* Tema del vídeo - VXX
+
+** Ensamblado de los ficheros de python (uno por idioma)
+
+Estos dos bloques solo contienen referencias noweb; el código real
+está en las secciones siguientes. Son los únicos bloques con =:tangle=.
+
+#+caption: Fichero de python del vídeo en español
+#+name: Fichero en español
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/LXX_VYY_FileName.py
+<<Carga de la librería Manim y NacAL>>
+
+<<Idioma es>>
+
+<<Utilidades bilingües>>
+
+<<Código de colores>>
+
+<<Título del vídeo>>
+
+<<TexTemplate con LaTeX-nacal>>
+
+<<Definición de mi escena con voz>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+#+caption: Fichero de python del vídeo en inglés
+#+name: Fichero en inglés
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/LXX_VYY_FileName.py
+<<Carga de la librería Manim y NacAL>>
+
+<<Idioma en>>
+
+<<Utilidades bilingües>>
+
+<<Código de colores>>
+
+<<Título del vídeo>>
+
+<<TexTemplate con LaTeX-nacal>>
+
+<<Definición de mi escena con voz>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+
+** Clases de las escenas
+
+Una clase con el vídeo completo (todas las escenas sin interrupción) y
+una clase por escena, para poder renderizar cada escena por separado.
+Todas comparten los mismos chunks de código.
+
+#+caption: Vídeo completo y escenas separadas
+#+name: Clases de las escenas
+#+BEGIN_SRC python :noweb no-export :eval no
+class LXX_VYY_NombreVideo(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Primera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Segunda escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Tercera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Cuarta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Quinta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Créditos finales>>
+
+
+class LXX_VYY_E00_Portada(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+class LXX_VYY_E01_Introduccion(MiEscenaConVoz):
+    def construct(self):
+        <<Primera escena>>
+
+
+class LXX_VYY_E02_TemaEscena(MiEscenaConVoz):
+    def construct(self):
+        <<Segunda escena>>
+
+
+class LXX_VYY_E03_TemaEscena(MiEscenaConVoz):
+    def construct(self):
+        <<Tercera escena>>
+
+
+class LXX_VYY_E04_TemaEscena(MiEscenaConVoz):
+    def construct(self):
+        <<Cuarta escena>>
+
+
+class LXX_VYY_E05_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Quinta escena>>
+
+
+class ZCreditosFinales(Scene):
+    def construct(self):
+        <<Créditos finales>>
+#+END_SRC
+
+
+** Título del vídeo
+
+Lo usan la portada (escena 0) y la cabecera de la primera escena.
+
+#+name: Título del vídeo
+#+BEGIN_SRC python :eval no
+TITULO = tr("Título del vídeo", "Video title")
+#+END_SRC
+
+** Código de cada escena
+
+Cada escena es un chunk con nombre. Dentro, cada frase de la narración
+va junto a la animación que acompaña, y se escribe en los dos idiomas
+con ~tr(es, en)~.
+
+*** Portada (escena 0)
+
+Escena propia, sin voz, sobre la que suena la música de entrada. El
+bloque [[montaje]] funde la música cuando empieza la escena siguiente.
+
+#+name: Portada
+#+BEGIN_SRC python :eval no
+self.creditos()
+portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(min(portada.width, config.frame_width*0.9))
+self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+self.wait(4.5)
+#+END_SRC
+
+*** Primera escena - Introducción
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+titulo = Title(tr("Título en español", "Title in English"),
+               tex_template=myTemplate, font_size=50).set_color(BLUE)
+self.play(Write(titulo))
+
+with self.voiceover(text=tr("""Primera frase de la narración.""",
+                            """First sentence of the narration.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+#+END_SRC
+
+*** Segunda escena
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+pass  # sustituir por el código de la escena
+#+END_SRC
+
+*** Tercera escena
+
+#+name: Tercera escena
+#+BEGIN_SRC python :eval no
+pass  # sustituir por el código de la escena
+#+END_SRC
+
+*** Cuarta escena
+
+#+name: Cuarta escena
+#+BEGIN_SRC python :eval no
+pass  # sustituir por el código de la escena
+#+END_SRC
+
+*** Quinta escena - Resumen
+
+#+name: Quinta escena
+#+BEGIN_SRC python :eval no
+pass  # sustituir por el código de la escena
+#+END_SRC
+
+
+* Trozos comunes de código
+
+** Carga de las librerías Manim, manim_voiceover y NacAL
+
+#+name: Carga de la librería Manim y NacAL
+#+BEGIN_SRC python :eval no
+import os
+import re
+from manim import *
+from contextlib import contextmanager
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.helper import remove_bookmarks
+from manim_voiceover.services.azure import AzureService
+from manim_voiceover.services.gtts import GTTSService
+import nacal as nc
+import sympy as sp
+#+END_SRC
+
+** Idioma del vídeo
+
+El único chunk que difiere entre los dos ficheros generados.
+
+#+name: Idioma es
+#+BEGIN_SRC python :eval no
+LANG = "es"
+#+END_SRC
+
+#+name: Idioma en
+#+BEGIN_SRC python :eval no
+LANG = "en"
+#+END_SRC
+
+** Utilidades bilingües
+
+- =tr(es, en)= devuelve la cadena del idioma del vídeo.
+- =VOCES_AZURE= :: voz de Azure de cada idioma. Otras voces en español
+  probadas: =es-ES-TeoNeural=, =es-ES-LaiaNeural= (bien),
+  =es-ES-SaulNeural= (peor). En inglés: =en-US-JennyNeural=.
+- =SERVICIO_VOZ= :: =azure= (de pago, calidad final) o =gtts= (gratis,
+  para pruebas). Se cambia con la variable de entorno =VOZ=.
+
+#+name: Utilidades bilingües
+#+BEGIN_SRC python :eval no
+def tr(es, en):
+    """Cadena en el idioma del vídeo."""
+    return es if LANG == "es" else en
+
+VOCES_AZURE  = {"es": "es-ES-AlvaroNeural", "en": "en-GB-RyanNeural"}
+SERVICIO_VOZ = os.environ.get("VOZ", "azure")
+#+END_SRC
+
+** Código de colores de la serie
+
+Los mismos colores en todos los vídeos, para que el espectador lea la
+pantalla sin esfuerzo (documentados en =NotacionNacal.org=).
+
+#+name: Código de colores
+#+BEGIN_SRC python :eval no
+COLOR_A         = BLUE      # primer objeto (número a, vector a)
+COLOR_B         = ORANGE    # segundo objeto (contrasta con el azul)
+COLOR_C         = GREEN     # tercer objeto
+COLOR_ESCALAR   = YELLOW    # escalares, preguntas al espectador, tarjeta de pausa
+COLOR_RESULTADO = WHITE     # resultado de una operación
+COLOR_REGLA     = TEAL      # pasos que usan una propiedad de los números reales
+COLOR_TITULO    = BLUE      # títulos y cabeceras
+#+END_SRC
+
+** Uso del paquete de $\LaTeX{}$ con la notación del curso (=nacal.sty=)
+
+Descargable desde [[https://github.com/mbujosab/nacal-latex-package]].
+Todo =Tex=, =MathTex= o =Title= con macros de =nacal= necesita
+=tex_template=myTemplate=. Se define una sola vez, a nivel de módulo
+(los bloques de ensamblado lo colocan tras las utilidades bilingües).
+
+#+name: TexTemplate con LaTeX-nacal
+#+BEGIN_SRC python :eval no
+myTemplate = TexTemplate()
+myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+#+END_SRC
+
+** Definición de mi escena con voz
+  :PROPERTIES:
+  :UNNUMBERED: t
+  :END:
+
+Subclase de =VoiceoverScene= con pausas de distintas duraciones, el
+selector de voz, la marca de copyright y un =voiceover= que convierte
+los dos puntos de la narración en una pausa (Azure no la hace) y que
+hace funcionar las marcas =<bookmark mark='x'/>= también con gTTS (con
+Azure la voz da el instante exacto de cada palabra; con gTTS se estima
+repartiendo la duración). Para sincronizar una animación con una palabra
+concreta: marca en el texto y =self.wait_until_bookmark("x")= dentro del
+=with=. Su método =setup()= (que Manim ejecuta antes de =construct()=)
+llama a =self.voz()=, así que las clases de las escenas no tienen que
+hacerlo.
+
+#+name: Definición de mi escena con voz
+#+BEGIN_SRC python :noweb no-export :eval no
+class MiEscenaConVoz(VoiceoverScene):
+    def setup(self):
+        """Manim lo ejecuta antes de construct(): fija la voz del idioma."""
+        self.voz()
+
+    def pausa_muy_corta(self, n=0.3):
+        self.wait(n)
+    def pausa_corta(self, n=0.5):
+        self.wait(n)
+    def pausa(self, n=1):
+        self.wait(n)
+    def pausa_media(self, n=1.5):
+        self.wait(n)
+    def pausa_larga(self, n=3):
+        self.wait(n)
+    def pausa_muy_larga(self, n=5):
+        self.wait(n)
+
+    @contextmanager
+    def voiceover(self, text=None, **kwargs):
+        """Como VoiceoverScene.voiceover, con tres añadidos: los dos puntos producen
+        una pausa en la voz (Azure no la hace por sí sola); el subtítulo conserva el
+        texto original (sin las marcas <bookmark mark='x'/>); y con gTTS, que no da
+        los tiempos de cada palabra, las marcas se estiman repartiendo la duración
+        proporcionalmente al texto, de modo que self.wait_until_bookmark("x")
+        funciona con los dos servicios (con Azure, con precisión)."""
+        if text is not None:
+            # el subtítulo no lleva ni marcas ni pausas SSML escritas a mano (<break time="200ms"/>)
+            kwargs.setdefault("subcaption", re.sub(r"\s*<break[^>]*/>\s*", " ", remove_bookmarks(text)))
+            if SERVICIO_VOZ == "gtts":
+                text = re.sub(r"\s*<break[^>]*/>\s*", ", ", text).replace(":", ".")
+            else:
+                text = text.replace(": ", ': <break time="500ms"/> ')
+        with super().voiceover(text=text, **kwargs) as tracker:
+            if text is not None and "<bookmark" in text and not getattr(tracker, "bookmark_times", None):
+                # gTTS guarda en la caché el texto sin marcas: se reponen y se estiman los tiempos
+                tracker.data["input_text"] = text
+                tracker.data["word_boundaries"] = tracker._get_fallback_word_boundaries()
+                tracker._process_bookmarks()
+            yield tracker
+
+    def anuncia_regla(self, nueva, anterior=None, run_time=1):
+        """Muestra, atenuada, la fórmula que se va a ilustrar (en lugar de la anterior, si la hay).
+        Queda a la vista durante la construcción; al terminar, destaca_regla() la enciende."""
+        nueva.set_opacity(0.45)
+        if anterior is None:
+            self.play(FadeIn(nueva), run_time=run_time)
+        else:
+            self.play(ReplacementTransform(anterior, nueva), run_time=run_time)
+        return nueva
+
+    def destaca_regla(self, regla, run_time=1.5):
+        """La ilustración ha terminado: la fórmula pasa a opacidad plena y parpadea."""
+        self.play(regla.animate.set_opacity(1), run_time=run_time/3)
+        self.play(Indicate(regla, color=COLOR_RESULTADO, scale_factor=1.15), run_time=2*run_time/3)
+
+    def voz(self, servicio=SERVICIO_VOZ):
+        """Fija el servicio de voz según el idioma del vídeo."""
+        if servicio == "gtts":
+            self.set_speech_service(GTTSService(lang=LANG, tld="com"))
+        else:
+            self.set_speech_service(AzureService(voice=VOCES_AZURE[LANG]))
+
+    <<Créditos en distintas partes de la pantalla>>
+
+    <<Pausa para pensar>>
+#+END_SRC
+
+#+name: Créditos en distintas partes de la pantalla
+#+BEGIN_SRC python :eval no
+def creditos(self, variante=1):
+    def analisis_opcion_elegida(tipo):
+        'Análisis de las opciones de eliminación elegidas'
+        lista = [100,20,10,4,2,1]
+        opcion = set()
+        for t in lista:
+            if (tipo - (tipo % t)) in lista:
+                opcion.add(tipo - (tipo % t))
+                tipo = tipo % t
+        return opcion
+
+    copyright = Tex(r"\textcopyright{\;} 2026\; Marcos Bujosa  ")
+
+    if 1 in analisis_opcion_elegida(variante):
+        stampDcha  = VGroup(copyright.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        self.add(stampDcha)
+    if 2 in analisis_opcion_elegida(variante):
+        stampIzda  = VGroup(copyright.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        self.add(stampIzda)
+    if 4 in analisis_opcion_elegida(variante):
+        stampBottom= VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        self.add(stampBottom)
+    if 10 in analisis_opcion_elegida(variante):
+        stampTop   = VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        self.add(stampTop)
+#+END_SRC
+
+*** Tarjeta de pausa para pensar
+
+Las demostraciones cortas se proponen como ejercicio: la tarjeta invita
+a pausar el vídeo, se espera unos segundos y, si se da una pista, se
+muestra y se vuelve a invitar a pausar. Misma tarjeta en todos los
+vídeos. =pista= es el texto en pantalla (puede llevar LaTeX) y
+=pista_voz= lo que dice la voz (por defecto, el mismo texto).
+
+#+name: Pausa para pensar
+#+BEGIN_SRC python :eval no
+def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4):
+    """Tarjeta que invita a pausar el vídeo; opcionalmente da una pista y vuelve a invitar."""
+    def tarjeta(texto):
+        barra = lambda: RoundedRectangle(corner_radius=0.06, width=0.2, height=0.6,
+                                         fill_color=COLOR_ESCALAR, fill_opacity=1, stroke_width=0)
+        icono = VGroup(barra(), barra()).arrange(RIGHT, buff=0.12)
+        rotulo = Tex(texto, tex_template=myTemplate, font_size=38)
+        rotulo.scale_to_fit_width(min(rotulo.width, config.frame_width*0.75))
+        contenido = VGroup(icono, rotulo).arrange(RIGHT, buff=0.4)
+        marco = RoundedRectangle(corner_radius=0.25, width=contenido.width+0.8, height=contenido.height+0.6,
+                                 stroke_color=COLOR_ESCALAR, fill_color=BLACK, fill_opacity=0.85)
+        return VGroup(marco, contenido).to_edge(DOWN, buff=0.4)
+
+    invitacion = tr("Pause el vídeo e inténtelo.", "Pause the video and give it a try.")
+    tarjeta1 = tarjeta(invitacion)
+    with self.voiceover(text=invitacion) as tracker:
+        self.play(FadeIn(tarjeta1), run_time=min(0.8, tracker.duration))
+    self.wait(segundos)
+    if pista is not None:
+        tarjeta2 = tarjeta(tr("Pista: ", "Hint: ") + pista)
+        with self.voiceover(text=tr("Una pista: ", "A hint: ") + (pista_voz or pista)) as tracker:
+            self.play(ReplacementTransform(tarjeta1, tarjeta2), run_time=min(0.8, tracker.duration))
+        tarjeta3 = tarjeta(tr("Pause de nuevo e inténtelo.", "Pause again and try once more."))
+        with self.voiceover(text=tr("Pause de nuevo e inténtelo.", "Pause again and try once more.")) as tracker:
+            self.play(ReplacementTransform(tarjeta2, tarjeta3), run_time=min(0.8, tracker.duration))
+        self.wait(segundos)
+        tarjeta1 = tarjeta3
+    self.play(FadeOut(tarjeta1), run_time=0.6)
+#+END_SRC
+
+*** Pantalla final de créditos
+
+#+name: Créditos finales
+#+BEGIN_SRC python :eval no
+copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
+github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
+CGG  = VGroup(copyright, github).scale(1.1)
+self.add(CGG)
+self.wait(10)
+#+END_SRC
+
+
+* COMMENT Bloques auxiliares (no se usan en todos los vídeos)
+
+** COMMENT Definición Vectores en R2 y R3
+
+Estas clases definen vectores en $\R[2]$ y $\R[3]$ para ser representados con dibujos.
+
+*** Vectores en R2
+
+#+name: Definición de VectorR2
+#+BEGIN_SRC python :eval no
+class VectorR2():
+    def __init__(self, lista, rpr='c', color=GRAY_B):
+        """Inicializa un Vector con una lista"""
+        coords = lista + [0] if len(lista)<3 else lista        
+        self.color  = color
+        #self.coords = tuple(coords)
+        #self.coords = tuple([float(i) for i in coords])
+        self.coords = tuple([int(i) if float(i)==int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords[:2], rpr)
+        self.tex    = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+
+    def dot(self, ejes, radio=0.08):
+        return Dot(ejes.c2p(*self.coords), radius=radio, color=self.color)
+
+    def v_line(self, ejes):
+        return ejes.get_vertical_line(ejes.c2p(*self.coords), color=self.color)
+
+    def h_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.coords), color=self.color)
+
+    def arrow(self, ejes):
+        return ejes.get_vector(self.Vector.lista, stroke_color = self.color, stroke_width=4)
+#+END_SRC
+
+*** Vectores en R3
+
+#+name: Definición de VectorR3
+#+BEGIN_SRC python :eval no
+class VectorR3():
+    def __init__(self, lista, rpr='c', color=GRAY_B):
+        """Inicializa un Vector con una lista"""
+        coords = lista + [0] if len(lista)<3 else lista
+        self.color  = color
+        #self.coords = tuple(coords)
+        self.coords = tuple([int(i) if float(i)==int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords, rpr)
+        self.tex    = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+        self.proyXY = self.coords[:-1] + (0,)
+        self.proyZ  = (0,0,) + (self.coords[-1],)
+
+    def dot(self, ejes, radio=0.08):
+        return Dot3D(ejes.c2p(*self.coords), radius=radio, color=self.color)
+
+    def x_line(self, ejes):
+        return ejes.get_vertical_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def y_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def z_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyZ), end=ejes.c2p(*self.coords), thickness=0.01)
+    
+    def v_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyXY), end=ejes.c2p(*self.coords), thickness=0.01)
+    
+    def xy_line(self, ejes):
+        return Line3D(start=np.array([0,0,0]), end=ejes.c2p(*self.proyXY), thickness=0.01)
+    
+    def proy_x_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def proy_y_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.coords), color=self.color)
+
+    def proy_y_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyZ), end=ejes.c2p(*self.coords), thickness=0.01)
+
+    def arrow(self, ejes):
+        return Arrow3D(
+            start=np.array(ejes.c2p(0, 0, 0)),
+            end=np.array(ejes.c2p(*self.coords)),
+            resolution=8,
+            color = self.color )
+#+END_SRC
+
+
+
+** COMMENT Insertar un vídeo en una escena
+
+#+name: Definición de VideoStatus y VideoMobject
+#+BEGIN_SRC python :results discard
+import cv2 # needs opencv-python https://pypi.org/project/opencv-python/
+from PIL import Image, ImageOps
+from dataclasses import dataclass
+
+@dataclass
+class VideoStatus:
+    time: float = 0
+    videoObject: cv2.VideoCapture = None
+    def __deepcopy__(self, memo):
+        return self
+
+class VideoMobject(ImageMobject):
+    '''
+    Following a discussion on Discord about animated GIF images.
+    Modified for videos
+
+    Parameters
+    ----------
+    filename
+        the filename of the video file
+
+    imageops
+        (optional) possibility to include a PIL.ImageOps operation, e.g.
+        PIL.ImageOps.mirror
+
+    speed
+        (optional) speed-up/slow-down the playback
+
+    loop
+        (optional) replay the video from the start in an endless loop
+
+    https://discord.com/channels/581738731934056449/1126245755607339250/1126245755607339250
+    2023-07-06 Uwe Zimmermann & Abulafia
+    2024-03-09 Uwe Zimmermann
+    '''
+    def __init__(self, filename=None, imageops=None, speed=1.0, loop=False, **kwargs):
+        self.filename = filename
+        self.imageops = imageops
+        self.speed    = speed
+        self.loop     = loop
+        self._id = id(self)
+        self.status = VideoStatus()
+        self.status.videoObject = cv2.VideoCapture(filename)
+
+        self.status.videoObject.set(cv2.CAP_PROP_POS_FRAMES, 1)
+        ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
+            img = Image.fromarray(frame)
+
+            if imageops != None:
+                img = imageops(img)
+        else:
+            img = Image.fromarray(np.uint8([[63, 0, 0, 0],
+                                        [0, 127, 0, 0],
+                                        [0, 0, 191, 0],
+                                        [0, 0, 0, 255]
+                                        ]))
+        super().__init__(img, **kwargs)
+        if ret:
+            self.add_updater(self.videoUpdater)
+
+    def videoUpdater(self, mobj, dt):
+        if dt == 0:
+            return
+        status = self.status
+        status.time += 1000*dt*mobj.speed
+        self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+        ret, frame = self.status.videoObject.read()
+        if (ret == False) and self.loop:
+            status.time = 0
+            self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+            ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # needed here?        
+            img = Image.fromarray(frame)
+
+            if mobj.imageops != None:
+                img = mobj.imageops(img)
+            mobj.pixel_array = change_to_rgba_array(
+                np.asarray(img), mobj.pixel_array_dtype
+            )
+
+#+END_SRC
+
+
+** COMMENT Código obtener subíndices de caracteres en expresiones
+
+Este código indexa los elementos de expresiones en \LaTeX para
+facilitar la transformación de una expresión en otra mediante la
+transformación de unos elementos en otros.
+
+#+name: Obtención de subíndices de caracteres en expresiones
+#+BEGIN_SRC python  :results discard
+
+import itertools
+def get_sub_indexes(tex):
+    ni = VGroup()
+    colors = itertools.cycle([RED,TEAL,GREEN,BLUE,PURPLE])
+    for i in range(len(tex)):
+        n = Text(f"{i}",color=next(colors)).scale(0.7)
+        n.next_to(tex[i],DOWN,buff=0.01)
+        ni.add(n)
+    return ni
+
+#+END_SRC
+
+
+
+
+* Rodando: 1,2,3\dots ¡acción!
+
+Todos los bloques reciben =idioma= (=es= o =en=) y trabajan en el
+repositorio correspondiente (=.= o =../videoMath2=). El manim usado es el
+del entorno virtual =~/.venvs/manim=.
+
+# +call: rodando(fichero="LXX_VYY_FileName", escena="1,2,3", idioma="es", voz="gtts")
+# +call: rodandoHD(fichero="LXX_VYY_FileName", escena="a", idioma="es")
+# +call: montaje(fichero="LXX_VYY_FileName", video="LXX_VYY_NombreVideo", idioma="es")
+# +call: fotogramas(video="LXX_VYY_NombreVideo", idioma="es", tiempos="0 10 20")
+# +call: guion(fichero="LXX_VYY_FileName", idioma="es")
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+=voz= puede ser =azure= (final) o =gtts= (pruebas gratuitas). Las escenas
+se indican por su número en el menú de manim (=1,2,3=) o con =a= para
+todas.
+
+- Versión de poca calidad (y se abre el vídeo al terminar):
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+- Versión con calidad HD1080:
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Montaje: concatenar las escenas, música de entrada y salida, subtítulos
+
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen =volumen=) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
+=volumen_voz=), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se normaliza con =loudnorm= y se rellena con silencio hasta la
+duración total (=loudnorm= retrasa unos 3 s y, sin el relleno, la mezcla
+acababa antes que la imagen y la música de los créditos se cortaba en seco). Los =.srt= de las escenas se desplazan y se
+funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
+
+=escenas= es la lista ordenada de clases; =cierre= la escena en la que
+vuelve la música. El mp4 y el srt finales quedan en la raíz del
+repositorio del idioma.
+
+#+name: montaje
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escenas="LXX_VYY_E00_Portada LXX_VYY_E01_Introduccion LXX_VYY_E02_TemaEscena LXX_VYY_E03_TemaEscena LXX_VYY_E04_TemaEscena LXX_VYY_E05_Resumen ZCreditosFinales" :var cierre="LXX_VYY_E05_Resumen" :var video="LXX_VYY_NombreVideo" :var idioma="es" :var calidad="1080p60" :var musica="music/3Blue1Brown-Zeta-X3.mp3" :var volumen="0.25" :var volumen_voz="0.04" :results output
+export LC_ALL=C   # decimales con punto para bc y printf
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+dir=$raiz/lib/media/videos/$fichero/$calidad
+tmp=$raiz/tmp/$video; mkdir -p $tmp; rm -f $tmp/seg_*.mp4
+
+# 1. Un segmento por escena, con audio y vídeo de la misma duración exacta
+i=0; lista=""; offsets=""; T=0; T0=""; Tc=""
+for esc in $escenas; do
+  seg=$(printf "%s/seg_%02d.mp4" $tmp $i)
+  dur=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4)
+  fps=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4)
+  if ffprobe -loglevel error -select_streams a -show_entries stream=codec_type -of csv=p=0 $dir/$esc.mp4 | grep -q audio; then
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -af "aresample=48000,apad" -ac 2 -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  else
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  fi
+  d=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg)
+  offsets="$offsets $T"; [ "$esc" = "$cierre" ] && Tc=$T
+  printf "%2d  %-55s %8.3f s  (empieza en %8.3f)\n" $i $esc $d $T
+  T=$(bc -l <<< "$T+$d"); [ -z "$T0" ] && T0=$d; dl=$d
+  lista="$lista $seg"; i=$((i+1))
+done
+n=$i; Tl=$(bc -l <<< "$T-$dl"); [ -z "$Tc" ] && Tc=$Tl
+printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (créditos)\n" $T $T0 $Tc $Tl
+
+# 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
+inputs=""; fc=""; k=0
+for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
+dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
+fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
+ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]loudnorm=I=-16:LRA=11:TP=-1.5,apad=whole_dur=$T[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $raiz/$video.mp4
+echo "Vídeo: $raiz/$video.mp4"
+
+# 3. Subtítulos: desplazar el srt de cada escena y fundirlos en uno
+ESCENAS="$escenas" OFFSETS="$offsets" python3 - "$dir" "$raiz/$video.srt" <<'EOF'
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) < 3 or "-->" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("-->")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --> {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subtítulos: {salida} ({k-1} entradas)")
+EOF
+#+END_SRC
+
+** Comprobar las uniones y los subtítulos
+
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime [[montaje]]) para mirar que no haya parones ni desfases.
+
+#+name: fotogramas
+#+BEGIN_SRC bash :var video="LXX_VYY_NombreVideo" :var idioma="es" :var tiempos="0 10 20" :results output
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+mkdir -p $raiz/tmp/fotogramas
+for t in $tiempos; do
+  for dt in -0.1 0.1; do
+    ti=$(bc -l <<< "$t+$dt"); [ $(bc -l <<< "$ti < 0") = 1 ] && ti=0
+    ffmpeg -loglevel error -y -ss $ti -i $raiz/$video.mp4 -frames:v 1 $raiz/tmp/fotogramas/$(printf "%08.2f" $ti).png
+  done
+done
+ls $raiz/tmp/fotogramas
+#+END_SRC
+
+** Extraer el guion (la narración) para revisarlo
+
+Recorre el fichero de python y saca, escena por escena, los textos
+~tr(...)~ del idioma pedido: en prosa la narración (los que están dentro
+de ~self.voiceover~) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en =LANG=, lee siempre el fichero español (=./lib/=).
+
+#+name: guion
+#+BEGIN_SRC python :python python3 :var fichero="LXX_VYY_FileName" :var idioma="es" :results output
+import ast, textwrap
+
+arbol = ast.parse(open(f"lib/{fichero}.py", encoding="utf-8").read())
+idx   = 0 if idioma == "es" else 1
+
+def texto(nodo):
+    try:
+        return ast.literal_eval(nodo)
+    except Exception:
+        return ast.unparse(nodo)
+
+def es_tr(n):
+    return (isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "tr" and len(n.args) >= 2)
+
+def es_borrado(stmt):
+    return ast.unparse(stmt).startswith("self.play(*[FadeOut(mob) for mob in self.mobjects])")
+
+# Primera clase con construct(): la del vídeo completo.
+construct = next(f for c in arbol.body if isinstance(c, ast.ClassDef)
+                 for f in c.body if isinstance(f, ast.FunctionDef) and f.name == "construct")
+
+escena, items = 0, []   # la portada es la escena 0
+def volcar():
+    global items
+    if items:
+        print(f"==== {'Escena' if idioma == 'es' else 'Scene'} {escena} ====\n")
+        for tipo, t in items:
+            if tipo == "voz":
+                print(textwrap.fill(t, 72), "\n")
+            else:
+                print(f"    [{t}]\n")
+    items = []
+
+for stmt in construct.body:
+    if es_borrado(stmt):
+        volcar(); escena += 1; continue
+    en_voz = set()
+    for n in ast.walk(stmt):
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == "voiceover":
+            en_voz |= {id(s) for s in ast.walk(n) if es_tr(s)}
+    for n in sorted((n for n in ast.walk(stmt) if es_tr(n)), key=lambda n: (n.lineno, n.col_offset)):
+        items.append(("voz" if id(n) in en_voz else "pantalla", texto(n.args[idx])))
+volcar()
+#+END_SRC
+
+** Tangle desde la terminal (sin abrir Emacs)
+
+#+BEGIN_SRC bash :results silent
+emacs --batch -l org --eval '(org-babel-tangle-file "LXX-VYY-NombreVideo.org")'
+#+END_SRC

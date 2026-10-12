@@ -1,0 +1,272 @@
+#+TITLE: Chuleta de notación del curso (Lección 1) para escribir los vídeos
+#+AUTHOR: Marcos Bujosa (compilada con Claude)
+#+LANGUAGE: es
+#+STARTUP: showall
+
+Resumen de la notación del libro [[https://mbujosab.github.io/CursoDeAlgebraLineal/][Curso de Álgebra Lineal]] (Lección 1),
+de las macros de =nacal.sty= y del módulo =nacal= de Python que
+necesitamos al escribir las escenas de Manim y sus narraciones. Fuente:
+=CursoDeAlgebraLineal-SRC/partes/Cap01-OperacionesVectoresYMatrices.tex=.
+
+* Convenios del libro que la narración debe respetar
+
+** Sistemas, vectores y matrices
+
+- Sistema :: lista *ordenada* de objetos. Se escribe entre corchetes con
+  punto y coma tras cada elemento: $[1;\ 2;\ 1;]$. No es un conjunto
+  (los conjuntos van entre llaves y no tienen orden).
+- Vector de $\R[n]$ :: sistema de $n$ números reales. Se escribe entre
+  *paréntesis*. En horizontal lleva coma tras cada elemento:
+  $(\pi,\ -1,\ 0,)$. En vertical, =pmatrix=. *Un mismo vector puede
+  escribirse en horizontal o en vertical*: en el libro NO existen
+  "vectores fila" ni "vectores columna". Ojo: $(2,)$ es un vector de
+  $\R[1]$; $(2)$ es un número.
+- Escalar :: número real. "Escalar un vector" = multiplicarlo por un
+  número (cambiarlo de escala). Al vector $\lambda\Vect{b}$ se le llama
+  *múltiplo* de $\Vect{b}$.
+- Igualdad de vectores :: componente a componente: $x_i=y_i$ para $i=1:n$.
+- $n:m$ :: la secuencia $n, n+1, \dots, m$ ("notación pythonesca").
+- Matriz de $\R[m\times n]$ :: sistema de $n$ vectores de $\R[m]$. Se
+  escribe entre *corchetes*; cada vector del sistema se escribe en
+  vertical y es una *columna*. $[\Vect{x}]$ es una matriz con una sola
+  columna (*matriz columna*), distinta del vector $\Vect{x}$.
+- Orden de una matriz :: "$m$ por $n$" (primero filas). Una matriz
+  "de orden $n$" (sin más) es cuadrada.
+- Igualdad de matrices :: columna a columna.
+
+** Nombres y tipografía
+
+| Objeto                     | Tipografía                          | Macro          |
+|----------------------------+-------------------------------------+----------------|
+| vector                     | minúscula negrita cursiva           | =\Vect{a}=     |
+| componente de un vector    | misma letra cursiva con subíndice   | $a_i$          |
+| matriz                     | mayúscula negrita sans-serif        | =\Mat{A}=      |
+| componente de una matriz   | minúscula cursiva, dos subíndices   | $a_{ij}$       |
+| escalares                  | letras griegas o latinas cursivas   | $\lambda,\varphi$ |
+| conjunto de los reales     |                                     | =\R=, =\R[n]=  |
+
+** El operador selector "$\getItem$" (la idea central de la notación)
+
+- $\eleVR{a}{i}$ ($\Vect{a}\getItem i$) selecciona la componente
+  $i$-ésima de $\Vect{a}$: equivale a $a_i$.
+- Por la *derecha* de una matriz selecciona una *columna*:
+  $\VectC{A}{j}$ (vector de $\R[m]$). Por la *izquierda* selecciona una
+  *fila*: $\VectF{A}{i}$ (vector de $\R[n]$). Con los dos a la vez,
+  una componente: $\eleM{A}{i}{j}=a_{ij}$.
+- Desde 1.4.4 también se admite por la izquierda de un vector:
+  $\eleVL{a}{i}=\eleVR{a}{i}=a_i$, y los escalares por la derecha:
+  $\lambda\Vect{b}=\Vect{b}\lambda$.
+- Apéndice 1.A: con una lista de índices selecciona un subvector:
+  $\elemR{\Vect{b}}{(3,3,1)}$.
+
+** Definiciones de las operaciones (siempre "componente a componente")
+
+- Suma :: $\elemR{(\Vect{a}+\Vect{b})}{i}=\eleVR{a}{i}+\eleVR{b}{i}$,
+  para $i=1:n$. El selector es *distributivo* respecto de la suma.
+- Producto por un escalar :: $\elemRp{\lambda\Vect{b}}{i}=\lambda\eleVRpE{b}{i}$.
+  El selector es *asociativo* respecto del producto por escalares
+  ("el paréntesis se desplaza", por eso se puede omitir y escribir
+  $\lambda\eleVR{b}{i}$).
+- Operador lineal :: distributivo respecto de la suma y asociativo
+  respecto del producto por escalares. *El selector es lineal*. Más
+  adelante: la transposición también es lineal, y el selector de
+  filas también.
+- Vector nulo $\Vect{0}$ (todas las componentes cero; los nulos de
+  $\R[2]$ y $\R[3]$ son distintos). Vector opuesto $-\Vect{a}$:
+  $\elemRp{-\Vect{a}}{i}=-\eleVRpE{a}{i}$.
+- Matrices (1.5): la suma y el producto por escalar se definen *por
+  columnas*: $\elemRp{\Mat{A}+\Mat{B}}{j}=\VectC{A}{j}+\VectC{B}{j}$ y
+  $\elemRp{\lambda\Mat{A}}{j}=\lambda\VectCpE{A}{j}$. De ahí se deduce
+  que también valen componente a componente y fila a fila.
+
+** Las ocho propiedades (sección 1.2.1, tema del vídeo 5)
+
+Recordatorio de los reales ($a,b,c\in\R$): $a+b=b+a$; $a+(b+c)=(a+b)+c$;
+$a+0=a$; $a+(-a)=0$; $ab=ba$; $a(b+c)=ab+ac$; $a(bc)=(ab)c$; $1a=a$.
+
+Para vectores con el mismo número de componentes y escalares $\lambda,\varphi$:
+1. $\Vect{a}+\Vect{b}=\Vect{b}+\Vect{a}$
+2. $\Vect{a}+(\Vect{b}+\Vect{c})=(\Vect{a}+\Vect{b})+\Vect{c}$
+3. $\Vect{0}+\Vect{a}=\Vect{a}$
+4. $\Vect{a}+(-\Vect{a})=\Vect{0}$
+5. $\lambda(\Vect{a}+\Vect{b})=\lambda\Vect{a}+\lambda\Vect{b}$
+6. $(\lambda+\varphi)\Vect{a}=\lambda\Vect{a}+\varphi\Vect{a}$
+7. $\lambda(\varphi\Vect{a})=(\lambda\varphi)\Vect{a}$
+8. $1\Vect{a}=\Vect{a}$
+
+Son las ocho propiedades que permitirán definir el *espacio vectorial*
+$\R[n]$ (Lección de espacios y subespacios). Las mismas ocho valen para
+matrices (1.5.1).
+
+El libro enseña *dos estrategias* de demostración:
+- Estrategia 1 :: operar con las componentes escritas dentro del vector
+  (columnas con $a_1,\dots,a_m$).
+- Estrategia 2 :: usar la linealidad del selector y reducir todo a la
+  componente $i$-ésima, que es un número real (en el libro los pasos
+  que son operaciones entre reales van en azul). Ejemplo (prop. 5):
+  $\elemR{\big(\lambda(\Vect{a}+\Vect{b})\big)}{i}
+   =\lambda\big(\elemRp{\Vect{a}+\Vect{b}}{i}\big)
+   =\lambda\big(\eleVR{a}{i}+\eleVR{b}{i}\big)
+   =\lambda\eleVRpE{a}{i}+\lambda\eleVRpE{b}{i}
+   =\elemRp{\lambda\Vect{a}}{i}+\elemRp{\lambda\Vect{b}}{i}
+   =\elemRp{\lambda\Vect{a}+\lambda\Vect{b}}{i}$.
+- En las demostraciones el libro *siempre pone los paréntesis* para
+  mostrar qué regla se aplica en cada paso.
+
+** Reglas de reescritura (1.4.4 y 1.6)
+
+- "Distribuir el operador" entre sumandos.
+- "Desplazar los paréntesis": $\elemRp{\lambda\Vect{b}}{i}=\lambda\eleVRpE{b}{i}=\eleVLPE{b}{i}\lambda=\elemLp{\Vect{b}\lambda}{i}$.
+- "Intercambiar escalar y selector" dentro y fuera del paréntesis.
+- Transposición: $\MatT{A}$ tiene por columnas las filas de $\Mat{A}$:
+  $\VectTC{A}{i}=\VectF{A}{i}$. Es lineal: $\Transp{\lambda\Mat{A}}=\lambda\MatT{A}$,
+  $\Transp{\Mat{A}+\Mat{B}}=\MatT{A}+\MatT{B}$.
+
+** Matrices especiales (1.4.6)
+
+Nula $\Mat{0}$, opuesta $-\Mat{A}$, cuadrada, rectangular, simétrica
+($\Mat{A}=\MatT{A}$), diagonal (fuera de la diagonal principal todo
+cero; no tiene por qué ser cuadrada), identidad $\Mat{I}$.
+
+** Interpretación que prefiere el libro
+
+Los vectores son *datos* (ejemplo 1.3: tasas de crecimiento del PIB de
+cinco países; la posición indica el país) y las matrices son tablas de
+datos (columna = año, fila = país). La interpretación geométrica
+(flechas) se enseña en los vídeos 3 y 4, pero el libro insiste en que
+*lo importante es la definición componente a componente y las reglas de
+manipulación simbólica*, no el dibujo.
+
+* Macros de =nacal.sty= (las que necesitan los vídeos)
+
+Sistema de sufijos de las macros (vale para toda la familia =elem*=,
+=eleV*=, =VectF/VectC=, =Mat*=, =Trans*=):
+- sin sufijo :: el argumento tal cual.
+- =p= :: el argumento *dentro* de paréntesis =\big( ... \big)=.
+- =P= :: igual, con =\Big( ... \Big)=.
+- =E= :: paréntesis *exteriores* (alrededor de toda la expresión).
+- =pE= / =PE= :: combinación de ambos.
+- versión con =*= :: paréntesis de tamaño normal en vez de =\big=.
+
+| Macro                       | Significado                                   | Se ve como                                |
+|-----------------------------+-----------------------------------------------+-------------------------------------------|
+| =\R=, =\R[n]=, =\R[m\times n]= | reales, vectores de n comp., matrices m por n | $\R$, $\R[n]$                             |
+| =\Vect{a}=                  | vector (negrita cursiva minúscula)            | $\Vect{a}$                                |
+| =\Vect[2003]{d}=            | vector con superíndice                        | $\Vect[2003]{d}$                          |
+| =\Vect{0}=                  | vector nulo                                   | $\Vect{0}$                                |
+| =\getItem=                  | el operador selector                          | $\getItem$                                |
+| =\eleVR{a}{i}=              | componente i de a (selector a la derecha)     | $\Vect{a}\getItem i$                      |
+| =\eleVL{a}{i}=              | componente i de a (selector a la izquierda)   | $i\getItem\Vect{a}$                       |
+| =\eleVRpE{a}{i}=            | lo mismo entre paréntesis exteriores          | $(\Vect{a}\getItem i)$                    |
+| =\elemR{X}{i}=              | selector sobre una expresión X cualquiera     | $X\getItem i$                             |
+| =\elemRp{X}{i}=             | (X) con \big, luego selector                  | $\big(X\big)\getItem i$                   |
+| =\elemRp*{X}{i}=            | igual con paréntesis normales                 | $(X)\getItem i$                           |
+| =\elemL{X}{i}=, =\elemLp=   | selector por la izquierda                     | $i\getItem X$                             |
+| =\elemLR{X}{i}{j}=          | selector por ambos lados                      | $i\getItem X\getItem j$                   |
+| =\Mat{A}=                   | matriz (negrita sans mayúscula)               | $\Mat{A}$                                 |
+| =\Matdim{A}{m}{n}=          | matriz con su orden debajo                    |                                           |
+| =\VectC{A}{j}=              | columna j de A                                | $\Mat{A}\getItem j$                       |
+| =\VectF{A}{i}=              | fila i de A                                   | $i\getItem\Mat{A}$                        |
+| =\VectCpE{A}{j}=            | columna j entre paréntesis exteriores         | $(\Mat{A}\getItem j)$                     |
+| =\eleM{A}{i}{j}=            | componente ij de A                            | $i\getItem\Mat{A}\getItem j$              |
+| =\MVectC{A}{j}=             | matriz columna [A|j]                          | $[\Mat{A}\getItem j]$                     |
+| =\T=                        | símbolo de transposición                      | $\intercal$                               |
+| =\MatT{A}=                  | transpuesta de A                              | $\Mat{A}^{\intercal}$                     |
+| =\Transp{X}=                | (X) transpuesta                               | $(X)^{\intercal}$                         |
+| =\VectTC{A}{i}=             | columna i de la transpuesta                   |                                           |
+| =\parentesis{X}=, =\Parentesis{X}= | paréntesis \big / \Big                 |                                           |
+
+* Uso desde Manim
+
+- Preámbulo: todo =Tex=/=MathTex=/=Title= con macros nacal necesita
+  =tex_template=myTemplate= donde =myTemplate.add_to_preamble(r"\usepackage{nacal}")=.
+  El paquete está instalado en =~/texmf/tex/latex/nacal/nacal.sty=.
+- Índices de submobjects: =MathTex(...)[0]= es la cadena, y =[0][k]= el
+  glifo k. Cuenta de glifos verificada (idéntica en manim 0.19 y 0.21):
+  | Fórmula                                   | Glifos | Reparto                               |
+  |-------------------------------------------+--------+---------------------------------------|
+  | =\eleVR{a}{i}=                            |      3 | a, \vert, i                           |
+  | =\elemRp{\Vect{a}+\Vect{b}}{i}=           |      7 | (, a, +, b, ), \vert, i               |
+  | =\elemRp{\lambda\Vect{a}}{i}=             |      6 | (, λ, a, ), \vert, i                  |
+  | =\lambda\eleVRpE{a}{i}=                   |      6 | λ, (, a, \vert, i, )                  |
+  | =\Vect{a}+\Vect{b} = \Vect{b}+\Vect{a}=   |      7 |                                       |
+  | =\begin{pmatrix}1\\ 2\\ 3\end{pmatrix}=   |      7 | (, 1, 2, 3, ) ... los paréntesis grandes ocupan 2 glifos cada uno |
+  | =\R[n]=                                   |      2 |                                       |
+  | =\eleM{A}{i}{j}=                          |      5 |                                       |
+  | =\VectC{A}{j}=                            |      3 |                                       |
+  | =\MatT{A}=                                |      2 |                                       |
+  Para comprobar índices nuevos: =self.add(index_labels(m[0]))= y
+  renderizar un fotograma con =-s=.
+- Vectores numéricos: generarlos con el módulo =nacal= y =.latex()=
+  (ver abajo) en vez de escribir =pmatrix= a mano.
+
+* Módulo =nacal= de Python (lo que usan los vídeos)
+
+#+begin_src python
+import nacal as nc
+b = nc.Vector([0, 4, 6])        # vector; .latex() -> \begin{pmatrix}0\\ 4\\ 6\end{pmatrix}
+nc.Vector([1, 2, 3], 'h').latex()  # en horizontal: \begin{pmatrix}1,& 2,& 3,\end{pmatrix}
+nc.V0(3); nc.V1(3)              # vector nulo y vector de unos
+b|3                             # 6   (selector: componente 3)
+3*b ; b+b ; -b                  # operaciones; devuelven Vector
+nc.fracc(1, 3)                  # Rational(1,3) de sympy, para escalares exactos
+B = nc.Matrix([[1,2,3],[0,-1,7]])   # lista de FILAS si se dan listas de números
+B = nc.Matrix([a, b, c])        # lista de COLUMNAS si se dan Vectores
+1|B ; B|2 ; 2|B|3 ; ~B          # fila 1, columna 2, componente (2,3), transpuesta
+nc.Matrix([B|2])                # matriz columna
+#+end_src
+
+Precedencia en Python: =*= y =+= se evalúan antes que =|=. Por claridad el
+libro recomienda paréntesis siempre: =(3*b)|2=.
+
+* Terminología en inglés ya fijada en los vídeos traducidos (=videoMath2=)
+
+| Español                              | Inglés usado en los vídeos                      |
+|--------------------------------------+-------------------------------------------------|
+| vector de $\R[n]$                    | vector in / of $\R[n]$                          |
+| componente                           | component (también "entry")                     |
+| lista ordenada de números            | ordered list of numbers, tuple                  |
+| suma de vectores                     | sum of vectors, vector addition                 |
+| producto por un escalar, reescalar   | scalar multiplication, scaling a vector         |
+| múltiplo de un vector                | scalar multiple of a vector                     |
+| componente a componente              | component-wise                                  |
+| operador selector                    | selector operator                               |
+| distributivo / asociativo            | distributive / associative                      |
+| interpretación geométrica            | geometric interpretation                        |
+| vector nulo                          | zero vector                                     |
+| escalar (número)                     | scalar                                          |
+| resumen                              | Key Takeaways                                   |
+
+Pendiente de fijar cuando lleguen esos vídeos: "vector opuesto"
+(propuesta: *the negative of a vector* / additive inverse), "orden
+$m$ por $n$" (propuesta: *an $m$ by $n$ matrix*), "reglas de
+reescritura" (*rewriting rules*), "matriz columna" (*column matrix*).
+
+* Código de colores de la serie (chunk =Código de colores= de la plantilla)
+
+| Constante         | Color    | Uso                                                        |
+|-------------------+----------+------------------------------------------------------------|
+| =COLOR_A=         | azul     | primer objeto: número $a$, vector $\Vect{a}$                |
+| =COLOR_B=         | naranja  | segundo objeto                                             |
+| =COLOR_C=         | verde    | tercer objeto                                              |
+| =COLOR_ESCALAR=   | amarillo | escalares, preguntas al espectador, tarjeta de pausa       |
+| =COLOR_RESULTADO= | blanco   | resultado de una operación                                 |
+| =COLOR_REGLA=     | teal     | pasos que usan una propiedad de los números reales; reglas |
+| =COLOR_TITULO=    | azul     | títulos y cabeceras de escena                              |
+
+* Estructura de los vídeos de la Lección 1
+
+| Vídeo | Sección del libro | Estado                                        |
+|-------+-------------------+-----------------------------------------------|
+| V01   | 1.1               | publicado (definición, notación, selector)    |
+| V02   | 1.2 (suma)        | publicado                                     |
+| V03   | 1.2 (suma, geom.) | publicado                                     |
+| V04   | 1.2 (producto)    | publicado                                     |
+| V05   | (no está en el libro) | en curso: las 8 propiedades de los reales con regla y compás |
+| V06   | 1.2.1             | en curso (escenas 1-2 hechas): propiedades de las operaciones con vectores |
+| V07   | 1.1.1             | pendiente: vectores especiales                |
+| V08   | 1.3               | pendiente: vectores como datos                |
+| V09   | 1.4 a 1.4.3       | pendiente: matrices, filas, columnas          |
+| V10   | 1.4.4 a 1.4.5     | pendiente: reescritura y transposición        |
+| V11   | 1.4.6 a 1.5       | pendiente: matrices especiales y operaciones  |
+| V12   | 1.6               | pendiente: notación matricial extendida       |

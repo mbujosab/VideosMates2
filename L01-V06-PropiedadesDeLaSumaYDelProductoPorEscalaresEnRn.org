@@ -1,0 +1,856 @@
+#+TITLE: Lección 1 del curso - Vídeo 5
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+#+LATEX: \maketitle
+
+****** COMMENT Para exportar a pdf
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results none :exports none
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+#+END_SRC
+
+* Propiedades de la suma y del producto por un escalar en $\mathbb{R}^n$ - V06
+
+Vídeo que cubre la Sección 1.2.1 del libro: las ocho propiedades de
+la suma de vectores y del producto por escalares, y las dos
+estrategias para demostrarlas.
+
+Este fichero es una *fuente única bilingüe* (véase la plantilla
+=LXX-VYY-NombreVideo.org=): genera =./lib/L01_V06_PropiedadesDeLasOperacionesConVectores.py=
+(español) y =../videoMath2/lib/L01_V06_PropertiesOfVectorOperations.py= (inglés).
+
+** Guion (escenas)
+
+| Escena | Contenido                                                                   | Estado      |
+|--------+-----------------------------------------------------------------------------+-------------|
+|      1 | Introducción: las dos operaciones se definen componente a componente         | hecha       |
+|      2 | Recordatorio de las ocho propiedades de los números reales y la pregunta    | hecha       |
+|      3 | Un ejemplo numérico: conmutatividad y distributividad con vectores concretos | por hacer   |
+|      4 | Demostración, estrategia 1: operando con las componentes dentro del vector   | por hacer   |
+|      5 | Demostración, estrategia 2: linealidad del operador selector                 | por hacer   |
+|      6 | Las ocho propiedades (proposición) y resumen: definirán el espacio vectorial | por hacer   |
+
+** Ensamblado de los ficheros de python (uno por idioma)
+
+#+caption: Fichero de python del vídeo en español
+#+name: Fichero en español
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V06_PropiedadesDeLasOperacionesConVectores.py
+<<Carga de la librería Manim y NacAL>>
+
+<<Idioma es>>
+
+<<Utilidades bilingües>>
+
+<<Código de colores>>
+
+<<Título del vídeo>>
+
+<<TexTemplate con LaTeX-nacal>>
+
+<<Definición de mi escena con voz>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+#+caption: Fichero de python del vídeo en inglés
+#+name: Fichero en inglés
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V06_PropertiesOfVectorOperations.py
+<<Carga de la librería Manim y NacAL>>
+
+<<Idioma en>>
+
+<<Utilidades bilingües>>
+
+<<Código de colores>>
+
+<<Título del vídeo>>
+
+<<TexTemplate con LaTeX-nacal>>
+
+<<Definición de mi escena con voz>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+
+** Clases de las escenas
+
+#+caption: Vídeo completo y escenas separadas
+#+name: Clases de las escenas
+#+BEGIN_SRC python :noweb no-export :eval no
+class L01_V06_PropiedadesDeLasOperacionesConVectores(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Primera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Segunda escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Tercera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Cuarta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Quinta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Sexta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Créditos finales>>
+
+
+class L01_V06_E00_Portada(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+class L01_V06_E01_Introduccion(MiEscenaConVoz):
+    def construct(self):
+        <<Primera escena>>
+
+
+class L01_V06_E02_PropiedadesDeLosReales(MiEscenaConVoz):
+    def construct(self):
+        <<Segunda escena>>
+
+
+class L01_V06_E03_EjemploNumerico(MiEscenaConVoz):
+    def construct(self):
+        <<Tercera escena>>
+
+
+class L01_V06_E04_Estrategia1(MiEscenaConVoz):
+    def construct(self):
+        <<Cuarta escena>>
+
+
+class L01_V06_E05_Estrategia2(MiEscenaConVoz):
+    def construct(self):
+        <<Quinta escena>>
+
+
+class L01_V06_E06_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Sexta escena>>
+
+
+class ZCreditosFinales(Scene):
+    def construct(self):
+        <<Créditos finales>>
+#+END_SRC
+
+
+** Título del vídeo
+
+Lo usan la portada (escena 0) y la cabecera de la primera escena.
+
+#+name: Título del vídeo
+#+BEGIN_SRC python :eval no
+TITULO = tr("Propiedades de las operaciones con vectores de  ", "Properties of the operations with vectors in  ") + r"\R[n]"
+#+END_SRC
+
+** Código de cada escena
+
+*** Portada (escena 0)
+
+Escena propia, sin voz, sobre la que suena la música de entrada. El
+bloque [[montaje]] funde la música cuando empieza la escena siguiente.
+
+#+name: Portada
+#+BEGIN_SRC python :eval no
+self.creditos()
+portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(min(portada.width, config.frame_width*0.9))
+self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+self.wait(4.5)
+#+END_SRC
+
+*** Escena 1 - Introducción
+
+Recordatorio de que la suma y el producto por un escalar se definen
+componente a componente, y de que lo importante no es la
+interpretación geométrica sino las reglas de manipulación simbólica.
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+# Portada
+titulo = Title(TITULO, tex_template=myTemplate, font_size=50).set_color(COLOR_TITULO)
+self.play(Write(titulo))
+self.pausa_media()
+
+igual = MathTex(r"=", tex_template=myTemplate)
+mas   = MathTex(r"+", tex_template=myTemplate)
+
+# suma
+cvab = MathTex(r"\elemRp{\Vect{a}+\Vect{b}}{i}", tex_template=myTemplate)
+cva  = MathTex(r"\eleVR{a}{i}",                  tex_template=myTemplate)
+cvb  = MathTex(r"\eleVR{b}{i}",                  tex_template=myTemplate)
+
+eq_suma = VGroup(cvab.copy(),
+                 igual.copy(),
+                 cva.copy(),
+                 mas.copy(),
+                 cvb.copy()).arrange(RIGHT).scale(1.5)
+
+# producto
+cvla = MathTex(r"\elemRp{\lambda\Vect{a}}{i}", tex_template=myTemplate)
+lca  = MathTex(r"\lambda\eleVRpE{a}{i}",       tex_template=myTemplate)
+
+eq_producto = VGroup(cvla.copy(),
+                     igual.copy(),
+                     lca.copy()).arrange(RIGHT).scale(1.5).next_to(eq_suma,
+                                                                   DOWN,
+                                                                   aligned_edge=LEFT,
+                                                                   buff=1.2)
+
+with self.voiceover(text=tr("""En los vídeos anteriores hemos visto dos operaciones con vectores de Rn:""",
+                            """In the previous videos we saw two operations with vectors in R n:""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""La suma,""",
+                            """The sum,""")) as tracker:
+    self.play(FadeIn(eq_suma[0][0][1:4],
+                     rate_func=rate_functions.exponential_decay),
+              run_time=2*tracker.duration/3)
+
+with self.voiceover(text=tr("""y el reescalado""",
+                            """and scaling.""")) as tracker:
+    self.play(FadeIn(eq_producto[0][0][1:3],
+                     rate_func=rate_functions.exponential_decay),
+              run_time=2*tracker.duration/3)
+
+with self.voiceover(text=tr("""Ambas operaciones se definen componente a componente.""",
+                            """Both operations are defined component-wise.""")) as tracker:
+    self.play(FadeIn(eq_suma[0][0][0],      # paréntesis inicial
+                     eq_suma[0][0][4:],     # cierre de paréntesis y selector
+                     eq_producto[0][0][0],  # paréntesis inicial
+                     eq_producto[0][0][3:], # cierre de paréntesis y selector
+                     scale=.5,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=tracker.duration)
+
+with self.voiceover(text=tr("""Las componentes del 'vector suma' son la suma de las componentes,""",
+                            """The components of the 'sum vector' are the sums of the components,""")) as tracker:
+    self.play(FadeIn(eq_suma[1:],           # resto de la ecuación
+                     scale=.1,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=3*tracker.duration/5)
+    self.play(Indicate(eq_suma[2][0]),
+              Indicate(eq_suma[4][0]))
+
+with self.voiceover(text=tr("""y las componentes del 'vector reescalado' son las componentes reescaladas.""",
+                            """and the components of the 'scaled vector' are the scaled components.""")) as tracker:
+    self.play(FadeIn(eq_producto[1:],       # resto de la ecuación
+                     scale=.1,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=3*tracker.duration/5)
+    self.play(Indicate(eq_producto[2][0][0]),
+              Indicate(eq_producto[2][0][2:5]))
+
+with self.voiceover(text=tr("""Aunque vimos la interpretación geométrica, en R2 y en R3, de ambas operaciones, señalamos que lo importante no es la interpretación geométrica. Lo más importante es que son operaciones definidas componente a componente que se traducen en reglas simples de manipulación simbólica. En este caso se traducen en operaciones entre números reales; sumas de números en el primer caso y productos en el segundo.""",
+                            """Although we saw the geometric interpretation of both operations in R2 and R3, we pointed out that the geometric interpretation is not what matters most. What matters most is that these operations are defined component-wise, and that translates into simple rules of symbolic manipulation. In this case, they translate into operations between real numbers: sums of numbers in the first case, and products in the second.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+#+END_SRC
+
+*** Escena 2 - Recordatorio de las propiedades de los números reales
+
+Sigue al libro: antes de preguntarse por las propiedades de las
+operaciones con vectores, se recuerdan ocho propiedades de los
+números reales (las del recuadro de la Sección 1.2.1). Termina
+planteando la pregunta que motiva el resto del vídeo.
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+subtitulo = Title(tr("Recordatorio: propiedades de los números reales",
+                     "Reminder: properties of the real numbers"),
+                  tex_template=myTemplate,
+                  font_size=44).set_color(BLUE)
+self.play(Write(subtitulo))
+
+sean = Tex(tr(r"Sean $a$, $b$ y $c$ números reales. Entonces:",
+              r"Let $a$, $b$ and $c$ be real numbers. Then:"),
+           tex_template=myTemplate,
+           font_size=40).next_to(subtitulo, DOWN, buff=0.5).to_edge(LEFT, buff=1)
+
+propiedades = [r"a+b=b+a",
+               r"a+(b+c)=(a+b)+c",
+               r"a+0=a",
+               r"a+(-a)=0",
+               r"ab=ba",
+               r"a(b+c)=ab+ac",
+               r"a(bc)=(ab)c",
+               r"1a=a"]
+
+lista = VGroup(*[MathTex(f"{k+1}.\\;\\;", p, tex_template=myTemplate, font_size=44)
+                 for k, p in enumerate(propiedades)])
+
+columna_suma     = VGroup(*lista[:4]).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
+columna_producto = VGroup(*lista[4:]).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
+cuadro = VGroup(columna_suma, columna_producto).arrange(RIGHT, buff=1.8, aligned_edge=UP)
+cuadro.next_to(sean, DOWN, buff=0.6).set_x(0)
+for k in range(4):   # alinea cada fila de la segunda columna con la primera
+    lista[4+k].set_y(lista[k].get_y())
+
+with self.voiceover(text=tr("""Para estudiar las propiedades de las operaciones con vectores, recordemos primero algunas propiedades de los números reales que seguro conoce desde la escuela.""",
+                            """To study the properties of the operations with vectors, let us first recall some properties of the real numbers that you surely know from school.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""Sean a, b y c tres números reales.""",
+                            """Let a, b and c be three real numbers.""")) as tracker:
+    self.play(FadeIn(sean), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""La suma es conmutativa,""",
+                            """Addition is commutative,""")) as tracker:
+    self.play(FadeIn(lista[0]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y asociativa.""",
+                            """and associative.""")) as tracker:
+    self.play(FadeIn(lista[1]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""El cero es el elemento neutro de la suma,""",
+                            """Zero is the identity element for addition,""")) as tracker:
+    self.play(FadeIn(lista[2]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y todo número tiene un opuesto: sumados dan cero.""",
+                            """and every number has an opposite: their sum is zero.""")) as tracker:
+    self.play(FadeIn(lista[3]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""El producto es conmutativo,""",
+                            """Multiplication is commutative,""")) as tracker:
+    self.play(FadeIn(lista[4]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y distributivo respecto de la suma.""",
+                            """and distributive over addition.""")) as tracker:
+    self.play(FadeIn(lista[5]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""También es asociativo,""",
+                            """It is also associative,""")) as tracker:
+    self.play(FadeIn(lista[6]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y el uno es el elemento neutro del producto.""",
+                            """and one is the identity element for multiplication.""")) as tracker:
+    self.play(FadeIn(lista[7]), run_time=tracker.duration/2)
+
+pregunta = Tex(tr(r"¿Se verifican también estas propiedades al operar con \emph{vectores}?",
+                  r"Do these properties also hold when operating with \emph{vectors}?"),
+               tex_template=myTemplate,
+               font_size=44).set_color(YELLOW).next_to(cuadro, DOWN, buff=0.8)
+
+with self.voiceover(text=tr("""Estas ocho propiedades son tan familiares que las usamos sin pensar. La cuestión que queremos abordar ahora es la siguiente:""",
+                            """These eight properties are so familiar that we use them without thinking. The question we want to address now is the following:""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""¿Se verifican también estas propiedades cuando operamos con vectores?""",
+                            """Do these properties also hold when we operate with vectors?""")) as tracker:
+    self.play(Write(pregunta), run_time=tracker.duration)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 3 - Un ejemplo numérico
+
+Por hacer. Idea: comprobar con vectores concretos (calculados con
+=nacal=) que $(1,2,3)+(4,5,6)=(4,5,6)+(1,2,3)$ y que
+$2\big((1,2)+(3,4)\big)=2(1,2)+2(3,4)$, operando componente a
+componente, y preguntar: ¿es casualidad o es una regla general?
+
+#+name: Tercera escena
+#+BEGIN_SRC python :eval no
+pass
+#+END_SRC
+
+*** Escena 4 - Demostración: estrategia 1 (componentes dentro del vector)
+
+Por hacer. Demostrar la conmutatividad y la distributividad
+escribiendo las componentes genéricas $a_1,\dots,a_n$ en columna,
+como en la Estrategia 1 del libro.
+
+#+name: Cuarta escena
+#+BEGIN_SRC python :eval no
+pass
+#+END_SRC
+
+*** Escena 5 - Demostración: estrategia 2 (linealidad del selector)
+
+Por hacer. Las mismas dos propiedades, reduciéndolas a la componente
+$i$-ésima con el operador selector. Los pasos que son operaciones
+entre números reales se destacan en azul, como en el libro.
+
+#+name: Quinta escena
+#+BEGIN_SRC python :eval no
+pass
+#+END_SRC
+
+*** Escena 6 - Las ocho propiedades y resumen
+
+Por hacer. Enunciar la proposición con las ocho propiedades para
+vectores (dos columnas, en paralelo con las de los reales) y cerrar:
+son las propiedades que permitirán definir el espacio vectorial
+$\mathbb{R}^n$.
+
+#+name: Sexta escena
+#+BEGIN_SRC python :eval no
+pass
+#+END_SRC
+
+
+* Trozos comunes de código
+
+** Carga de las librerías Manim, manim_voiceover y NacAL
+
+#+name: Carga de la librería Manim y NacAL
+#+BEGIN_SRC python :eval no
+import os
+import re
+from manim import *
+from contextlib import contextmanager
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.helper import remove_bookmarks
+from manim_voiceover.services.azure import AzureService
+from manim_voiceover.services.gtts import GTTSService
+import nacal as nc
+import sympy as sp
+#+END_SRC
+
+** Idioma del vídeo
+
+#+name: Idioma es
+#+BEGIN_SRC python :eval no
+LANG = "es"
+#+END_SRC
+
+#+name: Idioma en
+#+BEGIN_SRC python :eval no
+LANG = "en"
+#+END_SRC
+
+** Utilidades bilingües
+
+#+name: Utilidades bilingües
+#+BEGIN_SRC python :eval no
+def tr(es, en):
+    """Cadena en el idioma del vídeo."""
+    return es if LANG == "es" else en
+
+VOCES_AZURE  = {"es": "es-ES-AlvaroNeural", "en": "en-GB-RyanNeural"}
+SERVICIO_VOZ = os.environ.get("VOZ", "azure")
+#+END_SRC
+
+** Código de colores de la serie
+
+Los mismos colores en todos los vídeos, para que el espectador lea la
+pantalla sin esfuerzo (documentados en =NotacionNacal.org=).
+
+#+name: Código de colores
+#+BEGIN_SRC python :eval no
+COLOR_A         = BLUE      # primer objeto (número a, vector a)
+COLOR_B         = ORANGE    # segundo objeto (contrasta con el azul)
+COLOR_C         = GREEN     # tercer objeto
+COLOR_ESCALAR   = YELLOW    # escalares, preguntas al espectador, tarjeta de pausa
+COLOR_RESULTADO = WHITE     # resultado de una operación
+COLOR_REGLA     = TEAL      # pasos que usan una propiedad de los números reales
+COLOR_TITULO    = BLUE      # títulos y cabeceras
+#+END_SRC
+
+** Uso del paquete de $\LaTeX{}$ con la notación del curso (=nacal.sty=)
+
+#+name: TexTemplate con LaTeX-nacal
+#+BEGIN_SRC python :eval no
+myTemplate = TexTemplate()
+myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+#+END_SRC
+
+** Definición de mi escena con voz
+  :PROPERTIES:
+  :UNNUMBERED: t
+  :END:
+
+Subclase de =VoiceoverScene= con pausas de distintas duraciones, el
+selector de voz, la marca de copyright y un =voiceover= que convierte
+los dos puntos de la narración en una pausa (Azure no la hace) y que
+hace funcionar las marcas =<bookmark mark='x'/>= también con gTTS (con
+Azure la voz da el instante exacto de cada palabra; con gTTS se estima
+repartiendo la duración). Para sincronizar una animación con una palabra
+concreta: marca en el texto y =self.wait_until_bookmark("x")= dentro del
+=with=. Su método =setup()= (que Manim ejecuta antes de =construct()=)
+llama a =self.voz()=, así que las clases de las escenas no tienen que
+hacerlo.
+
+#+name: Definición de mi escena con voz
+#+BEGIN_SRC python :noweb no-export :eval no
+class MiEscenaConVoz(VoiceoverScene):
+    def setup(self):
+        """Manim lo ejecuta antes de construct(): fija la voz del idioma."""
+        self.voz()
+
+    def pausa_muy_corta(self, n=0.3):
+        self.wait(n)
+    def pausa_corta(self, n=0.5):
+        self.wait(n)
+    def pausa(self, n=1):
+        self.wait(n)
+    def pausa_media(self, n=1.5):
+        self.wait(n)
+    def pausa_larga(self, n=3):
+        self.wait(n)
+    def pausa_muy_larga(self, n=5):
+        self.wait(n)
+
+    @contextmanager
+    def voiceover(self, text=None, **kwargs):
+        """Como VoiceoverScene.voiceover, con tres añadidos: los dos puntos producen
+        una pausa en la voz (Azure no la hace por sí sola); el subtítulo conserva el
+        texto original (sin las marcas <bookmark mark='x'/>); y con gTTS, que no da
+        los tiempos de cada palabra, las marcas se estiman repartiendo la duración
+        proporcionalmente al texto, de modo que self.wait_until_bookmark("x")
+        funciona con los dos servicios (con Azure, con precisión)."""
+        if text is not None:
+            # el subtítulo no lleva ni marcas ni pausas SSML escritas a mano (<break time="200ms"/>)
+            kwargs.setdefault("subcaption", re.sub(r"\s*<break[^>]*/>\s*", " ", remove_bookmarks(text)))
+            if SERVICIO_VOZ == "gtts":
+                text = re.sub(r"\s*<break[^>]*/>\s*", ", ", text).replace(":", ".")
+            else:
+                text = text.replace(": ", ': <break time="500ms"/> ')
+        with super().voiceover(text=text, **kwargs) as tracker:
+            if text is not None and "<bookmark" in text and not getattr(tracker, "bookmark_times", None):
+                # gTTS guarda en la caché el texto sin marcas: se reponen y se estiman los tiempos
+                tracker.data["input_text"] = text
+                tracker.data["word_boundaries"] = tracker._get_fallback_word_boundaries()
+                tracker._process_bookmarks()
+            yield tracker
+
+    def anuncia_regla(self, nueva, anterior=None, run_time=1):
+        """Muestra, atenuada, la fórmula que se va a ilustrar (en lugar de la anterior, si la hay).
+        Queda a la vista durante la construcción; al terminar, destaca_regla() la enciende."""
+        nueva.set_opacity(0.45)
+        if anterior is None:
+            self.play(FadeIn(nueva), run_time=run_time)
+        else:
+            self.play(ReplacementTransform(anterior, nueva), run_time=run_time)
+        return nueva
+
+    def destaca_regla(self, regla, run_time=1.5):
+        """La ilustración ha terminado: la fórmula pasa a opacidad plena y parpadea."""
+        self.play(regla.animate.set_opacity(1), run_time=run_time/3)
+        self.play(Indicate(regla, color=COLOR_RESULTADO, scale_factor=1.15), run_time=2*run_time/3)
+
+    def voz(self, servicio=SERVICIO_VOZ):
+        """Fija el servicio de voz según el idioma del vídeo."""
+        if servicio == "gtts":
+            self.set_speech_service(GTTSService(lang=LANG, tld="com"))
+        else:
+            self.set_speech_service(AzureService(voice=VOCES_AZURE[LANG]))
+
+    <<Créditos en distintas partes de la pantalla>>
+
+    <<Pausa para pensar>>
+#+END_SRC
+
+#+name: Créditos en distintas partes de la pantalla
+#+BEGIN_SRC python :eval no
+def creditos(self, variante=1):
+    def analisis_opcion_elegida(tipo):
+        'Análisis de las opciones de eliminación elegidas'
+        lista = [100,20,10,4,2,1]
+        opcion = set()
+        for t in lista:
+            if (tipo - (tipo % t)) in lista:
+                opcion.add(tipo - (tipo % t))
+                tipo = tipo % t
+        return opcion
+
+    copyright = Tex(r"\textcopyright{\;} 2026\; Marcos Bujosa  ")
+
+    if 1 in analisis_opcion_elegida(variante):
+        stampDcha  = VGroup(copyright.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        self.add(stampDcha)
+    if 2 in analisis_opcion_elegida(variante):
+        stampIzda  = VGroup(copyright.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        self.add(stampIzda)
+    if 4 in analisis_opcion_elegida(variante):
+        stampBottom= VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        self.add(stampBottom)
+    if 10 in analisis_opcion_elegida(variante):
+        stampTop   = VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        self.add(stampTop)
+#+END_SRC
+
+*** Tarjeta de pausa para pensar
+
+Las demostraciones cortas se proponen como ejercicio: la tarjeta invita
+a pausar el vídeo, se espera unos segundos y, si se da una pista, se
+muestra y se vuelve a invitar a pausar. Misma tarjeta en todos los
+vídeos. =pista= es el texto en pantalla (puede llevar LaTeX) y
+=pista_voz= lo que dice la voz (por defecto, el mismo texto).
+
+#+name: Pausa para pensar
+#+BEGIN_SRC python :eval no
+def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4):
+    """Tarjeta que invita a pausar el vídeo; opcionalmente da una pista y vuelve a invitar."""
+    def tarjeta(texto):
+        barra = lambda: RoundedRectangle(corner_radius=0.06, width=0.2, height=0.6,
+                                         fill_color=COLOR_ESCALAR, fill_opacity=1, stroke_width=0)
+        icono = VGroup(barra(), barra()).arrange(RIGHT, buff=0.12)
+        rotulo = Tex(texto, tex_template=myTemplate, font_size=38)
+        rotulo.scale_to_fit_width(min(rotulo.width, config.frame_width*0.75))
+        contenido = VGroup(icono, rotulo).arrange(RIGHT, buff=0.4)
+        marco = RoundedRectangle(corner_radius=0.25, width=contenido.width+0.8, height=contenido.height+0.6,
+                                 stroke_color=COLOR_ESCALAR, fill_color=BLACK, fill_opacity=0.85)
+        return VGroup(marco, contenido).to_edge(DOWN, buff=0.4)
+
+    invitacion = tr("Pause el vídeo e inténtelo.", "Pause the video and give it a try.")
+    tarjeta1 = tarjeta(invitacion)
+    with self.voiceover(text=invitacion) as tracker:
+        self.play(FadeIn(tarjeta1), run_time=min(0.8, tracker.duration))
+    self.wait(segundos)
+    if pista is not None:
+        tarjeta2 = tarjeta(tr("Pista: ", "Hint: ") + pista)
+        with self.voiceover(text=tr("Una pista: ", "A hint: ") + (pista_voz or pista)) as tracker:
+            self.play(ReplacementTransform(tarjeta1, tarjeta2), run_time=min(0.8, tracker.duration))
+        tarjeta3 = tarjeta(tr("Pause de nuevo e inténtelo.", "Pause again and try once more."))
+        with self.voiceover(text=tr("Pause de nuevo e inténtelo.", "Pause again and try once more.")) as tracker:
+            self.play(ReplacementTransform(tarjeta2, tarjeta3), run_time=min(0.8, tracker.duration))
+        self.wait(segundos)
+        tarjeta1 = tarjeta3
+    self.play(FadeOut(tarjeta1), run_time=0.6)
+#+END_SRC
+
+*** Pantalla final de créditos
+
+#+name: Créditos finales
+#+BEGIN_SRC python :eval no
+copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
+github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
+CGG  = VGroup(copyright, github).scale(1.1)
+self.add(CGG)
+self.wait(10)
+#+END_SRC
+
+
+* Rodando: 1,2,3\dots ¡acción!
+
+# +call: rodando(fichero="L01_V06_PropiedadesDeLasOperacionesConVectores", escena="1,2", idioma="es", voz="gtts")
+# +call: rodando(fichero="L01_V06_PropertiesOfVectorOperations", escena="1,2", idioma="en", voz="gtts")
+
+# +call: rodandoHD(fichero="L01_V06_PropiedadesDeLasOperacionesConVectores", escena="a", idioma="es")
+# +call: rodandoHD(fichero="L01_V06_PropertiesOfVectorOperations", escena="a", idioma="en")
+
+# +call: montaje(fichero="L01_V06_PropiedadesDeLasOperacionesConVectores", escenas="L01_V06_E00_Portada L01_V06_E01_Introduccion L01_V06_E02_PropiedadesDeLosReales L01_V06_E03_EjemploNumerico L01_V06_E04_Estrategia1 L01_V06_E05_Estrategia2 L01_V06_E06_Resumen ZCreditosFinales", cierre="L01_V06_E06_Resumen", video="L01_V06_PropiedadesDeLasOperacionesConVectores", idioma="es")
+# +call: montaje(fichero="L01_V06_PropertiesOfVectorOperations", escenas="L01_V06_E00_Portada L01_V06_E01_Introduccion L01_V06_E02_PropiedadesDeLosReales L01_V06_E03_EjemploNumerico L01_V06_E04_Estrategia1 L01_V06_E05_Estrategia2 L01_V06_E06_Resumen ZCreditosFinales", cierre="L01_V06_E06_Resumen", video="L01_V06_PropertiesOfVectorOperations", idioma="en")
+
+
+
+# +call: guion(fichero="L01_V06_PropiedadesDeLasOperacionesConVectores", idioma="es")
+# +call: guion(fichero="L01_V06_PropiedadesDeLasOperacionesConVectores", idioma="en")
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V06_PropiedadesDeLasOperacionesConVectores" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V06_PropiedadesDeLasOperacionesConVectores" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Montaje: concatenar las escenas, música de entrada y salida, subtítulos
+
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen =volumen=) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
+=volumen_voz=), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se normaliza con =loudnorm=. Los =.srt= de las escenas se desplazan y se
+funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
+
+=escenas= es la lista ordenada de clases; =cierre= la escena en la que
+vuelve la música. El mp4 y el srt finales quedan en la raíz del
+repositorio del idioma.
+
+#+name: montaje
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escenas="LXX_VYY_E00_Portada LXX_VYY_E01_Introduccion LXX_VYY_E02_TemaEscena LXX_VYY_E03_TemaEscena LXX_VYY_E04_TemaEscena LXX_VYY_E05_Resumen ZCreditosFinales" :var cierre="LXX_VYY_E05_Resumen" :var video="LXX_VYY_NombreVideo" :var idioma="es" :var calidad="1080p60" :var musica="music/3Blue1Brown-Zeta-X3.mp3" :var volumen="0.25" :var volumen_voz="0.04" :results output
+export LC_ALL=C   # decimales con punto para bc y printf
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+dir=$raiz/lib/media/videos/$fichero/$calidad
+tmp=$raiz/tmp/$video; mkdir -p $tmp; rm -f $tmp/seg_*.mp4
+
+# 1. Un segmento por escena, con audio y vídeo de la misma duración exacta
+i=0; lista=""; offsets=""; T=0; T0=""; Tc=""
+for esc in $escenas; do
+  seg=$(printf "%s/seg_%02d.mp4" $tmp $i)
+  dur=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4)
+  fps=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4)
+  if ffprobe -loglevel error -select_streams a -show_entries stream=codec_type -of csv=p=0 $dir/$esc.mp4 | grep -q audio; then
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -af "aresample=48000,apad" -ac 2 -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  else
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  fi
+  d=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg)
+  offsets="$offsets $T"; [ "$esc" = "$cierre" ] && Tc=$T
+  printf "%2d  %-55s %8.3f s  (empieza en %8.3f)\n" $i $esc $d $T
+  T=$(bc -l <<< "$T+$d"); [ -z "$T0" ] && T0=$d; dl=$d
+  lista="$lista $seg"; i=$((i+1))
+done
+n=$i; Tl=$(bc -l <<< "$T-$dl"); [ -z "$Tc" ] && Tc=$Tl
+printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (créditos)\n" $T $T0 $Tc $Tl
+
+# 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
+inputs=""; fc=""; k=0
+for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
+dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
+fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
+ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]loudnorm=I=-16:LRA=11:TP=-1.5[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $raiz/$video.mp4
+echo "Vídeo: $raiz/$video.mp4"
+
+# 3. Subtítulos: desplazar el srt de cada escena y fundirlos en uno
+ESCENAS="$escenas" OFFSETS="$offsets" python3 - "$dir" "$raiz/$video.srt" <<'EOF'
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) < 3 or "-->" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("-->")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --> {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subtítulos: {salida} ({k-1} entradas)")
+EOF
+#+END_SRC
+
+** Comprobar las uniones y los subtítulos
+
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime [[montaje]]) para mirar que no haya parones ni desfases.
+
+#+name: fotogramas
+#+BEGIN_SRC bash :var video="LXX_VYY_NombreVideo" :var idioma="es" :var tiempos="0 10 20" :results output
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+mkdir -p $raiz/tmp/fotogramas
+for t in $tiempos; do
+  for dt in -0.1 0.1; do
+    ti=$(bc -l <<< "$t+$dt"); [ $(bc -l <<< "$ti < 0") = 1 ] && ti=0
+    ffmpeg -loglevel error -y -ss $ti -i $raiz/$video.mp4 -frames:v 1 $raiz/tmp/fotogramas/$(printf "%08.2f" $ti).png
+  done
+done
+ls $raiz/tmp/fotogramas
+#+END_SRC
+
+** Extraer el guion (la narración) para revisarlo
+
+Recorre el fichero de python y saca, escena por escena, los textos
+~tr(...)~ del idioma pedido: en prosa la narración (los que están dentro
+de ~self.voiceover~) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en =LANG=, lee siempre el fichero español (=./lib/=).
+
+#+name: guion
+#+BEGIN_SRC python :python python3 :var fichero="LXX_VYY_FileName" :var idioma="es" :results output
+import ast, textwrap
+
+arbol = ast.parse(open(f"lib/{fichero}.py", encoding="utf-8").read())
+idx   = 0 if idioma == "es" else 1
+
+def texto(nodo):
+    try:
+        return ast.literal_eval(nodo)
+    except Exception:
+        return ast.unparse(nodo)
+
+def es_tr(n):
+    return (isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "tr" and len(n.args) >= 2)
+
+def es_borrado(stmt):
+    return ast.unparse(stmt).startswith("self.play(*[FadeOut(mob) for mob in self.mobjects])")
+
+# Primera clase con construct(): la del vídeo completo.
+construct = next(f for c in arbol.body if isinstance(c, ast.ClassDef)
+                 for f in c.body if isinstance(f, ast.FunctionDef) and f.name == "construct")
+
+escena, items = 0, []   # la portada es la escena 0
+def volcar():
+    global items
+    if items:
+        print(f"==== {'Escena' if idioma == 'es' else 'Scene'} {escena} ====\n")
+        for tipo, t in items:
+            if tipo == "voz":
+                print(textwrap.fill(t, 72), "\n")
+            else:
+                print(f"    [{t}]\n")
+    items = []
+
+for stmt in construct.body:
+    if es_borrado(stmt):
+        volcar(); escena += 1; continue
+    en_voz = set()
+    for n in ast.walk(stmt):
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == "voiceover":
+            en_voz |= {id(s) for s in ast.walk(n) if es_tr(s)}
+    for n in sorted((n for n in ast.walk(stmt) if es_tr(n)), key=lambda n: (n.lineno, n.col_offset)):
+        items.append(("voz" if id(n) in en_voz else "pantalla", texto(n.args[idx])))
+volcar()
+#+END_SRC
+
+** Tangle desde la terminal (sin abrir Emacs)
+
+#+BEGIN_SRC bash :results silent
+emacs --batch -l org --eval '(org-babel-tangle-file "L01-V06-PropiedadesDeLaSumaYDelProductoPorEscalaresEnRn.org")'
+#+END_SRC

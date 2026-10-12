@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2026-01-27 mar 17:58 -->
+<!-- 2026-01-27 mar 19:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lección 1 del curso - Vídeo 4</title>
@@ -233,45 +233,45 @@
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0e501ba">1. Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</a>
+<li><a href="#orga17b520">1. Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</a>
 <ul>
-<li><a href="#org4d30199">1.1. Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</a></li>
-<li><a href="#orgb931c72">1.2. Escena 2 - Interpretación geométrica del producto de números</a></li>
-<li><a href="#org578841f">1.3. Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</a></li>
-<li><a href="#org07c2b25">1.4. Escena 4 - Interpretación geométrica del producto de tres números (3D)</a>
+<li><a href="#orgaa25fe8">1.1. Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</a></li>
+<li><a href="#org510848f">1.2. Escena 2 - Interpretación geométrica del producto de números</a></li>
+<li><a href="#org11f8528">1.3. Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</a></li>
+<li><a href="#org239bad4">1.4. Escena 4 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^3\)</a>
 <ul>
-<li><a href="#orgbd79833">1.4.1. Escena 3D</a></li>
-<li><a href="#org6a0a3bf">1.4.2. Escena + Narración</a></li>
+<li><a href="#org1ef54d0">1.4.1. Escena 3D</a></li>
+<li><a href="#orgf96cc42">1.4.2. Escena + Narración</a></li>
 </ul>
 </li>
-<li><a href="#orgb9bbea4">1.5. Escena 5 - Resumen</a></li>
+<li><a href="#org00e4c6e">1.5. Escena 5 - Resumen</a></li>
 </ul>
 </li>
-<li><a href="#org6da069b">2. Trozos comunes de código</a>
+<li><a href="#orgff69b49">2. Trozos comunes de código</a>
 <ul>
-<li><a href="#orge7b488a">2.1. Carga de la librería Manim y NacAL</a></li>
-<li><a href="#org7600134">Definición de algunas subclases con definiciones generales</a>
+<li><a href="#org945e944">2.1. Carga de la librería Manim y NacAL</a></li>
+<li><a href="#org8d1cb45">Definición de algunas subclases con definiciones generales</a>
 <ul>
-<li><a href="#orgfe8b813">Definición Vectores en R2 y R3</a></li>
-<li><a href="#org0d221d8">Insertar un vídeo en una escena</a></li>
-<li><a href="#org5f2865e">Mover miniescenas a un subdirectorio auxiliar</a></li>
+<li><a href="#org41cce2d">Definición Vectores en R2 y R3</a></li>
+<li><a href="#org775f72c">Insertar un vídeo en una escena</a></li>
+<li><a href="#org51908a4">Mover miniescenas a un subdirectorio auxiliar</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgbdbe3d4">3. Rodando: 1,2,3&hellip; ¡acción!</a></li>
+<li><a href="#org182da93">3. Rodando: 1,2,3&hellip; ¡acción!</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0e501ba" class="outline-2">
-<h2 id="org0e501ba"><span class="section-number-2">1.</span> Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</h2>
+<div id="outline-container-orga17b520" class="outline-2">
+<h2 id="orga17b520"><span class="section-number-2">1.</span> Producto de un vectores de \(\mathbb{R}^n\) por un escalar - Vídeo 04</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org4d30199" class="outline-3">
-<h3 id="org4d30199"><span class="section-number-3">1.1.</span> Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</h3>
+<div id="outline-container-orgaa25fe8" class="outline-3">
+<h3 id="orgaa25fe8"><span class="section-number-3">1.1.</span> Escena 1 - Producto de vectores de de \(\mathbb{R}^n\) por escalares</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
-<pre class="src src-python" id="org4a0f0e4">&lt;&lt;Carga de la librer&#237;a Manim y NacAL con AzureService&gt;&gt;
+<pre class="src src-python" id="org67ac19a">&lt;&lt;Carga de la librer&#237;a Manim y NacAL con AzureService&gt;&gt;
 <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">&lt;&lt;Carga de la librer&#237;a Manim y NacAL&gt;&gt;
 </span>&lt;&lt;Definici&#243;n de mi escena con voz&gt;&gt;
 &lt;&lt;Definici&#243;n de VectorR2&gt;&gt;
@@ -540,8 +540,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgb931c72" class="outline-3">
-<h3 id="orgb931c72"><span class="section-number-3">1.2.</span> Escena 2 - Interpretación geométrica del producto de números</h3>
+<div id="outline-container-org510848f" class="outline-3">
+<h3 id="org510848f"><span class="section-number-3">1.2.</span> Escena 2 - Interpretación geométrica del producto de números</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">L01_V04_E02_InterpretacionGeometricaDelProductoDeDosNumeros</span>(MiEscenaConVoz):   
@@ -1271,8 +1271,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org578841f" class="outline-3">
-<h3 id="org578841f"><span class="section-number-3">1.3.</span> Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</h3>
+<div id="outline-container-org11f8528" class="outline-3">
+<h3 id="org11f8528"><span class="section-number-3">1.3.</span> Escena 3 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^2\)</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">L01_V04_E03_InterpretacionGeometricaDelProductoPorEscalaresR2</span>(MiEscenaConVoz):    
@@ -1894,12 +1894,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org07c2b25" class="outline-3">
-<h3 id="org07c2b25"><span class="section-number-3">1.4.</span> Escena 4 - Interpretación geométrica del producto de tres números (3D)</h3>
+<div id="outline-container-org239bad4" class="outline-3">
+<h3 id="org239bad4"><span class="section-number-3">1.4.</span> Escena 4 - Interpretación geométrica del producto de vectores de de \(\mathbb{R}^3\)</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-orgbd79833" class="outline-4">
-<h4 id="orgbd79833"><span class="section-number-4">1.4.1.</span> Escena 3D</h4>
+<div id="outline-container-org1ef54d0" class="outline-4">
+<h4 id="org1ef54d0"><span class="section-number-4">1.4.1.</span> Escena 3D</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 <pre class="src src-python">
@@ -2158,8 +2158,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org6a0a3bf" class="outline-4">
-<h4 id="org6a0a3bf"><span class="section-number-4">1.4.2.</span> Escena + Narración</h4>
+<div id="outline-container-orgf96cc42" class="outline-4">
+<h4 id="orgf96cc42"><span class="section-number-4">1.4.2.</span> Escena + Narración</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 <pre class="src src-python">&lt;&lt;Definici&#243;n de VideoStatus y VideoMobject&gt;&gt;
@@ -2250,8 +2250,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgb9bbea4" class="outline-3">
-<h3 id="orgb9bbea4"><span class="section-number-3">1.5.</span> Escena 5 - Resumen</h3>
+<div id="outline-container-org00e4c6e" class="outline-3">
+<h3 id="org00e4c6e"><span class="section-number-3">1.5.</span> Escena 5 - Resumen</h3>
 <div class="outline-text-3" id="text-1-5">
 <div class="org-src-container">
 <pre class="src src-python">
@@ -2350,15 +2350,15 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org6da069b" class="outline-2">
-<h2 id="org6da069b"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div id="outline-container-orgff69b49" class="outline-2">
+<h2 id="orgff69b49"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orge7b488a" class="outline-3">
-<h3 id="orge7b488a"><span class="section-number-3">2.1.</span> Carga de la librería Manim y NacAL</h3>
+<div id="outline-container-org945e944" class="outline-3">
+<h3 id="org945e944"><span class="section-number-3">2.1.</span> Carga de la librería Manim y NacAL</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
-<pre class="src src-python" id="org59f46a9"><span style="color: #0000FF; font-weight: bold;">from</span> manim <span style="color: #0000FF; font-weight: bold;">import</span> *
+<pre class="src src-python" id="orgf0cefd1"><span style="color: #0000FF; font-weight: bold;">from</span> manim <span style="color: #0000FF; font-weight: bold;">import</span> *
 <span style="color: #0000FF; font-weight: bold;">from</span> manim_voiceover <span style="color: #0000FF; font-weight: bold;">import</span> VoiceoverScene
 <span style="color: #0000FF; font-weight: bold;">from</span> manim_voiceover.services.azure <span style="color: #0000FF; font-weight: bold;">import</span> AzureService
 <span style="color: #0000FF; font-weight: bold;">import</span> nacal <span style="color: #0000FF; font-weight: bold;">as</span> nc
@@ -2376,11 +2376,11 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org7600134" class="outline-3">
-<h3 id="org7600134">Definición de algunas subclases con definiciones generales</h3>
-<div class="outline-text-3" id="text-org7600134">
+<div id="outline-container-org8d1cb45" class="outline-3">
+<h3 id="org8d1cb45">Definición de algunas subclases con definiciones generales</h3>
+<div class="outline-text-3" id="text-org8d1cb45">
 <div class="org-src-container">
-<pre class="src src-python" id="orgb1258bc">
+<pre class="src src-python" id="org73c2f65">
 <span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">MiEscenaConVoz</span>(VoiceoverScene):
     <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">pausa_muy_corta</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, n=0.3):
         <span style="color: #0000FF; font-weight: bold;">self</span>.wait(n)
@@ -2402,7 +2402,7 @@
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf4783c3"><span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, variante=1):
+<pre class="src src-python" id="org7e5ca8a"><span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">creditos</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, variante=1):
     <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">analisis_opcion_elegida</span>(tipo):
         <span style="color: #036A07;">'An&#225;lisis de las opciones de eliminaci&#243;n elegidas'</span>
         <span style="color: #BA36A5;">lista</span> = [100,20,10,4,2,1]
@@ -2430,7 +2430,7 @@
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org71ec9aa"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">ZCreditos</span>(Scene):
+<pre class="src src-python" id="org3c612bb"><span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">ZCreditos</span>(Scene):
     <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">construct</span>(<span style="color: #0000FF; font-weight: bold;">self</span>):
         <span style="color: #D0372D;">copyright</span> = Tex(r<span style="color: #008000;">"\textcopyright{\;} 2026 \; Marcos Bujosa"</span>)
         <span style="color: #BA36A5;">github</span> = Tex(r<span style="color: #008000;">"\texttt{https://github.com/mbujosab}"</span>).next_to(<span style="color: #D0372D;">copyright</span>, DOWN)
@@ -2440,15 +2440,15 @@
 </pre>
 </div>
 </div>
-<div id="outline-container-orgfe8b813" class="outline-4">
-<h4 id="orgfe8b813">Definición Vectores en R2 y R3</h4>
-<div class="outline-text-4" id="text-orgfe8b813">
+<div id="outline-container-org41cce2d" class="outline-4">
+<h4 id="org41cce2d">Definición Vectores en R2 y R3</h4>
+<div class="outline-text-4" id="text-org41cce2d">
 <p>
 Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados con dibujos.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org26b3433">
+<pre class="src src-python" id="org9e1e415">
 <span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">VectorR2</span>():
     <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
         <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
@@ -2477,7 +2477,7 @@ Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados co
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgbb41d7c">
+<pre class="src src-python" id="orga1328ba">
 <span style="color: #0000FF; font-weight: bold;">class</span> <span style="color: #6434A3;">VectorR3</span>():
     <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">__init__</span>(<span style="color: #0000FF; font-weight: bold;">self</span>, lista, rpr=<span style="color: #008000;">'c'</span>, color=GRAY_B):
         <span style="color: #036A07;">"""Inicializa un Vector con una lista"""</span>
@@ -2528,11 +2528,11 @@ Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados co
 </div>
 </div>
 </div>
-<div id="outline-container-org0d221d8" class="outline-4">
-<h4 id="org0d221d8">Insertar un vídeo en una escena</h4>
-<div class="outline-text-4" id="text-org0d221d8">
+<div id="outline-container-org775f72c" class="outline-4">
+<h4 id="org775f72c">Insertar un vídeo en una escena</h4>
+<div class="outline-text-4" id="text-org775f72c">
 <div class="org-src-container">
-<pre class="src src-python" id="org4c7338e"><span style="color: #0000FF; font-weight: bold;">import</span> cv2 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needs opencv-python https://pypi.org/project/opencv-python/
+<pre class="src src-python" id="org05d6a3c"><span style="color: #0000FF; font-weight: bold;">import</span> cv2 <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">needs opencv-python https://pypi.org/project/opencv-python/
 </span><span style="color: #0000FF; font-weight: bold;">from</span> PIL <span style="color: #0000FF; font-weight: bold;">import</span> Image, ImageOps
 <span style="color: #0000FF; font-weight: bold;">from</span> dataclasses <span style="color: #0000FF; font-weight: bold;">import</span> dataclass
 
@@ -2619,36 +2619,36 @@ Estas clases definen vectores en \(\R[2]\) y \(\R[3]\) para ser representados co
 </div>
 </div>
 </div>
-<div id="outline-container-org5f2865e" class="outline-4">
-<h4 id="org5f2865e">Mover miniescenas a un subdirectorio auxiliar</h4>
-<div class="outline-text-4" id="text-org5f2865e">
+<div id="outline-container-org51908a4" class="outline-4">
+<h4 id="org51908a4">Mover miniescenas a un subdirectorio auxiliar</h4>
+<div class="outline-text-4" id="text-org51908a4">
 <div class="org-src-container">
-<pre class="src src-bash" id="org560367a">mkdir -p /home/marcos/SynologyDrive/ReposGH/Docencia/VideosMates2/lib/media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/aux_movie_files
+<pre class="src src-bash" id="org5e3093a">mkdir -p /home/marcos/SynologyDrive/ReposGH/Docencia/VideosMates2/lib/media/videos/L01_V04_ProductoDeUnVectorPorUnEscalar/480p15/aux_movie_files
 mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-bash" id="org545714c">mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
+<pre class="src src-bash" id="org93602f0">mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbdbe3d4" class="outline-2">
-<h2 id="orgbdbe3d4"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div id="outline-container-org182da93" class="outline-2">
+<h2 id="org182da93"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
 <div class="outline-text-2" id="text-3">
 </div>
 <ol class="org-ol">
-<li><a id="org7f8feb1"></a>Generamos un fichero <code>mpeg</code> por cada escena<br />
+<li><a id="org1d798d8"></a>Generamos un fichero <code>mpeg</code> por cada escena<br />
 <div class="outline-text-5" id="text-3-0-0-1">
 <ul class="org-ul">
 <li>Versión de poca calidad:</li>
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-bash" id="org24830fe"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+<pre class="src src-bash" id="org95cd87f"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -pql $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
 </pre>
 </div>
 
@@ -2657,12 +2657,12 @@ mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-bash" id="org2621021"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
+<pre class="src src-bash" id="org35aaad9"><span style="color: #006FE0;">echo</span> $<span style="color: #BA36A5;">escena</span> | manim -qh $<span style="color: #BA36A5;">fichero</span>.py --disable_caching
 </pre>
 </div>
 </div>
 </li>
-<li><a id="orgdc3d2d8"></a>Concatenamos las escenas en un único fichero <code>mpeg</code> y añadimos música de fondo.<br />
+<li><a id="org9209be1"></a>Concatenamos las escenas en un único fichero <code>mpeg</code> y añadimos música de fondo.<br />
 <div class="outline-text-5" id="text-3-0-0-2">
 <ul class="org-ul">
 <li>Montando la versión de baja resolución</li>
@@ -2670,7 +2670,7 @@ mv $<span style="color: #BA36A5;">fichero</span> aux_movie_files/
 
 
 <div class="org-src-container">
-<pre class="src src-bash" id="orgba36ca6">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+<pre class="src src-bash" id="orgec13180">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
 rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
 <span style="color: #0000FF; font-weight: bold;">for</span> f<span style="color: #0000FF; font-weight: bold;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4; <span style="color: #0000FF; font-weight: bold;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF; font-weight: bold;">done</span>
 ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
@@ -2686,7 +2686,7 @@ ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA3
 </ul>
 
 <div class="org-src-container">
-<pre class="src src-bash" id="org27985cf">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
+<pre class="src src-bash" id="org0b23453">ln -s -f <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/ZCreditos/$calidad/ZCreditos.mp4"</span> <span style="color: #008000;">"$(</span><span style="color: #FF1493;">pwd</span><span style="color: #008000;">)/$subdir/$video/$calidad/ZCreditos.mp4"</span>
 rm -f $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4 list.txt
 <span style="color: #0000FF; font-weight: bold;">for</span> f<span style="color: #0000FF; font-weight: bold;"> in</span> $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/*.mp4 ; <span style="color: #0000FF; font-weight: bold;">do </span><span style="color: #006FE0;">echo</span> file <span style="color: #008000;">\'</span>$<span style="color: #BA36A5;">f</span><span style="color: #008000;">\'</span> &gt;&gt; list.txt; <span style="color: #0000FF; font-weight: bold;">done</span>
 ffmpeg -f concat -safe 0 -i list.txt -c copy $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA36A5;">video</span>/$<span style="color: #BA36A5;">calidad</span>/$<span style="color: #BA36A5;">video</span>.mp4
@@ -2696,10 +2696,10 @@ ffmpeg -i $<span style="color: #BA36A5;">subdir</span>/$<span style="color: #BA3
 </div>
 </div>
 </li>
-<li><a id="org98c45a9"></a>Fundimos a negro los últimos segundos del vídeo (y la música).<br />
+<li><a id="orgddd2212"></a>Fundimos a negro los últimos segundos del vídeo (y la música).<br />
 <div class="outline-text-5" id="text-3-0-0-3">
 <div class="org-src-container">
-<pre class="src src-bash" id="org95d26a8"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
+<pre class="src src-bash" id="org6b33b9a"><span style="color: #BA36A5;">dur</span>=$(<span style="color: #FF1493;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4"</span>)
 <span style="color: #BA36A5;">offset</span>=$(<span style="color: #FF1493;">bc -l &lt;&lt;&lt; "$dur"-7</span>)
 ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="color: #008000;">\</span>
        -filter_complex <span style="color: #008000;">"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=out:duration=6:start_time='$offset'[a]"</span> <span style="color: #008000;">\</span>
@@ -2708,14 +2708,14 @@ ffmpeg -i <span style="color: #008000;">"tmp/$video.mp4"</span> <span style="col
 </div>
 </div>
 </li>
-<li><a id="orgae83295"></a>Traducción<br />
+<li><a id="org7472858"></a>Traducción<br />
 <div class="outline-text-5" id="text-3-0-0-4">
 <p>
 Esto no me ha funcionado.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-bash" id="org7d58b78">xgettext -o locale/$<span style="color: #BA36A5;">fichero</span>.pot $<span style="color: #BA36A5;">fichero</span>.py
+<pre class="src src-bash" id="orga51eb47">xgettext -o locale/$<span style="color: #BA36A5;">fichero</span>.pot $<span style="color: #BA36A5;">fichero</span>.py
 
 msginit -i locale/$<span style="color: #BA36A5;">fichero</span>.pot -o locale/en/LC_MESSAGES/$<span style="color: #BA36A5;">fichero</span>.po --locale=es --no-translator
 
@@ -2736,7 +2736,7 @@ manim_render_translation $<span style="color: #BA36A5;">fichero</span>.py -s $<s
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marcos Bujosa</p>
-<p class="date">Created: 2026-01-27 mar 17:58</p>
+<p class="date">Created: 2026-01-27 mar 19:18</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
