@@ -20,6 +20,13 @@ selector, "componente a componente", etc.).
   y **fuente única bilingüe**. Plantilla: `LXX-VYY-NombreVideo.org`.
   Cada escena es un chunk con nombre que reutilizan la clase del vídeo
   completo y las clases `LXX_VYY_Enn_*` (chunk "Clases de las escenas").
+- El código común (carga de librerías, `LANG`, `tr`, voces, colores,
+  `myTemplate`, `MiEscenaConVoz`, tarjeta de pausa, créditos,
+  VectorR2/R3) vive en `Comunes.org`, que tangle `lib/vm2comun.py` en
+  los dos repositorios (solo difieren en `LANG`). Cada vídeo hace
+  `from vm2comun import *` y declara `class ZCreditosFinales(CreditosFinales): pass`
+  (manim solo renderiza clases definidas en el fichero del vídeo). Si se
+  cambia algo común: tangle `Comunes.org` y todos los vídeos lo heredan.
 - Bilingüe: toda narración y texto en pantalla se escribe
   `tr("español", "English")`; las fórmulas nacal son comunes. El tangle
   genera dos py: `./lib/<Nombre>.py` (LANG="es") y
@@ -180,8 +187,7 @@ comillas, usa la caché real para que el audio elegido sea el del vídeo).
 
 ## Pendiente
 
-- Cuando los trozos comunes (carga de librerías, `tr`, `voz`,
-  `MiEscenaConVoz`, créditos, `myTemplate`, VectorR2/R3) se estabilicen
-  tras dos o tres vídeos bilingües, extraerlos a un `Comunes.org` que
-  tangle `lib/vm2comun.py` en ambos repos; cada vídeo haría
-  `from vm2comun import *`. Hoy se copian en cada org (~150 líneas).
+- Iconos de la serie (pregunta, idea clave, "engorroso", "ilustra, no
+  demuestra") al estilo de la tarjeta de pausa, en `Comunes.org`.
+- V06: reconciliar con V05 (los reales tienen nueve propiedades, para los
+  vectores bastan ocho) y pasar su guion por las reglas de letras.

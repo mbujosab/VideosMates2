@@ -34,3 +34,4 @@ pruebas.org
 lib/client_secret_youtube.json
 lib/token_youtube.json
 *.pdf
+*.srt
