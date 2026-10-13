@@ -33,3 +33,4 @@ pruebas.org
 # Credenciales de YouTube (lib/subir_youtube.py)
 lib/client_secret_youtube.json
 lib/token_youtube.json
+*.pdf
