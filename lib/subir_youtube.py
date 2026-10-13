@@ -9,6 +9,8 @@ Modos:
                                      ficha (campo `youtube`) si no se da
   ver        ID                      muestra título, descripción, subtítulos y listas
   listas                             todas las listas propias (también no listadas), con su id
+  subtitulos ID IDIOMA FICHERO.srt   sube o sustituye solo los subtítulos de ese idioma
+  idioma     ID es|en                cambia solo el idioma declarado (título y audio)
 
 La pantalla final (vídeo siguiente, suscripción) y las tarjetas no se pueden poner por la API:
 se hacen en YouTube Studio (se puede copiar la pantalla final de otro vídeo del canal).
@@ -139,7 +141,7 @@ def pone_subtitulos(yt, d, video_id):
     media = MediaFileUpload(d["subtitulos"], mimetype="application/x-subrip", resumable=False)
     # La API no deja actualizar una pista existente (403): se borra y se vuelve a subir.
     for previa in yt.captions().list(part="snippet", videoId=video_id).execute().get("items", []):
-        if previa["snippet"]["language"] == idioma:
+        if previa["snippet"]["language"] == idioma and previa["snippet"].get("trackKind") == "standard":   # no tocar las automáticas (asr)
             yt.captions().delete(id=previa["id"]).execute()
             print(f"Subtítulos ({idioma}) anteriores borrados")
     yt.captions().insert(part="snippet", media_body=media, sync=False,
@@ -186,6 +188,17 @@ def pone_miniatura(yt, d, video_id):
         print("Miniatura puesta")
 
 
+def pone_idioma(yt, video_id, idioma):
+    """Cambia solo el idioma declarado del vídeo (del título y del audio), conservando lo demás."""
+    v = yt.videos().list(part="snippet", id=video_id).execute()["items"][0]
+    sn = v["snippet"]
+    body = {"id": video_id, "snippet": {"title": sn["title"], "description": sn.get("description", ""),
+                                        "tags": sn.get("tags", []), "categoryId": sn["categoryId"],
+                                        "defaultLanguage": idioma, "defaultAudioLanguage": idioma}}
+    yt.videos().update(part="snippet", body=body).execute()
+    print(f"Idioma de https://youtu.be/{video_id} puesto a {idioma}")
+
+
 def listas(yt):
     """Todas las listas propias (incluidas las no listadas o privadas), con identificador."""
     pagina = None
@@ -223,6 +236,10 @@ def main():
     q = sub.add_parser("ver")
     q.add_argument("id")
     sub.add_parser("listas")
+    q = sub.add_parser("subtitulos", help="sube (o sustituye) solo los subtítulos de un vídeo")
+    q.add_argument("id"); q.add_argument("idioma", choices=["es", "en"]); q.add_argument("srt")
+    q = sub.add_parser("idioma", help="cambia solo el idioma declarado de un vídeo")
+    q.add_argument("id"); q.add_argument("codigo", choices=["es", "en"])
     args = p.parse_args()
 
     yt = youtube()
@@ -230,6 +247,10 @@ def main():
         return ver(yt, args.id)
     if args.modo == "listas":
         return listas(yt)
+    if args.modo == "subtitulos":
+        return pone_subtitulos(yt, {"idioma": args.idioma, "subtitulos": os.path.abspath(args.srt)}, args.id)
+    if args.modo == "idioma":
+        return pone_idioma(yt, args.id, args.codigo)
     d = lee_ficha(args.ficha, args.idioma)
     if args.modo == "subir":
         video_id = sube_video(yt, d)
