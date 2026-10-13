@@ -31,111 +31,111 @@ a necesitar las propiedades algebraicas de los números reales.
 Seguro que las conoce desde la escuela.
 
 9
-00:00:30,933 --> 00:00:35,223
+00:00:30,950 --> 00:00:35,240
 Pero ¿de dónde salen? En este vídeo vamos a verlas, no a demostrarlas.
 
 10
-00:00:35,323 --> 00:00:39,425
+00:00:35,340 --> 00:00:39,442
 Y las veremos con regla y compás como hacían los geómetras griegos.
 
 11
-00:00:39,600 --> 00:00:42,742
+00:00:39,533 --> 00:00:42,675
 Para ello, un número real será un punto de una recta
 
 12
-00:00:42,842 --> 00:00:45,236
+00:00:42,775 --> 00:00:45,169
 en la que hemos fijado el cero y el uno.
 
 13
-00:00:45,400 --> 00:00:48,800
+00:00:45,283 --> 00:00:48,684
 Veremos que las sumas y los productos de números reales se
 
 14
-00:00:48,900 --> 00:00:52,784
+00:00:48,784 --> 00:00:52,667
 pueden construir con la regla y el compás, trasladando segmentos y
 
 15
-00:00:52,884 --> 00:00:57,250
+00:00:52,767 --> 00:00:57,134
 trazando paralelas. Pero también, que dicha construcción es incómoda en la
 
 16
-00:00:57,350 --> 00:01:01,355
+00:00:57,234 --> 00:01:01,238
 práctica. De tratar de evitar esa incomodidad nace la manera moderna
 
 17
-00:01:01,455 --> 00:01:05,580
+00:01:01,338 --> 00:01:05,463
 de hacer matemáticas: operar con símbolos siguiendo unas pocas reglas.
 
 18
-00:01:06,733 --> 00:01:11,062
+00:01:06,567 --> 00:01:10,896
 Empecemos por la suma. Fijados el cero y el uno, tomemos un número a.
 
 19
-00:01:11,162 --> 00:01:15,684
+00:01:10,996 --> 00:01:15,518
 Es un punto de la recta. Pero también podemos verlo como un segmento: su
 
 20
-00:01:15,784 --> 00:01:19,857
+00:01:15,618 --> 00:01:19,691
 origen está siempre en el cero, y su otro extremo es el número a.
 
 21
-00:01:19,933 --> 00:01:24,921
+00:01:19,783 --> 00:01:24,771
 Y aquí tenemos otro número, b: otro segmento con el origen en el cero.
 
 22
-00:01:25,066 --> 00:01:28,662
+00:01:24,883 --> 00:01:28,479
 Para sumar a y b, trasladamos el segmento b, y ponemos su
 
 23
-00:01:28,762 --> 00:01:31,969
+00:01:28,579 --> 00:01:31,786
 origen en el extremo de a. Eso es justo lo que hace
 
 24
-00:01:32,069 --> 00:01:35,406
+00:01:31,886 --> 00:01:35,223
 un compás: toma una longitud y la lleva a otro sitio.
 
 25
-00:01:35,466 --> 00:01:39,183
+00:01:35,317 --> 00:01:39,034
 El extremo del segmento trasladado es la suma, a más b. Es
 
 26
-00:01:39,283 --> 00:01:42,869
+00:01:39,134 --> 00:01:42,720
 decir, la suma es un nuevo segmento: con el origen en el
 
 27
-00:01:42,969 --> 00:01:46,358
+00:01:42,820 --> 00:01:46,209
 cero, como siempre, y con el otro extremo en a más b.
 
 28
-00:01:46,399 --> 00:01:49,685
+00:01:46,300 --> 00:01:49,586
 Hagámoslo ahora en el otro orden: partimos de b y
 
 29
-00:01:49,785 --> 00:01:52,587
+00:01:49,686 --> 00:01:52,488
 ponemos el origen de a en el extremo de b.
 
 30
-00:01:52,666 --> 00:01:55,049
+00:01:52,583 --> 00:01:54,967
 Llegamos exactamente al mismo punto. Es
 
 31
-00:01:55,149 --> 00:01:57,342
+00:01:55,067 --> 00:01:57,259
 la propiedad conmutativa de la suma.
 
 32
-00:02:00,399 --> 00:02:05,529
+00:02:00,350 --> 00:02:05,480
 Con tres números podemos agrupar de dos maneras. Primero a más b, poniendo
 
 33
-00:02:05,629 --> 00:02:09,275
+00:02:05,580 --> 00:02:09,226
 el origen de b en el extremo de a. Y después sumar c.
 
 34
-00:02:10,199 --> 00:02:13,443
+00:02:10,150 --> 00:02:13,393
 O primero b más c, poniendo el origen de c en
 
 35
-00:02:13,543 --> 00:02:17,083
+00:02:13,493 --> 00:02:17,034
 el extremo de b. Y después sumárselo al número a.
 
 36
@@ -143,329 +143,329 @@ el extremo de b. Y después sumárselo al número a.
 El punto final es el mismo. Es la propiedad asociativa.
 
 37
-00:02:21,599 --> 00:02:25,826
+00:02:21,650 --> 00:02:25,877
 Sumar cero es sumar un segmento de longitud cero: un punto, con el
 
 38
-00:02:25,926 --> 00:02:29,367
+00:02:25,977 --> 00:02:29,418
 origen en el cero. Lo ponemos en el extremo de a, y no
 
 39
-00:02:29,467 --> 00:02:33,235
+00:02:29,518 --> 00:02:33,286
 nos movemos de a. El cero es el elemento neutro de la suma.
 
 40
-00:02:34,533 --> 00:02:38,360
+00:02:34,583 --> 00:02:38,410
 Todo número tiene un opuesto. Para construir el opuesto de a, ponemos
 
 41
-00:02:38,460 --> 00:02:41,604
+00:02:38,510 --> 00:02:41,654
 el compás en el cero y abatimos el segmento hacia el lado
 
 42
-00:02:41,704 --> 00:02:45,417
+00:02:41,754 --> 00:02:45,468
 contrario. Obtenemos menos a, un segmento con el origen en el cero,
 
 43
-00:02:45,517 --> 00:02:48,377
+00:02:45,568 --> 00:02:48,427
 como todos, pero que se extiende hacia el otro lado.
 
 44
-00:02:48,466 --> 00:02:53,167
+00:02:48,517 --> 00:02:53,218
 Sumemos ahora a y su opuesto con la regla de siempre: trasladamos el
 
 45
-00:02:53,267 --> 00:02:57,756
+00:02:53,318 --> 00:02:57,807
 segmento opuesto, y ponemos su origen en el extremo de a. Su otro
 
 46
-00:02:57,856 --> 00:03:01,710
+00:02:57,907 --> 00:03:01,761
 extremo cae justo en el cero. a, más su opuesto es cero.
 
 47
-00:03:01,799 --> 00:03:05,169
+00:03:01,850 --> 00:03:05,220
 Acabamos de ver cuatro propiedades de la suma. Y las cuatro
 
 48
-00:03:05,269 --> 00:03:07,933
+00:03:05,320 --> 00:03:07,983
 se ven en la recta con una sola regla: poner el
 
 49
-00:03:08,033 --> 00:03:10,579
+00:03:08,083 --> 00:03:10,630
 origen de un segmento en el extremo del otro.
 
 50
-00:03:11,667 --> 00:03:14,523
+00:03:11,717 --> 00:03:14,573
 Pasemos al producto. En el vídeo anterior vimos
 
 51
-00:03:14,623 --> 00:03:18,863
+00:03:14,673 --> 00:03:18,913
 una construcción geométrica que multiplica dos números. Recordémosla.
 
 52
-00:03:18,933 --> 00:03:22,529
+00:03:19,000 --> 00:03:22,596
 Ponemos a en el eje horizontal y b en el eje vertical.
 
 53
-00:03:22,667 --> 00:03:24,961
+00:03:22,700 --> 00:03:24,994
 Trazamos la recta que une el punto a del
 
 54
-00:03:25,061 --> 00:03:27,895
+00:03:25,094 --> 00:03:27,928
 eje horizontal con el punto uno del eje vertical.
 
 55
-00:03:27,933 --> 00:03:31,150
+00:03:28,017 --> 00:03:31,233
 Y trazamos la paralela que pasa por b. Dibujar una
 
 56
-00:03:31,250 --> 00:03:34,865
+00:03:31,333 --> 00:03:34,949
 paralela es una construcción clásica con regla y compás.
 
 57
-00:03:34,933 --> 00:03:39,129
+00:03:35,033 --> 00:03:39,229
 Donde esa paralela corta al eje horizontal está el producto a por b.
 
 58
-00:03:39,200 --> 00:03:42,553
+00:03:39,317 --> 00:03:42,670
 Fíjese en lo que hace esta figura: a cada número del eje
 
 59
-00:03:42,653 --> 00:03:46,684
+00:03:42,770 --> 00:03:46,801
 vertical le asigna un número del eje horizontal, su producto por a.
 
 60
-00:03:46,784 --> 00:03:51,124
+00:03:46,901 --> 00:03:51,241
 Si subimos por el eje vertical, el resultado se aleja proporcionalmente.
 
 61
-00:03:51,200 --> 00:03:56,811
+00:03:51,333 --> 00:03:56,945
 Si tomamos el uno, la paralela es la propia recta inicial, y el resultado es
 
 62
-00:03:56,911 --> 00:04:01,396
+00:03:57,045 --> 00:04:01,529
 a. Uno por a es a: el uno es el elemento neutro del producto.
 
 63
-00:04:01,467 --> 00:04:05,679
+00:04:01,617 --> 00:04:05,829
 Hay otra propiedad del producto: todo número distinto de cero tiene un
 
 64
-00:04:05,779 --> 00:04:10,360
+00:04:05,929 --> 00:04:10,510
 inverso, un número que multiplicado por él da uno. Para construirlo, movemos
 
 65
-00:04:10,460 --> 00:04:14,179
+00:04:10,610 --> 00:04:14,329
 la paralela hasta que corte al eje horizontal justo en el uno.
 
 66
-00:04:14,279 --> 00:04:17,999
+00:04:14,429 --> 00:04:18,149
 Donde esa paralela corta al eje vertical está el inverso de a.
 
 67
-00:04:19,267 --> 00:04:22,501
+00:04:19,433 --> 00:04:22,668
 Ahora sumemos otro número c a b, trasladándolo con
 
 68
-00:04:22,601 --> 00:04:25,503
+00:04:22,768 --> 00:04:25,669
 el compás sobre el eje vertical, encima de b.
 
 69
-00:04:25,600 --> 00:04:29,580
+00:04:25,767 --> 00:04:29,747
 La paralela que pasa por b más c nos da el producto a por b más c.
 
 70
-00:04:29,667 --> 00:04:33,887
+00:04:29,833 --> 00:04:34,053
 En el eje horizontal, entre cero y a por b, está el segmento a b.
 
 71
-00:04:33,987 --> 00:04:37,343
+00:04:34,153 --> 00:04:37,509
 Y entre a por b y a por b más c queda otro segmento.
 
 72
-00:04:37,400 --> 00:04:40,724
+00:04:37,600 --> 00:04:40,924
 ¿Cuánto mide ese segmento? Construyamos aparte el producto a
 
 73
-00:04:40,824 --> 00:04:42,892
+00:04:41,024 --> 00:04:43,092
 por c, con la paralela que pasa por c.
 
 74
-00:04:43,800 --> 00:04:46,928
+00:04:44,050 --> 00:04:47,178
 Y traslademos el segmento con el compás hasta
 
 75
-00:04:47,028 --> 00:04:50,084
+00:04:47,278 --> 00:04:50,334
 el origen. Coincide exactamente con a por c.
 
 76
-00:04:50,133 --> 00:04:53,522
+00:04:50,433 --> 00:04:53,822
 No es casualidad: la figura traslada los segmentos del eje
 
 77
-00:04:53,622 --> 00:04:57,733
+00:04:53,922 --> 00:04:58,033
 vertical al horizontal agrandándolos todos en la misma proporción. Por
 
 78
-00:04:57,833 --> 00:05:00,560
+00:04:58,133 --> 00:05:00,860
 eso una suma en el eje vertical se convierte en
 
 79
-00:05:00,660 --> 00:05:03,929
+00:05:00,960 --> 00:05:04,229
 una suma en el horizontal. Es la propiedad distributiva.
 
 80
-00:05:06,800 --> 00:05:11,177
+00:05:07,117 --> 00:05:11,494
 ¿Y la conmutativa? a por b igual a b por a. Nuestra construcción pone a
 
 81
-00:05:11,277 --> 00:05:14,836
+00:05:11,594 --> 00:05:15,153
 en el eje horizontal y b en el vertical, y nos da a por b.
 
 82
-00:05:14,933 --> 00:05:19,760
+00:05:15,250 --> 00:05:20,077
 Para calcular b por a necesitamos intercambiar los papeles: llevamos b al
 
 83
-00:05:19,860 --> 00:05:23,809
+00:05:20,177 --> 00:05:24,126
 eje horizontal y a al eje vertical, con dos arcos de compás.
 
 84
-00:05:23,866 --> 00:05:27,099
+00:05:24,217 --> 00:05:27,450
 Y repetimos la construcción: la recta por b
 
 85
-00:05:27,199 --> 00:05:29,502
+00:05:27,550 --> 00:05:29,853
 y por uno, y su paralela por a.
 
 86
-00:05:29,600 --> 00:05:32,938
+00:05:29,950 --> 00:05:33,288
 Son dos construcciones distintas, y acaban en el mismo
 
 87
-00:05:33,038 --> 00:05:36,376
+00:05:33,388 --> 00:05:36,726
 punto. Que coincidan no es casualidad, pero tampoco es
 
 88
-00:05:36,476 --> 00:05:40,324
+00:05:36,826 --> 00:05:40,674
 evidente: para justificarlo hacen falta triángulos semejantes.
 
 89
-00:05:41,200 --> 00:05:44,658
+00:05:41,567 --> 00:05:45,025
 La asociativa es peor: a por, b por c, frente a, a
 
 90
-00:05:44,758 --> 00:05:48,857
+00:05:45,125 --> 00:05:49,224
 por b, por c. Hay que multiplicar dos veces, y entre medias
 
 91
-00:05:48,957 --> 00:05:53,484
+00:05:49,324 --> 00:05:53,851
 llevar el resultado del eje horizontal al vertical con el compás.
 
 92
-00:05:54,666 --> 00:05:56,914
+00:05:54,833 --> 00:05:57,081
 Y por el otro camino: a por b, lo
 
 93
-00:05:57,014 --> 00:06:00,542
+00:05:57,181 --> 00:06:00,709
 llevamos al eje vertical, y lo multiplicamos por c.
 
 94
-00:06:00,866 --> 00:06:05,458
+00:06:00,983 --> 00:06:05,575
 Mismo punto. Pero cuente: cuatro rectas, cuatro paralelas,
 
 95
-00:06:05,558 --> 00:06:09,502
+00:06:05,675 --> 00:06:09,619
 dos arcos... y solo para multiplicar tres números.
 
 96
-00:06:10,400 --> 00:06:13,959
+00:06:10,517 --> 00:06:14,076
 Todas estas propiedades se pueden ver con regla y compás.
 
 97
-00:06:14,059 --> 00:06:17,490
+00:06:14,176 --> 00:06:17,607
 Pero es engorroso. Y esta es la cuestión. Los geómetras
 
 98
-00:06:17,590 --> 00:06:21,600
+00:06:17,707 --> 00:06:21,717
 griegos razonaban así, con figuras: en los Elementos de Euclides
 
 99
-00:06:21,700 --> 00:06:25,324
+00:06:21,817 --> 00:06:25,441
 la propiedad distributiva es un teorema sobre rectángulos.
 
 100
-00:06:25,400 --> 00:06:27,754
+00:06:25,533 --> 00:06:27,888
 Hubo que esperar casi dos mil años a que
 
 101
-00:06:27,854 --> 00:06:31,375
+00:06:27,988 --> 00:06:31,509
 Descartes diera el salto: tratar los segmentos como números
 
 102
-00:06:31,475 --> 00:06:34,444
+00:06:31,609 --> 00:06:34,577
 y operar con símbolos siguiendo unas pocas reglas.
 
 103
-00:06:34,533 --> 00:06:37,624
+00:06:34,667 --> 00:06:37,758
 Esa es la tradición que usted recibió en la escuela:
 
 104
-00:06:37,724 --> 00:06:41,245
+00:06:37,858 --> 00:06:41,378
 allí las reglas no se justifican con figuras, se comprueban
 
 105
-00:06:41,345 --> 00:06:44,129
+00:06:41,478 --> 00:06:44,263
 con unos cuantos ejemplos numéricos, y se usan.
 
 106
-00:06:45,200 --> 00:06:49,297
+00:06:45,350 --> 00:06:49,447
 Resumamos. Las dos operaciones con números reales se pueden
 
 107
-00:06:49,397 --> 00:06:53,140
+00:06:49,547 --> 00:06:53,290
 hacer con regla y compás, y cumplen estas propiedades.
 
 108
-00:06:53,200 --> 00:06:57,013
+00:06:53,383 --> 00:06:57,197
 De la suma: es conmutativa, es asociativa, el cero es
 
 109
-00:06:57,113 --> 00:07:00,780
+00:06:57,297 --> 00:07:00,963
 el elemento neutro, y todo número tiene un opuesto.
 
 110
-00:07:00,933 --> 00:07:05,116
+00:07:01,116 --> 00:07:05,300
 Del producto: es conmutativo, es distributivo respecto de la
 
 111
-00:07:05,216 --> 00:07:08,686
+00:07:05,400 --> 00:07:08,869
 suma, es asociativo, el uno es el elemento neutro,
 
 112
-00:07:08,786 --> 00:07:12,113
+00:07:08,969 --> 00:07:12,296
 y todo número distinto de cero tiene un inverso.
 
 113
-00:07:12,266 --> 00:07:15,808
+00:07:12,450 --> 00:07:15,991
 A partir de ahora no volveremos a la regla y el compás.
 
 114
-00:07:15,908 --> 00:07:20,906
+00:07:16,091 --> 00:07:21,089
 Estas nueve reglas son todo lo que necesitamos para operar simbólicamente con
 
 115
-00:07:21,006 --> 00:07:25,342
+00:07:21,189 --> 00:07:25,526
 números reales. Como dice Charles Van Loan: la notación lo es todo.
 
 116
-00:07:26,600 --> 00:07:29,758
+00:07:26,833 --> 00:07:29,992
 En el próximo vídeo plantearemos la misma cuestión para
 
 117
-00:07:29,858 --> 00:07:32,484
+00:07:30,092 --> 00:07:32,717
 los vectores. Veremos si la suma de vectores y
 
 118
-00:07:32,584 --> 00:07:35,980
+00:07:32,817 --> 00:07:36,213
 el producto por escalares cumplen estas mismas propiedades.

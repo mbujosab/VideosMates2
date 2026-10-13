@@ -1,0 +1,68 @@
+# Ficha de YouTube del vídeo L01 V05 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V05.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V05.toml en   # usa el campo youtube de la ficha (o --id)
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60).
+
+[comun]
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+youtube = "nfftYHyi0hU"   # https://youtu.be/nfftYHyi0hU (subido 2026-10-12)
+video = "L01_V05_PropiedadesDeLosRealesConReglaYCompas.mp4"
+subtitulos = "L01_V05_PropiedadesDeLosRealesConReglaYCompas.srt"
+idioma = "es"
+titulo = "L01 V05 Propiedades algebraicas de los números reales con regla y compás (Español)"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "números reales", "regla y compás", "propiedades algebraicas",
+             "matemáticas", "GECO", "UCM"]
+descripcion = """
+Las propiedades algebraicas de los números reales, vistas con regla y compás.
+
+Quinto vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Introducción: los números reales como puntos de una recta
+01:06 La suma, con regla y compás: conmutativa, asociativa, el cero y el opuesto
+03:11 El producto, con regla y compás: el uno, el inverso y la distributiva
+05:04 Dos propiedades incómodas: conmutativa y asociativa del producto
+06:44 Las reglas del juego: las nueve propiedades y «la notación lo es todo»
+07:36 Créditos finales
+
+Este vídeo no sigue una sección del libro: muestra con regla y compás, al modo de los geómetras griegos, las propiedades de los números reales que la Sección 1.2 da por conocidas y que el siguiente vídeo usará para estudiar las operaciones con vectores. Las propiedades se ilustran, no se demuestran; y se ve que la construcción geométrica es engorrosa, que es de donde nace la manera moderna de operar con símbolos.
+
+Correspondiente sección del libro: https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
+
+[en]
+youtube = "gAWXJVMWO7M"   # https://youtu.be/gAWXJVMWO7M (subido 2026-10-13)
+video = "../videoMath2/L01_V05_RealNumberPropertiesWithRulerAndCompass.mp4"
+subtitulos = "../videoMath2/L01_V05_RealNumberPropertiesWithRulerAndCompass.srt"
+idioma = "en"
+titulo = "L01 V05 Algebraic properties of the real numbers with ruler and compass (English)"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "real numbers", "ruler and compass", "algebraic properties",
+             "mathematics", "GECO", "UCM"]
+descripcion = """
+The algebraic properties of the real numbers, seen with ruler and compass.
+
+Fifth video of the first lesson of the linear algebra course.
+
+00:00 Title.
+00:06 Introduction: the real numbers as points on a line.
+01:05 Addition, with ruler and compass: commutative, associative, zero and the opposite.
+03:15 Multiplication, with ruler and compass: one, the inverse and the distributive property.
+05:25 Two uncomfortable properties: commutativity and associativity of the product.
+07:12 The rules of the game: the nine properties and "notation is everything".
+08:02 Closing credits.
+
+This video does not follow a section of the book: it shows with ruler and compass, in the manner of the Greek geometers, the properties of the real numbers that Section 1.2 takes for granted, and that the next video will use to study the operations with vectors. The properties are illustrated, not proved; and the geometric construction turns out to be cumbersome, which is where the modern way of operating with symbols comes from.
+
+Corresponding book section: https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""

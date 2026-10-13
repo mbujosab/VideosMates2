@@ -156,8 +156,19 @@ comillas, usa la caché real para que el audio elegido sea el del vídeo).
 - Decir explícitamente cuándo una escena ilustra y cuándo demuestra.
 - Música solo de entrada y salida (lo hace `montaje`); silencio durante
   el contenido y en las pausas para pensar.
-- Subir a YouTube el `.srt` que genera `montaje` en cada idioma; el
-  bloque `guion` da la descripción.
+- Subir a YouTube con `lib/subir_youtube.py` y una ficha TOML por vídeo
+  en `fichas/` (título, descripción con capítulos, etiquetas, lista,
+  mp4 y srt de cada idioma; modelo: `fichas/L01_V05.toml`). Modos:
+  `subir` (mp4 + todo) y `actualizar --id` (metadatos, subtítulos y lista
+  sobre un vídeo subido a mano). Credenciales OAuth en
+  `lib/client_secret_youtube.json` y `lib/token_youtube.json`
+  (ignorados). Los capítulos salen de los "empieza en" del `montaje`.
+  Formato heredado de los vídeos ya publicados: título "L01 V0N Nombre
+  (Español)" / "(English)", resumen de una línea, ordinal del vídeo,
+  capítulos, enlace a la sección del libro y a los notebooks; categoría
+  Educación; listas «Curso de Álgebra Lineal» (es) y «Linear Algebra
+  Course» (en), por título en la ficha; la lista antigua «Álgebra Lineal»
+  (confinamiento) se deja como está hasta rehacer los determinantes.
 
 ## Reglas
 
