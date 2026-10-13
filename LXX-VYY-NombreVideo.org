@@ -309,7 +309,7 @@ COLOR_REGLA     = TEAL      # pasos que usan una propiedad de los números reale
 COLOR_TITULO    = BLUE      # títulos y cabeceras
 #+END_SRC
 
-** Uso del paquete de $\LaTeX{}$ con la notación del curso (=nacal.sty=)
+** Uso del paquete de \LaTeX{} con la notación del curso (=nacal.sty=)
 
 Descargable desde [[https://github.com/mbujosab/nacal-latex-package]].
 Todo =Tex=, =MathTex= o =Title= con macros de =nacal= necesita

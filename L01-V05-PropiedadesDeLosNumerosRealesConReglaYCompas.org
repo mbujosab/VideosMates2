@@ -3,6 +3,7 @@
 #+LANGUAGE: es
 #+STARTUP: show4levels
 
+#+LATEX_COMPILER: lualatex
 #+LaTeX_HEADER: \usepackage{nacal}
 #+LATEX_HEADER: \usepackage[spanish]{babel}
 
@@ -827,7 +828,7 @@ with self.voiceover(text=tr("""Esa es la tradición que usted recibió en la esc
 self.pausa()
 #+END_SRC
 
-*** Escena 5 - Las nueve reglas y "la notación lo es todo"
+*** Escena 5 - Las nueve reglas y «la notación lo es todo»
 
 Lista de las nueve propiedades (las ocho primeras son las que abren el
 vídeo 6), cita de Van Loan del prefacio del libro y anuncio del siguiente
@@ -978,7 +979,7 @@ COLOR_REGLA     = TEAL      # pasos que usan una propiedad de los números reale
 COLOR_TITULO    = BLUE      # títulos y cabeceras
 #+END_SRC
 
-** Uso del paquete de $\LaTeX{}$ con la notación del curso (=nacal.sty=)
+** Uso del paquete de \LaTeX{} con la notación del curso (=nacal.sty=)
 
 Descargable desde [[https://github.com/mbujosab/nacal-latex-package]].
 Todo =Tex=, =MathTex= o =Title= con macros de =nacal= necesita
