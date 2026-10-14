@@ -1,0 +1,200 @@
+#+TITLE: Descartes del vídeo L01 V06
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+
+* Descartes de L01-V06 (2026-10-13)
+
+El V06 original (=L01-V06-PropiedadesDeLaSumaYDelProductoPorEscalaresEnRn.org=)
+iba a cubrir las ocho propiedades en un vídeo; se partió en V06 (suma)
+y V07 (producto por escalares) y se reescribió desde cero siguiendo el
+Ejercicio 4 de la Sección 1.2.1. Estas son las dos escenas que ya
+estaban hechas (recordatorio de las dos operaciones y de las ocho
+propiedades de los reales). Su contenido se repartió entre la escena 2
+de V06 y la escena 5 de V05.
+
+** Escena 1 - Introducción
+
+Recordatorio de que la suma y el producto por un escalar se definen
+componente a componente, y de que lo importante no es la
+interpretación geométrica sino las reglas de manipulación simbólica.
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+# Portada
+titulo = Title(TITULO, tex_template=myTemplate, font_size=50).set_color(COLOR_TITULO)
+self.play(Write(titulo))
+self.pausa_media()
+
+igual = MathTex(r"=", tex_template=myTemplate)
+mas   = MathTex(r"+", tex_template=myTemplate)
+
+# suma
+cvab = MathTex(r"\elemRp{\Vect{a}+\Vect{b}}{i}", tex_template=myTemplate)
+cva  = MathTex(r"\eleVR{a}{i}",                  tex_template=myTemplate)
+cvb  = MathTex(r"\eleVR{b}{i}",                  tex_template=myTemplate)
+
+eq_suma = VGroup(cvab.copy(),
+                 igual.copy(),
+                 cva.copy(),
+                 mas.copy(),
+                 cvb.copy()).arrange(RIGHT).scale(1.5)
+
+# producto
+cvla = MathTex(r"\elemRp{\lambda\Vect{a}}{i}", tex_template=myTemplate)
+lca  = MathTex(r"\lambda\eleVRpE{a}{i}",       tex_template=myTemplate)
+
+eq_producto = VGroup(cvla.copy(),
+                     igual.copy(),
+                     lca.copy()).arrange(RIGHT).scale(1.5).next_to(eq_suma,
+                                                                   DOWN,
+                                                                   aligned_edge=LEFT,
+                                                                   buff=1.2)
+
+with self.voiceover(text=tr("""En los vídeos anteriores hemos visto dos operaciones con vectores de Rn:""",
+                            """In the previous videos we saw two operations with vectors in R n:""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""La suma,""",
+                            """The sum,""")) as tracker:
+    self.play(FadeIn(eq_suma[0][0][1:4],
+                     rate_func=rate_functions.exponential_decay),
+              run_time=2*tracker.duration/3)
+
+with self.voiceover(text=tr("""y el reescalado""",
+                            """and scaling.""")) as tracker:
+    self.play(FadeIn(eq_producto[0][0][1:3],
+                     rate_func=rate_functions.exponential_decay),
+              run_time=2*tracker.duration/3)
+
+with self.voiceover(text=tr("""Ambas operaciones se definen componente a componente.""",
+                            """Both operations are defined component-wise.""")) as tracker:
+    self.play(FadeIn(eq_suma[0][0][0],      # paréntesis inicial
+                     eq_suma[0][0][4:],     # cierre de paréntesis y selector
+                     eq_producto[0][0][0],  # paréntesis inicial
+                     eq_producto[0][0][3:], # cierre de paréntesis y selector
+                     scale=.5,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=tracker.duration)
+
+with self.voiceover(text=tr("""Las componentes del 'vector suma' son la suma de las componentes,""",
+                            """The components of the 'sum vector' are the sums of the components,""")) as tracker:
+    self.play(FadeIn(eq_suma[1:],           # resto de la ecuación
+                     scale=.1,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=3*tracker.duration/5)
+    self.play(Indicate(eq_suma[2][0]),
+              Indicate(eq_suma[4][0]))
+
+with self.voiceover(text=tr("""y las componentes del 'vector reescalado' son las componentes reescaladas.""",
+                            """and the components of the 'scaled vector' are the scaled components.""")) as tracker:
+    self.play(FadeIn(eq_producto[1:],       # resto de la ecuación
+                     scale=.1,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=3*tracker.duration/5)
+    self.play(Indicate(eq_producto[2][0][0]),
+              Indicate(eq_producto[2][0][2:5]))
+
+with self.voiceover(text=tr("""Aunque vimos la interpretación geométrica, en R2 y en R3, de ambas operaciones, señalamos que lo importante no es la interpretación geométrica. Lo más importante es que son operaciones definidas componente a componente que se traducen en reglas simples de manipulación simbólica. En este caso se traducen en operaciones entre números reales; sumas de números en el primer caso y productos en el segundo.""",
+                            """Although we saw the geometric interpretation of both operations in R2 and R3, we pointed out that the geometric interpretation is not what matters most. What matters most is that these operations are defined component-wise, and that translates into simple rules of symbolic manipulation. In this case, they translate into operations between real numbers: sums of numbers in the first case, and products in the second.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+#+END_SRC
+
+** Escena 2 - Recordatorio de las propiedades de los números reales
+
+Sigue al libro: antes de preguntarse por las propiedades de las
+operaciones con vectores, se recuerdan ocho propiedades de los
+números reales (las del recuadro de la Sección 1.2.1). Termina
+planteando la pregunta que motiva el resto del vídeo.
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+subtitulo = Title(tr("Recordatorio: propiedades de los números reales",
+                     "Reminder: properties of the real numbers"),
+                  tex_template=myTemplate,
+                  font_size=44).set_color(BLUE)
+self.play(Write(subtitulo))
+
+sean = Tex(tr(r"Sean $a$, $b$ y $c$ números reales. Entonces:",
+              r"Let $a$, $b$ and $c$ be real numbers. Then:"),
+           tex_template=myTemplate,
+           font_size=40).next_to(subtitulo, DOWN, buff=0.5).to_edge(LEFT, buff=1)
+
+propiedades = [r"a+b=b+a",
+               r"a+(b+c)=(a+b)+c",
+               r"a+0=a",
+               r"a+(-a)=0",
+               r"ab=ba",
+               r"a(b+c)=ab+ac",
+               r"a(bc)=(ab)c",
+               r"1a=a"]
+
+lista = VGroup(*[MathTex(f"{k+1}.\\;\\;", p, tex_template=myTemplate, font_size=44)
+                 for k, p in enumerate(propiedades)])
+
+columna_suma     = VGroup(*lista[:4]).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
+columna_producto = VGroup(*lista[4:]).arrange(DOWN, aligned_edge=LEFT, buff=0.45)
+cuadro = VGroup(columna_suma, columna_producto).arrange(RIGHT, buff=1.8, aligned_edge=UP)
+cuadro.next_to(sean, DOWN, buff=0.6).set_x(0)
+for k in range(4):   # alinea cada fila de la segunda columna con la primera
+    lista[4+k].set_y(lista[k].get_y())
+
+with self.voiceover(text=tr("""Para estudiar las propiedades de las operaciones con vectores, recordemos primero algunas propiedades de los números reales que seguro conoce desde la escuela.""",
+                            """To study the properties of the operations with vectors, let us first recall some properties of the real numbers that you surely know from school.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""Sean a, b y c tres números reales.""",
+                            """Let a, b and c be three real numbers.""")) as tracker:
+    self.play(FadeIn(sean), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""La suma es conmutativa,""",
+                            """Addition is commutative,""")) as tracker:
+    self.play(FadeIn(lista[0]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y asociativa.""",
+                            """and associative.""")) as tracker:
+    self.play(FadeIn(lista[1]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""El cero es el elemento neutro de la suma,""",
+                            """Zero is the identity element for addition,""")) as tracker:
+    self.play(FadeIn(lista[2]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y todo número tiene un opuesto: sumados dan cero.""",
+                            """and every number has an opposite: their sum is zero.""")) as tracker:
+    self.play(FadeIn(lista[3]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""El producto es conmutativo,""",
+                            """Multiplication is commutative,""")) as tracker:
+    self.play(FadeIn(lista[4]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y distributivo respecto de la suma.""",
+                            """and distributive over addition.""")) as tracker:
+    self.play(FadeIn(lista[5]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""También es asociativo,""",
+                            """It is also associative,""")) as tracker:
+    self.play(FadeIn(lista[6]), run_time=tracker.duration/2)
+
+with self.voiceover(text=tr("""y el uno es el elemento neutro del producto.""",
+                            """and one is the identity element for multiplication.""")) as tracker:
+    self.play(FadeIn(lista[7]), run_time=tracker.duration/2)
+
+pregunta = Tex(tr(r"¿Se verifican también estas propiedades al operar con \emph{vectores}?",
+                  r"Do these properties also hold when operating with \emph{vectors}?"),
+               tex_template=myTemplate,
+               font_size=44).set_color(YELLOW).next_to(cuadro, DOWN, buff=0.8)
+
+with self.voiceover(text=tr("""Estas ocho propiedades son tan familiares que las usamos sin pensar. La cuestión que queremos abordar ahora es la siguiente:""",
+                            """These eight properties are so familiar that we use them without thinking. The question we want to address now is the following:""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+with self.voiceover(text=tr("""¿Se verifican también estas propiedades cuando operamos con vectores?""",
+                            """Do these properties also hold when we operate with vectors?""")) as tracker:
+    self.play(Write(pregunta), run_time=tracker.duration)
+
+self.pausa_media()
+#+END_SRC
+

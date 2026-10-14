@@ -1,0 +1,963 @@
+#+TITLE: Lección 1 del curso - Vídeo 7
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+#+LATEX: \maketitle
+
+****** COMMENT Para exportar a pdf
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results none :exports none
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+#+END_SRC
+
+* Propiedades del producto por escalares en $\mathbb{R}^n$ - V07
+
+Segundo de los dos vídeos que cubren el Ejercicio 4 de la Sección 1.2.1
+del libro: las propiedades 5 a 8 (producto de un vector por un escalar)
+y, en el resumen, la proposición completa con las ocho. Mismo método y
+mismas piezas visuales que V06 (=L01-V06-PropiedadesDeLaSumaDeVectores.org=,
+del que se copian las utilidades): igualdad componente a componente, las
+dos definiciones del selector, las cuatro propiedades del *producto* de
+los números reales (numeradas 5 a 8 como en V05), una sola regla por
+paso, panel de herramientas con pista en amarillo y contadores de uso.
+Encargo original: =tmp/HANDOFF_V07_guion.md=.
+
+Este fichero es una *fuente única bilingüe* (véase la plantilla
+=LXX-VYY-NombreVideo.org=): genera =./lib/L01_V07_PropiedadesDelProductoPorEscalares.py=
+(español) y =../videoMath2/lib/L01_V07_PropertiesOfScalarMultiplication.py= (inglés).
+
+** Guion (escenas)
+
+| Escena | Contenido                                                                     | Pausas |
+|--------+-------------------------------------------------------------------------------+--------|
+|      0 | Portada                                                                       |        |
+|      1 | Enlace con V06 y cuatro ejemplos numéricos en R2 (ilustran, no demuestran)     |        |
+|      2 | El método, en corto: igualdad componente a componente, dos definiciones, las cuatro propiedades del producto de los reales |        |
+|      3 | Propiedad 5: distributiva respecto de la suma de vectores (se presenta el panel) | 1      |
+|      4 | Propiedad 6: distributiva respecto de la suma de escalares (tres pasos con reales) | 1   |
+|      5 | Propiedad 7: asociativa                                                        | 1      |
+|      6 | Propiedad 8: el uno es el elemento neutro                                     | 1      |
+|      7 | Resumen: la proposición con las ocho propiedades, «espacio vectorial», anuncio de V08 |  |
+
+Cadenas (estrategia 2 del libro, revisada el 2026-10-13). Cuando una
+regla se aplica a los dos sumandos a la vez, la línea es una sola y su
+contador sube dos veces ("en los dos sumandos").
+
+** Ensamblado de los ficheros de python (uno por idioma)
+
+#+caption: Fichero de python del vídeo en español
+#+name: Fichero en español
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V07_PropiedadesDelProductoPorEscalares.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+#+caption: Fichero de python del vídeo en inglés
+#+name: Fichero en inglés
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V07_PropertiesOfScalarMultiplication.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "en")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+
+** Clases de las escenas
+
+#+caption: Vídeo completo y escenas separadas
+#+name: Clases de las escenas
+#+BEGIN_SRC python :noweb no-export :eval no
+class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Primera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Segunda escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Tercera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Cuarta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Quinta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Sexta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Séptima escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        self.creditos_finales()
+
+
+class L01_V07_E00_Portada(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+
+class L01_V07_E01_Ejemplos(MiEscenaConVoz):
+    def construct(self):
+        <<Primera escena>>
+
+
+class L01_V07_E02_Metodo(MiEscenaConVoz):
+    def construct(self):
+        <<Segunda escena>>
+
+
+class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
+    def construct(self):
+        <<Tercera escena>>
+
+
+class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
+    def construct(self):
+        <<Cuarta escena>>
+
+
+class L01_V07_E05_Asociativa(MiEscenaConVoz):
+    def construct(self):
+        <<Quinta escena>>
+
+
+class L01_V07_E06_Uno(MiEscenaConVoz):
+    def construct(self):
+        <<Sexta escena>>
+
+
+class L01_V07_E07_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Séptima escena>>
+
+
+class ZCreditosFinales(CreditosFinales):   # manim solo renderiza clases definidas en este fichero
+    pass
+#+END_SRC
+
+
+** Título del vídeo
+
+#+name: Título del vídeo
+#+BEGIN_SRC python :eval no
+TITULO = tr("Propiedades del producto por escalares en ", "Properties of scalar multiplication in ") + r"\R[n]"
+#+END_SRC
+
+** Utilidades del vídeo
+
+Copiadas de V06 con tres cambios: el panel solo tiene las dos
+definiciones del selector (el nulo y el opuesto no aparecen en V07) y a
+la derecha las propiedades 5 a 8 de los reales; el enunciado sale de
+=PROPIEDADES_PRODUCTO=; y =paso= admite =veces=, para las líneas que
+aplican la misma regla en los dos sumandos (el contador sube dos
+veces, con dos campanitas).
+
+#+name: Utilidades del vídeo
+#+BEGIN_SRC python :eval no
+PROPIEDADES_REALES = [r"a+b=b+a", r"a+(b+c)=(a+b)+c", r"a+0=a", r"a+(-a)=0",
+                      r"ab=ba", r"a(b+c)=ab+ac", r"a(bc)=(ab)c", r"1a=a"]
+
+PROPIEDADES_SUMA = [r"\Vect{a}+\Vect{b}=\Vect{b}+\Vect{a}",
+                    r"\Vect{a}+(\Vect{b}+\Vect{c})=(\Vect{a}+\Vect{b})+\Vect{c}",
+                    r"\Vect{a}+\Vect{0}=\Vect{a}",
+                    r"\Vect{a}+(-\Vect{a})=\Vect{0}"]
+
+PROPIEDADES_PRODUCTO = [r"\lambda(\Vect{a}+\Vect{b})=\lambda\Vect{a}+\lambda\Vect{b}",
+                        r"(\lambda+\varphi)\Vect{a}=\lambda\Vect{a}+\varphi\Vect{a}",
+                        r"\lambda(\varphi\Vect{a})=(\lambda\varphi)\Vect{a}",
+                        r"1\Vect{a}=\Vect{a}"]
+
+CAMPANITA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sonidos", "campanita.wav")   # suena al subir un contador
+
+DEFINICIONES = [("suma",     r"\elemRp{\Vect{a}+\Vect{b}}{i}=\eleVR{a}{i}+\eleVR{b}{i}"),
+                ("producto", r"\elemRp{\lambda\Vect{a}}{i}=\lambda\eleVRpE{a}{i}")]
+
+
+class Panel:
+    """Panel fijo de herramientas: definiciones a la izquierda y propiedades de los reales a la
+    derecha. Las piezas se identifican por clave ("suma", "producto", 5, 6, ...)."""
+    def __init__(self, escena, reales=range(5, 9), atenuadas=(), y_sup=2.95, font_size=28):
+        self.escena, self.piezas, self.usos, self.contadores = escena, {}, {}, {}
+        izq = VGroup(*[MathTex(f, tex_template=myTemplate, font_size=font_size) for _, f in DEFINICIONES])
+        izq.arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+        for (clave, _), m in zip(DEFINICIONES, izq):
+            self.piezas[clave] = m
+        der = VGroup(*[MathTex(f"{k}.\\;", PROPIEDADES_REALES[k-1], tex_template=myTemplate, font_size=font_size)
+                       for k in reales]).arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+        for k, m in zip(reales, der):
+            self.piezas[k] = m
+        cab_izq = Tex(tr("Definiciones", "Definitions"), font_size=24).set_color(GRAY_B)
+        cab_der = Tex(tr("Números reales", "Real numbers"), font_size=24).set_color(GRAY_B)
+        self.izq = VGroup(cab_izq, izq).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(LEFT, buff=0.35)
+        self.der = VGroup(cab_der, der).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(RIGHT, buff=1.1)
+        for g in (self.izq, self.der):
+            g.align_to([0, y_sup, 0], UP)
+        self.atenuadas = set(atenuadas)
+        for clave in atenuadas:
+            self.piezas[clave].set_opacity(0.3)
+        self.todo = VGroup(self.izq, self.der)
+
+    def enciende(self, *claves, run_time=0.8):
+        """Trae al frente piezas atenuadas (cuando entran en juego)."""
+        self.atenuadas -= set(claves)
+        self.escena.play(*[self.piezas[c].animate.set_opacity(1) for c in claves], run_time=run_time)
+
+    def pista(self, *claves, run_time=1):
+        """La pista: las piezas que hacen falta se iluminan en amarillo y se recuadran."""
+        self.atenuadas -= set(claves)
+        self.marcos = VGroup(*[SurroundingRectangle(self.piezas[c], color=COLOR_ESCALAR, buff=0.1,
+                                                    corner_radius=0.1, stroke_width=2) for c in claves])
+        self.escena.play(*[self.piezas[c].animate.set_color(COLOR_ESCALAR).set_opacity(1) for c in claves],
+                         Create(self.marcos), run_time=run_time)
+
+    def senala(self, clave, run_time=0.8):
+        """Antes de dar un paso: la pieza que se va a usar parpadea."""
+        self.escena.play(Indicate(self.piezas[clave], color=COLOR_RESULTADO, scale_factor=1.12), run_time=run_time)
+
+    def cuenta(self, clave, run_time=0.5):
+        """Después del paso: sube el contador de usos de la pieza, con una campanita."""
+        pieza = self.piezas[clave]
+        self.usos[clave] = self.usos.get(clave, 0) + 1
+        # insignia: disco de color con el número de usos dentro (no se confunde con parte de la fórmula)
+        disco = Circle(radius=0.17, fill_color=COLOR_TITULO, fill_opacity=1, stroke_width=0)
+        numero = Tex(f"\\textbf{{{self.usos[clave]}}}", font_size=24).set_color(WHITE).move_to(disco)
+        nuevo = VGroup(disco, numero).next_to(pieza, RIGHT, buff=0.3).shift(0.1*UP)
+        self.escena.add_sound(CAMPANITA)
+        if clave in self.contadores:
+            self.escena.play(ReplacementTransform(self.contadores[clave], nuevo), run_time=run_time)
+        else:
+            self.escena.play(FadeIn(nuevo, scale=0.5), run_time=run_time)
+        self.contadores[clave] = nuevo
+
+
+def cabecera_y_enunciado(escena, texto, numero):
+    """Cabecera de la escena (lleva el número de la propiedad) y enunciado de la propiedad `numero`
+    (5 a 8), sin numerar, en el hueco entre los dos lados del panel."""
+    cabecera = Tex(texto, tex_template=myTemplate, font_size=36).set_color(COLOR_TITULO).to_edge(UP, buff=0.25)
+    enunciado = MathTex(PROPIEDADES_PRODUCTO[numero-5], tex_template=myTemplate, font_size=40).set_color(COLOR_RESULTADO)
+    enunciado.scale_to_fit_width(min(enunciado.width, 4.6)).move_to([-0.3, 2.2, 0])
+    escena.add(cabecera)
+    return cabecera, enunciado
+
+
+def linea(formula, de_reales=False):
+    """Una línea de la cadena de igualdades (en teal si el paso es una operación entre números reales)."""
+    return MathTex(formula, tex_template=myTemplate, font_size=36).set_color(COLOR_REGLA if de_reales else WHITE)
+
+
+def coloca_cadena(cadena, y_sup=0.55, salto=0.66, x_izq=-3.3, sangria=0.6):
+    """Coloca la cadena bajo el enunciado y entre los dos lados del panel: la primera línea en x_izq y
+    las siguientes (que empiezan por '=') alineadas entre sí y desplazadas `sangria` a la derecha."""
+    for k, l in enumerate(cadena):
+        l.move_to([0, y_sup - k*salto, 0]).align_to([x_izq + (sangria if k else 0), 0, 0], LEFT)
+    return cadena
+
+
+def paso(escena, l, panel, clave, run_time=1, veces=1):
+    """Un paso de la cadena: parpadea la pieza que se va a usar (la voz la acaba de nombrar), se
+    escribe la línea y sube el contador con la campanita (dos veces si se aplica en dos sumandos)."""
+    panel.senala(clave)
+    escena.play(Write(l), run_time=run_time)
+    for _ in range(veces):
+        panel.cuenta(clave)
+
+
+def concluye(escena, enunciado, texto_es, texto_en, cadena=None):
+    """Cierre de cada demostración: en la marca 'cc' se destacan los dos extremos de la cadena; en
+    'ok' se recuadra y parpadea el enunciado demostrado."""
+    with escena.voiceover(text=tr(texto_es, texto_en)) as tracker:
+        if cadena is not None and "cc" in tracker.bookmark_times:
+            escena.wait_until_bookmark("cc")
+            escena.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.15),
+                        Indicate(cadena[-1], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
+        if "ok" in tracker.bookmark_times:
+            escena.wait_until_bookmark("ok")
+        marco = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
+        escena.play(Create(marco), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
+        restante = tracker.start_t + tracker.duration - escena.renderer.time
+        escena.pausa(max(0.3, restante))
+#+END_SRC
+
+** Código de cada escena
+
+*** Portada (escena 0)
+
+#+name: Portada
+#+BEGIN_SRC python :eval no
+self.creditos()
+portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(min(portada.width, config.frame_width*0.9))
+self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+self.wait(4.5)
+#+END_SRC
+
+*** Escena 1 - Enlace con V06 y ejemplos numéricos
+
+Enlace con el vídeo anterior en una frase y cuatro ejemplos en
+$\mathbb{R}^2$ bajo el título, uno por propiedad, con los vectores
+$(1,2)$ y $(2,1)$ y los escalares 2 y 3 (en amarillo). La voz describe
+lo que ocurre, no lee los ejemplos. La pregunta queda solo en pantalla;
+la voz va directa a la afirmación (Marcos, 2026-10-14).
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+titulo = Title(TITULO, tex_template=myTemplate, font_size=50).set_color(COLOR_TITULO)
+self.play(Write(titulo))
+
+with self.voiceover(text=tr("""En el vídeo anterior demostramos cuatro propiedades de la suma de vectores. En este demostraremos cuatro propiedades del producto por un escalar.""",
+                            """In the previous video we proved four properties of vector addition. In this one we will prove four properties of scalar multiplication.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+# Cuatro ejemplos numéricos en R2 (ilustran, no demuestran): una fila por propiedad
+def v(x, y):
+    return r"\begin{pmatrix}" + f"{x}\\\\{y}" + r"\end{pmatrix}"
+A, B = v(1, 2), v(2, 1)
+ESCALARES = {"2", "3", "1", r"(2+3)", r"(2\cdot 3)"}
+ejemplos = VGroup(
+    MathTex("2", r"\left(", A, "+", B, r"\right)", "=", v(6, 6), "=", "2", A, "+", "2", B,
+            tex_template=myTemplate, font_size=36),
+    MathTex(r"(2+3)", A, "=", v(5, 10), "=", "2", A, "+", "3", A, tex_template=myTemplate, font_size=36),
+    MathTex("2", r"\left(", "3", A, r"\right)", "=", v(6, 12), "=", r"(2\cdot 3)", A, tex_template=myTemplate, font_size=36),
+    MathTex("1", A, "=", A, tex_template=myTemplate, font_size=36))
+for ej in ejemplos:   # colores: a azul, b naranja, escalares amarillo
+    for k, parte in enumerate(ej):
+        texto = ej.tex_strings[k]
+        if texto == A: parte.set_color(COLOR_A)
+        elif texto == B: parte.set_color(COLOR_B)
+        elif texto in ESCALARES: parte.set_color(COLOR_ESCALAR)
+ejemplos.arrange(DOWN, buff=0.35).next_to(titulo, DOWN, buff=0.5)
+pregunta = Tex(tr("¿Característica de los ejemplos, o propiedades generales?", "Peculiar to the examples, or general properties?"),
+               font_size=40).set_color(COLOR_ESCALAR).next_to(ejemplos, DOWN, buff=0.45)
+
+with self.voiceover(text=tr("""En los siguientes ejemplos vemos que: <bookmark mark='e1'/> reescalar una suma de vectores da lo mismo que sumar los reescalados, <bookmark mark='e2'/> y lo mismo ocurre al reescalar por una suma de escalares. <bookmark mark='e3'/> Reescalar dos veces es reescalar por el producto de los escalares. <bookmark mark='e4'/> Y reescalar por uno no cambia nada.""",
+                            """In the following examples we see that: <bookmark mark='e1'/> scaling a sum of vectors gives the same as adding the scaled vectors, <bookmark mark='e2'/> and the same happens when scaling by a sum of scalars. <bookmark mark='e3'/> Scaling twice is scaling by the product of the scalars. <bookmark mark='e4'/> And scaling by one changes nothing.""")) as tracker:
+    for k, marca in enumerate(["e1", "e2", "e3", "e4"]):
+        self.wait_until_bookmark(marca)
+        self.play(FadeIn(ejemplos[k]), run_time=0.8)
+
+with self.voiceover(text=tr("""Como hicimos con la suma, vamos a demostrar que son propiedades generales del producto por un escalar.""",
+                            """As we did with addition, we are going to prove that these are general properties of scalar multiplication.""")) as tracker:
+    self.play(Write(pregunta), run_time=1.5)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 2 - El método, en corto
+
+Ya se explicó en V06: aquí se recuerda en una sola pantalla que se va
+completando (criterio de igualdad, las dos definiciones, las cuatro
+propiedades del producto de los reales y la regla de la cadena).
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("El método", "The method"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+self.play(Write(cabecera))
+
+criterio = MathTex(r"\Vect{v}=\Vect{w}", r"\quad\Longleftrightarrow\quad",
+                   r"\eleVR{v}{i}=\eleVR{w}{i}", tex_template=myTemplate, font_size=44)
+definiciones = VGroup(*[MathTex(f, tex_template=myTemplate, font_size=40) for _, f in DEFINICIONES]).arrange(DOWN, buff=0.3, aligned_edge=LEFT)
+reales = VGroup(*[MathTex(f"{k}.\\;\\;", PROPIEDADES_REALES[k-1], tex_template=myTemplate, font_size=40).set_color(COLOR_REGLA)
+                  for k in range(5, 9)]).arrange(DOWN, buff=0.3, aligned_edge=LEFT)
+herramientas = VGroup(definiciones, reales).arrange(RIGHT, buff=1.5, aligned_edge=UP)
+una_regla = Tex(tr("una sola definición o una sola propiedad de los reales en cada paso",
+                   "a single definition or a single property of the reals at each step"),
+                font_size=34).set_color(COLOR_REGLA)
+VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
+
+with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, para cualquier i.<bookmark mark='v3'/>""",
+                            """The method is the one from the previous video. Two vectors are equal when they coincide component-wise: it is enough to prove that the i-th component is the same, for any i.""")) as tracker:
+    self.play(Write(criterio), run_time=2)
+
+with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza el paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
+                            """Today we only need two definitions: <bookmark mark='s'/> addition, which distributes the selector, <bookmark mark='p'/> and scalar multiplication, which shifts the parentheses. And, of the properties of the reals, <bookmark mark='r'/> the four for multiplication.""")) as tracker:
+    self.wait_until_bookmark("s")
+    self.play(Write(definiciones[0]), run_time=0.8)
+    self.wait_until_bookmark("p")
+    self.play(Write(definiciones[1]), run_time=0.8)
+    self.wait_until_bookmark("r")
+    self.play(FadeIn(reales), run_time=1)
+
+with self.voiceover(text=tr("""Cada demostración es una cadena de igualdades con una sola definición o una sola propiedad de los reales en cada paso.""",
+                            """Each proof is a chain of equalities with a single definition or a single property of the reals at each step.""")) as tracker:
+    self.play(FadeIn(una_regla), run_time=1)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 3 - Propiedad 5: distributiva respecto de la suma de vectores
+
+Se presenta el panel (con las dos definiciones y las propiedades 5 a 8
+de los reales). Una pausa: la pista en amarillo se da antes. Seis
+líneas; la definición de producto se usa en los dos sumandos a la vez.
+Cuenta: producto 3, suma 2, distributiva 1.
+
+#+name: Tercera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera, enunciado = cabecera_y_enunciado(self, tr("Propiedad 5: distributiva respecto de la suma de vectores",
+                                                     "Property 5: distributive over vector addition"), 5)
+
+panel = Panel(self)
+with self.voiceover(text=tr("""De nuevo, las herramientas a la vista: a la izquierda, <bookmark mark='izq'/> las definiciones; a la derecha, <bookmark mark='der'/> las cuatro propiedades del producto de números reales.""",
+                            """Again, the tools in sight: on the left, <bookmark mark='izq'/> the definitions; on the right, <bookmark mark='der'/> the four properties of the multiplication of real numbers.""")) as tracker:
+    self.wait_until_bookmark("izq")
+    self.play(FadeIn(panel.izq), run_time=1)
+    self.wait_until_bookmark("der")
+    self.play(FadeIn(panel.der), run_time=1)
+
+with self.voiceover(text=tr("""Quinta propiedad: el producto por un escalar es distributivo respecto de la suma de vectores. Reescalar una suma es sumar los reescalados.""",
+                            """Fifth property: scalar multiplication is distributive over vector addition. Scaling a sum is adding the scaled vectors.""")) as tracker:
+    self.play(Write(enunciado), run_time=1.5)
+
+with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> las dos definiciones y la propiedad seis de los reales, la distributiva.""",
+                            """To prove it you will need <bookmark mark='p'/> both definitions and property six of the reals, the distributive property.""")) as tracker:
+    self.wait_until_bookmark("p")
+    panel.pista("suma", "producto", 6)
+
+self.pausa_para_pensar(invitacion_voz=tr("Pause el vídeo e intente demostrarlo.", "Pause the video and try to prove it."))
+
+cadena = coloca_cadena([linea(r"\elemRp{\lambda(\Vect{a}+\Vect{b})}{i}"),
+                        linea(r"=\lambda\big(\elemRp{\Vect{a}+\Vect{b}}{i}\big)"),
+                        linea(r"=\lambda\big(\eleVR{a}{i}+\eleVR{b}{i}\big)"),
+                        linea(r"=\lambda\eleVRpE{a}{i}+\lambda\eleVRpE{b}{i}", de_reales=True),
+                        linea(r"=\elemRp{\lambda\Vect{a}}{i}+\elemRp{\lambda\Vect{b}}{i}"),
+                        linea(r"=\elemRp{\lambda\Vect{a}+\lambda\Vect{b}}{i}")])
+
+with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
+                            """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
+    self.wait_until_bookmark("l0")
+    self.play(Write(cadena[0]), run_time=1)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+    self.wait_until_bookmark("l1")
+    paso(self, cadena[1], panel, "producto")
+
+with self.voiceover(text=tr("""Por la definición de suma podemos distribuir el selector. <bookmark mark='l2'/>""",
+                            """By the definition of addition we can distribute the selector. <bookmark mark='l2'/>""")) as tracker:
+    self.wait_until_bookmark("l2")
+    paso(self, cadena[2], panel, "suma")
+
+with self.voiceover(text=tr("""Ya todo son números reales, así que podemos aplicar la propiedad distributiva. <bookmark mark='l3'/>""",
+                            """Now everything is real numbers, so we can apply the distributive property. <bookmark mark='l3'/>""")) as tracker:
+    self.wait_until_bookmark("l3")
+    paso(self, cadena[3], panel, 6)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l4'/>""")) as tracker:
+    self.wait_until_bookmark("l4")
+    paso(self, cadena[4], panel, "producto", veces=2)
+
+with self.voiceover(text=tr("""Y por la definición de suma podemos sacar el selector como factor común. <bookmark mark='l5'/>""",
+                            """And by the definition of addition we can factor out the selector. <bookmark mark='l5'/>""")) as tracker:
+    self.wait_until_bookmark("l5")
+    paso(self, cadena[5], panel, "suma")
+
+with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
+                            """We have reached the i-th component of the right-hand side.""")) as tracker:
+    pass
+
+concluye(self, enunciado,
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> los dos vectores son iguales. Hemos usado tres veces la definición de producto, dos la de suma y una sola vez la distributiva.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> the two vectors are equal. We have used the definition of scalar multiplication three times, that of addition twice, and the distributive property only once.""",
+         cadena=cadena)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 4 - Propiedad 6: distributiva respecto de la suma de escalares
+
+La única propiedad sin pareja exacta en los reales: la distributiva del
+recordatorio tiene el factor común a la izquierda, así que hacen falta
+la conmutativa, la distributiva y de nuevo la conmutativa (en los dos
+sumandos). Se avisa antes de la pausa. Siete líneas (salto menor).
+Cuenta: producto 3, suma 1, conmutativa 3, distributiva 1.
+
+#+name: Cuarta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera, enunciado = cabecera_y_enunciado(self, tr("Propiedad 6: distributiva respecto de la suma de escalares",
+                                                     "Property 6: distributive over scalar addition"), 6)
+panel = Panel(self)
+self.add(panel.todo)
+
+with self.voiceover(text=tr("""Sexta propiedad: también es distributivo respecto de la suma de escalares. Reescalar por una suma de escalares es sumar los reescalados.""",
+                            """Sixth property: it is also distributive over the addition of scalars. Scaling by a sum of scalars is adding the scaled vectors.""")) as tracker:
+    self.play(Write(enunciado), run_time=1.5)
+
+with self.voiceover(text=tr("""Esta vez hará falta más de una propiedad de los reales: necesitará <bookmark mark='p'/> las dos definiciones, la conmutativa y la distributiva.""",
+                            """This time more than one property of the reals will be needed: you will need <bookmark mark='p'/> both definitions, the commutative property and the distributive property.""")) as tracker:
+    self.wait_until_bookmark("p")
+    panel.pista("suma", "producto", 5, 6)
+
+self.pausa_para_pensar(invitacion_voz=tr("Pause el vídeo e intente demostrarlo.", "Pause the video and try to prove it."))
+
+cadena = coloca_cadena([linea(r"\elemRp{(\lambda+\varphi)\Vect{a}}{i}"),
+                        linea(r"=(\lambda+\varphi)\eleVRpE{a}{i}"),
+                        linea(r"=\eleVRpE{a}{i}(\lambda+\varphi)", de_reales=True),
+                        linea(r"=\eleVRpE{a}{i}\lambda+\eleVRpE{a}{i}\varphi", de_reales=True),
+                        linea(r"=\lambda\eleVRpE{a}{i}+\varphi\eleVRpE{a}{i}", de_reales=True),
+                        linea(r"=\elemRp{\lambda\Vect{a}}{i}+\elemRp{\varphi\Vect{a}}{i}"),
+                        linea(r"=\elemRp{\lambda\Vect{a}+\varphi\Vect{a}}{i}")],
+                       salto=0.6)
+
+with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
+                            """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
+    self.wait_until_bookmark("l0")
+    self.play(Write(cadena[0]), run_time=1)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+    self.wait_until_bookmark("l1")
+    paso(self, cadena[1], panel, "producto")
+
+with self.voiceover(text=tr("""La distributiva que tenemos lleva el factor común a la izquierda. Así que primero, por la conmutativa, podemos cambiar el orden de los factores. <bookmark mark='l2'/>""",
+                            """The distributive property we have puts the common factor on the left. So first, by the commutative property, we can change the order of the factors. <bookmark mark='l2'/>""")) as tracker:
+    self.wait_until_bookmark("l2")
+    paso(self, cadena[2], panel, 5)
+
+with self.voiceover(text=tr("""Ahora sí podemos aplicar la distributiva. <bookmark mark='l3'/>""",
+                            """Now we can apply the distributive property. <bookmark mark='l3'/>""")) as tracker:
+    self.wait_until_bookmark("l3")
+    paso(self, cadena[3], panel, 6)
+
+with self.voiceover(text=tr("""Y por la conmutativa podemos cambiar de nuevo el orden de los factores en los dos sumandos. <bookmark mark='l4'/>""",
+                            """And by the commutative property we can change the order of the factors again in both terms. <bookmark mark='l4'/>""")) as tracker:
+    self.wait_until_bookmark("l4")
+    paso(self, cadena[4], panel, 5, veces=2)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l5'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l5'/>""")) as tracker:
+    self.wait_until_bookmark("l5")
+    paso(self, cadena[5], panel, "producto", veces=2)
+
+with self.voiceover(text=tr("""Y por la definición de suma podemos sacar el selector como factor común. <bookmark mark='l6'/>""",
+                            """And by the definition of addition we can factor out the selector. <bookmark mark='l6'/>""")) as tracker:
+    self.wait_until_bookmark("l6")
+    paso(self, cadena[6], panel, "suma")
+
+with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
+                            """We have reached the i-th component of the right-hand side.""")) as tracker:
+    pass
+
+concluye(self, enunciado,
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> los dos vectores son iguales. Esta vez hemos necesitado cuatro veces las propiedades de los reales, porque las reglas son exactamente las que son, y hay que aplicarlas tal como están escritas.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> the two vectors are equal. This time we have needed the properties of the reals four times, because the rules are exactly what they are, and they must be applied just as they are written.""",
+         cadena=cadena)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 5 - Propiedad 7: asociativa
+
+Cinco líneas. Cuenta: producto 3, asociativa 1.
+
+#+name: Quinta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera, enunciado = cabecera_y_enunciado(self, tr("Propiedad 7: asociativa", "Property 7: associative"), 7)
+panel = Panel(self)
+self.add(panel.todo)
+
+with self.voiceover(text=tr("""Séptima propiedad: reescalar dos veces es reescalar por el producto de los escalares.""",
+                            """Seventh property: scaling twice is scaling by the product of the scalars.""")) as tracker:
+    self.play(Write(enunciado), run_time=1.5)
+
+with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> la definición de producto y la propiedad siete de los reales, la asociativa.""",
+                            """To prove it you will need <bookmark mark='p'/> the definition of scalar multiplication and property seven of the reals, the associative property.""")) as tracker:
+    self.wait_until_bookmark("p")
+    panel.pista("producto", 7)
+
+self.pausa_para_pensar(invitacion_voz=tr("Pause el vídeo e intente demostrarlo.", "Pause the video and try to prove it."))
+
+cadena = coloca_cadena([linea(r"\elemRp{\lambda(\varphi\Vect{a})}{i}"),
+                        linea(r"=\lambda\big(\elemRp{\varphi\Vect{a}}{i}\big)"),
+                        linea(r"=\lambda\big(\varphi\eleVRpE{a}{i}\big)"),
+                        linea(r"=(\lambda\varphi)\eleVRpE{a}{i}", de_reales=True),
+                        linea(r"=\elemRp{(\lambda\varphi)\Vect{a}}{i}")])
+
+with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
+                            """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
+    self.wait_until_bookmark("l0")
+    self.play(Write(cadena[0]), run_time=1)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+    self.wait_until_bookmark("l1")
+    paso(self, cadena[1], panel, "producto")
+
+with self.voiceover(text=tr("""Y otra vez, dentro, podemos desplazar el paréntesis. <bookmark mark='l2'/>""",
+                            """And once more, inside, we can shift the parentheses. <bookmark mark='l2'/>""")) as tracker:
+    self.wait_until_bookmark("l2")
+    paso(self, cadena[2], panel, "producto")
+
+with self.voiceover(text=tr("""Ya todo son números reales, así que podemos aplicar la asociativa. <bookmark mark='l3'/>""",
+                            """Now everything is real numbers, so we can apply the associative property. <bookmark mark='l3'/>""")) as tracker:
+    self.wait_until_bookmark("l3")
+    paso(self, cadena[3], panel, 7)
+
+with self.voiceover(text=tr("""Y por la definición de producto podemos desplazar de nuevo el paréntesis. <bookmark mark='l4'/>""",
+                            """And by the definition of scalar multiplication we can shift the parentheses again. <bookmark mark='l4'/>""")) as tracker:
+    self.wait_until_bookmark("l4")
+    paso(self, cadena[4], panel, "producto")
+
+with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
+                            """We have reached the i-th component of the right-hand side.""")) as tracker:
+    pass
+
+concluye(self, enunciado,
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> los dos vectores son iguales. Hemos usado tres veces la definición de producto y una sola vez la asociativa.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> the two vectors are equal. We have used the definition of scalar multiplication three times and the associative property only once.""",
+         cadena=cadena)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 6 - Propiedad 8: el uno es el elemento neutro
+
+La más corta: tres líneas. Cuenta: producto 1, propiedad 8 una.
+
+#+name: Sexta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera, enunciado = cabecera_y_enunciado(self, tr("Propiedad 8: el uno es el elemento neutro",
+                                                     "Property 8: one is the identity element"), 8)
+panel = Panel(self)
+self.add(panel.todo)
+
+with self.voiceover(text=tr("""Octava y última propiedad: reescalar por uno no cambia nada.""",
+                            """Eighth and last property: scaling by one changes nothing.""")) as tracker:
+    self.play(Write(enunciado), run_time=1.5)
+
+with self.voiceover(text=tr("""Para demostrarla bastan <bookmark mark='p'/> la definición de producto y la propiedad ocho de los reales.""",
+                            """To prove it, <bookmark mark='p'/> the definition of scalar multiplication and property eight of the reals are enough.""")) as tracker:
+    self.wait_until_bookmark("p")
+    panel.pista("producto", 8)
+
+self.pausa_para_pensar(invitacion_voz=tr("Pause el vídeo e intente demostrarlo.", "Pause the video and try to prove it."))
+
+cadena = coloca_cadena([linea(r"\elemRp{1\Vect{a}}{i}"),
+                        linea(r"=1\eleVRpE{a}{i}"),
+                        linea(r"=\eleVR{a}{i}", de_reales=True)])
+
+with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
+                            """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
+    self.wait_until_bookmark("l0")
+    self.play(Write(cadena[0]), run_time=1)
+
+with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+                            """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+    self.wait_until_bookmark("l1")
+    paso(self, cadena[1], panel, "producto")
+
+with self.voiceover(text=tr("""Y por la propiedad ocho de los reales podemos quitar el uno. <bookmark mark='l2'/>""",
+                            """And by property eight of the reals we can drop the one. <bookmark mark='l2'/>""")) as tracker:
+    self.wait_until_bookmark("l2")
+    paso(self, cadena[2], panel, 8)
+
+with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
+                            """We have reached the i-th component of the right-hand side.""")) as tracker:
+    pass
+
+concluye(self, enunciado,
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> reescalar por uno deja el vector igual. Es la demostración más corta: solo dos pasos.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> scaling by one leaves the vector unchanged. It is the shortest proof: just two steps.""",
+         cadena=cadena)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 7 - Resumen: la proposición completa
+
+Ahora sí se enuncia la proposición del libro (Ejercicio 4 de la
+Sección 1.2.1) con las ocho propiedades en dos columnas (suma 1-4 y
+producto por escalares 5-8), la frase sobre el espacio vectorial y el
+anuncio de V08 (Sección 1.3, «Vectores como representación de datos»).
+
+#+name: Séptima escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+self.add(cabecera)
+
+para = Tex(tr(r"Para cualesquiera $\Vect{a},\Vect{b},\Vect{c}\in\R[n]$ y escalares $\lambda,\varphi$:",
+              r"For any $\Vect{a},\Vect{b},\Vect{c}\in\R[n]$ and scalars $\lambda,\varphi$:"),
+           tex_template=myTemplate, font_size=36).next_to(cabecera, DOWN, buff=0.4)
+col_suma = VGroup(*[MathTex(f"{k+1}.\\;\\;", p, tex_template=myTemplate, font_size=38)
+                    for k, p in enumerate(PROPIEDADES_SUMA)]).arrange(DOWN, aligned_edge=LEFT, buff=0.4)
+col_prod = VGroup(*[MathTex(f"{k+5}.\\;\\;", p, tex_template=myTemplate, font_size=38)
+                    for k, p in enumerate(PROPIEDADES_PRODUCTO)]).arrange(DOWN, aligned_edge=LEFT, buff=0.4)
+tabla = VGroup(col_suma, col_prod).arrange(RIGHT, buff=1.2, aligned_edge=UP).next_to(para, DOWN, buff=0.5)
+tabla.scale_to_fit_width(min(tabla.width, config.frame_width*0.9)).set_x(0)
+for k in range(4):   # misma rejilla de filas
+    col_prod[k].set_y(col_suma[k].get_y())
+espacio = Tex(tr("Estas ocho propiedades definirán el \\emph{espacio vectorial}",
+                 "These eight properties will define a \\emph{vector space}"),
+              font_size=36).set_color(COLOR_ESCALAR).next_to(tabla, DOWN, buff=0.6)
+
+with self.voiceover(text=tr("""Resumamos. Con este vídeo y el anterior hemos demostrado las ocho propiedades de las operaciones con vectores: <bookmark mark='s'/> cuatro de la suma <bookmark mark='p'/> y cuatro del producto por un escalar.""",
+                            """Let us sum up. With this video and the previous one we have proved the eight properties of the operations with vectors: <bookmark mark='s'/> four for addition <bookmark mark='p'/> and four for scalar multiplication.""")) as tracker:
+    self.play(FadeIn(para), run_time=0.8)
+    self.wait_until_bookmark("s")
+    self.play(FadeIn(col_suma), run_time=1)
+    self.wait_until_bookmark("p")
+    self.play(FadeIn(col_prod), run_time=1)
+
+with self.voiceover(text=tr("""Más adelante en el curso, estas ocho propiedades serán las que definan qué es un espacio vectorial.""",
+                            """Later in the course, these eight properties will be the ones that define what a vector space is.""")) as tracker:
+    self.play(FadeIn(espacio), run_time=1)
+
+with self.voiceover(text=tr("""En el próximo vídeo veremos los vectores como una forma de representar datos.""",
+                            """In the next video we will see vectors as a way of representing data.""")) as tracker:
+    self.pausa_corta(tracker.duration)
+
+self.pausa_media()
+#+END_SRC
+
+
+* Trozos comunes de código
+
+Viven en =Comunes.org=, que se tangle a =lib/vm2comun.py= (y a
+=../videoMath2/lib/vm2comun.py=): carga de librerías, =LANG= y =tr()=,
+voces de Azure, código de colores, =myTemplate=, =MiEscenaConVoz= (con
+=voiceover=, =anuncia_regla=/=destaca_regla=, créditos, tarjeta de
+pausa), la pantalla de créditos y los vectores de $\mathbb{R}^2$ y
+$\mathbb{R}^3$. Si =vm2comun.py= no existe o está anticuado, tangle
+primero =Comunes.org=.
+
+* Rodando: 1,2,3\dots ¡acción!
+
+# +call: rodando(fichero="L01_V07_PropiedadesDelProductoPorEscalares", escena="1", idioma="es", voz="gtts")
+# +call: rodando(fichero="L01_V07_PropertiesOfScalarMultiplication", escena="1", idioma="en", voz="gtts")
+
+# +call: rodandoHD(fichero="L01_V07_PropiedadesDelProductoPorEscalares", escena="a", idioma="es")
+# +call: rodandoHD(fichero="L01_V07_PropertiesOfScalarMultiplication", escena="a", idioma="en")
+
+# +call: montaje(fichero="L01_V07_PropiedadesDelProductoPorEscalares", escenas="L01_V07_E00_Portada L01_V07_E01_Ejemplos L01_V07_E02_Metodo L01_V07_E03_DistributivaVectores L01_V07_E04_DistributivaEscalares L01_V07_E05_Asociativa L01_V07_E06_Uno L01_V07_E07_Resumen ZCreditosFinales", cierre="L01_V07_E07_Resumen", video="L01_V07_PropiedadesDelProductoPorEscalares", idioma="es")
+# +call: montaje(fichero="L01_V07_PropertiesOfScalarMultiplication", escenas="L01_V07_E00_Portada L01_V07_E01_Ejemplos L01_V07_E02_Metodo L01_V07_E03_DistributivaVectores L01_V07_E04_DistributivaEscalares L01_V07_E05_Asociativa L01_V07_E06_Uno L01_V07_E07_Resumen ZCreditosFinales", cierre="L01_V07_E07_Resumen", video="L01_V07_PropertiesOfScalarMultiplication", idioma="en")
+
+
+
+# +call: guion(fichero="L01_V07_PropiedadesDelProductoPorEscalares", idioma="es")
+# +call: guion(fichero="L01_V07_PropiedadesDelProductoPorEscalares", idioma="en")
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V07_PropiedadesDelProductoPorEscalares" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V07_PropiedadesDelProductoPorEscalares" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Montaje: concatenar las escenas, música de entrada y salida, subtítulos
+
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen =volumen=) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
+=volumen_voz=), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se normaliza con =loudnorm=. Los =.srt= de las escenas se desplazan y se
+funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
+
+=escenas= es la lista ordenada de clases; =cierre= la escena en la que
+vuelve la música. El mp4 y el srt finales quedan en la raíz del
+repositorio del idioma.
+
+#+name: montaje
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escenas="LXX_VYY_E00_Portada LXX_VYY_E01_Introduccion LXX_VYY_E02_TemaEscena LXX_VYY_E03_TemaEscena LXX_VYY_E04_TemaEscena LXX_VYY_E05_Resumen ZCreditosFinales" :var cierre="LXX_VYY_E05_Resumen" :var video="LXX_VYY_NombreVideo" :var idioma="es" :var calidad="1080p60" :var musica="music/3Blue1Brown-Zeta-X3.mp3" :var volumen="0.25" :var volumen_voz="0.04" :results output
+export LC_ALL=C   # decimales con punto para bc y printf
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+dir=$raiz/lib/media/videos/$fichero/$calidad
+tmp=$raiz/tmp/$video; mkdir -p $tmp; rm -f $tmp/seg_*.mp4
+
+# 1. Un segmento por escena, con audio y vídeo de la misma duración exacta
+i=0; lista=""; offsets=""; T=0; T0=""; Tc=""
+for esc in $escenas; do
+  seg=$(printf "%s/seg_%02d.mp4" $tmp $i)
+  dur=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4)
+  fps=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4)
+  if ffprobe -loglevel error -select_streams a -show_entries stream=codec_type -of csv=p=0 $dir/$esc.mp4 | grep -q audio; then
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -af "aresample=48000,apad" -ac 2 -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  else
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  fi
+  d=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg)
+  offsets="$offsets $T"; [ "$esc" = "$cierre" ] && Tc=$T
+  printf "%2d  %-55s %8.3f s  (empieza en %8.3f)\n" $i $esc $d $T
+  T=$(bc -l <<< "$T+$d"); [ -z "$T0" ] && T0=$d; dl=$d
+  lista="$lista $seg"; i=$((i+1))
+done
+n=$i; Tl=$(bc -l <<< "$T-$dl"); [ -z "$Tc" ] && Tc=$Tl
+printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (créditos)\n" $T $T0 $Tc $Tl
+
+# 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
+inputs=""; fc=""; k=0
+for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
+dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
+fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
+ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]loudnorm=I=-16:LRA=11:TP=-1.5[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $raiz/$video.mp4
+echo "Vídeo: $raiz/$video.mp4"
+
+# 3. Subtítulos: desplazar el srt de cada escena y fundirlos en uno
+ESCENAS="$escenas" OFFSETS="$offsets" python3 - "$dir" "$raiz/$video.srt" <<'EOF'
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) < 3 or "-->" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("-->")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --> {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subtítulos: {salida} ({k-1} entradas)")
+EOF
+#+END_SRC
+
+** Comprobar las uniones y los subtítulos
+
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime [[montaje]]) para mirar que no haya parones ni desfases.
+
+#+name: fotogramas
+#+BEGIN_SRC bash :var video="LXX_VYY_NombreVideo" :var idioma="es" :var tiempos="0 10 20" :results output
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+mkdir -p $raiz/tmp/fotogramas
+for t in $tiempos; do
+  for dt in -0.1 0.1; do
+    ti=$(bc -l <<< "$t+$dt"); [ $(bc -l <<< "$ti < 0") = 1 ] && ti=0
+    ffmpeg -loglevel error -y -ss $ti -i $raiz/$video.mp4 -frames:v 1 $raiz/tmp/fotogramas/$(printf "%08.2f" $ti).png
+  done
+done
+ls $raiz/tmp/fotogramas
+#+END_SRC
+
+** Extraer el guion (la narración) para revisarlo
+
+Recorre el fichero de python y saca, escena por escena, los textos
+~tr(...)~ del idioma pedido: en prosa la narración (los que están dentro
+de ~self.voiceover~) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en =LANG=, lee siempre el fichero español (=./lib/=).
+
+#+name: guion
+#+BEGIN_SRC python :python python3 :var fichero="LXX_VYY_FileName" :var idioma="es" :results output
+import ast, textwrap
+
+arbol = ast.parse(open(f"lib/{fichero}.py", encoding="utf-8").read())
+idx   = 0 if idioma == "es" else 1
+
+def texto(nodo):
+    try:
+        return ast.literal_eval(nodo)
+    except Exception:
+        return ast.unparse(nodo)
+
+def es_tr(n):
+    return (isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "tr" and len(n.args) >= 2)
+
+def es_borrado(stmt):
+    return ast.unparse(stmt).startswith("self.play(*[FadeOut(mob) for mob in self.mobjects])")
+
+# Primera clase con construct(): la del vídeo completo.
+construct = next(f for c in arbol.body if isinstance(c, ast.ClassDef)
+                 for f in c.body if isinstance(f, ast.FunctionDef) and f.name == "construct")
+
+escena, items = 0, []   # la portada es la escena 0
+def volcar():
+    global items
+    if items:
+        print(f"==== {'Escena' if idioma == 'es' else 'Scene'} {escena} ====\n")
+        for tipo, t in items:
+            if tipo == "voz":
+                print(textwrap.fill(t, 72), "\n")
+            else:
+                print(f"    [{t}]\n")
+    items = []
+
+for stmt in construct.body:
+    if es_borrado(stmt):
+        volcar(); escena += 1; continue
+    en_voz = set()
+    for n in ast.walk(stmt):
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == "voiceover":
+            en_voz |= {id(s) for s in ast.walk(n) if es_tr(s)}
+    for n in sorted((n for n in ast.walk(stmt) if es_tr(n)), key=lambda n: (n.lineno, n.col_offset)):
+        items.append(("voz" if id(n) in en_voz else "pantalla", texto(n.args[idx])))
+volcar()
+#+END_SRC
+
+** Tangle desde la terminal (sin abrir Emacs)
+
+#+BEGIN_SRC bash :results silent
+emacs --batch -l org --eval '(org-babel-tangle-file "Comunes.org")'   # solo si cambió el código común
+emacs --batch -l org --eval '(org-babel-tangle-file "L01-V07-PropiedadesDelProductoPorEscalares.org")'
+#+END_SRC

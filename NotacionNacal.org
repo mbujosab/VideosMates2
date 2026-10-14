@@ -87,7 +87,7 @@ $a+0=a$; $a+(-a)=0$; $ab=ba$; $a(b+c)=ab+ac$; $a(bc)=(ab)c$; $1a=a$.
 Para vectores con el mismo número de componentes y escalares $\lambda,\varphi$:
 1. $\Vect{a}+\Vect{b}=\Vect{b}+\Vect{a}$
 2. $\Vect{a}+(\Vect{b}+\Vect{c})=(\Vect{a}+\Vect{b})+\Vect{c}$
-3. $\Vect{0}+\Vect{a}=\Vect{a}$
+3. $\Vect{a}+\Vect{0}=\Vect{a}$
 4. $\Vect{a}+(-\Vect{a})=\Vect{0}$
 5. $\lambda(\Vect{a}+\Vect{b})=\lambda\Vect{a}+\lambda\Vect{b}$
 6. $(\lambda+\varphi)\Vect{a}=\lambda\Vect{a}+\varphi\Vect{a}$
@@ -237,8 +237,10 @@ libro recomienda paréntesis siempre: =(3*b)|2=.
 | escalar (número)                     | scalar                                          |
 | resumen                              | Key Takeaways                                   |
 
-Pendiente de fijar cuando lleguen esos vídeos: "vector opuesto"
-(propuesta: *the negative of a vector* / additive inverse), "orden
+Fijado en V06 (2026-10-13): "vector opuesto" = *opposite vector* (como
+"opposite" para números en V05), "elemento neutro" = *identity
+element*, "lado izquierdo/derecho" = *left-/right-hand side*.
+Pendiente de fijar cuando lleguen esos vídeos: "orden
 $m$ por $n$" (propuesta: *an $m$ by $n$ matrix*), "reglas de
 reescritura" (*rewriting rules*), "matriz columna" (*column matrix*).
 
@@ -262,9 +264,9 @@ reescritura" (*rewriting rules*), "matriz columna" (*column matrix*).
 | V02   | 1.2 (suma)        | publicado                                     |
 | V03   | 1.2 (suma, geom.) | publicado                                     |
 | V04   | 1.2 (producto)    | publicado                                     |
-| V05   | (no está en el libro) | en curso: las 8 propiedades de los reales con regla y compás |
-| V06   | 1.2.1             | en curso (escenas 1-2 hechas): propiedades de las operaciones con vectores |
-| V07   | 1.1.1             | pendiente: vectores especiales                |
+| V05   | (no está en el libro) | publicado 2026-10-13: las 9 propiedades de los reales con regla y compás |
+| V06   | 1.1.1 y 1.2.1     | guion aprobado 2026-10-14 (falta audio Azure y HD): vectores nulo y opuesto, el método (estrategia 2) y las propiedades 1-4 de la suma |
+| V07   | 1.2.1             | en curso (guion escrito 2026-10-14, pendiente de revisión de Marcos): propiedades 5-8, la proposición completa y «espacio vectorial» |
 | V08   | 1.3               | pendiente: vectores como datos                |
 | V09   | 1.4 a 1.4.3       | pendiente: matrices, filas, columnas          |
 | V10   | 1.4.4 a 1.4.5     | pendiente: reescritura y transposición        |

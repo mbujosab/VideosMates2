@@ -8,6 +8,7 @@
 *.tex
 .ipynb_checkpoints
 media
+media_*
 music
 __pycache__
 tmp

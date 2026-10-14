@@ -15,8 +15,9 @@ selector, "componente a componente", etc.).
 ## Flujo de trabajo
 
 - Un fichero org por vídeo (`L01-V05-Nombre.org`; plan de la lección 1 en
-  `NotacionNacal.org`: V05 reales con regla y compás, V06 propiedades de
-  las operaciones con vectores, ..., V12), programación literaria
+  `NotacionNacal.org`: V05 reales con regla y compás, V06 vectores
+  especiales y propiedades de la suma, V07 propiedades del producto por
+  escalares, ..., V12), programación literaria
   y **fuente única bilingüe**. Plantilla: `LXX-VYY-NombreVideo.org`.
   Cada escena es un chunk con nombre que reutilizan la clase del vídeo
   completo y las clases `LXX_VYY_Enn_*` (chunk "Clases de las escenas").
@@ -112,6 +113,73 @@ comillas, usa la caché real para que el audio elegido sea el del vídeo).
   (`<bookmark mark='v2'/>`: cambia la clave de la caché, no el audio
   pedido) y quedarse con la mejor toma. Umbral práctico: 150 ms.
 
+## Frases que Tristan entona mal (V06, 2026-10-14)
+
+Lo que Marcos oyó mal al escuchar V06 con Azure, y la versión que funcionó.
+Escribir las frases nuevas ya en la forma buena.
+
+- **Nada de preguntas en la voz**, ni directas ni encadenadas ("¿Son
+  estos...? ¿O son...?"): reformular en afirmativo con "podría(n)":
+  "Estos comportamientos podrían ser una característica particular de
+  los ejemplos, o propiedades generales." La pregunta va en pantalla.
+- **Interrogativa indirecta con complemento detrás del verbo**: "da
+  igual qué pareja sumemos primero" pausa 350-580 ms antes de "primero",
+  que suena aislado. Terminar la frase en el verbo: "da igual por qué
+  pareja empecemos" (0 ms en todas las tiradas). En general, no dejar un
+  adverbio o complemento corto colgando detrás de "qué ... + subjuntivo".
+- **"Un vector más su opuesto da..."** (el "más" de fórmula entre
+  sustantivos) se entona mal; con verbo suena natural: "sumar un vector y
+  su opuesto da un vector nulo". Mejor el verbo "sumar" que el "más"
+  leído, salvo entre letras.
+- **Letra vocal (a, i) junto a otra vocal = sinalefa**, aunque haya coma
+  en medio: "Como i es" suena "comoi"; "cualquier i, 'a' más" funde la
+  'i' con la 'a'; "Por tanto, 'a'" se traga la 'a' (20-70 ms). Poner
+  delante de la letra una palabra acabada en consonante ("cualquier i",
+  "Así pues, 'a' más") y detrás un punto ("Esto vale para cualquier i.
+  Por tanto, ..."). Fórmula definitiva de las conclusiones (V06 y V07): sin letra
+  suelta, "Como esto es cierto para cualquier componente del vector, los
+  dos vectores son iguales" / "..., 'a' más el vector nulo es a" ('a' tras
+  coma, medida 200-220 ms); en inglés "Since this holds for any component
+  of the vector, ...".
+  La duración de la 'i' se mide mejor con las marcas de palabra de Azure
+  (`duration_milliseconds` y hueco hasta la siguiente) que con la
+  envolvente, que la mezcla con la pausa del punto.
+- Las letras a final de frase ("las de a.") quedan en 110-150 ms en todas
+  las tiradas: es la caída natural del final, no hace falta perseguirla.
+- Cuando algo "suena raro", **medirlo**: `tmp/huecos.py` (silencio
+  delante de cada palabra), `tmp/mide_cache.py` (duración de letras o
+  palabras sobre las tomas reales de la caché), `tmp/tiradas.py` (N
+  tiradas de una frase en `tmp/pruebas_azure/v06`; la primera, sin marca,
+  tiene la misma clave que el render, así que se puede copiar a
+  `lib/media/voiceovers` con su entrada de `cache.json` sin pagar otra
+  vez). Probar 3-4 redacciones con tres tiradas cada una: distingue una
+  toma mala (otra tirada lo arregla) de una frase mala (falla siempre).
+- Tras sintetizar frases nuevas, pasar `tmp/pausas_raras.py CACHE [horas]`:
+  lista los silencios >= 300 ms entre palabras sin puntuación. Los de
+  enumeración ("..., y") son normales; uno de 500-700 ms antes de la
+  última palabra ("sumemos | primero", "factor it | out") es el fallo
+  que se oye: repetir la tirada y, si persiste, reformular. Si la toma
+  buena es la primera tirada (sin marca), sustituye a la mala en la
+  caché real con el mismo nombre y sin tocar el org.
+- **Mover una marca sin pagar ni perder la toma aprobada**: la clave de
+  la caché es el texto con marcas *y* el SSML, y quitar una marca deja
+  sus espacios en el SSML, así que moverla cambia la clave y Azure
+  sintetiza una toma nueva (distinta). Para conservar la buena: renderizar
+  una vez (crea la entrada nueva), copiar en la entrada de la toma buena
+  el `input_text` nuevo y el `ssml` nuevo (en `ssml` y en
+  `input_data.ssml`) y dejarla en `cache.json` antes que la nueva (gana la
+  primera coincidencia). Hecho en las conclusiones de V06 (2026-10-14).
+- **Una marca al principio del texto se dispara al final.** manim-voiceover
+  interpola el tiempo de una marca en la posición 0 (antes de la primera
+  palabra) y la manda al final del audio (aviso "TimeInterpolator received
+  weird input"): `<bookmark mark='cc'/> Como esto es...` destacaba los
+  extremos de la cadena cuando la frase ya había acabado. `concluye` de V06
+  lo corrige (marca con `tracker.bookmark_distances[m] == 0` = ya, sin
+  esperar); copiarla así en V07 y en cualquier función que espere una marca
+  inicial. Comprobarlo siempre con una tira de fotogramas.
+- Varias sesiones pueden escribir a la vez en el mismo `cache.json`: no
+  renderizar dos vídeos con Azure en paralelo en el mismo repo.
+
 ## Estilo de los vídeos (acordado 2026-10-11)
 
 - Esqueleto fijo: portada, enlace con el vídeo anterior en una o dos
@@ -158,6 +226,75 @@ comillas, usa la caché real para que el audio elegido sea el del vídeo).
 - Las demostraciones cortas se proponen como ejercicio con
   `self.pausa_para_pensar(pista=..., pista_voz=...)`: tarjeta única en
   toda la serie, pausa, pista, pausa, y después la demostración paso a paso.
+  La voz de la primera tarjeta dice **qué** hay que intentar
+  (`invitacion_voz="Pause el vídeo e intente demostrar la propiedad
+  conmutativa."`), no solo "inténtelo".
+- **Demostraciones con panel de herramientas** (acordado con Marcos el
+  2026-10-13 sobre V06; modelo: clase `Panel` y funciones `linea`,
+  `coloca_cadena`, `paso`, `concluye` de `L01-V06-PropiedadesDeLaSumaDeVectores.org`):
+  - Panel fijo arriba: definiciones a la izquierda (suma y producto por
+    escalar siempre visibles; nulo y opuesto atenuados al 30 % hasta la
+    escena en que entran en juego), propiedades de los reales a la
+    derecha, en pequeño (28 pt). Enunciado sin numerar (el número va en la
+    cabecera "Propiedad N: ...") centrado en el hueco entre los paneles y
+    a media altura entre la cabecera y la cadena; la cadena debajo, en
+    el centro, con las líneas de pasos con reales en `COLOR_REGLA`.
+  - Pista = las piezas necesarias pasan a amarillo **y** se recuadran
+    (el amarillo solo no se ve en baja resolución). Orden de cada paso:
+    la voz nombra la regla, la pieza parpadea en el panel, se escribe la
+    línea y entonces sube el contador (insignia: disco azul con el
+    número, separado de la fórmula; nunca "×2" pegado, que parece un
+    factor) con la campanita `lib/sonidos/campanita.wav`
+    (`self.add_sound`). La conclusión dice la cuenta ("dos usos de la
+    definición de suma y uno de la conmutativa"), no "dos definiciones".
+  - Al usar una definición del selector, la voz dice **en qué sentido**
+    se reescribe (semilla de V01-V04; Marcos, 2026-10-14): "Por la
+    definición de suma podemos distribuir el selector" (de izquierda a
+    derecha) / "...podemos sacar el selector como factor común" (de
+    derecha a izquierda);
+    "Por la definición de producto (o de opuesto) podemos desplazar el
+    paréntesis" (en los dos sentidos). Al presentar las definiciones, decir ya qué hace
+    cada una: "la suma, que distribuye el selector, el producto por un
+    escalar, que desplaza el paréntesis, ... y el opuesto, que también
+    desplaza el paréntesis". Giro preferido por Marcos para **todos** los pasos,
+    también los de los reales: "por [regla] podemos [acción]" ("Ya todo
+    son números reales, así que podemos aplicar la asociativa"), más
+    natural que "Regla: acción" o que nombrar la regla a secas. Que el alumno asocie selector distribuido ⇄ factorizable.
+  - Pausas: dos en las dos primeras propiedades (intentar, pista,
+    intentar), una en las siguientes (pista y pausa).
+- **Narración directa y mínima** (criterio de Marcos, 2026-10-14): cada
+  frase dice una cosa y solo se dice lo que el vídeo va a usar. Fuera
+  los apuntes laterales ("observe que reescalar por menos uno da el
+  opuesto, pero no lo usaremos"), las justificaciones de lo que se
+  admite ("estas propiedades no las demostramos: las admitimos"), los
+  conectores de relleno ("Pero antes...", "Así que, para...") y las
+  frases descolgadas de resumen ("distinga los tres tipos de cosas").
+  Si dos frases consecutivas dicen lo mismo con distinto énfasis, una
+  sobra. Modelo: "El vector nulo es el que tiene todas sus componentes
+  nulas, y lo escribimos con un cero en negrita. Por ejemplo, el vector
+  nulo de R2 tiene dos ceros, y el de R3 tiene tres. En las
+  demostraciones usaremos que toda componente de un vector nulo es
+  cero." Los ejemplos en pantalla se eligen para que se vean de un
+  vistazo ((0, 1, 2) y su opuesto) y no se describen.
+- **Discurso natural, no lectura de puntos** (Marcos, 2026-10-14): frases
+  completas y enlazadas, como hablaría un profesor. Nada de titulares
+  sueltos ("Definición de suma.", "La componente i-ésima del lado
+  izquierdo.", "Las piezas que necesita: ...", "Tres usos de ..."):
+  "Por la definición de suma podemos distribuir el selector", "Empezamos
+  por la componente i-ésima del lado izquierdo", "Para demostrarla
+  necesitará ...", "Hemos usado tres veces la definición de producto ...".
+  Directo no significa telegráfico.
+- **No leer en voz alta lo que ya está en pantalla.** La voz describe o
+  nombra ("la propiedad conmutativa: el orden de los sumandos no altera
+  la suma", "definición de suma", "este vector y su opuesto"), no recita
+  la fórmula ("a más b es igual a b más a", "la componente i-ésima de a
+  más la componente i-ésima de b"). Leerlo alarga el vídeo y aburre.
+  Sin preguntas en la voz (Azure las entona mal): la pregunta va en
+  pantalla y la voz la parafrasea en afirmativo. Las observaciones
+  generales van en el resumen final, no intercaladas en una demostración.
+- Nada aparece en pantalla y luego se recoloca: cada elemento se crea ya
+  en su posición final (los `set_x`/`arrange` antes de la primera
+  animación que lo muestre).
 - Legible en un móvil: fórmulas con `font_size` >= 40 en 1080p, márgenes,
   no más de un bloque de texto y una fórmula grande a la vez.
 - Decir explícitamente cuándo una escena ilustra y cuándo demuestra.
@@ -189,5 +326,20 @@ comillas, usa la caché real para que el audio elegido sea el del vídeo).
 
 - Iconos de la serie (pregunta, idea clave, "engorroso", "ilustra, no
   demuestra") al estilo de la tarjeta de pausa, en `Comunes.org`.
-- V06: reconciliar con V05 (los reales tienen nueve propiedades, para los
-  vectores bastan ocho) y pasar su guion por las reglas de letras.
+- V06 (`L01-V06-PropiedadesDeLaSumaDeVectores.org`): guion **aprobado por
+  Marcos el 2026-10-14** tras su revisión (vídeo de prueba gTTS 480p de
+  8 min 24 s). Falta: comprobar el inglés con gTTS, voces de Azure (medir
+  las pocas letras y escuchar las preguntas de la escena 1), render HD,
+  ficha `fichas/L01_V06.toml`, subida y web. **Encargo detallado, paso a
+  paso, en `tmp/HANDOFF_V06_audio.md`** (leerlo antes de empezar). Las cadenas de las
+  demostraciones coinciden paso a paso con la solución del libro
+  (Ejercicio 4 de 1.2.1, estrategia 2, revisada el mismo día: ahora
+  $\Vect{a}+\Vect{0}=\Vect{a}$ y una regla por paso).
+- V07: propiedades 5-8 (producto por escalares) con las mismas
+  utilidades de V06; solo usa las cuatro propiedades del producto de los
+  reales (5-8); la 6 necesita tres pasos de reales (conmutativa,
+  distributiva, conmutativa). **Encargo completo con las cuatro cadenas,
+  el panel, las escenas y la entrega en `tmp/HANDOFF_V07_guion.md`.**
+  Guion escrito el 2026-10-14 en `L01-V07-PropiedadesDelProductoPorEscalares.org`;
+  vídeo de prueba gTTS 480p `L01_V07_PropiedadesDelProductoPorEscalares_prueba480p.mp4`
+  (6 min 59 s), pendiente de la revisión de Marcos.

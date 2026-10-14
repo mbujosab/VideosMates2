@@ -129,8 +129,12 @@ class MiEscenaConVoz(VoiceoverScene):
             stampTop   = VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
             self.add(stampTop)
 
-    def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4):
-        """Tarjeta que invita a pausar el vídeo; opcionalmente da una pista y vuelve a invitar."""
+    def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4, invitacion=None, invitacion_voz=None,
+                          al_dar_la_pista=None):
+        """Tarjeta que invita a pausar el vídeo; opcionalmente da una pista y vuelve a invitar.
+        `invitacion` cambia el texto de la primera tarjeta (e `invitacion_voz` lo que dice la voz);
+        `al_dar_la_pista` es una función que se ejecuta mientras la voz da la pista (por ejemplo,
+        iluminar en amarillo las piezas que hacen falta)."""
         def tarjeta(texto):
             barra = lambda: RoundedRectangle(corner_radius=0.06, width=0.2, height=0.6,
                                              fill_color=COLOR_ESCALAR, fill_opacity=1, stroke_width=0)
@@ -142,15 +146,17 @@ class MiEscenaConVoz(VoiceoverScene):
                                      stroke_color=COLOR_ESCALAR, fill_color=BLACK, fill_opacity=0.85)
             return VGroup(marco, contenido).to_edge(DOWN, buff=0.4)
     
-        invitacion = tr("Pause el vídeo e inténtelo.", "Pause the video and give it a try.")
+        invitacion = invitacion or tr("Pause el vídeo e inténtelo.", "Pause the video and give it a try.")
         tarjeta1 = tarjeta(invitacion)
-        with self.voiceover(text=invitacion) as tracker:
+        with self.voiceover(text=invitacion_voz or invitacion) as tracker:
             self.play(FadeIn(tarjeta1), run_time=min(0.8, tracker.duration))
         self.wait(segundos)
         if pista is not None:
             tarjeta2 = tarjeta(tr("Pista: ", "Hint: ") + pista)
             with self.voiceover(text=tr("Una pista: ", "A hint: ") + (pista_voz or pista)) as tracker:
                 self.play(ReplacementTransform(tarjeta1, tarjeta2), run_time=min(0.8, tracker.duration))
+                if al_dar_la_pista is not None:
+                    al_dar_la_pista()
             tarjeta3 = tarjeta(tr("Pause de nuevo e inténtelo.", "Pause again and try once more."))
             with self.voiceover(text=tr("Pause de nuevo e inténtelo.", "Pause again and try once more.")) as tracker:
                 self.play(ReplacementTransform(tarjeta2, tarjeta3), run_time=min(0.8, tracker.duration))
