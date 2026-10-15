@@ -194,7 +194,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, para cualquier i.<bookmark mark='v3'/>""",
+        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, sea cual sea i.<bookmark mark='v2'/>""",
                                     """The method is the one from the previous video. Two vectors are equal when they coincide component-wise: it is enough to prove that the i-th component is the same, for any i.""")) as tracker:
             self.play(Write(criterio), run_time=2)
         
@@ -231,7 +231,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                                     """Fifth property: scalar multiplication is distributive over vector addition. Scaling a sum is adding the scaled vectors.""")) as tracker:
             self.play(Write(enunciado), run_time=1.5)
         
-        with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> las dos definiciones y la propiedad seis de los reales, la distributiva.""",
+        with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> las dos definiciones y la propiedad seis de los reales, la distributiva.<bookmark mark='v3'/>""",
                                     """To prove it you will need <bookmark mark='p'/> both definitions and property six of the reals, the distributive property.""")) as tracker:
             self.wait_until_bookmark("p")
             panel.pista("suma", "producto", 6)
@@ -584,7 +584,7 @@ class L01_V07_E02_Metodo(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, para cualquier i.<bookmark mark='v3'/>""",
+        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, sea cual sea i.<bookmark mark='v2'/>""",
                                     """The method is the one from the previous video. Two vectors are equal when they coincide component-wise: it is enough to prove that the i-th component is the same, for any i.""")) as tracker:
             self.play(Write(criterio), run_time=2)
         
@@ -622,7 +622,7 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
                                     """Fifth property: scalar multiplication is distributive over vector addition. Scaling a sum is adding the scaled vectors.""")) as tracker:
             self.play(Write(enunciado), run_time=1.5)
         
-        with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> las dos definiciones y la propiedad seis de los reales, la distributiva.""",
+        with self.voiceover(text=tr("""Para demostrarla necesitará <bookmark mark='p'/> las dos definiciones y la propiedad seis de los reales, la distributiva.<bookmark mark='v3'/>""",
                                     """To prove it you will need <bookmark mark='p'/> both definitions and property six of the reals, the distributive property.""")) as tracker:
             self.wait_until_bookmark("p")
             panel.pista("suma", "producto", 6)

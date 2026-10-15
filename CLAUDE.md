@@ -144,6 +144,10 @@ Escribir las frases nuevas ya en la forma buena.
   La duración de la 'i' se mide mejor con las marcas de palabra de Azure
   (`duration_milliseconds` y hueco hasta la siguiente) que con la
   envolvente, que la mezcla con la pausa del punto.
+- **"para cualquier i." al final de frase** suena "cualquiera i" o "cualquier ei" aunque la 'i'
+  dure 200 ms (Marcos, V06 y V07, 2026-10-15): repetir la tirada no lo arregla. Funcionan
+  "sea cual sea i." (la elegida en V07), "para cualquier 'i'." y "sea cual sea el índice i.".
+  No sustituirla por "en todas las posiciones": diría que el vector es constante.
 - Las letras a final de frase ("las de a.") quedan en 110-150 ms en todas
   las tiradas: es la caída natural del final, no hace falta perseguirla.
 - Cuando algo "suena raro", **medirlo**: `tmp/huecos.py` (silencio

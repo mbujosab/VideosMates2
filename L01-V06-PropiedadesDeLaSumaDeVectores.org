@@ -751,8 +751,8 @@ with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado d
     pass
 
 concluye(self, enunciado,
-         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> 'a' más el vector nulo es a. Hemos usado tres piezas, una vez cada una.""",
-         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> 'a' plus the zero vector is 'a'. We have used three pieces, once each.""",
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> 'a' más el vector nulo es a. Hemos usado cada una de las tres piezas una sola vez.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> 'a' plus the zero vector is 'a'. We have used each of the three pieces only once.""",
          cadena=cadena)
 
 self.pausa_media()
@@ -823,8 +823,8 @@ with self.voiceover(text=tr("""Este último paso parece innecesario, pero es el 
     pass
 
 concluye(self, enunciado,
-         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> 'a' más su opuesto es el vector nulo. Hemos usado cuatro piezas, una vez cada una.""",
-         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> 'a' plus its opposite is the zero vector. We have used four pieces, once each.""",
+         """<bookmark mark='cc'/> Como esto es cierto para cualquier componente del vector, <bookmark mark='ok'/> 'a' más su opuesto es el vector nulo. Hemos usado cada una de las cuatro piezas una sola vez.""",
+         """<bookmark mark='cc'/> Since this holds for any component of the vector, <bookmark mark='ok'/> 'a' plus its opposite is the zero vector. We have used each of the four pieces only once.<bookmark mark='v3'/>""",
          cadena=cadena)
 
 self.pausa_media()
@@ -865,6 +865,13 @@ with self.voiceover(text=tr("""Resumamos. La suma de vectores <bookmark mark='v1
 with self.voiceover(text=tr("""Son las mismas cuatro propiedades que cumple la suma de números reales.""",
                             """They are the same four properties satisfied by the addition of real numbers.""")) as tracker:
     self.play(FadeIn(rotulo_reales), FadeIn(col_reales), run_time=1.2)
+
+with self.voiceover(text=tr("""Se escriben casi igual, pero a la derecha <bookmark mark='bv'/> las letras en negrita son vectores, y a la izquierda <bookmark mark='br'/> son números.""",
+                            """They look almost the same, but on the right <bookmark mark='bv'/> the bold letters are vectors, and on the left <bookmark mark='br'/> they are numbers.""")) as tracker:
+    self.wait_until_bookmark("bv")
+    self.play(Indicate(col_vectores, color=COLOR_ESCALAR, scale_factor=1.08), run_time=1.2)
+    self.wait_until_bookmark("br")
+    self.play(Indicate(col_reales, color=COLOR_ESCALAR, scale_factor=1.08), run_time=1.2)
 
 metodo = Tex(tr(r"igualdad componente a componente, definiciones,\\ y una sola propiedad de los reales en cada paso",
                 r"component-wise equality, definitions,\\ and a single property of the reals at each step"),
