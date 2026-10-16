@@ -111,15 +111,20 @@ def paso(escena, l, panel, clave, run_time=1, veces=1):
 
 
 def concluye(escena, enunciado, texto_es, texto_en, cadena=None):
-    """Cierre de cada demostración: en la marca 'cc' se destacan los dos extremos de la cadena; en
-    'ok' se recuadra y parpadea el enunciado demostrado."""
+    """Cierre de cada demostración: i es cualquiera, luego los vectores son iguales (en la marca 'cc'
+    se destacan los dos extremos de la cadena) y al final se enciende el enunciado."""
     with escena.voiceover(text=tr(texto_es, texto_en)) as tracker:
-        if cadena is not None and "cc" in tracker.bookmark_times:
-            escena.wait_until_bookmark("cc")
+        # manim-voiceover sitúa al final del audio una marca en la posición 0 del texto (interpola
+        # antes de la primera palabra): una marca al principio significa "ya", sin esperar
+        bt = {m: (tracker.start_t if tracker.bookmark_distances[m] == 0 else t) for m, t in tracker.bookmark_times.items()}
+        if cadena is not None and "cc" in bt:
+            if bt["cc"] - escena.renderer.time > 0.01: escena.wait(bt["cc"] - escena.renderer.time)
+            rt = min(3, max(0.8, bt["ok"] - bt["cc"])) if "ok" in bt else 1.5   # dura lo que la frase, hasta el recuadro
             escena.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.15),
-                        Indicate(cadena[-1], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
-        if "ok" in tracker.bookmark_times:
-            escena.wait_until_bookmark("ok")
+                        Indicate(cadena[-1], color=COLOR_ESCALAR, scale_factor=1.15), run_time=rt)
+        if "ok" in bt:
+            if bt["ok"] - escena.renderer.time > 0.01: escena.wait(bt["ok"] - escena.renderer.time)
+        # lo demostrado: recuadro amarillo y parpadeo del enunciado
         marco = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
         escena.play(Create(marco), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
         restante = tracker.start_t + tracker.duration - escena.renderer.time
@@ -441,7 +446,9 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
         
         cadena = coloca_cadena([linea(r"\elemRp{1\Vect{a}}{i}"),
                                 linea(r"=1\eleVRpE{a}{i}"),
-                                linea(r"=\eleVR{a}{i}", de_reales=True)])
+                                linea(r"=\eleVRpE{a}{i}", de_reales=True)])
+        # la misma línea sin el paréntesis, que sobra (no es un paso de la demostración)
+        sin_parentesis = linea(r"=\eleVR{a}{i}", de_reales=True).align_to(cadena[2], LEFT).align_to(cadena[2], DOWN)
         
         with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
                                     """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
@@ -457,6 +464,13 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                                     """And by property eight of the reals we can drop the one. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
+        
+        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que el paréntesis sobra <bookmark mark='q'/> y podemos quitarlo.""",
+                                    """Parentheses indicate the order of operations: first what is inside, and then what is outside. Here nothing is left outside, so the parentheses are unnecessary <bookmark mark='q'/> and we can drop them.""")) as tracker:
+            self.play(Indicate(cadena[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
+            self.wait_until_bookmark("q")
+            self.play(TransformMatchingShapes(cadena[2], sin_parentesis), run_time=1)
+            cadena[2] = sin_parentesis
         
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
@@ -835,7 +849,9 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
         
         cadena = coloca_cadena([linea(r"\elemRp{1\Vect{a}}{i}"),
                                 linea(r"=1\eleVRpE{a}{i}"),
-                                linea(r"=\eleVR{a}{i}", de_reales=True)])
+                                linea(r"=\eleVRpE{a}{i}", de_reales=True)])
+        # la misma línea sin el paréntesis, que sobra (no es un paso de la demostración)
+        sin_parentesis = linea(r"=\eleVR{a}{i}", de_reales=True).align_to(cadena[2], LEFT).align_to(cadena[2], DOWN)
         
         with self.voiceover(text=tr("""Empezamos por la componente i-ésima del lado izquierdo. <bookmark mark='l0'/>""",
                                     """We start with the i-th component of the left-hand side. <bookmark mark='l0'/>""")) as tracker:
@@ -851,6 +867,13 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
                                     """And by property eight of the reals we can drop the one. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
+        
+        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que el paréntesis sobra <bookmark mark='q'/> y podemos quitarlo.""",
+                                    """Parentheses indicate the order of operations: first what is inside, and then what is outside. Here nothing is left outside, so the parentheses are unnecessary <bookmark mark='q'/> and we can drop them.""")) as tracker:
+            self.play(Indicate(cadena[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
+            self.wait_until_bookmark("q")
+            self.play(TransformMatchingShapes(cadena[2], sin_parentesis), run_time=1)
+            cadena[2] = sin_parentesis
         
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:

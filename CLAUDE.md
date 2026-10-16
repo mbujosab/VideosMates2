@@ -345,5 +345,10 @@ Escribir las frases nuevas ya en la forma buena.
   distributiva, conmutativa). **Encargo completo con las cuatro cadenas,
   el panel, las escenas y la entrega en `tmp/HANDOFF_V07_guion.md`.**
   Guion escrito el 2026-10-14 en `L01-V07-PropiedadesDelProductoPorEscalares.org`;
-  vídeo de prueba gTTS 480p `L01_V07_PropiedadesDelProductoPorEscalares_prueba480p.mp4`
-  (6 min 59 s), pendiente de la revisión de Marcos.
+  revisado por Marcos y con voz de Azure (Tristan) a 480p:
+  `L01_V07_PropiedadesDelProductoPorEscalares_azure480p.mp4` (6 min 41 s). Las tomas
+  de Azure están en una **caché aparte**, `lib/media_v07/voiceovers` (render con
+  `--media_dir media_v07`, montaje con `tmp/montaje_v07.sh fichero "escenas" cierre
+  video idioma calidad`), porque la sesión de V06 sintetizaba a la vez: antes del HD,
+  fusionar su `cache.json` y sus mp3 con `lib/media/voiceovers` y renderizar sin
+  `--media_dir`. Falta: escucha final de Marcos, inglés (Ollie), HD, ficha, subida, web.
