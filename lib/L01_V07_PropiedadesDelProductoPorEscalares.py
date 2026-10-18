@@ -88,9 +88,10 @@ def cabecera_y_enunciado(escena, texto, numero):
     return cabecera, enunciado
 
 
-def linea(formula, de_reales=False):
-    """Una línea de la cadena de igualdades (en teal si el paso es una operación entre números reales)."""
-    return MathTex(formula, tex_template=myTemplate, font_size=36).set_color(COLOR_REGLA if de_reales else WHITE)
+def linea(*formula, de_reales=False):
+    """Una línea de la cadena de igualdades (en teal si el paso es una operación entre números reales);
+    en varios trozos si hay que resaltar una parte."""
+    return MathTex(*formula, tex_template=myTemplate, font_size=36).set_color(COLOR_REGLA if de_reales else WHITE)
 
 
 def coloca_cadena(cadena, y_sup=0.55, salto=0.66, x_izq=-3.3, sangria=0.6):
@@ -199,9 +200,11 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, sea cual sea i.<bookmark mark='v2'/>""",
-                                    """The method is the one from the previous video. Two vectors are equal when they coincide component-wise: it is enough to prove that the i-th component is the same, for any i.""")) as tracker:
+        with self.voiceover(text=tr("""El método es el del vídeo anterior. Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.<bookmark mark='v4'/>""",
+                                    """The method is the one from the previous video. To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise.""")) as tracker:
             self.play(Write(criterio), run_time=2)
+            self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
+            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
         with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza el paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
                                     """Today we only need two definitions: <bookmark mark='s'/> addition, which distributes the selector, <bookmark mark='p'/> and scalar multiplication, which shifts the parentheses. And, of the properties of the reals, <bookmark mark='r'/> the four for multiplication.""")) as tracker:
@@ -246,7 +249,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
         cadena = coloca_cadena([linea(r"\elemRp{\lambda(\Vect{a}+\Vect{b})}{i}"),
                                 linea(r"=\lambda\big(\elemRp{\Vect{a}+\Vect{b}}{i}\big)"),
                                 linea(r"=\lambda\big(\eleVR{a}{i}+\eleVR{b}{i}\big)"),
-                                linea(r"=\lambda\eleVRpE{a}{i}+\lambda\eleVRpE{b}{i}", de_reales=True),
+                                linea(r"=\lambda", r"\eleVRpE{a}{i}", r"+\lambda", r"\eleVRpE{b}{i}", de_reales=True),
                                 linea(r"=\elemRp{\lambda\Vect{a}}{i}+\elemRp{\lambda\Vect{b}}{i}"),
                                 linea(r"=\elemRp{\lambda\Vect{a}+\lambda\Vect{b}}{i}")])
         
@@ -270,6 +273,11 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 6)
         
+        with self.voiceover(text=tr("""Cada componente va entre paréntesis para que quede claro que el escalar multiplica a la componente, y no al vector.""",
+                                    """Each component goes in parentheses to make clear that the scalar multiplies the component, not the vector.""")) as tracker:
+            self.play(Indicate(cadena[3][1], color=COLOR_ESCALAR, scale_factor=1.15),
+                      Indicate(cadena[3][3], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
+        
         with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
@@ -280,6 +288,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l5")
             paso(self, cadena[5], panel, "suma")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -331,6 +340,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""La distributiva que tenemos lleva el factor común a la izquierda. Así que primero, por la conmutativa, podemos cambiar el orden de los factores. <bookmark mark='l2'/>""",
                                     """The distributive property we have puts the common factor on the left. So first, by the commutative property, we can change the order of the factors. <bookmark mark='l2'/>""")) as tracker:
+            panel.senala(6)   # "la distributiva que tenemos": la del panel
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 5)
         
@@ -354,6 +364,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l6")
             paso(self, cadena[6], panel, "suma")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -414,6 +425,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -461,7 +473,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             paso(self, cadena[1], panel, "producto")
         
         with self.voiceover(text=tr("""Y por la propiedad ocho de los reales podemos quitar el uno. <bookmark mark='l2'/>""",
-                                    """And by property eight of the reals we can drop the one. <bookmark mark='l2'/>""")) as tracker:
+                                    """And property eight of the reals lets us drop the one. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
         
@@ -472,6 +484,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.play(TransformMatchingShapes(cadena[2], sin_parentesis), run_time=1)
             cadena[2] = sin_parentesis
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -598,9 +611,11 @@ class L01_V07_E02_Metodo(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Dos vectores son iguales cuando coinciden componente a componente: basta demostrar que la componente i-ésima es la misma, sea cual sea i.<bookmark mark='v2'/>""",
-                                    """The method is the one from the previous video. Two vectors are equal when they coincide component-wise: it is enough to prove that the i-th component is the same, for any i.""")) as tracker:
+        with self.voiceover(text=tr("""El método es el del vídeo anterior. Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.<bookmark mark='v4'/>""",
+                                    """The method is the one from the previous video. To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise.""")) as tracker:
             self.play(Write(criterio), run_time=2)
+            self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
+            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
         with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza el paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
                                     """Today we only need two definitions: <bookmark mark='s'/> addition, which distributes the selector, <bookmark mark='p'/> and scalar multiplication, which shifts the parentheses. And, of the properties of the reals, <bookmark mark='r'/> the four for multiplication.""")) as tracker:
@@ -646,7 +661,7 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
         cadena = coloca_cadena([linea(r"\elemRp{\lambda(\Vect{a}+\Vect{b})}{i}"),
                                 linea(r"=\lambda\big(\elemRp{\Vect{a}+\Vect{b}}{i}\big)"),
                                 linea(r"=\lambda\big(\eleVR{a}{i}+\eleVR{b}{i}\big)"),
-                                linea(r"=\lambda\eleVRpE{a}{i}+\lambda\eleVRpE{b}{i}", de_reales=True),
+                                linea(r"=\lambda", r"\eleVRpE{a}{i}", r"+\lambda", r"\eleVRpE{b}{i}", de_reales=True),
                                 linea(r"=\elemRp{\lambda\Vect{a}}{i}+\elemRp{\lambda\Vect{b}}{i}"),
                                 linea(r"=\elemRp{\lambda\Vect{a}+\lambda\Vect{b}}{i}")])
         
@@ -670,6 +685,11 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 6)
         
+        with self.voiceover(text=tr("""Cada componente va entre paréntesis para que quede claro que el escalar multiplica a la componente, y no al vector.""",
+                                    """Each component goes in parentheses to make clear that the scalar multiplies the component, not the vector.""")) as tracker:
+            self.play(Indicate(cadena[3][1], color=COLOR_ESCALAR, scale_factor=1.15),
+                      Indicate(cadena[3][3], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
+        
         with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
@@ -680,6 +700,7 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
             self.wait_until_bookmark("l5")
             paso(self, cadena[5], panel, "suma")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -732,6 +753,7 @@ class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""La distributiva que tenemos lleva el factor común a la izquierda. Así que primero, por la conmutativa, podemos cambiar el orden de los factores. <bookmark mark='l2'/>""",
                                     """The distributive property we have puts the common factor on the left. So first, by the commutative property, we can change the order of the factors. <bookmark mark='l2'/>""")) as tracker:
+            panel.senala(6)   # "la distributiva que tenemos": la del panel
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 5)
         
@@ -755,6 +777,7 @@ class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l6")
             paso(self, cadena[6], panel, "suma")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -816,6 +839,7 @@ class L01_V07_E05_Asociativa(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto")
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass
@@ -864,7 +888,7 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
             paso(self, cadena[1], panel, "producto")
         
         with self.voiceover(text=tr("""Y por la propiedad ocho de los reales podemos quitar el uno. <bookmark mark='l2'/>""",
-                                    """And by property eight of the reals we can drop the one. <bookmark mark='l2'/>""")) as tracker:
+                                    """And property eight of the reals lets us drop the one. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
         
@@ -875,6 +899,7 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
             self.play(TransformMatchingShapes(cadena[2], sin_parentesis), run_time=1)
             cadena[2] = sin_parentesis
         
+        self.wait(0.3)
         with self.voiceover(text=tr("""Hemos llegado a la componente i-ésima del lado derecho.""",
                                     """We have reached the i-th component of the right-hand side.""")) as tracker:
             pass

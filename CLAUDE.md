@@ -55,6 +55,17 @@ selector, "componente a componente", etc.).
   normaliza la voz (loudnorm), pone música solo en la portada (fundido al
   empezar la escena 1) y desde la escena `cierre` hasta el fundido a negro,
   y fusiona los `.srt` de las escenas en un único `video.srt` para YouTube.
+- Web: cada vídeo publicado lleva su entrada en `README.org` (python, html
+  del org, enlaces a YouTube es/en) y su org exportado a html. El org del
+  vídeo se exporta en batch con htmlize cargado (`emacs --batch -l
+  exporta.el --visit=FICHERO.org -f org-html-export-to-html`, con
+  `exporta.el` añadiendo `~/.emacs.d/elpa/htmlize-*` al load-path); sale
+  igual que el de V05. El `index.html`, en cambio, **no** se reexporta en
+  batch: el tema de la web (estilo UCM, `worg.css` incrustado) solo sale
+  con `C-c C-e h h` desde el Emacs abierto de Marcos (su configuración
+  `~/.emacs.d`, no scimax); cargar ese `init.el` en batch no lo reproduce
+  (probado 2026-10-17: algo de la sesión interactiva lo pone).
+  Se le añade la entrada a mano copiando la anterior, o lo exporta Marcos.
 - Comprobar visualmente: extraer fotogramas con ffmpeg (bloque
   `fotogramas`, en especial alrededor de cada unión) y mirarlos.
 
@@ -130,7 +141,9 @@ Escribir las frases nuevas ya en la forma buena.
 - **"Un vector más su opuesto da..."** (el "más" de fórmula entre
   sustantivos) se entona mal; con verbo suena natural: "sumar un vector y
   su opuesto da un vector nulo". Mejor el verbo "sumar" que el "más"
-  leído, salvo entre letras.
+  leído, salvo entre letras. Confirmado con números: "un número más su
+  opuesto es cero" pausa 210-380 ms antes de "su" en las tres tiradas;
+  "sumar un número y su opuesto da cero", 0 ms.
 - **Letra vocal (a, i) junto a otra vocal = sinalefa**, aunque haya coma
   en medio: "Como i es" suena "comoi"; "cualquier i, 'a' más" funde la
   'i' con la 'a'; "Por tanto, 'a'" se traga la 'a' (20-70 ms). Poner
@@ -141,6 +154,9 @@ Escribir las frases nuevas ya en la forma buena.
   dos vectores son iguales" / "..., 'a' más el vector nulo es a" ('a' tras
   coma, medida 200-220 ms); en inglés "Since this holds for any component
   of the vector, ...".
+  Y la 'i' sola delante de una pausa larga (dos puntos) suena "ie" aunque
+  dure 210 ms ("para cualquier i: así..."): mejor nombrar la cosa
+  ("para cualquier componente:") y dejar la letra en pantalla.
   La duración de la 'i' se mide mejor con las marcas de palabra de Azure
   (`duration_milliseconds` y hueco hasta la siguiente) que con la
   envolvente, que la mezcla con la pausa del punto.
@@ -148,6 +164,11 @@ Escribir las frases nuevas ya en la forma buena.
   dure 200 ms (Marcos, V06 y V07, 2026-10-15): repetir la tirada no lo arregla. Funcionan
   "sea cual sea i." (la elegida en V07), "para cualquier 'i'." y "sea cual sea el índice i.".
   No sustituirla por "en todas las posiciones": diría que el vector es constante.
+- **Ollie: "And by property three/eight of the reals we can..."** pausa 220-270 ms
+  entre "property" y el número en todas las tiradas (Marcos lo oyó en V06 y V07).
+  Funciona "And property eight of the reals lets us drop the one." (0 ms; queda
+  una pausa natural tras "of the reals"). Ya no queda ningún "by property N" en
+  los vídeos en inglés.
 - Las letras a final de frase ("las de a.") quedan en 110-150 ms en todas
   las tiradas: es la caída natural del final, no hace falta perseguirla.
 - Cuando algo "suena raro", **medirlo**: `tmp/huecos.py` (silencio
@@ -181,6 +202,12 @@ Escribir las frases nuevas ya en la forma buena.
   lo corrige (marca con `tracker.bookmark_distances[m] == 0` = ya, sin
   esperar); copiarla así en V07 y en cualquier función que espere una marca
   inicial. Comprobarlo siempre con una tira de fotogramas.
+- **Toma cortada por Azure** (V07 en, 2026-10-17: "...the order of the f"): la última
+  palabra llega con `duration_milliseconds` 0 y el mp3 acaba ~0,3 s después de su
+  inicio, con la voz aún sonando. Ni el render ni el montaje la cortan; es la síntesis.
+  `tmp/tomas_cortadas.py CACHE...` lista las candidatas (en una letra final, 0,2 s es
+  normal; en una palabra larga, no). Se arregla repitiendo la tirada: la primera
+  (misma clave) sustituye a la mala en la caché con el mismo nombre.
 - Varias sesiones pueden escribir a la vez en el mismo `cache.json`: no
   renderizar dos vídeos con Azure en paralelo en el mismo repo.
 
@@ -326,19 +353,35 @@ Escribir las frases nuevas ya en la forma buena.
 - Español primero para la revisión pedagógica; el inglés se genera del
   mismo org (objetivo: una sola fuente bilingüe).
 
+## Calendario de publicación en YouTube (acordado con Marcos el 2026-10-18)
+
+Un vídeo por semana: español el **jueves a las 18:00** (Madrid) e inglés el **sábado** a la misma
+hora. Se mantienen dos o tres vídeos de reserva. **No subir nada (ni en privado) hasta que Marcos dé
+el último repaso** a cada vídeo, unos días después de aprobarlo.
+
+| Vídeo | Español      | Inglés       | Estado                                  |
+|-------+--------------+--------------+-----------------------------------------|
+| V07   | jue 22-10-26 | sáb 24-10-26 | HD listo; pendiente del último repaso   |
+| V08   | jue 29-10-26 | sáb 31-10-26 | HD listo; pendiente del último repaso   |
+| V09   | jue 05-11-26 | sáb 07-11-26 | HD listo; pendiente del último repaso   |
+
+**Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
+próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
+Subida: la API deja en privado los vídeos de un proyecto sin auditar. Por eso el mp4 se sube a mano
+en YouTube Studio, con la publicación programada allí (Programar: fecha y hora). Después se ejecuta
+`lib/subir_youtube.py actualizar FICHA IDIOMA --id ID` para los metadatos, los subtítulos y la lista,
+se apunta el id en la ficha y se añaden la entrada de `README.org`/`index.html` y el html del org.
+Al publicar un vídeo, actualizar esta tabla.
+
 ## Pendiente
 
-- Iconos de la serie (pregunta, idea clave, "engorroso", "ilustra, no
-  demuestra") al estilo de la tarjeta de pausa, en `Comunes.org`.
-- V06 (`L01-V06-PropiedadesDeLaSumaDeVectores.org`): guion **aprobado por
-  Marcos el 2026-10-14** tras su revisión (vídeo de prueba gTTS 480p de
-  8 min 24 s). Falta: comprobar el inglés con gTTS, voces de Azure (medir
-  las pocas letras y escuchar las preguntas de la escena 1), render HD,
-  ficha `fichas/L01_V06.toml`, subida y web. **Encargo detallado, paso a
-  paso, en `tmp/HANDOFF_V06_audio.md`** (leerlo antes de empezar). Las cadenas de las
-  demostraciones coinciden paso a paso con la solución del libro
-  (Ejercicio 4 de 1.2.1, estrategia 2, revisada el mismo día: ahora
-  $\Vect{a}+\Vect{0}=\Vect{a}$ y una regla por paso).
+- Iconos de la serie: **hechos el 2026-10-18** en `Comunes.org` (chunk `Iconos`): `aviso(tipo)` da un
+  rótulo con icono al estilo de la tarjeta de pausa y `icono(tipo)` solo el símbolo. Tipos: `pregunta`
+  (disco amarillo con ?), `idea` (bombilla), `engorroso` (garabato), `ilustra` ("Ilustra, no demuestra",
+  ojo) y `ampliacion` (rombo de curva peligrosa, para la serie X). Muestra en `tmp/iconos_serie.png`.
+  Aún no los usa ningún vídeo; los colores y dibujos están a la espera de que Marcos los vea.
+- V06 (`L01-V06-PropiedadesDeLaSumaDeVectores.org`): **publicado el 2026-10-17** en los dos idiomas
+  (ids en la memoria y en `fichas/L01_V06.toml`), con su entrada en `README.org`/`index.html`.
 - V07: propiedades 5-8 (producto por escalares) con las mismas
   utilidades de V06; solo usa las cuatro propiedades del producto de los
   reales (5-8); la 6 necesita tres pasos de reales (conmutativa,
@@ -351,4 +394,38 @@ Escribir las frases nuevas ya en la forma buena.
   `--media_dir media_v07`, montaje con `tmp/montaje_v07.sh fichero "escenas" cierre
   video idioma calidad`), porque la sesión de V06 sintetizaba a la vez: antes del HD,
   fusionar su `cache.json` y sus mp3 con `lib/media/voiceovers` y renderizar sin
-  `--media_dir`. Falta: escucha final de Marcos, inglés (Ollie), HD, ficha, subida, web.
+  `--media_dir`. **Fusionadas el 2026-10-17** (40 tomas, sin conflictos): ya se renderiza
+  con `lib/media` como los demás. Ese día se igualó a V06: criterio de la escena 2 con la
+  frase de V06 y la igualdad de componentes resaltada, explicación de los paréntesis que
+  aparecen en el paso 3 de la propiedad 5 ("el escalar multiplica a la componente, y no al
+  vector"), distributiva del panel señalada en el paso 2 de la propiedad 6 y
+  `self.wait(0.3)` antes de "Hemos llegado". **Aprobado por Marcos en los dos idiomas y
+  renderizado en HD el 2026-10-17** (`L01_V07_PropiedadesDelProductoPorEscalares.mp4`, 6:48, y
+  `../videoMath2/L01_V07_PropertiesOfScalarMultiplication.mp4`, 6:50, con sus srt); ficha
+  `fichas/L01_V07.toml` con los capítulos. **Publicación: es el jueves 22 y en el sábado 24 de octubre
+  de 2026** (calendario más abajo), apuntar los ids en la ficha, entrada en `README.org`/`index.html` y html del org.
+- V08 (`L01-V08-VectoresComoDatos.org`, Sección 1.3; cena, cesta, combinación lineal, PIB y la
+  criatura Omega): **aprobado por Marcos en los dos idiomas y renderizado en HD el 2026-10-17**
+  (`L01_V08_VectoresComoDatos.mp4` y `../videoMath2/L01_V08_VectorsAsData.mp4`, 3:19, con sus
+  srt); ficha `fichas/L01_V08.toml` con los capítulos. **Publicación: es el jueves 29 y en el sábado 31 de
+  octubre de 2026**, y después ids, README/index y html del org. Las utilidades de Omega (`omega`,
+  `cambia`, `parpadea`, `entra`, `bocadillo`) **ya están en `Comunes.org`** (2026-10-17); V08
+  conserva su copia idéntica (se define tras el import y manda la suya). Retoque 2026-10-18 (Marcos): la
+  alegría de Omega dura un instante (1-2 s) y vuelve a `normal` mirando lo que explica la voz; HD de la
+  escena 3 rehecho en los dos idiomas (sin sintetizar), capítulos de la ficha corregidos.
+- V09 (`L01-V09-MatricesFilasYColumnas.org`, Secciones 1.4-1.4.3): primera versión (2026-10-17) no
+  convenció a Marcos; **segunda versión 2026-10-18 fiel a sus transparencias de clase**
+  (`../MatematicasII-SRC/Version0/temas/T01.tex`, transparencias "Matrices" y "Más notación": ejemplo
+  a, b, c de R², A ≠ [b;c;a] (todas las columnas cambian de sitio; Marcos), B con las filas de A para el orden, una sola matriz 2×3 para los tres
+  selectores con su nombre largo). Las transparencias son fuente de consulta para los vídeos siguientes.
+  Tercera versión (2026-10-18), **paralela a V01** (Marcos): definición y letras del superíndice,
+  ejemplos (posición; listas distintas = orden; igualdad como consecuencia), notación (corchetes,
+  matriz columna como (3)≠(3,), mayúsculas, matriz nula) y componentes (a_ij y el selector; sin `elem`).
+  Prueba gTTS 480p: `L01_V09_MatricesFilasYColumnas_prueba480p.mp4`, guion en
+  `tmp/guion_V09_es.txt`. La versión 1 y el apéndice de R⁰ están en `ZZ_Basura_L01_V09.org`. En inglés,
+  "orden" = *order* (Marcos). **Azure es 480p el 2026-10-18**: `L01_V09_MatricesFilasYColumnas_azure480p.mp4`
+  (5:01); dos tomas repetidas con `v2` (una cortada por Azure a media frase, otra con 620 ms antes de
+  "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. Falta su último repaso y la subida (5 y 7 de noviembre).
+- **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
+  marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
+  de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.

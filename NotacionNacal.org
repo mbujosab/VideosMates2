@@ -240,9 +240,9 @@ libro recomienda paréntesis siempre: =(3*b)|2=.
 Fijado en V06 (2026-10-13): "vector opuesto" = *opposite vector* (como
 "opposite" para números en V05), "elemento neutro" = *identity
 element*, "lado izquierdo/derecho" = *left-/right-hand side*.
-Pendiente de fijar cuando lleguen esos vídeos: "orden
-$m$ por $n$" (propuesta: *an $m$ by $n$ matrix*), "reglas de
-reescritura" (*rewriting rules*), "matriz columna" (*column matrix*).
+Fijado en V09 (2026-10-17): "orden $m$ por $n$" = *order m by n*
+("this matrix is of order five by four"; Marcos), "matriz columna" =
+*column matrix*. Pendiente: "reglas de reescritura" (*rewriting rules*).
 
 * Código de colores de la serie (chunk =Código de colores= de la plantilla)
 
@@ -265,10 +265,31 @@ reescritura" (*rewriting rules*), "matriz columna" (*column matrix*).
 | V03   | 1.2 (suma, geom.) | publicado                                     |
 | V04   | 1.2 (producto)    | publicado                                     |
 | V05   | (no está en el libro) | publicado 2026-10-13: las 9 propiedades de los reales con regla y compás |
-| V06   | 1.1.1 y 1.2.1     | guion aprobado 2026-10-14 (falta audio Azure y HD): vectores nulo y opuesto, el método (estrategia 2) y las propiedades 1-4 de la suma |
-| V07   | 1.2.1             | en curso (guion escrito 2026-10-14, pendiente de revisión de Marcos): propiedades 5-8, la proposición completa y «espacio vectorial» |
-| V08   | 1.3               | pendiente: vectores como datos                |
-| V09   | 1.4 a 1.4.3       | pendiente: matrices, filas, columnas          |
+| V06   | 1.1.1 y 1.2.1     | publicado 2026-10-17 (es Hrkks90PbVE, en WudpCJUYBiA): vectores nulo y opuesto, el método (estrategia 2) y las propiedades 1-4 de la suma |
+| V07   | 1.2.1             | HD es/en 2026-10-17, se publica es 22-10 y en 24-10: propiedades 5-8, la proposición completa y «espacio vectorial» |
+| V08   | 1.3               | HD es/en 2026-10-17, se publica es 29-10 y en 31-10: vectores como datos (cena, cesta, combinación lineal, PIB) y la criatura Omega |
+| V09   | 1.4 a 1.4.3       | segunda versión 2026-10-18 (sigue las transparencias de clase): matrices, orden, selectores, igualdad; prueba gTTS |
 | V10   | 1.4.4 a 1.4.5     | pendiente: reescritura y transposición        |
 | V11   | 1.4.6 a 1.5       | pendiente: matrices especiales y operaciones  |
 | V12   | 1.6               | pendiente: notación matricial extendida       |
+
+** Vídeos de ampliación (serie X, propuesta 2026-10-18)
+
+Marcos (2026-10-18): lo de mayor nivel de abstracción va en vídeos
+cortos aparte, marcados como opcionales y más difíciles, para el
+público al que le interese (los alumnos del grado no suelen verlos).
+Así se desarrollan mejor y no alargan los vídeos principales.
+
+- Numeración propia: =L01 X01=, =L01 X02=... (no mueve la de los
+  principales); título con "(Ampliación)" / "(Going further)".
+- Portada de otro color con el símbolo de "curva peligrosa" (☡) y Omega
+  en estado =meditacion= como sello de la serie.
+- Lista de YouTube propia; el vídeo principal la enlaza en la
+  descripción y con una frase al final (solo cuando el X ya exista).
+- Estilo: sin tarjeta de pausa, ritmo más rápido, se supone más base.
+
+| Vídeo | Amplía | Tema                                                                 |
+|-------+--------+----------------------------------------------------------------------|
+| X01   | V09    | listas y $\R[0]$: $(2,)$ frente a $2$, tuplas de Python, $\R[n+1]=\R\times\R[n]$, por qué $[1\ 2\ 3]\neq(1,2,3,)$ y no hay vectores fila ni columna (nota a pie de 1.4.3; borrador del apéndice en =ZZ_Basura_L01_V09.org=) |
+| X02   | V11    | $\R[m\times n]$ es $\R[mn]$ disfrazado: apilar las columnas; las ocho propiedades salen gratis |
+| X03   | V10    | la notación como programa: linealidad del selector, demostraciones por sustitución, $\Vect{a}\lambda$, comprobado con =nacal= |

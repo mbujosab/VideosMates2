@@ -1,0 +1,72 @@
+# Ficha de YouTube del vídeo L01 V06 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V06.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V06.toml en   # usa el campo youtube de la ficha (o --id)
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60).
+
+[comun]
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+youtube = "Hrkks90PbVE"   # https://youtu.be/Hrkks90PbVE (subido 2026-10-17)
+video = "L01_V06_PropiedadesDeLaSumaDeVectores.mp4"
+subtitulos = "L01_V06_PropiedadesDeLaSumaDeVectores.srt"
+idioma = "es"
+titulo = "L01 V06 Propiedades de la suma de vectores (Español)"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "vectores", "suma de vectores", "vector nulo", "vector opuesto",
+             "demostraciones", "propiedades algebraicas", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Las cuatro propiedades de la suma de vectores de Rn, demostradas componente a componente.
+
+Sexto vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Dos vectores especiales: el vector nulo y el opuesto
+01:14 Cómo demostrar una igualdad entre vectores
+02:04 Propiedad 1: la suma es conmutativa
+03:18 Propiedad 2: la suma es asociativa
+04:39 Propiedad 3: el vector nulo es el elemento neutro
+05:37 Propiedad 4: todo vector tiene un opuesto
+06:54 Resumen
+07:32 Créditos finales
+
+Cada propiedad se propone primero como ejercicio (pause el vídeo e inténtelo) y después se demuestra paso a paso: una cadena de igualdades desde la componente i-ésima del lado izquierdo hasta la del lado derecho, usando en cada paso una sola definición o una sola propiedad de los números reales (las vistas en el vídeo anterior). Así la demostración vale para vectores de cualquier tamaño.
+
+Correspondiente sección del libro (Sección 1.1.1 y Ejercicio 4 de la Sección 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
+
+[en]
+youtube = "WudpCJUYBiA"   # https://youtu.be/WudpCJUYBiA (subido 2026-10-17)
+video = "../videoMath2/L01_V06_PropertiesOfVectorAddition.mp4"
+subtitulos = "../videoMath2/L01_V06_PropertiesOfVectorAddition.srt"
+idioma = "en"
+titulo = "L01 V06 Properties of vector addition (English)"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "vector addition", "zero vector", "opposite vector",
+             "proofs", "algebraic properties", "mathematics", "GECO", "UCM"]
+descripcion = """
+The four properties of vector addition in Rn, proved component-wise.
+
+Sixth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 Two special vectors: the zero vector and the opposite
+01:15 How to prove an equality between vectors
+02:03 Property 1: addition is commutative
+03:15 Property 2: addition is associative
+04:37 Property 3: the zero vector is the identity element
+05:36 Property 4: every vector has an opposite
+06:53 Key takeaways
+07:31 Closing credits
+
+Each property is first posed as an exercise (pause the video and try it) and then proved step by step: a chain of equalities from the i-th component of the left-hand side to that of the right-hand side, using in each step a single definition or a single property of the real numbers (those seen in the previous video). That way the proof holds for vectors of any size.
+
+Corresponding book section (Section 1.1.1 and Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""

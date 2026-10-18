@@ -1,0 +1,956 @@
+#+TITLE: Lección 1 del curso - Vídeo 09: matrices, filas y columnas
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+#+LATEX: \maketitle
+
+****** COMMENT Para exportar a pdf
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results none :exports none
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+#+END_SRC
+
+* Matrices, filas y columnas - V09
+
+Cubre las Secciones 1.4 a 1.4.3 del libro (matrices de
+$\R[m\times n]$, filas, columnas y el resumen de la notación) y sigue
+las transparencias de clase de Marcos (=MatematicasII-SRC=, lección 1,
+transparencias "Matrices" y "Más notación"). Segunda versión
+(2026-10-18); la primera, más apoyada en los datos del PIB y con un
+apéndice sobre $\R[0]$, está en =ZZ_Basura_L01_V09.org=. El apéndice
+pasa a un vídeo de ampliación aparte (L01 X01, véase el plan en
+=NotacionNacal.org=).
+
+Tercera versión (2026-10-18): paralela a V01 (Marcos), con su misma
+secuencia: definición (qué indica cada letra del superíndice), ejemplos
+(la posición importa; listas con distinto número de vectores, el orden;
+en consecuencia, la igualdad), notación (corchetes, columnas siempre en
+vertical, letras, matriz nula) y componentes (lo habitual, $a_{ij}$, y el
+selector).
+
+1. enlace con V08: la tabla del PIB es una lista ordenada de vectores,
+   una matriz; definición; las dos letras del superíndice;
+2. $\Mat{A}=[\Vect{a};\Vect{b};\Vect{c};]\neq[\Vect{c};\Vect{b};\Vect{a};]$
+   (ejemplo de la transparencia, como $(1,2,3)\neq(3,2,1)$ en V01);
+3. $\Mat{B}$ con las filas de $\Mat{A}$: listas distintas (tres vectores
+   de dos números frente a dos de tres); eso dice el orden;
+   $\Matdim{A}{2}{3}\neq\Matdim{B}{3}{2}$; Omega; $\R[2\times 3]$;
+4. en consecuencia, la igualdad (mismo orden y columna a columna);
+5. notación: paréntesis y corchetes; columna entre corchetes = matriz
+   columna (como $(3)\neq(3,)$); mayúsculas en negrita; matriz nula;
+6. componentes ($a_{ij}$ y $\eleM{A}{2}{1}$), fila y columna (vectores);
+7. resumen y anuncio de V10 y del vídeo de ampliación.
+
+En inglés, "orden" se traduce por /order/ (Marcos, 2026-10-17: "the
+order of a matrix ... m by n"; además "of order n" = cuadrada, como en
+el libro) y "matriz columna" por /column matrix/.
+
+Este fichero es una *fuente única bilingüe* (véase la plantilla
+=LXX-VYY-NombreVideo.org=): genera =./lib/L01_V09_MatricesFilasYColumnas.py=
+(español) y =../videoMath2/lib/L01_V09_MatricesRowsAndColumns.py= (inglés).
+
+** Guion (escenas)
+
+| Escena | Contenido                                                                          | Pausas |
+|--------+------------------------------------------------------------------------------------+--------|
+|      0 | Portada                                                                            |        |
+|      1 | Enlace con V08; definición; las letras del superíndice                            |        |
+|      2 | $[\Vect{a};\Vect{b};\Vect{c};]\neq[\Vect{c};\Vect{b};\Vect{a};]$: la posición importa |        |
+|      3 | $\Mat{B}$; listas distintas; el orden; Omega; $\R[2\times 3]$                      |        |
+|      4 | Igualdad de matrices (consecuencia), columna a columna                            |        |
+|      5 | Notación: corchetes, matriz columna, letras, matriz nula                           |        |
+|      6 | Componentes ($a_{ij}$, selector), filas y columnas                                 |        |
+|      7 | Resumen (tabla de notación) y anuncio de V10                                        |        |
+
+** Ensamblado de los ficheros de python (uno por idioma)
+
+#+caption: Fichero de python del vídeo en español
+#+name: Fichero en español
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V09_MatricesFilasYColumnas.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+#+caption: Fichero de python del vídeo en inglés
+#+name: Fichero en inglés
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V09_MatricesRowsAndColumns.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "en")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+
+** Clases de las escenas
+
+#+caption: Vídeo completo y escenas separadas
+#+name: Clases de las escenas
+#+BEGIN_SRC python :noweb no-export :eval no
+class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Primera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Segunda escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Tercera escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Cuarta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Quinta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Sexta escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        <<Séptima escena>>
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        self.creditos_finales()
+
+
+class L01_V09_E00_Portada(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+
+class L01_V09_E01_LaMatriz(MiEscenaConVoz):
+    def construct(self):
+        <<Primera escena>>
+
+
+class L01_V09_E02_Ejemplos(MiEscenaConVoz):
+    def construct(self):
+        <<Segunda escena>>
+
+
+class L01_V09_E03_Orden(MiEscenaConVoz):
+    def construct(self):
+        <<Tercera escena>>
+
+
+class L01_V09_E04_Igualdad(MiEscenaConVoz):
+    def construct(self):
+        <<Cuarta escena>>
+
+
+class L01_V09_E05_Notacion(MiEscenaConVoz):
+    def construct(self):
+        <<Quinta escena>>
+
+
+class L01_V09_E06_Selectores(MiEscenaConVoz):
+    def construct(self):
+        <<Sexta escena>>
+
+
+class L01_V09_E07_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Séptima escena>>
+
+
+class ZCreditosFinales(CreditosFinales):   # manim solo renderiza clases definidas en este fichero
+    pass
+#+END_SRC
+
+
+** Título del vídeo
+
+#+name: Título del vídeo
+#+BEGIN_SRC python :eval no
+TITULO = tr("Matrices: filas y columnas", "Matrices: rows and columns")
+#+END_SRC
+
+** Utilidades del vídeo
+
+- =vector(valores)= y =matriz(filas)=: un vector entre paréntesis y una
+  matriz entre corchetes, con números de un decimal (o enteros con
+  =decimales=0=); sus componentes se animan una a una
+  (=get_entries()=, =get_rows()=, =get_columns()=).
+- =leyenda(rotulos, entradas, x_der)=: rótulos alineados a la derecha
+  de =x_der=, cada uno a la altura de su entrada (los países).
+- =tabla_pib(centro)=: la matriz del PIB con los países a la izquierda
+  y los años encima de cada columna.
+- =franja_fila= y =franja_columna=: franja amarilla translúcida sobre
+  una fila o una columna (la de las filas, como en V08).
+- =con_nombre(tex, mob)=: la fórmula =tex= (p. ej. ="\Mat{A}="=) a la
+  izquierda de la matriz o vector =mob=.
+
+#+name: Utilidades del vídeo
+#+BEGIN_SRC python :eval no
+PAISES = [tr("España", "Spain"), tr("Francia", "France"), tr("Alemania", "Germany"),
+          tr("Reino Unido", "United Kingdom"), tr("EE. UU.", "USA")]
+PIB = {2003: [2.9, 0.9, -0.2, 2.5, 1.8], 2004: [3.1, 2.0, 1.1, 3.2, 3.1],
+       2005: [3.3, 1.6, 0.7, 1.9, 3.7], 2006: [3.3, 2.0, 0.9, 1.5, 3.5]}   # Sección 1.3 del libro (fuente: ICAE)
+ANYOS = list(PIB)
+FILAS_PIB = [[PIB[a][k] for a in ANYOS] for k in range(len(PAISES))]
+
+A_EJ = [[4, -1, 0], [2, 2, 7]]      # transparencia "Matrices": a=(4,2,), b=(-1,2,), c=(0,7,)
+A_SEL = [[1, 2, 1], [7, 0, 3]]      # transparencia "Más notación"
+COLOR_FILA, COLOR_COLUMNA = COLOR_A, COLOR_B   # índice de la fila y de la columna (letras del superíndice)
+
+
+def vector(valores, color=WHITE, decimales=1, escala=0.8):
+    conf = {"num_decimal_places": decimales, "group_with_commas": False}
+    if decimales:
+        v = DecimalMatrix([[x] for x in valores], left_bracket="(", right_bracket=")", v_buff=0.62, element_to_mobject_config=conf)
+    else:
+        v = IntegerMatrix([[x] for x in valores], left_bracket="(", right_bracket=")", v_buff=0.62)
+    v.get_entries().set_color(color)
+    return v.scale(escala)
+
+
+def matriz(filas, color=WHITE, decimales=1, escala=0.8, h_buff=1.3):
+    conf = {"num_decimal_places": decimales, "group_with_commas": False}
+    if decimales:
+        m = DecimalMatrix(filas, v_buff=0.62, h_buff=h_buff, element_to_mobject_config=conf)
+    else:
+        m = IntegerMatrix(filas, v_buff=0.62, h_buff=h_buff)
+    m.get_entries().set_color(color)
+    return m.scale(escala)
+
+
+def con_nombre(tex, mob, font_size=48):
+    return VGroup(MathTex(tex, tex_template=myTemplate, font_size=font_size), mob).arrange(RIGHT, buff=0.2)
+
+
+def leyenda(rotulos, entradas, x_der, font_size=30):
+    """Rótulos alineados a la derecha de x_der, cada uno a la altura de su entrada."""
+    filas = VGroup(*[Tex(r, font_size=font_size) for r in rotulos])
+    for f, e in zip(filas, entradas):
+        f.move_to([x_der - f.width/2, e.get_y(), 0])
+    return filas
+
+
+def tabla_pib(centro=ORIGIN, font_size=30):
+    """La matriz del PIB: [0] la matriz, [1] los países, [2] los años (encima de cada columna)."""
+    M = matriz(FILAS_PIB).move_to(centro)
+    paises = leyenda(PAISES, M.get_columns()[0], M.get_left()[0] - 0.3, font_size=font_size)
+    anyos = VGroup(*[Tex(str(a), font_size=font_size, color=GRAY_B).next_to(col, UP, buff=0.35).set_y(M.get_top()[1] + 0.3)
+                     for a, col in zip(ANYOS, M.get_columns())])
+    return VGroup(M, paises, anyos)
+
+
+def franja_fila(m, i, x0=None, x1=None, color=COLOR_ESCALAR):
+    """Franja sobre la fila i (desde 0) de la matriz m, de x0 a x1 (por defecto, la matriz entera)."""
+    x0 = m.get_left()[0] if x0 is None else x0
+    x1 = m.get_right()[0] if x1 is None else x1
+    y = m.get_rows()[i].get_y()
+    return Rectangle(width=x1 - x0, height=0.45, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([(x0 + x1)/2, y, 0])
+
+
+def franja_columna(m, j, color=COLOR_ESCALAR):
+    """Franja sobre la columna j (desde 0) de la matriz m."""
+    col = m.get_columns()[j]
+    return Rectangle(width=col.width + 0.35, height=m.get_brackets()[0].height, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([col.get_x(), m.get_y(), 0])
+#+END_SRC
+
+** Código de cada escena
+
+*** Portada (escena 0)
+
+#+name: Portada
+#+BEGIN_SRC python :eval no
+self.creditos()
+portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(min(portada.width, config.frame_width*0.9))
+self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+self.wait(4.5)
+#+END_SRC
+
+*** Escena 1 - La tabla del PIB es una matriz; la definición
+
+Empieza como acabó V08: la tabla del PIB. Una franja recorre sus
+columnas (cada una, un vector) y la voz la llama matriz. Después, la
+definición general y, como en V01 ("la R indica que los números son
+reales y el superíndice n, cuántos hay"), qué indica cada letra del
+superíndice.
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+tabla = tabla_pib([0.8, -0.6, 0], font_size=32)
+M = tabla[0]
+defin = Tex(tr(r"Una \emph{matriz} de ", r"A \emph{matrix} in "), r"$\R[m\times n]$",
+            tr(r" es una lista ordenada\\ de ", r" is an ordered list\\ of "), r"$n$",
+            tr(r" vectores de ", r" vectors in "), r"$\R[m]$", tr(r": sus \emph{columnas}.", r": its \emph{columns}."),
+            tex_template=myTemplate, font_size=48).move_to([0, 0.6, 0])
+m_s = VGroup(defin[1][1], defin[5][1])    # la m del superíndice y la de R^m
+n_s = VGroup(defin[1][3], defin[3][0])    # la n del superíndice y la de "n vectores"
+
+with self.voiceover(text=tr("""En el vídeo anterior pusimos uno al lado del otro los cuatro vectores con el crecimiento del PIB de cinco países, y obtuvimos esta tabla de números.""",
+                            """In the previous video we placed side by side the four vectors with the GDP growth of five countries, and we got this table of numbers.""")) as tracker:
+    self.play(Write(titulo), run_time=1.2)
+    self.play(FadeIn(tabla), run_time=1.5)
+
+with self.voiceover(text=tr("""Cada columna de la tabla es uno de esos vectores. <bookmark mark='m'/> Una lista ordenada de vectores como esta se llama matriz.""",
+                            """Each column of the table is one of those vectors. <bookmark mark='m'/> An ordered list of vectors like this one is called a matrix.""")) as tracker:
+    franja = None
+    for j in range(4):
+        nueva = franja_columna(M, j)
+        self.play(FadeIn(nueva) if franja is None else ReplacementTransform(franja, nueva), run_time=0.5)
+        franja = nueva
+    self.play(FadeOut(franja), run_time=0.4)
+    self.wait_until_bookmark("m")
+    self.play(FadeOut(tabla[1]), FadeOut(tabla[2]), M.animate.move_to([0, -0.6, 0]), run_time=1)   # solo la matriz, en el centro
+
+with self.voiceover(text=tr("""En general, una matriz es una lista ordenada de vectores, todos con el mismo número de componentes, y esos vectores son sus columnas.""",
+                            """In general, a matrix is an ordered list of vectors, all with the same number of components, and those vectors are its columns.""")) as tracker:
+    self.play(FadeOut(M), run_time=0.8)
+    self.play(FadeIn(defin), run_time=1)
+
+with self.voiceover(text=tr("""En el superíndice, la primera letra indica cuántas componentes tiene cada vector, <bookmark mark='n'/> y la segunda, cuántos vectores hay en la lista.""",
+                            """In the superscript, the first letter tells how many components each vector has, <bookmark mark='n'/> and the second, how many vectors there are in the list.""")) as tracker:
+    self.play(Indicate(m_s, color=COLOR_FILA, scale_factor=1.5), run_time=1)
+    self.play(m_s.animate.set_color(COLOR_FILA), run_time=0.3)   # Indicate devuelve el color original
+    self.wait_until_bookmark("n")
+    self.play(Indicate(n_s, color=COLOR_COLUMNA, scale_factor=1.5), run_time=1)
+    self.play(n_s.animate.set_color(COLOR_COLUMNA), run_time=0.3)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 2 - Ejemplos: la posición de cada vector importa
+
+El primer ejemplo de V01, $(1,2,3)\neq(3,2,1)$, en versión matricial
+(transparencia "Matrices"): los tres vectores, escritos en vertical,
+pasan a ser las columnas de $\Mat{A}$; con los vectores en otra posición
+la matriz es otra.
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cols = list(zip(*A_EJ))   # las columnas de A: a, b y c
+COLORES = [COLOR_A, COLOR_B, COLOR_C]   # un color por vector, para seguirlos cuando cambian de sitio
+vs = [vector(c, color=k, decimales=0) for c, k in zip(cols, COLORES)]
+vecs = VGroup(*[con_nombre(rf"\Vect{{{l}}}=", v) for l, v in zip("abc", vs)]).arrange(RIGHT, buff=1.0).move_to([0, 2.1, 0])
+for v, k in zip(vecs, COLORES):
+    v[0][0][0].set_color(k)   # la letra del vector
+A = matriz(A_EJ, decimales=0, h_buff=1.0)
+f_A = con_nombre(r"\Mat{A}=\begin{bmatrix}\Vect{a}; & \Vect{b}; & \Vect{c};\end{bmatrix}=", A).move_to([0, -0.1, 0])
+ORDEN = (1, 2, 0)   # la nueva lista [b; c; a]: todos los vectores cambian de sitio
+POS = {j: p for p, j in enumerate(ORDEN)}   # posición de cada vector en la nueva lista
+C = matriz([[r[j] for j in ORDEN] for r in A_EJ], decimales=0, h_buff=1.0)
+f_C = VGroup(MathTex(r"\begin{bmatrix}\Vect{b}; & \Vect{c}; & \Vect{a};\end{bmatrix}=", tex_template=myTemplate, font_size=48), C,
+             MathTex(r"\neq\Mat{A}", tex_template=myTemplate, font_size=48)).arrange(RIGHT, buff=0.2).move_to([0, -2.4, 0])
+f_C.shift((f_A[1].get_x() - C.get_x())*RIGHT)   # las dos matrices numéricas, una encima de la otra
+# glifos: f_A[0] = A = [ a ; b ; c ; ] =  (letras 3, 5, 7);  f_C[0] = [ b ; c ; a ; ] =  (letras 1, 3, 5)
+letras_A = [f_A[0][0][3], f_A[0][0][5], f_A[0][0][7]]
+letras_C = [f_C[0][0][1 + 2*POS[j]] for j in range(3)]   # dónde acaba cada vector (a, b, c)
+for k, la, lc in zip(COLORES, letras_A, letras_C):
+    la.set_color(k); lc.set_color(k)
+for j, k in enumerate(COLORES):
+    A.get_columns()[j].set_color(k)
+    C.get_columns()[POS[j]].set_color(k)
+resto_C = VGroup(*[g for g in f_C[0][0] if all(g is not l for l in letras_C)], C.get_brackets(), f_C[2])
+
+with self.voiceover(text=tr("""Veamos un ejemplo con tres vectores de dos componentes.""",
+                            """Let us look at an example with three vectors of two components.""")) as tracker:
+    self.play(LaggedStart(*[FadeIn(v) for v in vecs], lag_ratio=0.4), run_time=1.5)
+
+with self.voiceover(text=tr("""Con ellos formamos la matriz A, <bookmark mark='l'/> que es la lista de los tres vectores entre corchetes. <bookmark mark='c'/> Cada vector es una columna, y las columnas se escriben una al lado de la otra.""",
+                            """With them we build the matrix A, <bookmark mark='l'/> which is the list of the three vectors in square brackets. <bookmark mark='c'/> Each vector is a column, and the columns are written side by side.""")) as tracker:
+    self.wait_until_bookmark("l")
+    self.play(Write(f_A[0]), run_time=1.2)
+    self.wait_until_bookmark("c")
+    self.play(FadeIn(A.get_brackets()), run_time=0.4)
+    self.play(LaggedStart(*[TransformFromCopy(v.get_entries(), col) for v, col in zip(vs, A.get_columns())], lag_ratio=0.5), run_time=2)
+
+with self.voiceover(text=tr("""Como en los vectores, la posición importa: <bookmark mark='o'/> si colocamos los vectores en otro lugar de la lista, obtenemos una matriz distinta.""",
+                            """As with vectors, position matters: <bookmark mark='o'/> if we place the vectors elsewhere in the list, we get a different matrix.""")) as tracker:
+    self.wait_until_bookmark("o")
+    self.play(FadeIn(resto_C), run_time=0.6)
+    for j in ORDEN:   # b, c y a, por el orden de la nueva lista: copias de las columnas de A
+        fr = franja_columna(A, j)
+        self.play(FadeIn(fr), run_time=0.3)
+        self.play(TransformFromCopy(letras_A[j], letras_C[j]), TransformFromCopy(A.get_columns()[j], C.get_columns()[POS[j]]), run_time=0.9)
+        self.play(FadeOut(fr), run_time=0.2)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 3 - Listas con distinto número de vectores: el orden
+
+El segundo ejemplo de V01 ($\R[4]$ frente a $\R[2]$) en versión
+matricial. $\Mat{B}$ se forma con dos vectores que llevan los números de
+las filas de $\Mat{A}$ (semilla de la transposición). Omega cree que son
+la misma matriz (mismos números); son listas distintas de vectores
+(tres de dos números frente a dos de tres, como dos vectores con listas
+distintas), y eso es lo que dice el orden (Marcos, 2026-10-18). Al
+final, como "pertenece a $\R[4]$ por ser una lista de cuatro números":
+$\Mat{A}\in\R[2\times 3]$ y $\Mat{B}\in\R[3\times 2]$. Al decir que son listas distintas,
+cada matriz se escribe como la lista de sus columnas, entre paréntesis y
+seguidas de ";", como en el libro (Marcos, 2026-10-18), y vuelve a su
+forma de tabla para hablar del orden.
+
+#+name: Tercera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+A = matriz(A_EJ, decimales=0, h_buff=1.0)
+f_A = con_nombre(r"\Mat{A}=", A).move_to([-4.2, 0.9, 0])
+ll_f = Brace(A, RIGHT, buff=0.1)
+ll_c = Brace(A, UP, buff=0.15)
+r_f = ll_f.get_tex(tr(r"2\ \text{filas}", r"2\ \text{rows}"), buff=0.1).scale(0.8)
+r_c = ll_c.get_tex(tr(r"3\ \text{columnas}", r"3\ \text{columns}"), buff=0.1).scale(0.8)
+B = matriz([list(f) for f in zip(*A_EJ)], decimales=0, h_buff=1.0)
+f_B = con_nombre(r"\Mat{B}=", B).move_to([2.0, 0.9, 0])   # deja sitio a A escrita como lista
+llB_f = Brace(B, RIGHT, buff=0.1)
+llB_c = Brace(B, UP, buff=0.15)
+rB_f = llB_f.get_tex(tr(r"3\ \text{filas}", r"3\ \text{rows}"), buff=0.1).scale(0.8)
+rB_c = llB_c.get_tex(tr(r"2\ \text{columnas}", r"2\ \text{columns}"), buff=0.1).scale(0.8)
+dimA = MathTex(r"\Matdim{A}{2}{3}", tex_template=myTemplate, font_size=56)
+dimB = MathTex(r"\Matdim{B}{3}{2}", tex_template=myTemplate, font_size=56)
+neq = MathTex(r"\neq", font_size=56)
+abajo = VGroup(dimA, neq, dimB).arrange(RIGHT, buff=0.5).move_to([-1.2, -2.6, 0])
+conj = MathTex(r"\Mat{A}\in\R[2\times 3]", r"\qquad", r"\Mat{B}\in\R[3\times 2]", tex_template=myTemplate, font_size=52).move_to(abajo)
+om = omega("duda", mira=LEFT, alto=1.4).to_corner(DR, buff=0.3)
+globo = bocadillo(tr(r"¿La misma matriz?", r"The same matrix?"), om, ancho=3.0)
+
+def como_lista(filas, m):
+    """La matriz m escrita como en el libro: la lista de sus columnas, cada una entre paréntesis y seguida de ";"."""
+    cols = [r"\begin{pmatrix}" + r"\\ ".join(str(x) for x in c) + r"\end{pmatrix};" for c in zip(*filas)]
+    lista = MathTex(r"\begin{bmatrix}" + r" & ".join(cols) + r"\end{bmatrix}", font_size=40)
+    return lista.move_to(m, aligned_edge=LEFT)
+
+A_lista = como_lista(A_EJ, A)
+B_lista = como_lista([list(f) for f in zip(*A_EJ)], B)
+A_de_nuevo, B_de_nuevo = A.copy(), B.copy()
+
+with self.voiceover(text=tr("""Formemos ahora otra matriz B con dos vectores de tres componentes: <bookmark mark='x'/> el primero lleva los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.<bookmark mark='v3'/>""",
+                            """Now let us build another matrix B with two vectors of three components: <bookmark mark='x'/> the first one carries the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.<bookmark mark='v2'/>""")) as tracker:
+    self.play(FadeIn(f_A), run_time=0.8)
+    self.play(FadeIn(f_B[0]), FadeIn(B.get_brackets()), run_time=0.8)
+    for i, marca in enumerate(["x", "y"]):
+        self.wait_until_bookmark(marca)
+        fr = franja_fila(A, i)
+        self.play(FadeIn(fr), run_time=0.4)
+        self.play(TransformFromCopy(A.get_rows()[i], B.get_columns()[i]), run_time=1.2)
+        self.play(FadeOut(fr), run_time=0.3)
+
+with self.voiceover(text=tr("""Omega cree que las matrices A y B son la misma, porque tienen los mismos números.""",
+                            """Omega thinks that the matrices A and B are the same, because they have the same numbers.""")) as tracker:
+    entra(self, om)
+    self.play(FadeIn(globo, scale=0.8), run_time=0.6)
+
+with self.voiceover(text=tr("""Pero son listas distintas, igual que dos vectores son distintos si sus listas de números son diferentes. <bookmark mark='a'/> La matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.<bookmark mark='v2'/>""",
+                            """But they are different lists, just as two vectors are different when their lists of numbers differ. <bookmark mark='a'/> The matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
+    self.play(FadeOut(globo), run_time=0.4)
+    cambia(self, om, "sorpresa")
+    self.wait(0.6)
+    cambia(self, om, "normal", mira=UL)   # la sorpresa dura un instante; ahora atiende
+    self.wait_until_bookmark("a")
+    self.play(FadeTransform(A, A_lista), run_time=1.2)   # la lista de vectores, como en el libro
+    self.wait_until_bookmark("b")
+    self.play(FadeTransform(B, B_lista), run_time=1.2)
+
+with self.voiceover(text=tr("""Eso es lo que indica el orden de una matriz: primero el número de filas, <bookmark mark='f'/> que es el de componentes de cada vector, y después el número de columnas, <bookmark mark='c'/> que es el de vectores de la lista. <bookmark mark='o'/> La matriz A es de orden dos por tres, <bookmark mark='p'/> y B, de orden tres por dos.""",
+                            """That is what the order of a matrix tells us: first the number of rows, <bookmark mark='f'/> which is the number of components of each vector, and then the number of columns, <bookmark mark='c'/> which is the number of vectors in the list. <bookmark mark='o'/> The matrix A is of order two by three, <bookmark mark='p'/> and B is of order three by two.""")) as tracker:
+    self.play(FadeTransform(A_lista, A_de_nuevo), FadeTransform(B_lista, B_de_nuevo), run_time=1)
+    self.wait_until_bookmark("f")
+    self.play(GrowFromCenter(ll_f), FadeIn(r_f), run_time=0.8)
+    self.wait_until_bookmark("c")
+    self.play(GrowFromCenter(ll_c), FadeIn(r_c), run_time=0.8)
+    self.wait_until_bookmark("o")
+    self.play(Write(dimA), run_time=1)
+    self.wait_until_bookmark("p")
+    self.play(GrowFromCenter(llB_f), FadeIn(rB_f), GrowFromCenter(llB_c), FadeIn(rB_c), run_time=0.8)
+    self.play(Write(dimB), run_time=1)
+
+with self.voiceover(text=tr("""Por eso, dos matrices de distinto orden son necesariamente distintas.""",
+                            """That is why two matrices of different orders are necessarily different.""")) as tracker:
+    self.play(Write(neq), run_time=0.6)
+
+with self.voiceover(text=tr("""Así, la matriz A pertenece al conjunto de las matrices de orden dos por tres, <bookmark mark='b'/> y B, al de las matrices de orden tres por dos.""",
+                            """So the matrix A belongs to the set of matrices of order two by three, <bookmark mark='b'/> and B to the set of matrices of order three by two.""")) as tracker:
+    self.play(ReplacementTransform(VGroup(dimA, neq), conj[0]), run_time=1)
+    self.wait_until_bookmark("b")
+    self.play(ReplacementTransform(dimB, conj[2]), run_time=1)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 4 - La igualdad de matrices
+
+La conclusión de los ejemplos, como en V01 ("en consecuencia, dos
+vectores serán iguales si, y solo si, sus listas son idénticas"): mismo
+orden y columnas iguales una a una. Una franja recorre las columnas de
+las dos a la vez mientras la voz las empareja; debajo, el criterio con
+el selector.
+
+#+name: Cuarta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+A = matriz(A_EJ, decimales=0, h_buff=1.0)
+B = matriz(A_EJ, decimales=0, h_buff=1.0)
+par = VGroup(con_nombre(r"\Mat{A}=", A), con_nombre(r"\Mat{B}=", B)).arrange(RIGHT, buff=1.5).move_to([0, 1, 0])
+criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff", r"\VectC{A}{j}=\VectC{B}{j}", tr(r"\quad\text{para } j=1:n", r"\quad\text{for } j=1:n"),
+                   tex_template=myTemplate, font_size=48).move_to([0, -1.6, 0])
+cabecera = Tex(tr("Igualdad de matrices", "Equality of matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+
+with self.voiceover(text=tr("""En consecuencia, dos matrices son iguales si, y solo si, sus listas son idénticas: <bookmark mark='c1'/> la primera columna de una es igual a la primera de la otra, <bookmark mark='c2'/> la segunda a la segunda, <bookmark mark='c3'/> y así con todas.""",
+                            """Consequently, two matrices are equal if, and only if, their lists are identical: <bookmark mark='c1'/> the first column of one equals the first column of the other, <bookmark mark='c2'/> the second the second, <bookmark mark='c3'/> and so on with all of them.<bookmark mark='v2'/>""")) as tracker:
+    self.play(Write(cabecera), FadeIn(par), run_time=1)
+    franjas = None
+    for j, marca in enumerate(["c1", "c2", "c3"]):
+        self.wait_until_bookmark(marca)
+        nuevas = VGroup(franja_columna(A, j), franja_columna(B, j))
+        self.play(FadeIn(nuevas) if franjas is None else ReplacementTransform(franjas, nuevas), run_time=0.6)
+        franjas = nuevas
+
+with self.voiceover(text=tr("""Es decir, columna a columna. <bookmark mark='r'/> Este mismo criterio nos servirá para definir las operaciones con matrices.""",
+                            """That is, column by column. <bookmark mark='r'/> This same criterion will help us define the operations with matrices.""")) as tracker:
+    self.play(FadeOut(franjas), Write(criterio), run_time=1.5)
+    self.wait_until_bookmark("r")
+    self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 5 - Notación
+
+La escena de notación de V01, en versión matricial, un bloque cada vez:
+1. corchetes (la frase de la transparencia, en paralelo a los paréntesis
+   de los vectores);
+2. con un vector daba igual escribirlo en horizontal o en vertical; en
+   una matriz cada vector va en vertical, como columna; por eso una
+   columna entre corchetes no es un vector (como $(3)\neq(3,)$ en V01);
+3. letras mayúsculas en negrita y la matriz nula (se volverá a contar en
+   V11 con las matrices especiales).
+
+#+name: Quinta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Notación", "Notation"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+# 1. paréntesis y corchetes
+v_ej = con_nombre(r"\Vect{a}=", MathTex(r"(4,\ 2,)", font_size=48))
+A1 = MathTex(r"\Mat{A}=", r"\begin{bmatrix}\Vect{a}; & \Vect{b}; & \Vect{c};\end{bmatrix}", tex_template=myTemplate, font_size=48)
+bloque1 = VGroup(v_ej, A1).arrange(RIGHT, buff=2.0).move_to([0, 1.2, 0])
+# 2. horizontal o vertical
+hv = MathTex(r"(4,\ 2,)", r"=", r"\begin{pmatrix}4\\ 2\end{pmatrix}", font_size=48)
+colmat = MathTex(r"\begin{pmatrix}4\\ 2\end{pmatrix}", r"\neq", r"\begin{bmatrix}4\\ 2\end{bmatrix}", font_size=48)
+tres = MathTex(r"(3)", r"\neq", r"(3,)", font_size=48)
+r_hv = Tex(tr("el mismo vector", "the same vector"), font_size=30, color=GRAY_B)
+r_cm = Tex(tr("vector y matriz columna", "vector and column matrix"), font_size=30, color=GRAY_B)
+r_tr = Tex(tr("número y vector", "number and vector"), font_size=30, color=GRAY_B)
+fila2 = VGroup(VGroup(hv, r_hv).arrange(DOWN, buff=0.3), VGroup(colmat, r_cm).arrange(DOWN, buff=0.3),
+               VGroup(tres, r_tr).arrange(DOWN, buff=0.3)).arrange(RIGHT, buff=1.4, aligned_edge=UP).move_to([0, -1.6, 0])
+lista1 = MathTex(r"\begin{bmatrix}\begin{pmatrix}4\\ 2\end{pmatrix};\end{bmatrix}", font_size=48).move_to(colmat[2], aligned_edge=LEFT)
+colmat_de_nuevo = colmat[2].copy()   # su forma habitual, para volver a ella
+# 3. letras y matriz nula
+letras = MathTex(r"\Mat{A},\ \Mat{B},\ \Mat{C},\ \ldots", tex_template=myTemplate, font_size=56).move_to([0, 1.2, 0])
+ceros = VGroup(*[con_nombre(r"\Mat{0}=", matriz([[0]*n for _ in range(m)], decimales=0, h_buff=0.8))
+                 for m, n in [(2, 2), (2, 3), (3, 2)]]).arrange(RIGHT, buff=0.8).move_to([0, -1.5, 0])
+
+with self.voiceover(text=tr("""Un paréntesis alrededor de una lista de números <bookmark mark='cm'/> separados por comas denota un vector, <bookmark mark='k'/> y un corchete alrededor de una lista de vectores <bookmark mark='pc'/> separados por puntos y comas denota una matriz.""",
+                            """Parentheses around a list of numbers <bookmark mark='cm'/> separated by commas denote a vector, <bookmark mark='k'/> and square brackets around a list of vectors <bookmark mark='pc'/> separated by semicolons denote a matrix.""")) as tracker:
+    self.play(Write(cabecera), FadeIn(v_ej), run_time=1)
+    self.wait_until_bookmark("cm")
+    self.play(Indicate(VGroup(v_ej[1][0][2], v_ej[1][0][4]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
+    self.wait_until_bookmark("k")
+    self.play(FadeIn(A1), run_time=1)
+    self.wait_until_bookmark("pc")
+    self.play(Indicate(VGroup(*[A1[1][k] for k in (2, 4, 6)]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
+
+with self.voiceover(text=tr("""Un vector se puede escribir en horizontal o en vertical. <bookmark mark='c'/> En una matriz, en cambio, cada vector de la lista se escribe en vertical, como una columna. <bookmark mark='m'/> Así, una columna entre corchetes no es un vector, sino <bookmark mark='l'/> una lista con un solo vector: una matriz con una sola columna, <bookmark mark='t'/> igual que un número entre paréntesis no es un vector de una componente.""",
+                            """A vector can be written horizontally or vertically. <bookmark mark='c'/> In a matrix, however, each vector in the list is written vertically, as a column. <bookmark mark='m'/> So a column in square brackets is not a vector, but <bookmark mark='l'/> a list with a single vector: a matrix with a single column, <bookmark mark='t'/> just as a number in parentheses is not a vector with one component.""")) as tracker:
+    self.play(FadeIn(fila2[0]), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(Indicate(A1[1], color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
+    self.wait_until_bookmark("m")
+    self.play(FadeIn(fila2[1]), run_time=1)
+    self.wait_until_bookmark("l")
+    self.play(FadeTransform(colmat[2], lista1), run_time=1)   # la lista de un solo vector, como en el libro
+    self.wait_until_bookmark("t")
+    self.play(FadeIn(fila2[2]), run_time=1)
+
+self.play(FadeTransform(lista1, colmat_de_nuevo), run_time=1)   # vuelve a su forma habitual
+self.wait(0.5)
+self.play(FadeOut(VGroup(bloque1, fila2, colmat_de_nuevo)), run_time=0.8)
+with self.voiceover(text=tr("""Para denotar matrices usaremos letras mayúsculas en negrita.""",
+                            """To denote matrices we will use bold capital letters.""")) as tracker:
+    self.play(FadeIn(letras), run_time=1)
+
+with self.voiceover(text=tr("""Un cero en negrita denota una matriz cuyas componentes son todas nulas. <bookmark mark='o'/> Como con el vector nulo, frecuentemente su orden se deduce del contexto.""",
+                            """A bold zero denotes a matrix whose components are all zero. <bookmark mark='o'/> As with the zero vector, its order can often be deduced from the context.""")) as tracker:
+    self.play(FadeIn(ceros[0]), run_time=1)
+    self.wait_until_bookmark("o")
+    self.play(LaggedStart(*[FadeIn(c) for c in ceros[1:]], lag_ratio=0.5), run_time=1.5)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 6 - Componentes, filas y columnas
+
+Como la escena 3 de V01: lo habitual ($a_{ij}$) y después el selector
+(transparencia "Más notación", sin el nombre largo =elem=, que no se va
+a usar por ahora y recargaba la línea). Una sola matriz pequeña arriba
+y, debajo, una línea por selector; la franja marca en la matriz lo que
+se selecciona. La fila y la columna son vectores.
+
+#+name: Sexta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+A = matriz(A_SEL, decimales=0, h_buff=1.0)
+f_A = con_nombre(r"\Mat{A}=", A).move_to([0, 2.0, 0])
+x0 = -4.6
+comp = MathTex(r"\eleM{A}{2}{1}", r"\;=\;", r"a_{21}", r"\;=\;7", tex_template=myTemplate, font_size=48)
+fila = MathTex(r"\VectF{A}{1}", r"\;=\;(1,\ 2,\ 1,)", tex_template=myTemplate, font_size=48)
+col = MathTex(r"\VectC{A}{1}", r"\;=\;\begin{pmatrix}1\\ 7\end{pmatrix}", tex_template=myTemplate, font_size=48)
+for linea, y in [(comp, 0.1), (fila, -1.0), (col, -2.5)]:
+    linea.move_to([x0 + linea.width/2, y, 0])
+for linea in (fila, col):   # el "=" que sigue al selector, alineado con el de la componente
+    linea.shift((comp[1].get_left()[0] - linea[1].get_left()[0])*RIGHT)
+r_hab = Tex(tr("lo habitual", "the usual way"), font_size=28, color=GRAY_B).next_to(comp[2], UP, buff=0.2)
+r_sel = Tex(tr("selector", "selector"), font_size=28, color=GRAY_B).next_to(comp[0], UP, buff=0.2)
+# glifos: a_{21} = a, 2, 1; 2|A|1 = 2, |, A, |, 1
+sub_f, sub_c = comp[2][1], comp[2][2]
+sel_i, sel_d = comp[0][0:2], comp[0][3:5]
+# la fila y la columna, primero con un índice genérico (i, j) que pasa a ser 1 en el ejemplo
+fila_g = MathTex(r"\VectF{A}{i}", tex_template=myTemplate, font_size=48)
+fila_g.shift(fila[0][2].get_center() - fila_g[0][2].get_center())   # glifos: i, |, A
+col_g = MathTex(r"\VectC{A}{j}", tex_template=myTemplate, font_size=48)
+col_g.shift(col[0][0].get_center() - col_g[0][0].get_center())       # glifos: A, |, j
+
+with self.voiceover(text=tr("""Para seleccionar una componente de un vector, el operador selector necesita un índice. En una matriz necesita dos: <bookmark mark='f'/> el de la fila <bookmark mark='c'/> y el de la columna.""",
+                            """To select a component of a vector, the selector operator needs one index. In a matrix it needs two: <bookmark mark='f'/> the row index <bookmark mark='c'/> and the column index.""")) as tracker:
+    self.play(FadeIn(f_A), run_time=1)
+    self.wait_until_bookmark("f")
+    ff = franja_fila(A, 1)
+    self.play(FadeIn(ff), run_time=0.5)
+    self.wait_until_bookmark("c")
+    fc = franja_columna(A, 0)
+    self.play(FadeIn(fc), run_time=0.5)
+    self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+
+with self.voiceover(text=tr("""Lo habitual es escribirla con la letra de la matriz en minúscula y dos subíndices: <bookmark mark='i'/> primero el de la fila <bookmark mark='j'/> y después el de la columna.""",
+                            """The usual way is to write it with the letter of the matrix in lower case and two subscripts: <bookmark mark='i'/> first the row <bookmark mark='j'/> and then the column.""")) as tracker:
+    self.play(FadeIn(comp[2:]), FadeIn(r_hab), run_time=1)
+    self.wait_until_bookmark("i")
+    self.play(Indicate(sub_f, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+    self.wait_until_bookmark("j")
+    self.play(Indicate(sub_c, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+
+with self.voiceover(text=tr("""En este curso, como con los vectores, usaremos el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
+                            """In this course, as with vectors, we will use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
+    self.play(FadeIn(comp[:2]), FadeIn(r_sel), run_time=1)
+    self.wait_until_bookmark("s")
+    self.play(Indicate(sel_i, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("d")
+    self.play(Indicate(sel_d, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+
+# el símbolo aparece un instante antes de que la voz lo describa (Marcos, 2026-10-18)
+self.play(FadeOut(ff), FadeOut(fc), FadeIn(fila_g), run_time=0.6)
+with self.voiceover(text=tr("""Si el operador actúa solo por la izquierda, selecciona una fila: la que indica el índice. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='f'/> selecciona la primera fila de A, que es un vector.""",
+                            """If the operator acts only on the left, it selects a row: the one given by the index. <bookmark mark='e'/> For example, with index one, <bookmark mark='f'/> it selects the first row of A, which is a vector.""")) as tracker:
+    self.play(Indicate(fila_g[0][0:2], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("e")
+    self.play(ReplacementTransform(fila_g, fila[0]), run_time=0.8)   # i pasa a ser 1
+    self.wait_until_bookmark("f")
+    ff = franja_fila(A, 0)
+    self.play(FadeIn(ff), FadeIn(fila[1]), run_time=0.8)
+
+self.play(FadeOut(ff), FadeIn(col_g), run_time=0.6)
+with self.voiceover(text=tr("""Y si actúa solo por la derecha, selecciona una columna. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='c'/> la primera columna de A, que también es un vector.""",
+                            """And if it acts only on the right, it selects a column. <bookmark mark='e'/> For example, with index one, <bookmark mark='c'/> the first column of A, which is also a vector.""")) as tracker:
+    self.play(Indicate(col_g[0][1:3], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("e")
+    self.play(ReplacementTransform(col_g, col[0]), run_time=0.8)   # j pasa a ser 1
+    self.wait_until_bookmark("c")
+    fc = franja_columna(A, 0)
+    self.play(FadeIn(fc), FadeIn(col[1]), run_time=0.8)
+
+with self.voiceover(text=tr("""Las filas y las columnas de una matriz son vectores, y por eso van entre paréntesis.""",
+                            """The rows and the columns of a matrix are vectors, and that is why they go in parentheses.""")) as tracker:
+    self.play(FadeOut(fc), Indicate(fila[1], color=COLOR_ESCALAR, scale_factor=1.1), Indicate(col[1], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.2)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 7 - Resumen y anuncio de V10
+
+La definición, el orden y la tabla de notación del libro (componente,
+fila y columna). Anuncio del siguiente vídeo y del vídeo de ampliación
+(L01 X01; si se publica V09 antes que X01, quitar esa frase).
+
+#+name: Séptima escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+defin = Tex(tr(r"Matriz de $\R[m\times n]$: lista ordenada de $n$ vectores de $\R[m]$\\ (sus columnas), entre corchetes.",
+               r"Matrix in $\R[m\times n]$: an ordered list of $n$ vectors in $\R[m]$\\ (its columns), in square brackets."),
+            tex_template=myTemplate, font_size=34)
+orden = Tex(tr(r"Orden $m\times n$: primero las filas, después las columnas.", r"Order $m\times n$: rows first, then columns."),
+            tex_template=myTemplate, font_size=34)
+encabezados = [tr("fila $i$", "row $i$"), tr("componente $ij$", "component $ij$"), tr("columna $j$", "column $j$")]
+formulas = [r"\VectF{A}{i}\in\R[n]", r"\eleM{A}{i}{j}=a_{ij}", r"\VectC{A}{j}\in\R[m]"]
+tabla = VGroup(*[VGroup(Tex(e, tex_template=myTemplate, font_size=32, color=GRAY_B), MathTex(f, tex_template=myTemplate, font_size=44)).arrange(DOWN, buff=0.3)
+                 for e, f in zip(encabezados, formulas)]).arrange(RIGHT, buff=1.2)
+bloque = VGroup(defin, orden, tabla).arrange(DOWN, buff=0.6).next_to(cabecera, DOWN, buff=0.7)
+
+with self.voiceover(text=tr("""Resumamos. Una matriz es una lista ordenada de vectores con el mismo número de componentes; dichos vectores son las columnas de la matriz. La lista de vectores se escribe entre corchetes. <bookmark mark='o'/> Su orden indica el número de filas primero y el número de columnas después.<bookmark mark='v2'/>""",
+                            """Let us sum up. A matrix is an ordered list of vectors with the same number of components; these vectors are the columns of the matrix. The list of vectors is written in square brackets. <bookmark mark='o'/> Its order gives the number of rows first and the number of columns second.""")) as tracker:
+    self.play(Write(cabecera), FadeIn(defin), run_time=1)
+    self.wait_until_bookmark("o")
+    self.play(FadeIn(orden), run_time=0.8)
+
+with self.voiceover(text=tr("""Con el operador selector actuando por la izquierda, seleccionamos una fila. <bookmark mark='c'/> Con el operador selector actuando por la derecha, una columna. <bookmark mark='e'/> Y con el operador selector actuando por ambos lados, seleccionamos una componente.""",
+                            """With the selector operator acting on the left, we select a row. <bookmark mark='c'/> With the selector operator acting on the right, a column. <bookmark mark='e'/> And with the selector operator acting on both sides, we select a component.<bookmark mark='v2'/>""")) as tracker:
+    self.play(FadeIn(tabla[0]), run_time=0.8)
+    self.wait_until_bookmark("c")
+    self.play(FadeIn(tabla[2]), run_time=0.8)
+    self.wait_until_bookmark("e")
+    self.play(FadeIn(tabla[1]), run_time=0.8)
+
+with self.voiceover(text=tr("""En el próximo vídeo veremos que da igual seleccionar primero la fila o la columna, y la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.""",
+                            """In the next video we will see that it makes no difference whether we select the row or the column first, and we will meet transposition, which turns the rows of a matrix into columns, as we did when we built the matrix B.""")) as tracker:
+    pass
+
+self.pausa_media()
+#+END_SRC
+
+
+* Trozos comunes de código
+
+Viven en =Comunes.org=, que se tangle a =lib/vm2comun.py= (y a
+=../videoMath2/lib/vm2comun.py=): carga de librerías, =LANG= y =tr()=,
+voces de Azure, código de colores, =myTemplate=, =MiEscenaConVoz= (con
+=voiceover=, =anuncia_regla=/=destaca_regla=, créditos, tarjeta de
+pausa), la pantalla de créditos, Omega y los vectores de $\mathbb{R}^2$
+y $\mathbb{R}^3$. Si =vm2comun.py= no existe o está anticuado, tangle
+primero =Comunes.org=.
+
+* Rodando: 1,2,3\dots ¡acción!
+
+# +call: rodando(fichero="L01_V09_MatricesFilasYColumnas", escena="1", idioma="es", voz="gtts")
+# +call: rodando(fichero="L01_V09_MatricesRowsAndColumns", escena="1", idioma="en", voz="gtts")
+
+# +call: rodandoHD(fichero="L01_V09_MatricesFilasYColumnas", escena="a", idioma="es")
+# +call: rodandoHD(fichero="L01_V09_MatricesRowsAndColumns", escena="a", idioma="en")
+
+# +call: montaje(fichero="L01_V09_MatricesFilasYColumnas", escenas="L01_V09_E00_Portada L01_V09_E01_LaMatriz L01_V09_E02_Ejemplos L01_V09_E03_Orden L01_V09_E04_Igualdad L01_V09_E05_Notacion L01_V09_E06_Selectores L01_V09_E07_Resumen ZCreditosFinales", cierre="L01_V09_E07_Resumen", video="L01_V09_MatricesFilasYColumnas", idioma="es")
+# +call: montaje(fichero="L01_V09_MatricesRowsAndColumns", escenas="L01_V09_E00_Portada L01_V09_E01_LaMatriz L01_V09_E02_Ejemplos L01_V09_E03_Orden L01_V09_E04_Igualdad L01_V09_E05_Notacion L01_V09_E06_Selectores L01_V09_E07_Resumen ZCreditosFinales", cierre="L01_V09_E07_Resumen", video="L01_V09_MatricesRowsAndColumns", idioma="en")
+
+# +call: guion(fichero="L01_V09_MatricesFilasYColumnas", idioma="es")
+# +call: guion(fichero="L01_V09_MatricesFilasYColumnas", idioma="en")
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V09_MatricesFilasYColumnas" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V09_MatricesFilasYColumnas" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Montaje: concatenar las escenas, música de entrada y salida, subtítulos
+
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen =volumen=) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
+=volumen_voz=), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se normaliza con =loudnorm=. Los =.srt= de las escenas se desplazan y se
+funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
+
+=escenas= es la lista ordenada de clases; =cierre= la escena en la que
+vuelve la música (el resumen). El mp4 y el srt finales quedan en la raíz del repositorio del
+idioma.
+
+#+name: montaje
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escenas="LXX_VYY_E00_Portada LXX_VYY_E01_Introduccion LXX_VYY_E02_TemaEscena LXX_VYY_E03_TemaEscena LXX_VYY_E04_TemaEscena LXX_VYY_E05_Resumen ZCreditosFinales" :var cierre="LXX_VYY_E05_Resumen" :var video="LXX_VYY_NombreVideo" :var idioma="es" :var calidad="1080p60" :var musica="music/3Blue1Brown-Zeta-X3.mp3" :var volumen="0.25" :var volumen_voz="0.04" :results output
+export LC_ALL=C   # decimales con punto para bc y printf
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+dir=$raiz/lib/media/videos/$fichero/$calidad
+tmp=$raiz/tmp/$video; mkdir -p $tmp; rm -f $tmp/seg_*.mp4
+
+# 1. Un segmento por escena, con audio y vídeo de la misma duración exacta
+i=0; lista=""; offsets=""; T=0; T0=""; Tc=""
+for esc in $escenas; do
+  seg=$(printf "%s/seg_%02d.mp4" $tmp $i)
+  dur=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4)
+  fps=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4)
+  if ffprobe -loglevel error -select_streams a -show_entries stream=codec_type -of csv=p=0 $dir/$esc.mp4 | grep -q audio; then
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -af "aresample=48000,apad" -ac 2 -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  else
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  fi
+  d=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg)
+  offsets="$offsets $T"; [ "$esc" = "$cierre" ] && Tc=$T
+  printf "%2d  %-55s %8.3f s  (empieza en %8.3f)\n" $i $esc $d $T
+  T=$(bc -l <<< "$T+$d"); [ -z "$T0" ] && T0=$d; dl=$d
+  lista="$lista $seg"; i=$((i+1))
+done
+n=$i; Tl=$(bc -l <<< "$T-$dl"); [ -z "$Tc" ] && Tc=$Tl
+printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (créditos)\n" $T $T0 $Tc $Tl
+
+# 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
+inputs=""; fc=""; k=0
+for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
+dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
+fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
+ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]loudnorm=I=-16:LRA=11:TP=-1.5[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $raiz/$video.mp4
+echo "Vídeo: $raiz/$video.mp4"
+
+# 3. Subtítulos: desplazar el srt de cada escena y fundirlos en uno
+ESCENAS="$escenas" OFFSETS="$offsets" python3 - "$dir" "$raiz/$video.srt" <<'EOF'
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) < 3 or "-->" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("-->")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --> {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subtítulos: {salida} ({k-1} entradas)")
+EOF
+#+END_SRC
+
+** Comprobar las uniones y los subtítulos
+
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime [[montaje]]) para mirar que no haya parones ni desfases.
+
+#+name: fotogramas
+#+BEGIN_SRC bash :var video="LXX_VYY_NombreVideo" :var idioma="es" :var tiempos="0 10 20" :results output
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+mkdir -p $raiz/tmp/fotogramas
+for t in $tiempos; do
+  for dt in -0.1 0.1; do
+    ti=$(bc -l <<< "$t+$dt"); [ $(bc -l <<< "$ti < 0") = 1 ] && ti=0
+    ffmpeg -loglevel error -y -ss $ti -i $raiz/$video.mp4 -frames:v 1 $raiz/tmp/fotogramas/$(printf "%08.2f" $ti).png
+  done
+done
+ls $raiz/tmp/fotogramas
+#+END_SRC
+
+** Extraer el guion (la narración) para revisarlo
+
+Recorre el fichero de python y saca, escena por escena, los textos
+~tr(...)~ del idioma pedido: en prosa la narración (los que están dentro
+de ~self.voiceover~) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en =LANG=, lee siempre el fichero español (=./lib/=).
+
+#+name: guion
+#+BEGIN_SRC python :python python3 :var fichero="LXX_VYY_FileName" :var idioma="es" :results output
+import ast, textwrap
+
+arbol = ast.parse(open(f"lib/{fichero}.py", encoding="utf-8").read())
+idx   = 0 if idioma == "es" else 1
+
+def texto(nodo):
+    try:
+        return ast.literal_eval(nodo)
+    except Exception:
+        return ast.unparse(nodo)
+
+def es_tr(n):
+    return (isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "tr" and len(n.args) >= 2)
+
+def es_borrado(stmt):
+    return ast.unparse(stmt).startswith("self.play(*[FadeOut(mob) for mob in self.mobjects])")
+
+# Primera clase con construct(): la del vídeo completo.
+construct = next(f for c in arbol.body if isinstance(c, ast.ClassDef)
+                 for f in c.body if isinstance(f, ast.FunctionDef) and f.name == "construct")
+
+escena, items = 0, []   # la portada es la escena 0
+def volcar():
+    global items
+    if items:
+        print(f"==== {'Escena' if idioma == 'es' else 'Scene'} {escena} ====\n")
+        for tipo, t in items:
+            if tipo == "voz":
+                print(textwrap.fill(t, 72), "\n")
+            else:
+                print(f"    [{t}]\n")
+    items = []
+
+for stmt in construct.body:
+    if es_borrado(stmt):
+        volcar(); escena += 1; continue
+    en_voz = set()
+    for n in ast.walk(stmt):
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == "voiceover":
+            en_voz |= {id(s) for s in ast.walk(n) if es_tr(s)}
+    for n in sorted((n for n in ast.walk(stmt) if es_tr(n)), key=lambda n: (n.lineno, n.col_offset)):
+        items.append(("voz" if id(n) in en_voz else "pantalla", texto(n.args[idx])))
+volcar()
+#+END_SRC
+
+** Tangle desde la terminal (sin abrir Emacs)
+
+#+BEGIN_SRC bash :results silent
+emacs --batch -l org --eval '(org-babel-tangle-file "Comunes.org")'   # solo si cambió el código común
+emacs --batch -l org --eval '(org-babel-tangle-file "L01-V09-MatricesFilasYColumnas.org")'
+#+END_SRC

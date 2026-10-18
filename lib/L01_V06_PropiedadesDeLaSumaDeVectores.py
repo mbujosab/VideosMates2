@@ -248,9 +248,11 @@ class L01_V06_PropiedadesDeLaSumaDeVectores(MiEscenaConVoz):
                             tex_template=myTemplate, font_size=36).set_color(GRAY_B)
         VGroup(criterio, criterio_nota).arrange(DOWN, buff=0.4).next_to(cabecera, DOWN, buff=1.0)
         
-        with self.voiceover(text=tr("""Dos vectores son iguales cuando coinciden componente a componente. Por tanto basta demostrar que la componente i-ésima es la misma, <bookmark mark='i'/> para cualquier i: así la demostración vale para vectores de cualquier tamaño.<bookmark mark='v4'/>""",
-                                    """Two vectors are equal when they coincide component-wise. Therefore it is enough to prove that the i-th component is the same, <bookmark mark='i'/> for any i: that way the proof holds for vectors of any size.""")) as tracker:
-            self.play(Write(criterio), run_time=2)
+        with self.voiceover(text=tr("""Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente. <bookmark mark='i'/> Así la demostración vale para vectores de cualquier tamaño.""",
+                                    """To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise. <bookmark mark='i'/> That way the proof holds for vectors of any size.""")) as tracker:
+            self.play(Write(criterio), run_time=1.5)
+            self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
+            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("i")
             self.play(FadeIn(criterio_nota), run_time=0.8)
         
@@ -409,13 +411,13 @@ class L01_V06_PropiedadesDeLaSumaDeVectores(MiEscenaConVoz):
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "suma")
         
-        with self.voiceover(text=tr("""Y en el segundo sumando podemos distribuirlo otra vez. <bookmark mark='l2'/>""",
-                                    """And on the second term we can distribute it again. <bookmark mark='l2'/>""")) as tracker:
+        with self.voiceover(text=tr("""Y en el segundo sumando podemos distribuirlo otra vez. <bookmark mark='l2'/> El resultado ocupa el sitio de un solo sumando, así que va entre paréntesis.""",
+                                    """And on the second term we can distribute it again. <bookmark mark='l2'/> The result takes the place of a single term, so it goes in parentheses.""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "suma")
         
-        with self.voiceover(text=tr("""Ya todo son números reales, así que por la asociativa podemos mover el paréntesis. <bookmark mark='l3'/>""",
-                                    """Now everything is real numbers, so by the associative property we can move the parentheses. <bookmark mark='l3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Ya todo son números reales y la expresión tiene la forma de la asociativa, así que podemos mover el paréntesis. <bookmark mark='l3'/>""",
+                                    """Now everything is real numbers and the expression has the form of the associative property, so we can move the parentheses. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 2)
         
@@ -483,7 +485,7 @@ class L01_V06_PropiedadesDeLaSumaDeVectores(MiEscenaConVoz):
             paso(self, cadena[2], panel, "nulo")
         
         with self.voiceover(text=tr("""Y por la propiedad tres de los reales podemos quitar el cero. <bookmark mark='l3'/>""",
-                                    """And by property three of the reals we can drop the zero. <bookmark mark='l3'/>""")) as tracker:
+                                    """And property three of the reals lets us drop the zero. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 3)
         
@@ -536,13 +538,13 @@ class L01_V06_PropiedadesDeLaSumaDeVectores(MiEscenaConVoz):
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "suma")
         
-        with self.voiceover(text=tr("""Por la definición de opuesto podemos desplazar el paréntesis. <bookmark mark='l2'/>""",
-                                    """By the definition of opposite we can move the parentheses. <bookmark mark='l2'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de opuesto podemos desplazar el paréntesis. <bookmark mark='l2'/> Como en la propiedad dos, el resultado ocupa el sitio de un solo sumando y va entre paréntesis.""",
+                                    """By the definition of opposite we can move the parentheses. <bookmark mark='l2'/> As in property two, the result takes the place of a single term and goes in parentheses.""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "opuesto")
         
-        with self.voiceover(text=tr("""Y por la propiedad cuatro de los reales, un número más su opuesto es cero. <bookmark mark='l3'/>""",
-                                    """And by property four of the reals, a number plus its opposite is zero. <bookmark mark='l3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Ahora tiene exactamente la forma de la propiedad cuatro de los reales: sumar un número y su opuesto da cero. <bookmark mark='l3'/>""",
+                                    """Now it has exactly the form of property four of the reals: a number plus its opposite is zero. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 4)
         
@@ -742,9 +744,11 @@ class L01_V06_E02_Metodo(MiEscenaConVoz):
                             tex_template=myTemplate, font_size=36).set_color(GRAY_B)
         VGroup(criterio, criterio_nota).arrange(DOWN, buff=0.4).next_to(cabecera, DOWN, buff=1.0)
         
-        with self.voiceover(text=tr("""Dos vectores son iguales cuando coinciden componente a componente. Por tanto basta demostrar que la componente i-ésima es la misma, <bookmark mark='i'/> para cualquier i: así la demostración vale para vectores de cualquier tamaño.<bookmark mark='v4'/>""",
-                                    """Two vectors are equal when they coincide component-wise. Therefore it is enough to prove that the i-th component is the same, <bookmark mark='i'/> for any i: that way the proof holds for vectors of any size.""")) as tracker:
-            self.play(Write(criterio), run_time=2)
+        with self.voiceover(text=tr("""Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente. <bookmark mark='i'/> Así la demostración vale para vectores de cualquier tamaño.""",
+                                    """To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise. <bookmark mark='i'/> That way the proof holds for vectors of any size.""")) as tracker:
+            self.play(Write(criterio), run_time=1.5)
+            self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
+            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("i")
             self.play(FadeIn(criterio_nota), run_time=0.8)
         
@@ -905,13 +909,13 @@ class L01_V06_E04_Asociativa(MiEscenaConVoz):
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "suma")
         
-        with self.voiceover(text=tr("""Y en el segundo sumando podemos distribuirlo otra vez. <bookmark mark='l2'/>""",
-                                    """And on the second term we can distribute it again. <bookmark mark='l2'/>""")) as tracker:
+        with self.voiceover(text=tr("""Y en el segundo sumando podemos distribuirlo otra vez. <bookmark mark='l2'/> El resultado ocupa el sitio de un solo sumando, así que va entre paréntesis.""",
+                                    """And on the second term we can distribute it again. <bookmark mark='l2'/> The result takes the place of a single term, so it goes in parentheses.""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "suma")
         
-        with self.voiceover(text=tr("""Ya todo son números reales, así que por la asociativa podemos mover el paréntesis. <bookmark mark='l3'/>""",
-                                    """Now everything is real numbers, so by the associative property we can move the parentheses. <bookmark mark='l3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Ya todo son números reales y la expresión tiene la forma de la asociativa, así que podemos mover el paréntesis. <bookmark mark='l3'/>""",
+                                    """Now everything is real numbers and the expression has the form of the associative property, so we can move the parentheses. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 2)
         
@@ -980,7 +984,7 @@ class L01_V06_E05_VectorNulo(MiEscenaConVoz):
             paso(self, cadena[2], panel, "nulo")
         
         with self.voiceover(text=tr("""Y por la propiedad tres de los reales podemos quitar el cero. <bookmark mark='l3'/>""",
-                                    """And by property three of the reals we can drop the zero. <bookmark mark='l3'/>""")) as tracker:
+                                    """And property three of the reals lets us drop the zero. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 3)
         
@@ -1034,13 +1038,13 @@ class L01_V06_E06_Opuesto(MiEscenaConVoz):
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "suma")
         
-        with self.voiceover(text=tr("""Por la definición de opuesto podemos desplazar el paréntesis. <bookmark mark='l2'/>""",
-                                    """By the definition of opposite we can move the parentheses. <bookmark mark='l2'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de opuesto podemos desplazar el paréntesis. <bookmark mark='l2'/> Como en la propiedad dos, el resultado ocupa el sitio de un solo sumando y va entre paréntesis.""",
+                                    """By the definition of opposite we can move the parentheses. <bookmark mark='l2'/> As in property two, the result takes the place of a single term and goes in parentheses.""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "opuesto")
         
-        with self.voiceover(text=tr("""Y por la propiedad cuatro de los reales, un número más su opuesto es cero. <bookmark mark='l3'/>""",
-                                    """And by property four of the reals, a number plus its opposite is zero. <bookmark mark='l3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Ahora tiene exactamente la forma de la propiedad cuatro de los reales: sumar un número y su opuesto da cero. <bookmark mark='l3'/>""",
+                                    """Now it has exactly the form of property four of the reals: a number plus its opposite is zero. <bookmark mark='l3'/>""")) as tracker:
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 4)
         

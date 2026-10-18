@@ -177,6 +177,164 @@ class CreditosFinales(Scene):
     def construct(self):
         pantalla_de_creditos(self)
 
+OMEGA_COLOR  = PURPLE_B     # fuera del código de colores de la serie
+
+
+def _cara(estado, alto, mira=ORIGIN):
+    """Ojos, cejas y boca de Omega (se colocan dentro del arco). Estados: normal (sonriente),
+    neutral (sin sonrisa), duda, sorpresa, alegria y meditacion."""
+    u, blanco, r = alto/2, dict(color=WHITE, stroke_width=3), 0.11*alto/2
+    def ojo(rr=r, pupila=0.5, m=mira):
+        b = Circle(radius=rr, color=WHITE, fill_opacity=1, stroke_width=1.2).set_stroke(BLACK)
+        p = Dot(radius=rr*pupila, color=BLACK).move_to(m*rr*0.4)
+        return VGroup(b, p, Dot(radius=rr*0.13, color=WHITE).move_to(p.get_center() + rr*0.18*(UP + LEFT)))
+    if estado == "alegria":
+        ojos = VGroup(*[Arc(radius=0.8*r, start_angle=0, angle=PI, **blanco) for _ in range(2)])
+    elif estado == "meditacion":
+        ojos = VGroup(*[Arc(radius=0.8*r, start_angle=PI, angle=PI, **blanco) for _ in range(2)])
+    elif estado == "sorpresa":
+        ojos = VGroup(ojo(1.25*r, 0.3, ORIGIN), ojo(1.25*r, 0.3, ORIGIN))
+    elif estado == "duda":
+        ojos = VGroup(ojo(m=UR), ojo(m=UR))
+    else:
+        ojos = VGroup(ojo(), ojo())
+    ojos.arrange(RIGHT, buff=0.9*r)
+    i, d, w = ojos[0].get_top(), ojos[1].get_top(), 2.2*r
+    ceja = lambda c, ang, dy: Line(c + 0.5*w*LEFT, c + 0.5*w*RIGHT, **blanco).rotate(ang).shift((0.12*u + dy)*UP)
+    if estado == "duda":          # una ceja alta, con la punta interior levantada
+        cejas = VGroup(ceja(i, 0, -0.02*u), ceja(d, -18*DEGREES, 0.1*u))
+    elif estado == "sorpresa":
+        cejas = VGroup(*[ArcBetweenPoints(c + 0.5*w*LEFT + 0.2*u*UP, c + 0.5*w*RIGHT + 0.2*u*UP, angle=-PI/3, **blanco) for c in (i, d)])
+    elif estado in ("meditacion", "neutral"):
+        cejas = VGroup(ceja(i, 0, -0.02*u), ceja(d, 0, -0.02*u))
+    else:                         # normal y alegría: cejas relajadas
+        cejas = VGroup(ceja(i, 10*DEGREES, 0), ceja(d, -10*DEGREES, 0))
+    base = ojos.get_bottom() + 0.16*u*DOWN
+    if estado == "alegria":
+        boca = Arc(radius=0.17*u, start_angle=PI, angle=PI, color=WHITE, fill_color=WHITE, fill_opacity=1, stroke_width=2).move_to(base + 0.04*u*DOWN)
+    elif estado == "sorpresa":
+        boca = Ellipse(width=0.12*u, height=0.17*u, color=WHITE, stroke_width=3).move_to(base + 0.04*u*DOWN)
+    elif estado == "duda":
+        boca = Line(base + 0.12*u*LEFT, base + 0.12*u*RIGHT, **blanco).rotate(-12*DEGREES)
+    elif estado in ("meditacion", "neutral"):
+        boca = Line(base + (0.06 if estado == "meditacion" else 0.1)*u*LEFT, base + (0.06 if estado == "meditacion" else 0.1)*u*RIGHT, **blanco)
+    else:
+        boca = Arc(radius=0.14*u, start_angle=-PI*0.8, angle=PI*0.6, **blanco).move_to(base)
+    return VGroup(ojos, cejas, boca)
+
+
+def omega(estado="normal", alto=1.6, mira=ORIGIN, color=None):
+    """La criatura de la serie: [0] el cuerpo (una Ω gruesa), [1] la cara (ojos, cejas, boca)
+    y [2] el signo del estado (?, !, destellos o la nube de pensamiento)."""
+    cuerpo = MathTex(r"\boldsymbol{\Omega}").set_color(color or OMEGA_COLOR).scale_to_fit_height(alto)
+    cara = _cara(estado, alto, mira).move_to(cuerpo.get_center() + 0.13*alto*UP)
+    figura = VGroup(cuerpo, cara)
+    signo = VGroup()
+    if estado == "duda":
+        figura.rotate(-8*DEGREES)
+        signo = MathTex("?", font_size=60, color=COLOR_ESCALAR).next_to(figura, UR, buff=0)
+    elif estado == "sorpresa":
+        figura.stretch(1.08, 1)
+        signo = MathTex("!", font_size=60, color=COLOR_ESCALAR).next_to(figura, UR, buff=0)
+    elif estado == "alegria":
+        figura.stretch(0.95, 1)
+        signo = VGroup(*[Star(n=4, outer_radius=0.12, inner_radius=0.04, color=COLOR_ESCALAR, fill_opacity=1).move_to(figura.get_corner(UR) + v)
+                         for v in (0.1*UP, 0.35*DOWN + 0.25*RIGHT, 0.25*UP + 0.45*LEFT)])
+    elif estado == "meditacion":
+        nube = VGroup(*[Circle(radius=rr, color=WHITE, fill_opacity=1) for rr in (0.06, 0.1, 0.38)])
+        nube[0].move_to(figura.get_corner(UR) + 0.05*UP); nube[1].next_to(nube[0], UR, buff=0.05); nube[2].next_to(nube[1], UR, buff=0)
+        signo = VGroup(nube, MathTex(r"\dots", color=BLACK, font_size=40).move_to(nube[2]))
+    o = VGroup(cuerpo, cara, signo)
+    o.estado, o.alto, o.mira = estado, alto, mira
+    return o
+
+
+def cambia(escena, criatura, estado, mira=None, run_time=0.6):
+    """Cambia la expresión de la criatura sin moverla (el cuerpo se queda donde estaba)."""
+    nueva = omega(estado, criatura.alto, criatura.mira if mira is None else mira)
+    nueva.shift(criatura[0].get_bottom() - nueva[0].get_bottom())
+    # Un signo que aparece o desaparece (?, !, destellos) lo hace en su sitio: transformado
+    # desde o hacia un grupo vacío, volaría desde o hacia el origen.
+    if len(nueva[2]) == 0 and len(criatura[2]) > 0:
+        nueva.submobjects[2] = criatura[2].copy().set_opacity(0)
+    elif len(criatura[2]) == 0 and len(nueva[2]) > 0:
+        criatura.submobjects[2] = nueva[2].copy().set_opacity(0)
+    escena.play(Transform(criatura, nueva), run_time=run_time)
+    criatura.estado, criatura.mira = estado, nueva.mira
+
+
+def bocadillo(texto, criatura, ancho=4.2, font_size=30):
+    t = Tex(texto, font_size=font_size, color=BLACK)
+    if t.width > ancho:
+        t.scale_to_fit_width(ancho)
+    globo = RoundedRectangle(corner_radius=0.25, width=t.width + 0.5, height=t.height + 0.4,
+                             fill_color=WHITE, fill_opacity=1, stroke_color=WHITE)
+    globo.next_to(criatura[0], UL, buff=0.05).shift(0.4*RIGHT)
+    t.move_to(globo)
+    pico = Polygon(globo.get_corner(DR) + 0.35*LEFT, globo.get_corner(DR) + 0.8*LEFT,
+                   criatura[0].get_corner(UL) + 0.15*RIGHT + 0.05*DOWN, fill_color=WHITE, fill_opacity=1, stroke_width=0)
+    return VGroup(pico, globo, t)
+
+
+def parpadea(escena, criatura, run_time=0.3):
+    if criatura.estado in ("alegria", "meditacion"):   # ya tiene los ojos cerrados
+        return
+    ojos = criatura[1][0]
+    escena.play(ojos.animate.stretch(0.1, 1), run_time=run_time/2)
+    escena.play(ojos.animate.stretch(10, 1), run_time=run_time/2)
+
+
+def entra(escena, criatura, desde=RIGHT, run_time=1):
+    escena.play(FadeIn(criatura, shift=1.5*(-desde)), run_time=run_time)
+    parpadea(escena, criatura)
+
+ICONOS = {   # tipo: (color, texto por defecto)
+    "pregunta":   (COLOR_ESCALAR, tr("Pregunta", "Question")),
+    "idea":       (GOLD_A,        tr("Idea clave", "Key idea")),
+    "engorroso":  (RED_B,         tr("Engorroso", "Tedious")),
+    "ilustra":    (GRAY_A,        tr("Ilustra, no demuestra", "Illustrates, does not prove")),
+    "ampliacion": (PURPLE_B,      tr("Ampliación", "Extension")),
+}
+
+def icono(tipo, alto=0.6):
+    """El símbolo del tipo de momento, dibujado con primitivas (sin fuentes especiales)."""
+    color = ICONOS[tipo][0]
+    if tipo == "pregunta":     # disco con una interrogación
+        s = VGroup(Circle(radius=0.5, fill_color=color, fill_opacity=1, stroke_width=0),
+                   MathTex(r"\boldsymbol{?}", color=BLACK, font_size=72))
+    elif tipo == "idea":       # bombilla con rayos
+        bombilla = Circle(radius=0.32, color=color, stroke_width=6).shift(0.12*UP)
+        casquillo = VGroup(*[Line(0.14*LEFT, 0.14*RIGHT, color=color, stroke_width=6).shift((0.32 + 0.11*k)*DOWN)
+                             for k in range(2)])
+        rayos = VGroup(*[Line(0.45*UP, 0.62*UP, color=color, stroke_width=5).rotate(a, about_point=ORIGIN).shift(0.12*UP)
+                         for a in (-1.0, -0.5, 0, 0.5, 1.0)])
+        s = VGroup(bombilla, casquillo, rayos)
+    elif tipo == "engorroso":  # garabato enredado
+        s = ParametricFunction(lambda t: np.array([0.4*np.sin(2*t) + 0.15*np.cos(7*t), 0.4*np.cos(3*t) + 0.12*np.sin(5*t), 0]),
+                               t_range=[0, TAU], color=color, stroke_width=5)
+    elif tipo == "ilustra":    # un ojo
+        parpado = VGroup(ArcBetweenPoints(0.55*LEFT, 0.55*RIGHT, angle=-1.6),
+                         ArcBetweenPoints(0.55*LEFT, 0.55*RIGHT, angle=1.6)).set_stroke(color, 6)
+        s = VGroup(parpado, Circle(radius=0.17, fill_color=color, fill_opacity=1, stroke_width=0))
+    elif tipo == "ampliacion":  # señal de curva peligrosa (rombo con una curva en S)
+        rombo = Square(side_length=0.75, color=color, stroke_width=6).rotate(PI/4)
+        curva = ParametricFunction(lambda t: np.array([0.12*np.sin(PI*t), 0.3*t, 0]), t_range=[-1, 1],
+                                   color=color, stroke_width=6)
+        s = VGroup(rombo, curva)
+    s.scale_to_fit_height(alto)
+    for m in s.family_members_with_points():   # trazo diseñado para alto 1: más fino si el icono es pequeño
+        m.set_stroke(width=m.get_stroke_width()*min(1, alto))
+    return s
+
+def aviso(tipo, texto=None, font_size=30):
+    """Rótulo con icono para marcar el tipo de momento del vídeo (ver ICONOS)."""
+    color, por_defecto = ICONOS[tipo]
+    rotulo = Tex(texto or por_defecto, tex_template=myTemplate, font_size=font_size, color=color)
+    contenido = VGroup(icono(tipo, alto=max(0.45, 1.3*rotulo.height)), rotulo).arrange(RIGHT, buff=0.25)
+    marco = RoundedRectangle(corner_radius=0.18, width=contenido.width+0.5, height=contenido.height+0.35,
+                             stroke_color=color, stroke_width=2, fill_color=BLACK, fill_opacity=0.85)
+    return VGroup(marco, contenido.move_to(marco))
+
 class VectorR2():
     def __init__(self, lista, rpr='c', color=GRAY_B):
         """Inicializa un Vector con una lista"""

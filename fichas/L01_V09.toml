@@ -1,0 +1,72 @@
+# Ficha de YouTube del vídeo L01 V09 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V09.toml es --id ID   # tras subirlo a mano en Studio
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V09.toml en --id ID
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60, 2026-10-18).
+
+[comun]
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+# youtube = ""   # rellenar tras subirlo
+video = "L01_V09_MatricesFilasYColumnas.mp4"
+subtitulos = "L01_V09_MatricesFilasYColumnas.srt"
+idioma = "es"
+titulo = "L01 V09 Matrices: filas y columnas (Español)"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "matrices", "matriz", "filas", "columnas", "orden de una matriz",
+             "operador selector", "vectores", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Una matriz es una lista ordenada de vectores con el mismo número de componentes: sus columnas.
+
+Noveno vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 De la tabla del PIB a la matriz
+00:38 Un ejemplo: la posición de cada vector importa
+01:01 El orden de una matriz
+01:59 Igualdad de matrices
+02:19 Notación: corchetes, matriz columna y matriz nula
+03:06 Componentes, filas y columnas con el operador selector
+03:57 Resumen
+04:40 Créditos finales
+
+La tabla con el crecimiento del PIB de cinco países del vídeo anterior es una matriz: una lista de vectores, que son sus columnas. Con tres vectores de dos componentes formamos una matriz y vemos que, si los cambiamos de sitio en la lista, la matriz es otra. Una segunda matriz, hecha con las filas de la primera, tiene los mismos números pero es una lista distinta: eso es lo que indica el orden (filas por columnas). De ahí la igualdad de matrices, columna a columna. Después, la notación (corchetes alrededor de vectores separados por puntos y comas, la matriz columna, que no es un vector, y la matriz nula) y el operador selector, que por la izquierda selecciona una fila, por la derecha una columna y por los dos lados una componente.
+
+Correspondiente sección del libro (Sección 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
+
+[en]
+# youtube = ""   # fill in after upload
+video = "../videoMath2/L01_V09_MatricesRowsAndColumns.mp4"
+subtitulos = "../videoMath2/L01_V09_MatricesRowsAndColumns.srt"
+idioma = "en"
+titulo = "L01 V09 Matrices: rows and columns (English)"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "matrices", "matrix", "rows", "columns", "order of a matrix",
+             "selector operator", "vectors", "mathematics", "GECO", "UCM"]
+descripcion = """
+A matrix is an ordered list of vectors with the same number of components: its columns.
+
+Ninth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 From the GDP table to a matrix
+00:38 An example: the position of each vector matters
+01:00 The order of a matrix
+01:59 Equality of matrices
+02:19 Notation: square brackets, column matrix and zero matrix
+03:05 Components, rows and columns with the selector operator
+03:57 Key takeaways
+04:38 Closing credits
+
+The table with the GDP growth of five countries from the previous video is a matrix: a list of vectors, which are its columns. With three vectors of two components we build a matrix and see that, if we move them to other places in the list, we get a different matrix. A second matrix, made from the rows of the first, has the same numbers but is a different list: that is what its order (rows by columns) tells us. Hence the equality of matrices, column by column. Then the notation (square brackets around vectors separated by semicolons, the column matrix, which is not a vector, and the zero matrix) and the selector operator, which selects a row from the left, a column from the right, and a component from both sides.
+
+Corresponding book section (Section 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""

@@ -1,0 +1,72 @@
+# Ficha de YouTube del vídeo L01 V07 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V07.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V07.toml en   # usa el campo youtube de la ficha (o --id)
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60, 2026-10-17).
+
+[comun]
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+# youtube = ""   # rellenar tras subirlo
+video = "L01_V07_PropiedadesDelProductoPorEscalares.mp4"
+subtitulos = "L01_V07_PropiedadesDelProductoPorEscalares.srt"
+idioma = "es"
+titulo = "L01 V07 Propiedades del producto por escalares (Español)"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "vectores", "producto por escalares", "propiedad distributiva",
+             "propiedad asociativa", "demostraciones", "propiedades algebraicas", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Las cuatro propiedades del producto de un vector de Rn por un escalar, demostradas componente a componente.
+
+Séptimo vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Ejemplos
+00:39 El método
+01:08 Propiedad 5: distributiva respecto de la suma de vectores
+02:38 Propiedad 6: distributiva respecto de la suma de escalares
+04:09 Propiedad 7: asociativa
+05:12 Propiedad 8: el uno es el elemento neutro
+06:11 Resumen
+06:33 Créditos finales
+
+Como en el vídeo anterior, cada propiedad se propone primero como ejercicio (pause el vídeo e inténtelo) y después se demuestra paso a paso: una cadena de igualdades desde la componente i-ésima del lado izquierdo hasta la del lado derecho, usando en cada paso una sola definición o una sola propiedad de los números reales. Con las cuatro propiedades de la suma, son las ocho propiedades que definirán el espacio vectorial.
+
+Correspondiente sección del libro (Ejercicio 4 de la Sección 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
+
+[en]
+# youtube = ""   # fill in after upload
+video = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.mp4"
+subtitulos = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.srt"
+idioma = "en"
+titulo = "L01 V07 Properties of scalar multiplication (English)"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "scalar multiplication", "distributive property",
+             "associative property", "proofs", "algebraic properties", "mathematics", "GECO", "UCM"]
+descripcion = """
+The four properties of multiplying a vector in Rn by a scalar, proved component-wise.
+
+Seventh video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 Examples
+00:40 The method
+01:10 Property 5: distributive over vector addition
+02:40 Property 6: distributive over scalar addition
+04:11 Property 7: associative
+05:15 Property 8: one is the identity element
+06:13 Key takeaways
+06:35 Closing credits
+
+As in the previous video, each property is first posed as an exercise (pause the video and try it) and then proved step by step: a chain of equalities from the i-th component of the left-hand side to that of the right-hand side, using in each step a single definition or a single property of the real numbers. Together with the four properties of addition, these are the eight properties that will define a vector space.
+
+Corresponding book section (Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""

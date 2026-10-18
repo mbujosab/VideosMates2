@@ -198,3 +198,18 @@ with self.voiceover(text=tr("""¿Se verifican también estas propiedades cuando 
 self.pausa_media()
 #+END_SRC
 
+
+* Regla general de los paréntesis en la escena 2 (descartada el 2026-10-17)
+
+Marcos: no se entiende, porque todos los pasos son sustituciones y solo la del opuesto introduce un paréntesis. Se sustituye por "no se escriben dos signos seguidos" en el paso 2 de la propiedad 4.
+
+#+BEGIN_SRC python
+# Regla de escritura: ningún paréntesis aparece sin motivo
+sustituir = Tex(tr("lo que se sustituye va entre paréntesis", "what is substituted goes in parentheses"),
+                font_size=36).set_color(GRAY_B).next_to(una_regla, DOWN, buff=0.4)
+with self.voiceover(text=tr("""Y cuando sustituimos algo por una expresión igual, <bookmark mark='p'/> la escribimos entre paréntesis.""",
+                            """And when we replace something with an equal expression, <bookmark mark='p'/> we write it in parentheses.""")) as tracker:
+    self.wait_until_bookmark("p")
+    self.play(FadeIn(sustituir), run_time=1)
+
+#+END_SRC

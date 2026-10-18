@@ -1,0 +1,68 @@
+# Ficha de YouTube del vídeo L01 V08 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V08.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V08.toml en   # usa el campo youtube de la ficha (o --id)
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60, 2026-10-18: Omega alegre solo un instante).
+
+[comun]
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+# youtube = ""   # rellenar tras subirlo
+video = "L01_V08_VectoresComoDatos.mp4"
+subtitulos = "L01_V08_VectoresComoDatos.srt"
+idioma = "es"
+titulo = "L01 V08 Los vectores como representación de datos (Español)"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "vectores", "datos", "combinación lineal", "suma de vectores",
+             "producto por escalares", "PIB", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Un vector sirve para guardar datos: lo que importa es la posición de cada componente.
+
+Octavo vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 La cena: cada receta es un vector
+00:53 La cesta de la compra: suma y producto por un número
+01:21 Omega se apunta: una combinación lineal
+01:55 Datos económicos: el crecimiento del PIB
+02:29 Resumen y cuatro vectores en una tabla
+03:05 Créditos finales
+
+Tres amigos preparan una cena; cada receta es un vector con los ingredientes de una ración, siempre en el mismo orden. Sumar las recetas componente a componente y multiplicar por el número de comensales da la cesta de la compra, y añadir tres raciones más de tortilla da una combinación lineal de las recetas. Después, el mismo uso de los vectores con datos económicos: el crecimiento del PIB de cinco países entre 2003 y 2006, que en el próximo vídeo se convertirá en una matriz.
+
+Correspondiente sección del libro (Sección 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
+
+[en]
+# youtube = ""   # fill in after upload
+video = "../videoMath2/L01_V08_VectorsAsData.mp4"
+subtitulos = "../videoMath2/L01_V08_VectorsAsData.srt"
+idioma = "en"
+titulo = "L01 V08 Vectors as a representation of data (English)"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "data", "linear combination", "vector addition",
+             "scalar multiplication", "GDP", "mathematics", "GECO", "UCM"]
+descripcion = """
+A vector can store data: what matters is the position of each component.
+
+Eighth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 The dinner: each recipe is a vector
+00:53 The shopping basket: addition and multiplication by a number
+01:23 Omega joins in: a linear combination
+01:55 Economic data: GDP growth
+02:30 Key takeaways and four vectors in a table
+03:04 Closing credits
+
+Three friends prepare a dinner; each recipe is a vector with the ingredients for one serving, always in the same order. Adding the recipes component-wise and multiplying by the number of diners gives the shopping basket, and adding three more servings of omelette gives a linear combination of the recipes. Then the same use of vectors with economic data: the GDP growth of five countries from 2003 to 2006, which will become a matrix in the next video.
+
+Corresponding book section (Section 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+"""
