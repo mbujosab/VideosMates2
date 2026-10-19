@@ -216,6 +216,10 @@ Escribir las frases nuevas ya en la forma buena.
 - Esqueleto fijo: portada, enlace con el vídeo anterior en una o dos
   frases, cuerpo, resumen con el resultado en pantalla, una frase que
   anuncie el siguiente vídeo, créditos. Menos de diez minutos.
+- **Título y cabeceras** (Marcos, 2026-10-19): la escena 1 lleva arriba el título del vídeo
+  (`Title(TITULO)`, como en V05-V10) y cada escena siguiente una cabecera corta
+  (`Tex(..., font_size=44).set_color(COLOR_TITULO).to_edge(UP)`), salvo donde la cabecera corte el
+  hilo de una historia continua (V08: cena, cesta, PIB, sin cabeceras). Comprobarlo en cada vídeo nuevo.
 - La voz manda y la animación acompaña (`tracker.duration`). Nada aparece
   en pantalla sin que la voz lo mencione; en pantalla van fórmulas y
   rótulos cortos, la explicación va en la narración. Para que algo
@@ -283,16 +287,20 @@ Escribir las frases nuevas ya en la forma buena.
     definición de suma podemos distribuir el selector" (de izquierda a
     derecha) / "...podemos sacar el selector como factor común" (de
     derecha a izquierda);
-    "Por la definición de producto (o de opuesto) podemos desplazar el
+    "Por la definición de producto (o de opuesto) podemos desplazar los
     paréntesis" (en los dos sentidos). Al presentar las definiciones, decir ya qué hace
     cada una: "la suma, que distribuye el selector, el producto por un
-    escalar, que desplaza el paréntesis, ... y el opuesto, que también
-    desplaza el paréntesis". Giro preferido por Marcos para **todos** los pasos,
+    escalar, que desplaza los paréntesis, ... y el opuesto, que también
+    desplaza los paréntesis". Giro preferido por Marcos para **todos** los pasos,
     también los de los reales: "por [regla] podemos [acción]" ("Ya todo
     son números reales, así que podemos aplicar la asociativa"), más
     natural que "Regla: acción" o que nombrar la regla a secas. Que el alumno asocie selector distribuido ⇄ factorizable.
   - Pausas: dos en las dos primeras propiedades (intentar, pista,
     intentar), una en las siguientes (pista y pausa).
+- **«Los paréntesis», en plural** (Marcos, 2026-10-19): lo que se desplaza o se quita es la pareja,
+  así que «podemos desplazar los paréntesis», «los paréntesis de la derecha», «sobran y podemos
+  quitarlos». En singular, «el paréntesis de la derecha» parece el signo «)». V06 (publicado) conserva
+  el singular.
 - **Narración directa y mínima** (criterio de Marcos, 2026-10-14): cada
   frase dice una cosa y solo se dice lo que el vídeo va a usar. Fuera
   los apuntes laterales ("observe que reescalar por menos uno da el
@@ -355,13 +363,13 @@ Escribir las frases nuevas ya en la forma buena.
 
 ## Calendario de publicación en YouTube (acordado con Marcos el 2026-10-18)
 
-Un vídeo por semana: español el **jueves a las 18:00** (Madrid) e inglés el **sábado** a la misma
-hora. Se mantienen dos o tres vídeos de reserva. **No subir nada (ni en privado) hasta que Marcos dé
+Un vídeo por semana: español el **jueves a las 15:00** (Madrid; antes 18:00, cambiado por Marcos el
+2026-10-19) e inglés el **sábado a las 15:00**. Se mantienen dos o tres vídeos de reserva. **No subir nada (ni en privado) hasta que Marcos dé
 el último repaso** a cada vídeo, unos días después de aprobarlo.
 
 | Vídeo | Español      | Inglés       | Estado                                  |
 |-------+--------------+--------------+-----------------------------------------|
-| V07   | jue 22-10-26 | sáb 24-10-26 | HD listo; pendiente del último repaso   |
+| V07   | jue 22-10-26 | sáb 24-10-26 | aprobado (19-10); falta subir es y en   |
 | V08   | jue 29-10-26 | sáb 31-10-26 | HD listo; pendiente del último repaso   |
 | V09   | jue 05-11-26 | sáb 07-11-26 | HD listo; pendiente del último repaso   |
 
@@ -402,7 +410,12 @@ Al publicar un vídeo, actualizar esta tabla.
   `self.wait(0.3)` antes de "Hemos llegado". **Aprobado por Marcos en los dos idiomas y
   renderizado en HD el 2026-10-17** (`L01_V07_PropiedadesDelProductoPorEscalares.mp4`, 6:48, y
   `../videoMath2/L01_V07_PropertiesOfScalarMultiplication.mp4`, 6:50, con sus srt); ficha
-  `fichas/L01_V07.toml` con los capítulos. **Publicación: es el jueves 22 y en el sábado 24 de octubre
+  `fichas/L01_V07.toml` con los capítulos. Último repaso de Marcos (2026-10-19): «Como hicimos en el otro vídeo, ... éstas son», «Como ya
+  sabemos, para demostrar...», «las dos definiciones y las propiedades conmutativa y distributiva» (que no
+  parezcan nombres de las definiciones) y, en la propiedad 7, qué paréntesis se desplaza («los paréntesis de
+  fuera»; «los paréntesis de la derecha para sacar fuera el selector»; en inglés solo estos dos); después «los paréntesis» en plural en todo
+  V07 y «los paréntesis de fuera» también en el primer paso de las propiedades 5 y 6. HD rehecho
+  (6:50 es, 6:53 en) y capítulos de la ficha corregidos; HD anterior en el scratchpad de la sesión. **Publicación: es el jueves 22 y en el sábado 24 de octubre
   de 2026** (calendario más abajo), apuntar los ids en la ficha, entrada en `README.org`/`index.html` y html del org.
 - V08 (`L01-V08-VectoresComoDatos.org`, Sección 1.3; cena, cesta, combinación lineal, PIB y la
   criatura Omega): **aprobado por Marcos en los dos idiomas y renderizado en HD el 2026-10-17**
@@ -425,7 +438,17 @@ Al publicar un vídeo, actualizar esta tabla.
   `tmp/guion_V09_es.txt`. La versión 1 y el apéndice de R⁰ están en `ZZ_Basura_L01_V09.org`. En inglés,
   "orden" = *order* (Marcos). **Azure es 480p el 2026-10-18**: `L01_V09_MatricesFilasYColumnas_azure480p.mp4`
   (5:01); dos tomas repetidas con `v2` (una cortada por Azure a media frase, otra con 620 ms antes de
-  "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. Falta su último repaso y la subida (5 y 7 de noviembre).
+  "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. 2026-10-19: cabeceras añadidas a las escenas 2, 3 y 6 («Ejemplos», «El orden de una matriz», «Componentes, filas y columnas») y HD rehecho sin sintetizar. Falta su último repaso y la subida (5 y 7 de noviembre).
+- V10 (`L01-V10-SeleccionYTransposicion.org`, Secciones 1.4.4-1.4.5; inglés
+  `L01_V10_SelectionAndTransposition`): estructura aprobada por Marcos el 2026-10-18 (selector por la
+  izquierda de un vector y da igual el orden; transposición, con la B de V09 = Aᵀ; matriz fila; regla
+  "transponer = cambiar de lado los índices" demostrada y (Aᵀ)ᵀ = A con tarjeta de pausa). El escalar a la
+  derecha y las reglas con escalares van a V11; la notación como programa, a X03. Primer uso del rótulo
+  `aviso("idea")`. Prueba gTTS 480p: `L01_V10_SeleccionYTransposicion_prueba480p.mp4`, guion en
+  `tmp/guion_V10_es.txt`. 2026-10-19 (Marcos): título en la escena 1, cabecera en la 2 y, en la escena 4,
+  la matriz columna y la matriz fila escritas un instante como listas del libro, [(9;2);] y [(9,);(2,);],
+  con «un vector de R²» / «dos vectores de R¹» (nacal: `Matrix([Vector([9]), Vector([2])])`; el
+  Python, para X03). Nueva prueba: 5:17. Falta: revisión de Marcos, Azure, HD, ficha.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.

@@ -357,10 +357,11 @@ la matriz es otra.
 #+name: Segunda escena
 #+BEGIN_SRC python :eval no
 self.creditos()
+cabecera = Tex(tr("Ejemplos", "Examples"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 cols = list(zip(*A_EJ))   # las columnas de A: a, b y c
 COLORES = [COLOR_A, COLOR_B, COLOR_C]   # un color por vector, para seguirlos cuando cambian de sitio
 vs = [vector(c, color=k, decimales=0) for c, k in zip(cols, COLORES)]
-vecs = VGroup(*[con_nombre(rf"\Vect{{{l}}}=", v) for l, v in zip("abc", vs)]).arrange(RIGHT, buff=1.0).move_to([0, 2.1, 0])
+vecs = VGroup(*[con_nombre(rf"\Vect{{{l}}}=", v) for l, v in zip("abc", vs)]).arrange(RIGHT, buff=1.0).move_to([0, 1.9, 0])
 for v, k in zip(vecs, COLORES):
     v[0][0][0].set_color(k)   # la letra del vector
 A = matriz(A_EJ, decimales=0, h_buff=1.0)
@@ -383,7 +384,7 @@ resto_C = VGroup(*[g for g in f_C[0][0] if all(g is not l for l in letras_C)], C
 
 with self.voiceover(text=tr("""Veamos un ejemplo con tres vectores de dos componentes.""",
                             """Let us look at an example with three vectors of two components.""")) as tracker:
-    self.play(LaggedStart(*[FadeIn(v) for v in vecs], lag_ratio=0.4), run_time=1.5)
+    self.play(Write(cabecera), LaggedStart(*[FadeIn(v) for v in vecs], lag_ratio=0.4), run_time=1.5)
 
 with self.voiceover(text=tr("""Con ellos formamos la matriz A, <bookmark mark='l'/> que es la lista de los tres vectores entre corchetes. <bookmark mark='c'/> Cada vector es una columna, y las columnas se escriben una al lado de la otra.""",
                             """With them we build the matrix A, <bookmark mark='l'/> which is the list of the three vectors in square brackets. <bookmark mark='c'/> Each vector is a column, and the columns are written side by side.""")) as tracker:
@@ -423,6 +424,7 @@ forma de tabla para hablar del orden.
 #+name: Tercera escena
 #+BEGIN_SRC python :eval no
 self.creditos()
+cabecera = Tex(tr("El orden de una matriz", "The order of a matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 A = matriz(A_EJ, decimales=0, h_buff=1.0)
 f_A = con_nombre(r"\Mat{A}=", A).move_to([-4.2, 0.9, 0])
 ll_f = Brace(A, RIGHT, buff=0.1)
@@ -455,7 +457,7 @@ A_de_nuevo, B_de_nuevo = A.copy(), B.copy()
 
 with self.voiceover(text=tr("""Formemos ahora otra matriz B con dos vectores de tres componentes: <bookmark mark='x'/> el primero lleva los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.<bookmark mark='v3'/>""",
                             """Now let us build another matrix B with two vectors of three components: <bookmark mark='x'/> the first one carries the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.<bookmark mark='v2'/>""")) as tracker:
-    self.play(FadeIn(f_A), run_time=0.8)
+    self.play(Write(cabecera), FadeIn(f_A), run_time=0.8)
     self.play(FadeIn(f_B[0]), FadeIn(B.get_brackets()), run_time=0.8)
     for i, marca in enumerate(["x", "y"]):
         self.wait_until_bookmark(marca)
@@ -627,6 +629,7 @@ se selecciona. La fila y la columna son vectores.
 #+name: Sexta escena
 #+BEGIN_SRC python :eval no
 self.creditos()
+cabecera = Tex(tr("Componentes, filas y columnas", "Components, rows and columns"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 A = matriz(A_SEL, decimales=0, h_buff=1.0)
 f_A = con_nombre(r"\Mat{A}=", A).move_to([0, 2.0, 0])
 x0 = -4.6
@@ -650,7 +653,7 @@ col_g.shift(col[0][0].get_center() - col_g[0][0].get_center())       # glifos: A
 
 with self.voiceover(text=tr("""Para seleccionar una componente de un vector, el operador selector necesita un índice. En una matriz necesita dos: <bookmark mark='f'/> el de la fila <bookmark mark='c'/> y el de la columna.""",
                             """To select a component of a vector, the selector operator needs one index. In a matrix it needs two: <bookmark mark='f'/> the row index <bookmark mark='c'/> and the column index.""")) as tracker:
-    self.play(FadeIn(f_A), run_time=1)
+    self.play(Write(cabecera), FadeIn(f_A), run_time=1)
     self.wait_until_bookmark("f")
     ff = franja_fila(A, 1)
     self.play(FadeIn(ff), run_time=0.5)

@@ -25,13 +25,13 @@ Séptimo vídeo de la lección primera del curso de álgebra lineal.
 
 00:00 Título
 00:06 Ejemplos
-00:39 El método
-01:08 Propiedad 5: distributiva respecto de la suma de vectores
-02:38 Propiedad 6: distributiva respecto de la suma de escalares
-04:09 Propiedad 7: asociativa
+00:38 El método
+01:06 Propiedad 5: distributiva respecto de la suma de vectores
+02:37 Propiedad 6: distributiva respecto de la suma de escalares
+04:08 Propiedad 7: asociativa
 05:12 Propiedad 8: el uno es el elemento neutro
-06:11 Resumen
-06:33 Créditos finales
+06:13 Resumen
+06:35 Créditos finales
 
 Como en el vídeo anterior, cada propiedad se propone primero como ejercicio (pause el vídeo e inténtelo) y después se demuestra paso a paso: una cadena de igualdades desde la componente i-ésima del lado izquierdo hasta la del lado derecho, usando en cada paso una sola definición o una sola propiedad de los números reales. Con las cuatro propiedades de la suma, son las ocho propiedades que definirán el espacio vectorial.
 
@@ -56,13 +56,13 @@ Seventh video of the first lesson of the linear algebra course.
 
 00:00 Title
 00:06 Examples
-00:40 The method
-01:10 Property 5: distributive over vector addition
+00:39 The method
+01:09 Property 5: distributive over vector addition
 02:40 Property 6: distributive over scalar addition
 04:11 Property 7: associative
-05:15 Property 8: one is the identity element
-06:13 Key takeaways
-06:35 Closing credits
+05:18 Property 8: one is the identity element
+06:16 Key takeaways
+06:38 Closing credits
 
 As in the previous video, each property is first posed as an exercise (pause the video and try it) and then proved step by step: a chain of equalities from the i-th component of the left-hand side to that of the right-hand side, using in each step a single definition or a single property of the real numbers. Together with the four properties of addition, these are the eight properties that will define a vector space.
 

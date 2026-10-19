@@ -177,7 +177,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                 self.wait_until_bookmark(marca)
                 self.play(FadeIn(ejemplos[k]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Como hicimos con la suma, vamos a demostrar que son propiedades generales del producto por un escalar.""",
+        with self.voiceover(text=tr("""Como hicimos en el otro vídeo, vamos a demostrar que éstas son propiedades generales del producto por un escalar.""",
                                     """As we did with addition, we are going to prove that these are general properties of scalar multiplication.""")) as tracker:
             self.play(Write(pregunta), run_time=1.5)
         
@@ -200,13 +200,13 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.<bookmark mark='v4'/>""",
+        with self.voiceover(text=tr("""Como ya sabemos, para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.""",
                                     """The method is the one from the previous video. To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise.""")) as tracker:
             self.play(Write(criterio), run_time=2)
             self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
             self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza el paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
+        with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza los paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
                                     """Today we only need two definitions: <bookmark mark='s'/> addition, which distributes the selector, <bookmark mark='p'/> and scalar multiplication, which shifts the parentheses. And, of the properties of the reals, <bookmark mark='r'/> the four for multiplication.""")) as tracker:
             self.wait_until_bookmark("s")
             self.play(Write(definiciones[0]), run_time=0.8)
@@ -258,8 +258,8 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
@@ -278,7 +278,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.play(Indicate(cadena[3][1], color=COLOR_ESCALAR, scale_factor=1.15),
                       Indicate(cadena[3][3], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto", veces=2)
@@ -312,7 +312,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
                                     """Sixth property: it is also distributive over the addition of scalars. Scaling by a sum of scalars is adding the scaled vectors.""")) as tracker:
             self.play(Write(enunciado), run_time=1.5)
         
-        with self.voiceover(text=tr("""Esta vez hará falta más de una propiedad de los reales: necesitará <bookmark mark='p'/> las dos definiciones, la conmutativa y la distributiva.""",
+        with self.voiceover(text=tr("""Esta vez hará falta más de una propiedad de los reales: necesitará <bookmark mark='p'/> las dos definiciones y las propiedades conmutativa y distributiva.""",
                                     """This time more than one property of the reals will be needed: you will need <bookmark mark='p'/> both definitions, the commutative property and the distributive property.""")) as tracker:
             self.wait_until_bookmark("p")
             panel.pista("suma", "producto", 5, 6)
@@ -333,8 +333,8 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
@@ -354,7 +354,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, 5, veces=2)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l5'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis en los dos sumandos. <bookmark mark='l5'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l5'/>""")) as tracker:
             self.wait_until_bookmark("l5")
             paso(self, cadena[5], panel, "producto", veces=2)
@@ -405,12 +405,12 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
-        with self.voiceover(text=tr("""Y otra vez, dentro, podemos desplazar el paréntesis. <bookmark mark='l2'/>""",
+        with self.voiceover(text=tr("""Y otra vez, dentro, podemos desplazar los paréntesis. <bookmark mark='l2'/>""",
                                     """And once more, inside, we can shift the parentheses. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "producto")
@@ -420,8 +420,8 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 7)
         
-        with self.voiceover(text=tr("""Y por la definición de producto podemos desplazar de nuevo el paréntesis. <bookmark mark='l4'/>""",
-                                    """And by the definition of scalar multiplication we can shift the parentheses again. <bookmark mark='l4'/>""")) as tracker:
+        with self.voiceover(text=tr("""Y por la definición de producto podemos desplazar los paréntesis de la derecha para sacar fuera el selector. <bookmark mark='l4'/>""",
+                                    """And by the definition of scalar multiplication we can shift the parentheses on the right to take the selector outside. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto")
         
@@ -467,7 +467,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis. <bookmark mark='l1'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
@@ -477,7 +477,7 @@ class L01_V07_PropiedadesDelProductoPorEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
         
-        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que el paréntesis sobra <bookmark mark='q'/> y podemos quitarlo.""",
+        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que los paréntesis sobran <bookmark mark='q'/> y podemos quitarlos.""",
                                     """Parentheses indicate the order of operations: first what is inside, and then what is outside. Here nothing is left outside, so the parentheses are unnecessary <bookmark mark='q'/> and we can drop them.""")) as tracker:
             self.play(Indicate(cadena[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("q")
@@ -587,7 +587,7 @@ class L01_V07_E01_Ejemplos(MiEscenaConVoz):
                 self.wait_until_bookmark(marca)
                 self.play(FadeIn(ejemplos[k]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Como hicimos con la suma, vamos a demostrar que son propiedades generales del producto por un escalar.""",
+        with self.voiceover(text=tr("""Como hicimos en el otro vídeo, vamos a demostrar que éstas son propiedades generales del producto por un escalar.""",
                                     """As we did with addition, we are going to prove that these are general properties of scalar multiplication.""")) as tracker:
             self.play(Write(pregunta), run_time=1.5)
         
@@ -611,13 +611,13 @@ class L01_V07_E02_Metodo(MiEscenaConVoz):
                         font_size=34).set_color(COLOR_REGLA)
         VGroup(criterio, herramientas, una_regla).arrange(DOWN, buff=0.7).next_to(cabecera, DOWN, buff=0.6)
         
-        with self.voiceover(text=tr("""El método es el del vídeo anterior. Para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.<bookmark mark='v4'/>""",
+        with self.voiceover(text=tr("""Como ya sabemos, para demostrar que dos vectores son iguales, basta demostrar que <bookmark mark='cc'/> lo son componente a componente.""",
                                     """The method is the one from the previous video. To prove that two vectors are equal, it is enough to prove that <bookmark mark='cc'/> they are equal component-wise.""")) as tracker:
             self.play(Write(criterio), run_time=2)
             self.wait_until_bookmark("cc")   # la igualdad de las componentes, cuando la voz dice "componente a componente"
             self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza el paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
+        with self.voiceover(text=tr("""Hoy solo necesitamos dos definiciones: <bookmark mark='s'/> la suma, que distribuye el selector, <bookmark mark='p'/> y el producto por un escalar, que desplaza los paréntesis. Y, de las propiedades de los reales, <bookmark mark='r'/> las cuatro del producto.""",
                                     """Today we only need two definitions: <bookmark mark='s'/> addition, which distributes the selector, <bookmark mark='p'/> and scalar multiplication, which shifts the parentheses. And, of the properties of the reals, <bookmark mark='r'/> the four for multiplication.""")) as tracker:
             self.wait_until_bookmark("s")
             self.play(Write(definiciones[0]), run_time=0.8)
@@ -670,8 +670,8 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
@@ -690,7 +690,7 @@ class L01_V07_E03_DistributivaVectores(MiEscenaConVoz):
             self.play(Indicate(cadena[3][1], color=COLOR_ESCALAR, scale_factor=1.15),
                       Indicate(cadena[3][3], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis en los dos sumandos. <bookmark mark='l4'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto", veces=2)
@@ -725,7 +725,7 @@ class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
                                     """Sixth property: it is also distributive over the addition of scalars. Scaling by a sum of scalars is adding the scaled vectors.""")) as tracker:
             self.play(Write(enunciado), run_time=1.5)
         
-        with self.voiceover(text=tr("""Esta vez hará falta más de una propiedad de los reales: necesitará <bookmark mark='p'/> las dos definiciones, la conmutativa y la distributiva.""",
+        with self.voiceover(text=tr("""Esta vez hará falta más de una propiedad de los reales: necesitará <bookmark mark='p'/> las dos definiciones y las propiedades conmutativa y distributiva.""",
                                     """This time more than one property of the reals will be needed: you will need <bookmark mark='p'/> both definitions, the commutative property and the distributive property.""")) as tracker:
             self.wait_until_bookmark("p")
             panel.pista("suma", "producto", 5, 6)
@@ -746,8 +746,8 @@ class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
@@ -767,7 +767,7 @@ class L01_V07_E04_DistributivaEscalares(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, 5, veces=2)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis en los dos sumandos. <bookmark mark='l5'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis en los dos sumandos. <bookmark mark='l5'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses in both terms. <bookmark mark='l5'/>""")) as tracker:
             self.wait_until_bookmark("l5")
             paso(self, cadena[5], panel, "producto", veces=2)
@@ -819,12 +819,12 @@ class L01_V07_E05_Asociativa(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
-                                    """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis de fuera. <bookmark mark='l1'/>""",
+                                    """By the definition of scalar multiplication we can shift the outer parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
         
-        with self.voiceover(text=tr("""Y otra vez, dentro, podemos desplazar el paréntesis. <bookmark mark='l2'/>""",
+        with self.voiceover(text=tr("""Y otra vez, dentro, podemos desplazar los paréntesis. <bookmark mark='l2'/>""",
                                     """And once more, inside, we can shift the parentheses. <bookmark mark='l2'/>""")) as tracker:
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, "producto")
@@ -834,8 +834,8 @@ class L01_V07_E05_Asociativa(MiEscenaConVoz):
             self.wait_until_bookmark("l3")
             paso(self, cadena[3], panel, 7)
         
-        with self.voiceover(text=tr("""Y por la definición de producto podemos desplazar de nuevo el paréntesis. <bookmark mark='l4'/>""",
-                                    """And by the definition of scalar multiplication we can shift the parentheses again. <bookmark mark='l4'/>""")) as tracker:
+        with self.voiceover(text=tr("""Y por la definición de producto podemos desplazar los paréntesis de la derecha para sacar fuera el selector. <bookmark mark='l4'/>""",
+                                    """And by the definition of scalar multiplication we can shift the parentheses on the right to take the selector outside. <bookmark mark='l4'/>""")) as tracker:
             self.wait_until_bookmark("l4")
             paso(self, cadena[4], panel, "producto")
         
@@ -882,7 +882,7 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar el paréntesis. <bookmark mark='l1'/>""",
+        with self.voiceover(text=tr("""Por la definición de producto podemos desplazar los paréntesis. <bookmark mark='l1'/>""",
                                     """By the definition of scalar multiplication we can shift the parentheses. <bookmark mark='l1'/>""")) as tracker:
             self.wait_until_bookmark("l1")
             paso(self, cadena[1], panel, "producto")
@@ -892,7 +892,7 @@ class L01_V07_E06_Uno(MiEscenaConVoz):
             self.wait_until_bookmark("l2")
             paso(self, cadena[2], panel, 8)
         
-        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que el paréntesis sobra <bookmark mark='q'/> y podemos quitarlo.""",
+        with self.voiceover(text=tr("""Los paréntesis indican el orden de las operaciones: primero se hace lo de dentro, y después lo de fuera. Aquí fuera no queda ninguna operación, así que los paréntesis sobran <bookmark mark='q'/> y podemos quitarlos.""",
                                     """Parentheses indicate the order of operations: first what is inside, and then what is outside. Here nothing is left outside, so the parentheses are unnecessary <bookmark mark='q'/> and we can drop them.""")) as tracker:
             self.play(Indicate(cadena[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("q")

@@ -269,7 +269,7 @@ Fijado en V09 (2026-10-17): "orden $m$ por $n$" = *order m by n*
 | V07   | 1.2.1             | HD es/en 2026-10-17, se publica es 22-10 y en 24-10: propiedades 5-8, la proposición completa y «espacio vectorial» |
 | V08   | 1.3               | HD es/en 2026-10-17, se publica es 29-10 y en 31-10: vectores como datos (cena, cesta, combinación lineal, PIB) y la criatura Omega |
 | V09   | 1.4 a 1.4.3       | segunda versión 2026-10-18 (sigue las transparencias de clase): matrices, orden, selectores, igualdad; prueba gTTS |
-| V10   | 1.4.4 a 1.4.5     | pendiente: reescritura y transposición        |
+| V10   | 1.4.4 a 1.4.5     | guion (2026-10-18): selección y transposición |
 | V11   | 1.4.6 a 1.5       | pendiente: matrices especiales y operaciones  |
 | V12   | 1.6               | pendiente: notación matricial extendida       |
 
