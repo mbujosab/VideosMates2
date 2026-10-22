@@ -10,7 +10,7 @@ privacidad = "public"   # public | unlisted | private
 # miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
 
 [es]
-# youtube = ""   # rellenar tras subirlo
+youtube = "GOqglYkmOiA"   # subido por la API el 2026-10-22
 video = "L01_V07_PropiedadesDelProductoPorEscalares.mp4"
 subtitulos = "L01_V07_PropiedadesDelProductoPorEscalares.srt"
 idioma = "es"

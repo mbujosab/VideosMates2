@@ -369,16 +369,17 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 
 | Vídeo | Español      | Inglés       | Estado                                  |
 |-------+--------------+--------------+-----------------------------------------|
-| V07   | jue 22-10-26 | sáb 24-10-26 | aprobado (19-10); falta subir es y en   |
+| V07   | jue 22-10-26 | sáb 24-10-26 | es publicado (GOqglYkmOiA); falta en    |
 | V08   | jue 29-10-26 | sáb 31-10-26 | HD listo; pendiente del último repaso   |
 | V09   | jue 05-11-26 | sáb 07-11-26 | HD listo; pendiente del último repaso   |
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
-Subida: la API deja en privado los vídeos de un proyecto sin auditar. Por eso el mp4 se sube a mano
-en YouTube Studio, con la publicación programada allí (Programar: fecha y hora). Después se ejecuta
-`lib/subir_youtube.py actualizar FICHA IDIOMA --id ID` para los metadatos, los subtítulos y la lista,
-se apunta el id en la ficha y se añaden la entrada de `README.org`/`index.html` y el html del org.
+Subida: `lib/subir_youtube.py subir FICHA IDIOMA` (mp4, metadatos, subtítulos y lista de una vez).
+Pese al aviso del script, la API publica en **público** (V05 y V07 es, 2026-10-22): no programa, así que
+se lanza a la hora de publicar. El token caduca cada semana: si da `invalid_grant`, apartar
+`lib/token_youtube.json` y repetir; se abre el navegador para autorizar. La pantalla final, en Studio.
+Después se apunta el id en la ficha y se añaden la entrada de `README.org`/`index.html` y el html del org.
 Al publicar un vídeo, actualizar esta tabla.
 
 ## Pendiente
