@@ -369,7 +369,7 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 
 | Vídeo | Español      | Inglés       | Estado                                  |
 |-------+--------------+--------------+-----------------------------------------|
-| V07   | jue 22-10-26 | sáb 24-10-26 | es publicado (GOqglYkmOiA); falta en    |
+| V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
 | V08   | jue 29-10-26 | sáb 31-10-26 | HD listo; pendiente del último repaso   |
 | V09   | jue 05-11-26 | sáb 07-11-26 | HD listo; pendiente del último repaso   |
 
@@ -416,8 +416,8 @@ Al publicar un vídeo, actualizar esta tabla.
   parezcan nombres de las definiciones) y, en la propiedad 7, qué paréntesis se desplaza («los paréntesis de
   fuera»; «los paréntesis de la derecha para sacar fuera el selector»; en inglés solo estos dos); después «los paréntesis» en plural en todo
   V07 y «los paréntesis de fuera» también en el primer paso de las propiedades 5 y 6. HD rehecho
-  (6:50 es, 6:53 en) y capítulos de la ficha corregidos; HD anterior en el scratchpad de la sesión. **Publicación: es el jueves 22 y en el sábado 24 de octubre
-  de 2026** (calendario más abajo), apuntar los ids en la ficha, entrada en `README.org`/`index.html` y html del org.
+  (6:50 es, 6:53 en) y capítulos de la ficha corregidos; HD anterior en el scratchpad de la sesión. **Publicado: es el jueves 22 (GOqglYkmOiA) y en el sábado 24 de octubre (cNfCZMC8QcM)
+  de 2026**, con ids en la ficha, entrada en `README.org`/`index.html` y html del org y pantalla final en Studio.
 - V08 (`L01-V08-VectoresComoDatos.org`, Sección 1.3; cena, cesta, combinación lineal, PIB y la
   criatura Omega): **aprobado por Marcos en los dos idiomas y renderizado en HD el 2026-10-17**
   (`L01_V08_VectoresComoDatos.mp4` y `../videoMath2/L01_V08_VectorsAsData.mp4`, 3:19, con sus

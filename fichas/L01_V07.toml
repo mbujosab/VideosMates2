@@ -41,7 +41,7 @@ Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 """
 
 [en]
-# youtube = ""   # fill in after upload
+youtube = "cNfCZMC8QcM"   # subido por la API el 2026-10-24
 video = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.mp4"
 subtitulos = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.srt"
 idioma = "en"
