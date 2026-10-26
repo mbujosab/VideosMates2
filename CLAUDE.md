@@ -52,7 +52,7 @@ selector, "componente a componente", etc.).
   de las escenas (nunca con `-c copy`: manim genera el audio unas décimas
   más largo que la imagen y la concatenación sin recodificar deja un parón
   en cada unión). `montaje` iguala cada segmento, concatena recodificando,
-  normaliza la voz (loudnorm), pone música solo en la portada (fundido al
+  lleva la voz a -16 LUFS con una ganancia fija medida sobre toda la voz más un limitador (desde V08, 2026-10-26: `loudnorm` en una pasada sube la ganancia poco a poco y la primera frase quedaba 5 dB más baja; V05-V07 publicados lo tienen; aplicado también a V09, que se volvió a montar, a V10 y a la plantilla), pone música solo en la portada (fundido al
   empezar la escena 1) y desde la escena `cierre` hasta el fundido a negro,
   y fusiona los `.srt` de las escenas en un único `video.srt` para YouTube.
 - Web: cada vídeo publicado lleva su entrada en `README.org` (python, html
@@ -370,8 +370,8 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | Vídeo | Español      | Inglés       | Estado                                  |
 |-------+--------------+--------------+-----------------------------------------|
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
-| V08   | jue 29-10-26 | sáb 31-10-26 | HD listo; pendiente del último repaso   |
-| V09   | jue 05-11-26 | sáb 07-11-26 | HD listo; pendiente del último repaso   |
+| V08   | jue 29-10-26 | sáb 31-10-26 | HD aprobado tras el último repaso (2026-10-26); listo para subir |
+| V09   | jue 05-11-26 | sáb 07-11-26 | HD listo (montado de nuevo el 2026-10-26 con la ganancia fija de la voz); pendiente del último repaso |
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.

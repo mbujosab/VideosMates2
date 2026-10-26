@@ -633,7 +633,9 @@ manim genera el audio unas décimas más largo que la imagen). La música
 suena en la portada (volumen =volumen=) y se funde cuando empieza la
 primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
 =volumen_voz=), sube en la última escena (los créditos) y se funde a
-negro con la imagen. La voz se normaliza con =loudnorm=. Los =.srt= de las escenas se desplazan y se
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con =loudnorm= en una pasada, que
+subía el volumen poco a poco al empezar). Los =.srt= de las escenas se desplazan y se
 funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
 
 =escenas= es la lista ordenada de clases; =cierre= la escena en la que
@@ -670,12 +672,17 @@ printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz)
 # 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
 inputs=""; fc=""; k=0
 for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+# La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+# (loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB más baja.)
+ia=""; for k in $(seq 0 $((n-1))); do ia="$ia[$k:a]"; done
+I=$(ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2>&1 | awk '$1=="I:"{v=$2} END{print v}')
+ganancia=$(bc -l <<< "-16 - ($I)"); printf "Voz: %s LUFS; ganancia %.2f dB\n" $I $ganancia
 fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
 dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
 fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
 ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
   ${fc}concat=n=$n:v=1:a=1[v0][a0];
-  [a0]loudnorm=I=-16:LRA=11:TP=-1.5[voz];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
   [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
   [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
   [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];

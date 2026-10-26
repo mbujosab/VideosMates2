@@ -7,13 +7,13 @@ INGREDIENTES = [tr("patatas (g)", "potatoes (g)"), tr("huevos (unidades)", "eggs
                 tr("pepino (g)", "cucumber (g)"), tr("aceite (ml)", "oil (ml)")]
 
 # nombre del plato, nombre del vector, ingredientes por ración, color
-RECETAS = [(tr("Tortilla", "Omelette"), r"\Vect{t}", [150, 1, 30, 0, 0, 40], COLOR_A),
+RECETAS = [(tr("Tortilla", "Spanish tortilla"), r"\Vect{t}", [150, 1, 30, 0, 0, 40], COLOR_A),
            (tr("Gazpacho", "Gazpacho"), r"\Vect{g}", [0, 0, 15, 250, 50, 20], COLOR_B),
            (tr("Ensalada campera", "Potato salad"), tr(r"\Vect{e}", r"\Vect{s}"), [100, 1, 20, 100, 0, 15], COLOR_C)]
 T, G, E = (r[2] for r in RECETAS)
 UNA_DE_CADA = [a + b + c for a, b, c in zip(T, G, E)]       # t + g + e
 PARA_TRES   = [3*x for x in UNA_DE_CADA]                    # 3(t + g + e)
-CON_OMEGA   = [x + 3*y for x, y in zip(PARA_TRES, T)]       # 3(t + g + e) + 3t
+CON_OMEGA   = [x + 4*y for x, y in zip(PARA_TRES, T)]       # 3(t + g + e) + 4t
 
 PAISES = [tr("España", "Spain"), tr("Francia", "France"), tr("Alemania", "Germany"),
           tr("Reino Unido", "United Kingdom"), tr("EE. UU.", "USA")]
@@ -179,9 +179,10 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
         with self.voiceover(text=tr("""En los dos vídeos anteriores hemos operado con vectores sin preocuparnos de para qué los podemos usar. En este veremos que un vector sirve para guardar datos.""",
                                     """In the two previous videos we operated with vectors without worrying about what we can use them for. In this one we will see that a vector is a way of storing data.""")) as tracker:
             self.play(Write(titulo), run_time=1.5)
+        self.wait(0.5)   # una pausa antes de presentar a los cocineros (Marcos, 2026-10-26)
         
         with self.voiceover(text=tr("""Ana, Luis y Marta preparan una cena, y cada uno cocinará un plato: <bookmark mark='t'/> Ana, una tortilla de patatas; <bookmark mark='g'/> Luis, un gazpacho; <bookmark mark='e'/> y Marta, una ensalada campera.""",
-                                    """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish omelette; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
+                                    """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish tortilla; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
             for marca, cab in zip("tge", cabeceras):
                 self.wait_until_bookmark(marca)
                 self.play(FadeIn(cab, shift=0.2*DOWN), run_time=0.7)
@@ -213,8 +214,8 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
         vs = VGroup(*[vector(v, color=c) for _, _, v, c in RECETAS])
         cesta = vector(UNA_DE_CADA)
         signos = [MathTex(s, font_size=44) for s in "++="]
-        fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.35).move_to([1.3, -0.7, 0])
-        ley = leyenda(INGREDIENTES, vs[0])
+        fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.5).move_to([1.3, -0.7, 0])   # hueco para los 3 de la propiedad 5
+        ley = leyenda(INGREDIENTES, vs[0], buff=0.5)
         nombres = VGroup(*[MathTex(l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs)])
         rot_cesta = Tex(tr("cesta", "basket"), font_size=32).next_to(cesta, UP, buff=0.3)
         l_t, l_g, l_e = (r[1] for r in RECETAS)
@@ -232,20 +233,36 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
                                     for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3.5)
         
         nueva = vector(PARA_TRES).move_to(cesta, aligned_edge=LEFT)
+        tres_c = MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(cesta, LEFT, buff=0.1)
+        # antes de multiplicar se quitan los sumandos y el igual: t+g+e no es igual a 3(t+g+e)
         with self.voiceover(text=tr("""Este vector tiene los ingredientes de una ración de cada plato. Como cenan tres personas, <bookmark mark='x'/> lo multiplicamos por tres.""",
                                     """This vector holds the ingredients for one serving of each dish. Since three people are having dinner, <bookmark mark='x'/> we multiply it by three.""")) as tracker:
-            self.play(Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
+            self.play(FadeOut(vs), FadeOut(nombres), FadeOut(VGroup(*signos)), Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
             self.wait_until_bookmark("x")
-            # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis
-            self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]), run_time=2)
-            self.play(Transform(cesta, nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
+            # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis; otro 3 se pone delante de la cesta
+            self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]),
+                      FadeIn(tres_c, shift=RIGHT), run_time=2)
+            self.play(ReplacementTransform(VGroup(tres_c, cesta), nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
         
+        # las recetas multiplicadas por tres ocupan el sitio de las de antes (mismo ancho) y el igual se recupera
+        vs3 = VGroup(*[vector([3*x for x in v], color=c).move_to(w) for (_, _, v, c), w in zip(RECETAS, vs)])
+        nombres3 = VGroup(*[MathTex("3", l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs3)])
+        for n in nombres3:
+            n[0].set_color(COLOR_ESCALAR)
+        signos3 = VGroup(*[s.copy() for s in signos])
+        tres_r = [MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(v, LEFT, buff=0.1) for v in vs]
         VGroup(f3.copy(), f5).arrange(RIGHT, buff=0.15).to_edge(UP, buff=0.5)
         with self.voiceover(text=tr("""Daría lo mismo multiplicar cada receta por tres y sumar después: <bookmark mark='p'/> es la propiedad cinco del vídeo anterior.""",
                                     """It would be the same to multiply each recipe by three and add afterwards: <bookmark mark='p'/> it is property five from the previous video.""")) as tracker:
-            self.play(f3.animate.next_to(f5, LEFT, buff=0.15), run_time=0.6)
+            # las recetas vuelven como estaban y se multiplican por tres a la vista, como la cesta
+            self.play(f3.animate.next_to(f5, LEFT, buff=0.15), FadeIn(vs), FadeIn(nombres), FadeIn(signos3[:2]), run_time=0.8)
+            self.play(*[FadeIn(t, shift=0.5*RIGHT) for t in tres_r], run_time=0.6)
+            self.play(*[ReplacementTransform(VGroup(t, v), w) for t, v, w in zip(tres_r, vs, vs3)],
+                      *[ReplacementTransform(n, m[1]) for n, m in zip(nombres, nombres3)],
+                      *[FadeIn(m[0], shift=0.3*RIGHT) for m in nombres3], run_time=1.2)
             self.wait_until_bookmark("p")
-            self.play(Write(f5), run_time=1.2)
+            self.play(Write(f5), FadeIn(signos3[2]), run_time=1.2)
+            self.play(Indicate(signos3[2], color=COLOR_REGLA, scale_factor=1.8), run_time=1)   # el igual vuelve gracias a la propiedad 5
         
         self.pausa_media()
 
@@ -254,38 +271,38 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
         self.creditos()
         l_t, l_g, l_e = (r[1] for r in RECETAS)
         cesta = vector(PARA_TRES)
-        mas, tres, tt, igual = MathTex("+", font_size=44), MathTex("3", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
+        mas, cuatro, tt, igual = MathTex("+", font_size=44), MathTex("4", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
         total = vector(CON_OMEGA)
-        fila = VGroup(cesta, mas, VGroup(tres, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
-        t3 = vector([3*x for x in T], color=COLOR_A).move_to(fila[2])
+        fila = VGroup(cesta, mas, VGroup(cuatro, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
+        t4 = vector([4*x for x in T], color=COLOR_A).move_to(fila[2])
         ley = leyenda(INGREDIENTES, cesta)
         f3 = MathTex(f"3({l_t}+{l_g}+{l_e})", tex_template=myTemplate, font_size=44).next_to(cesta, UP, buff=0.3)
-        ft = MathTex(f"3{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
+        ft = MathTex(f"4{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
         ft[0][0].set_color(COLOR_ESCALAR); ft[0][1:].set_color(COLOR_A)
-        ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+3{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
+        ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+4{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
         nombre_cl = Tex(tr("combinación lineal", "linear combination"), font_size=34, color=COLOR_ESCALAR).next_to(ftot, RIGHT, buff=0.5)
         om = omega("normal", mira=LEFT).to_corner(DR, buff=0.5)
-        globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ tres raciones de tortilla.",
-                             r"Count me in! I won't cook,\\ but I'd eat three\\ servings of omelette."), om, ancho=3.6)
+        globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ cuatro raciones de tortilla.",
+                             r"Count me in! I won't cook,\\ but I'd eat four\\ servings of tortilla."), om, ancho=3.6)
         
-        with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería tres raciones.""",
-                                    """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the omelette and would eat three servings.""")) as tracker:
+        with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería cuatro raciones.""",
+                                    """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the tortilla and would eat four servings.""")) as tracker:
             self.play(FadeIn(ley), FadeIn(cesta), FadeIn(f3), run_time=1)
             self.wait_until_bookmark("o")
             entra(self, om)
             self.play(FadeIn(globo, scale=0.8), run_time=0.6)
         
-        with self.voiceover(text=tr("""Así que multiplicamos por tres la receta de la tortilla <bookmark mark='t3'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
-                                    """So we multiply the omelette recipe by three <bookmark mark='t3'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
+        with self.voiceover(text=tr("""Así que multiplicamos por cuatro la receta de la tortilla <bookmark mark='t4'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
+                                    """So we multiply the tortilla recipe by four <bookmark mark='t4'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
             self.play(FadeOut(globo), run_time=0.5)
-            self.wait_until_bookmark("t3")
-            self.play(FadeIn(mas), FadeIn(tres), FadeIn(tt), FadeIn(ft), run_time=0.8)
-            self.play(ReplacementTransform(VGroup(tres, tt), t3), run_time=1.2)   # el 3 se absorbe: queda 3t ya calculado
+            self.wait_until_bookmark("t4")
+            self.play(FadeIn(mas), FadeIn(cuatro), FadeIn(tt), FadeIn(ft), run_time=0.8)
+            self.play(ReplacementTransform(VGroup(cuatro, tt), t4), run_time=1.2)   # el 4 se absorbe: queda 4t ya calculado
             self.wait_until_bookmark("s")
             self.play(FadeIn(igual), FadeIn(total.get_brackets()), run_time=0.5)
-            self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t3.get_entries()[k]), total.get_entries()[k])
+            self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t4.get_entries()[k]), total.get_entries()[k])
                                     for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3)
-            cambia(self, om, "alegria")   # sus tres raciones ya están en la cesta
+            cambia(self, om, "alegria")   # sus cuatro raciones ya están en la cesta
         
         with self.voiceover(text=tr("""La cesta es una suma de recetas multiplicadas por números. <bookmark mark='f'/> Esta forma de combinar vectores se llama <bookmark mark='cl'/> combinación lineal, y aparecerá a lo largo de todo el curso.""",
                                     """The basket is a sum of recipes multiplied by numbers. <bookmark mark='f'/> This way of combining vectors is called <bookmark mark='cl'/> a linear combination, and it will appear throughout the course.""")) as tracker:
@@ -305,7 +322,7 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
         hoja = VGroup(cab_lista, lista).arrange(DOWN, buff=0.4).move_to([-1, -0.5, 0])
         with self.voiceover(text=tr("""Y con la lista de ingredientes delante, el vector se convierte en la lista de la compra.""",
                                     """And with the list of ingredients alongside, the vector becomes the shopping list.""")) as tracker:
-            self.play(FadeOut(VGroup(cesta, mas, t3, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
+            self.play(FadeOut(VGroup(cesta, mas, t4, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
             self.play(FadeTransform(VGroup(ley, total), hoja), run_time=1.5)
             cambia(self, om, "normal", mira=LEFT)
         
@@ -315,7 +332,7 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
 
         self.creditos()
         d = vector(PIB[2003], decimales=1).move_to([-0.5, -0.3, 0])
-        nombre = MathTex(r"\Vect[2003]{d}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
+        nombre = MathTex(r"\Vect[2003]{p}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
         paises = leyenda(PAISES, d, font_size=32)
         x0, x1 = paises.get_left()[0] - 0.15, d.get_right()[0] + 0.15
         om = omega("duda").to_corner(DR, buff=0.5).shift(0.8*UP)   # lleva la pregunta
@@ -356,7 +373,7 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
 
         self.creditos()
         ds = VGroup(*[vector(PIB[a], decimales=1) for a in PIB]).arrange(RIGHT, buff=0.6).move_to([1, 0.1, 0])
-        nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{d}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
+        nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{p}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
         paises = leyenda(PAISES, ds[0], font_size=32)
         resumen = Tex(tr("Cada posición corresponde siempre a lo mismo:\\\\ un ingrediente, un país...",
                          "Each position always refers to the same thing:\\\\ an ingredient, a country..."), font_size=34).to_edge(DOWN, buff=0.5)
@@ -367,8 +384,8 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
             self.wait_until_bookmark("a")
             self.play(LaggedStart(*[FadeIn(VGroup(v, n)) for v, n in zip(ds, nombres)], lag_ratio=0.4), run_time=2)
         
-        with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Por eso tiene sentido sumar componente a componente y multiplicar por un número.""",
-                                    """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. That is why it makes sense to add component-wise and to multiply by a number.""")) as tracker:
+        with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Con las recetas, eso nos permitió sumar componente a componente y multiplicar por un número.""",
+                                    """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. With the recipes, this let us add component-wise and multiply by a number.""")) as tracker:
             self.wait_until_bookmark("r")
             self.play(FadeIn(resumen), run_time=1)
         
@@ -379,6 +396,7 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
             self.wait_until_bookmark("f")
             self.play(FadeIn(fila), run_time=0.8)
         
+        self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo (Marcos, 2026-10-26)
         with self.voiceover(text=tr("""En el próximo vídeo esa tabla de números tendrá nombre: una matriz.""",
                                     """In the next video this table of numbers will get a name: a matrix.""")) as tracker:
             self.play(FadeOut(fila), Create(SurroundingRectangle(ds, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15)), run_time=1.2)
@@ -413,9 +431,10 @@ class L01_V08_E01_LaCena(MiEscenaConVoz):
         with self.voiceover(text=tr("""En los dos vídeos anteriores hemos operado con vectores sin preocuparnos de para qué los podemos usar. En este veremos que un vector sirve para guardar datos.""",
                                     """In the two previous videos we operated with vectors without worrying about what we can use them for. In this one we will see that a vector is a way of storing data.""")) as tracker:
             self.play(Write(titulo), run_time=1.5)
+        self.wait(0.5)   # una pausa antes de presentar a los cocineros (Marcos, 2026-10-26)
         
         with self.voiceover(text=tr("""Ana, Luis y Marta preparan una cena, y cada uno cocinará un plato: <bookmark mark='t'/> Ana, una tortilla de patatas; <bookmark mark='g'/> Luis, un gazpacho; <bookmark mark='e'/> y Marta, una ensalada campera.""",
-                                    """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish omelette; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
+                                    """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish tortilla; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
             for marca, cab in zip("tge", cabeceras):
                 self.wait_until_bookmark(marca)
                 self.play(FadeIn(cab, shift=0.2*DOWN), run_time=0.7)
@@ -448,8 +467,8 @@ class L01_V08_E02_LaCesta(MiEscenaConVoz):
         vs = VGroup(*[vector(v, color=c) for _, _, v, c in RECETAS])
         cesta = vector(UNA_DE_CADA)
         signos = [MathTex(s, font_size=44) for s in "++="]
-        fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.35).move_to([1.3, -0.7, 0])
-        ley = leyenda(INGREDIENTES, vs[0])
+        fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.5).move_to([1.3, -0.7, 0])   # hueco para los 3 de la propiedad 5
+        ley = leyenda(INGREDIENTES, vs[0], buff=0.5)
         nombres = VGroup(*[MathTex(l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs)])
         rot_cesta = Tex(tr("cesta", "basket"), font_size=32).next_to(cesta, UP, buff=0.3)
         l_t, l_g, l_e = (r[1] for r in RECETAS)
@@ -467,20 +486,36 @@ class L01_V08_E02_LaCesta(MiEscenaConVoz):
                                     for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3.5)
         
         nueva = vector(PARA_TRES).move_to(cesta, aligned_edge=LEFT)
+        tres_c = MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(cesta, LEFT, buff=0.1)
+        # antes de multiplicar se quitan los sumandos y el igual: t+g+e no es igual a 3(t+g+e)
         with self.voiceover(text=tr("""Este vector tiene los ingredientes de una ración de cada plato. Como cenan tres personas, <bookmark mark='x'/> lo multiplicamos por tres.""",
                                     """This vector holds the ingredients for one serving of each dish. Since three people are having dinner, <bookmark mark='x'/> we multiply it by three.""")) as tracker:
-            self.play(Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
+            self.play(FadeOut(vs), FadeOut(nombres), FadeOut(VGroup(*signos)), Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
             self.wait_until_bookmark("x")
-            # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis
-            self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]), run_time=2)
-            self.play(Transform(cesta, nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
+            # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis; otro 3 se pone delante de la cesta
+            self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]),
+                      FadeIn(tres_c, shift=RIGHT), run_time=2)
+            self.play(ReplacementTransform(VGroup(tres_c, cesta), nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
         
+        # las recetas multiplicadas por tres ocupan el sitio de las de antes (mismo ancho) y el igual se recupera
+        vs3 = VGroup(*[vector([3*x for x in v], color=c).move_to(w) for (_, _, v, c), w in zip(RECETAS, vs)])
+        nombres3 = VGroup(*[MathTex("3", l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs3)])
+        for n in nombres3:
+            n[0].set_color(COLOR_ESCALAR)
+        signos3 = VGroup(*[s.copy() for s in signos])
+        tres_r = [MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(v, LEFT, buff=0.1) for v in vs]
         VGroup(f3.copy(), f5).arrange(RIGHT, buff=0.15).to_edge(UP, buff=0.5)
         with self.voiceover(text=tr("""Daría lo mismo multiplicar cada receta por tres y sumar después: <bookmark mark='p'/> es la propiedad cinco del vídeo anterior.""",
                                     """It would be the same to multiply each recipe by three and add afterwards: <bookmark mark='p'/> it is property five from the previous video.""")) as tracker:
-            self.play(f3.animate.next_to(f5, LEFT, buff=0.15), run_time=0.6)
+            # las recetas vuelven como estaban y se multiplican por tres a la vista, como la cesta
+            self.play(f3.animate.next_to(f5, LEFT, buff=0.15), FadeIn(vs), FadeIn(nombres), FadeIn(signos3[:2]), run_time=0.8)
+            self.play(*[FadeIn(t, shift=0.5*RIGHT) for t in tres_r], run_time=0.6)
+            self.play(*[ReplacementTransform(VGroup(t, v), w) for t, v, w in zip(tres_r, vs, vs3)],
+                      *[ReplacementTransform(n, m[1]) for n, m in zip(nombres, nombres3)],
+                      *[FadeIn(m[0], shift=0.3*RIGHT) for m in nombres3], run_time=1.2)
             self.wait_until_bookmark("p")
-            self.play(Write(f5), run_time=1.2)
+            self.play(Write(f5), FadeIn(signos3[2]), run_time=1.2)
+            self.play(Indicate(signos3[2], color=COLOR_REGLA, scale_factor=1.8), run_time=1)   # el igual vuelve gracias a la propiedad 5
         
         self.pausa_media()
 
@@ -490,38 +525,38 @@ class L01_V08_E03_Omega(MiEscenaConVoz):
         self.creditos()
         l_t, l_g, l_e = (r[1] for r in RECETAS)
         cesta = vector(PARA_TRES)
-        mas, tres, tt, igual = MathTex("+", font_size=44), MathTex("3", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
+        mas, cuatro, tt, igual = MathTex("+", font_size=44), MathTex("4", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
         total = vector(CON_OMEGA)
-        fila = VGroup(cesta, mas, VGroup(tres, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
-        t3 = vector([3*x for x in T], color=COLOR_A).move_to(fila[2])
+        fila = VGroup(cesta, mas, VGroup(cuatro, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
+        t4 = vector([4*x for x in T], color=COLOR_A).move_to(fila[2])
         ley = leyenda(INGREDIENTES, cesta)
         f3 = MathTex(f"3({l_t}+{l_g}+{l_e})", tex_template=myTemplate, font_size=44).next_to(cesta, UP, buff=0.3)
-        ft = MathTex(f"3{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
+        ft = MathTex(f"4{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
         ft[0][0].set_color(COLOR_ESCALAR); ft[0][1:].set_color(COLOR_A)
-        ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+3{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
+        ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+4{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
         nombre_cl = Tex(tr("combinación lineal", "linear combination"), font_size=34, color=COLOR_ESCALAR).next_to(ftot, RIGHT, buff=0.5)
         om = omega("normal", mira=LEFT).to_corner(DR, buff=0.5)
-        globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ tres raciones de tortilla.",
-                             r"Count me in! I won't cook,\\ but I'd eat three\\ servings of omelette."), om, ancho=3.6)
+        globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ cuatro raciones de tortilla.",
+                             r"Count me in! I won't cook,\\ but I'd eat four\\ servings of tortilla."), om, ancho=3.6)
         
-        with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería tres raciones.""",
-                                    """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the omelette and would eat three servings.""")) as tracker:
+        with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería cuatro raciones.""",
+                                    """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the tortilla and would eat four servings.""")) as tracker:
             self.play(FadeIn(ley), FadeIn(cesta), FadeIn(f3), run_time=1)
             self.wait_until_bookmark("o")
             entra(self, om)
             self.play(FadeIn(globo, scale=0.8), run_time=0.6)
         
-        with self.voiceover(text=tr("""Así que multiplicamos por tres la receta de la tortilla <bookmark mark='t3'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
-                                    """So we multiply the omelette recipe by three <bookmark mark='t3'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
+        with self.voiceover(text=tr("""Así que multiplicamos por cuatro la receta de la tortilla <bookmark mark='t4'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
+                                    """So we multiply the tortilla recipe by four <bookmark mark='t4'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
             self.play(FadeOut(globo), run_time=0.5)
-            self.wait_until_bookmark("t3")
-            self.play(FadeIn(mas), FadeIn(tres), FadeIn(tt), FadeIn(ft), run_time=0.8)
-            self.play(ReplacementTransform(VGroup(tres, tt), t3), run_time=1.2)   # el 3 se absorbe: queda 3t ya calculado
+            self.wait_until_bookmark("t4")
+            self.play(FadeIn(mas), FadeIn(cuatro), FadeIn(tt), FadeIn(ft), run_time=0.8)
+            self.play(ReplacementTransform(VGroup(cuatro, tt), t4), run_time=1.2)   # el 4 se absorbe: queda 4t ya calculado
             self.wait_until_bookmark("s")
             self.play(FadeIn(igual), FadeIn(total.get_brackets()), run_time=0.5)
-            self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t3.get_entries()[k]), total.get_entries()[k])
+            self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t4.get_entries()[k]), total.get_entries()[k])
                                     for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3)
-            cambia(self, om, "alegria")   # sus tres raciones ya están en la cesta
+            cambia(self, om, "alegria")   # sus cuatro raciones ya están en la cesta
         
         with self.voiceover(text=tr("""La cesta es una suma de recetas multiplicadas por números. <bookmark mark='f'/> Esta forma de combinar vectores se llama <bookmark mark='cl'/> combinación lineal, y aparecerá a lo largo de todo el curso.""",
                                     """The basket is a sum of recipes multiplied by numbers. <bookmark mark='f'/> This way of combining vectors is called <bookmark mark='cl'/> a linear combination, and it will appear throughout the course.""")) as tracker:
@@ -541,7 +576,7 @@ class L01_V08_E03_Omega(MiEscenaConVoz):
         hoja = VGroup(cab_lista, lista).arrange(DOWN, buff=0.4).move_to([-1, -0.5, 0])
         with self.voiceover(text=tr("""Y con la lista de ingredientes delante, el vector se convierte en la lista de la compra.""",
                                     """And with the list of ingredients alongside, the vector becomes the shopping list.""")) as tracker:
-            self.play(FadeOut(VGroup(cesta, mas, t3, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
+            self.play(FadeOut(VGroup(cesta, mas, t4, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
             self.play(FadeTransform(VGroup(ley, total), hoja), run_time=1.5)
             cambia(self, om, "normal", mira=LEFT)
         
@@ -552,7 +587,7 @@ class L01_V08_E04_PIB(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         d = vector(PIB[2003], decimales=1).move_to([-0.5, -0.3, 0])
-        nombre = MathTex(r"\Vect[2003]{d}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
+        nombre = MathTex(r"\Vect[2003]{p}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
         paises = leyenda(PAISES, d, font_size=32)
         x0, x1 = paises.get_left()[0] - 0.15, d.get_right()[0] + 0.15
         om = omega("duda").to_corner(DR, buff=0.5).shift(0.8*UP)   # lleva la pregunta
@@ -594,7 +629,7 @@ class L01_V08_E05_Resumen(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         ds = VGroup(*[vector(PIB[a], decimales=1) for a in PIB]).arrange(RIGHT, buff=0.6).move_to([1, 0.1, 0])
-        nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{d}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
+        nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{p}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
         paises = leyenda(PAISES, ds[0], font_size=32)
         resumen = Tex(tr("Cada posición corresponde siempre a lo mismo:\\\\ un ingrediente, un país...",
                          "Each position always refers to the same thing:\\\\ an ingredient, a country..."), font_size=34).to_edge(DOWN, buff=0.5)
@@ -605,8 +640,8 @@ class L01_V08_E05_Resumen(MiEscenaConVoz):
             self.wait_until_bookmark("a")
             self.play(LaggedStart(*[FadeIn(VGroup(v, n)) for v, n in zip(ds, nombres)], lag_ratio=0.4), run_time=2)
         
-        with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Por eso tiene sentido sumar componente a componente y multiplicar por un número.""",
-                                    """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. That is why it makes sense to add component-wise and to multiply by a number.""")) as tracker:
+        with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Con las recetas, eso nos permitió sumar componente a componente y multiplicar por un número.""",
+                                    """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. With the recipes, this let us add component-wise and multiply by a number.""")) as tracker:
             self.wait_until_bookmark("r")
             self.play(FadeIn(resumen), run_time=1)
         
@@ -617,6 +652,7 @@ class L01_V08_E05_Resumen(MiEscenaConVoz):
             self.wait_until_bookmark("f")
             self.play(FadeIn(fila), run_time=0.8)
         
+        self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo (Marcos, 2026-10-26)
         with self.voiceover(text=tr("""En el próximo vídeo esa tabla de números tendrá nombre: una matriz.""",
                                     """In the next video this table of numbers will get a name: a matrix.""")) as tracker:
             self.play(FadeOut(fila), Create(SurroundingRectangle(ds, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15)), run_time=1.2)

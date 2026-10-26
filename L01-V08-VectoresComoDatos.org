@@ -29,7 +29,7 @@ libro ("Vectores como representación de datos") y hace de puente hacia
 las matrices (V09). Propuesta de Marcos (2026-10-17): una cena en la que
 cada amigo cocina un plato; las recetas son vectores de ingredientes por
 ración, la suma da la cesta de la compra, y un amigo que no cocina pero
-se comería tres raciones de tortilla obliga a multiplicar por un escalar
+se comería cuatro raciones de tortilla obliga a multiplicar por un escalar
 y volver a sumar (la combinación lineal, que ya se nombra). Al final,
 el ejemplo del libro: el crecimiento del PIB de cinco países, que V09
 retoma para construir la primera matriz.
@@ -51,7 +51,7 @@ Este fichero es una *fuente única bilingüe* (véase la plantilla
 |      0 | Portada                                                                         |        |
 |      1 | Enlace con V06-V07; la cena: tres platos, tres recetas-vector y la leyenda; lo que importa es la posición |        |
 |      2 | La cesta de la compra: suma componente a componente; tres comensales, producto por tres; la propiedad 5 |        |
-|      3 | Omega se apunta (tres raciones de tortilla): 3t y otra suma; la cesta como suma de recetas por números; la lista de la compra |        |
+|      3 | Omega se apunta (cuatro raciones de tortilla): 4t y otra suma; la cesta como suma de recetas por números; la lista de la compra |        |
 |      4 | El ejemplo del libro: crecimiento del PIB en 2003; la posición indica el país; el país que no creció (sin tarjeta de pausa) |        |
 |      5 | Resumen y puente: cuatro años, cuatro vectores uno al lado del otro; anuncio de las matrices (V09) |        |
 
@@ -65,8 +65,8 @@ Ingredientes por ración, siempre en este orden: patatas (g), huevos
 | Ensalada campera (Marta) | e = (100, 1, 20, 100, 0, 15)   |
 
 Cuentas: t+g+e = (250, 2, 65, 350, 50, 75); 3(t+g+e) = (750, 6, 195,
-1050, 150, 225); 3t = (450, 3, 90, 0, 0, 120); 3(t+g+e)+3t = (1200, 9,
-285, 1050, 150, 345). En inglés la ensalada es /potato salad/ y su
+1050, 150, 225); 4t = (600, 4, 120, 0, 0, 160); 3(t+g+e)+4t = (1350, 10,
+315, 1050, 150, 385). En inglés la ensalada es /potato salad/ y su
 vector se llama s.
 
 ** Ensamblado de los ficheros de python (uno por idioma)
@@ -197,13 +197,13 @@ INGREDIENTES = [tr("patatas (g)", "potatoes (g)"), tr("huevos (unidades)", "eggs
                 tr("pepino (g)", "cucumber (g)"), tr("aceite (ml)", "oil (ml)")]
 
 # nombre del plato, nombre del vector, ingredientes por ración, color
-RECETAS = [(tr("Tortilla", "Omelette"), r"\Vect{t}", [150, 1, 30, 0, 0, 40], COLOR_A),
+RECETAS = [(tr("Tortilla", "Spanish tortilla"), r"\Vect{t}", [150, 1, 30, 0, 0, 40], COLOR_A),
            (tr("Gazpacho", "Gazpacho"), r"\Vect{g}", [0, 0, 15, 250, 50, 20], COLOR_B),
            (tr("Ensalada campera", "Potato salad"), tr(r"\Vect{e}", r"\Vect{s}"), [100, 1, 20, 100, 0, 15], COLOR_C)]
 T, G, E = (r[2] for r in RECETAS)
 UNA_DE_CADA = [a + b + c for a, b, c in zip(T, G, E)]       # t + g + e
 PARA_TRES   = [3*x for x in UNA_DE_CADA]                    # 3(t + g + e)
-CON_OMEGA   = [x + 3*y for x, y in zip(PARA_TRES, T)]       # 3(t + g + e) + 3t
+CON_OMEGA   = [x + 4*y for x, y in zip(PARA_TRES, T)]       # 3(t + g + e) + 4t
 
 PAISES = [tr("España", "Spain"), tr("Francia", "France"), tr("Alemania", "Germany"),
           tr("Reino Unido", "United Kingdom"), tr("EE. UU.", "USA")]
@@ -382,9 +382,10 @@ x0, x1 = ley.get_left()[0] - 0.15, vs[-1].get_right()[0] + 0.15
 with self.voiceover(text=tr("""En los dos vídeos anteriores hemos operado con vectores sin preocuparnos de para qué los podemos usar. En este veremos que un vector sirve para guardar datos.""",
                             """In the two previous videos we operated with vectors without worrying about what we can use them for. In this one we will see that a vector is a way of storing data.""")) as tracker:
     self.play(Write(titulo), run_time=1.5)
+self.wait(0.5)   # una pausa antes de presentar a los cocineros (Marcos, 2026-10-26)
 
 with self.voiceover(text=tr("""Ana, Luis y Marta preparan una cena, y cada uno cocinará un plato: <bookmark mark='t'/> Ana, una tortilla de patatas; <bookmark mark='g'/> Luis, un gazpacho; <bookmark mark='e'/> y Marta, una ensalada campera.""",
-                            """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish omelette; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
+                            """Ana, Luis and Marta are preparing a dinner, and each of them will cook one dish: <bookmark mark='t'/> Ana, a Spanish tortilla; <bookmark mark='g'/> Luis, a gazpacho; <bookmark mark='e'/> and Marta, a potato salad.""")) as tracker:
     for marca, cab in zip("tge", cabeceras):
         self.wait_until_bookmark(marca)
         self.play(FadeIn(cab, shift=0.2*DOWN), run_time=0.7)
@@ -415,8 +416,11 @@ self.pausa_media()
 
 Arriba, la fórmula de la cesta (se reescribe al multiplicar por tres).
 Las componentes de las tres recetas vuelan fila a fila hasta la cesta:
-"patatas con patatas". Al multiplicar por tres, la cesta se transforma
-en la nueva; la propiedad 5 de V07 aparece en =COLOR_REGLA= al lado.
+"patatas con patatas". Antes de multiplicar por tres se quitan las
+recetas y el igual (si no, la fila diría t+g+e = 3(t+g+e)); un 3 amarillo
+se pone delante de la cesta y se absorbe en ella. Con la propiedad 5
+vuelven las recetas como estaban, se multiplican por tres igual que la
+cesta (3t, 3g, 3e) y se recupera el igual, resaltado en =COLOR_REGLA=; la propiedad 5 de V07 aparece en =COLOR_REGLA= al lado.
 
 #+name: Segunda escena
 #+BEGIN_SRC python :eval no
@@ -424,8 +428,8 @@ self.creditos()
 vs = VGroup(*[vector(v, color=c) for _, _, v, c in RECETAS])
 cesta = vector(UNA_DE_CADA)
 signos = [MathTex(s, font_size=44) for s in "++="]
-fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.35).move_to([1.3, -0.7, 0])
-ley = leyenda(INGREDIENTES, vs[0])
+fila = VGroup(vs[0], signos[0], vs[1], signos[1], vs[2], signos[2], cesta).arrange(RIGHT, buff=0.5).move_to([1.3, -0.7, 0])   # hueco para los 3 de la propiedad 5
+ley = leyenda(INGREDIENTES, vs[0], buff=0.5)
 nombres = VGroup(*[MathTex(l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs)])
 rot_cesta = Tex(tr("cesta", "basket"), font_size=32).next_to(cesta, UP, buff=0.3)
 l_t, l_g, l_e = (r[1] for r in RECETAS)
@@ -443,29 +447,45 @@ with self.voiceover(text=tr("""Para hacer la compra, primero sumamos los ingredi
                             for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3.5)
 
 nueva = vector(PARA_TRES).move_to(cesta, aligned_edge=LEFT)
+tres_c = MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(cesta, LEFT, buff=0.1)
+# antes de multiplicar se quitan los sumandos y el igual: t+g+e no es igual a 3(t+g+e)
 with self.voiceover(text=tr("""Este vector tiene los ingredientes de una ración de cada plato. Como cenan tres personas, <bookmark mark='x'/> lo multiplicamos por tres.""",
                             """This vector holds the ingredients for one serving of each dish. Since three people are having dinner, <bookmark mark='x'/> we multiply it by three.""")) as tracker:
-    self.play(Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
+    self.play(FadeOut(vs), FadeOut(nombres), FadeOut(VGroup(*signos)), Indicate(cesta, color=COLOR_RESULTADO, scale_factor=1.08), run_time=1)
     self.wait_until_bookmark("x")
-    # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis
-    self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]), run_time=2)
-    self.play(Transform(cesta, nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
+    # el 3 llega desde la izquierda y se pega a t+g+e mientras aparecen los paréntesis; otro 3 se pone delante de la cesta
+    self.play(ReplacementTransform(f1, f3[2]), FadeIn(f3[0], shift=2*RIGHT), FadeIn(f3[1]), FadeIn(f3[3]),
+              FadeIn(tres_c, shift=RIGHT), run_time=2)
+    self.play(ReplacementTransform(VGroup(tres_c, cesta), nueva), rot_cesta.animate.next_to(nueva, UP, buff=0.3), run_time=1.5)
 
+# las recetas multiplicadas por tres ocupan el sitio de las de antes (mismo ancho) y el igual se recupera
+vs3 = VGroup(*[vector([3*x for x in v], color=c).move_to(w) for (_, _, v, c), w in zip(RECETAS, vs)])
+nombres3 = VGroup(*[MathTex("3", l, tex_template=myTemplate, font_size=40, color=c).next_to(v, UP, buff=0.25) for (_, l, _, c), v in zip(RECETAS, vs3)])
+for n in nombres3:
+    n[0].set_color(COLOR_ESCALAR)
+signos3 = VGroup(*[s.copy() for s in signos])
+tres_r = [MathTex("3", font_size=44, color=COLOR_ESCALAR).next_to(v, LEFT, buff=0.1) for v in vs]
 VGroup(f3.copy(), f5).arrange(RIGHT, buff=0.15).to_edge(UP, buff=0.5)
 with self.voiceover(text=tr("""Daría lo mismo multiplicar cada receta por tres y sumar después: <bookmark mark='p'/> es la propiedad cinco del vídeo anterior.""",
                             """It would be the same to multiply each recipe by three and add afterwards: <bookmark mark='p'/> it is property five from the previous video.""")) as tracker:
-    self.play(f3.animate.next_to(f5, LEFT, buff=0.15), run_time=0.6)
+    # las recetas vuelven como estaban y se multiplican por tres a la vista, como la cesta
+    self.play(f3.animate.next_to(f5, LEFT, buff=0.15), FadeIn(vs), FadeIn(nombres), FadeIn(signos3[:2]), run_time=0.8)
+    self.play(*[FadeIn(t, shift=0.5*RIGHT) for t in tres_r], run_time=0.6)
+    self.play(*[ReplacementTransform(VGroup(t, v), w) for t, v, w in zip(tres_r, vs, vs3)],
+              *[ReplacementTransform(n, m[1]) for n, m in zip(nombres, nombres3)],
+              *[FadeIn(m[0], shift=0.3*RIGHT) for m in nombres3], run_time=1.2)
     self.wait_until_bookmark("p")
-    self.play(Write(f5), run_time=1.2)
+    self.play(Write(f5), FadeIn(signos3[2]), run_time=1.2)
+    self.play(Indicate(signos3[2], color=COLOR_REGLA, scale_factor=1.8), run_time=1)   # el igual vuelve gracias a la propiedad 5
 
 self.pausa_media()
 #+END_SRC
 
-*** Escena 3 - Omega se apunta: otra receta multiplicada por tres
+*** Escena 3 - Omega se apunta: otra receta multiplicada por cuatro
 
 Se rehace la cesta para tres (la voz la nombra al empezar). Entra Omega
-con su bocadillo; la tortilla aparece multiplicada por tres y se suma a
-la cesta; la fórmula de arriba pasa a 3(t+g+e)+3t, que la voz describe
+con su bocadillo; la tortilla aparece multiplicada por cuatro y se suma a
+la cesta; la fórmula de arriba pasa a 3(t+g+e)+4t, que la voz describe
 sin leerla. Al final, la cesta y la leyenda se convierten en la lista de
 la compra.
 
@@ -474,38 +494,38 @@ la compra.
 self.creditos()
 l_t, l_g, l_e = (r[1] for r in RECETAS)
 cesta = vector(PARA_TRES)
-mas, tres, tt, igual = MathTex("+", font_size=44), MathTex("3", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
+mas, cuatro, tt, igual = MathTex("+", font_size=44), MathTex("4", font_size=44, color=COLOR_ESCALAR), vector(T, color=COLOR_A), MathTex("=", font_size=44)
 total = vector(CON_OMEGA)
-fila = VGroup(cesta, mas, VGroup(tres, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
-t3 = vector([3*x for x in T], color=COLOR_A).move_to(fila[2])
+fila = VGroup(cesta, mas, VGroup(cuatro, tt).arrange(RIGHT, buff=0.1), igual, total).arrange(RIGHT, buff=0.3).move_to([-0.3, -0.7, 0])
+t4 = vector([4*x for x in T], color=COLOR_A).move_to(fila[2])
 ley = leyenda(INGREDIENTES, cesta)
 f3 = MathTex(f"3({l_t}+{l_g}+{l_e})", tex_template=myTemplate, font_size=44).next_to(cesta, UP, buff=0.3)
-ft = MathTex(f"3{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
+ft = MathTex(f"4{l_t}", tex_template=myTemplate, font_size=44).next_to(fila[2], UP, buff=0.3)
 ft[0][0].set_color(COLOR_ESCALAR); ft[0][1:].set_color(COLOR_A)
-ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+3{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
+ftot = MathTex(f"3({l_t}+{l_g}+{l_e})+4{l_t}", tex_template=myTemplate, font_size=44).to_edge(UP, buff=0.4).shift(1.5*LEFT)
 nombre_cl = Tex(tr("combinación lineal", "linear combination"), font_size=34, color=COLOR_ESCALAR).next_to(ftot, RIGHT, buff=0.5)
 om = omega("normal", mira=LEFT).to_corner(DR, buff=0.5)
-globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ tres raciones de tortilla.",
-                     r"Count me in! I won't cook,\\ but I'd eat three\\ servings of omelette."), om, ancho=3.6)
+globo = bocadillo(tr(r"¡Yo me apunto! No cocino,\\ pero me comería\\ cuatro raciones de tortilla.",
+                     r"Count me in! I won't cook,\\ but I'd eat four\\ servings of tortilla."), om, ancho=3.6)
 
-with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería tres raciones.""",
-                            """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the omelette and would eat three servings.""")) as tracker:
+with self.voiceover(text=tr("""Con la cesta ya preparada para tres, <bookmark mark='o'/> se apunta también Omega. No cocinará, pero le encanta la tortilla y se comería cuatro raciones.""",
+                            """With the basket ready for three, <bookmark mark='o'/> Omega joins in too. Omega will not cook, but loves the tortilla and would eat four servings.""")) as tracker:
     self.play(FadeIn(ley), FadeIn(cesta), FadeIn(f3), run_time=1)
     self.wait_until_bookmark("o")
     entra(self, om)
     self.play(FadeIn(globo, scale=0.8), run_time=0.6)
 
-with self.voiceover(text=tr("""Así que multiplicamos por tres la receta de la tortilla <bookmark mark='t3'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
-                            """So we multiply the omelette recipe by three <bookmark mark='t3'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
+with self.voiceover(text=tr("""Así que multiplicamos por cuatro la receta de la tortilla <bookmark mark='t4'/> y la sumamos a la cesta. <bookmark mark='s'/>""",
+                            """So we multiply the tortilla recipe by four <bookmark mark='t4'/> and add it to the basket. <bookmark mark='s'/>""")) as tracker:
     self.play(FadeOut(globo), run_time=0.5)
-    self.wait_until_bookmark("t3")
-    self.play(FadeIn(mas), FadeIn(tres), FadeIn(tt), FadeIn(ft), run_time=0.8)
-    self.play(ReplacementTransform(VGroup(tres, tt), t3), run_time=1.2)   # el 3 se absorbe: queda 3t ya calculado
+    self.wait_until_bookmark("t4")
+    self.play(FadeIn(mas), FadeIn(cuatro), FadeIn(tt), FadeIn(ft), run_time=0.8)
+    self.play(ReplacementTransform(VGroup(cuatro, tt), t4), run_time=1.2)   # el 4 se absorbe: queda 4t ya calculado
     self.wait_until_bookmark("s")
     self.play(FadeIn(igual), FadeIn(total.get_brackets()), run_time=0.5)
-    self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t3.get_entries()[k]), total.get_entries()[k])
+    self.play(LaggedStart(*[TransformFromCopy(VGroup(cesta.get_entries()[k], t4.get_entries()[k]), total.get_entries()[k])
                             for k in range(len(INGREDIENTES))], lag_ratio=0.35), run_time=3)
-    cambia(self, om, "alegria")   # sus tres raciones ya están en la cesta
+    cambia(self, om, "alegria")   # sus cuatro raciones ya están en la cesta
 
 with self.voiceover(text=tr("""La cesta es una suma de recetas multiplicadas por números. <bookmark mark='f'/> Esta forma de combinar vectores se llama <bookmark mark='cl'/> combinación lineal, y aparecerá a lo largo de todo el curso.""",
                             """The basket is a sum of recipes multiplied by numbers. <bookmark mark='f'/> This way of combining vectors is called <bookmark mark='cl'/> a linear combination, and it will appear throughout the course.""")) as tracker:
@@ -525,7 +545,7 @@ cab_lista = Tex(tr("Lista de la compra", "Shopping list"), font_size=40, color=C
 hoja = VGroup(cab_lista, lista).arrange(DOWN, buff=0.4).move_to([-1, -0.5, 0])
 with self.voiceover(text=tr("""Y con la lista de ingredientes delante, el vector se convierte en la lista de la compra.""",
                             """And with the list of ingredients alongside, the vector becomes the shopping list.""")) as tracker:
-    self.play(FadeOut(VGroup(cesta, mas, t3, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
+    self.play(FadeOut(VGroup(cesta, mas, t4, igual, ft, f3)), total.animate.next_to(ley, RIGHT, buff=0.35), run_time=1)
     self.play(FadeTransform(VGroup(ley, total), hoja), run_time=1.5)
     cambia(self, om, "normal", mira=LEFT)
 
@@ -534,7 +554,7 @@ self.pausa_media()
 
 *** Escena 4 - El ejemplo del libro: el crecimiento del PIB
 
-El vector $\Vect[2003]{d}$ de la Sección 1.3 con los países a la
+El vector $\Vect[2003]{p}$ (en el libro, d; aquí p de PIB y de /product/, como las recetas llevan la inicial del plato) de la Sección 1.3 con los países a la
 izquierda. La pregunta del libro ("¿Qué país no creció en 2003?") la
 lleva Omega en su bocadillo; la voz la parafrasea, y tras un instante
 se resalta el dato negativo y la voz da la respuesta (Marcos: una
@@ -544,7 +564,7 @@ tarjeta de pausa sería excesiva para algo tan inmediato).
 #+BEGIN_SRC python :eval no
 self.creditos()
 d = vector(PIB[2003], decimales=1).move_to([-0.5, -0.3, 0])
-nombre = MathTex(r"\Vect[2003]{d}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
+nombre = MathTex(r"\Vect[2003]{p}", tex_template=myTemplate, font_size=44).next_to(d, UP, buff=0.3)
 paises = leyenda(PAISES, d, font_size=32)
 x0, x1 = paises.get_left()[0] - 0.15, d.get_right()[0] + 0.15
 om = omega("duda").to_corner(DR, buff=0.5).shift(0.8*UP)   # lleva la pregunta
@@ -591,7 +611,7 @@ los países a la izquierda; el resumen en una línea; el anuncio de V09.
 #+BEGIN_SRC python :eval no
 self.creditos()
 ds = VGroup(*[vector(PIB[a], decimales=1) for a in PIB]).arrange(RIGHT, buff=0.6).move_to([1, 0.1, 0])
-nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{d}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
+nombres = VGroup(*[MathTex(rf"\Vect[{a}]{{p}}", tex_template=myTemplate, font_size=40).next_to(v, UP, buff=0.3) for a, v in zip(PIB, ds)])
 paises = leyenda(PAISES, ds[0], font_size=32)
 resumen = Tex(tr("Cada posición corresponde siempre a lo mismo:\\\\ un ingrediente, un país...",
                  "Each position always refers to the same thing:\\\\ an ingredient, a country..."), font_size=34).to_edge(DOWN, buff=0.5)
@@ -602,8 +622,8 @@ with self.voiceover(text=tr("""Con datos de cuatro años tenemos cuatro vectores
     self.wait_until_bookmark("a")
     self.play(LaggedStart(*[FadeIn(VGroup(v, n)) for v, n in zip(ds, nombres)], lag_ratio=0.4), run_time=2)
 
-with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Por eso tiene sentido sumar componente a componente y multiplicar por un número.""",
-                            """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. That is why it makes sense to add component-wise and to multiply by a number.""")) as tracker:
+with self.voiceover(text=tr("""Resumamos. Un vector puede guardar datos: <bookmark mark='r'/> cada posición corresponde siempre a lo mismo; por ejemplo un ingrediente o un país. Con las recetas, eso nos permitió sumar componente a componente y multiplicar por un número.""",
+                            """Let us sum up. A vector can store data: <bookmark mark='r'/> each position always refers to the same thing; for example, an ingredient or a country. With the recipes, this let us add component-wise and multiply by a number.""")) as tracker:
     self.wait_until_bookmark("r")
     self.play(FadeIn(resumen), run_time=1)
 
@@ -614,6 +634,7 @@ with self.voiceover(text=tr("""Para guardar juntos los cuatro vectores, basta po
     self.wait_until_bookmark("f")
     self.play(FadeIn(fila), run_time=0.8)
 
+self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo (Marcos, 2026-10-26)
 with self.voiceover(text=tr("""En el próximo vídeo esa tabla de números tendrá nombre: una matriz.""",
                             """In the next video this table of numbers will get a name: a matrix.""")) as tracker:
     self.play(FadeOut(fila), Create(SurroundingRectangle(ds, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15)), run_time=1.2)
@@ -671,7 +692,9 @@ manim genera el audio unas décimas más largo que la imagen). La música
 suena en la portada (volumen =volumen=) y se funde cuando empieza la
 primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
 =volumen_voz=), sube en la última escena (los créditos) y se funde a
-negro con la imagen. La voz se normaliza con =loudnorm=. Los =.srt= de las escenas se desplazan y se
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con =loudnorm= en una pasada, que
+subía el volumen poco a poco al empezar). Los =.srt= de las escenas se desplazan y se
 funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
 
 =escenas= es la lista ordenada de clases; =cierre= la escena en la que
@@ -708,12 +731,17 @@ printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz)
 # 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
 inputs=""; fc=""; k=0
 for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+# La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+# (loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB más baja.)
+ia=""; for k in $(seq 0 $((n-1))); do ia="$ia[$k:a]"; done
+I=$(ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2>&1 | awk '$1=="I:"{v=$2} END{print v}')
+ganancia=$(bc -l <<< "-16 - ($I)"); printf "Voz: %s LUFS; ganancia %.2f dB\n" $I $ganancia
 fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
 dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
 fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
 ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
   ${fc}concat=n=$n:v=1:a=1[v0][a0];
-  [a0]loudnorm=I=-16:LRA=11:TP=-1.5[voz];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
   [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
   [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
   [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
