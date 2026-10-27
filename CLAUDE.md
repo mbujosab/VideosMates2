@@ -371,7 +371,7 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 |-------+--------------+--------------+-----------------------------------------|
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
 | V08   | jue 29-10-26 | sáb 31-10-26 | HD aprobado tras el último repaso (2026-10-26); listo para subir |
-| V09   | jue 05-11-26 | sáb 07-11-26 | HD listo (montado de nuevo el 2026-10-26 con la ganancia fija de la voz); pendiente del último repaso |
+| V09   | jue 05-11-26 | sáb 07-11-26 | retoques del último repaso aplicados (2026-10-27); Azure 480p es/en a la espera de Marcos; falta HD |
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.

@@ -331,8 +331,9 @@ with self.voiceover(text=tr("""Cada columna de la tabla es uno de esos vectores.
     self.wait_until_bookmark("m")
     self.play(FadeOut(tabla[1]), FadeOut(tabla[2]), M.animate.move_to([0, -0.6, 0]), run_time=1)   # solo la matriz, en el centro
 
-with self.voiceover(text=tr("""En general, una matriz es una lista ordenada de vectores, todos con el mismo número de componentes, y esos vectores son sus columnas.""",
-                            """In general, a matrix is an ordered list of vectors, all with the same number of components, and those vectors are its columns.""")) as tracker:
+self.wait(0.5)   # una pausa antes de la definición general (Marcos, 2026-10-26)
+with self.voiceover(text=tr("""En general, una matriz es una lista ordenada de vectores, todos con el mismo número de componentes, que constituyen sus columnas.""",
+                            """In general, a matrix is an ordered list of vectors, all with the same number of components, which make up its columns.""")) as tracker:
     self.play(FadeOut(M), run_time=0.8)
     self.play(FadeIn(defin), run_time=1)
 
@@ -471,8 +472,8 @@ with self.voiceover(text=tr("""Omega cree que las matrices A y B son la misma, p
     entra(self, om)
     self.play(FadeIn(globo, scale=0.8), run_time=0.6)
 
-with self.voiceover(text=tr("""Pero son listas distintas, igual que dos vectores son distintos si sus listas de números son diferentes. <bookmark mark='a'/> La matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.<bookmark mark='v2'/>""",
-                            """But they are different lists, just as two vectors are different when their lists of numbers differ. <bookmark mark='a'/> The matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
+with self.voiceover(text=tr("""Pero son listas distintas. Igual que dos vectores son distintos si sus listas de números son diferentes, <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
+                            """But they are different lists. Just as two vectors are different when their lists of numbers differ, <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
     self.play(FadeOut(globo), run_time=0.4)
     cambia(self, om, "sorpresa")
     self.wait(0.6)
@@ -482,8 +483,8 @@ with self.voiceover(text=tr("""Pero son listas distintas, igual que dos vectores
     self.wait_until_bookmark("b")
     self.play(FadeTransform(B, B_lista), run_time=1.2)
 
-with self.voiceover(text=tr("""Eso es lo que indica el orden de una matriz: primero el número de filas, <bookmark mark='f'/> que es el de componentes de cada vector, y después el número de columnas, <bookmark mark='c'/> que es el de vectores de la lista. <bookmark mark='o'/> La matriz A es de orden dos por tres, <bookmark mark='p'/> y B, de orden tres por dos.""",
-                            """That is what the order of a matrix tells us: first the number of rows, <bookmark mark='f'/> which is the number of components of each vector, and then the number of columns, <bookmark mark='c'/> which is the number of vectors in the list. <bookmark mark='o'/> The matrix A is of order two by three, <bookmark mark='p'/> and B is of order three by two.""")) as tracker:
+with self.voiceover(text=tr("""El orden de una matriz indica precisamente esos números: primero el número de componentes de sus vectores, <bookmark mark='f'/> que es el número de filas, y después el número de vectores de la lista, <bookmark mark='c'/> que es el número de columnas. <bookmark mark='o'/> La matriz A es de orden dos por tres, <bookmark mark='p'/> y B, de orden tres por dos.""",
+                            """The order of a matrix gives precisely those numbers: first the number of components of its vectors, <bookmark mark='f'/> which is the number of rows, and then the number of vectors in the list, <bookmark mark='c'/> which is the number of columns. <bookmark mark='o'/> The matrix A is of order two by three, <bookmark mark='p'/> and B is of order three by two.""")) as tracker:
     self.play(FadeTransform(A_lista, A_de_nuevo), FadeTransform(B_lista, B_de_nuevo), run_time=1)
     self.wait_until_bookmark("f")
     self.play(GrowFromCenter(ll_f), FadeIn(r_f), run_time=0.8)
@@ -495,12 +496,13 @@ with self.voiceover(text=tr("""Eso es lo que indica el orden de una matriz: prim
     self.play(GrowFromCenter(llB_f), FadeIn(rB_f), GrowFromCenter(llB_c), FadeIn(rB_c), run_time=0.8)
     self.play(Write(dimB), run_time=1)
 
-with self.voiceover(text=tr("""Por eso, dos matrices de distinto orden son necesariamente distintas.""",
-                            """That is why two matrices of different orders are necessarily different.""")) as tracker:
+with self.voiceover(text=tr("""Dos matrices de distinto orden son necesariamente distintas.""",
+                            """Two matrices of different orders are necessarily different.""")) as tracker:
     self.play(Write(neq), run_time=0.6)
 
-with self.voiceover(text=tr("""Así, la matriz A pertenece al conjunto de las matrices de orden dos por tres, <bookmark mark='b'/> y B, al de las matrices de orden tres por dos.""",
-                            """So the matrix A belongs to the set of matrices of order two by three, <bookmark mark='b'/> and B to the set of matrices of order three by two.""")) as tracker:
+with self.voiceover(text=tr("""Otra forma de indicar el orden de estas matrices es decir que <bookmark mark='a'/> A pertenece al conjunto de las matrices de dos por tres, <bookmark mark='b'/> y B, al de las matrices de tres por dos.""",
+                            """Another way to give the order of these matrices is to say that <bookmark mark='a'/> A belongs to the set of two-by-three matrices, <bookmark mark='b'/> and B to the set of three-by-two matrices.""")) as tracker:
+    self.wait_until_bookmark("a")   # la pertenencia de A, cuando la voz la nombra (Marcos, 2026-10-27)
     self.play(ReplacementTransform(VGroup(dimA, neq), conj[0]), run_time=1)
     self.wait_until_bookmark("b")
     self.play(ReplacementTransform(dimB, conj[2]), run_time=1)
@@ -510,9 +512,9 @@ self.pausa_media()
 
 *** Escena 4 - La igualdad de matrices
 
-La conclusión de los ejemplos, como en V01 ("en consecuencia, dos
-vectores serán iguales si, y solo si, sus listas son idénticas"): mismo
-orden y columnas iguales una a una. Una franja recorre las columnas de
+La igualdad, por analogía con la de vectores (no como consecuencia de la
+escena anterior, que confundía al oyente; Marcos, 2026-10-26): dos
+matrices son iguales si lo son sus listas, es decir, columnas iguales una a una. Una franja recorre las columnas de
 las dos a la vez mientras la voz las empareja; debajo, el criterio con
 el selector.
 
@@ -526,8 +528,8 @@ criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff", r"\VectC{A}{j}=\VectC{B}{j}", tr
                    tex_template=myTemplate, font_size=48).move_to([0, -1.6, 0])
 cabecera = Tex(tr("Igualdad de matrices", "Equality of matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 
-with self.voiceover(text=tr("""En consecuencia, dos matrices son iguales si, y solo si, sus listas son idénticas: <bookmark mark='c1'/> la primera columna de una es igual a la primera de la otra, <bookmark mark='c2'/> la segunda a la segunda, <bookmark mark='c3'/> y así con todas.""",
-                            """Consequently, two matrices are equal if, and only if, their lists are identical: <bookmark mark='c1'/> the first column of one equals the first column of the other, <bookmark mark='c2'/> the second the second, <bookmark mark='c3'/> and so on with all of them.<bookmark mark='v2'/>""")) as tracker:
+with self.voiceover(text=tr("""Como ocurre con los vectores, dos matrices son iguales si, y solo si, lo son sus respectivas listas: <bookmark mark='c1'/> la primera columna de una es igual a la primera de la otra, <bookmark mark='c2'/> la segunda a la segunda, <bookmark mark='c3'/> y así con todas.""",
+                            """As with vectors, two matrices are equal if, and only if, their respective lists are equal: <bookmark mark='c1'/> the first column of one equals the first column of the other, <bookmark mark='c2'/> the second the second, <bookmark mark='c3'/> and so on with all of them.<bookmark mark='v2'/>""")) as tracker:
     self.play(Write(cabecera), FadeIn(par), run_time=1)
     franjas = None
     for j, marca in enumerate(["c1", "c2", "c3"]):
@@ -551,8 +553,12 @@ La escena de notación de V01, en versión matricial, un bloque cada vez:
 1. corchetes (la frase de la transparencia, en paralelo a los paréntesis
    de los vectores);
 2. con un vector daba igual escribirlo en horizontal o en vertical; en
-   una matriz cada vector va en vertical, como columna; por eso una
-   columna entre corchetes no es un vector (como $(3)\neq(3,)$ en V01);
+   una matriz cada vector va en vertical, como columna. Por eso, con la
+   escena despejada (Marcos, 2026-10-27): vector ≠ matriz columna ≠ matriz fila
+   (lista de números, lista con un vector de R², lista de dos vectores de R¹;
+   antes eran dos comparaciones que se repetían, la otra en ZZ_Basura), escritas un instante como listas
+   del libro, y $3\neq(3,)\neq[3]$ (número, lista de números, lista de
+   listas de números);
 3. letras mayúsculas en negrita y la matriz nula (se volverá a contar en
    V11 con las matrices especiales).
 
@@ -564,24 +570,51 @@ cabecera = Tex(tr("Notación", "Notation"), font_size=44).set_color(COLOR_TITULO
 v_ej = con_nombre(r"\Vect{a}=", MathTex(r"(4,\ 2,)", font_size=48))
 A1 = MathTex(r"\Mat{A}=", r"\begin{bmatrix}\Vect{a}; & \Vect{b}; & \Vect{c};\end{bmatrix}", tex_template=myTemplate, font_size=48)
 bloque1 = VGroup(v_ej, A1).arrange(RIGHT, buff=2.0).move_to([0, 1.2, 0])
-# 2. horizontal o vertical
+# 2. horizontal o vertical; matriz columna, matriz fila y vector, escritos un instante como listas del libro
+def par(izq, der, r_izq, r_der, x=0, y=1.0):
+    """Dos objetos separados por "≠", con un rótulo gris debajo de cada uno."""
+    g = VGroup(VGroup(izq, Tex(r_izq, font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3),
+               MathTex(r"\neq", font_size=48),
+               VGroup(der, Tex(r_der, font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3))
+    g.arrange(RIGHT, buff=0.6)
+    g[2][0].match_y(g[0][0]); g[2][1].match_y(g[0][1]); g[1].match_y(g[0][0])   # objetos y rótulos a la misma altura
+    return g.move_to([x, y, 0])
+def como_lista(tex, rotulo, sobre):
+    """La forma de lista del libro, debajo de su objeto, con un rótulo amarillo."""
+    l = MathTex(tex, tex_template=myTemplate, font_size=44).next_to(sobre, DOWN, buff=1.0)
+    return VGroup(l, Tex(rotulo, tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(l, DOWN, buff=0.25))
 hv = MathTex(r"(4,\ 2,)", r"=", r"\begin{pmatrix}4\\ 2\end{pmatrix}", font_size=48)
-colmat = MathTex(r"\begin{pmatrix}4\\ 2\end{pmatrix}", r"\neq", r"\begin{bmatrix}4\\ 2\end{bmatrix}", font_size=48)
-tres = MathTex(r"(3)", r"\neq", r"(3,)", font_size=48)
-r_hv = Tex(tr("el mismo vector", "the same vector"), font_size=30, color=GRAY_B)
-r_cm = Tex(tr("vector y matriz columna", "vector and column matrix"), font_size=30, color=GRAY_B)
-r_tr = Tex(tr("número y vector", "number and vector"), font_size=30, color=GRAY_B)
-fila2 = VGroup(VGroup(hv, r_hv).arrange(DOWN, buff=0.3), VGroup(colmat, r_cm).arrange(DOWN, buff=0.3),
-               VGroup(tres, r_tr).arrange(DOWN, buff=0.3)).arrange(RIGHT, buff=1.4, aligned_edge=UP).move_to([0, -1.6, 0])
-lista1 = MathTex(r"\begin{bmatrix}\begin{pmatrix}4\\ 2\end{pmatrix};\end{bmatrix}", font_size=48).move_to(colmat[2], aligned_edge=LEFT)
-colmat_de_nuevo = colmat[2].copy()   # su forma habitual, para volver a ella
+bloque_hv = VGroup(hv, Tex(tr("el mismo vector", "the same vector"), font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3).move_to([0, -1.6, 0])
+COL = r"\begin{bmatrix}4\\ 2\end{bmatrix}"
+FIL = r"\begin{bmatrix}4 & 2\end{bmatrix}"
+# vector, matriz columna y matriz fila: tres objetos distintos (Marcos, 2026-10-27)
+vf = par(MathTex(r"\begin{pmatrix}4\\ 2\end{pmatrix}", font_size=48), MathTex(COL, font_size=48), tr("vector", "vector"), tr("matriz columna", "column matrix"))
+vf_f = VGroup(MathTex(r"\neq", font_size=48), VGroup(MathTex(FIL, font_size=48), Tex(tr("matriz fila", "row matrix"), font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3))
+vf_f.arrange(RIGHT, buff=0.6).next_to(vf, RIGHT, buff=0.6)
+vf_f[1][0].match_y(vf[0][0]); vf_f[1][1].match_y(vf[0][1]); vf_f[0].match_y(vf[0][0])
+vf.add(*vf_f).move_to([0, 1.0, 0])
+l_vec = como_lista(r"(4,\ 2,)", tr("dos números", "two numbers"), vf[0])
+l_vc = como_lista(r"\begin{bmatrix}\begin{pmatrix}4\\ 2\end{pmatrix};\end{bmatrix}", tr(r"un vector de $\R[2]$", r"one vector of $\R[2]$"), vf[2])
+l_vf = como_lista(r"\left[(4,);\ (2,);\right]", tr(r"dos vectores de $\R[1]$", r"two vectors of $\R[1]$"), vf[4])
+for l in (l_vc, l_vf): l.match_y(l_vec)
+# número, vector y matriz con un solo número
+tres = MathTex(r"3", r"\neq", r"(3,)", r"\neq", r"\begin{bmatrix}3\end{bmatrix}", font_size=48)
+r_tr = Tex(tr("número, vector y matriz", "number, vector and matrix"), font_size=30, color=GRAY_B)
+fila3 = VGroup(tres, r_tr).arrange(DOWN, buff=0.3).move_to([-0.4, -1.6, 0])   # hueco a la derecha para [(3,);]
+lista3 = MathTex(r"\begin{bmatrix}(3,);\end{bmatrix}", font_size=48).move_to(tres[4], aligned_edge=LEFT)   # una lista con un vector que contiene un número
+tres_de_nuevo = tres[4].copy()
 # 3. letras y matriz nula
 letras = MathTex(r"\Mat{A},\ \Mat{B},\ \Mat{C},\ \ldots", tex_template=myTemplate, font_size=56).move_to([0, 1.2, 0])
 ceros = VGroup(*[con_nombre(r"\Mat{0}=", matriz([[0]*n for _ in range(m)], decimales=0, h_buff=0.8))
                  for m, n in [(2, 2), (2, 3), (3, 2)]]).arrange(RIGHT, buff=0.8).move_to([0, -1.5, 0])
+# el mismo cero con su orden debajo, para cuando el contexto no lo deja claro
+ceros_dim = [MathTex(rf"\Matdim{{0}}{{{m}}}{{{n}}}", tex_template=myTemplate, font_size=48) for m, n in [(2, 2), (2, 3), (3, 2)]]
+for c, d in zip(ceros, ceros_dim):
+    cero = max(d[0], key=lambda g: g.height)   # el cero en negrita (el orden va en pequeño)
+    d.shift(c[0][0][0].get_center() - cero.get_center())
 
-with self.voiceover(text=tr("""Un paréntesis alrededor de una lista de números <bookmark mark='cm'/> separados por comas denota un vector, <bookmark mark='k'/> y un corchete alrededor de una lista de vectores <bookmark mark='pc'/> separados por puntos y comas denota una matriz.""",
-                            """Parentheses around a list of numbers <bookmark mark='cm'/> separated by commas denote a vector, <bookmark mark='k'/> and square brackets around a list of vectors <bookmark mark='pc'/> separated by semicolons denote a matrix.""")) as tracker:
+with self.voiceover(text=tr("""Repasemos la notación que ya conocemos. Unos paréntesis alrededor de una lista de números, <bookmark mark='cm'/> cada uno seguido de una coma, denotan un vector, <bookmark mark='k'/> y unos corchetes alrededor de una lista de vectores, <bookmark mark='pc'/> cada uno seguido de un punto y coma, denotan una matriz.""",
+                            """Let us review the notation we already know. Parentheses around a list of numbers, <bookmark mark='cm'/> each followed by a comma, denote a vector, <bookmark mark='k'/> and square brackets around a list of vectors, <bookmark mark='pc'/> each followed by a semicolon, denote a matrix.""")) as tracker:
     self.play(Write(cabecera), FadeIn(v_ej), run_time=1)
     self.wait_until_bookmark("cm")
     self.play(Indicate(VGroup(v_ej[1][0][2], v_ej[1][0][4]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
@@ -590,30 +623,48 @@ with self.voiceover(text=tr("""Un paréntesis alrededor de una lista de números
     self.wait_until_bookmark("pc")
     self.play(Indicate(VGroup(*[A1[1][k] for k in (2, 4, 6)]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
 
-with self.voiceover(text=tr("""Un vector se puede escribir en horizontal o en vertical. <bookmark mark='c'/> En una matriz, en cambio, cada vector de la lista se escribe en vertical, como una columna. <bookmark mark='m'/> Así, una columna entre corchetes no es un vector, sino <bookmark mark='l'/> una lista con un solo vector: una matriz con una sola columna, <bookmark mark='t'/> igual que un número entre paréntesis no es un vector de una componente.""",
-                            """A vector can be written horizontally or vertically. <bookmark mark='c'/> In a matrix, however, each vector in the list is written vertically, as a column. <bookmark mark='m'/> So a column in square brackets is not a vector, but <bookmark mark='l'/> a list with a single vector: a matrix with a single column, <bookmark mark='t'/> just as a number in parentheses is not a vector with one component.""")) as tracker:
-    self.play(FadeIn(fila2[0]), run_time=1)
+with self.voiceover(text=tr("""Un vector se puede escribir en horizontal o en vertical. <bookmark mark='c'/> En una matriz, en cambio, cada vector de la lista se escribe en vertical, como una columna.<bookmark mark='v2'/>""",
+                            """A vector can be written horizontally or vertically. <bookmark mark='c'/> In a matrix, however, each vector in the list is written vertically, as a column.""")) as tracker:
+    self.play(FadeIn(bloque_hv), run_time=1)
     self.wait_until_bookmark("c")
     self.play(Indicate(A1[1], color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
-    self.wait_until_bookmark("m")
-    self.play(FadeIn(fila2[1]), run_time=1)
-    self.wait_until_bookmark("l")
-    self.play(FadeTransform(colmat[2], lista1), run_time=1)   # la lista de un solo vector, como en el libro
-    self.wait_until_bookmark("t")
-    self.play(FadeIn(fila2[2]), run_time=1)
 
-self.play(FadeTransform(lista1, colmat_de_nuevo), run_time=1)   # vuelve a su forma habitual
+# la escena se despeja para comparar (Marcos, 2026-10-27)
+self.play(FadeOut(VGroup(bloque1, bloque_hv)), run_time=0.8)
+with self.voiceover(text=tr("""Por eso, un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.<bookmark mark='v2'/>""",
+                            """That is why a vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.""")) as tracker:
+    self.play(FadeIn(vf), run_time=1)
+    for marca, k, l in [("v", 0, l_vec), ("c", 2, l_vc), ("f", 4, l_vf)]:
+        self.wait_until_bookmark(marca)
+        self.play(TransformFromCopy(vf[k][0], l[0]), FadeIn(l[1]), run_time=0.8)
+
+self.wait(2.5)   # tiempo para mirar las listas antes de quitarlas (Marcos, 2026-10-27)
+self.play(FadeOut(VGroup(l_vec, l_vc, l_vf)), run_time=0.8)
+
+with self.voiceover(text=tr("""Del mismo modo, un número, un vector con un solo número y una matriz con un solo número son objetos distintos: <bookmark mark='n'/> un número, <bookmark mark='l'/> una lista de números, <bookmark mark='ll'/> y una lista de listas de números.<bookmark mark='v2'/>""",
+                            """Likewise, a number, a vector with a single number and a matrix with a single number are different objects: <bookmark mark='n'/> a number, <bookmark mark='l'/> a list of numbers, <bookmark mark='ll'/> and a list of lists of numbers.""")) as tracker:
+    self.play(FadeIn(fila3), run_time=1)
+    self.wait_until_bookmark("n")
+    self.play(Indicate(tres[0], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.7)
+    self.wait_until_bookmark("l")
+    self.play(Indicate(tres[2], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.7)
+    self.wait_until_bookmark("ll")
+    self.play(FadeTransform(tres[4], lista3), run_time=1)   # la matriz, como lista con un vector de un número
+
+self.play(FadeTransform(lista3, tres_de_nuevo), run_time=1)   # vuelve a su forma habitual
 self.wait(0.5)
-self.play(FadeOut(VGroup(bloque1, fila2, colmat_de_nuevo)), run_time=0.8)
+self.play(FadeOut(VGroup(vf, fila3, tres_de_nuevo)), run_time=0.8)
 with self.voiceover(text=tr("""Para denotar matrices usaremos letras mayúsculas en negrita.""",
                             """To denote matrices we will use bold capital letters.""")) as tracker:
     self.play(FadeIn(letras), run_time=1)
 
-with self.voiceover(text=tr("""Un cero en negrita denota una matriz cuyas componentes son todas nulas. <bookmark mark='o'/> Como con el vector nulo, frecuentemente su orden se deduce del contexto.""",
-                            """A bold zero denotes a matrix whose components are all zero. <bookmark mark='o'/> As with the zero vector, its order can often be deduced from the context.""")) as tracker:
+with self.voiceover(text=tr("""Un cero en negrita denota una matriz cuyas componentes son todas nulas. <bookmark mark='o'/> Como con el vector nulo, frecuentemente su orden se deduce del contexto. <bookmark mark='e'/> Cuando no está claro, se puede indicar explícitamente debajo del cero.<bookmark mark='v2'/>""",
+                            """A bold zero denotes a matrix whose components are all zero. <bookmark mark='o'/> As with the zero vector, its order can often be deduced from the context. <bookmark mark='e'/> When it is not clear, it can be shown explicitly under the zero.""")) as tracker:
     self.play(FadeIn(ceros[0]), run_time=1)
     self.wait_until_bookmark("o")
     self.play(LaggedStart(*[FadeIn(c) for c in ceros[1:]], lag_ratio=0.5), run_time=1.5)
+    self.wait_until_bookmark("e")
+    self.play(*[ReplacementTransform(c[0][0][0], d) for c, d in zip(ceros, ceros_dim)], run_time=1.2)
 
 self.pausa_media()
 #+END_SRC
@@ -636,7 +687,7 @@ x0 = -4.6
 comp = MathTex(r"\eleM{A}{2}{1}", r"\;=\;", r"a_{21}", r"\;=\;7", tex_template=myTemplate, font_size=48)
 fila = MathTex(r"\VectF{A}{1}", r"\;=\;(1,\ 2,\ 1,)", tex_template=myTemplate, font_size=48)
 col = MathTex(r"\VectC{A}{1}", r"\;=\;\begin{pmatrix}1\\ 7\end{pmatrix}", tex_template=myTemplate, font_size=48)
-for linea, y in [(comp, 0.1), (fila, -1.0), (col, -2.5)]:
+for linea, y in [(comp, 0.3), (fila, -1.1), (col, -2.8)]:   # hueco para la fila en vertical
     linea.move_to([x0 + linea.width/2, y, 0])
 for linea in (fila, col):   # el "=" que sigue al selector, alineado con el de la componente
     linea.shift((comp[1].get_left()[0] - linea[1].get_left()[0])*RIGHT)
@@ -650,6 +701,9 @@ fila_g = MathTex(r"\VectF{A}{i}", tex_template=myTemplate, font_size=48)
 fila_g.shift(fila[0][2].get_center() - fila_g[0][2].get_center())   # glifos: i, |, A
 col_g = MathTex(r"\VectC{A}{j}", tex_template=myTemplate, font_size=48)
 col_g.shift(col[0][0].get_center() - col_g[0][0].get_center())       # glifos: A, |, j
+# la otra forma de escribir la fila y la columna, detrás de un "=" (Marcos, 2026-10-27)
+fila_v = MathTex(r"=\begin{pmatrix}1\\ 2\\ 1\end{pmatrix}", font_size=48).next_to(fila, RIGHT, buff=0.25)
+col_h = MathTex(r"=(1,\ 7,)", font_size=48).next_to(col, RIGHT, buff=0.25)
 
 with self.voiceover(text=tr("""Para seleccionar una componente de un vector, el operador selector necesita un índice. En una matriz necesita dos: <bookmark mark='f'/> el de la fila <bookmark mark='c'/> y el de la columna.""",
                             """To select a component of a vector, the selector operator needs one index. In a matrix it needs two: <bookmark mark='f'/> the row index <bookmark mark='c'/> and the column index.""")) as tracker:
@@ -662,8 +716,8 @@ with self.voiceover(text=tr("""Para seleccionar una componente de un vector, el 
     self.play(FadeIn(fc), run_time=0.5)
     self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
 
-with self.voiceover(text=tr("""Lo habitual es escribirla con la letra de la matriz en minúscula y dos subíndices: <bookmark mark='i'/> primero el de la fila <bookmark mark='j'/> y después el de la columna.""",
-                            """The usual way is to write it with the letter of the matrix in lower case and two subscripts: <bookmark mark='i'/> first the row <bookmark mark='j'/> and then the column.""")) as tracker:
+with self.voiceover(text=tr("""Lo habitual es escribir la componente con la letra de la matriz en minúscula y dos subíndices: <bookmark mark='i'/> primero el de la fila <bookmark mark='j'/> y después el de la columna.""",
+                            """The usual way is to write the component with the letter of the matrix in lower case and two subscripts: <bookmark mark='i'/> first the row <bookmark mark='j'/> and then the column.""")) as tracker:
     self.play(FadeIn(comp[2:]), FadeIn(r_hab), run_time=1)
     self.wait_until_bookmark("i")
     self.play(Indicate(sub_f, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
@@ -690,8 +744,8 @@ with self.voiceover(text=tr("""Si el operador actúa solo por la izquierda, sele
     self.play(FadeIn(ff), FadeIn(fila[1]), run_time=0.8)
 
 self.play(FadeOut(ff), FadeIn(col_g), run_time=0.6)
-with self.voiceover(text=tr("""Y si actúa solo por la derecha, selecciona una columna. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='c'/> la primera columna de A, que también es un vector.""",
-                            """And if it acts only on the right, it selects a column. <bookmark mark='e'/> For example, with index one, <bookmark mark='c'/> the first column of A, which is also a vector.""")) as tracker:
+with self.voiceover(text=tr("""Y si actúa solo por la derecha, selecciona una columna. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='c'/> selecciona la primera columna de A, que también es un vector.""",
+                            """And if it acts only on the right, it selects a column. <bookmark mark='e'/> For example, with index one, <bookmark mark='c'/> it selects the first column of A, which is also a vector.""")) as tracker:
     self.play(Indicate(col_g[0][1:3], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
     self.wait_until_bookmark("e")
     self.play(ReplacementTransform(col_g, col[0]), run_time=0.8)   # j pasa a ser 1
@@ -699,9 +753,14 @@ with self.voiceover(text=tr("""Y si actúa solo por la derecha, selecciona una c
     fc = franja_columna(A, 0)
     self.play(FadeIn(fc), FadeIn(col[1]), run_time=0.8)
 
-with self.voiceover(text=tr("""Las filas y las columnas de una matriz son vectores, y por eso van entre paréntesis.""",
-                            """The rows and the columns of a matrix are vectors, and that is why they go in parentheses.""")) as tracker:
-    self.play(FadeOut(fc), Indicate(fila[1], color=COLOR_ESCALAR, scale_factor=1.1), Indicate(col[1], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.2)
+self.wait(0.6)   # una pausa antes de la conclusión (Marcos, 2026-10-27)
+with self.voiceover(text=tr("""Filas y columnas son vectores, y por eso las podemos escribir indistintamente en horizontal <bookmark mark='h'/> o en vertical, <bookmark mark='p'/> con sus listas de números siempre entre paréntesis.""",
+                            """Rows and columns are vectors, so we can write them either horizontally <bookmark mark='h'/> or vertically, <bookmark mark='p'/> with their lists of numbers always in parentheses.""")) as tracker:
+    self.play(FadeOut(fc), run_time=0.5)
+    self.wait_until_bookmark("h")
+    self.play(FadeIn(fila_v), FadeIn(col_h), run_time=1)
+    self.wait_until_bookmark("p")
+    self.play(*[Indicate(m, color=COLOR_ESCALAR, scale_factor=1.1) for m in (fila[1], col[1], fila_v, col_h)], run_time=1.2)
 
 self.pausa_media()
 #+END_SRC
@@ -716,33 +775,53 @@ fila y columna). Anuncio del siguiente vídeo y del vídeo de ampliación
 #+BEGIN_SRC python :eval no
 self.creditos()
 cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
-defin = Tex(tr(r"Matriz de $\R[m\times n]$: lista ordenada de $n$ vectores de $\R[m]$\\ (sus columnas), entre corchetes.",
-               r"Matrix in $\R[m\times n]$: an ordered list of $n$ vectors in $\R[m]$\\ (its columns), in square brackets."),
+defin = Tex(tr(r"Matriz de ", r"Matrix in "), r"$\R[m\times n]$", tr(r": ", r": an "), tr(r"lista ordenada", r"ordered list"), tr(r" de ", r" of "),
+            r"$n$", tr(r" vectores de ", r" vectors in "), r"$\R[m]$", tr(r"\\ (sus columnas), entre corchetes.", r"\\ (its columns), in square brackets."),
             tex_template=myTemplate, font_size=34)
-orden = Tex(tr(r"Orden $m\times n$: primero las filas, después las columnas.", r"Order $m\times n$: rows first, then columns."),
+orden = Tex(tr(r"Orden ", r"Order "), r"$m\times n$", tr(r": primero las filas, después las columnas.", r": rows first, then columns."),
             tex_template=myTemplate, font_size=34)
+# glifos: orden[1] = m, ×, n
 encabezados = [tr("fila $i$", "row $i$"), tr("componente $ij$", "component $ij$"), tr("columna $j$", "column $j$")]
 formulas = [r"\VectF{A}{i}\in\R[n]", r"\eleM{A}{i}{j}=a_{ij}", r"\VectC{A}{j}\in\R[m]"]
 tabla = VGroup(*[VGroup(Tex(e, tex_template=myTemplate, font_size=32, color=GRAY_B), MathTex(f, tex_template=myTemplate, font_size=44)).arrange(DOWN, buff=0.3)
                  for e, f in zip(encabezados, formulas)]).arrange(RIGHT, buff=1.2)
 bloque = VGroup(defin, orden, tabla).arrange(DOWN, buff=0.6).next_to(cabecera, DOWN, buff=0.7)
 
-with self.voiceover(text=tr("""Resumamos. Una matriz es una lista ordenada de vectores con el mismo número de componentes; dichos vectores son las columnas de la matriz. La lista de vectores se escribe entre corchetes. <bookmark mark='o'/> Su orden indica el número de filas primero y el número de columnas después.<bookmark mark='v2'/>""",
-                            """Let us sum up. A matrix is an ordered list of vectors with the same number of components; these vectors are the columns of the matrix. The list of vectors is written in square brackets. <bookmark mark='o'/> Its order gives the number of rows first and the number of columns second.""")) as tracker:
+# señales en la definición (Marcos, 2026-10-27): un efecto cada vez, cuando la voz lo nombra
+with self.voiceover(text=tr("""Resumamos. Una matriz es una <bookmark mark='l'/> lista ordenada <bookmark mark='n'/> de vectores <bookmark mark='m'/> con el mismo número de componentes; dichos vectores son las columnas de la matriz. La lista de vectores se escribe entre corchetes. <bookmark mark='o'/> Su orden indica <bookmark mark='f'/> el número de filas primero <bookmark mark='c'/> y el número de columnas después.""",
+                            """Let us sum up. A matrix is an <bookmark mark='l'/> ordered list <bookmark mark='n'/> of vectors <bookmark mark='m'/> with the same number of components; these vectors are the columns of the matrix. The list of vectors is written in square brackets. <bookmark mark='o'/> Its order gives <bookmark mark='f'/> the number of rows first <bookmark mark='c'/> and the number of columns second.""")) as tracker:
     self.play(Write(cabecera), FadeIn(defin), run_time=1)
+    self.wait_until_bookmark("l")
+    self.play(Circumscribe(defin[3], color=COLOR_ESCALAR, buff=0.08), run_time=1)
+    # (los Indicate de m y n en la definición se quitaron: no daban el efecto buscado; Marcos, 2026-10-27)
     self.wait_until_bookmark("o")
     self.play(FadeIn(orden), run_time=0.8)
+    self.wait_until_bookmark("f")
+    self.play(Indicate(orden[1][0], color=COLOR_FILA, scale_factor=1.8), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(Indicate(orden[1][2], color=COLOR_COLUMNA, scale_factor=1.8), run_time=1)
 
-with self.voiceover(text=tr("""Con el operador selector actuando por la izquierda, seleccionamos una fila. <bookmark mark='c'/> Con el operador selector actuando por la derecha, una columna. <bookmark mark='e'/> Y con el operador selector actuando por ambos lados, seleccionamos una componente.""",
-                            """With the selector operator acting on the left, we select a row. <bookmark mark='c'/> With the selector operator acting on the right, a column. <bookmark mark='e'/> And with the selector operator acting on both sides, we select a component.<bookmark mark='v2'/>""")) as tracker:
+# el operador se destaca cuando la voz dice por qué lado actúa (Marcos, 2026-10-27)
+# glifos: tabla[0][1] = i, |, A, ...;  tabla[1][1] = i, |, A, |, j, ...;  tabla[2][1] = A, |, j, ...
+sel_fila, sel_col = tabla[0][1][0][0:2], tabla[2][1][0][1:3]
+sel_comp = [tabla[1][1][0][0:2], tabla[1][1][0][3:5]]
+with self.voiceover(text=tr("""Con el operador selector actuando <bookmark mark='i'/> por la izquierda, seleccionamos una fila. <bookmark mark='c'/> Con el operador selector actuando <bookmark mark='d'/> por la derecha, una columna. <bookmark mark='e'/> Y con el operador selector actuando <bookmark mark='a'/> por ambos lados, seleccionamos una componente.""",
+                            """With the selector operator acting <bookmark mark='i'/> on the left, we select a row. <bookmark mark='c'/> With the selector operator acting <bookmark mark='d'/> on the right, a column. <bookmark mark='e'/> And with the selector operator acting <bookmark mark='a'/> on both sides, we select a component.<bookmark mark='v3'/>""")) as tracker:
     self.play(FadeIn(tabla[0]), run_time=0.8)
+    self.wait_until_bookmark("i")
+    self.play(Indicate(sel_fila, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
     self.wait_until_bookmark("c")
     self.play(FadeIn(tabla[2]), run_time=0.8)
+    self.wait_until_bookmark("d")
+    self.play(Indicate(sel_col, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
     self.wait_until_bookmark("e")
     self.play(FadeIn(tabla[1]), run_time=0.8)
+    self.wait_until_bookmark("a")
+    self.play(*[Indicate(g, color=COLOR_ESCALAR, scale_factor=1.6) for g in sel_comp], run_time=0.9)
 
-with self.voiceover(text=tr("""En el próximo vídeo veremos que da igual seleccionar primero la fila o la columna, y la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.""",
-                            """In the next video we will see that it makes no difference whether we select the row or the column first, and we will meet transposition, which turns the rows of a matrix into columns, as we did when we built the matrix B.""")) as tracker:
+self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo, como en V08
+with self.voiceover(text=tr("""En el próximo vídeo veremos que, para seleccionar una componente de una matriz, da igual empezar por la fila o por la columna. También veremos la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.<bookmark mark='v2'/>""",
+                            """In the next video we will see that, to select a component of a matrix, it makes no difference whether we start with the row or with the column. We will also meet transposition, which turns the rows of a matrix into columns, as we did when we built the matrix B.<bookmark mark='v2'/>""")) as tracker:
     pass
 
 self.pausa_media()

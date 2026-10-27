@@ -399,3 +399,25 @@ with self.voiceover(text=tr("""Y si le interesa saber por qué una columna entre
                             """And if you would like to know why a column in square brackets is not a vector, there is an extension video about it.""")) as tracker:
     pass
 #+END_SRC
+
+* Escena 5: comparación matriz columna / matriz fila (descartada 2026-10-27)
+
+Repetía la comparación siguiente (vector, matriz columna y matriz fila); se unificaron en una (Marcos).
+
+#+BEGIN_SRC python :eval no
+cf = par(MathTex(COL, font_size=48), MathTex(FIL, font_size=48), tr("matriz columna", "column matrix"), tr("matriz fila", "row matrix"))
+l_col = como_lista(r"\begin{bmatrix}\begin{pmatrix}4\\ 2\end{pmatrix};\end{bmatrix}", tr(r"un vector de $\R[2]$", r"one vector of $\R[2]$"), cf[0])
+l_fil = como_lista(r"\left[(4,);\ (2,);\right]", tr(r"dos vectores de $\R[1]$", r"two vectors of $\R[1]$"), cf[2])
+l_fil.match_y(l_col)
+
+with self.voiceover(text=tr("""Por eso, una matriz columna y una matriz fila con los mismos números son matrices distintas: <bookmark mark='c'/> la primera es una lista con un solo vector de n componentes, <bookmark mark='f'/> y la segunda, una lista de n vectores de una componente.""",
+                            """That is why a column matrix and a row matrix with the same numbers are different matrices: <bookmark mark='c'/> the first is a list with a single vector of n components, <bookmark mark='f'/> and the second, a list of n vectors of one component.""")) as tracker:
+    self.play(FadeIn(cf), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(TransformFromCopy(cf[0][0], l_col[0]), FadeIn(l_col[1]), run_time=0.8)
+    self.wait_until_bookmark("f")
+    self.play(TransformFromCopy(cf[2][0], l_fil[0]), FadeIn(l_fil[1]), run_time=0.8)
+
+self.wait(2.5)   # tiempo para mirar las listas antes de quitarlas (Marcos, 2026-10-27)
+self.play(FadeOut(VGroup(cf, l_col, l_fil)), run_time=0.8)
+#+END_SRC
