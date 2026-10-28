@@ -10,7 +10,7 @@ privacidad = "public"   # public | unlisted | private
 # miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
 
 [es]
-# youtube = ""   # rellenar tras subirlo
+youtube = "w62nh5CvJtM"   # subido por la API el 2026-10-28
 video = "L01_V08_VectoresComoDatos.mp4"
 subtitulos = "L01_V08_VectoresComoDatos.srt"
 idioma = "es"

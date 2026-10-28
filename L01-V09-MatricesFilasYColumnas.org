@@ -632,7 +632,7 @@ with self.voiceover(text=tr("""Un vector se puede escribir en horizontal o en ve
 # la escena se despeja para comparar (Marcos, 2026-10-27)
 self.play(FadeOut(VGroup(bloque1, bloque_hv)), run_time=0.8)
 with self.voiceover(text=tr("""Por eso, un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.<bookmark mark='v2'/>""",
-                            """That is why a vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.""")) as tracker:
+                            """That is why a vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.<bookmark mark='v3'/>""")) as tracker:
     self.play(FadeIn(vf), run_time=1)
     for marca, k, l in [("v", 0, l_vec), ("c", 2, l_vc), ("f", 4, l_vf)]:
         self.wait_until_bookmark(marca)
