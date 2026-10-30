@@ -472,7 +472,7 @@ with self.voiceover(text=tr("""Omega cree que las matrices A y B son la misma, p
     entra(self, om)
     self.play(FadeIn(globo, scale=0.8), run_time=0.6)
 
-with self.voiceover(text=tr("""Pero son listas distintas: <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
+with self.voiceover(text=tr("""Pero son listas distintas: <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.<bookmark mark='v4'/>""",
                             """But they are different lists: <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
     self.play(FadeOut(globo), run_time=0.4)
     cambia(self, om, "sorpresa")
