@@ -1,0 +1,891 @@
+#+TITLE: Lesson 1 of the Course - Video 1
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: en-us
+# +STARTUP: show3levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LaTeX_HEADER: \usepackage{pdfpages}
+
+# To prevent executing all the code when exporting to pdf
+#+PROPERTY: header-args :eval never-export
+
+\maketitle
+
+*** COMMENT Adjustments for compiling the documentation
+#+CALL: NameInCodeChunks()
+#+NAME: NameInCodeChunks
+#+BEGIN_SRC emacs-lisp :results silent
+(setq org-babel-exp-code-template
+         (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template)
+               )
+#+END_SRC
+
+
+* Vectors of \R[n] - V01
+
+
+** Scene 1 - Definition of a Vector in \R[n]
+
+#+call: running(file="L01_V01_Vectors", scene="1")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E01_VectorsDefinition.mp4
+
+#+name: L01_V01_E01_VectorsDefinition
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V01_Vectors.py
+<<Loading the Manim and NacAL Library with AzureService>>
+# Load the Manim and NacAL library with AzureService>>
+
+<<copyright>>
+
+class L01_V01_E01_VectorsDefinition(VoiceoverScene):
+    def construct(self):
+        self.set_speech_service(AzureService(voice="en-GB-RyanNeural"))
+        #self.set_speech_service( AzureService(voice="es-ES-AlvaroNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="en", tld="com"))        
+        myTemplate = TexTemplate()
+        myTemplate.add_to_preamble(r"\usepackage{nacal}")
+
+        # Lateral copyright
+        <<copyrightLateral>>
+
+        # Cover
+        title = Title(r"Definition of a Vector in \R[n] and Notation",
+                     tex_template = myTemplate,
+                     font_size=70).set_color(BLUE)
+        self.play(Write(title))
+        self.wait(1.5)
+        self.play(FadeOut(title))
+
+        # Vector Definition
+        definition = Tex("A vector in ",
+                         r"$\R[n]$",
+                         r" is an \emph{ordered list} of $n$ numbers",
+                         tex_template = myTemplate,
+                         ).to_edge(UP).set_width(13)
+        with self.voiceover(text=r"A vector in R n is an ordered list of numbers.") as tracker:
+            self.add(definition)
+
+        # Clarification of notation
+        with self.voiceover(text="The R indicates that the numbers are real.") as tracker:
+            self.play(Circumscribe(definition[1][0], fade_out=True), run_time=tracker.duration)
+
+        with self.voiceover(text="""And the superscript n indicates that the list contains n
+        numbers.""") as tracker:
+            self.play(Circumscribe(definition[1][1], fade_out=True), run_time=tracker.duration)
+            self.wait(0.3)
+
+        with self.voiceover(text="""that the list being ordered means that the order in which the 
+        elements appear matters.""") as tracker:
+            self.play(Circumscribe(definition[2][4:15], fade_out=True), run_time=tracker.duration)
+
+        # Examples
+        Ej = Tex(r"\textbf{Examples:}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(GREEN).next_to(definition, DOWN, aligned_edge=LEFT)
+        self.add(Ej)
+
+        d = nc.Vector([1,2,3],'h')
+        Ej1 = MathTex( d.latex(), "\\ne", nc.Vector(reversed(d),'h').latex() ) 
+        with self.voiceover(text="""For example, the vectors, one two three and three two one, are
+        different.""") as tracker:
+            self.play(FadeIn(Ej1))
+            self.wait(tracker.duration-0.5)
+            self.play(FadeOut(Ej1))
+
+        p = nc.Vector([sp.pi,sp.pi,sp.pi,sp.pi],'h')
+        Ej2 = MathTex(p.latex(), r"\ne", nc.Vector(p|(1,2),'h').latex() )
+        with self.voiceover(text=r"""Also, vectors with a different number of
+        elements are different. For instance, the vector on the left belongs to R 4 as it is a list of
+        4 numbers. The one on the right belongs to R
+        2.""") as tracker:
+            self.add(Ej2)
+            self.wait(tracker.duration-0.5)
+            self.play(FadeOut(Ej2))
+
+        c = nc.Vector([sp.pi,nc.fracc(3,4),0,0.11],'h')
+        Ej3 = MathTex(c.latex(),"=",c.latex())
+        with self.voiceover(text=r"""Consequently, two vectors will be equal if, and only if, their
+        respective lists are identical""") as tracker:
+            self.play(FadeIn(Ej3))
+            self.wait(tracker.duration)
+            self.play(FadeOut(Ej3))            
+        self.play(FadeOut(Ej))
+        self.wait()
+
+#+END_SRC
+
+
+#+call: running(file="L01_V01_Vectors", scene="1")
+#+call: runningHD(file="L01_V01_Vectors", scene="1")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E01_VectorsDefinition.mp4
+
+
+** Scene 2 - Notation of Vectors in \R[n]
+
+#+call: running(file="L01_V01_Vectors", scene="2")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E02_VectorsNotation.mp4
+
+#+name: L01_V01_E02_VectorsNotation
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V01_Vectors.py
+class L01_V01_E02_VectorsNotation(VoiceoverScene):
+    def construct(self):
+        self.set_speech_service( AzureService(voice="en-GB-RyanNeural" ) )
+      
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))        
+        myTemplate = TexTemplate()
+        myTemplate.add_to_preamble(r"\usepackage{nacal}")
+
+        # Lateral copyright
+        <<copyrightLateral>>
+
+        # Vector Definition
+        definition = Tex("A vector in ",
+                         r"$\R[n]$",
+                         r" is an \emph{ordered list} of $n$ numbers",
+                         tex_template = myTemplate,
+                         ).to_edge(UP).set_width(13)
+        self.add(definition)
+        d = nc.Vector([1,2,3],'h')
+        p = nc.Vector([sp.pi,sp.pi,sp.pi,sp.pi],'h')
+
+        # Notation
+        Notac = Tex(r"\textbf{Notation:}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(BLUE).next_to(definition, DOWN, aligned_edge=LEFT)
+        self.add(Notac)
+        self.wait()
+
+        a    = nc.Vector( [5, 1, 10] , 'h')        
+        Not1 = MathTex(a.latex(),        tex_template = myTemplate,)
+        Not2 = MathTex(r"=",             tex_template = myTemplate,)
+        Not3 = MathTex(a.copy().latex(), tex_template = myTemplate,)
+        grp1 = VGroup(Not1,Not2,Not3).arrange(RIGHT)
+        with self.voiceover(text=r"""To express a vector, it is enough to indicate the list of elements
+        in their corresponding order.""") as tracker:
+            self.add(grp1)
+            self.play(Circumscribe(definition[2][4:15]),run_time=tracker.duration)
+
+        with self.voiceover(text=r"""For this reason, we can write the same vector both horizontally and
+        vertically. But keep in mind that most books do not respect this convention and consider,
+        contrary to what we will do, that row vectors and column vectors are distinct objects.""") as tracker:
+            self.wait(tracker.duration+0.3)
+
+        with self.voiceover(text=r"""We will always write the list of numbers enclosed in parentheses,
+        placing a comma after each element when writing the vector horizontally.""") as tracker:
+            self.play(Indicate(grp1[0][0][::len(grp1[0][0])-1]),
+                      Indicate(grp1[2][0][0:2]), Indicate(grp1[2][0][-2:]),
+                      run_time=tracker.duration/2)
+            self.play(Flash(grp1[0][0][2]),
+                      Flash(grp1[0][0][4]), Flash(grp1[0][0][7]),
+                      run_time=tracker.duration/8)
+            self.wait(tracker.duration/8)
+            self.play(Circumscribe(grp1[0]))
+            self.play(FadeOut(grp1))
+
+        VectorNoNumero =  MathTex(r"(3)",
+                                  r"\ne",(3*nc.V1(1)).latex(),
+                                  r"\in\R[1]",
+                                  tex_template = myTemplate,)
+        with self.voiceover(text=r"""Thus, we can distinguish a number in parentheses from a
+        vector in R 1;""") as tracker:
+            self.add(VectorNoNumero)
+            self.play(Indicate(VectorNoNumero[0]),run_time=tracker.duration*2/3)
+            self.play(Indicate(VectorNoNumero[2]),run_time=tracker.duration/3)
+        with self.voiceover(text=r"""That is, from a list containing a single number.""") as tracker:
+            self.play(Indicate(VectorNoNumero[3]),
+                      Flash(definition[2][-8]),
+                      run_time=tracker.duration)
+            self.play(FadeOut(VectorNoNumero))
+
+        Vectors = MathTex(r"\Vect{a}, \Vect{b}, \Vect{c},\ldots\Vect{x}, \Vect{y}, \Vect{z}",
+                           tex_template = myTemplate,).move_to( UP )
+        Vector1  = MathTex(r"\Vect{a}=",a.copy().latex(),   tex_template = myTemplate,)
+        Vector2  = MathTex(r"\Vect{d}=",d.copy().latex(),   tex_template = myTemplate,)
+        Vector3  = MathTex(r"\Vect{x}=",p.copy().latex(),   tex_template = myTemplate,)
+        grp3 = VGroup(Vector1,Vector2,Vector3).arrange(RIGHT, buff=2).next_to(Vectors, DOWN)
+        with self.voiceover(text=r"""To denote vectors, we will use lowercase letters in bold
+        italics.""") as tracker:
+            self.add(Vectors)
+            self.add(grp3)
+            self.wait(tracker.duration/2)
+            self.play(Indicate(Vectors),run_time=tracker.duration/2)
+            self.play(FadeOut(Vectors))
+            self.play(Indicate(Vector1[0][0],scale_factor=2.),
+                      Indicate(Vector2[0][0],scale_factor=2.),
+                      Indicate(Vector3[0][0],scale_factor=2.),
+                      run_time=1.5)
+            self.play(FadeOut(grp3))
+
+        Vzero = MathTex(r"\Vect{0}", tex_template = myTemplate,)#.move_to( UP )
+        with self.voiceover(text=r"""A bold zero denotes a vector whose components are all
+        zeros.""") as tracker:
+            self.add(Vzero)
+            self.play(Indicate(Vzero))
+            self.wait(tracker.duration/2)
+            self.play(FadeOut(Vzero))
+
+        Vzero1 = MathTex(r"\Vect{0}=", nc.V0(1).latex(), ",",  tex_template = myTemplate,)
+        Vzero2 = MathTex(r"\Vect{0}=", nc.V0(2).latex(), ",",  tex_template = myTemplate,)
+        Vzero3 = MathTex(r"\Vect{0}=", nc.V0(3).latex(), ",",  tex_template = myTemplate,)
+        Vzero6 = MathTex(r"\Vect{0}=", nc.V0(6).latex(), ",",  tex_template = myTemplate,)
+        VzeroN = MathTex(r"\Vect{0}\in\R[100]",             tex_template = myTemplate,)
+        grp2   = VGroup(Vzero1,Vzero2,Vzero3,Vzero6,VzeroN).arrange(RIGHT, buff=0.7)
+        with self.voiceover( text = r"""Note that a bold zero does not indicate its number of
+        components. Usually, the number of zeros is inferred from context.""" ) as tracker:
+            self.add(grp2)
+            self.wait(tracker.duration)
+            self.play(FadeOut(grp2),FadeOut(Notac),FadeOut(definition))
+            self.wait(1.5)
+
+#+END_SRC
+
+#+call: running(file="L01_V01_Vectors", scene="2")
+#+call: runningHD(file="L01_V01_Vectors", scene="2")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E02_VectorsNotation.mp4
+
+
+** Scene 3 - Selection of Elements from a Vector in \R[n]
+  
+#+call: running(file="L01_V01_Vectors", scene="3")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E03_VectorsElements.mp4
+
+#+name: L01_V01_E03_VectorsElements
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V01_Vectors.py
+class L01_V01_E03_VectorsElements(VoiceoverScene):
+    def construct(self):
+        self.set_speech_service( AzureService(voice="en-GB-RyanNeural" ) )
+        #self.set_speech_service(GTTSService(lang="es", tld="com"))
+        myTemplate = TexTemplate()
+        myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+        
+        # Lateral copyright
+        <<copyrightLateral>>
+        
+        # Notation
+        Notac = Tex(r"\textbf{Notation for Elements:}",
+                 tex_template = myTemplate,
+                 font_size=50).set_color(BLUE).to_corner(UL)
+        self.wait()
+        self.add(Notac)
+        self.wait()
+        
+        # Elements of a Vector
+        v_generic  = nc.Vector(sp.symbols('a:5')[1:],'h')
+        cs = MathTex(r"\Vect{a}=",
+                     v_generic.latex(),
+                     tex_template = myTemplate,)
+        
+        with self.voiceover(text = r"""It is customary to denote each element of a vector with the letter
+        of its name in regular font.""" ) as tracker:
+            self.wait()
+            self.play(FadeIn(cs), run_time=0.5)
+            self.play( Circumscribe(cs[1][1]),
+                       Circumscribe(cs[1][4]),
+                       Circumscribe(cs[1][7]),
+                       Circumscribe(cs[1][10]),
+                       run_time=tracker.duration/2)
+            
+        with self.voiceover(text = r"""indicating with a subscript its position in the
+        list.""" ) as tracker:
+            self.play( Flash(cs[1][2]),
+                       Flash(cs[1][5]),
+                       Flash(cs[1][8]),
+                       Flash(cs[1][11]),
+                       run_time=tracker.duration)
+            self.play(FadeOut(cs))
+            
+        c = nc.Vector([sp.pi,nc.fracc(3,4),0,0.11],'h')
+        vector_c = MathTex(r"\Vect{c}=",c.latex(),tex_template = myTemplate,)
+        A = VGroup(*[ MathTex("c_"+str(i+1)+"=&"+sp.latex(e))  for i,e in enumerate(c.lista)
+                     ]).arrange(DOWN,aligned_edge=LEFT, buff=.5)
+        B = Brace(A, LEFT)
+        C = VGroup(A,B)        
+        Elements_c   = VGroup(vector_c, C).arrange(RIGHT, buff=1)
+        with self.voiceover(text = r"""Thus, for vector C """) as tracker:
+            self.play(FadeIn(vector_c))
+            self.play(GrowFromCenter(B),FadeIn(A))
+            
+        with self.voiceover(text = r"""with c 1 we denote its first component""") as tracker:
+            self.play( Indicate(vector_c[1][1]),    Indicate(A[0]) )
+        with self.voiceover(text = r"""with c 2 the second""") as tracker:
+            self.play( Indicate(vector_c[1][3:6]),  Indicate(A[1]) )
+        with self.voiceover(text = r"""and in the same way with the rest of the components""") as tracker:
+            self.play( Indicate(vector_c[1][7],
+                                run_time=tracker.duration/2),
+                       Indicate(A[2],
+                                run_time=tracker.duration/2) )
+            self.play( Indicate(vector_c[1][9:13],
+                                run_time=tracker.duration/2),
+                       Indicate(A[3],
+                                run_time=tracker.duration/2) )
+            self.wait(0.5)
+            self.play( FadeOut(vector_c), FadeOut(B), FadeOut(A) )
+            self.wait(0.5)
+
+        with self.voiceover(text = r"""The fact of employing two types of fonts:""" ) as tracker:
+            self.add(cs)
+            self.wait(tracker.duration)
+            
+        with self.voiceover(text = r"""with bold fonts for vectors and regular for components,
+        makes it difficult to distinguish them at first glance""" ) as tracker:
+            self.play( Indicate(cs[0][ 0],scale_factor=2.),
+                       Indicate(cs[0][ 0],scale_factor=2.),
+                       Indicate(cs[1][ 1],scale_factor=2.),
+                       Indicate(cs[1][ 4],scale_factor=2.),
+                       Indicate(cs[1][ 7],scale_factor=2.),
+                       Indicate(cs[1][10],scale_factor=2.), run_time=tracker.duration*2/3)
+
+        MTa = MathTex(r"\eleVR{a}{i}",tex_template = myTemplate).scale(3)
+        MTb = MathTex(r"{a}_{i}=",tex_template = myTemplate).scale(3).next_to(MTa, LEFT)
+        VG  = VGroup(MTb,MTa) 
+        with self.voiceover(text = r"""A clearer and more operational notation would use a single font type,
+        where the selection of elements is denoted with an operator. For instance, with a vertical bar.""" ) as tracker:
+            self.play(cs.animate.to_corner(DL),
+                      run_time=tracker.duration*4/5)
+            self.play(Indicate(VG[1][0][1]))
+            self.wait(0.5)
+
+        def GenericVector(s,n):
+            elem = lambda s,i: sp.Symbol(r'\eleVR{'+ s +'}{'+ str(i) + '}')
+            return nc.Vector([elem(s,i) for i in range(1,n+1)], 'h')
+        
+        v_generic2 = GenericVector('a',4)
+        cs2 = MathTex(r"=",
+                     v_generic2.latex(),
+                     tex_template = myTemplate,).next_to(cs, RIGHT)
+        
+        VGB = VGroup(*[MathTex(sp.latex(e) + "=\; & \eleVR{a}{" + str(i) + "}",
+                               tex_template = myTemplate)
+                       for i,e in enumerate(v_generic.lista,1)
+                       ]).scale(3)
+        
+        with self.voiceover( text = r"""Therefore, to denote a component, we will write a
+        subscript with a vertical bar mediating between the vector and the index of the
+        component""" ) as tracker:
+            #self.add(VG[0])
+            self.wait(tracker.duration/3)
+            self.play(Indicate(VG[1][0][1:], run_time=tracker.duration/4))
+            #self.wait(tracker.duration/3)
+            self.add(VG[1][0][0])
+            self.play(Indicate(VG[1][0][0],  run_time=tracker.duration/5))
+            self.play(Indicate(VG[1][0][-1], run_time=tracker.duration/5))
+            #self.play(Indicate(VG[1][0][0],  run_time=tracker.duration/6))
+            self.play(Write(VG[0]))
+            self.play(VG.animate.move_to([0,0,0]), run_time=tracker.duration/6)
+            
+            source0 = VG[0][0]
+            source1 = VG[1][0]
+            target  = VGB[0][0]
+
+            transform_index0 = [[0,1,2], [0,1,2]]
+            transform_index1 = [[0,1,2], [3,4,5]]
+            
+            self.play(
+                ,*[
+                    ReplacementTransform(source0[i],target[j], rate_func=rate_functions.smooth)
+                    for i,j in zip(*transform_index0)
+                ],
+                ,*[
+                    ReplacementTransform(source1[i],target[j], rate_func=rate_functions.smooth)
+                    for i,j in zip(*transform_index1)
+                ],
+                run_time=tracker.duration/5)
+            
+            self.play(FadeIn(cs2) )
+            self.play(FadeTransform(VGB[0][0][0:2],cs[1][ 1: 3]),
+                      FadeTransform(VGB[0][0][3:],cs2[1][ 1: 4]),
+                      run_time=.7)
+            self.play(FadeIn(VGB[1]), FadeOut(VGB[0][0][2]))
+            self.play(FadeTransform(VGB[1][0][0:2],cs[1] [4: 6]),
+                      FadeTransform(VGB[1][0][3:],cs2[1][ 5: 8]),
+                      FadeOut(VGB[1][0][2]),
+                      run_time=.6)
+            self.play(FadeIn(VGB[2]))
+            self.play(FadeTransform(VGB[2][0][0:2],cs[1][ 7: 9]),
+                      FadeTransform(VGB[2][0][3:],cs2[1][9:12]),
+                      FadeOut(VGB[2][0][2]),
+                      run_time=.5)
+            self.play(FadeIn(VGB[3]))
+            self.play(FadeTransform(VGB[3][0][0:2],cs[1][10:12]),
+                      FadeTransform(VGB[3][0][3:],cs2[1][13:16]),
+                      FadeOut(VGB[3][0][2]),
+                      run_time=.4)
+            self.play(FadeOut(Notac),FadeOut(cs),FadeOut(cs2))
+            
+        MTLR = MathTex(r"\eleVR{a}{i}",r"\;=\eleVL{a}{i}",tex_template = myTemplate).scale(3)
+        with self.voiceover( text = r"""Moreover, we will allow the selection operator to act both on the
+        right and on the left.""" ) as tracker:   
+            self.play(FadeIn(MTLR[0]), run_time=tracker.duration/2)
+            self.play(FadeIn(MTLR[1]))
+            self.wait(tracker.duration/3+0.5)
+            self.play(FadeOut(MTLR))
+            self.wait()
+            
+#+END_SRC
+
+
+#+call: running(file="L01_V01_Vectors", scene="3")
+#+call: runningHD(file="L01_V01_Vectors", scene="3")
+
+# file:./lib/media/videos/L01_V01_Vectors/480p15/L01_V01_E03_VectorsElements.mp4
+
+
+**** COMMENT In low resolution                                   :noexports:
+
+#+call: running(file="L01_V01_Vectors", scene="1,2,3,4")
+
+#+call: assembling(video="L01_V01_Vectors")
+
+#+call: fade(video="L01_V01_Vectors")
+
+**** COMMENT In high resolution                                   :noexports:
+
+#+call: runningHD(file="L01_V01_Vectors", scene="1,2,3,4")
+
+#+call: assemblingHD(video="L01_V01_Vectors")
+
+#+call: fade(video="L01_V01_Vectors")
+
+# file:./L01_V01_Vectors.mp4
+
+  
+
+* Common Code Snippets
+
+** Loading the Manim and NacAL Library
+
+#+name: Loading the Manim and NacAL Library
+#+BEGIN_SRC python :exports none :results discard
+from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.gtts import GTTSService
+import nacal as nc
+import sympy as sp
+
+# FOR TRANSLATION (but I don't know how to generate the translated videos)
+from manim_voiceover.translate import get_gettext
+# It is good practice to get the LOCALE and DOMAIN from environment variables
+import os
+LOCALE = os.getenv("LOCALE")
+DOMAIN = os.getenv("DOMAIN")
+# The following function uses LOCALE and DOMAIN to set the language, and
+# returns a gettext function that is used to insert translations.
+_ = get_gettext()
+#+END_SRC
+
+
+#+name: Loading the Manim and NacAL Library with AzureService
+#+BEGIN_SRC python :results discard
+from manim import *
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.azure import AzureService
+import nacal as nc
+import sympy as sp
+# FOR TRANSLATION (but I don't know how to generate the translated videos)
+from manim_voiceover.translate import get_gettext
+# It is good practice to get the LOCALE and DOMAIN from environment variables
+import os
+LOCALE = os.getenv("LOCALE")
+DOMAIN = os.getenv("DOMAIN")
+# The following function uses LOCALE and DOMAIN to set the language, and
+# returns a gettext function that is used to insert translations.
+_ = get_gettext()
+#+END_SRC
+
+#+RESULTS: Loading the Manim and NacAL Library with AzureService
+
+** Defining Some Subclasses with General Definitions 
+  :PROPERTIES:  
+  :UNNUMBERED: t  
+  :END:  
+
+#+name: Defining My Scene with Voice
+#+BEGIN_SRC python :noweb no-export :results discard
+
+class MySceneWithVoice(VoiceoverScene):
+    def very_short_pause(self, n=0.3):
+        self.wait(n)
+    def short_pause(self, n=0.5):
+        self.wait(n)
+    def pause(self, n=1):
+        self.wait(n)
+    def medium_pause(self, n=1.5):
+        self.wait(n)
+    def long_pause(self, n=3):
+        self.wait(n)
+    def very_long_pause(self, n=5):
+        self.wait(n)
+
+    <<Credits in Different Parts of the Screen>>
+         
+#+END_SRC
+
+#    by    = MathTex(r"\cdot")
+#    equals  = MathTex("=")
+#    where  = Tex("where")
+#    pycomma = Tex(";")
+
+#+name: Credits in Different Parts of the Screen
+#+BEGIN_SRC python :results discard
+def credits(self, variant=1):
+    def analyze_chosen_option(type):
+        'Analysis of the chosen elimination options'
+        list_options = [100, 20, 10, 4, 2, 1]
+        option_set = set()
+        for t in list_options:
+            if (type - (type % t)) in list_options:
+                option_set.add(type - (type % t))
+                type = type % t
+        return option_set    
+    copyright = Tex(r"\textcopyright{\;} 2026\; Marcos Bujosa")
+    if 1 in analyze_chosen_option(variant):
+        stampRight  = VGroup(copyright.copy()).rotate(PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        self.add(stampRight)
+    if 2 in analyze_chosen_option(variant):
+        stampLeft  = VGroup(copyright.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        self.add(stampLeft)
+    if 4 in analyze_chosen_option(variant):
+        stampBottom = VGroup(copyright.copy()).rotate(0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        self.add(stampBottom)
+    if 10 in analyze_chosen_option(variant):
+        stampTop   = VGroup(copyright.copy()).rotate(0).scale(0.5).to_edge(UP, buff=0.1).set_color(GRAY_D)
+        self.add(stampTop)
+
+#+END_SRC
+
+# ** Credits
+
+#+name: copyright
+#+BEGIN_SRC python :noweb tangle :results discard
+class ZCredits(Scene):
+    def construct(self):
+        copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
+        github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
+        CGG  = VGroup(copyright, github).scale(1.1)
+        self.add(CGG)
+        self.wait(10)
+#+END_SRC
+
+# +call: running(file="L01_V01_Vectors", scene="4")
+
+# +call: runningHD(file="L01_V01_Vectors", scene="4")
+
+# +call: assemblingHD(video="L01_V01_Vectors")
+
+# +call: fade(video="L01_V01_Vectors")
+
+*** Defining Vectors in R2 and R3
+
+These classes define vectors in $\R[2]$ and $\R[3]$ to be represented with drawings.
+
+#+name: Definition of VectorR2
+#+BEGIN_SRC python :results discard
+
+class VectorR2():
+    def __init__(self, list, rpr='c', color=GRAY_B):
+        """Initializes a Vector with a list"""
+        coords = list + [0] if len(list) < 3 else list        
+        self.color = color
+        #self.coords = tuple(coords)
+        #self.coords = tuple([float(i) for i in coords])
+        self.coords = tuple([int(i) if float(i) == int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords[:2], rpr)
+        self.tex = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+
+    def dot(self, axes, radius=0.08):
+        return Dot(axes.c2p(*self.coords), radius=radius, color=self.color)
+
+    def v_line(self, axes):
+        return axes.get_vertical_line(axes.c2p(*self.coords), color=self.color)
+
+    def h_line(self, axes):
+        return axes.get_horizontal_line(axes.c2p(*self.coords), color=self.color)
+
+    def arrow(self, axes):
+        return axes.get_vector(self.Vector.lista, stroke_color=self.color, stroke_width=4)
+
+#+END_SRC
+
+
+#+name: Definition of VectorR3
+#+BEGIN_SRC python :results discard
+
+class VectorR3():
+    def __init__(self, list, rpr='c', color=GRAY_B):
+        """Initializes a Vector with a list"""
+        coords = list + [0] if len(list) < 3 else list
+        self.color = color
+        #self.coords = tuple(coords)
+        self.coords = tuple([int(i) if float(i) == int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords, rpr)
+        self.tex = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+        self.projXY = self.coords[:-1] + (0,)
+        self.projZ  = (0, 0,) + (self.coords[-1],)
+
+    def dot(self, axes, radius=0.08):
+        return Dot3D(axes.c2p(*self.coords), radius=radius, color=self.color)
+
+    def x_line(self, axes):
+        return axes.get_vertical_line(axes.c2p(*self.projXY), color=self.color)
+    
+    def y_line(self, axes):
+        return axes.get_horizontal_line(axes.c2p(*self.projXY), color=self.color)
+    
+    def z_line(self, axes):
+        return Line3D(start=axes.c2p(*self.projZ), end=axes.c2p(*self.coords), thickness=0.01)
+    
+    def v_line(self, axes):
+        return Line3D(start=axes.c2p(*self.projXY), end=axes.c2p(*self.coords), thickness=0.01)
+    
+    def xy_line(self, axes):
+        return Line3D(start=np.array([0, 0, 0]), end=axes.c2p(*self.projXY), thickness=0.01)
+    
+    def proj_x_line(self, axes):
+        return axes.get_horizontal_line(axes.c2p(*self.projXY), color=self.color)
+    
+    def proj_y_line(self, axes):
+        return axes.get_horizontal_line(axes.c2p(*self.coords), color=self.color)
+
+    def proj_z_line(self, axes):
+        return Line3D(start=axes.c2p(*self.projZ), end=axes.c2p(*self.coords), thickness=0.01)
+
+    def arrow(self, axes):
+        return Arrow3D(
+            start=np.array(axes.c2p(0, 0, 0)),
+            end=np.array(axes.c2p(*self.coords)),
+            resolution=8,
+            color=self.color)
+
+#+END_SRC
+
+*** Inserting a Video in a Scene
+
+#+name: Definition of VideoStatus and VideoMobject
+#+BEGIN_SRC python :results discard
+import cv2 # needs opencv-python https://pypi.org/project/opencv-python/
+from PIL import Image, ImageOps
+from dataclasses import dataclass
+
+@dataclass
+class VideoStatus:
+    time: float = 0
+    videoObject: cv2.VideoCapture = None
+    def __deepcopy__(self, memo):
+        return self
+
+class VideoMobject(ImageMobject):
+    '''
+    Following a discussion on Discord about animated GIF images.
+    Modified for videos
+
+    Parameters
+    ----------
+    filename
+        the filename of the video file
+
+    imageops
+        (optional) possibility to include a PIL.ImageOps operation, e.g.
+        PIL.ImageOps.mirror
+
+    speed
+        (optional) speed-up/slow-down the playback
+
+    loop
+        (optional) replay the video from the start in an endless loop
+
+    https://discord.com/channels/581738731934056449/1126245755607339250/1126245755607339250
+    2023-07-06 Uwe Zimmermann & Abulafia
+    2024-03-09 Uwe Zimmermann
+    '''
+    def __init__(self, filename=None, imageops=None, speed=1.0, loop=False, **kwargs):
+        self.filename = filename
+        self.imageops = imageops
+        self.speed = speed
+        self.loop = loop
+        self._id = id(self)
+        self.status = VideoStatus()
+        self.status.videoObject = cv2.VideoCapture(filename)
+
+        self.status.videoObject.set(cv2.CAP_PROP_POS_FRAMES, 1)
+        ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
+            img = Image.fromarray(frame)
+
+            if imageops is not None:
+                img = imageops(img)
+        else:
+            img = Image.fromarray(np.uint8([[63, 0, 0, 0],
+                                        [0, 127, 0, 0],
+                                        [0, 0, 191, 0],
+                                        [0, 0, 0, 255]
+                                        ]))
+        super().__init__(img, **kwargs)
+        if ret:
+            self.add_updater(self.videoUpdater)
+
+    def videoUpdater(self, mobj, dt):
+        if dt == 0:
+            return
+        status = self.status
+        status.time += 1000 * dt * mobj.speed
+        self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+        ret, frame = self.status.videoObject.read()
+        if (ret == False) and self.loop:
+            status.time = 0
+            self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+            ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # needed here?        
+            img = Image.fromarray(frame)
+
+            if mobj.imageops is not None:
+                img = mobj.imageops(img)
+            mobj.pixel_array = change_to_rgba_array(
+                np.asarray(img), mobj.pixel_array_dtype
+            )
+
+#+END_SRC
+
+
+*** Moving Mini-scenes to an Auxiliary Subdirectory
+
+#+call: move(file="L01_V04_E03_ProductInR3_3D.mp4")
+#+call: move(file="L01_V03_E03_SumInRn_3D.mp4")
+
+#+name: move
+#+BEGIN_SRC bash :var file="L01_V04_E03_ProductInR3_3D.mp4" :dir /home/marcos/SynologyDrive/ReposGH/Docencia/videoMath2/lib/media/videos/L01_V01_Vectors/480p15/ :results silent
+mkdir -p /home/marcos/SynologyDrive/ReposGH/Docencia/videoMath2/lib/media/videos/L01_V01_Vectors/480p15/aux_movie_files
+mv $file aux_movie_files/
+#+END_SRC
+
+#+call: moveHD(file="L01_V04_E03_ProductInR3_3D.mp4")
+#+call: moveHD(file="L01_V03_E03_SumInRn_3D.mp4")
+
+#+name: moveHD
+#+BEGIN_SRC bash :var file="L01_V04_E03_ProductInR3_3D.mp4" :dir /home/marcos/CloudStation/ReposGH/Docencia/videoMath2/lib/media/videos/L01_V03_SumOfVectors-II/1080p60/ :results silent
+mv $file aux_movie_files/
+#+END_SRC
+
+*** COMMENT Code to Get Subindexes of Characters in Expressions
+
+This code indexes the elements of expressions in \LaTeX to
+facilitate the transformation of one expression into another by transforming certain elements into others.
+
+#+name: Getting Subindexes of Characters in Expressions
+#+BEGIN_SRC python :results discard
+
+import itertools def get_sub_indexes(tex): ni = VGroup() colors =
+itertools.cycle([RED, TEAL, GREEN, BLUE, PURPLE]) for i in
+range(len(tex)): n = Text(f"{i}", color=next(colors)).scale(0.7)
+n.next_to(tex[i], DOWN, buff=0.01) ni.add(n) return ni
+
+#+END_SRC
+
+
+
+* Running: 1,2,3... Action!
+
+
+#+call: running(file="L01_V01_Vectors", scene="1,2,3,4")
+
+# +call: FusionSumR3()
+
+# +call: FusionSumRn()
+
+#+call: assembling(video="L01_V01_Vectors")
+
+#+call: fade(video="L01_V01_Vectors")
+
+
+#+call: runningHD(file="L01_V01_Vectors", scene="1,2,3,4")
+
+# +call: FusionSumR3_HD()
+
+# +call: FusionSumRn_HD()
+
+#+call: assemblingHD(video="L01_V01_Vectors")
+
+#+call: fade(video="L01_V01_Vectors")
+
+**** Generating a ~mpeg~ File for Each Scene
+
+- Low-quality version:
+
+#+call: running(file="L01_V01_Vectors", scene="1,2,3,4")
+
+#+name: running
+#+BEGIN_SRC bash :var file="L01_V01_Vectors" :var scene="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/videoMath2/lib :results silent
+echo $scene | manim -pql $file.py --disable_caching
+#+END_SRC
+
+- HD1080 quality version:
+
+#+call: runningHD(file="L01_V01_Vectors", scene="1,2,3,4")
+
+#+name: runningHD
+#+BEGIN_SRC bash :var file="L01_V01_Vectors" :var scene="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/videoMath2/lib :results silent
+echo $scene | manim -qh $file.py --disable_caching
+#+END_SRC
+
+**** Concatenating the Scenes into a Single ~mpeg~ File and Adding Background Music
+
+- Assembling the low-resolution version
+
+#+call: assembling(video="L01_V01_Vectors")
+
+# :var subdir="lib/media/videos" :var video="L01_V01_Vectors" :var quality="480p15"  :var music="music/3Blue1Brown-Zeta-X3" :results silent
+
+# ffmpeg -i $subdir/$video/$quality/$video.mp4 -i $music.mp3  -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+
+
+#+call: assembling(video="L01_V01_Vectors")
+
+#+name: assembling
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V01_Vectors" :var quality="480p15"  :var music="music/3Blue1Brown-Zeta-X3" :results silent
+ln -s -f "$(pwd)/$subdir/ZCredits/$quality/ZCredits.mp4" "$(pwd)/$subdir/$video/$quality/ZCredits.mp4"
+rm -f $subdir/$video/$quality/$video.mp4 list.txt
+for f in $subdir/$video/$quality/*.mp4; do echo file \'$f\' >> list.txt; done
+ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$quality/$video.mp4
+mkdir -p tmp
+
+ffmpeg -i $subdir/$video/$quality/$video.mp4 -i $music.mp3  -filter_complex "[0:a]apad[main]; [1:a]volume=0.03,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset ultrafast -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+#+END_SRC
+
+
+# #######################################
+
+- Assembling the HD1080 quality version
+
+#+call: assemblingHD(video="L01_V01_Vectors")
+
+#+name: assemblingHD
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var video="L01_V01_Vectors" :var quality="1080p60" :var music="music/3Blue1Brown-Zeta-X3" :results silent
+#ln -s -f "$(pwd)/$subdir/ZCredits/$quality/ZCredits.mp4" "$(pwd)/$subdir/$video/$quality/ZCredits.mp4"
+rm -f $subdir/$video/$quality/$video.mp4 list.txt
+for f in $subdir/$video/$quality/*.mp4 ; do echo file \'$f\' >> list.txt; done
+ffmpeg -f concat -safe 0 -i list.txt -c copy $subdir/$video/$quality/$video.mp4
+mkdir -p tmp
+ffmpeg -i $subdir/$video/$quality/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+#+END_SRC
+
+**** Fading to Black for the Last Seconds of the Video (and the Music).
+
+#+call: fade(video="L01_V01_Vectors")
+
+
+#+name: fade
+#+BEGIN_SRC bash :var video="L01_Vectors" :results silent
+dur=$(ffprobe -loglevel error -show_entries format=duration -of
+default=nk=1:nw=1 "tmp/$video.mp4") offset=$(bc -l <<< "$dur"-7)
+ffmpeg -i "tmp/$video.mp4" \ -filter_complex
+"[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=out:duration=6:start_time='$offset'[a]"
+\ -map "[v]" -map "[a]" -y $video.mp4
+#+END_SRC

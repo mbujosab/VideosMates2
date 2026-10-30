@@ -1,0 +1,30 @@
+#+TITLE: Videos for the Linear Algebra course (Mathematics II, GECO)
+#+AUTHOR: Marcos Bujosa
+
+English sources of videos V01-V04, written before the bilingual single source. From V05 on, each
+video is a single bilingual org in the parent folder (=tr("español", "English")=), whose tangle writes
+the English =py= to =../../videoMath2/lib/=. The folder =videoMath2= is only the English output
+(tangled =py=, Azure cache, =mp4= and =srt=); its git history (6 commits) is frozen since 2026-10-30.
+
+These four orgs tangle to =../../videoMath2/lib/=; their render and montage blocks still assume they
+run inside =videoMath2= (paths =lib/media/...=), so to re-render one, open it from there or adjust
+those paths.
+
+The videos follow the book [[https://mbujosab.github.io/CursoDeAlgebraLineal/][Curso de Álgebra Lineal]] and use its
+notation (LaTeX package =nacal.sty= and the Python module [[https://github.com/mbujosab/nacallib][nacal]]).
+Each video is an Org-mode literate file that tangles into =lib/*.py= and is
+rendered with [[https://www.manim.community/][Manim]] and [[https://github.com/ManimCommunity/manim-voiceover][manim-voiceover]].
+
+* Lesson 1
+
+** Video 1 - Vectors of \R[n]
+- Source: [[file:L01-V01-Vectors.org]] / [[file:../../videoMath2/lib/L01_V01_Vectors.py]]
+
+** Video 2 - Sum of vectors (I)
+- Source: [[file:L01-V02-SumOfVectors-I.org]] / [[file:../../videoMath2/lib/L01_V02_SumOfVectors-I.py]]
+
+** Video 3 - Sum of vectors (II): geometric interpretation
+- Source: [[file:L01-V03-SumOfVectors-II.org]] / [[file:../../videoMath2/lib/L01_V03_SumOfVectors-II.py]]
+
+** Video 4 - Scaling vectors
+- Source: [[file:L01-V04-ScalingVectors.org]] / [[file:../../videoMath2/lib/L01_V04_ScalingVectors.py]]

@@ -1,8 +1,11 @@
 # VideosMates2 — vídeos con Manim para Matemáticas II (GECO, UCM)
 
 Vídeos que siguen el libro *Curso de Álgebra Lineal* (fuentes en
-`../CursoDeAlgebraLineal-SRC/partes/`). Versión en español aquí; la
-versión en inglés vive en el repo hermano `../videoMath2`.
+`../CursoDeAlgebraLineal-SRC/partes/`). **Toda la fuente está aquí**: los org bilingües
+(desde V05) y, en `en/`, los org en inglés de V01-V04 (anteriores a la fuente bilingüe) y el
+prompt de traducción. `../videoMath2` es solo la **carpeta de salida del inglés** (py del tangle,
+caché de Azure de Ollie, mp4 y srt); su git está congelado desde el 2026-10-30 (no hacer commits
+allí; `LEEME.txt`).
 
 ## Antes de escribir cualquier escena
 
@@ -24,7 +27,7 @@ selector, "componente a componente", etc.).
 - El código común (carga de librerías, `LANG`, `tr`, voces, colores,
   `myTemplate`, `MiEscenaConVoz`, tarjeta de pausa, créditos,
   VectorR2/R3) vive en `Comunes.org`, que tangle `lib/vm2comun.py` en
-  los dos repositorios (solo difieren en `LANG`). Cada vídeo hace
+  `lib/` y en `../videoMath2/lib/` (solo difieren en `LANG`). Cada vídeo hace
   `from vm2comun import *` y declara `class ZCreditosFinales(CreditosFinales): pass`
   (manim solo renderiza clases definidas en el fichero del vídeo). Si se
   cambia algo común: tangle `Comunes.org` y todos los vídeos lo heredan.
@@ -374,6 +377,12 @@ Escribir las frases nuevas ya en la forma buena.
   (confinamiento) se deja como está hasta rehacer los determinantes.
 
 ## Reglas
+
+- **Copias de lo no versionado** (`lib/media` de los dos idiomas, mp4 y srt finales): solo en el
+  Synology. Mientras un vídeo no está publicado, su caché de voz (`lib/media/voiceovers`) es lo que
+  más importa: guarda las tomas aprobadas, y Azure no repite la misma toma. Tras publicar, se
+  puede borrar lo regenerable (`media/videos`, `Tex`, `images`); conviene conservar el mp4 y el srt
+  finales y la caché de voz, por si hay que retocar un vídeo publicado (V07 se retocó tras aprobarse).
 
 - No hacer commit ni push sin que Marcos lo pida. Los `.mp4`, `media/`,
   `tmp/` y `music/` están ignorados y así deben seguir.

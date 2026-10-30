@@ -1,0 +1,3251 @@
+#+TITLE: Lección 1 del curso - Vídeo 4
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+# +LaTeX_HEADER: \usepackage{pdfpages}
+# +LATEX_HEADER: \usepackage{fontspec}
+
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+# Para que no ejecute todo el código al exportar a pdf
+# +PROPERTY: header-args :eval never-export
+# +PROPERTY: header-args:emacs-lisp :session :results silent
+
+#+LATEX: \maketitle
+
+
+
+
+# +CALL: NombreEnChunksDeCodigo()
+# +NAME: NombreEnChunksDeCodigo
+# #+BEGIN_SRC emacs-lisp :results silent :exports none
+# (setq org-babel-exp-code-template
+#       (concat "\n#+ATTR_LATEX: :options label=%name\n"
+#               org-babel-exp-code-template))
+# 
+# #+END_SRC
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :eval export :results silent :exports results
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+
+
+(defvar my/src-block-names nil)
+
+(defun my/build-src-block-names (file)
+  "Construye una lista de (posicion . nombre) para bloques con #+NAME."
+  (setq my/src-block-names nil)
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-char (point-min))
+    (while (re-search-forward
+            "^#\\+NAME:[ \t]*\\(.+\\)\n.*#\\+BEGIN_SRC" nil t)
+      (push (cons (match-beginning 0)
+                  (string-trim (match-string 1)))
+            my/src-block-names)))
+  (setq my/src-block-names (nreverse my/src-block-names)))
+
+(defun my/org-html-src-block-with-name (src-block contents info)
+  (let* ((begin (org-element-property :begin src-block))
+         ;; Buscar el nombre cuya posición esté justo antes de este bloque
+         ;; y sea el más cercano
+         (label
+          (let ((best nil)
+                (best-pos -1))
+            (dolist (entry my/src-block-names)
+              (let ((pos (car entry))
+                    (name (cdr entry)))
+                ;; La posición en el fichero original es aproximada;
+                ;; buscamos la entrada cuya pos sea <= begin y la más cercana
+                (when (and (<= pos begin)
+                           (> pos best-pos))
+                  (setq best name)
+                  (setq best-pos pos))))
+            ;; Solo usar si está suficientemente cerca (500 chars)
+            (when (and best (< (- begin best-pos) 500))
+              best)))
+         (result (org-html-src-block src-block contents info)))
+    (if (and label (not (string-empty-p label)))
+        (concat
+         (format "<div class=\"src-block-name\"><code>%s</code></div>\n" label)
+         result)
+      result)))
+
+(defun my/html-export-to-file (&optional async subtreep visible-only body-only ext-plist)
+  (interactive)
+  (my/build-src-block-names (buffer-file-name))
+  (org-export-to-file 'my-html
+      (org-export-output-file-name ".html" subtreep)
+    async subtreep visible-only body-only ext-plist))
+
+(let ((backend (org-export-get-backend 'my-html)))
+  (if backend
+      (setf (org-export-backend-transcoders backend)
+            (cons '(src-block . my/org-html-src-block-with-name)
+                  (assq-delete-all 'src-block
+                                   (org-export-backend-transcoders backend))))
+    (org-export-define-derived-backend 'my-html 'html
+      :menu-entry '(?H "Export to HTML with src names"
+                    ((?H "To file" my/html-export-to-file)))
+      :translate-alist '((src-block . my/org-html-src-block-with-name)))))
+#+END_SRC
+
+
+#+HTML_HEAD: <style>
+#+HTML_HEAD: .src-block-name {
+#+HTML_HEAD:   margin-bottom: 0;
+#+HTML_HEAD:   padding: 2px 10px;
+#+HTML_HEAD:   background: #e8e8e8;
+#+HTML_HEAD:   border: 1px solid #ccc;
+#+HTML_HEAD:   border-bottom: none;
+#+HTML_HEAD:   display: inline-block;
+#+HTML_HEAD: }
+#+HTML_HEAD: .src-block-name code {
+#+HTML_HEAD:   font-family: monospace;
+#+HTML_HEAD:   font-size: 0.9em;
+#+HTML_HEAD:   font-weight: bold;
+#+HTML_HEAD:   color: #333;
+#+HTML_HEAD: }
+#+HTML_HEAD: </style>
+
+
+
+* Geometric Interpretation of Vector Scaling - V04
+
+
+** Full video - Geometric Interpretation of Vector Scaling
+
+*** Carga de las librerías de python necesarias
+
+Este bloque contiene la carga de librerías y las definiciones comunes a todas las escenas.
+#+CAPTION: Carga de librerías y las definiciones comunes a todas las escenas
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py
+<<Carga de la librería Manim y NacAL>>
+
+<<Definición de mi escena con voz>>
+
+<<Servicio de voz AzureService>>
+
+<<Servicio de voz de Google>>
+#+END_SRC
+
+**** Carga de las librerías para incorporar un vídeo como elemento de una escena
+
+Este bloque contiene las definiciones que permiten insertar un vídeo dentro de una escena (en este caso introducir el vídeo 3D en la escena con las narraciones que deben acompañar al vídeo.
+
+Es como está hecha la parte de $\mathbb{R}^3$, ya que las escenas en 3D no permiten añadir una narración (al menos por el momento).
+
+#+name: Definiciones para insertar un vídeo dentro de una escena
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py
+<<Definición de VideoStatus y VideoMobject>>
+#+END_SRC
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="6")
+
+
+** Estructura del vídeo completo (todas las escenas sin interrupción)
+
+Este bloque contiene el vídeo con todas las escenas sin interrupción.
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py
+class L01_V04_Geometric_Interpretation_of_Vector_Scaling(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<TexTemplate con LaTeX-nacal>>
+
+        <<Primera escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+        
+        <<Segunda escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+        
+        <<Definición de VectorR2>>
+        <<Tercera escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+        
+        <<Cuarta escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+        
+        <<Quinta escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects] )  # borrado de todo
+        
+        <<Créditos finales>>
+#+END_SRC
+
+
+** Código de cada escena
+
+*** Primera escena
+
+Definición de la operación producto por un escalar.
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+
+# Portada
+titulo = Title("Scalar multiplication of vectors in " + r"\R[n]",
+             tex_template = myTemplate,
+             font_size=70).set_color(BLUE)
+self.play(Write(titulo))
+self.pausa_media()
+self.play(FadeOut(titulo))
+
+operacionProducto = Tex("Scalar multiplication",
+                 tex_template = myTemplate, font_size=70
+                 ).to_edge(UP).set_color(BLUE)
+
+operacionDescripcion = Tex("The product is defined component-wise.",
+                 tex_template = myTemplate,
+                 ).move_to([0,2.5,0]).to_edge(LEFT)
+# Ejemplos
+EjR3 = Tex(r"\textbf{" + "Example in " + r"\R[3]:}",
+         tex_template = myTemplate,
+         font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+
+EjR4 = Tex(r"\textbf{" + "Example in " + r"\R[4]:}",
+         tex_template = myTemplate,
+         font_size=50).set_color(GREEN).next_to(operacionDescripcion, DOWN, aligned_edge=LEFT)
+
+a    = 3
+b    = nc.Vector( [0, 1, 2])        
+s1 = MathTex(a,                tex_template = myTemplate,)
+por= MathTex(r"\cdot",         tex_template = myTemplate,)
+s3 = MathTex(b.latex(),        tex_template = myTemplate,)
+igual = MathTex(r"=",          tex_template = myTemplate,)
+s5 = MathTex((a*b).latex(),    tex_template = myTemplate,)
+grp1 = VGroup(s1,por,s3,igual,s5).arrange(RIGHT)
+
+with self.voiceover(text="""Beyond adding vectors,""") as tracker:
+    self.pausa_corta(tracker.duration)
+    
+self.add(operacionProducto)
+self.add(operacionDescripcion)
+
+with self.voiceover(text="""we can also scale them by multiplying by a scalar, producing a scalar multiple.""") as tracker:
+    self.add(EjR3)
+    self.play(FadeIn(grp1[2]), run_time=tracker.duration/4)
+    self.play(FadeIn(grp1[:2]), run_time=tracker.duration*3/4)
+
+with self.voiceover(text="""The result is another vector, where each component is computed separately.""") as tracker:
+    self.pausa_media()
+    self.add(grp1[3])
+    self.add(grp1[4][0][:2])
+    self.add(grp1[4][0][-2:])
+
+with self.voiceover(text="""The first component is just the scalar times the first component of the original vector.""") as tracker:
+    self.play(FadeIn(grp1[4][0][2]), run_time=tracker.duration/3)
+    self.play(Circumscribe(grp1[0]),
+              Circumscribe(grp1[2][0][2]),
+              Indicate(grp1[4][0][2]),                      
+              run_time=tracker.duration*2/3)
+    self.pausa_corta()
+    
+with self.voiceover(text="""And we compute the second component — and all the others — in exactly the same way.""") as tracker:
+    self.play(FadeIn(grp1[4][0][3]), run_time=tracker.duration/3)
+    self.play(Circumscribe(grp1[0]),
+              Circumscribe(grp1[2][0][3]),
+              Indicate(grp1[4][0][3]),
+              run_time=tracker.duration/3)
+    self.play(FadeIn(grp1[4][0][4]),
+              run_time=tracker.duration/6)
+    self.play(Circumscribe(grp1[0]),
+              Circumscribe(grp1[2][0][4]),
+              Indicate(grp1[4][0][4]),
+              run_time=tracker.duration/3 )
+    self.pausa_muy_corta()
+    self.play(FadeOut(grp1))
+
+escalar = sp.symbols('\lambda')
+vga = MathTex(escalar, tex_template = myTemplate)
+
+v_generico_b  = nc.Vector(sp.symbols('b:5')[1:])
+vgb = MathTex(v_generico_b.latex(), tex_template = myTemplate)
+
+vgab = MathTex((escalar * v_generico_b).latex(), tex_template = myTemplate)
+
+grp2 = VGroup(vga,por,vgb,igual,vgab).arrange(RIGHT)
+with self.voiceover(text="""This describes scalar multiplication in R 4.""") as tracker:
+    self.play(FadeTransform(EjR3,EjR4))
+    self.play(FadeIn(grp2))
+    self.pausa()
+
+with self.voiceover(text="""We typically simplify the notation by omitting the multiplication dot.""") as tracker:
+    self.pausa(tracker.duration/3)
+    self.play(FadeOut(grp2[1]),
+              grp2[0].animate.move_to(grp2[1]),
+              run_time=2*tracker.duration/3)
+    self.pausa_muy_corta()
+    
+with self.voiceover(text="""As with addition,""") as tracker:
+    self.pausa(tracker.duration)
+
+with self.voiceover(text="""in R n, we want a definition that doesn’t require listing every component — especially when n is large.""") as tracker:
+    self.wait(tracker.duration/6)
+    self.play(Indicate(vga[0][4:-4]),
+              Indicate(vgb[0][4:-4]),
+              Indicate(vgab[0][4:-4]),
+              run_time=2*tracker.duration/3)
+    self.wait(1.5*tracker.duration/6)
+
+Defn = Tex(r"\textbf{" + "Definition" + ":}",
+         tex_template = myTemplate,
+         font_size=50).set_color(RED).next_to(operacionDescripcion,
+                                              DOWN,
+                                              aligned_edge=LEFT)
+
+with self.voiceover(text="""We can do this using the component selector operator.""") as tracker:
+    self.play(FadeOut(grp2),
+              FadeOut(EjR4),
+              run_time=tracker.duration/3)
+    self.add(Defn)
+
+cvab = MathTex(r"\elemRp{\lambda\Vect{a}}{i}", tex_template = myTemplate)
+cvb  = MathTex(r"\lambda\eleVRpE{a}{i}", tex_template = myTemplate)
+eq_suma = VGroup(cvab,igual,cvb).arrange(RIGHT).scale(1.5)
+
+donde = Tex("where")
+indices = MathTex(r"i=1:n", tex_template = myTemplate)
+pc_indices = VGroup(donde,indices).arrange(RIGHT, buff=1)
+grp3 = VGroup(eq_suma, pc_indices).arrange(RIGHT, buff=1)
+
+with self.voiceover(text="""It lets us say that the i component of the scalar multiple is just""") as tracker:
+    
+    self.play(FadeIn(grp3[0][0],
+                     scale=1.5,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=tracker.duration-1.5)            
+    self.play(FadeIn(grp3[0][1],
+                     scale=1.5,
+                     rate_func=rate_functions.exponential_decay))
+
+with self.voiceover(text="""the scalar times the i component of the vector;""") as tracker:
+
+    self.play(FadeIn(grp3[0][2:],
+                     scale=0.5,
+                     rate_func=rate_functions.exponential_decay),
+              run_time=tracker.duration+0.2)
+
+with self.voiceover(text=r"""for every index i from 1 to n""") as tracker:
+    self.play(FadeIn(grp3[1]))
+    self.pausa_corta()
+
+with self.voiceover(text=r"""This gives us a useful associative rule:""") as tracker:
+    self.play(Indicate(eq_suma[0][0][0]),
+              Indicate(eq_suma[0][0][3]),
+              Indicate(eq_suma[2][0][1]),
+              Indicate(eq_suma[2][0][5]),
+              run_time=tracker.duration)
+
+with self.voiceover(text=r"""taking the i component of a scalar multiple is the same as multiplying the scalar by the i component.""") as tracker:            
+    source0 = MathTex(r"\elemRp{\lambda\Vect{a}}{i}",
+                      tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+    target0 = MathTex(r"\lambda\eleVRpE{a}{i}",
+                      tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+    source1 = target0.copy()
+    target1 = source0.copy()
+
+    source2 = source0.copy()
+    target2 = target0.copy()
+
+    VG0 = VGroup(source0,target0)
+    self.add(source0)
+    transform_index0 = [[0,1,2,3,4,5],
+                        [1,0,2,5,3,4]]
+    self.play(
+        *[
+            ReplacementTransform(source0[i],target0[j], rate_func=rate_functions.smooth)
+            for i,j in zip(*transform_index0)
+        ],
+        run_time=tracker.duration)
+    
+with self.voiceover(text="""And conversely, we can write it the other way around.""") as tracker:            
+    self.play(ReplacementTransform(target0,source1))
+    
+    VG1 = VGroup(source1,target1)
+    transform_index1 = [[0,1,2,3,4,5],
+                        [1,0,2,4,5,3]]
+    self.play(
+        *[
+            ReplacementTransform(source1[i],target1[j], rate_func=rate_functions.smooth)
+            for i,j in zip(*transform_index1)
+        ],
+        run_time=tracker.duration)
+    
+with self.voiceover(text="""In other words, it doesn’t matter whether we apply the selector before or after multiplying by the scalar.""") as tracker:
+    self.play(ReplacementTransform(target1,source2))
+    VG2 = VGroup(source2,target2)
+    self.play(
+        *[
+            ReplacementTransform(source2[i],target2[j], rate_func=rate_functions.there_and_back_with_pause)
+            for i,j in zip(*transform_index0)
+        ],
+        run_time=tracker.duration)
+    
+with self.voiceover(text="""This is a form of associativity.""") as tracker:            
+    self.remove(target1,source2,target2)
+    self.play(Indicate(eq_suma[0][0][0]),
+              Indicate(eq_suma[0][0][3]),
+              Indicate(eq_suma[2][0][1]),
+              Indicate(eq_suma[2][0][5]),
+              run_time=tracker.duration)
+    self.play(FadeOut(grp3), run_time=0.2)
+    #self.pausa_muy_corta()
+
+with self.voiceover(text="""Therefore, parentheses are unnecessary—the expression is unambiguous without them, just as with ordinary multiplication of numbers.""") as tracker:
+    
+    target3 = MathTex(r"\lambda\eleVR{a}{i}",
+                      tex_template = myTemplate).next_to(grp3, DOWN, buff=0).scale(1.5)[0]
+    grp4 = VGroup(cvab,igual,cvb,igual.copy(),target3).arrange(RIGHT, buff=1)
+
+    producto = MathTex(r"(ab)c\;=\;a(bc)\;=\;abc",
+                       tex_template = myTemplate).next_to(grp4, DOWN, buff=1.2).scale(1.5)[0]
+
+    self.play(FadeIn(grp4),
+              run_time=tracker.duration/3)
+    
+    self.play(Indicate(target3), run_time=tracker.duration/3)
+
+    self.play(FadeIn(producto))
+    
+    self.pausa(tracker.duration/3)
+    self.pausa_muy_corta(1.5)        
+#+END_SRC
+
+*** Segunda escena
+
+Interpretación geométrica del producto de dos números reales
+
+#+name: Segunda escena
+#+begin_src python :eval no
+# --- Títulos ---
+cabecera = Tex("Geometric interpretation of the product",
+                    tex_template = myTemplate,
+                    font_size=70).to_edge(UP).set_color(BLUE)
+
+cabecera2 = Tex("Geometric interpretation of the product of numbers",
+               tex_template = myTemplate,
+               font_size=70).to_edge(UP).set_color(BLUE).scale(0.6).shift(0.1*UP)
+
+# --- Utilidades de etiquetas en ejes ---
+def coordenada_x(x,ax, label='', pos=0):
+    if x==int(x):
+        xlabel = (ax[0][2][int(x)-1]).copy()
+    else:
+        label = label if label else f"{x}"
+        xlabel = Tex(label, font_size=30)
+        pos_label = UP if pos else DOWN
+        xlabel.next_to(ax.c2p(x,0), pos_label, buff=0.6)
+    return xlabel
+
+def coordenada_y(y,ax, label='', pos=0):
+    if y==int(y):
+        ylabel = (ax[1][2][int(y)-1]).copy()
+    else:
+        label = label if label else f"{y}"
+        ylabel = Tex(label, font_size=30)
+        pos_label = RIGHT if pos else LEFT
+        ylabel.next_to(ax.c2p(0,y), pos_label, buff=0.5)
+    return ylabel
+        
+coordenadas_xy = lambda x,y,ax,labelx='',labely='',posx=0,posy=0: (coordenada_x(x,ax,labelx,posx),
+                                                                   coordenada_y(y,ax,labely,posy))
+
+# --- Construcciones geométricas ---
+def retículaProducto(a, b: int, ax: Axes) -> VGroup:
+    def cuadricula(a: int, b: int, ax: Axes):
+        base = VGroup(*[Square().scale(0.5) for s in range(0,int(a*b))])
+        base.arrange_in_grid(rows=b,
+                             flow_order="ru",
+                             buff=0).next_to(ax.coords_to_point(0, 0),
+                                             UR,
+                                             buff=0)
+        return Group(*[base[c[0]:c[1]] for c in [(a*i,a*(i+1)) for i in range(b)]])
+    
+    def rectangulo(a, b: int, ax: Axes):
+        base  = VGroup(*[Rectangle(height=2.0, width=2.0*a).scale(0.5) for s in range(0,b)])
+        posicion = UR if a>0 else UL
+        tabla = base.arrange_in_grid(rows=b,
+                                     flow_order="ru",
+                                     buff=0).next_to(ax.coords_to_point(0, 0),
+                                                     posicion,
+                                                     buff=0)
+        return tabla
+    return cuadricula(a, b, ax) if isinstance(a, int) else rectangulo(a, b, ax)
+
+def productoEnteros(a,b,ax,tabla,duración=2):
+    print(len(tabla))
+    self.play([fila.animate.shift((len(tabla)-1-i)*a*RIGHT) for i,fila in enumerate(tabla)], run_time=duración/2)
+    self.play([fila.animate.shift(i*DOWN) for i,fila in enumerate(tabla)], run_time=duración/2)
+
+def producto(a,b,ax,tabla,duración=3):
+    self.play([fila.animate.shift((len(tabla)-1-i)*a*RIGHT) for i,fila in enumerate(tabla)], run_time=duración/3)
+    self.play([fila.animate.shift(i*DOWN) for i,fila in enumerate(tabla)], run_time=duración/3)
+    self.play([fila.animate.shift(i*UP) for i,fila in enumerate(tabla)], run_time=duración/3)
+
+def Arco(ax, b):
+    unidad = 1
+    arco = Arc(start_angle=0,  # Ángulo de inicio (90 grados en radianes)
+               angle=PI/2,       # Ángulo de arco (-90 grados en radianes)
+               radius=b*unidad,     # Radio del arco
+               arc_center=ax.c2p(0,0),
+               stroke_width=3,
+               color=YELLOW)
+    return arco
+                
+def Rectángulo(a, b, ax: Axes):
+        posición = UR if a>0 else UL
+        rectángulo = Rectangle(height=1.0,
+                               width=1.0*a).next_to(ax.coords_to_point(0, 0),
+                                                    posición,
+                                                    buff=0)
+        return rectángulo
+    
+def multiplica(a, b, ax: Axes):
+    """
+    Desplaza horizontalmente una recta que pasa por (a, 0) y (0, 1)
+    hasta que corte el eje vertical en el punto (0, b)
+    """
+    # Diagonal del rectángulo
+    punto_inferior = ax.coords_to_point(a, 0)
+    punto_superior = ax. coords_to_point(0, 1)
+    diagonal = Line(punto_inferior, punto_superior, color=BLUE)
+    # Extender la diagonal.
+    # Con la ecuación: y = 1 - x/a, podemos calcular puntos más alejados
+    if b>0:
+        y_arriba = 1+b # Punto lejano a la izquierda
+        x_arriba = -a*(y_arriba-1)
+        y_abajo = -1  # Punto lejano a la derecha
+        x_abajo = 2*a
+    else:
+        y_arriba = 2 # Punto lejano a la izquierda
+        x_arriba = -a
+        y_abajo = b-1  # Punto lejano a la derecha
+        x_abajo = -a*(y_abajo-1)
+        # Diagonal extendida para cortar los ejes tras el desplazamiento
+    diagonal_extendida = Line(
+        ax.coords_to_point(x_arriba, y_arriba),
+        ax.coords_to_point(x_abajo, y_abajo),
+        color=RED                )                
+    desplazamiento_x = a * (b - 1)
+    desplazamiento = ax.coords_to_point(desplazamiento_x, 0) - ax.coords_to_point(0, 0)
+    diagonal_extendida.shift(desplazamiento)
+    
+    return diagonal, diagonal_extendida
+
+# --- Arranque del vídeo ---
+self.creditos(1)
+
+ax = Axes(
+    x_length=12,
+    y_length=6,
+    x_range=[0, 12, 1],
+    y_range=[0, 6, 1],
+    tips=False,
+    axis_config={"include_numbers": True}
+)        
+
+resumen1 = Tex(r"""Before examining scalar multiplication in \R[2],""",
+               tex_template = myTemplate).scale_to_fit_width(config.frame_width*.9)
+
+resumen2 = Tex(r"""we need a geometric view of multiplying real numbers.""",
+               tex_template = myTemplate).next_to(resumen1, DOWN).scale_to_fit_width(config.frame_width*.9)
+
+with self.voiceover(text="""Before examining scalar multiplication in R 2,""") as tracker:
+    self.add(cabecera)            
+    self.play(Write(resumen1), run_time=tracker.duration+0.2)
+    
+with self.voiceover(text="""we will first build a geometric view of multiplying real numbers.""") as tracker:
+    self.play(Write(resumen2), run_time=tracker.duration)
+    self.play(FadeOut(resumen1),
+              FadeOut(resumen2))
+                
+with self.voiceover(text="""When working with natural numbers, we commonly associate their magnitudes with lengths and their products with areas.""") as tracker:
+
+    self.play(FadeIn(ax),
+              FadeTransform(cabecera, cabecera2),
+              run_time=tracker.duration/3)
+
+with self.voiceover(text="""Thus, 1 times 1 corresponds to a unit square with side length 1.""") as tracker:
+    
+    a=1
+    b=1
+    tabla = retículaProducto(a,b,ax)
+    self.pausa(tracker.duration/6)
+    xlabel,ylabel=coordenadas_xy(a,b,ax)
+    self.play(Indicate(xlabel,scale_factor=2.5))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+    self.remove(xlabel,
+                ylabel)
+    [self.play(FadeIn(base), run_time=.5) for base in tabla]
+    self.play(Indicate(tabla), run_time=tracker.duration/3)
+
+with self.voiceover(text="""Notice that the area of the square equals the length of the base.""") as tracker:            
+    self.pausa(tracker.duration/2)
+    self.play(tabla.animate.fade(0.8), run_time=tracker.duration/2)
+
+    
+with self.voiceover(text="""We can represent 3 times 1 as a rectangle with base 3 and height 1.""") as tracker:
+    
+    a=3.
+    b=1
+    tabla2 = retículaProducto(a,b,ax)
+    xlabel,ylabel=coordenadas_xy(a,b,ax)
+    self.play(Indicate(xlabel,scale_factor=2.5))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+    self.remove(xlabel,
+                ylabel)
+    [self.play(FadeIn(base), run_time=.5) for base in tabla2]
+    self.play(Indicate(tabla2), run_time=tracker.duration/3)
+    self.pausa(tracker.duration/4)
+
+with self.voiceover(text="""Again, the area equals the length of the base, since the height is 1.""") as tracker:
+    self.play(FadeOut(tabla), run_time=tracker.duration/2)
+    self.play(tabla2.animate.set_opacity(0.15), run_time=tracker.duration/2)
+    
+                                
+with self.voiceover(text="""To multiply 3 by 4, we stack four rectangles, each with base 3 and height 1. When aligned in a row, their combined length equals the product.""") as tracker:
+    
+    a=3.
+    b=4
+    tabla = retículaProducto(a,b,ax)
+    xlabel,ylabel=coordenadas_xy(a,b,ax)
+    self.play(Indicate(xlabel,scale_factor=2.5))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+    self.remove(xlabel,
+                ylabel)
+    self.play([FadeIn(base) for base in tabla], run_time=tracker.duration/3)
+    self.play(FadeOut(tabla2))
+    productoEnteros(a,b,ax,tabla,duración=tracker.duration/3)
+    self.pausa_muy_corta()
+    self.play(FadeOut(tabla))
+    
+with self.voiceover(text="""This multiplication method generalizes to rectangles of any base length, provided we use a natural number of rectangles of height 1.""") as tracker:
+    
+    a=2/5
+    b=6
+    tabla = retículaProducto(a,b,ax)
+    xlabel,ylabel=coordenadas_xy(a,b,ax)
+    self.play(Indicate(xlabel,scale_factor=2.5))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+    self.remove(xlabel,
+                ylabel)
+    self.play([FadeIn(base) for base in tabla], run_time=tracker.duration/4)
+    productoEnteros(a,b,ax,tabla,duración=tracker.duration/3)
+    self.play(FadeOut(tabla),
+              run_time=tracker.duration/4)
+    
+with self.voiceover(text="""For example, we can multiply the square root of 2 by 5.""") as tracker:
+    a=np.sqrt(2)
+    a_label=r"$\sqrt{2}$"
+    b=5
+    tabla = retículaProducto(a,b,ax)
+    self.pausa(tracker.duration/3)           
+    xlabel,ylabel=coordenadas_xy(a, b, ax, labelx=a_label)
+    self.play(Indicate(xlabel,scale_factor=2.5))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+    self.remove(ylabel)
+    self.play([FadeIn(base) for base in tabla], run_time=tracker.duration/3)
+    productoEnteros(a,b,ax,tabla)
+    
+with self.voiceover(text="""The result is slightly greater than 7.""") as tracker:
+    
+    self.pausa(tracker.duration)           
+
+with self.voiceover(text="""But how do we multiply two arbitrary real numbers? We need an interpretation that doesn't require an integer number of rectangles of height 1.""") as tracker:
+    
+    self.pausa(tracker.duration)           
+    
+with self.voiceover(text="""Let's examine what happens at the midpoint between the initial stack and the final row.""") as tracker:
+    
+    self.play([fila.animate.shift(i*UP) for i,fila in enumerate(tabla)],
+              run_time=tracker.duration)
+
+with self.voiceover(text="""At this position, the rectangles remain aligned.""") as tracker:
+    
+    recta =  Line(start = tabla.get_corner(DR),
+                  end   = tabla.get_corner(UL),
+                  color = RED_B)
+    self.play(FadeIn(recta))
+    
+with self.voiceover(text="""The line through the diagonals intersects the y-axis at the multiplier and the x-axis at the product.""") as tracker:
+
+    xlabel5=coordenada_x(a*5, ax, label=r"$5\sqrt{2}$")
+    self.pausa(tracker.duration/4)
+    self.play(Indicate(ylabel, scale_factor=2.5), run_time=tracker.duration/3)
+    self.play(Indicate(xlabel5, scale_factor=2.5), run_time=tracker.duration/3)
+    
+with self.voiceover(text="""Remarkably, this property holds for any vertical translation of this line.""") as tracker:
+    rectas = VGroup(*[Line(start = tabla.get_corner(UL),
+                           end   = fila.get_corner(DR),
+                           color = RED_B) for i, fila in enumerate(tabla)])
+    xlabel2=coordenada_x(a*2, ax, label=r"$2\sqrt{2}$")
+    xlabel3=coordenada_x(a*3, ax, label=r"$3\sqrt{2}$")
+    xlabel4=coordenada_x(a*4, ax, label=r"$4\sqrt{2}$")
+    xlabels=VGroup(reversed([xlabel,xlabel2,xlabel3,xlabel4,xlabel5]))
+    
+    for i, fila in reversed(list(enumerate(tabla))):
+        self.play(rectas[i].animate.shift(i * DOWN),
+                  fila.animate.shift(i*DOWN),
+                  Indicate(xlabels[i], scale_factor=2.5),
+                  Indicate(ax[1][2][len(tabla)-1-i], scale_factor=2.5),
+                  run_time=tracker.duration/4)
+    self.pausa()
+    self.play(FadeOut(tabla,
+                      recta,
+                      rectas,
+                      xlabel,
+                      xlabels)) 
+    
+
+with self.voiceover(text="""Using this method, we can multiply any two real numbers. For example, root 11 times root 11.""") as tracker:
+    arco = Arco(ax,np.sqrt(11))
+    #a=2*np.sqrt(2)
+    #a_label=r"$2\sqrt{2}$"
+    #b=3*np.sqrt(2)
+    #b_label=r"$3\sqrt{2}$"
+    a=np.sqrt(11)
+    a_label=r"$\sqrt{11}$"
+    b=np.sqrt(11)
+    b_label=r"$\sqrt{11}$"
+    xlabel,ylabel=coordenadas_xy(a, b, ax, labelx=a_label, labely=b_label)
+    rectángulo = Rectángulo(a, b, ax)
+
+    self.pausa(tracker.duration/2)
+    self.play(Indicate(xlabel,scale_factor=2.5),
+              FadeIn(rectángulo))
+    self.play(Create(arco))
+    self.play(Indicate(ylabel,scale_factor=2.5))
+
+with self.voiceover(text="""The result is exactly 11.""") as tracker:     
+    diagonal, diagonal_extendida = multiplica(a, b, ax)
+    self.play(Create(diagonal))
+    self.play(ReplacementTransform(diagonal.copy(),diagonal_extendida))
+    self.wait(tracker.duration)
+    
+    self.play(*[FadeOut(mob)for mob in self.mobjects])  # borrado de todo
+
+# --- Signos y cero ---
+ax = Axes(
+    x_length=12,
+    y_length=6,
+    x_range=[-6, 6, 1],
+    y_range=[-3, 3, 1],
+    tips=False,
+    x_axis_config={"include_numbers": True}
+)        
+self.add(ax)
+    
+a=-2.5
+a_label=r"$\alpha$"
+b=-1.5
+b_label=r"$\beta$"
+
+xlabel, ylabel = coordenadas_xy(a, b, ax, labelx=a_label, labely=b_label)
+xlabel.scale(1.5)
+ylabel.scale(1.5)
+
+c=2.01
+c_label=r"$\gamma$"        
+__, ylabel2 = coordenadas_xy(a, c, ax, labelx=a_label, labely=c_label)
+ylabel2.scale(1.5)
+
+with self.voiceover(text="""Now, the signs. Multiplication preserves sign rules.""") as tracker:
+    self.play(Indicate(xlabel,scale_factor=1.5),
+              Indicate(ylabel,scale_factor=1.5),
+              run_time=tracker.duration/2)
+
+with self.voiceover(text="""Draw the diagonal for alpha. Move it to meet beta on the vertical axis.""") as tracker:
+    rectángulo = Rectángulo(a, b, ax)
+    diagonal, diagonal_extendida = multiplica(a, b, ax)
+    #self.play(Create(rectángulo), run_time=tracker.duration/3)
+    self.add(rectángulo)
+    self.play(FadeIn(diagonal),   run_time=tracker.duration/3)
+    diagonal_alargada =diagonal.copy().scale(4)
+    self.play(Create(diagonal_alargada),
+              FadeOut(rectángulo))
+    self.play(FadeTransform(diagonal_alargada,
+                            diagonal_extendida),
+              run_time=tracker.duration/3)
+
+with self.voiceover(text="""Negative times negative is positive: alpha beta lies on the positive side.""") as tracker:
+    prod_label = Tex(r"$\alpha\beta$", font_size=30).scale(1.5)
+    prod_label.next_to(ax.c2p(a*b,0), UP, buff=0.3)
+    self.wait(tracker.duration/2)           
+    self.play(Indicate(prod_label, scale_factor=2.0), run_time=tracker.duration/2)
+
+with self.voiceover(text="""With a positive gamma, alpha gamma is negative.""") as tracker:
+    __, diagonal_extendida2 = multiplica(a, c, ax)
+    prod_label2 = Tex(r"$\alpha\gamma$", font_size=30).scale(1.5)
+    prod_label2.next_to(ax.c2p(a*c,0), UP, buff=0.3)
+    self.play(Indicate(ylabel2, scale_factor=1.5),
+              Indicate(xlabel,  scale_factor=1.5),
+              run_time=tracker.duration/3)
+    self.play(FadeTransform(diagonal.copy(),diagonal_extendida2), run_time=tracker.duration/3),
+    self.play(Indicate(prod_label2, scale_factor=2.0), run_time=tracker.duration/3)
+    self.wait()
+    self.play(FadeOut(diagonal_extendida,
+                      diagonal_extendida2,
+                      prod_label,
+                      prod_label2,
+                      xlabel,
+                      ylabel,
+                      ylabel2,))
+
+# --- Caso cero ---
+cerolabel = Tex('$0$', font_size=32, color=YELLOW).scale(1.3)
+cerolabel.next_to(ax.c2p(0,0), DOWN)
+
+fondoCero = SurroundingRectangle(cerolabel,
+                                 color=BLACK,
+                                 fill_color=BLACK,
+                                 fill_opacity=0.8,
+                                 stroke_width=0,
+                                 buff=0.1)
+
+with self.voiceover(text="""If alpha is zero, the diagonal is the vertical axis.""") as tracker:
+    punto_inferior = ax.coords_to_point(0, 0)
+    punto_superior = ax. coords_to_point(0, 1)
+    diagonal_vertical = Line(punto_inferior, punto_superior, color=BLUE)
+    punto_inferiorMin = ax.coords_to_point(0, -4)
+    punto_superiorMax = ax. coords_to_point(0, 4)
+    diagonal_vertical_extendida = Line(punto_inferiorMin, punto_superiorMax, color=BLUE)
+    self.play(ReplacementTransform(diagonal,diagonal_vertical),
+              run_time=tracker.duration/2)
+    
+with self.voiceover(text="""Its extension meets the horizontal axis at zero.""") as tracker:
+    self.play(ReplacementTransform(diagonal_vertical,
+                                   diagonal_vertical_extendida,
+                                   rate_func=rate_functions.slow_into),
+              run_time=tracker.duration/2)
+
+with self.voiceover(text="""Zero times any number is zero.""") as tracker:
+    self.add(fondoCero)
+    self.play(Indicate(cerolabel), run_time=tracker.duration)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])  # borrado de todo
+    
+# --- Variante con eje vertical ---
+with self.voiceover(text="""We can also use the vertical axis as the output axis.""") as tracker:
+    ax = Axes(
+        x_length=12,
+        y_length=6,
+        x_range=[0, 12, 1],
+        y_range=[0, 6, 1],
+        tips=False,
+        axis_config={"include_numbers": True}
+    )
+    self.play(FadeIn(ax), run_time=tracker.duration/2)
+
+def multiplicaEjeVertical(a, b, ax: Axes):
+    """
+    Desplaza horizontalmente una recta que pasa por (a, 0) y (0, 1)
+    hasta que corte el eje vertical en el punto (0, b)
+    """
+    punto_inferior = ax.coords_to_point(1, 0)
+    punto_superior = ax. coords_to_point(0, a)
+    diagonal = Line(punto_inferior, punto_superior, color=BLUE)
+    y_arriba = a+b
+    x_arriba = (a-y_arriba)/b if b!=0 else 0
+    y_abajo = -1
+    x_abajo = (a-y_abajo)/b if b!=0 else 0
+    diagonal_extendida = Line(
+        ax.coords_to_point(b, 0),
+        ax.coords_to_point(0,a*b),
+        color=RED)
+    return diagonal, diagonal_extendida
+    
+with self.voiceover(text="""Use a rectangle of base 1 and height 2. Its diagonal multiplies by 2.""") as tracker:
+    a=2
+    b=3
+    rectángulo = Rectangle(height=1.0*a,
+                           width=1.0).next_to(ax.coords_to_point(0, 0),
+                                              UR,
+                                              buff=0)
+    diagonal, diagonal_extendida = multiplicaEjeVertical(a, b, ax)
+    self.play(FadeIn(rectángulo), Create(diagonal), run_time=tracker.duration+0.2)
+    self.play(FadeOut(rectángulo))
+
+with self.voiceover(text="""To multiply by 3, draw a parallel through 3 on the horizontal axis; where it meets the vertical axis is the product.""") as tracker:
+    xlabel,ylabel=coordenadas_xy(b, a*b, ax)
+    self.play(Indicate(xlabel, scale_factor=2.0),
+              ReplacementTransform(diagonal.copy(), diagonal_extendida))
+    self.pausa(tracker.duration*2/3)
+    self.play(Indicate(ylabel, scale_factor=2.0))
+    self.pausa()
+    self.play(*[FadeOut(mob)for mob in self.mobjects]) # borrado de todo
+
+# --- Líneas no perpendiculares ---
+def line_intersection(l1, l2):
+    """
+    Devuelve el punto de intersección entre dos rectas dadas
+    por pares de puntos (p1, p2), (p3, p4).
+    """
+    p1, p2 = l1
+    p3, p4 = l2
+    x1, y1 = p1[:2]
+    x2, y2 = p2[:2]
+    x3, y3 = p3[:2]
+    x4, y4 = p4[:2]
+    denom = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+    px = ((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4))/denom
+    py = ((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4))/denom
+    return np.array([px, py, 0])
+
+blanca1 = Line(start=LEFT*6 + DOWN*1, end=RIGHT*6 + UP*2, color=WHITE)
+blanca2 = Line(start=LEFT*6 + UP*1,   end=RIGHT*6 + DOWN*1, color=WHITE)
+azul1 = Line(start=LEFT*6 + UP*2, end=RIGHT*6 + DOWN*2, color=BLUE)
+desplazamiento = UP*0.5
+azul2 = azul1.copy().shift(desplazamiento)
+
+p_1 = line_intersection(
+    (blanca1.get_start(), blanca1.get_end()),
+    (azul1.get_start(), azul1.get_end())
+)
+
+p_alpha = line_intersection(
+    (blanca2.get_start(), blanca2.get_end()),
+    (azul1.get_start(), azul1.get_end())
+)
+
+p_beta = line_intersection(
+    (blanca1.get_start(), blanca1.get_end()),
+    (azul2.get_start(), azul2.get_end())
+)
+
+p_alpha_beta = line_intersection(
+    (blanca2.get_start(), blanca2.get_end()),
+    (azul2.get_start(), azul2.get_end())
+)
+
+d1 = Dot(p_1)
+da = Dot(p_alpha)
+db = Dot(p_beta)
+dab = Dot(p_alpha_beta)
+
+t1 = MathTex("1").next_to(d1, UP)
+ta = MathTex(r"\alpha").next_to(da, DOWN)
+tb = MathTex(r"\beta").next_to(db, UP)
+tab = MathTex(r"\alpha\beta").next_to(dab, DOWN)
+            
+with self.voiceover(text="""We don't even need perpendicular axes.""") as tracker:
+    self.play(Create(blanca1),
+              Create(blanca2),
+              FadeIn(d1, da),
+              Write(t1),
+              Write(ta))
+    self.play(Create(azul1))
+    self.play(FadeIn(db), Write(tb))
+    self.play(ReplacementTransform(azul1.copy(), azul2))
+    self.play(FadeIn(dab), Write(tab))
+    
+with self.voiceover(text="""Any pair of lines through the origin suffices.""") as tracker:
+    self.wait(tracker.duration/3)
+    self.play(Indicate(blanca1),
+              Indicate(blanca2),
+              run_time=tracker.duration/2)
+    self.wait(2)
+#+end_src
+
+*** Tercera escena
+
+Interpretación geométrica del producto de un vector de $\mathbb{R}^2$ por un escalar.
+
+#+name: Tercera escena
+#+BEGIN_SRC python
+# procedimientos auxiliares        
+def coordenadaX(x, ax: Axes):
+    posición = UR if x>0 else UL
+    rectángulo = Rectangle(height=unidad,
+                           width=unidad*x,
+                           color=GREY_B,
+                           stroke_width=3).next_to(ax.coords_to_point(0, 0),
+                                                posición,
+                                                buff=0)
+    return rectángulo
+
+def coordenadaY(y, ax: Axes):
+    posición = UR if y>0 else UL
+    rectángulo = Rectangle(height=unidad*y,
+                           width=unidad,
+                           color=GREY_B,
+                           stroke_width=3).next_to(ax.coords_to_point(0, 0),
+                                                        posición,
+                                                        buff=0)
+    return rectángulo
+
+def Arco(ax, b):
+    unidad = 1
+    arco = Arc(start_angle=PI/2,
+               angle=-PI/2,
+               radius=(b)*unidad,
+               arc_center=ax.c2p(0,0),
+               stroke_width=4,
+               color=YELLOW)
+    return arco
+
+def multiplica(vector, c, axes: Axes, unidad):
+    """
+    Multiplica un vector de R2 por un escalar
+    """
+    def diagonales(x,y,c=1):
+        diagonalx = Line(axes.coords_to_point(x*c, 0),
+                         axes.coords_to_point(0, 1*c),
+                         color=BLUE)
+        diagonaly = Line(axes.coords_to_point(1*c, 0),
+                         axes.coords_to_point(0, y*c),
+                         color=BLUE)
+        return diagonalx, diagonaly
+        
+    x,y,z = vector.coords
+    # arcos (el segundo marca |c|)
+    arco1 = Arco(axes, unidad)
+    arco2 = Arco(axes, unidad*c)
+    # Diagonales de x y de y
+    diagonalx1, diagonaly1 = diagonales(x,y)
+    diagonalx2, diagonaly2 = diagonales(x,y,c)
+    return arco1, diagonalx1, diagonaly1, arco2, diagonalx2, diagonaly2
+
+# elementos generales
+cabecera = Tex("Geometric interpretation of the scalar multiplication of vectors in $\R[2]$",
+               tex_template = myTemplate,
+               font_size=60).scale_to_fit_width(config.frame_width*.9).to_edge(UP).set_color(BLUE)
+
+# plano de coordenadas
+unidad = 673/1200
+mínimo = -12.2
+máximo =  12.2
+axes = NumberPlane(
+    x_range=[mínimo+3, máximo],
+    y_range=[mínimo+3, máximo],
+    x_length=12,
+    y_length=12,
+).add_coordinates()
+
+# inicio de la locución
+self.creditos(7)
+self.add(cabecera)
+self.pausa_corta()
+	
+with self.voiceover(text="""Let's interpret scalar multiplication geometrically.""") as tracker:
+    self.pausa(tracker.duration) 
+    self.play(FadeIn(axes),
+              FadeOut(cabecera))
+
+######## caso con dos componentes no nulas ########
+
+with self.voiceover(text="""Consider a vector in R 2 with both components nonzero.""") as tracker:
+    a  = nc.Vector([sp.symbols('x'), sp.symbols('y')])
+    escalar = sp.symbols('\lambda')
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    grp1 = VGroup(lv, s1).arrange(RIGHT).to_corner(UL)
+    fondo = SurroundingRectangle(grp1, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0.15)
+    self.add(fondo)
+    self.play(FadeIn(grp1))
+    self.pausa()
+
+with self.voiceover(text="""For instance, the vector four two.""") as tracker:
+    a=4
+    b=2
+    Vect1 = nc.Vector([a,b])
+    vect1 = VectorR2(Vect1.lista, rpr='colum', color=GOLD_A)
+    vect1_dot = vect1.arrow(axes)
+    vect1_tex = vect1.tex
+    vect1_tex.next_to(vect1_dot.get_end(), UP)
+    fondo1 = SurroundingRectangle(vect1_tex, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0)
+    vect1_v_line = vect1.v_line(axes)
+    vect1_h_line = vect1.h_line(axes)
+    vect1_flecha = vect1.arrow(axes)
+    self.play(FadeIn(vect1_dot, fondo1, vect1_tex, vect1_v_line, vect1_h_line))
+    self.pausa()
+    arco1, diagonalx1, diagonaly1, *__ = multiplica(vect1, 1, axes, unidad)
+
+with self.voiceover(text="""A scalar multiplies both components.""") as tracker:
+    self.play(Indicate(grp1[1][0][1], scale_factor=2),
+              Indicate(grp1[1][0][3], scale_factor=2),
+              run_time=tracker.duration)
+    self.pausa_muy_corta()
+    
+with self.voiceover(text="""We apply the same geometric rule to x and to y.""") as tracker:
+    rectánguloX = coordenadaX(a, axes)
+    rectánguloY = coordenadaY(b, axes)
+    self.wait(tracker.duration/3)
+    self.play(FadeIn(rectánguloX), FadeIn(diagonalx1), run_time=tracker.duration/6)
+    self.play(FadeIn(rectánguloY), FadeIn(diagonaly1), run_time=tracker.duration/6)
+
+with self.voiceover(text="""x sits on the horizontal axis;.""") as tracker:
+    self.play(Indicate(rectánguloX), Indicate(diagonalx1), run_time=tracker.duration/2)
+
+with self.voiceover(text="""y on the vertical.""") as tracker:
+    self.play(Indicate(rectánguloY), Indicate(diagonaly1), run_time=tracker.duration/2)
+
+with self.voiceover(text="""We use the same line method as before: a line parallel to the diagonal that meets the vertical axis at lambda gives lambda x on the horizontal. Analogously for y.""") as tracker:
+    self.play(FadeOut(rectánguloX), FadeOut(rectánguloY))
+
+with self.voiceover(text="""The arc marks lambda.""") as tracker:
+    arco1.set_stroke(width=3)
+    self.play(Indicate(arco1))
+    
+def creaciónDeMúltiplos(tupla, factor, axes,
+                        arco0,  vect0_dot, vect0_tex,
+                        vect0_h_line, vect0_v_line,
+                        diagonalx0, diagonaly0,
+                        fondo0=[],
+                        color=GOLD_A, rpr='colum', radio=0.05, unidad=673/1200,
+                        run_time=2):
+    Vect = factor*nc.Vector(tupla)
+    vect = VectorR2(Vect.lista, rpr=rpr, color=color)
+    vect_dot = vect.arrow(axes)
+    vect_tex = vect.tex
+    vect_tex.next_to(vect_dot.get_end(), UP)
+    fondo = SurroundingRectangle(vect_tex, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0)
+    vect_h_line = vect.h_line(axes)
+    vect_v_line = vect.v_line(axes)
+    vect_flecha = vect.arrow(axes)
+    _, _, _, arco, diagonalx, diagonaly = multiplica(VectorR2(tupla), factor, axes, unidad)
+    self.play(FadeTransform(diagonalx0, diagonalx),
+              FadeTransform(diagonaly0, diagonaly),
+              ReplacementTransform(arco0, arco),
+              TransformFromCopy(vect0_dot, vect_dot),
+              TransformFromCopy(vect0_h_line, vect_h_line),
+              TransformFromCopy(vect0_v_line, vect_v_line),
+              FadeIn(fondo),
+              Write(vect_tex),
+              run_time=run_time)
+    return arco, vect_dot, vect_tex, vect_h_line, vect_v_line, diagonalx, diagonaly, fondo
+
+# Selección reducida de factores: >1, entre 0 y 1, negativo, y 0
+with self.voiceover(text="""With lambda equal three, both components triple.""") as tracker:
+    factor = nc.fracc(3,1)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, 
+                                arco1, vect1_dot, vect1_tex,
+                                vect1_h_line, vect1_v_line,
+                                diagonalx1, diagonaly1,
+                                color=GOLD_A, rpr='colum', radio=0.05, unidad=unidad,
+                                run_time=tracker.duration/2)
+    arco2, vect2_dot, vect2_tex, vect2_h_line, vect2_v_line, diagonalx2, diagonaly2, fondo2 = lista
+
+with self.voiceover(text="""With lambda one half, both components halve.""") as tracker:
+    factor = nc.fracc(1,2)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista, run_time=tracker.duration/2)
+    arco3, vect3_dot, vect3_tex, vect3_h_line, vect3_v_line, diagonalx3, diagonaly3, fondo3 = lista
+
+with self.voiceover(text="""With lambda negative two, the arrow flips direction and doubles in length.""") as tracker:
+    factor = -2
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista, run_time=tracker.duration/2)
+    arco4, vect4_dot, vect4_tex, vect4_h_line, vect4_v_line, diagonalx4, diagonaly4, fondo4 = lista
+
+with self.voiceover(text="""With lambda zero, all components collapse to zero.""") as tracker:
+    factor = 0
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista, run_time=tracker.duration/2)
+    arco0, vect0_dot, vect0_tex, vect0_h_line, vect0_v_line, diagonalx0, diagonaly0, fondo0 = lista
+
+# Razón constante y recta por el origen
+with self.voiceover(text="""Because both coordinates scale by lambda, the ratio y over x stays constant.""") as tracker:
+    source0 = MathTex(r"\frac{y}{x}=\alpha", tex_template = myTemplate)
+    añadido = MathTex(r"\frac{\lambda y}{\lambda x}=", tex_template = myTemplate)
+    VG0 = VGroup(añadido,source0).arrange(RIGHT)
+    target0 = MathTex(r"y=\alpha \cdot x", tex_template = myTemplate)
+    VG0.add(target0).next_to(grp1, DOWN, buff=1).scale(1.5).shift(RIGHT/3)
+    fondoVG0 = SurroundingRectangle(VG0, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0.15)
+    self.add(fondoVG0)
+    self.play(FadeIn(source0), FadeIn(añadido), run_time=tracker.duration*2/5)
+    self.pausa(tracker.duration/6)
+    self.play(Flash(grp1[1][0][1]), Flash(grp1[1][0][3]), run_time=tracker.duration/3)
+
+with self.voiceover(text="""All points with this ratio lie on a line through the origin.""") as tracker:
+    self.play(FadeOut(añadido), run_time=tracker.duration/4)
+    transform_index0 = [[0,1,2,3,4],[0,3,4,1,2]]
+    self.play(*[
+            ReplacementTransform(source0[0][i],target0[0][j], rate_func=rate_functions.smooth)
+            for i,j in zip(*transform_index0)
+        ],
+        run_time=tracker.duration/2)
+    self.play(FadeOut(vect1_v_line, vect2_v_line, vect3_v_line, vect4_v_line,
+                      vect1_h_line, vect2_h_line, vect3_h_line, vect4_h_line,
+                      fondo0, fondo1, fondo2, fondo3, fondo4,
+                      vect0_tex, vect1_tex, vect2_tex, vect3_tex, vect4_tex),
+              run_time=tracker.duration*1/5)
+    p1 = (16, 8)
+    p2 = (-12, -6)
+    P1 = axes.coords_to_point(*p1)
+    P2 = axes.coords_to_point(*p2)
+    recta = Line(P1, P2, color=BLUE_B)
+    self.play(FadeOut(vect1_dot, vect2_dot, vect3_dot, vect4_dot),
+              Indicate(recta, scale_factor=5),
+              Circumscribe(target0))
+    self.pausa()
+    self.play(FadeOut(recta), FadeOut(fondo), FadeOut(vect0_dot), FadeOut(fondoVG0),
+              FadeOut(grp1), FadeOut(source0))
+
+######## caso con una componente nula: x != 0, y = 0 ########
+with self.voiceover(text="""Now a vector with one zero component: only the first component is nonzero.""") as tracker:
+    a  = nc.Vector([sp.symbols('x'),0])
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    s2 = MathTex(r";\qquad",  tex_template = myTemplate)
+    s3 = MathTex(r"x\ne0",  tex_template = myTemplate)
+    grpX = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL)
+    fondo = SurroundingRectangle(grpX, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0.15)
+    a=4; b=0
+    VectX = nc.Vector([a,b])
+    vectX = VectorR2(VectX.lista, rpr='colum', color=GOLD_A)
+    vectX_dot = vectX.arrow(axes)
+    vectX_tex = vectX.tex
+    vectX_tex.next_to(vectX_dot.get_end(), UP)
+    fondoX = SurroundingRectangle(vectX_tex, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0)
+    vectX_v_line = vectX.v_line(axes)
+    vectX_h_line = vectX.h_line(axes)
+    vectX_flecha = vectX.arrow(axes)
+    self.play(FadeIn(fondo), FadeIn(grpX), run_time=tracker.duration/4)
+    self.play(FadeIn(fondoX), FadeIn(vect1_dot), Write(vect1_tex),
+              run_time=tracker.duration/5)
+    arco1, diagonalxX, diagonalyX, *__ = multiplica(vectX, 1, axes, unidad)
+    self.play(Indicate(grpX[1][0][3], scale_factor=2.2),
+              FadeTransform(vect1_dot, vectX_dot),
+              FadeTransform(vect1_tex, vectX_tex),
+              run_time=tracker.duration/2)
+    self.pausa()
+
+with self.voiceover(text="""A positive lambda keeps the direction;.""") as tracker:
+    # Un ejemplo positivo y uno negativo, sin repetir toda la batería
+    factor = 2.5
+    lista = creaciónDeMúltiplos([a,b], factor, axes,
+                                arco1, vectX_dot, vectX_tex,
+                                vectX_h_line, vectX_v_line,
+                                diagonalxX, diagonalyX,
+                                run_time=tracker.duration*4/5)
+    arco2, vect2_dot, vect2_tex, vect2_h_line, vect2_v_line, diagonalx2, diagonaly2, fondo2 = lista
+
+with self.voiceover(text="""a negative lambda flips it.""") as tracker:
+    factor = -2
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista, run_time=tracker.duration*4/5)
+    arco3, vect3_dot, vect3_tex, vect3_h_line, vect3_v_line, diagonalx3, diagonaly3, fondo3 = lista
+    self.pausa_corta()
+
+with self.voiceover(text="""All scalar multiples lie on the horizontal axis.""") as tracker:
+    punto_Ax = axes.coords_to_point(-9.2, 0)
+    punto_Bx = axes.coords_to_point(12.2, 0)
+    eje_x = Line(punto_Ax, punto_Bx, color=RED_B)
+    self.remove(*[vectX_dot, vect2_dot, vect3_dot,
+                  vectX_tex, vect2_tex, vect3_tex,
+                  arco3, fondoX, fondo2, fondo3,
+                  diagonalxX, diagonalyX, diagonalx3, diagonaly3])
+    self.play(Indicate(eje_x), run_time=tracker.duration)
+    self.play(FadeOut(eje_x))
+    self.remove(*[grpX, fondo])
+
+######## caso con una componente nula: x = 0, y != 0 ########
+with self.voiceover(text="""If the first component is zero and the second is not, the situation is analogous.""") as tracker:
+    a  = nc.Vector([0, sp.symbols('y')])
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    s2 = MathTex(r";\qquad",  tex_template = myTemplate)
+    s3 = MathTex(r"y\ne0",  tex_template = myTemplate)
+    grpY = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL)
+    fondo = SurroundingRectangle(grpY, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0.15)
+    self.play(FadeIn(fondo), FadeIn(grpY), run_time=tracker.duration/4)
+
+with self.voiceover(text="""All scalar multiples lie on the vertical axis.""") as tracker:
+    punto_Ay = axes.coords_to_point(0,- 6)
+    punto_By = axes.coords_to_point(0, 9)
+    eje_y = Line(punto_Ay, punto_By, color=RED_B)
+    self.play(Indicate(eje_y), run_time=tracker.duration)
+    self.play(FadeOut(eje_y))
+
+# Resumen y caso vector cero
+resumen1 = Tex(r"""The set of scalar multiples of a \underline{non-zero} vector in \R[2]""",
+               tex_template = myTemplate)
+resumen2 = Tex(r"""forms a line passing through the origin.""",
+               tex_template = myTemplate).next_to(resumen1, DOWN)
+
+with self.voiceover(text="""Therefore, for any nonzero vector in R 2, the set of all scalar multiples forms a line through the origin.""") as tracker:
+    self.play(*[FadeOut(mob)for mob in self.mobjects] )            
+    self.play(Write(resumen1))
+    self.play(Write(resumen2))
+    self.pausa(1.5)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+
+with self.voiceover(text="""For the zero vector, every scalar multiple is still zero, so the set of multiples is just the origin.""") as tracker:
+    self.play(FadeIn(axes))
+    Vect0 = nc.Vector([0,0])
+    vect0 = VectorR2(Vect0.lista, rpr='colum', color=YELLOW)
+    vect0_dot = vect0.dot(axes, radio=0.1)
+    escalar = sp.symbols('\lambda')
+    lv0 = MathTex(r"\lambda\," + Vect0.latex() + " = ",  tex_template = myTemplate)
+    w0  = escalar*Vect0
+    s0 = MathTex(w0.latex(),  tex_template = myTemplate)
+    paralambda = MathTex(r"\text{for any } \lambda",  tex_template = myTemplate)
+    grp0 = VGroup(lv0, s0, paralambda).arrange(RIGHT).to_corner(UL)
+    fondo0 = SurroundingRectangle(grp0, color=BLACK, fill_color=BLACK, fill_opacity=0.8, stroke_width=0, buff=0.15)
+    self.add(fondo0)
+    self.play(FadeIn(grp0))
+    self.play(Indicate(vect0_dot), run_time=tracker.duration/3)
+    self.wait(tracker.duration/3)
+    self.play(Indicate(vect0_dot, scale_factor=2.0))
+    self.play(FadeOut(vect0_dot), FadeOut(fondo0), FadeOut(grp0))
+    self.pausa()
+
+#+END_SRC
+
+*** Cuarta escena
+
+Interpretación geométrica del producto de un vector de $\mathbb{R}^3$ por un escalar.
+
+**** Parte 3D de la cuarta escena
+
+Creación del vídeo en $\mathbb{R}^3$.
+
+#+name: Parte 3D de la cuarta escena
+#+begin_src python :eval no
+mínimo = -10
+máximo = 12
+
+# Crear ejes 3D
+axes = ThreeDAxes(
+    x_range=[mínimo+3, máximo],
+    y_range=[mínimo+3, máximo],
+    z_range=[mínimo+3, máximo],
+    x_length=12,
+    y_length=12,
+    z_length=12,
+).add_coordinates()
+
+def Arcos(axes, radio):
+    # Obtener la posición del punto (0,0,0) en los ejes
+    origen_ejes = axes.c2p(0, 0, 0)
+    # Radio en coordenadas de los ejes
+    radio_coordenadas = radio
+    # Convertir el radio a unidades de Manim
+    radio_manim = np.linalg.norm(
+        axes.c2p(radio_coordenadas, 0, 0) - axes.c2p(0, 0, 0))
+    # si radio negativo nos vamos al cuadrante negativo con start_angle=PI
+    signo = 0 if radio>0 else PI
+    # Arco entre X e Y (en el plano XY)
+    arco_xy = Arc(
+        radius=radio_manim,
+        start_angle=signo,
+        angle=PI/2,
+        arc_center=origen_ejes,
+        color=YELLOW,
+        stroke_width=3)
+    # Arco entre Y y Z (en el plano YZ)
+    arco_yz = Arc(
+        radius=radio_manim,
+        start_angle=signo,
+        angle=PI/2,
+        arc_center=origen_ejes,
+        color=YELLOW,
+        stroke_width=3).rotate(-PI/2, axis=UP, about_point=origen_ejes)
+    # Arco entre Z y X (en el plano ZX)
+    arco_zx = Arc(
+        radius=radio_manim,
+        start_angle=signo,
+        angle=PI/2,
+        arc_center=origen_ejes,
+        color=YELLOW,
+        stroke_width=3).rotate(PI/2, axis=RIGHT, about_point=origen_ejes)
+
+    arcos = VGroup(arco_xy, arco_yz, arco_zx)
+    return arcos      
+
+def coordenadasYdiagonales(tupla, axes, factor=1):
+    
+    coordenadas = tupla
+    Vector = nc.Vector(coordenadas)
+
+    Vx = nc.Vector([coordenadas[0],0,0,])
+    Vy = nc.Vector([0,coordenadas[1],0,])
+    Vz = nc.Vector([0,0,coordenadas[2],])
+    Vxy = nc.Vector([coordenadas[0],coordenadas[1],0,])
+
+    # líneas de las coordenadas
+    line_x = Line(start=np.array(axes.c2p(*Vx.lista)),
+                  end=np.array(axes.c2p(*Vxy.lista)),
+                  stroke_width=1.0)
+    line_y = Line(start=np.array(axes.c2p(*Vy.lista)),
+                  end=np.array(axes.c2p(*Vxy.lista)),
+                  stroke_width=1.0)
+    line_xy = Line(start=np.array(axes.c2p(*Vxy.lista)),
+                   end=np.array(axes.c2p(*Vector.lista)),
+                   stroke_width=1.0)
+    line_z = Line(start=np.array(axes.c2p(*Vz.lista)),
+                  end=np.array(axes.c2p(*Vector.lista)),
+                  stroke_width=1.0)
+    
+    lineas = VGroup(line_x, line_y, line_xy, line_z)
+
+    # Diagonales
+    diagonal_x = Line3D(
+        start=axes.c2p(*[factor if x != 0 else 0 for x in (0,1,0)]),
+        end=axes.c2p(*Vx.lista),
+        #stroke_width=1.9,
+        color=RED)
+
+    diagonal_y = Line3D(
+        start=axes.c2p(*[factor if x != 0 else 0 for x in (0,0,1)]),
+        end=axes.c2p(*Vy.lista),
+        #stroke_width=1.9,
+        color=GREEN)
+
+    diagonal_z = Line3D(
+        start=axes.c2p(*[factor if x != 0 else 0 for x in (1,0,0)]),
+        end=axes.c2p(*Vz.lista),
+        #stroke_width=1.9,
+        color=BLUE)
+
+    diagonales = VGroup(diagonal_x, diagonal_y, diagonal_z)
+
+    return lineas, diagonales
+
+
+def creaciónDeMúltiplos(tupla, factor, axes, arcos0, flecha0, lineas0, diagonales0,
+                        color=TEAL_A, run_time=2.5):
+    
+    Vect = factor*nc.Vector(tupla)
+    vect = VectorR3(Vect.lista, color=color)
+    flecha = vect.arrow(axes)
+    arcos = Arcos(axes, factor)
+    lineas, diagonales = coordenadasYdiagonales(Vect.lista, axes, factor)
+    
+    
+    self.play(ReplacementTransform(diagonales0,
+                                   diagonales),
+              ReplacementTransform(arcos0,
+                                   arcos),
+              ReplacementTransform(lineas0,
+                                   lineas),
+              TransformFromCopy(flecha0,
+                                flecha),
+              run_time=run_time)
+    
+    return arcos, flecha, lineas, diagonales
+
+tupla = (4,3,2)        
+arcos0 = Arcos(axes, 1)
+lineas0, diagonales0 = coordenadasYdiagonales(tupla, axes)
+
+vector = VectorR3(tupla, color=TEAL_A)
+flecha0 = vector.arrow(axes)        
+
+
+self.add(axes)
+# Configurar la cámara para ver la escena en 3D
+self.set_camera_orientation(phi=75 * DEGREES,
+                            theta=45 * DEGREES,
+                            zoom=1.1)
+self.begin_ambient_camera_rotation(rate=0.2)
+self.wait(2)
+
+self.play(FadeIn(lineas0))
+self.wait(1.5)
+self.play(FadeIn(arcos0),
+          FadeIn(diagonales0))
+self.wait(8.5)
+self.play(Create(flecha0))
+self.wait(1)
+
+factor = 2
+arcos1, flecha1, lineas1, diagonales1 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos0, flecha0, lineas0,
+                                                             diagonales0, run_time=6.5)
+
+factor = -1
+arcos2, flecha2, lineas2, diagonales2 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos1, flecha1, lineas1,
+                                                             diagonales1)
+self.wait(8.5)
+
+self.play(FadeOut(arcos2,
+                  flecha0,
+                  flecha1,
+                  flecha2,
+                  lineas2,
+                  diagonales2),
+          run_time=0.5)
+self.wait(0.5)
+
+tupla = (4,0,2)        
+arcos0 = Arcos(axes, 1)
+lineas0, diagonales0 = coordenadasYdiagonales(tupla, axes)
+
+vector = VectorR3(tupla, color=TEAL_A)
+flecha0 = vector.arrow(axes)        
+
+self.play(FadeIn(lineas0))
+self.wait(1)
+self.play(Create(flecha0))
+self.wait(1)
+self.play(FadeIn(arcos0),
+          FadeIn(diagonales0))
+
+factor = 2.5
+arcos1, flecha1, lineas1, diagonales1 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos0, flecha0, lineas0,
+                                                             diagonales0, run_time=2)
+
+factor = -1.5
+arcos2, flecha2, lineas2, diagonales2 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos1, flecha1, lineas1,
+                                                             diagonales1, run_time=2)
+
+self.wait(2)
+
+self.play(FadeOut(arcos2,
+                  flecha0,
+                  flecha1,
+                  flecha2,
+                  lineas2,
+                  diagonales2),
+          run_time=0.5)
+self.wait(0.5)
+
+tupla = (0,3,0)        
+arcos0 = Arcos(axes, 1)
+lineas0, diagonales0 = coordenadasYdiagonales(tupla, axes)
+
+vector = VectorR3(tupla, color=TEAL_A)
+flecha0 = vector.arrow(axes)        
+
+
+self.play(FadeIn(lineas0),
+          Create(flecha0),
+          FadeIn(arcos0),
+          FadeIn(diagonales0))
+self.wait(.5)
+
+factor = 4
+arcos1, flecha1, lineas1, diagonales1 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos0, flecha0, lineas0,
+                                                             diagonales0, run_time=2)
+
+factor = -3
+arcos2, flecha2, lineas2, diagonales2 = creaciónDeMúltiplos(tupla, factor, axes,
+                                                             arcos1, flecha1, lineas1,
+                                                             diagonales1)
+self.wait(.5)
+
+self.play(FadeOut(arcos2,
+                  flecha0,
+                  flecha1,
+                  flecha2,
+                  lineas2,
+                  diagonales2),
+          run_time=0.5)
+
+tupla = (0,0,0)        
+vector = VectorR3(tupla,
+                  color=YELLOW_A)
+vector_dot = vector.dot(axes,
+                        radio=0.05)
+self.play(FadeIn(vector_dot))
+self.wait(2.5)
+self.play(Indicate(vector_dot,
+                   scale_factor=3),
+          run_time=1.5)
+self.wait(4)
+#+end_src
+
+**** Narración sobre la escena 3D
+
+Creación de la narrración que acompaña al vídeo en $\mathbb{R}^3$.
+
+Hay que prestar atención a qué vídeo se importa como objeto: ¿el de alta definición  (=1080p60=)? ¿O el de baja definición (=480p15=)?
+
+#+name: Cuarta escena
+#+begin_src python :eval no
+self.creditos(2)
+
+cabecera = Tex("Geometric interpretation of scalar multiplication in " + r"$\R[3]$" ,
+               tex_template = myTemplate,
+               font_size=60).scale_to_fit_width(config.frame_width*.9).to_edge(UP).set_color(BLUE)
+
+self.add(cabecera)
+self.pausa_corta()
+
+video1 = VideoMobject(
+    #filename=r"./media/videos/L01_V04_ScalingVectors/480p15/L01_V04_Video_escena_3D.mp4",
+    filename=r"./media/videos/L01_V04_ScalingVectors/1080p60/L01_V04_Video_escena_3D.mp4",
+    speed=1.0
+).scale_to_fit_width(config.frame_width*.95)
+
+with self.voiceover(text="""The geometric interpretation of scalar multiplication in R 3 is the same as in R 2.""") as tracker:
+    
+    self.wait(tracker.duration)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])
+    self.add(video1)
+
+with self.voiceover(text="""Consider a vector in R 3 with all three components nonzero.""") as tracker:
+    
+    self.wait(max(2,tracker.duration))
+
+# We apply the same diagonal-line rule in each coordinate plane to read lambda x, lambda y, and lambda z.    
+with self.voiceover(text="""We apply the same diagonal-line rule in each coordinate plane to read lambda x, lambda y, and lambda z.""") as tracker:
+    
+    self.wait(max(3,tracker.duration))
+
+# We point the vector with an arrow.
+with self.voiceover(text="""Recall: the vector is the point; the arrow is just a pointer.""") as tracker:
+    
+    self.wait(tracker.duration)
+
+#Multiplying all three coordinates by the same scalar alpha, scales the vector proportionally.
+with self.voiceover(text="""Scaling by lambda multiplies each coordinate by lambda, so the vector stretches by a factor of the absolute value of lambda.""") as tracker:
+    
+    self.wait(tracker.duration)
+
+with self.voiceover(text="""if lambda is negative, it flips direction.""") as tracker:
+    
+    self.wait(tracker.duration)
+
+# All scalar multiples of the vector lie on a line through the origin.
+with self.voiceover(text="""All scalar multiples lie on the single line through the origin in the vector’s direction.""") as tracker:
+    
+    self.wait(tracker.duration+3.5)
+
+# When one component is zero, all multiples lie in the plane spanned by the axes corresponding to the nonzero components. These multiples still form a line through the origin.
+with self.voiceover(text="""If one component is zero, the vector lies in a coordinate plane; its multiples form a line within that plane.""") as tracker:
+    
+    self.wait(tracker.duration+4)
+
+# When only one component is nonzero, the scalar multiples form the coordinate axis corresponding to that component.    
+with self.voiceover(text="""If only one component is nonzero, the multiples coincide with the corresponding coordinate axis.""") as tracker:
+    
+    self.wait(tracker.duration+1)
+
+# The only exception occurs with the zero vector, whose scalar multiples form a single point—the origin itself.
+with self.voiceover(text="""For the zero vector, every multiple is still the origin.""") as tracker:
+    
+    self.wait(tracker.duration+0.5)
+    self.play(*[FadeOut(mob)for mob in self.mobjects]) # borrado de todo
+    
+    self.add(cabecera)
+
+with self.voiceover(text="""Just as in R 2, the set of all scalar multiples of any nonzero vector in R 3 is a line through the origin.""") as tracker:
+
+    resumen1 = Tex(r"""The set of scalar multiples of a \underline{non-zero} vector in \R[3]""",
+                   tex_template = myTemplate)
+    resumen2 = Tex(r"""is a line passing through the origin.""",
+                   tex_template = myTemplate).next_to(resumen1, DOWN)
+    
+    self.play(Write(resumen1),
+              run_time=tracker.duration*2/3)
+    self.play(Write(resumen2),
+              run_time=tracker.duration/4)                       
+    self.pausa(2.5)
+#+end_src
+
+*** Quinta escena
+
+Resumen final: lo importante es la efinición de la operación; no la interpretación geométrica.
+
+#+name: Quinta escena
+#+begin_src python :eval no
+self.creditos()
+
+titulo = Title("Scalar multiplication of vectors in " + r"$\R[n]$" ,
+             tex_template = myTemplate,
+             font_size=65).set_color(BLUE)
+self.add(titulo)
+self.pausa()
+
+# Resumen
+resumen = Tex(r"\textbf{Key Takeaways:}",
+         tex_template = myTemplate,
+         font_size=50).set_color(ORANGE).next_to(titulo, DOWN, aligned_edge=LEFT)
+
+with self.voiceover(text="""Geometric intuition only takes us so far. What really matters is the definition of scalar multiplication and the rule it gives us.""") as tracker:
+
+    cvab = MathTex(r"\elemRp{\lambda\Vect{a}}{i}", tex_template = myTemplate)
+    cvb  = MathTex(r"\lambda\eleVRpE{a}{i}", tex_template = myTemplate)
+    igual = MathTex(r"=",          tex_template = myTemplate,)
+    eq_suma = VGroup(cvab,igual,cvb).arrange(RIGHT).scale(1.5)
+    
+    donde = Tex("where")
+    indices = MathTex(r"i=1:n", tex_template = myTemplate)
+    pc_indices = VGroup(donde,indices).arrange(RIGHT, buff=1)
+    grp3 = VGroup(eq_suma, pc_indices).arrange(RIGHT, buff=1)
+
+    self.add(resumen)
+    self.pausa(tracker.duration/2)
+
+with self.voiceover(text="""Multiplying a vector by lambda""") as tracker:
+    self.play(Indicate(cvab[0][1:3],
+                       scale_factor=2.5),
+              run_time=tracker.duration)
+
+with self.voiceover(text="""just multiplies each component by lambda.""") as tracker:
+    self.add(grp3)
+
+with self.voiceover(text="""Consequently, it doesn’t matter whether we apply the selector before or after multiplying by the scalar. """) as tracker:
+
+    source0 = MathTex(r"\elemRp{\lambda\Vect{a}}{i}",
+                      tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+    target0 = MathTex(r"\lambda\eleVRpE{a}{i}",
+                      tex_template = myTemplate).next_to(grp3, DOWN, buff=1.2).scale(2)[0]
+    source1 = target0.copy()
+    target1 = source0.copy()
+    
+    source2 = source0.copy()
+    target2 = target0.copy()
+    
+    VG0 = VGroup(source0,target0)
+
+    transform_index0 = [[0,1,2,3,4,5],
+                        [1,0,2,5,3,4]]
+
+    self.add(source0)
+               
+    self.wait(tracker.duration/5)
+    
+    self.play(
+        ,*[
+            Transform(source0[i],
+                      target0[j],
+                      rate_func=rate_functions.there_and_back_with_pause)
+            for i,j in zip(*transform_index0)
+        ],
+        run_time=4*tracker.duration/5)
+#+end_src
+
+
+* Escenas en vídeos separados 
+
+
+** Scene 1 - Introduction 
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="1")
+
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+class L01_V04_E01_Introducción(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<TexTemplate con LaTeX-nacal>>
+        
+        <<Primera escena>>        
+#+END_SRC
+
+
+** Scene 2 - Geometric interpretation of number multiplications
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="2")
+
+# <<Gogle Voice>>
+# <<Azure Voice>>
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+class L01_V04_E02_Interpretación_Geométrica_del_Producto_de_Números(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<TexTemplate con LaTeX-nacal>>
+        
+        <<Segunda escena>>
+#+END_SRC
+
+
+** Scene 3 - Geometric interpretation of scalar multiplication of vectors in $\mathbb{R}^2$
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="3")
+
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+class L01_V04_E03_Interpretación_Geométrica_del_Producto_por_Escalares_en_R2(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<Definición de VectorR2>>
+        
+        <<TexTemplate con LaTeX-nacal>>
+        
+        <<Tercera escena>>        
+#+END_SRC
+
+
+** Scene 4 - Geometric interpretation of scalar multiplication of vectors in $\mathbb{R}^3$
+
+*** Parte 3D de la cuarta escena
+
+Este vídeo es fundamentea, pues es un elemento necesario para compilar el vídeo completo.
+
+# +call: rodando(fichero="L01_V04_ProductoDeUnVectorPorUnEscalar", escena=" 7")
+
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+class L01_V04_Video_escena_3D(ThreeDScene):
+    def construct(self):
+        <<Definición de VectorR3>>
+
+        <<Parte 3D de la cuarta escena>>
+
+        self.play(*[FadeOut(mob)for mob in self.mobjects])  # borrado de todo
+#+END_SRC
+
+*** Narración sobre la escena 3D
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="4")
+
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+<<Definición de VideoStatus y VideoMobject>>
+
+class L01_V04_E04_Interpretación_Geométrica_del_Producto_por_Escalares_en_R3(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<TexTemplate con LaTeX-nacal>>
+        
+        <<Cuarta escena>>        
+#+END_SRC
+
+
+** Scene 5 - Resumen 
+
+# +call: rodando(fichero="L01_V04_ScalingVectors", escena="5")
+
+#+BEGIN_SRC python :noweb tangle :tangle ../../videoMath2/lib/L01_V04_ScalingVectors.py :results none
+class L01_V04_E05_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Azure Voice>>
+
+        <<TexTemplate con LaTeX-nacal>>
+        
+        <<Quinta escena>>        
+#+END_SRC
+
+
+* Trozos comunes de código
+
+
+** Servicio =text to audio=
+
+*** Servicio Azure (funciona bastante bien, pero es de pago)
+
+#+name: Azure Voice
+#+BEGIN_SRC python :results none
+self.set_speech_service(AzureService(voice="en-GB-RyanNeural"))
+
+# def slow(text, rate="-10%"):
+#      return f'<speak><prosody rate="{rate}">{text}</prosody></speak>'
+#+END_SRC
+- Para audio en español :: usar ~self.set_speech_service(AzureService(voice="es-ES-AlvaroNeural"))~
+- Para audio en inglés :: usar ~self.set_speech_service(AzureService(voice="en-GB-RyanNeural"))~
+
+*** Servicio de Google (funciona regular, pero es gratis)
+
+#+name: Gogle Voice
+#+BEGIN_SRC python :results none
+self.set_speech_service(GTTSService()) 
+#+END_SRC
+- Para audio en español :: usar ~self.set_speech_service(GTTSService(lang="es", tld="com"))~
+- Para audio en inglés :: usar ~self.set_speech_service(GTTSService())~
+
+
+** Uso del paquete de $\LaTeX{}$ con la notación del curso (=nacal.sty=)
+
+Descargable desde [[https://github.com/mbujosab/nacal-latex-package]].
+
+#+name: TexTemplate con LaTeX-nacal
+#+BEGIN_SRC python :results none
+myTemplate = TexTemplate()
+myTemplate.add_to_preamble(r"""\usepackage{nacal} """)
+#+END_SRC
+
+
+** Carga de las librerías Manim, manim_voiceover y NacAL
+
+Es lo primero que se tiene que cargar
+
+#+name: Carga de la librería Manim y NacAL
+#+BEGIN_SRC python :results none
+from manim import *
+from manim_voiceover import VoiceoverScene
+import nacal as nc
+import sympy as sp
+#+END_SRC
+
+
+** Servicios de voz
+
+No es necesario cargar ambos. Basta cargar el que realmente se va a utilizar.
+
+#+name: Servicio de voz AzureService
+#+BEGIN_SRC python :results none
+from manim_voiceover.services.azure import AzureService
+#+END_SRC
+
+#+name: Servicio de voz de Google
+#+BEGIN_SRC python :results none
+from manim_voiceover.services.gtts import GTTSService
+#+END_SRC
+
+
+** Definición de algunas subclases con definiciones generales 
+  :PROPERTIES:  
+  :UNNUMBERED: t  
+  :END:  
+
+Esto se puede simplificar, no es necesario definir una subclase (bastaría incorporar un chunk de códio). Por ahora lo dejo así.
+
+*** MiEscenaConVoz  
+  
+#+name: Definición de mi escena con voz
+#+BEGIN_SRC python :noweb no-export :eval no
+class MiEscenaConVoz(VoiceoverScene):
+    def pausa_muy_corta(self, n=0.3):
+        self.wait(n)
+    def pausa_corta(self, n=0.5):
+        self.wait(n)
+    def pausa(self, n=1):
+        self.wait(n)
+    def pausa_media(self, n=1.5):
+        self.wait(n)
+    def pausa_larga(self, n=3):
+        self.wait(n)
+    def pausa_muy_larga(self, n=5):
+        self.wait(n)
+
+    <<Créditos en distintas partes de la pantalla>>
+#+END_SRC
+
+
+#+name: Créditos en distintas partes de la pantalla
+#+BEGIN_SRC python :eval no
+def creditos(self, variante=1):
+    def analisis_opcion_elegida(tipo):
+        'Análisis de las opciones de eliminación elegidas'
+        lista = [100,20,10,4,2,1]
+        opcion = set()
+        for t in lista:
+            if (tipo - (tipo % t)) in lista:
+                opcion.add(tipo - (tipo % t))
+                tipo = tipo % t
+        return opcion
+    
+    copyright = Tex(r"\textcopyright{\;} 2026\; Marcos Bujosa  ")
+    
+    if 1 in analisis_opcion_elegida(variante):
+        stampDcha  = VGroup(copyright.copy()).rotate( PI/2).scale(0.5).to_edge(RIGHT, buff=0.1).set_color(GRAY_D)
+        self.add(stampDcha)
+    if 2 in analisis_opcion_elegida(variante):
+        stampIzda  = VGroup(copyright.copy()).rotate(-PI/2).scale(0.5).to_edge(LEFT, buff=0.1).set_color(GRAY_D)
+        self.add(stampIzda)
+    if 4 in analisis_opcion_elegida(variante):
+        stampBottom= VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(DOWN, buff=0.1).set_color(GRAY_D)
+        self.add(stampBottom)
+    if 10 in analisis_opcion_elegida(variante):
+        stampTop   = VGroup(copyright.copy()).rotate(    0).scale(0.5).to_edge(  UP, buff=0.1).set_color(GRAY_D)
+        self.add(stampTop)        
+#+END_SRC
+
+*** Pantalla final de creditos
+
+#+name: Créditos finales
+#+BEGIN_SRC python :noweb tangle :results discard
+copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
+github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
+CGG  = VGroup(copyright, github).scale(1.1)
+self.add(CGG)
+self.wait(10)
+#+END_SRC
+
+
+
+
+** Definición Vectores en R2 y R3
+Estas clases definen vectores en $\R[2]$ y $\R[3]$ para ser representados con dibujos.
+*** Vectores en R2
+
+#+name: Definición de VectorR2
+#+BEGIN_SRC python :eval no
+class VectorR2():
+    def __init__(self, lista, rpr='c', color=GRAY_B):
+        """Inicializa un Vector con una lista"""
+        coords = lista + [0] if len(lista)<3 else lista        
+        self.color  = color
+        #self.coords = tuple(coords)
+        #self.coords = tuple([float(i) for i in coords])
+        self.coords = tuple([int(i) if float(i)==int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords[:2], rpr)
+        self.tex    = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+
+    def dot(self, ejes, radio=0.08):
+        return Dot(ejes.c2p(*self.coords), radius=radio, color=self.color)
+
+    def v_line(self, ejes):
+        return ejes.get_vertical_line(ejes.c2p(*self.coords), color=self.color)
+
+    def h_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.coords), color=self.color)
+
+    def arrow(self, ejes):
+        return ejes.get_vector(self.Vector.lista, stroke_color = self.color, stroke_width=4)
+#+END_SRC
+
+*** Vectores en R3
+
+#+name: Definición de VectorR3
+#+BEGIN_SRC python :eval no
+class VectorR3():
+    def __init__(self, lista, rpr='c', color=GRAY_B):
+        """Inicializa un Vector con una lista"""
+        coords = lista + [0] if len(lista)<3 else lista
+        self.color  = color
+        #self.coords = tuple(coords)
+        self.coords = tuple([int(i) if float(i)==int(i) else float(i) for i in coords])
+        self.Vector = nc.Vector(self.coords, rpr)
+        self.tex    = MathTex(self.Vector.latex(), color=self.color).scale(0.8)
+        self.proyXY = self.coords[:-1] + (0,)
+        self.proyZ  = (0,0,) + (self.coords[-1],)
+
+    def dot(self, ejes, radio=0.08):
+        return Dot3D(ejes.c2p(*self.coords), radius=radio, color=self.color)
+
+    def x_line(self, ejes):
+        return ejes.get_vertical_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def y_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def z_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyZ), end=ejes.c2p(*self.coords), thickness=0.01)
+    
+    def v_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyXY), end=ejes.c2p(*self.coords), thickness=0.01)
+    
+    def xy_line(self, ejes):
+        return Line3D(start=np.array([0,0,0]), end=ejes.c2p(*self.proyXY), thickness=0.01)
+    
+    def proy_x_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.proyXY), color=self.color)
+    
+    def proy_y_line(self, ejes):
+        return ejes.get_horizontal_line(ejes.c2p(*self.coords), color=self.color)
+
+    def proy_y_line(self, ejes):
+        return Line3D(start=ejes.c2p(*self.proyZ), end=ejes.c2p(*self.coords), thickness=0.01)
+
+    def arrow(self, ejes):
+        return Arrow3D(
+            start=np.array(ejes.c2p(0, 0, 0)),
+            end=np.array(ejes.c2p(*self.coords)),
+            resolution=8,
+            color = self.color )
+#+END_SRC
+
+
+** Insertar un vídeo en una escena
+
+#+name: Definición de VideoStatus y VideoMobject
+#+BEGIN_SRC python :results discard
+import cv2 # needs opencv-python https://pypi.org/project/opencv-python/
+from PIL import Image, ImageOps
+from dataclasses import dataclass
+
+@dataclass
+class VideoStatus:
+    time: float = 0
+    videoObject: cv2.VideoCapture = None
+    def __deepcopy__(self, memo):
+        return self
+
+class VideoMobject(ImageMobject):
+    '''
+    Following a discussion on Discord about animated GIF images.
+    Modified for videos
+
+    Parameters
+    ----------
+    filename
+        the filename of the video file
+
+    imageops
+        (optional) possibility to include a PIL.ImageOps operation, e.g.
+        PIL.ImageOps.mirror
+
+    speed
+        (optional) speed-up/slow-down the playback
+
+    loop
+        (optional) replay the video from the start in an endless loop
+
+    https://discord.com/channels/581738731934056449/1126245755607339250/1126245755607339250
+    2023-07-06 Uwe Zimmermann & Abulafia
+    2024-03-09 Uwe Zimmermann
+    '''
+    def __init__(self, filename=None, imageops=None, speed=1.0, loop=False, **kwargs):
+        self.filename = filename
+        self.imageops = imageops
+        self.speed    = speed
+        self.loop     = loop
+        self._id = id(self)
+        self.status = VideoStatus()
+        self.status.videoObject = cv2.VideoCapture(filename)
+
+        self.status.videoObject.set(cv2.CAP_PROP_POS_FRAMES, 1)
+        ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
+            img = Image.fromarray(frame)
+
+            if imageops != None:
+                img = imageops(img)
+        else:
+            img = Image.fromarray(np.uint8([[63, 0, 0, 0],
+                                        [0, 127, 0, 0],
+                                        [0, 0, 191, 0],
+                                        [0, 0, 0, 255]
+                                        ]))
+        super().__init__(img, **kwargs)
+        if ret:
+            self.add_updater(self.videoUpdater)
+
+    def videoUpdater(self, mobj, dt):
+        if dt == 0:
+            return
+        status = self.status
+        status.time += 1000*dt*mobj.speed
+        self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+        ret, frame = self.status.videoObject.read()
+        if (ret == False) and self.loop:
+            status.time = 0
+            self.status.videoObject.set(cv2.CAP_PROP_POS_MSEC, status.time)
+            ret, frame = self.status.videoObject.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # needed here?        
+            img = Image.fromarray(frame)
+
+            if mobj.imageops != None:
+                img = mobj.imageops(img)
+            mobj.pixel_array = change_to_rgba_array(
+                np.asarray(img), mobj.pixel_array_dtype
+            )
+
+#+END_SRC
+
+#+RESULTS: Definición de VideoStatus y VideoMobject
+
+
+# +call: rodando(fichero="L01_V03_SumaDeVectores-I", escena="4")
+
+# +call: rodandoHD(fichero="L01_V03_SumaDeVectores-I", escena="4")
+
+# +call: montandoHD(video="L01_V03_SumaDeVectores-I")
+
+# +call: fade(video="L01_V03_SumaDeVectores-I")
+
+
+** COMMENT Código obtener subíndices de caracteres en expresiones
+
+Este código indexa los elementos de expresiones en \LaTeX para
+facilitar la transformación de una expresión en otra mediante la
+transformación de unos elementos en otros.
+
+#+name: Obtención de subíndices de caracteres en expresiones
+#+BEGIN_SRC python  :results discard
+
+import itertools
+def get_sub_indexes(tex):
+    ni = VGroup()
+    colors = itertools.cycle([RED,TEAL,GREEN,BLUE,PURPLE])
+    for i in range(len(tex)):
+        n = Text(f"{i}",color=next(colors)).scale(0.7)
+        n.next_to(tex[i],DOWN,buff=0.01)
+        ni.add(n)
+    return ni
+
+#+END_SRC
+
+#+RESULTS: Obtención de subíndices de caracteres en expresiones
+
+
+
+
+
+* Rodando: 1,2,3\dots ¡acción!
+
+
+#+call: rodando(fichero="L01_V04_ProductoDeUnVectorPorUnEscalar", escena="1,2,3,4,5,6")
+
+# +call: rodandoHD(fichero="L01_V04_ProductoDeUnVectorPorUnEscalar", escena="8,7")
+
+# +call: bandaSonora()
+
+# +call: fade(video="L01_V04_ProductoDeUnVectorPorUnEscalar")
+
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+- Versión de poca calidad:
+
+#+call: rodando(fichero="L01_V04_ProductoDeUnVectorPorUnEscalar", escena="1,2,3")
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V04_ProductoDeUnVectorPorUnEscalar" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+echo $escena | manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+- Versión con calidad HD1080:
+
+#+call: rodandoHD(fichero="L01_V04_ProductoDeUnVectorPorUnEscalar", escena="1,2,3")
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V04_ProductoDeUnVectorPorUnEscalar" :var escena="1" :dir /home/marcos/CloudStation/ReposGH/Docencia/VideosMates2/lib :results silent
+echo $escena | manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Añadimos música de fondo.
+
+
+#+name: bandaSonora
+#+BEGIN_SRC bash  :var subdir="lib/media/videos" :var carpeta="L01_V04_ScalingVectors" :var quality="1080p60" :var video="L01_V04_Geometric_Interpretation_of_Vector_Scaling" :var music="music/3Blue1Brown-Zeta-X3" :results silent
+ffmpeg -i $subdir/$carpeta/$quality/$video.mp4 -i $music.mp3 -filter_complex "[0:a]apad[main]; [1:a]volume=0.04,apad[A]; [main][A]amerge[out]" -c:v libx264 -c:a aac -map 0:v -map "[out]" -preset medium -tune stillimage -threads 0 -profile:v baseline -ac 2 -pix_fmt yuv420p -shortest -y tmp/$video.mp4
+#+END_SRC
+
+** Fundimos a negro los últimos segundos del vídeo (y la música).
+
+#+call: fade(video="L01_V04_Geometric_Interpretation_of_Vector_Scaling")
+
+
+#+name: fade
+#+BEGIN_SRC bash :var video="L01_V04_Geometric_Interpretation_of_Vector_Scaling" :results silent
+dur=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 "tmp/$video.mp4")
+offset=$(bc -l <<< "$dur"-7)
+ffmpeg -i "tmp/$video.mp4" \
+       -filter_complex "[0:v]fade=type=in:duration=0,fade=type=out:duration=6:start_time='$offset'[v];[0:a]afade=type=out:duration=6:start_time='$offset'[a]" \
+       -map "[v]" -map "[a]" -y $video.mp4
+#+END_SRC
+
+
+* COMMENT Descartado
+
+#+name: Segunda escena v.2
+#+BEGIN_SRC python
+# --- Títulos ---
+cabecera = Tex("Geometric interpretation of the product",
+                    tex_template = myTemplate,
+                    font_size=70).to_edge(UP).set_color(BLUE)
+
+cabecera2 = Tex("Geometric interpretation of the product of numbers",
+               tex_template = myTemplate,
+               font_size=70).to_edge(UP).set_color(BLUE).scale(0.6).shift(0.1*UP)
+
+# --- Utilidades de etiquetas en ejes ---
+def coordenada_x(x,ax, label='', pos=0):
+    if x==int(x):
+        xlabel = (ax[0][2][int(x)-1]).copy()
+    else:
+        label = label if label else f"{x}"
+        xlabel = Tex(label, font_size=30)
+        pos_label = UP if pos else DOWN
+        xlabel.next_to(ax.c2p(x,0), pos_label, buff=0.6)
+    return xlabel
+
+def coordenada_y(y,ax, label='', pos=0):
+    if y==int(y):
+        ylabel = (ax[1][2][int(y)-1]).copy()
+    else:
+        label = label if label else f"{y}"
+        ylabel = Tex(label, font_size=30)
+        pos_label = RIGHT if pos else LEFT
+        ylabel.next_to(ax.c2p(0,y), pos_label, buff=0.5)
+    return ylabel
+        
+coordenadas_xy = lambda x,y,ax,labelx='',labely='',posx=0,posy=0: (coordenada_x(x,ax,labelx,posx),
+                                                                   coordenada_y(y,ax,labely,posy))
+
+# --- Construcciones geométricas ---
+def retículaProducto(a, b: int, ax: Axes) -> VGroup:
+    def cuadricula(a: int, b: int, ax: Axes):
+        base = VGroup(*[Square().scale(0.5) for s in range(0,int(a*b))])
+        base.arrange_in_grid(rows=b,
+                             flow_order="ru",
+                             buff=0).next_to(ax.coords_to_point(0, 0),
+                                             UR,
+                                             buff=0)
+        return Group(*[base[c[0]:c[1]] for c in [(a*i,a*(i+1)) for i in range(b)]])
+    
+    def rectangulo(a, b: int, ax: Axes):
+        base  = VGroup(*[Rectangle(height=2.0, width=2.0*a).scale(0.5) for s in range(0,b)])
+        posicion = UR if a>0 else UL
+        tabla = base.arrange_in_grid(rows=b,
+                                     flow_order="ru",
+                                     buff=0).next_to(ax.coords_to_point(0, 0),
+                                                     posicion,
+                                                     buff=0)
+        return tabla
+    return cuadricula(a, b, ax) if isinstance(a, int) else rectangulo(a, b, ax)
+
+def productoEnteros(a,b,ax,tabla,duración=2):
+    print(len(tabla))
+    self.play([fila.animate.shift((len(tabla)-1-i)*a*RIGHT) for i,fila in enumerate(tabla)], run_time=duración/2)
+    self.play([fila.animate.shift(i*DOWN) for i,fila in enumerate(tabla)], run_time=duración/2)
+
+def producto(a,b,ax,tabla,duración=3):
+    self.play([fila.animate.shift((len(tabla)-1-i)*a*RIGHT) for i,fila in enumerate(tabla)], run_time=duración/3)
+    self.play([fila.animate.shift(i*DOWN) for i,fila in enumerate(tabla)], run_time=duración/3)
+    self.play([fila.animate.shift(i*UP) for i,fila in enumerate(tabla)], run_time=duración/3)
+
+def Arco(ax, b):
+    unidad = 1
+    arco = Arc(start_angle=PI/2,
+               angle=-PI/2,
+               radius=b*unidad,
+               arc_center=ax.c2p(0,0),
+               stroke_width=0.8)
+    return arco
+                
+def Rectángulo(a, b, ax: Axes):
+        posición = UR if a>0 else UL
+        rectángulo = Rectangle(height=1.0,
+                               width=1.0*a).next_to(ax.coords_to_point(0, 0),
+                                                    posición,
+                                                    buff=0)
+        return rectángulo
+    
+def multiplica(a, b, ax: Axes):
+    """
+    Desplaza horizontalmente una recta que pasa por (a, 0) y (0, 1)
+    hasta que corte el eje vertical en el punto (0, b)
+    """
+    # Diagonal del rectángulo
+    punto_inferior = ax.coords_to_point(a, 0)
+    punto_superior = ax. coords_to_point(0, 1)
+    diagonal = Line(punto_inferior, punto_superior, color=BLUE)
+    # Extender la diagonal
+    if b>0:
+        y_arriba = 1+b
+        x_arriba = -a*(y_arriba-1)
+        y_abajo = -1
+        x_abajo = 2*a
+    else:
+        y_arriba = 2
+        x_arriba = -a
+        y_abajo = b-1
+        x_abajo = -a*(y_abajo-1)
+    diagonal_extendida = Line(
+        ax.coords_to_point(x_arriba, y_arriba),
+        ax.coords_to_point(x_abajo, y_abajo),
+        color=RED
+    )                
+    desplazamiento_x = a * (b - 1)
+    desplazamiento = ax.coords_to_point(desplazamiento_x, 0) - ax.coords_to_point(0, 0)
+    diagonal_extendida.shift(desplazamiento)
+    return diagonal, diagonal_extendida
+
+# --- Arranque del vídeo ---
+self.creditos(1)
+
+ax = Axes(
+    x_length=12,
+    y_length=6,
+    x_range=[0, 12, 1],
+    y_range=[0, 6, 1],
+    tips=False,
+    axis_config={"include_numbers": True}
+)        
+
+resumen1 = Tex(r"""Before examining scalar multiplication in \R[2],""",
+               tex_template = myTemplate).scale_to_fit_width(config.frame_width*.9)
+
+resumen2 = Tex(r"""we will first build a geometric view of multiplying real numbers.""",
+               tex_template = myTemplate).next_to(resumen1, DOWN).scale_to_fit_width(config.frame_width*.9)
+
+with self.voiceover(text="""Before examining scalar multiplication in R 2,""") as tracker:
+    self.add(cabecera)            
+    self.play(Write(resumen1), run_time=tracker.duration+0.2)
+    
+with self.voiceover(text="""we will first build a geometric view of multiplying real numbers.""") as tracker:
+    self.play(Write(resumen2), run_time=tracker.duration)
+    self.play(FadeOut(resumen1),
+              FadeOut(resumen2))
+                
+with self.voiceover(text="""For natural numbers, lengths represent magnitudes and areas represent products.""") as tracker:
+    self.play(FadeIn(ax),
+              FadeTransform(cabecera, cabecera2),
+              run_time=tracker.duration/3)
+
+# --- Único ejemplo discreto (entero): 3 x 4 ---
+with self.voiceover(text="""Three times four: stack four 3 by 1 rectangles and align them.""") as tracker:
+    a=3.
+    b=4
+    tabla = retículaProducto(a,b,ax)
+    xlabel,ylabel=coordenadas_xy(a,b,ax)
+    self.play(Indicate(xlabel,scale_factor=2.0))
+    self.play(Indicate(ylabel,scale_factor=2.0))
+    self.remove(xlabel,ylabel)
+    self.play(*[FadeIn(base) for base in tabla], run_time=tracker.duration/3)
+    productoEnteros(a,b,ax,tabla,duración=tracker.duration/2)
+    self.pausa_muy_corta()
+    self.play(FadeOut(tabla))
+
+# --- Paso al caso general (recta paralela a la diagonal) ---
+with self.voiceover(text="""For arbitrary real numbers, we use a continuous construction.""") as tracker:
+    self.wait(tracker.duration/2)
+
+with self.voiceover(text="""Start with base a and height 1. Draw the diagonal through a,0 and 0,1.""") as tracker:
+    a=3.
+    b=4
+    rectángulo = Rectángulo(a, b, ax)
+    diagonal, diagonal_extendida = multiplica(a, b, ax)
+    self.play(Create(rectángulo), run_time=tracker.duration/2)
+    self.play(Create(diagonal),   run_time=tracker.duration/2)
+
+with self.voiceover(text="""Shift a parallel line to hit the vertical axis at b. Its intersection with the horizontal axis is a b.""") as tracker:
+    self.play(ReplacementTransform(diagonal.copy(),diagonal_extendida))
+    self.pausa()
+
+# --- 3 × π ---
+with self.voiceover(text="""For example, three times pi is a bit less than nine and a half.""") as tracker:           
+    a=3.
+    b=np.pi
+    b_label=r"$\pi$"
+    ylabelpi=coordenada_y(b, ax, label=b_label)
+    kk, diagonal_extendida3 = multiplica(a, b, ax)
+    self.add(ylabelpi)
+    self.play(ReplacementTransform(diagonal.copy(),diagonal_extendida3))
+    self.pausa()
+    self.play(FadeOut(ylabelpi,
+                      diagonal_extendida,
+                      diagonal_extendida3,
+                      rectángulo,
+                      diagonal))
+
+# --- 2√2 × 3√2 ---
+with self.voiceover(text="""Using this line method, two root two times three root two equals twelve.""") as tracker:
+    a=2*np.sqrt(2)
+    a_label=r"$2\sqrt{2}$"
+    b=3*np.sqrt(2)
+    b_label=r"$3\sqrt{2}$"
+    xlabel,ylabel=coordenadas_xy(a, b, ax, labelx=a_label, labely=b_label)
+    rectángulo = Rectángulo(a, b, ax)
+    self.pausa(tracker.duration/2)
+    self.play(Indicate(xlabel,scale_factor=2.0),
+              FadeIn(rectángulo))
+    self.play(Indicate(ylabel,scale_factor=2.0))
+
+with self.voiceover(text="""The product is exactly twelve.""") as tracker:     
+    diagonal, diagonal_extendida = multiplica(a, b, ax)
+    self.play(Create(diagonal))
+    self.play(ReplacementTransform(diagonal.copy(),diagonal_extendida))
+    self.wait(tracker.duration/2)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])  # borrado de todo
+
+# --- Signos y cero ---
+ax = Axes(
+    x_length=12,
+    y_length=6,
+    x_range=[-6, 6, 1],
+    y_range=[-3, 3, 1],
+    tips=False,
+    x_axis_config={"include_numbers": True}
+)        
+self.add(ax)
+    
+a=-2.5
+a_label=r"$\alpha$"
+b=-1.5
+b_label=r"$\beta$"
+
+xlabel, ylabel = coordenadas_xy(a, b, ax, labelx=a_label, labely=b_label)
+xlabel.scale(1.5)
+ylabel.scale(1.5)
+
+c=1.5
+c_label=r"$\gamma$"        
+__, ylabel2 = coordenadas_xy(a, c, ax, labelx=a_label, labely=c_label)
+ylabel2.scale(1.5)
+
+with self.voiceover(text="""Now, the signs. Multiplication preserves sign rules.""") as tracker:
+    self.play(Indicate(xlabel,scale_factor=1.5),
+              Indicate(ylabel,scale_factor=1.5),
+              run_time=tracker.duration/2)
+
+with self.voiceover(text="""Draw the diagonal for alpha. Move it to meet beta on the vertical axis.""") as tracker:
+    rectángulo = Rectángulo(a, b, ax)
+    diagonal, diagonal_extendida = multiplica(a, b, ax)
+    self.play(Create(rectángulo), run_time=tracker.duration/3)
+    self.play(Create(diagonal),   run_time=tracker.duration/3)
+    diagonal_alargada =diagonal.copy().scale(4)
+    self.play(FadeIn(diagonal_alargada),
+              FadeOut(rectángulo))
+    self.play(FadeTransform(diagonal_alargada,
+                            diagonal_extendida),
+              run_time=tracker.duration/3)
+
+    #self.play(ReplacementTransform(diagonal.copy(),diagonal_extendida),
+    #          run_time=tracker.duration/3)
+
+with self.voiceover(text="""Negative times negative is positive: alpha beta lies on the positive side.""") as tracker:
+    prod_label = Tex(r"$\alpha\beta$", font_size=30).scale(1.5)
+    prod_label.next_to(ax.c2p(a*b,0), UP, buff=0.3)
+    self.wait(tracker.duration/2)           
+    self.play(Indicate(prod_label, scale_factor=2.0), run_time=tracker.duration/2)
+
+with self.voiceover(text="""With a positive gamma, alpha gamma is negative.""") as tracker:
+    __, diagonal_extendida2 = multiplica(a, c, ax)
+    prod_label2 = Tex(r"$\alpha\gamma$", font_size=30).scale(1.5)
+    prod_label2.next_to(ax.c2p(a*c,0), UP, buff=0.3)
+    self.play(Indicate(ylabel2, scale_factor=1.5),
+              Indicate(xlabel,  scale_factor=1.5),
+              run_time=tracker.duration/3)
+    self.play(FadeTransform(diagonal.copy(),diagonal_extendida2), run_time=tracker.duration/3),
+    self.play(Indicate(prod_label2, scale_factor=2.0), run_time=tracker.duration/3)
+    self.wait()
+    self.play(FadeOut(diagonal_extendida,
+                      diagonal_extendida2,
+                      prod_label,
+                      prod_label2,
+                      xlabel,
+                      ylabel,
+                      ylabel2,))
+
+# --- Caso cero ---
+cerolabel = Tex('$0$', font_size=32, color=YELLOW).scale(1.3)
+cerolabel.next_to(ax.c2p(0,0), DOWN)
+
+with self.voiceover(text="""If alpha is zero, the diagonal is the vertical axis.""") as tracker:
+    punto_inferior = ax.coords_to_point(0, 0)
+    punto_superior = ax. coords_to_point(0, 1)
+    diagonal_vertical = Line(punto_inferior, punto_superior, color=BLUE)
+    punto_inferiorMin = ax.coords_to_point(0, -4)
+    punto_superiorMax = ax. coords_to_point(0, 4)
+    diagonal_vertical_extendida = Line(punto_inferiorMin, punto_superiorMax, color=BLUE)
+    self.play(ReplacementTransform(diagonal,diagonal_vertical),
+              run_time=tracker.duration/2)
+    #self.play(Create(diagonal_vertical), run_time=tracker.duration/2)
+    
+with self.voiceover(text="""Its extension meets the horizontal axis at zero.""") as tracker:
+    self.play(ReplacementTransform(diagonal_vertical,
+                                   diagonal_vertical_extendida,
+                                   rate_func=rate_functions.slow_into),
+              run_time=tracker.duration/2)
+
+with self.voiceover(text="""Zero times any number is zero.""") as tracker:
+    self.play(Indicate(cerolabel), run_time=tracker.duration)
+    self.play(*[FadeOut(mob)for mob in self.mobjects])  # borrado de todo
+    
+# --- Variante con eje vertical ---
+with self.voiceover(text="""We can also use the vertical axis as the output axis.""") as tracker:
+    ax = Axes(
+        x_length=12,
+        y_length=6,
+        x_range=[0, 12, 1],
+        y_range=[0, 6, 1],
+        tips=False,
+        axis_config={"include_numbers": True}
+    )
+    self.play(FadeIn(ax), run_time=tracker.duration/2)
+
+def multiplicaEjeVertical(a, b, ax: Axes):
+    """
+    Desplaza horizontalmente una recta que pasa por (a, 0) y (0, 1)
+    hasta que corte el eje vertical en el punto (0, b)
+    """
+    punto_inferior = ax.coords_to_point(1, 0)
+    punto_superior = ax. coords_to_point(0, a)
+    diagonal = Line(punto_inferior, punto_superior, color=BLUE)
+    y_arriba = a+b
+    x_arriba = (a-y_arriba)/b if b!=0 else 0
+    y_abajo = -1
+    x_abajo = (a-y_abajo)/b if b!=0 else 0
+    diagonal_extendida = Line(
+        ax.coords_to_point(b, 0),
+        ax.coords_to_point(0,a*b),
+        color=RED)
+    return diagonal, diagonal_extendida
+    
+with self.voiceover(text="""Use a rectangle of base 1 and height 2. Its diagonal multiplies by 2.""") as tracker:
+    a=2
+    b=3
+    rectángulo = Rectangle(height=1.0*a,
+                           width=1.0).next_to(ax.coords_to_point(0, 0),
+                                              UR,
+                                              buff=0)
+    diagonal, diagonal_extendida = multiplicaEjeVertical(a, b, ax)
+    self.play(FadeIn(rectángulo), Create(diagonal), run_time=tracker.duration+0.2)
+    self.play(FadeOut(rectángulo))
+
+with self.voiceover(text="""To multiply by 3, draw a parallel through 3 on the horizontal axis; where it meets the vertical axis is the product.""") as tracker:
+    xlabel,ylabel=coordenadas_xy(b, a*b, ax)
+    self.play(Indicate(xlabel, scale_factor=2.0),
+              ReplacementTransform(diagonal.copy(), diagonal_extendida))
+    self.pausa(tracker.duration*2/3)
+    self.play(Indicate(ylabel, scale_factor=2.0))
+    self.pausa()
+    self.play(*[FadeOut(mob)for mob in self.mobjects]) # borrado de todo
+
+# --- Líneas no perpendiculares ---
+def line_intersection(l1, l2):
+    """
+    Devuelve el punto de intersección entre dos rectas dadas
+    por pares de puntos (p1, p2), (p3, p4).
+    """
+    p1, p2 = l1
+    p3, p4 = l2
+    x1, y1 = p1[:2]
+    x2, y2 = p2[:2]
+    x3, y3 = p3[:2]
+    x4, y4 = p4[:2]
+    denom = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4)
+    px = ((x1*y2-y1*x2)*(x3-x4)-(x1-x2)*(x3*y4-y3*x4))/denom
+    py = ((x1*y2-y1*x2)*(y3-y4)-(y1-y2)*(x3*y4-y3*x4))/denom
+    return np.array([px, py, 0])
+
+blanca1 = Line(start=LEFT*6 + DOWN*1, end=RIGHT*6 + UP*2, color=WHITE)
+blanca2 = Line(start=LEFT*6 + UP*1,   end=RIGHT*6 + DOWN*1, color=WHITE)
+azul1 = Line(start=LEFT*6 + UP*2, end=RIGHT*6 + DOWN*2, color=BLUE)
+desplazamiento = UP*0.5
+azul2 = azul1.copy().shift(desplazamiento)
+
+p_1 = line_intersection(
+    (blanca1.get_start(), blanca1.get_end()),
+    (azul1.get_start(), azul1.get_end())
+)
+
+p_alpha = line_intersection(
+    (blanca2.get_start(), blanca2.get_end()),
+    (azul1.get_start(), azul1.get_end())
+)
+
+p_beta = line_intersection(
+    (blanca1.get_start(), blanca1.get_end()),
+    (azul2.get_start(), azul2.get_end())
+)
+
+p_alpha_beta = line_intersection(
+    (blanca2.get_start(), blanca2.get_end()),
+    (azul2.get_start(), azul2.get_end())
+)
+
+d1 = Dot(p_1)
+da = Dot(p_alpha)
+db = Dot(p_beta)
+dab = Dot(p_alpha_beta)
+
+t1 = MathTex("1").next_to(d1, UP)
+ta = MathTex(r"\alpha").next_to(da, DOWN)
+tb = MathTex(r"\beta").next_to(db, UP)
+tab = MathTex(r"\alpha\beta").next_to(dab, DOWN)
+            
+with self.voiceover(text="""We don't even need perpendicular axes.""") as tracker:
+    self.play(Create(blanca1),
+              Create(blanca2),
+              FadeIn(d1, da),
+              Write(t1),
+              Write(ta))
+    self.play(Create(azul1))
+    self.play(FadeIn(db), Write(tb))
+    self.play(ReplacementTransform(azul1.copy(), azul2))
+    self.play(FadeIn(dab), Write(tab))
+    
+with self.voiceover(text="""Any pair of lines through the origin suffices.""") as tracker:
+    self.wait(tracker.duration/3)
+    self.play(Indicate(blanca1),
+              Indicate(blanca2),
+              run_time=tracker.duration/2)
+    self.wait(2)
+#+END_SRC
+
+#+name: Tercera escena (versión vieja)
+#+begin_src python :eval no
+# procedimientos auxiliares        
+def coordenadaX(x, ax: Axes):
+    posición = UR if x>0 else UL
+    rectángulo = Rectangle(height=unidad,
+                           width=unidad*x,
+                           color=GREY_B,
+                           stroke_width=3).next_to(ax.coords_to_point(0, 0),
+                                                posición,
+                                                buff=0)
+    return rectángulo
+
+def coordenadaY(y, ax: Axes):
+    posición = UR if y>0 else UL
+    rectángulo = Rectangle(height=unidad*y,
+                           width=unidad,
+                           color=GREY_B,
+                           stroke_width=3).next_to(ax.coords_to_point(0, 0),
+                                                        posición,
+                                                        buff=0)
+    return rectángulo
+
+def Arco(ax, b):
+    unidad = 1
+    arco = Arc(start_angle=PI/2,  # Ángulo de inicio (90 grados en radianes)
+               angle=-PI/2,       # Ángulo de arco (-90 grados en radianes)
+               radius=b*unidad,     # Radio del arco
+               arc_center=ax.c2p(0,0),
+               stroke_width=4,
+               color=YELLOW)
+    return arco
+
+def multiplica(vector, c, axes: Axes, unidad):
+    """
+    Multiplica un vector de R2 por un escalar
+    """
+    def diagonales(x,y,c=1):
+        diagonalx = Line(axes.coords_to_point(x*c, 0),
+                         axes.coords_to_point(0, 1*c),
+                         color=BLUE)
+        diagonaly = Line(axes.coords_to_point(1*c, 0),
+                         axes.coords_to_point(0, y*c),
+                         color=BLUE)
+        return diagonalx, diagonaly
+        
+    x,y,z = vector.coords
+    # arcos
+    arco1 = Arco(axes, unidad)
+    arco2 = Arco(axes, unidad*c)
+    # Diagonal rectángulos
+    diagonalx1, diagonaly1 = diagonales(x,y)
+    diagonalx2, diagonaly2 = diagonales(x,y,c)
+                
+    return arco1, diagonalx1, diagonaly1, arco2, diagonalx2, diagonaly2
+
+# elementos generales
+        	
+cabecera = Tex("Geometric interpretation of the scalar multiplication of vectors in $\R[2]$",
+               tex_template = myTemplate,
+               font_size=60).scale_to_fit_width(config.frame_width*.9).to_edge(UP).set_color(BLUE)        
+
+# plano de coordenadas
+unidad = 673/1200
+mínimo = -12.2   # Rango de X de -6 a 16
+máximo =  12.2   # Rango de Y de -6 a 16
+axes = NumberPlane(
+    x_range=[mínimo+3, máximo],
+    y_range=[mínimo+3, máximo],
+    x_length=12,       # Longitud total en el eje X (16 - (-6) = 22)
+    y_length=12,       # Longitud total en el eje Y (16 - (-6) = 22)
+).add_coordinates()#.to_edge(RIGHT)
+
+# inicio de la locución
+self.creditos(7)
+self.add(cabecera)
+self.pausa_corta()
+	
+with self.voiceover(text="""We can now interpret scalar multiplication geometrically.""") as tracker:
+            
+    self.pausa(tracker.duration) 
+    self.play(FadeIn(axes),
+              FadeOut(cabecera))
+
+######## sin componentes nulas ###
+
+with self.voiceover(text="""Consider an arbitrary vector in R 2 with both components nonzero.""") as tracker:
+
+    a  = nc.Vector([sp.symbols('x'), sp.symbols('y')])
+    escalar = sp.symbols('\lambda')
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    grp1 = VGroup(lv, s1).arrange(RIGHT).to_corner(UL)
+    
+    fondo = SurroundingRectangle(
+        grp1,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0.15)
+    
+    self.add(fondo)
+    self.play(FadeIn(grp1))
+    self.pausa() 
+    
+with self.voiceover(text="""For instance, the vector 'four-two'.""") as tracker:
+
+    a=4
+    b=2
+    Vect1 = nc.Vector([a,b])
+    vect1 = VectorR2(Vect1.lista,
+                     rpr='colum',
+                     color=GOLD_A)
+    vect1_dot = vect1.arrow(axes)
+    vect1_tex = vect1.tex
+    vect1_tex.next_to(vect1_dot.get_end(), UP)
+    fondo1 = SurroundingRectangle(
+        vect1_tex,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0)
+    vect1_v_line = vect1.v_line(axes)
+    vect1_h_line = vect1.h_line(axes)
+    vect1_flecha = vect1.arrow(axes)
+
+    self.play(FadeIn(vect1_dot, fondo1, vect1_tex, vect1_v_line, vect1_h_line))
+    self.pausa()
+
+    arco1, diagonalx1, diagonaly1, *__ = multiplica(vect1, 1, axes, unidad)
+
+
+with self.voiceover(text="""When we multiply by a scalar, the same factor applies to both components.""") as tracker:
+    self.play(Indicate(grp1[1][0][1], scale_factor=2),
+              Indicate(grp1[1][0][3], scale_factor=2),
+              run_time=tracker.duration)
+    self.pausa_muy_corta()
+    
+with self.voiceover(text="""Therefore, we must multiply both the first and second components
+                     geometrically.""") as tracker:
+                
+    rectánguloX = coordenadaX(a, axes)
+    rectánguloY = coordenadaY(b, axes)
+
+    self.wait(tracker.duration/2)
+    self.play(FadeIn(rectánguloX),
+              FadeIn(diagonalx1),
+              run_time=tracker.duration/8)
+    self.play(FadeIn(rectánguloY),
+              FadeIn(diagonaly1),
+              run_time=tracker.duration/8)
+
+with self.voiceover(text="""Notice that one component is represented along the horizontal axis
+                   and the other along the vertical axis.""") as tracker:
+    
+    self.wait(tracker.duration/2)
+    self.play(Indicate(rectánguloX),
+              Indicate(diagonalx1),
+              run_time=tracker.duration/8)
+    self.play(Indicate(rectánguloY),
+              Indicate(diagonaly1),
+              run_time=tracker.duration/8)
+                
+with self.voiceover(text="""Applying the same factor to both components means that when we
+                     translate the diagonals, both translated lines must intersect the other
+                     axes at the same scalar value.""") as tracker:
+
+    self.wait(tracker.duration*3/5)
+    self.play(FadeOut(rectánguloX), FadeOut(rectánguloY))
+
+    arco1.set_stroke(width=3)
+    self.play(Indicate(arco1))
+
+def creaciónDeMúltiplos(tupla, factor, axes,
+                        arco0,  vect0_dot, vect0_tex,
+                        vect0_h_line, vect0_v_line,
+                        diagonalx0, diagonaly0,
+                        fondo0=[],
+                        color=GOLD_A, rpr='colum', radio=0.05, unidad=673/1200,
+                        run_time=2):
+    
+    Vect = factor*nc.Vector(tupla)
+    vect = VectorR2(Vect.lista, rpr=rpr, color=color)
+    vect_dot = vect.arrow(axes)
+    vect_tex = vect.tex
+    vect_tex.next_to(vect_dot.get_end(), UP)
+    fondo = SurroundingRectangle(
+        vect_tex,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0)
+    vect_h_line = vect.h_line(axes)
+    vect_v_line = vect.v_line(axes)
+    vect_flecha = vect.arrow(axes)
+    ,*__, arco, diagonalx, diagonaly = multiplica(VectorR2(tupla), factor, axes, unidad)
+    
+    self.play(FadeTransform(diagonalx0,
+                            diagonalx),
+              FadeTransform(diagonaly0,
+                            diagonaly),
+              ReplacementTransform(arco0,
+                                   arco),
+              TransformFromCopy(vect0_dot,
+                                vect_dot),
+              TransformFromCopy(vect0_h_line,
+                                vect_h_line),
+              TransformFromCopy(vect0_v_line,
+                                vect_v_line),
+              FadeIn(fondo),
+              Write(vect_tex),
+              run_time=run_time)
+    return arco, vect_dot, vect_tex, vect_h_line, vect_v_line, diagonalx, diagonaly, fondo
+    
+with self.voiceover(text="""When we multiply the vector by 3, both components are tripled.""") as tracker:
+
+    factor = nc.fracc(3,1)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, 
+                                arco1, vect1_dot, vect1_tex,
+                                vect1_h_line, vect1_v_line,
+                                diagonalx1, diagonaly1,
+                                color=GOLD_A, rpr='colum', radio=0.05, unidad=unidad,
+                                run_time=tracker.duration/2)
+
+    arco2, vect2_dot, vect2_tex, vect2_h_line, vect2_v_line, diagonalx2, diagonaly2, fondo2 = lista
+  
+
+with self.voiceover(text="""Multiplying by 2 doubles both components.""") as tracker:
+    
+    factor = nc.fracc(2,1)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista, 
+                                run_time=tracker.duration/2)
+    arco3, vect3_dot, vect3_tex, vect3_h_line, vect3_v_line, diagonalx3, diagonaly3, fondo3 = lista
+
+with self.voiceover(text="""Multiplying by one-half reduces both components by half.""") as tracker:
+    
+    factor = nc.fracc(1,2)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/2)
+    arco4, vect4_dot, vect4_tex, vect4_h_line, vect4_v_line, diagonalx4, diagonaly4, fondo4 = lista
+
+
+with self.voiceover(text="""When we multiply by a negative number, the signs of both components change, reversing the direction of the arrow.""") as tracker:
+
+    factor = -1
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/4)
+    arco5, vect5_dot, vect5_tex, vect5_h_line, vect5_v_line, diagonalx5, diagonaly5, fondo5 = lista
+
+    factor = -2
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/4)
+    arco6, vect6_dot, vect6_tex, vect6_h_line, vect6_v_line, diagonalx6, diagonaly6, fondo6 = lista
+    
+
+with self.voiceover(text="""Moreover, any vector multiplied by zero yields the zero vector.""") as tracker:            
+    factor = 0
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/2)
+    arco0, vect0_dot, vect0_tex, vect0_h_line, vect0_v_line, diagonalx0, diagonaly0, fondo0 = lista
+
+with self.voiceover(text="""Notice that the ratio between the components is preserved, since both are multiplied by the same scalar.""") as tracker:
+
+   
+    source0 = MathTex(r"\frac{y}{x}=\alpha",
+                      tex_template = myTemplate)
+    añadido = MathTex(r"\frac{\lambda y}{\lambda x}=",
+                      tex_template = myTemplate)
+    VG0 = VGroup(añadido,source0).arrange(RIGHT)
+    
+    target0 = MathTex(r"y=\alpha \cdot x",
+                      tex_template = myTemplate)
+
+    VG0.add(target0).next_to(grp1,
+                             DOWN,
+                             buff=1).scale(1.5).shift(RIGHT/3)
+
+    fondoVG0 = SurroundingRectangle(VG0,
+                                    color=BLACK,
+                                    fill_color=BLACK,
+                                    fill_opacity=0.8,
+                                    stroke_width=0,
+                                    buff=0.15)
+    
+    self.add(fondoVG0)
+    self.play(FadeIn(source0),
+              FadeIn(añadido),
+              run_time=tracker.duration*2/5)
+
+    self.pausa(tracker.duration/6)
+    self.play(Flash(grp1[1][0][1]),
+              Flash(grp1[1][0][3]),
+              run_time=tracker.duration/3)
+            
+with self.voiceover(text="""In this example, the second component is half the first component.""") as tracker:
+
+    self.play(FadeOut(añadido),
+              run_time=tracker.duration/4)
+                
+with self.voiceover(text="""All points sharing the same ratio of coordinates lie on a line through the origin.""") as tracker:
+    
+    transform_index0 = [[0,1,2,3,4],
+                        [0,3,4,1,2]]
+    self.play(
+        ,*[
+            ReplacementTransform(source0[0][i],target0[0][j], rate_func=rate_functions.smooth)
+            for i,j in zip(*transform_index0)
+        ],
+        run_time=tracker.duration/2)
+    
+    self.play(FadeOut(vect1_v_line,
+                      vect2_v_line,
+                      vect3_v_line,
+                      vect4_v_line,
+                      vect5_v_line,
+                      vect6_v_line,
+                      vect1_h_line,
+                      vect2_h_line,
+                      vect3_h_line,
+                      vect4_h_line,
+                      vect5_h_line,
+                      vect6_h_line,
+                      fondo0,
+                      fondo1,
+                      fondo2,
+                      fondo3,
+                      fondo4,
+                      fondo5,
+                      fondo6,
+                      vect0_tex,
+                      vect1_tex,
+                      vect2_tex,
+                      vect3_tex,
+                      vect4_tex,
+                      vect5_tex,
+                      vect6_tex),
+              run_time=tracker.duration*1/5)
+    
+    p1 = (16, 8)
+    p2 = (-12, -6)
+    # Conversión a puntos del plano con los ejes de coordenadas
+    P1 = axes.coords_to_point(*p1)
+    P2 = axes.coords_to_point(*p2)
+    
+    recta = Line(P1, P2, color=BLUE_B)
+ 
+    self.play(FadeOut(vect1_dot,
+                      vect2_dot,
+                      vect3_dot,
+                      vect4_dot,
+                      vect5_dot,
+                      vect6_dot),
+              Indicate(recta, scale_factor=5),
+              Circumscribe(target0))
+
+    self.pausa()
+    
+    self.play(FadeOut(recta),
+              FadeOut(fondo),
+              FadeOut(vect0_dot),
+              FadeOut(fondoVG0),
+              FadeOut(grp1),
+              FadeOut(source0))
+
+with self.voiceover(text="""Now consider a vector with only one nonzero component—in this case, the first component.""") as tracker:
+
+    a  = nc.Vector([sp.symbols('x'),0])
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    s2 = MathTex(r";\qquad",  tex_template = myTemplate)
+    s3 = MathTex(r"x\ne0",  tex_template = myTemplate)
+    grpX = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL)
+    
+    fondo = SurroundingRectangle(
+        grpX,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0.15)
+    
+    a=4
+    b=0
+    VectX = nc.Vector([a,b])
+    vectX = VectorR2(VectX.lista,
+                     rpr='colum',
+                     color=GOLD_A)
+    #vectX_dot = vectX.dot(axes, radio=0.05)
+    vectX_dot = vectX.arrow(axes)
+    vectX_tex = vectX.tex
+    vectX_tex.next_to(vectX_dot.get_end(), UP)
+    fondoX = SurroundingRectangle(
+        vectX_tex,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0)
+    vectX_v_line = vectX.v_line(axes)
+    vectX_h_line = vectX.h_line(axes)
+    vectX_flecha = vectX.arrow(axes)
+    
+    self.play(FadeIn(fondo),
+              FadeIn(grpX),
+              run_time=tracker.duration/4)
+
+    self.play(FadeIn(fondoX),
+              FadeIn(vect1_dot),
+              Write(vect1_tex),
+              Create(diagonalx1),
+              Create(diagonaly1),
+              run_time=tracker.duration/5)
+
+    arco1, diagonalxX, diagonalyX, *__ = multiplica(vectX, 1, axes, unidad)
+    
+    self.play(Indicate(grpX[1][0][3],
+                       scale_factor=2.5),
+              FadeTransform(vect1_dot,
+                            vectX_dot),                      
+              FadeTransform(vect1_tex,
+                            vectX_tex),
+              FadeTransform(diagonalx1,
+                            diagonalxX),
+              FadeTransform(diagonaly1,
+                            diagonalyX),
+              run_time=tracker.duration/2)
+    self.pausa()
+
+with self.voiceover(text="""When we multiply by a scalar, the same factor applies to all components, but the second component remains zero.""") as tracker:
+                                        
+    factor = nc.fracc(3,1)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/7)
+    arco2, vect2_dot, vect2_tex, vect2_h_line, vect2_v_line, diagonalx2, diagonaly2, fondo2 = lista
+    
+   
+    factor = 2
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/7)
+    arco3, vect3_dot, vect3_tex, vect3_h_line, vect3_v_line, diagonalx3, diagonaly3, fondo3 = lista
+    
+    factor = nc.fracc(1,2)
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/7)
+    arco4, vect4_dot, vect4_tex, vect4_h_line, vect4_v_line, diagonalx4, diagonaly4, fondo4 = lista
+   
+    factor = -1
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/7)
+    arco5, vect5_dot, vect5_tex, vect5_h_line, vect5_v_line, diagonalx5, diagonaly5, fondo5 = lista
+
+    factor = -2
+    lista = creaciónDeMúltiplos([a,b], factor, axes, *lista,
+                                run_time=tracker.duration/7)
+    arco6, vect6_dot, vect6_tex, vect6_h_line, vect6_v_line, diagonalx6, diagonaly6, fondo6 = lista
+    self.pausa_corta()
+    
+with self.voiceover(text="""So in this case, all scalar multiples lie on the horizontal axis.""") as tracker:
+
+    punto_Ax = axes.coords_to_point(-9.2, 0)
+    punto_Bx = axes. coords_to_point(12.2, 0)
+    eje_x = Line(punto_Ax, punto_Bx, color=RED_B)
+
+    self.remove(*[vectX_dot,
+                      vect2_dot,
+                      vect3_dot,
+                      vect4_dot,
+                      vect5_dot,
+                      vect6_dot,
+                      vectX_tex,
+                      vect2_tex,
+                      vect3_tex,
+                      vect4_tex,
+                      vect5_tex,
+                      vect6_tex,
+                      arco6,
+                      fondoX,
+                      fondo0,
+                      fondo1,
+                      fondo2,
+                      fondo3,
+                      fondo4,
+                      fondo5,
+                      fondo6,
+                      diagonalxX,
+                      diagonalyX,
+                      diagonalx6,
+                      diagonaly6])
+    self.play(Indicate(eje_x),
+              run_time=tracker.duration)
+    
+    self.play(FadeOut(eje_x))
+    self.remove(*[grpX,fondo])
+
+with self.voiceover(text="""The case where the first component is zero is analogous.""") as tracker:
+
+    a  = nc.Vector([0, sp.symbols('y')])
+    v  = a*escalar
+    lv = MathTex(r"\lambda\," + a.latex() + " = ",  tex_template = myTemplate)
+    s1 = MathTex(v.latex(),  tex_template = myTemplate)
+    s2 = MathTex(r";\qquad",  tex_template = myTemplate)
+    s3 = MathTex(r"y\ne0",  tex_template = myTemplate)
+    grpY = VGroup(lv, s1, s2, s3).arrange(RIGHT).to_corner(UL)
+    
+    fondo = SurroundingRectangle(
+        grpY,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0.15)
+               
+    self.play(FadeIn(fondo),
+              FadeIn(grpY),
+              run_time=tracker.duration/4)
+
+    
+with self.voiceover(text="""All scalar multiples lie on the vertical axis.""") as tracker:
+
+    punto_Ay = axes.coords_to_point(0,- 6)
+    punto_By = axes. coords_to_point(0, 9)
+    eje_y = Line(punto_Ay, punto_By, color=RED_B)
+
+    self.play(Indicate(eje_y),
+              run_time=tracker.duration)
+    
+    self.play(FadeOut(eje_y))
+
+resumen1 = Tex(r"""The set of scalar multiples of a \underline{non-zero} vector in \R[2]""",
+               tex_template = myTemplate)
+resumen2 = Tex(r"""forms a line passing through the origin.""",
+               tex_template = myTemplate).next_to(resumen1, DOWN)
+    
+with self.voiceover(text="""Therefore, the set of all scalar multiples of any nonzero vector in R 2 forms a line through the origin.""") as tracker:
+    
+    self.play(*[FadeOut(mob)for mob in self.mobjects] )            
+    self.play(Write(resumen1))
+    self.play(Write(resumen2))                       
+    self.pausa(1.5)
+    self.play(*[FadeOut(mob)for mob in self.mobjects]) # borrado de todo
+
+with self.voiceover(text="""For the zero vector, since any scalar multiple of zero is zero, the set of multiples consists only of the origin.""") as tracker:
+
+    self.play(FadeIn(axes))
+    
+    Vect0 = nc.Vector([0,0])
+    vect0 = VectorR2(Vect0.lista, rpr='colum', color=YELLOW)
+    vect0_dot = vect0.dot(axes, radio=0.1)
+    
+    escalar = sp.symbols('\lambda')
+    lv0 = MathTex(r"\lambda\," + Vect0.latex() + " = ",  tex_template = myTemplate)
+    w0  = escalar*Vect0
+    s0 = MathTex(w0.latex(),  tex_template = myTemplate)
+    paralambda = MathTex(r"\text{for any } \lambda",  tex_template = myTemplate)
+    grp0 = VGroup(lv0, s0, paralambda).arrange(RIGHT).to_corner(UL)
+    
+    fondo0 = SurroundingRectangle(
+        grp0,
+        color=BLACK,
+        fill_color=BLACK,
+        fill_opacity=0.8,
+        stroke_width=0,
+        buff=0.15)
+
+    self.add(fondo0)
+    self.play(FadeIn(grp0))
+    self.play(Indicate(vect0_dot),
+              #FadeIn(vect0_tex),
+              run_time=tracker.duration/3)
+    self.wait(tracker.duration/3)
+    self.play(Indicate(vect0_dot,
+                       scale_factor=2.5))
+    self.play(FadeOut(vect0_dot),
+              #FadeOut(vect0_tex),
+              FadeOut(fondo0),
+              FadeOut(grp0))
+    self.pausa()
+    
+#+end_src
+
+# :PROPERTIES:
+# :ID:       cdef2db7-7bc0-41f1-a31d-ebcba0244dd5
+# :END:
