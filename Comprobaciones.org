@@ -1,54 +1,161 @@
 #+TITLE: Comprobaciones antes de dar por bueno un vídeo
 #+AUTHOR: Marcos Bujosa
 
-Lista que se repasa en cada vídeo nuevo y **cada vez que se retoca la narración**, antes de
-enseñárselo a Marcos. Las reglas de estilo están en =CLAUDE.md=; aquí solo lo que hay que
-comprobar.
+Guion de revisión de cada vídeo, en cinco pasadas: cada tipo de fallo se ve mejor sobre un
+material distinto. Las reglas de estilo (el porqué) están en =CLAUDE.md=; aquí está lo que hay que
+comprobar. Versión de 2026-10-30, a partir de las correcciones de Marcos en V06-V10.
 
-* Coherencia de la narración (desde 2026-10-29)
+Las pasadas se reparten en dos fases según la voz. Lo que no depende de la voz se cierra **antes
+de sintetizar con Azure** (es gratis y evita pagar tomas de frases que luego cambian); lo que
+depende de cómo suena y de cuándo cae cada palabra solo se puede juzgar **con Azure**: gTTS tiene
+otra velocidad, no pausa igual en los dos puntos, entona distinto los finales y estima las marcas
+por caracteres (hasta un segundo de error).
 
-Origen: en V09 (escena 3), un retoque del último repaso movió un punto y dejó la frase «Igual que
-dos vectores son distintos si sus listas de números son diferentes, la matriz A es una lista de
-tres vectores...», que no tiene sentido. Nadie lo vio hasta el HD aprobado. En la misma revisión
-salieron un «Por eso» que no se seguía de lo anterior (escena 5) y «este mismo criterio» (el de
-igualdad) para anunciar la definición de las operaciones (escena 4).
+| Fase                  | Pasada                         | Material                                               |
+|-----------------------+--------------------------------+--------------------------------------------------------|
+| A. Antes de Azure     | 1. Contenido                   | guion en prosa (bloque =guion=), es y en                 |
+| (prueba gTTS 480p)    | 2. Lenguaje                    | guion + =lib/revisa_guion.py= + lectura en frío          |
+|                       | 4a. Imagen: composición        | prueba gTTS y tiras de fotogramas                      |
+| B. Con Azure          | 3. Ritmo                       | render Azure 480p, con sonido                          |
+| (480p, luego HD)      | 4b. Imagen: sincronía          | tiras de fotogramas en cada marca                      |
+|                       | 5. Audio y entrega             | caché de Azure, montaje, srt, ficha                    |
 
-Se hace sobre el guion en prosa (bloque =guion= del org, en los dos idiomas), leyéndolo **sin
-mirar la pantalla**, frase a frase:
+Marcos revisa la pedagogía sobre la prueba de la fase A; la fase B empieza cuando la narración está
+aprobada. Un retoque de narración en la fase B obliga a repetir las pasadas 1 y 2 sobre lo tocado
+(y a sintetizar solo esas frases).
 
-1. *Cada frase está completa.* Si empieza con una subordinada («Igual que...», «Como...»,
-   «Aunque...», «Si...»), la oración principal la cierra y dice lo que la subordinada anuncia.
-2. *Cada conector se justifica con la frase anterior.* «Por eso», «así que», «por tanto»: lo
-   anterior es la causa. «Es decir»: reformula lo anterior, sin añadir nada. «Aun así», «pero»,
-   «en cambio»: hay un contraste de verdad. «Del mismo modo»: el caso es paralelo.
-   «Efectivamente»: confirma algo que ya se ha dicho o supuesto.
-3. *Las referencias apuntan a algo que existe.* «Este criterio», «esos números», «esta tabla»: se
-   sabe a qué se refieren y es eso. «Como vimos en el vídeo anterior»: ese vídeo lo dijo (mirar su
-   guion). «Veamos...»: el vídeo lo enseña a continuación. «En el próximo vídeo...»: coincide con
-   el plan de =NotacionNacal.org=.
-4. *Lo que se afirma es cierto según el libro* (definiciones, órdenes, «por columnas», etc.).
-5. *El español y el inglés dicen lo mismo*, frase a frase.
-6. *Tras cualquier retoque* (mover un punto, partir o unir frases, quitar un trozo), releer la
-   frase resultante entera, con la anterior y la siguiente. El error de V09 nació así.
-7. *Nada se vuelve a contar sin necesidad* (Marcos, 2026-10-30). Comparar con el guion del vídeo
-   anterior de la serie (y con los que cita): lo que ya se contó solo se repite si hace falta
-   recordarlo para entender este vídeo, y entonces como recuerdo breve («en el vídeo anterior
-   vimos...», «ya en el primer vídeo admitimos...»), nunca presentado como nuevo. Origen: la
-   escena 4 de V10 repetía la explicación de vector, matriz columna y matriz fila de V09.
-8. *Lectura en frío:* pasar el guion de los dos idiomas a un revisor sin contexto (un subagente que
-   solo reciba el guion) con el encargo de señalar frases incompletas, conectores que no se siguen y
-   referencias sueltas. Lo que señale se comprueba aquí; no se corrige a ciegas.
+Tras **cualquier** retoque (mover un punto, partir o unir frases, quitar un trozo), releer la
+frase resultante entera con la anterior y la siguiente, y repetir las pasadas 1 y 2 sobre lo
+tocado. Origen: en V09 (escena 3) un retoque dejó la frase «Igual que dos vectores son distintos
+si sus listas de números son diferentes, la matriz A es una lista de tres vectores...», sin
+sentido, y llegó hasta el HD aprobado (2026-10-29).
 
-* Audio (tras sintetizar con Azure)
+* Pasada 1. Contenido
 
-- =tmp/pausas_raras.py CACHE [horas]=: silencios >= 300 ms sin puntuación.
-- =tmp/tomas_cortadas.py CACHE=: tomas que Azure corta a media palabra.
-- Letras sueltas: =tmp/mide_cache.py= (y las marcas de palabra de Azure); umbral práctico 150 ms.
-- Si una toma sale mal: tiradas (=tmp/tiradas.py=) y quedarse con la mejor (=CLAUDE.md=).
+Sobre el guion en prosa, **sin mirar la pantalla**.
 
-* Imagen y montaje
+1. *Objetivo.* El vídeo cabe en una frase («después de verlo, el alumno sabe que...») y cada
+   escena contribuye a ella. Una escena que no contribuye sobra.
+2. *Encaje en la serie.* Comparar con el guion del vídeo anterior y de los que cite
+   (=revisa_guion.py --anterior=). Lo ya contado solo se repite si hace falta para entender este
+   vídeo, en una frase y como recuerdo («en el vídeo anterior vimos...», «ya en el primer vídeo
+   admitimos...»), nunca presentado como nuevo. «Como vimos en el vídeo anterior»: ese vídeo lo
+   dijo. «En el próximo vídeo...»: coincide con el plan de =NotacionNacal.org=. (V10, 2026-10-30:
+   la escena 4 repetía vector / matriz columna / matriz fila de V09, y el selector por la
+   izquierda se presentaba como nuevo cuando ya estaba en V01.)
+3. *Completitud.* Si una idea tiene dos sentidos, se dicen los dos (V10: las columnas de la
+   transpuesta son las filas, *y viceversa*). Cada paso de una demostración nombra la regla que
+   usa. El resumen recoge todo lo nuevo y nada más.
+4. *Exactitud.* Lo que se afirma es cierto según el libro (definiciones, órdenes, «por columnas»,
+   «componente a componente»...).
+5. *Ilustra o demuestra.* Se dice explícitamente qué hace cada escena.
+6. *Notación.* Nada aparece en pantalla (ni se nombra) antes de presentarse; ninguna letra sin
+   definir (V10: $[\Vect{a}]$ sin haber presentado $\Vect{a}$).
+7. *Esqueleto.* Portada, enlace con el vídeo anterior en una o dos frases, cuerpo, resumen con el
+   resultado en pantalla, una frase que anuncia el siguiente, créditos.
 
-- Fotogramas alrededor de cada unión (bloque =fotogramas=).
-- Una tira de fotogramas en cada marca que espere la animación (marcas iniciales: =CLAUDE.md=).
-- Subtítulos: sin marcas ni comillas de letras; capítulos de la ficha con los «empieza en» del
-  último =montaje= (redondeando hacia abajo).
+* Pasada 2. Lenguaje
+
+Sobre el guion en prosa, frase a frase, en los dos idiomas. Primero el script, que señala dónde
+mirar (no corrige nada; cada aviso es una pregunta):
+
+: python3 lib/revisa_guion.py lib/FICHERO.py --anterior lib/VIDEO_ANTERIOR.py [--ambiguas orden,rango]
+: python3 lib/revisa_guion.py ../videoMath2/lib/FICHERO_EN.py --idioma en --anterior ../videoMath2/lib/ANTERIOR_EN.py
+
+Da las palabras y los segundos de voz por escena y avisa de frases LARGAS, CONECTORES al empezar
+(con la frase anterior al lado), REFERENCIAS («esa», «la otra», «aquí»...), palabras AMBIGUAS del
+vídeo, riesgos de VOZ (preguntas, «Mire», interrogativos indirectos, «X más Y»), frases que se
+REPITEN dentro del vídeo y frases YA CONTADAS en el anterior.
+
+1. *Una idea por frase.* Más de ~22 palabras: ¿partirla? Ninguna subordinada larga delante de la
+   principal; si la frase empieza con «Igual que...», «Como...», «Si...», la principal la cierra y
+   dice lo que la subordinada anuncia.
+2. *Economía.* Si se puede decir con menos palabras sin perder nada, se acorta («Las columnas de
+   la transpuesta... y sus filas, las columnas» → «La transposición transforma las filas en
+   columnas, y viceversa»). Fuera conectores de relleno, apuntes laterales y frases que repiten la
+   anterior con otro énfasis.
+3. *Conectores justificados.* «Por eso», «así que», «por tanto»: lo anterior es la causa. «Es
+   decir»: reformula, sin añadir. «Pero», «aun así», «en cambio»: hay un contraste de verdad
+   (V10: «Pero aquí el selector actúa por la izquierda» no se oponía a nada). «Del mismo modo»: el
+   caso es paralelo. Ante la duda, quitarlo.
+4. *Referencias con antecedente.* «La otra», «esa columna», «esto», «aquí»: con la voz sola se sabe
+   a qué se refieren. Si no, nombrar la cosa (V10: «quitar la otra» → «quitar la transposición
+   que queda»).
+5. *Términos sin doble sentido.* Una palabra con dos significados en el vídeo se precisa, y el
+   término elegido se usa igual en toda la narración y en los rótulos (V10: «da igual el orden»,
+   con «orden» = número de filas y columnas → «el orden en que se aplican los selectores»; «el
+   orden de los selectores» tampoco valía: parecía que se intercambian).
+6. *No leer la pantalla.* La voz nombra y explica; no recita fórmulas.
+7. *Discurso natural.* Frases completas y enlazadas, como hablaría un profesor; nada de titulares
+   sueltos. Tratamiento de usted.
+8. *Escrito para Tristan y Ollie* (detalles en =CLAUDE.md=): sin preguntas; interrogativos
+   indirectos terminando en el verbo; letras sueltas en posiciones seguras; «sumar X y Y» mejor
+   que «X más Y»; sin «Mire» ni «Fíjese» al empezar; «los paréntesis» en plural.
+9. *Español e inglés dicen lo mismo*, frase a frase, rótulos incluidos.
+10. *Lectura en frío.* Pasar el guion de los dos idiomas a un revisor sin contexto (un subagente
+    que solo reciba el guion) con el encargo de señalar frases incompletas, conectores que no se
+    siguen, referencias sueltas y repeticiones. Lo que señale se comprueba aquí; no se corrige a
+    ciegas (un revisor sin pantalla marca como sueltas referencias que la imagen resuelve).
+
+* Pasada 3. Ritmo (fase B, con Azure)
+
+Viendo el render con Azure a 480p con sonido, de principio a fin y sin parar. Con gTTS solo se
+puede adelantar lo grueso (una escena claramente larga o vacía); pausas, entonación y duración, con
+Azure.
+
+1. *Respiración.* Tras un resultado importante hay una pausa (=pausa_media=) antes de seguir; no
+   se encadenan tres ideas nuevas sin respiro. Después de un cambio en pantalla, la imagen queda
+   quieta un instante antes de la frase siguiente.
+2. *Variedad.* Se alternan frases largas y cortas; ninguna serie de frases calcadas que suene a
+   lista (si se repite una fórmula en pasos seguidos, que sea a propósito, como en una cadena).
+3. *Final de frase.* Cada frase acaba en la palabra importante, no en un complemento colgado.
+4. *Duración.* Menos de diez minutos; ninguna escena se hace larga para lo que cuenta (si una
+   escena explicativa pasa de ~90 s, ¿qué sobra?). La columna de segundos de =revisa_guion.py=
+   ayuda a ver la escena desproporcionada.
+5. *Interés.* Cada escena tiene algo que mirar mientras habla la voz; ningún tramo largo con la
+   pantalla quieta y la voz explicando.
+
+* Pasada 4. Imagen
+
+Tiras de fotogramas (bloque =fotogramas=; ffmpeg con =LC_ALL=C=).
+
+** 4a. Composición (fase A, con la prueba gTTS)
+
+Lo que no depende de cuándo cae cada palabra. Las marcas sí se colocan ya en el texto, en su sitio
+(justo delante de la palabra); que caigan bien se comprueba en 4b.
+
+1. *Cada expresión nace de la anterior* (=CLAUDE.md=): lo que no cambia se copia mientras la voz
+   nombra la regla, lo que cambia se transforma cuando la voz lo describe, lo que se quita no
+   aparece (o se desvanece en la copia literal). Una expresión que se completa muestra primero
+   unos glifos y después el resto, en su sitio.
+2. *Nada se recoloca.* Cada elemento nace en su posición final; al animar varias piezas a la vez,
+   cada una sobre su propio centro (escalar un =VGroup= separa las piezas).
+3. *Se señala exactamente lo que dice la voz* (V10: los dos selectores, no el vector entero; las
+   tres $i$ al decir «fila»).
+4. *Legible en un móvil.* Fórmulas de 40 pt o más en 1080p; un bloque de texto y una fórmula
+   grande a la vez como máximo; nada que roce los bordes ni la marca de agua.
+5. *Coherencia de la serie.* Colores del código de la serie, también en los resaltados (si una
+   fila se marcó en amarillo y una columna en verde, sus índices también); título en la escena 1
+   y cabecera corta en las demás; tarjeta de pausa con la invitación concreta; rótulos de aviso.
+6. *Uniones.* Fotogramas alrededor de cada unión del montaje.
+
+** 4b. Sincronía (fase B, con Azure)
+
+1. *Cada cosa aparece o se señala cuando la voz la nombra*, con las marcas reales de Azure: tira
+   de fotogramas en cada marca. Resaltados sostenidos mientras se habla de algo (cambio de color
+   rápido que dura hasta la palabra siguiente), no un parpadeo que llega a su máximo tarde.
+2. *Animaciones que no caben* en el tramo entre dos marcas (la voz ya va por la frase siguiente).
+3. *Marcas al principio de un texto*: se disparan al final (=CLAUDE.md=).
+
+* Pasada 5. Audio y entrega (fase B)
+
+Con Azure a 480p; los puntos 6 y 7, también sobre el HD.
+
+1. =tmp/pausas_raras.py CACHE [horas]=: silencios >= 300 ms sin puntuación.
+2. =tmp/tomas_cortadas.py CACHE=: tomas que Azure corta a media palabra.
+3. Letras sueltas: =tmp/mide_cache.py= y las marcas de palabra de Azure; umbral práctico 150 ms.
+4. Si una toma sale mal: tiradas (=tmp/tiradas.py=) y quedarse con la mejor (=CLAUDE.md=).
+5. Escuchar el vídeo entero en los dos idiomas (junto con la pasada 3).
+6. Música solo en la entrada y la salida; voz a -16 LUFS (lo hace =montaje=).
+7. Subtítulos sin marcas ni comillas de letras; capítulos de la ficha con los «empieza en» del
+   último =montaje= (redondeando hacia abajo).

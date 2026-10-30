@@ -69,7 +69,8 @@ selector, "componente a componente", etc.).
 - Comprobar visualmente: extraer fotogramas con ffmpeg (bloque
   `fotogramas`, en especial alrededor de cada unión) y mirarlos.
 - **Antes de enseñar un vídeo a Marcos, y tras cada retoque de la narración, repasar
-  `Comprobaciones.org`** (coherencia frase a frase del guion en los dos idiomas, audio, imagen).
+  `Comprobaciones.org`** (cinco pasadas: contenido, lenguaje, ritmo, imagen, audio y entrega; la de
+  lenguaje empieza con `python3 lib/revisa_guion.py lib/FICHERO.py --anterior lib/ANTERIOR.py`).
   Nació el 2026-10-29 de una frase rota en V09 que llegó hasta el HD aprobado.
 
 ## Entorno

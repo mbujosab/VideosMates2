@@ -374,7 +374,7 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
                     r"\VectTC{A}{i}=\VectF{A}{i},\qquad \elemLp{\MatT{A}}{i}=\VectC{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
         rotulos = [tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"),
                    tr("da igual el orden de selección", "the order of selection does not matter"),
-                   tr("las columnas de la transpuesta son las filas, y sus filas, las columnas", "the columns of the transpose are the rows, and its rows, the columns"),
+                   tr("transponer convierte las filas en columnas, y viceversa", "transposing turns rows into columns, and vice versa"),
                    tr("transponer = cambiar de lado los índices", "transposing = swapping the sides of the indices")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=44), Tex(r, font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.4).move_to([0, -0.5, 0])
@@ -385,8 +385,8 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
             self.wait_until_bookmark("o")
             self.play(FadeIn(filas[1]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz, y sus filas, las columnas. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
-                                    """The columns of the transpose of a matrix are the rows of the matrix, and its rows, the columns. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
+        with self.voiceover(text=tr("""La transposición transforma las filas en columnas, y viceversa. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
+                                    """Transposition turns rows into columns, and vice versa. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
             self.play(FadeIn(filas[2]), run_time=0.8)
             self.wait_until_bookmark("r")
             self.play(FadeIn(filas[3]), run_time=0.8)
@@ -716,7 +716,7 @@ class L01_V10_E06_Resumen(MiEscenaConVoz):
                     r"\VectTC{A}{i}=\VectF{A}{i},\qquad \elemLp{\MatT{A}}{i}=\VectC{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
         rotulos = [tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"),
                    tr("da igual el orden de selección", "the order of selection does not matter"),
-                   tr("las columnas de la transpuesta son las filas, y sus filas, las columnas", "the columns of the transpose are the rows, and its rows, the columns"),
+                   tr("transponer convierte las filas en columnas, y viceversa", "transposing turns rows into columns, and vice versa"),
                    tr("transponer = cambiar de lado los índices", "transposing = swapping the sides of the indices")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=44), Tex(r, font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.4).move_to([0, -0.5, 0])
@@ -727,8 +727,8 @@ class L01_V10_E06_Resumen(MiEscenaConVoz):
             self.wait_until_bookmark("o")
             self.play(FadeIn(filas[1]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz, y sus filas, las columnas. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
-                                    """The columns of the transpose of a matrix are the rows of the matrix, and its rows, the columns. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
+        with self.voiceover(text=tr("""La transposición transforma las filas en columnas, y viceversa. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
+                                    """Transposition turns rows into columns, and vice versa. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
             self.play(FadeIn(filas[2]), run_time=0.8)
             self.wait_until_bookmark("r")
             self.play(FadeIn(filas[3]), run_time=0.8)
