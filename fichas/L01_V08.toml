@@ -2,7 +2,7 @@
 # Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V08.toml es
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V08.toml en   # usa el campo youtube de la ficha (o --id)
-# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60; es: 2026-10-26, último repaso de Marcos; en: 2026-10-26).
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60; es: 2026-10-26, último repaso de Marcos; en: 2026-10-30, dos frases distintas del español).
 
 [comun]
 categoria = "27"        # Educación
@@ -58,7 +58,7 @@ Eighth video of the first lesson of the linear algebra course.
 01:23 Omega joins in: a linear combination
 01:55 Economic data: GDP growth
 02:30 Key takeaways and four vectors in a table
-03:06 Closing credits
+03:05 Closing credits
 
 Three friends prepare a dinner; each recipe is a vector with the ingredients for one serving, always in the same order. Adding the recipes component-wise and multiplying by the number of diners gives the shopping basket, and adding four more servings of tortilla gives a linear combination of the recipes. Then the same use of vectors with economic data: the GDP growth of five countries from 2003 to 2006, which will become a matrix in the next video.
 

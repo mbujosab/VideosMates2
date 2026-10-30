@@ -225,8 +225,8 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
             entra(self, om)
             self.play(FadeIn(globo, scale=0.8), run_time=0.6)
         
-        with self.voiceover(text=tr("""Pero son listas distintas. Igual que dos vectores son distintos si sus listas de números son diferentes, <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
-                                    """But they are different lists. Just as two vectors are different when their lists of numbers differ, <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
+        with self.voiceover(text=tr("""Pero son listas distintas: <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
+                                    """But they are different lists: <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
             self.play(FadeOut(globo), run_time=0.4)
             cambia(self, om, "sorpresa")
             self.wait(0.6)
@@ -268,8 +268,13 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
         A = matriz(A_EJ, decimales=0, h_buff=1.0)
         B = matriz(A_EJ, decimales=0, h_buff=1.0)
         par = VGroup(con_nombre(r"\Mat{A}=", A), con_nombre(r"\Mat{B}=", B)).arrange(RIGHT, buff=1.5).move_to([0, 1, 0])
-        criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff", r"\VectC{A}{j}=\VectC{B}{j}", tr(r"\quad\text{para } j=1:n", r"\quad\text{for } j=1:n"),
-                           tex_template=myTemplate, font_size=48).move_to([0, -1.6, 0])
+        # en palabras: el selector por la derecha (A|j) no se presenta hasta la escena 6 (Marcos, 2026-10-30)
+        criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff",
+                           tr(r"\text{columna } j \text{ de } \Mat{A}=\text{columna } j \text{ de } \Mat{B}",
+                              r"\text{column } j \text{ of } \Mat{A}=\text{column } j \text{ of } \Mat{B}"),
+                           tex_template=myTemplate, font_size=48)
+        rango = MathTex(tr(r"\text{para } j=1:n", r"\text{for } j=1:n"), tex_template=myTemplate, font_size=48)
+        criterio = VGroup(criterio, rango).arrange(DOWN, buff=0.3).move_to([0, -1.9, 0])   # en una línea no cabe en español
         cabecera = Tex(tr("Igualdad de matrices", "Equality of matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         
         with self.voiceover(text=tr("""Como ocurre con los vectores, dos matrices son iguales si, y solo si, lo son sus respectivas listas: <bookmark mark='c1'/> la primera columna de una es igual a la primera de la otra, <bookmark mark='c2'/> la segunda a la segunda, <bookmark mark='c3'/> y así con todas.""",
@@ -282,11 +287,11 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
                 self.play(FadeIn(nuevas) if franjas is None else ReplacementTransform(franjas, nuevas), run_time=0.6)
                 franjas = nuevas
         
-        with self.voiceover(text=tr("""Es decir, columna a columna. <bookmark mark='r'/> Este mismo criterio nos servirá para definir las operaciones con matrices.""",
-                                    """That is, column by column. <bookmark mark='r'/> This same criterion will help us define the operations with matrices.""")) as tracker:
+        with self.voiceover(text=tr("""Es decir, columna a columna. <bookmark mark='r'/> Las operaciones con matrices también se definirán columna a columna.""",
+                                    """That is, column by column. <bookmark mark='r'/> The operations with matrices will also be defined column by column.""")) as tracker:
             self.play(FadeOut(franjas), Write(criterio), run_time=1.5)
             self.wait_until_bookmark("r")
-            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
+            self.play(Indicate(criterio[0][2], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
         
         self.pausa_media()
 
@@ -359,8 +364,8 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
         
         # la escena se despeja para comparar (Marcos, 2026-10-27)
         self.play(FadeOut(VGroup(bloque1, bloque_hv)), run_time=0.8)
-        with self.voiceover(text=tr("""Por eso, un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.<bookmark mark='v2'/>""",
-                                    """That is why a vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.<bookmark mark='v3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.""",
+                                    """A vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.""")) as tracker:
             self.play(FadeIn(vf), run_time=1)
             for marca, k, l in [("v", 0, l_vec), ("c", 2, l_vc), ("f", 4, l_vf)]:
                 self.wait_until_bookmark(marca)
@@ -443,8 +448,8 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
             self.wait_until_bookmark("j")
             self.play(Indicate(sub_c, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
         
-        with self.voiceover(text=tr("""En este curso, como con los vectores, usaremos el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
-                                    """In this course, as with vectors, we will use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
+        with self.voiceover(text=tr("""Pero en este curso, como con los vectores, usaremos principalmente el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
+                                    """But in this course, as with vectors, we will mainly use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
             self.play(FadeIn(comp[:2]), FadeIn(r_sel), run_time=1)
             self.wait_until_bookmark("s")
             self.play(Indicate(sel_i, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
@@ -532,7 +537,7 @@ class L01_V09_MatricesFilasYColumnas(MiEscenaConVoz):
             self.play(*[Indicate(g, color=COLOR_ESCALAR, scale_factor=1.6) for g in sel_comp], run_time=0.9)
         
         self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo, como en V08
-        with self.voiceover(text=tr("""En el próximo vídeo veremos que, para seleccionar una componente de una matriz, da igual empezar por la fila o por la columna. También veremos la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.<bookmark mark='v2'/>""",
+        with self.voiceover(text=tr("""En el próximo vídeo veremos que, para seleccionar una componente de una matriz, da igual empezar por la fila o por la columna. También veremos la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.<bookmark mark='w3'/>""",
                                     """In the next video we will see that, to select a component of a matrix, it makes no difference whether we start with the row or with the column. We will also meet transposition, which turns the rows of a matrix into columns, as we did when we built the matrix B.<bookmark mark='v2'/>""")) as tracker:
             pass
         
@@ -701,8 +706,8 @@ class L01_V09_E03_Orden(MiEscenaConVoz):
             entra(self, om)
             self.play(FadeIn(globo, scale=0.8), run_time=0.6)
         
-        with self.voiceover(text=tr("""Pero son listas distintas. Igual que dos vectores son distintos si sus listas de números son diferentes, <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
-                                    """But they are different lists. Just as two vectors are different when their lists of numbers differ, <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
+        with self.voiceover(text=tr("""Pero son listas distintas: <bookmark mark='a'/> la matriz A es una lista de tres vectores, con dos números cada uno, <bookmark mark='b'/> y B es una lista de solo dos vectores, con tres números cada uno.""",
+                                    """But they are different lists: <bookmark mark='a'/> the matrix A is a list of three vectors, with two numbers each, <bookmark mark='b'/> and B is a list of only two vectors, with three numbers each.""")) as tracker:
             self.play(FadeOut(globo), run_time=0.4)
             cambia(self, om, "sorpresa")
             self.wait(0.6)
@@ -745,8 +750,13 @@ class L01_V09_E04_Igualdad(MiEscenaConVoz):
         A = matriz(A_EJ, decimales=0, h_buff=1.0)
         B = matriz(A_EJ, decimales=0, h_buff=1.0)
         par = VGroup(con_nombre(r"\Mat{A}=", A), con_nombre(r"\Mat{B}=", B)).arrange(RIGHT, buff=1.5).move_to([0, 1, 0])
-        criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff", r"\VectC{A}{j}=\VectC{B}{j}", tr(r"\quad\text{para } j=1:n", r"\quad\text{for } j=1:n"),
-                           tex_template=myTemplate, font_size=48).move_to([0, -1.6, 0])
+        # en palabras: el selector por la derecha (A|j) no se presenta hasta la escena 6 (Marcos, 2026-10-30)
+        criterio = MathTex(r"\Mat{A}=\Mat{B}", r"\iff",
+                           tr(r"\text{columna } j \text{ de } \Mat{A}=\text{columna } j \text{ de } \Mat{B}",
+                              r"\text{column } j \text{ of } \Mat{A}=\text{column } j \text{ of } \Mat{B}"),
+                           tex_template=myTemplate, font_size=48)
+        rango = MathTex(tr(r"\text{para } j=1:n", r"\text{for } j=1:n"), tex_template=myTemplate, font_size=48)
+        criterio = VGroup(criterio, rango).arrange(DOWN, buff=0.3).move_to([0, -1.9, 0])   # en una línea no cabe en español
         cabecera = Tex(tr("Igualdad de matrices", "Equality of matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         
         with self.voiceover(text=tr("""Como ocurre con los vectores, dos matrices son iguales si, y solo si, lo son sus respectivas listas: <bookmark mark='c1'/> la primera columna de una es igual a la primera de la otra, <bookmark mark='c2'/> la segunda a la segunda, <bookmark mark='c3'/> y así con todas.""",
@@ -759,11 +769,11 @@ class L01_V09_E04_Igualdad(MiEscenaConVoz):
                 self.play(FadeIn(nuevas) if franjas is None else ReplacementTransform(franjas, nuevas), run_time=0.6)
                 franjas = nuevas
         
-        with self.voiceover(text=tr("""Es decir, columna a columna. <bookmark mark='r'/> Este mismo criterio nos servirá para definir las operaciones con matrices.""",
-                                    """That is, column by column. <bookmark mark='r'/> This same criterion will help us define the operations with matrices.""")) as tracker:
+        with self.voiceover(text=tr("""Es decir, columna a columna. <bookmark mark='r'/> Las operaciones con matrices también se definirán columna a columna.""",
+                                    """That is, column by column. <bookmark mark='r'/> The operations with matrices will also be defined column by column.""")) as tracker:
             self.play(FadeOut(franjas), Write(criterio), run_time=1.5)
             self.wait_until_bookmark("r")
-            self.play(Indicate(criterio[2], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
+            self.play(Indicate(criterio[0][2], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
         
         self.pausa_media()
 
@@ -837,8 +847,8 @@ class L01_V09_E05_Notacion(MiEscenaConVoz):
         
         # la escena se despeja para comparar (Marcos, 2026-10-27)
         self.play(FadeOut(VGroup(bloque1, bloque_hv)), run_time=0.8)
-        with self.voiceover(text=tr("""Por eso, un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.<bookmark mark='v2'/>""",
-                                    """That is why a vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.<bookmark mark='v3'/>""")) as tracker:
+        with self.voiceover(text=tr("""Un vector, una matriz columna y una matriz fila con los mismos números son objetos distintos: <bookmark mark='v'/> el vector es una lista de n números, <bookmark mark='c'/> la matriz columna, una lista con un solo vector de n componentes, <bookmark mark='f'/> y la matriz fila, una lista de n vectores de una componente.""",
+                                    """A vector, a column matrix and a row matrix with the same numbers are different objects: <bookmark mark='v'/> the vector is a list of n numbers, <bookmark mark='c'/> the column matrix, a list with a single vector of n components, <bookmark mark='f'/> and the row matrix, a list of n vectors of one component.""")) as tracker:
             self.play(FadeIn(vf), run_time=1)
             for marca, k, l in [("v", 0, l_vec), ("c", 2, l_vc), ("f", 4, l_vf)]:
                 self.wait_until_bookmark(marca)
@@ -922,8 +932,8 @@ class L01_V09_E06_Selectores(MiEscenaConVoz):
             self.wait_until_bookmark("j")
             self.play(Indicate(sub_c, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
         
-        with self.voiceover(text=tr("""En este curso, como con los vectores, usaremos el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
-                                    """In this course, as with vectors, we will use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
+        with self.voiceover(text=tr("""Pero en este curso, como con los vectores, usaremos principalmente el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
+                                    """But in this course, as with vectors, we will mainly use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
             self.play(FadeIn(comp[:2]), FadeIn(r_sel), run_time=1)
             self.wait_until_bookmark("s")
             self.play(Indicate(sel_i, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
@@ -1012,7 +1022,7 @@ class L01_V09_E07_Resumen(MiEscenaConVoz):
             self.play(*[Indicate(g, color=COLOR_ESCALAR, scale_factor=1.6) for g in sel_comp], run_time=0.9)
         
         self.wait(0.5)   # una pausa antes de anunciar el próximo vídeo, como en V08
-        with self.voiceover(text=tr("""En el próximo vídeo veremos que, para seleccionar una componente de una matriz, da igual empezar por la fila o por la columna. También veremos la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.<bookmark mark='v2'/>""",
+        with self.voiceover(text=tr("""En el próximo vídeo veremos que, para seleccionar una componente de una matriz, da igual empezar por la fila o por la columna. También veremos la transposición, que convierte las filas de una matriz en columnas, como hicimos al formar la matriz B.<bookmark mark='w3'/>""",
                                     """In the next video we will see that, to select a component of a matrix, it makes no difference whether we start with the row or with the column. We will also meet transposition, which turns the rows of a matrix into columns, as we did when we built the matrix B.<bookmark mark='v2'/>""")) as tracker:
             pass
         

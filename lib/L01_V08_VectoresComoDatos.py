@@ -202,8 +202,9 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
             self.wait_until_bookmark("to")
             self.play(ReplacementTransform(f_huevos, f_tomate), run_time=0.8)
         
+        # el inglés difiere del español publicado (2026-10-28): la frase prometía un motivo que el vídeo no da (Marcos, 2026-10-30)
         with self.voiceover(text=tr("""Veamos el motivo por el que, si cada cocinero ordenara los ingredientes de manera distinta, los vectores no servirían para organizar la lista de la compra.""",
-                                    """Let us see the reason why, if each cook listed the ingredients in a different order, the vectors would be useless for organising the shopping list.""")) as tracker:
+                                    """That is why every cook must list the ingredients in the same order: otherwise the vectors would be useless for organising the shopping list.""")) as tracker:
             self.play(FadeOut(f_tomate), run_time=0.8)
         
         self.pausa_media()
@@ -359,8 +360,9 @@ class L01_V08_VectoresComoDatos(MiEscenaConVoz):
         self.play(Indicate(d.get_entries()[2], color=COLOR_ESCALAR, scale_factor=1.3), run_time=1.2)
         
         f_al = banda(d, 2, x0, x1)
+        # el inglés difiere del español publicado: «Indeed» confirmaba algo que nadie había dicho (Marcos, 2026-10-30)
         with self.voiceover(text=tr("""Efectivamente, es <bookmark mark='al'/> Alemania: su dato es negativo, así que su PIB disminuyó ese año.""",
-                                    """Indeed, it is <bookmark mark='al'/> Germany: its figure is negative, so its GDP shrank that year.""")) as tracker:
+                                    """The answer is <bookmark mark='al'/> Germany: its figure is negative, so its GDP shrank that year.""")) as tracker:
             self.play(FadeOut(globo), run_time=0.4)
             self.wait_until_bookmark("al")
             self.play(FadeIn(f_al), run_time=0.8)
@@ -454,8 +456,9 @@ class L01_V08_E01_LaCena(MiEscenaConVoz):
             self.wait_until_bookmark("to")
             self.play(ReplacementTransform(f_huevos, f_tomate), run_time=0.8)
         
+        # el inglés difiere del español publicado (2026-10-28): la frase prometía un motivo que el vídeo no da (Marcos, 2026-10-30)
         with self.voiceover(text=tr("""Veamos el motivo por el que, si cada cocinero ordenara los ingredientes de manera distinta, los vectores no servirían para organizar la lista de la compra.""",
-                                    """Let us see the reason why, if each cook listed the ingredients in a different order, the vectors would be useless for organising the shopping list.""")) as tracker:
+                                    """That is why every cook must list the ingredients in the same order: otherwise the vectors would be useless for organising the shopping list.""")) as tracker:
             self.play(FadeOut(f_tomate), run_time=0.8)
         
         self.pausa_media()
@@ -614,8 +617,9 @@ class L01_V08_E04_PIB(MiEscenaConVoz):
         self.play(Indicate(d.get_entries()[2], color=COLOR_ESCALAR, scale_factor=1.3), run_time=1.2)
         
         f_al = banda(d, 2, x0, x1)
+        # el inglés difiere del español publicado: «Indeed» confirmaba algo que nadie había dicho (Marcos, 2026-10-30)
         with self.voiceover(text=tr("""Efectivamente, es <bookmark mark='al'/> Alemania: su dato es negativo, así que su PIB disminuyó ese año.""",
-                                    """Indeed, it is <bookmark mark='al'/> Germany: its figure is negative, so its GDP shrank that year.""")) as tracker:
+                                    """The answer is <bookmark mark='al'/> Germany: its figure is negative, so its GDP shrank that year.""")) as tracker:
             self.play(FadeOut(globo), run_time=0.4)
             self.wait_until_bookmark("al")
             self.play(FadeIn(f_al), run_time=0.8)
