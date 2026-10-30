@@ -1,0 +1,63 @@
+#+TITLE: Descartes de L01-V10 (selección y transposición)
+
+* Escena 4 larga (vector, matriz columna y matriz fila), sustituida el 2026-10-30
+
+Marcos: repetía lo que ya contó V09 (escena 5). Queda una sola frase: la
+transpuesta de una matriz columna es una matriz fila.
+
+** Escena 4 - Vector, matriz columna y matriz fila
+
+El ejemplo del libro ($\Vect{c}=(9,2,)$, aquí $\Vect{a}$). En V09, la
+columna entre corchetes era una matriz columna; su transpuesta es una
+matriz fila. Los tres objetos, con sus órdenes, y la cadena de
+desigualdades del libro.
+
+#+name: Cuarta escena larga (descartada)
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Vector, matriz columna y matriz fila", "Vector, column matrix and row matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+v = MathTex(r"\Vect{a}=(9,\ 2,)", tex_template=myTemplate, font_size=48)
+colm = MathTex(r"\begin{bmatrix}\Vect{a}\end{bmatrix}", r"=", r"\begin{bmatrix}9\\ 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
+film = MathTex(r"{\begin{bmatrix}\Vect{a}\end{bmatrix}}^{\T}", r"=", r"\begin{bmatrix}9 & 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
+r_v = Tex(tr("vector", "vector"), font_size=30, color=GRAY_B)
+r_c = Tex(tr(r"matriz columna, $2\times 1$", r"column matrix, $2\times 1$"), font_size=30, color=GRAY_B)
+r_f = Tex(tr(r"matriz fila, $1\times 2$", r"row matrix, $1\times 2$"), font_size=30, color=GRAY_B)
+grupos = VGroup(*[VGroup(f, r).arrange(DOWN, buff=0.4) for f, r in [(v, r_v), (colm, r_c), (film, r_f)]])
+grupos.arrange(RIGHT, buff=1.2, aligned_edge=DOWN).move_to([0, 0.6, 0])
+sis_c = MathTex(r"\begin{bmatrix}\begin{pmatrix}9\\ 2\end{pmatrix};\end{bmatrix}", tex_template=myTemplate, font_size=44).next_to(r_c, DOWN, buff=0.35)
+sis_f = MathTex(r"\left[(9,);\ (2,);\right]", tex_template=myTemplate, font_size=44).next_to(r_f, DOWN, buff=0.35).match_y(sis_c)
+l_c = Tex(tr(r"un vector de $\R[2]$", r"one vector of $\R[2]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_c, DOWN, buff=0.25)
+l_f = Tex(tr(r"dos vectores de $\R[1]$", r"two vectors of $\R[1]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_f, DOWN, buff=0.25).match_y(l_c)
+distintos = MathTex(r"(9,\ 2,)", r"\neq", r"\begin{bmatrix}9\\ 2\end{bmatrix}", r"\neq", r"\begin{bmatrix}9 & 2\end{bmatrix}",
+                    font_size=48).move_to([0, -2.3, 0])
+
+with self.voiceover(text=tr("""En el vídeo anterior vimos que un vector entre corchetes es una matriz con una sola columna: <bookmark mark='c'/> una matriz columna.""",
+                            """In the previous video we saw that a vector in square brackets is a matrix with a single column: <bookmark mark='c'/> a column matrix.""")) as tracker:
+    self.play(Write(cabecera), FadeIn(grupos[0]), run_time=1)
+    self.play(FadeIn(colm), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(FadeIn(r_c), run_time=0.6)
+
+with self.voiceover(text=tr("""Su transpuesta tiene una sola fila: <bookmark mark='f'/> es una matriz fila.""",
+                            """Its transpose has a single row: <bookmark mark='f'/> it is a row matrix.""")) as tracker:
+    self.play(FadeIn(film[0]), run_time=0.8)
+    self.play(TransformFromCopy(colm[2], film[2]), FadeIn(film[1]), run_time=1.2)
+    self.wait_until_bookmark("f")
+    self.play(FadeIn(r_f), run_time=0.6)
+
+with self.voiceover(text=tr("""Escritas como listas se ve la diferencia: <bookmark mark='c'/> la matriz columna es una lista con un solo vector de dos componentes, <bookmark mark='f'/> y la matriz fila, una lista con dos vectores de una componente.""",
+                            """Written as lists, the difference shows: <bookmark mark='c'/> the column matrix is a list with a single vector of two components, <bookmark mark='f'/> and the row matrix, a list with two vectors of one component.""")) as tracker:
+    self.wait_until_bookmark("c")
+    self.play(TransformFromCopy(colm[2], sis_c), FadeIn(l_c), run_time=0.8)
+    self.wait_until_bookmark("f")
+    self.play(TransformFromCopy(film[2], sis_f), FadeIn(l_f), run_time=0.8)
+    self.wait(max(0.5, tracker.get_remaining_duration() - 0.8))
+    self.play(FadeOut(VGroup(sis_c, l_c, sis_f, l_f)), run_time=0.8)
+
+with self.voiceover(text=tr("""Así, un vector, una matriz columna y una matriz fila son tres objetos distintos, aunque tengan los mismos números.""",
+                            """So a vector, a column matrix and a row matrix are three different objects, even if they have the same numbers.""")) as tracker:
+    self.play(FadeIn(distintos), run_time=1.2)
+
+self.pausa_media()
+#+END_SRC
+

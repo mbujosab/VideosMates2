@@ -300,6 +300,18 @@ Escribir las frases nuevas ya en la forma buena.
     natural que "Regla: acción" o que nombrar la regla a secas. Que el alumno asocie selector distribuido ⇄ factorizable.
   - Pausas: dos en las dos primeras propiedades (intentar, pista,
     intentar), una en las siguientes (pista y pausa).
+- **Cada expresión nace de la anterior** (Marcos, 2026-10-30; modelo: escena 5 de V10, y la
+  técnica de V02). En las cadenas de igualdades y en las expresiones que se completan, se escribe
+  la fórmula entera con `MathTex` y se trabaja con los índices de sus glifos (sacarlos con una
+  imagen numerada): nada se mueve de sitio ni desaparece un instante. En cada paso, la parte que
+  no cambia se copia (`TransformFromCopy`) mientras la voz nombra la regla, y la que cambia se
+  transforma (un glifo en otro, o viajando de lado) en una marca `<bookmark>` cuando la voz
+  describe el cambio. Lo que se quita (paréntesis, una transposición) simplemente no aparece. Variante
+  (demostración de (Aᵀ)ᵀ = A en V10, funciones `copia_literal` y `transforma_copia`): al nombrar la
+  regla se copia la expresión anterior tal cual, y sobre la copia desaparece lo que se quita mientras
+  lo demás va a su sitio; útil cuando lo que se quita es justo lo que el paso enseña. Una
+  expresión que se completa muestra primero unos glifos y después el resto, en su sitio. La
+  sincronización fina se comprueba con Azure: con gTTS las marcas se estiman por caracteres.
 - **«Los paréntesis», en plural** (Marcos, 2026-10-19): lo que se desplaza o se quita es la pareja,
   así que «podemos desplazar los paréntesis», «los paréntesis de la derecha», «sobran y podemos
   quitarlos». En singular, «el paréntesis de la derecha» parece el signo «)». V06 (publicado) conserva
@@ -318,6 +330,10 @@ Escribir las frases nuevas ya en la forma buena.
   demostraciones usaremos que toda componente de un vector nulo es
   cero." Los ejemplos en pantalla se eligen para que se vean de un
   vistazo ((0, 1, 2) y su opuesto) y no se describen.
+- **No volver a contar lo del vídeo anterior** (Marcos, 2026-10-30): lo ya contado en la serie
+  solo se repite si hace falta recordarlo para entender el vídeo, y como recuerdo breve, no como
+  algo nuevo (V10 repetía vector/matriz columna/matriz fila de V09; el selector por la izquierda
+  ya estaba en V01). Comprobarlo con el guion del vídeo anterior (`Comprobaciones.org`).
 - **Discurso natural, no lectura de puntos** (Marcos, 2026-10-14): frases
   completas y enlazadas, como hablaría un profesor. Nada de titulares
   sueltos ("Definición de suma.", "La componente i-ésima del lado

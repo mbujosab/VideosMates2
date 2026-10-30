@@ -30,7 +30,12 @@ mirar la pantalla**, frase a frase:
 5. *El español y el inglés dicen lo mismo*, frase a frase.
 6. *Tras cualquier retoque* (mover un punto, partir o unir frases, quitar un trozo), releer la
    frase resultante entera, con la anterior y la siguiente. El error de V09 nació así.
-7. *Lectura en frío:* pasar el guion de los dos idiomas a un revisor sin contexto (un subagente que
+7. *Nada se vuelve a contar sin necesidad* (Marcos, 2026-10-30). Comparar con el guion del vídeo
+   anterior de la serie (y con los que cita): lo que ya se contó solo se repite si hace falta
+   recordarlo para entender este vídeo, y entonces como recuerdo breve («en el vídeo anterior
+   vimos...», «ya en el primer vídeo admitimos...»), nunca presentado como nuevo. Origen: la
+   escena 4 de V10 repetía la explicación de vector, matriz columna y matriz fila de V09.
+8. *Lectura en frío:* pasar el guion de los dos idiomas a un revisor sin contexto (un subagente que
    solo reciba el guion) con el encargo de señalar frases incompletas, conectores que no se siguen y
    referencias sueltas. Lo que señale se comprueba aquí; no se corrige a ciegas.
 

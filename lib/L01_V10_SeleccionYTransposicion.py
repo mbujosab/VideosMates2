@@ -42,6 +42,22 @@ def columna_de_lineas(lineas, x0, y0, dy):
     return VGroup(*lineas)
 
 
+def copia_literal(escena, origen, destino, igual, run_time=1.2):
+    """Copia la expresión origen tal cual, alineada a la izquierda donde irá destino, y escribe el igual."""
+    copia = origen.copy()
+    copia.shift((destino.get_left()[0] - copia.get_left()[0])*RIGHT)
+    escena.play(FadeIn(igual), TransformFromCopy(origen, copia), run_time=run_time)
+    return copia
+
+
+def transforma_copia(escena, copia, destino, parejas, se_van=(), aparecen=(), run_time=1.5):
+    """Sobre la copia: los glifos de se_van desaparecen, los de parejas (glifo de la copia, glifo de
+    destino) van a su sitio, y los de aparecen (índices de destino) surgen donde van."""
+    escena.play(*[FadeOut(copia[i]) for i in se_van],
+                *[ReplacementTransform(copia[i], destino[j]) for i, j in parejas],
+                *[FadeIn(destino[j]) for j in aparecen], run_time=run_time)
+
+
 def rotulo(texto, junto_a, x=None, font_size=28):
     """Rótulo gris pequeño a la derecha de una línea (la regla que justifica el paso)."""
     r = Tex(texto, tex_template=myTemplate, font_size=font_size, color=GRAY_B)
@@ -71,8 +87,8 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
             self.play(Write(titulo), FadeIn(f_A), run_time=1.2)
             self.play(Write(comp), run_time=1.2)
         
-        with self.voiceover(text=tr("""Esa componente está a la vez en una fila y en una columna: <bookmark mark='f'/> en la segunda fila <bookmark mark='c'/> y en la primera columna.""",
-                                    """That component lies both in a row and in a column: <bookmark mark='f'/> in the second row <bookmark mark='c'/> and in the first column.""")) as tracker:
+        with self.voiceover(text=tr("""Esa componente está a la vez <bookmark mark='f'/> en una fila y <bookmark mark='c'/> en una columna.""",
+                                    """That component lies both <bookmark mark='f'/> in a row and <bookmark mark='c'/> in a column.""")) as tracker:
             self.wait_until_bookmark("f")
             ff = franja_fila(A, 1)
             self.play(FadeIn(ff), run_time=0.5)
@@ -81,10 +97,19 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
             self.play(FadeIn(fc), run_time=0.5)
             self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
         
-        with self.voiceover(text=tr("""Así que también debería poder obtenerse seleccionando primero la fila, o primero la columna.""",
-                                    """So we should also be able to get it by selecting the row first, or the column first.""")) as tracker:
+        with self.voiceover(text=tr("""Cada fila y cada columna es una lista ordenada de números, es decir, un vector.""",
+                                    """Each row and each column is an ordered list of numbers, that is, a vector.""")) as tracker:
             self.play(Indicate(ff, color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
             self.play(Indicate(fc, color=COLOR_C, scale_factor=1.05), run_time=1)
+        
+        with self.voiceover(text=tr("""Así que el siete es componente de dos vectores distintos: <bookmark mark='f'/> es la primera componente de la segunda fila, <bookmark mark='c'/> y la segunda componente de la primera columna.""",
+                                    """So the seven is a component of two different vectors: <bookmark mark='f'/> it is the first component of the second row, <bookmark mark='c'/> and the second component of the first column.""")) as tracker:
+            self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.wait_until_bookmark("f")
+            self.play(ff.animate.set_fill(opacity=0.55), fc.animate.set_fill(opacity=0.06), run_time=0.5)
+            self.wait_until_bookmark("c")
+            self.play(ff.animate.set_fill(opacity=0.06), fc.animate.set_fill(opacity=0.55), run_time=0.5)
+        self.play(ff.animate.set_fill(opacity=0.22), fc.animate.set_fill(opacity=0.22), run_time=0.5)
         
         self.pausa_media()
 
@@ -97,34 +122,42 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
         por_fila = MathTex(r"\elemRp{\VectF{A}{2}}{1}", r"=", r"\elemR{(7,\ 0,\ 3,)}{1}", r"=", r"7", tex_template=myTemplate, font_size=48)
         por_col = MathTex(r"\elemLp{\VectC{A}{1}}{2}", r"=", r"\elemL{\begin{pmatrix}1\\ 7\end{pmatrix}}{2}", r"=", r"7", tex_template=myTemplate, font_size=48)
         lineas = columna_de_lineas([por_fila, por_col], x0=-1.6, y0=0.3, dy=1.45)
+        # Glifos de cada línea: primero la fila (o la columna) seleccionada, después lo que la completa
+        fila = VGroup(por_fila[0][1:4], por_fila[1], por_fila[2][:8])                       # 2|A = (7, 0, 3,)
+        fila_resto = VGroup(por_fila[0][0], por_fila[0][4:], por_fila[2][8:], por_fila[3:])  # ( )|1, |1, = 7
+        col = VGroup(por_col[0][3:6], por_col[1], por_col[2][2:])                            # A|1 = (1; 7)
+        col_resto = VGroup(por_col[0][:3], por_col[0][6], por_col[2][:2], por_col[3:])       # 2|( ), 2|, = 7
         convenio = MathTex(r"\eleVL{a}{i}", r"=", r"\eleVR{a}{i}", r"=", r"a_i", tex_template=myTemplate, font_size=52).move_to([0.8, -2.7, 0])
         idea = aviso("idea").next_to(convenio, LEFT, buff=0.8)
         conclusion = MathTex(r"\elemRp{\VectF{A}{2}}{1}", r"=", r"\elemLp{\VectC{A}{1}}{2}", r"=", r"\eleM{A}{2}{1}",
                              tex_template=myTemplate, font_size=52).move_to([0, 0.2, 0])
+        general = MathTex(r"\elemRp{\VectF{A}{i}}{j}", r"=", r"\elemLp{\VectC{A}{j}}{i}", r"=", r"\eleM{A}{i}{j}",
+                          tex_template=myTemplate, font_size=52).move_to(conclusion)   # mismos glifos: el 2 pasa a i y el 1 a j
         
-        with self.voiceover(text=tr("""Seleccionemos primero la segunda fila, <bookmark mark='f'/> que es un vector. <bookmark mark='c'/> Su primera componente es el siete.""",
-                                    """Let us first select the second row, <bookmark mark='f'/> which is a vector. <bookmark mark='c'/> Its first component is the seven.""")) as tracker:
-            self.play(Write(cabecera), FadeIn(f_A), FadeIn(por_fila[0]), run_time=1)
+        with self.voiceover(text=tr("""Seleccionemos primero <bookmark mark='f'/> la fila, <bookmark mark='c'/> y después su primera componente.""",
+                                    """Let us first select <bookmark mark='f'/> the row, <bookmark mark='c'/> and then its first component.""")) as tracker:
+            self.play(Write(cabecera), FadeIn(f_A), run_time=1)
             self.wait_until_bookmark("f")
             ff = franja_fila(A, 1)
-            self.play(FadeIn(ff), FadeIn(por_fila[1:3]), run_time=0.8)
+            self.play(FadeIn(ff), FadeIn(fila), run_time=0.8)
             self.wait_until_bookmark("c")
-            self.play(FadeIn(por_fila[3:]), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.play(FadeIn(fila_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
         
-        with self.voiceover(text=tr("""Ahora seleccionemos primero la primera columna, <bookmark mark='c'/> que también es un vector. <bookmark mark='s'/> El siete es su segunda componente.""",
-                                    """Now let us first select the first column, <bookmark mark='c'/> which is also a vector. <bookmark mark='s'/> The seven is its second component.""")) as tracker:
-            self.play(FadeOut(ff), FadeIn(por_col[0]), run_time=0.8)
+        with self.voiceover(text=tr("""Ahora seleccionemos primero <bookmark mark='c'/> la columna, <bookmark mark='s'/> y después su segunda componente.""",
+                                    """Now let us first select <bookmark mark='c'/> the column, <bookmark mark='s'/> and then its second component.""")) as tracker:
+            self.play(FadeOut(ff), run_time=0.8)
             self.wait_until_bookmark("c")
             fc = franja_columna(A, 0, color=COLOR_C)
-            self.play(FadeIn(fc), FadeIn(por_col[1:3]), run_time=0.8)
+            self.play(FadeIn(fc), FadeIn(col), run_time=0.8)
             self.wait_until_bookmark("s")
-            self.play(FadeIn(por_col[3:]), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.play(FadeIn(col_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
         
-        with self.voiceover(text=tr("""Pero aquí el selector actúa por la izquierda de un vector. <bookmark mark='a'/> Para que esto tenga sentido, aceptaremos que el selector pueda actuar por cualquier lado de un vector, <bookmark mark='d'/> con el mismo resultado.""",
-                                    """But here the selector acts on the left of a vector. <bookmark mark='a'/> For this to make sense, we will allow the selector to act on either side of a vector, <bookmark mark='d'/> with the same result.""")) as tracker:
-            self.play(FadeOut(fc), Indicate(por_col[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1)
+        with self.voiceover(text=tr("""Aquí el selector actúa por la izquierda de un vector. <bookmark mark='a'/> Ya en el primer vídeo del curso admitimos que el selector puede actuar por cualquier lado de un vector, <bookmark mark='d'/> con el mismo resultado.""",
+                                    """Here the selector acts on the left of a vector. <bookmark mark='a'/> Back in the first video of the course, we agreed that the selector can act on either side of a vector, <bookmark mark='d'/> with the same result.""")) as tracker:
+            sel_izq = VGroup(por_col[0][:2], por_col[2][:2])  # los dos selectores por la izquierda, resaltados toda la frase
+            self.play(FadeOut(fc), *[s.animate.set_color(COLOR_ESCALAR).scale(1.25) for s in sel_izq], run_time=0.6)
             self.wait_until_bookmark("a")
-            self.play(FadeIn(idea), FadeIn(convenio[0]), run_time=0.8)
+            self.play(*[s.animate.set_color(WHITE).scale(1/1.25) for s in sel_izq], FadeIn(idea), FadeIn(convenio[0]), run_time=0.8)
             self.wait_until_bookmark("d")
             self.play(FadeIn(convenio[1:]), run_time=0.8)
         
@@ -135,9 +168,20 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
             self.wait_until_bookmark("q")
             self.play(FadeIn(conclusion[3:]), run_time=1)
         
-        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su fila y en su columna.""",
-                                    """We have seen it in an example, but it holds for any component of any matrix, because every component lies both in its row and in its column.""")) as tracker:
-            self.play(Indicate(conclusion[4], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
+        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna.""",
+                                    """We have seen it in an example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column.""")) as tracker:
+            self.wait_until_bookmark("g")
+            self.play(*[ReplacementTransform(conclusion[p][g], general[p][g]) for p in range(5) for g in range(len(conclusion[p]))], run_time=1.5)
+            # las tres i (fila) y después las tres j (columna), con los colores de las franjas; el resaltado
+            # empieza en cuanto la voz dice la palabra (sin la subida lenta de Indicate) y dura hasta la siguiente
+            ies = [general[p][g] for p, g in [(0, 1), (2, 0), (4, 0)]]
+            jotas = [general[p][g] for p, g in [(0, 6), (2, 5), (4, 4)]]
+            self.wait_until_bookmark("f")
+            self.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.5) for x in ies], run_time=0.25)
+            self.wait_until_bookmark("c")
+            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in ies], *[x.animate.set_color(COLOR_C).scale(1.5) for x in jotas], run_time=0.25)
+            self.wait(0.8)
+            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in jotas], run_time=0.4)
         
         self.pausa_media()
 
@@ -165,8 +209,8 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
                 self.play(TransformFromCopy(A.get_rows()[i], T.get_columns()[i]), run_time=1.2)
                 self.play(FadeOut(fr), run_time=0.3)
         
-        with self.voiceover(text=tr("""Convertir las filas de una matriz en columnas se llama transposición. <bookmark mark='t'/> La matriz B es la transpuesta de A, que se escribe con una T en el superíndice.""",
-                                    """Turning the rows of a matrix into columns is called transposition. <bookmark mark='t'/> The matrix B is the transpose of A, which is written with a T as a superscript.""")) as tracker:
+        with self.voiceover(text=tr("""Convertir las filas de una matriz en las columnas de otra se llama transposición. <bookmark mark='t'/> La matriz B es la transpuesta de A, que se escribe con una T en el superíndice.""",
+                                    """Turning the rows of a matrix into the columns of another is called transposition. <bookmark mark='t'/> The matrix B is the transpose of A, which is written with a T as a superscript.""")) as tracker:
             self.wait_until_bookmark("t")
             self.play(FadeTransform(f_T[0], nombre_T), run_time=1.2)
         
@@ -189,48 +233,21 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
         self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
 
         self.creditos()
-        cabecera = Tex(tr("Vector, matriz columna y matriz fila", "Vector, column matrix and row matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
-        v = MathTex(r"\Vect{a}=(9,\ 2,)", tex_template=myTemplate, font_size=48)
-        colm = MathTex(r"\begin{bmatrix}\Vect{a}\end{bmatrix}", r"=", r"\begin{bmatrix}9\\ 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
-        film = MathTex(r"{\begin{bmatrix}\Vect{a}\end{bmatrix}}^{\T}", r"=", r"\begin{bmatrix}9 & 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
-        r_v = Tex(tr("vector", "vector"), font_size=30, color=GRAY_B)
-        r_c = Tex(tr(r"matriz columna, $2\times 1$", r"column matrix, $2\times 1$"), font_size=30, color=GRAY_B)
-        r_f = Tex(tr(r"matriz fila, $1\times 2$", r"row matrix, $1\times 2$"), font_size=30, color=GRAY_B)
-        grupos = VGroup(*[VGroup(f, r).arrange(DOWN, buff=0.4) for f, r in [(v, r_v), (colm, r_c), (film, r_f)]])
-        grupos.arrange(RIGHT, buff=1.2, aligned_edge=DOWN).move_to([0, 0.6, 0])
-        sis_c = MathTex(r"\begin{bmatrix}\begin{pmatrix}9\\ 2\end{pmatrix};\end{bmatrix}", tex_template=myTemplate, font_size=44).next_to(r_c, DOWN, buff=0.35)
-        sis_f = MathTex(r"\left[(9,);\ (2,);\right]", tex_template=myTemplate, font_size=44).next_to(r_f, DOWN, buff=0.35).match_y(sis_c)
-        l_c = Tex(tr(r"un vector de $\R[2]$", r"one vector of $\R[2]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_c, DOWN, buff=0.25)
-        l_f = Tex(tr(r"dos vectores de $\R[1]$", r"two vectors of $\R[1]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_f, DOWN, buff=0.25).match_y(l_c)
-        distintos = MathTex(r"(9,\ 2,)", r"\neq", r"\begin{bmatrix}9\\ 2\end{bmatrix}", r"\neq", r"\begin{bmatrix}9 & 2\end{bmatrix}",
-                            font_size=48).move_to([0, -2.3, 0])
+        cabecera = Tex(tr("Matriz columna y matriz fila", "Column matrix and row matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+        colm = MathTex(r"\begin{bmatrix}9\\ 2\end{bmatrix}", tex_template=myTemplate, font_size=52)
+        film = MathTex(r"{\begin{bmatrix}9\\ 2\end{bmatrix}}^{\T}", r"=", r"\begin{bmatrix}9 & 2\end{bmatrix}", tex_template=myTemplate, font_size=52)
+        r_c = Tex(tr(r"matriz columna, $2\times 1$", r"column matrix, $2\times 1$"), font_size=32, color=GRAY_B)
+        r_f = Tex(tr(r"matriz fila, $1\times 2$", r"row matrix, $1\times 2$"), font_size=32, color=GRAY_B)
+        grupos = VGroup(*[VGroup(f, r).arrange(DOWN, buff=0.5) for f, r in [(colm, r_c), (film, r_f)]])
+        grupos.arrange(RIGHT, buff=1.6, aligned_edge=DOWN).move_to([0, 0, 0])
         
-        with self.voiceover(text=tr("""En el vídeo anterior vimos que un vector entre corchetes es una matriz con una sola columna: <bookmark mark='c'/> una matriz columna.""",
-                                    """In the previous video we saw that a vector in square brackets is a matrix with a single column: <bookmark mark='c'/> a column matrix.""")) as tracker:
-            self.play(Write(cabecera), FadeIn(grupos[0]), run_time=1)
-            self.play(FadeIn(colm), run_time=1)
+        with self.voiceover(text=tr("""Por ejemplo, <bookmark mark='c'/> la transpuesta de una matriz columna <bookmark mark='f'/> es una matriz fila.""",
+                                    """For example, <bookmark mark='c'/> the transpose of a column matrix <bookmark mark='f'/> is a row matrix.""")) as tracker:
+            self.play(Write(cabecera), run_time=0.8)
             self.wait_until_bookmark("c")
-            self.play(FadeIn(r_c), run_time=0.6)
-        
-        with self.voiceover(text=tr("""Su transpuesta tiene una sola fila: <bookmark mark='f'/> es una matriz fila.""",
-                                    """Its transpose has a single row: <bookmark mark='f'/> it is a row matrix.""")) as tracker:
-            self.play(FadeIn(film[0]), run_time=0.8)
-            self.play(TransformFromCopy(colm[2], film[2]), FadeIn(film[1]), run_time=1.2)
+            self.play(FadeIn(colm), FadeIn(r_c), run_time=0.8)
             self.wait_until_bookmark("f")
-            self.play(FadeIn(r_f), run_time=0.6)
-        
-        with self.voiceover(text=tr("""Escritas como listas se ve la diferencia: <bookmark mark='c'/> la matriz columna es una lista con un solo vector de dos componentes, <bookmark mark='f'/> y la matriz fila, una lista con dos vectores de una componente.""",
-                                    """Written as lists, the difference shows: <bookmark mark='c'/> the column matrix is a list with a single vector of two components, <bookmark mark='f'/> and the row matrix, a list with two vectors of one component.""")) as tracker:
-            self.wait_until_bookmark("c")
-            self.play(TransformFromCopy(colm[2], sis_c), FadeIn(l_c), run_time=0.8)
-            self.wait_until_bookmark("f")
-            self.play(TransformFromCopy(film[2], sis_f), FadeIn(l_f), run_time=0.8)
-            self.wait(max(0.5, tracker.get_remaining_duration() - 0.8))
-            self.play(FadeOut(VGroup(sis_c, l_c, sis_f, l_f)), run_time=0.8)
-        
-        with self.voiceover(text=tr("""Así, un vector, una matriz columna y una matriz fila son tres objetos distintos, aunque tengan los mismos números.""",
-                                    """So a vector, a column matrix and a row matrix are three different objects, even if they have the same numbers.""")) as tracker:
-            self.play(FadeIn(distintos), run_time=1.2)
+            self.play(FadeIn(film), FadeIn(r_f), run_time=1.2)
         
         self.pausa_media()
 
@@ -244,31 +261,53 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
                   MathTex(r"\phantom{\eleMT{A}{i}{j}}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=48)]
         columna_de_lineas(cadena, x0=-2.6, y0=1.6, dy=1.15)
         x_rot = 1.4
-        reglas = [rotulo(tr("da igual el orden", "the order does not matter"), cadena[0], x=x_rot),
+        reglas = [rotulo(tr("da igual el orden de selección", "the order of selection does not matter"), cadena[0], x=x_rot),
                   rotulo(tr("definición de transpuesta", "definition of the transpose"), cadena[1], x=x_rot),
                   rotulo(tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"), cadena[2], x=x_rot),
-                  rotulo(tr("da igual el orden", "the order does not matter"), cadena[3], x=x_rot)]
+                  rotulo(tr("da igual el orden de selección", "the order of selection does not matter"), cadena[3], x=x_rot)]
         regla = MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=56).move_to([1.2, 1.6, 0])
         idea = aviso("idea").next_to(regla, LEFT, buff=0.8)
         doble = MathTex(r"\elemLRp{\TransP*{\MatT{A}}}{i}{j}", r"=", r"\eleMT{A}{j}{i}", r"=", r"\eleM{A}{i}{j}", tex_template=myTemplate, font_size=52).move_to([0, -0.3, 0])
         final = MathTex(r"\TransP*{\MatT{A}}=\Mat{A}", tex_template=myTemplate, font_size=56).move_to([0, -1.8, 0])
+        cols = MathTex(r"\VectC{A}{i}", r"=", r"\elemRp{\TransP*{\MatT{A}}}{i}", r"=", r"\elemLp{\MatT{A}}{i}", tex_template=myTemplate, font_size=52).move_to([0, -0.3, 0])
         
-        with self.voiceover(text=tr("""Veamos el efecto de la transposición sobre una componente. Empezamos por una componente cualquiera de la transpuesta.""",
-                                    """Let us see the effect of transposition on a component. We start with any component of the transpose.""")) as tracker:
+        with self.voiceover(text=tr("""Veamos el efecto de la transposición sobre las componentes. Empezamos por una componente cualquiera de la transpuesta.""",
+                                    """Let us see the effect of transposition on the components. We start with any component of the transpose.""")) as tracker:
             self.play(Write(cabecera), FadeIn(cadena[0][0]), run_time=1.2)
         
-        pasos = [(tr("""Como da igual el orden, podemos seleccionar primero la columna.""",
-                     """Since the order does not matter, we can select the column first."""), cadena[0]),
-                 (tr("""Por la definición de transpuesta, podemos sustituir esa columna por la fila de A con el mismo índice.""",
-                     """By the definition of the transpose, we can replace that column with the row of A with the same index."""), cadena[1]),
-                 (tr("""Esa fila es un vector, así que podemos pasar el selector al otro lado.""",
-                     """That row is a vector, so we can move the selector to the other side."""), cadena[2]),
-                 (tr("""Y como da igual el orden, podemos quitar los paréntesis.""",
-                     """And since the order does not matter, we can drop the parentheses."""), cadena[3])]
-        for k, (texto, linea) in enumerate(pasos):
+        # Glifos de las expresiones de la derecha:
+        #   cadena[0]: i | ( ( A T ) | j )    cadena[1]: i | ( j | A )
+        #   cadena[2]: ( j | A ) | i          cadena[3]: j | A | i
+        # Cada expresión nace de la anterior (la primera, del lado izquierdo, i|(A T)|j): lo que no cambia se
+        # copia al empezar la frase (o en la marca 'y') y lo que cambia se transforma cuando la voz describe el cambio (marca 'x').
+        # Parejas (glifo de origen, glifo de destino).
+        d = [linea[2] for linea in cadena]
+        origen = [cadena[0][0]] + d[:-1]
+        pasos = [(tr("""Como da igual el orden en que se aplican los selectores, <bookmark mark='y'/> podemos seleccionar primero la columna, <bookmark mark='x'/> y luego la fila.""",
+                     """Since the order in which the selectors are applied does not matter, <bookmark mark='y'/> we can select the column first, <bookmark mark='x'/> and then the row."""),
+                  [(2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8)],   # (A T)|j se desplaza
+                  [(0, 0), (1, 1), (2, 2), (5, 9)]),                  # i| se desplaza y los paréntesis se duplican
+                 (tr("""Por la definición de transpuesta, <bookmark mark='x'/> podemos sustituir esa columna por la fila de A con el mismo índice.""",
+                     """By the definition of the transpose, <bookmark mark='x'/> we can replace that column with the row of A with the same index."""),
+                  [(0, 0), (1, 1), (2, 2), (9, 6)],    # i|( ) se copia
+                  [(4, 5), (7, 4), (8, 3)]),           # (A T)|j pasa a ser j|A
+                 (tr("""Esa fila es un vector, así que <bookmark mark='x'/> podemos pasar el selector al otro lado.""",
+                     """That row is a vector, so <bookmark mark='x'/> we can move the selector to the other side."""),
+                  [(2, 0), (3, 1), (4, 2), (5, 3), (6, 4)],   # (j|A) se copia
+                  [(0, 6), (1, 5)]),                          # i| pasa al otro lado
+                 (tr("""Y como da igual el orden en que se aplican los selectores, podemos quitar los paréntesis.""",
+                     """And since the order in which the selectors are applied does not matter, we can drop the parentheses."""),
+                  [(1, 0), (2, 1), (3, 2), (5, 3), (6, 4)],   # j|A|i se copia; los paréntesis no aparecen
+                  [])]
+        for k, (texto, fijos, cambios) in enumerate(pasos):
             with self.voiceover(text=texto) as tracker:
                 self.play(FadeIn(reglas[k]), run_time=0.6)
-                self.play(Write(linea[1:]), run_time=1.2)
+                if "mark='y'" in texto:   # lo que no cambia, cuando la voz lo nombra
+                    self.wait_until_bookmark("y")
+                self.play(FadeIn(cadena[k][1]), *[TransformFromCopy(origen[k][i], d[k][j]) for i, j in fijos], run_time=1.2)
+                if cambios:
+                    self.wait_until_bookmark("x")
+                    self.play(*[TransformFromCopy(origen[k][i], d[k][j]) for i, j in cambios], run_time=1.5)
         
         with self.voiceover(text=tr("""Hemos demostrado que transponer intercambia los índices: <bookmark mark='f'/> el de la fila pasa a ser el de la columna, <bookmark mark='c'/> y el de la columna, el de la fila.""",
                                     """We have proved that transposing swaps the indices: <bookmark mark='f'/> the row index becomes the column index, <bookmark mark='c'/> and the column index becomes the row index.""")) as tracker:
@@ -290,17 +329,40 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
                                invitacion_voz=tr("Pause el vídeo e intente demostrar que la transpuesta de la transpuesta de A es A.",
                                                  "Pause the video and try to prove that the transpose of the transpose of A is A."))
         
-        with self.voiceover(text=tr("""Empezamos por una componente cualquiera. <bookmark mark='a'/> Por la regla, podemos quitar la transposición exterior cambiando de lado los índices, <bookmark mark='b'/> y, por la misma regla, podemos quitar la otra, y los índices vuelven a su sitio.""",
-                                    """We start with any component. <bookmark mark='a'/> By the rule, we can remove the outer transposition by swapping the sides of the indices, <bookmark mark='b'/> and, by the same rule, we can remove the other one, and the indices go back to their places.""")) as tracker:
+        with self.voiceover(text=tr("""Empezamos por una componente cualquiera. <bookmark mark='a'/> Por la regla, podemos quitar la transposición exterior <bookmark mark='x1'/> cambiando de lado los índices. <bookmark mark='b'/> Por la misma regla, podemos quitar la transposición que queda, <bookmark mark='x2'/> y los índices vuelven a su sitio.""",
+                                    """We start with any component. <bookmark mark='a'/> By the rule, we can remove the outer transposition <bookmark mark='x1'/> by swapping the sides of the indices. <bookmark mark='b'/> By the same rule, we can remove the remaining transposition, <bookmark mark='x2'/> and the indices go back to their places.""")) as tracker:
+            # Glifos: i | ( ( A T ) T ) | j  =  j | ( A T ) | i  =  i | A | j
             self.play(FadeIn(doble[0]), run_time=1)
             self.wait_until_bookmark("a")
-            self.play(Write(doble[1:3]), run_time=1)
+            copia = copia_literal(self, doble[0], doble[2], doble[1])
+            self.wait_until_bookmark("x1")
+            transforma_copia(self, copia, doble[2], [(3, 2), (4, 3), (5, 4), (6, 5), (0, 7), (1, 6), (10, 0), (9, 1)], se_van=[2, 7, 8])
             self.wait_until_bookmark("b")
-            self.play(Write(doble[3:]), run_time=1)
+            copia = copia_literal(self, doble[2], doble[4], doble[3])
+            self.wait_until_bookmark("x2")
+            transforma_copia(self, copia, doble[4], [(3, 2), (0, 4), (1, 3), (7, 0), (6, 1)], se_van=[2, 4, 5])
         
         with self.voiceover(text=tr("""Las dos matrices tienen el mismo orden y las mismas componentes, así que son iguales.""",
                                     """Both matrices have the same order and the same components, so they are equal.""")) as tracker:
             self.play(Write(final), run_time=1.2)
+        
+        # Las columnas de A son las filas de la transpuesta (apartado (c) del ejercicio del libro), con lo recién probado.
+        # Glifos: A | i  =  ( ( A T ) T ) | i  =  i | ( A T )
+        self.play(FadeOut(doble), run_time=0.6)
+        with self.voiceover(text=tr("""Con esto vemos también que las columnas de A son las filas de su transpuesta.""",
+                                    """This also shows that the columns of A are the rows of its transpose.""")) as tracker:
+            self.play(FadeIn(cols[0]), run_time=1)
+        with self.voiceover(text=tr("""Como la transpuesta de la transpuesta es A, <bookmark mark='x'/> podemos escribir A como la transpuesta de su transpuesta.""",
+                                    """Since the transpose of the transpose is A, <bookmark mark='x'/> we can write A as the transpose of its transpose.""")) as tracker:
+            copia = copia_literal(self, cols[0], cols[2], cols[1])
+            self.play(Indicate(final, color=COLOR_ESCALAR, scale_factor=1.1), run_time=0.8)
+            self.wait_until_bookmark("x")
+            transforma_copia(self, copia, cols[2], [(0, 2), (1, 7), (2, 8)], aparecen=[0, 1, 3, 4, 5, 6])
+        with self.voiceover(text=tr("""Y por la definición de transpuesta, <bookmark mark='x'/> esa columna es la fila de la transpuesta con el mismo índice.""",
+                                    """And by the definition of the transpose, <bookmark mark='x'/> that column is the row of the transpose with the same index.""")) as tracker:
+            copia = copia_literal(self, cols[2], cols[4], cols[3])
+            self.wait_until_bookmark("x")
+            transforma_copia(self, copia, cols[4], [(1, 2), (2, 3), (3, 4), (4, 5), (8, 0), (7, 1)], se_van=[0, 5, 6])
         
         self.pausa_media()
 
@@ -309,10 +371,10 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
         self.creditos()
         cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         formulas = [r"\eleVL{a}{i}=\eleVR{a}{i}", r"\elemRp{\VectF{A}{i}}{j}=\elemLp{\VectC{A}{j}}{i}=\eleM{A}{i}{j}",
-                    r"\VectTC{A}{i}=\VectF{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
+                    r"\VectTC{A}{i}=\VectF{A}{i},\qquad \elemLp{\MatT{A}}{i}=\VectC{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
         rotulos = [tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"),
-                   tr("da igual el orden", "the order does not matter"),
-                   tr("las columnas de la transpuesta son las filas", "the columns of the transpose are the rows"),
+                   tr("da igual el orden de selección", "the order of selection does not matter"),
+                   tr("las columnas de la transpuesta son las filas, y sus filas, las columnas", "the columns of the transpose are the rows, and its rows, the columns"),
                    tr("transponer = cambiar de lado los índices", "transposing = swapping the sides of the indices")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=44), Tex(r, font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.4).move_to([0, -0.5, 0])
@@ -323,8 +385,8 @@ class L01_V10_SeleccionYTransposicion(MiEscenaConVoz):
             self.wait_until_bookmark("o")
             self.play(FadeIn(filas[1]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
-                                    """The columns of the transpose of a matrix are the rows of the matrix. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
+        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz, y sus filas, las columnas. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
+                                    """The columns of the transpose of a matrix are the rows of the matrix, and its rows, the columns. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
             self.play(FadeIn(filas[2]), run_time=0.8)
             self.wait_until_bookmark("r")
             self.play(FadeIn(filas[3]), run_time=0.8)
@@ -362,8 +424,8 @@ class L01_V10_E01_Enlace(MiEscenaConVoz):
             self.play(Write(titulo), FadeIn(f_A), run_time=1.2)
             self.play(Write(comp), run_time=1.2)
         
-        with self.voiceover(text=tr("""Esa componente está a la vez en una fila y en una columna: <bookmark mark='f'/> en la segunda fila <bookmark mark='c'/> y en la primera columna.""",
-                                    """That component lies both in a row and in a column: <bookmark mark='f'/> in the second row <bookmark mark='c'/> and in the first column.""")) as tracker:
+        with self.voiceover(text=tr("""Esa componente está a la vez <bookmark mark='f'/> en una fila y <bookmark mark='c'/> en una columna.""",
+                                    """That component lies both <bookmark mark='f'/> in a row and <bookmark mark='c'/> in a column.""")) as tracker:
             self.wait_until_bookmark("f")
             ff = franja_fila(A, 1)
             self.play(FadeIn(ff), run_time=0.5)
@@ -372,10 +434,19 @@ class L01_V10_E01_Enlace(MiEscenaConVoz):
             self.play(FadeIn(fc), run_time=0.5)
             self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
         
-        with self.voiceover(text=tr("""Así que también debería poder obtenerse seleccionando primero la fila, o primero la columna.""",
-                                    """So we should also be able to get it by selecting the row first, or the column first.""")) as tracker:
+        with self.voiceover(text=tr("""Cada fila y cada columna es una lista ordenada de números, es decir, un vector.""",
+                                    """Each row and each column is an ordered list of numbers, that is, a vector.""")) as tracker:
             self.play(Indicate(ff, color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
             self.play(Indicate(fc, color=COLOR_C, scale_factor=1.05), run_time=1)
+        
+        with self.voiceover(text=tr("""Así que el siete es componente de dos vectores distintos: <bookmark mark='f'/> es la primera componente de la segunda fila, <bookmark mark='c'/> y la segunda componente de la primera columna.""",
+                                    """So the seven is a component of two different vectors: <bookmark mark='f'/> it is the first component of the second row, <bookmark mark='c'/> and the second component of the first column.""")) as tracker:
+            self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.wait_until_bookmark("f")
+            self.play(ff.animate.set_fill(opacity=0.55), fc.animate.set_fill(opacity=0.06), run_time=0.5)
+            self.wait_until_bookmark("c")
+            self.play(ff.animate.set_fill(opacity=0.06), fc.animate.set_fill(opacity=0.55), run_time=0.5)
+        self.play(ff.animate.set_fill(opacity=0.22), fc.animate.set_fill(opacity=0.22), run_time=0.5)
         
         self.pausa_media()
 
@@ -389,34 +460,42 @@ class L01_V10_E02_SelectorIzquierda(MiEscenaConVoz):
         por_fila = MathTex(r"\elemRp{\VectF{A}{2}}{1}", r"=", r"\elemR{(7,\ 0,\ 3,)}{1}", r"=", r"7", tex_template=myTemplate, font_size=48)
         por_col = MathTex(r"\elemLp{\VectC{A}{1}}{2}", r"=", r"\elemL{\begin{pmatrix}1\\ 7\end{pmatrix}}{2}", r"=", r"7", tex_template=myTemplate, font_size=48)
         lineas = columna_de_lineas([por_fila, por_col], x0=-1.6, y0=0.3, dy=1.45)
+        # Glifos de cada línea: primero la fila (o la columna) seleccionada, después lo que la completa
+        fila = VGroup(por_fila[0][1:4], por_fila[1], por_fila[2][:8])                       # 2|A = (7, 0, 3,)
+        fila_resto = VGroup(por_fila[0][0], por_fila[0][4:], por_fila[2][8:], por_fila[3:])  # ( )|1, |1, = 7
+        col = VGroup(por_col[0][3:6], por_col[1], por_col[2][2:])                            # A|1 = (1; 7)
+        col_resto = VGroup(por_col[0][:3], por_col[0][6], por_col[2][:2], por_col[3:])       # 2|( ), 2|, = 7
         convenio = MathTex(r"\eleVL{a}{i}", r"=", r"\eleVR{a}{i}", r"=", r"a_i", tex_template=myTemplate, font_size=52).move_to([0.8, -2.7, 0])
         idea = aviso("idea").next_to(convenio, LEFT, buff=0.8)
         conclusion = MathTex(r"\elemRp{\VectF{A}{2}}{1}", r"=", r"\elemLp{\VectC{A}{1}}{2}", r"=", r"\eleM{A}{2}{1}",
                              tex_template=myTemplate, font_size=52).move_to([0, 0.2, 0])
+        general = MathTex(r"\elemRp{\VectF{A}{i}}{j}", r"=", r"\elemLp{\VectC{A}{j}}{i}", r"=", r"\eleM{A}{i}{j}",
+                          tex_template=myTemplate, font_size=52).move_to(conclusion)   # mismos glifos: el 2 pasa a i y el 1 a j
         
-        with self.voiceover(text=tr("""Seleccionemos primero la segunda fila, <bookmark mark='f'/> que es un vector. <bookmark mark='c'/> Su primera componente es el siete.""",
-                                    """Let us first select the second row, <bookmark mark='f'/> which is a vector. <bookmark mark='c'/> Its first component is the seven.""")) as tracker:
-            self.play(Write(cabecera), FadeIn(f_A), FadeIn(por_fila[0]), run_time=1)
+        with self.voiceover(text=tr("""Seleccionemos primero <bookmark mark='f'/> la fila, <bookmark mark='c'/> y después su primera componente.""",
+                                    """Let us first select <bookmark mark='f'/> the row, <bookmark mark='c'/> and then its first component.""")) as tracker:
+            self.play(Write(cabecera), FadeIn(f_A), run_time=1)
             self.wait_until_bookmark("f")
             ff = franja_fila(A, 1)
-            self.play(FadeIn(ff), FadeIn(por_fila[1:3]), run_time=0.8)
+            self.play(FadeIn(ff), FadeIn(fila), run_time=0.8)
             self.wait_until_bookmark("c")
-            self.play(FadeIn(por_fila[3:]), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.play(FadeIn(fila_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
         
-        with self.voiceover(text=tr("""Ahora seleccionemos primero la primera columna, <bookmark mark='c'/> que también es un vector. <bookmark mark='s'/> El siete es su segunda componente.""",
-                                    """Now let us first select the first column, <bookmark mark='c'/> which is also a vector. <bookmark mark='s'/> The seven is its second component.""")) as tracker:
-            self.play(FadeOut(ff), FadeIn(por_col[0]), run_time=0.8)
+        with self.voiceover(text=tr("""Ahora seleccionemos primero <bookmark mark='c'/> la columna, <bookmark mark='s'/> y después su segunda componente.""",
+                                    """Now let us first select <bookmark mark='c'/> the column, <bookmark mark='s'/> and then its second component.""")) as tracker:
+            self.play(FadeOut(ff), run_time=0.8)
             self.wait_until_bookmark("c")
             fc = franja_columna(A, 0, color=COLOR_C)
-            self.play(FadeIn(fc), FadeIn(por_col[1:3]), run_time=0.8)
+            self.play(FadeIn(fc), FadeIn(col), run_time=0.8)
             self.wait_until_bookmark("s")
-            self.play(FadeIn(por_col[3:]), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+            self.play(FadeIn(col_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
         
-        with self.voiceover(text=tr("""Pero aquí el selector actúa por la izquierda de un vector. <bookmark mark='a'/> Para que esto tenga sentido, aceptaremos que el selector pueda actuar por cualquier lado de un vector, <bookmark mark='d'/> con el mismo resultado.""",
-                                    """But here the selector acts on the left of a vector. <bookmark mark='a'/> For this to make sense, we will allow the selector to act on either side of a vector, <bookmark mark='d'/> with the same result.""")) as tracker:
-            self.play(FadeOut(fc), Indicate(por_col[2], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1)
+        with self.voiceover(text=tr("""Aquí el selector actúa por la izquierda de un vector. <bookmark mark='a'/> Ya en el primer vídeo del curso admitimos que el selector puede actuar por cualquier lado de un vector, <bookmark mark='d'/> con el mismo resultado.""",
+                                    """Here the selector acts on the left of a vector. <bookmark mark='a'/> Back in the first video of the course, we agreed that the selector can act on either side of a vector, <bookmark mark='d'/> with the same result.""")) as tracker:
+            sel_izq = VGroup(por_col[0][:2], por_col[2][:2])  # los dos selectores por la izquierda, resaltados toda la frase
+            self.play(FadeOut(fc), *[s.animate.set_color(COLOR_ESCALAR).scale(1.25) for s in sel_izq], run_time=0.6)
             self.wait_until_bookmark("a")
-            self.play(FadeIn(idea), FadeIn(convenio[0]), run_time=0.8)
+            self.play(*[s.animate.set_color(WHITE).scale(1/1.25) for s in sel_izq], FadeIn(idea), FadeIn(convenio[0]), run_time=0.8)
             self.wait_until_bookmark("d")
             self.play(FadeIn(convenio[1:]), run_time=0.8)
         
@@ -427,9 +506,20 @@ class L01_V10_E02_SelectorIzquierda(MiEscenaConVoz):
             self.wait_until_bookmark("q")
             self.play(FadeIn(conclusion[3:]), run_time=1)
         
-        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su fila y en su columna.""",
-                                    """We have seen it in an example, but it holds for any component of any matrix, because every component lies both in its row and in its column.""")) as tracker:
-            self.play(Indicate(conclusion[4], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1)
+        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna.""",
+                                    """We have seen it in an example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column.""")) as tracker:
+            self.wait_until_bookmark("g")
+            self.play(*[ReplacementTransform(conclusion[p][g], general[p][g]) for p in range(5) for g in range(len(conclusion[p]))], run_time=1.5)
+            # las tres i (fila) y después las tres j (columna), con los colores de las franjas; el resaltado
+            # empieza en cuanto la voz dice la palabra (sin la subida lenta de Indicate) y dura hasta la siguiente
+            ies = [general[p][g] for p, g in [(0, 1), (2, 0), (4, 0)]]
+            jotas = [general[p][g] for p, g in [(0, 6), (2, 5), (4, 4)]]
+            self.wait_until_bookmark("f")
+            self.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.5) for x in ies], run_time=0.25)
+            self.wait_until_bookmark("c")
+            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in ies], *[x.animate.set_color(COLOR_C).scale(1.5) for x in jotas], run_time=0.25)
+            self.wait(0.8)
+            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in jotas], run_time=0.4)
         
         self.pausa_media()
 
@@ -458,8 +548,8 @@ class L01_V10_E03_Transposicion(MiEscenaConVoz):
                 self.play(TransformFromCopy(A.get_rows()[i], T.get_columns()[i]), run_time=1.2)
                 self.play(FadeOut(fr), run_time=0.3)
         
-        with self.voiceover(text=tr("""Convertir las filas de una matriz en columnas se llama transposición. <bookmark mark='t'/> La matriz B es la transpuesta de A, que se escribe con una T en el superíndice.""",
-                                    """Turning the rows of a matrix into columns is called transposition. <bookmark mark='t'/> The matrix B is the transpose of A, which is written with a T as a superscript.""")) as tracker:
+        with self.voiceover(text=tr("""Convertir las filas de una matriz en las columnas de otra se llama transposición. <bookmark mark='t'/> La matriz B es la transpuesta de A, que se escribe con una T en el superíndice.""",
+                                    """Turning the rows of a matrix into the columns of another is called transposition. <bookmark mark='t'/> The matrix B is the transpose of A, which is written with a T as a superscript.""")) as tracker:
             self.wait_until_bookmark("t")
             self.play(FadeTransform(f_T[0], nombre_T), run_time=1.2)
         
@@ -483,48 +573,21 @@ class L01_V10_E03_Transposicion(MiEscenaConVoz):
 class L01_V10_E04_MatrizFila(MiEscenaConVoz):
     def construct(self):
         self.creditos()
-        cabecera = Tex(tr("Vector, matriz columna y matriz fila", "Vector, column matrix and row matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
-        v = MathTex(r"\Vect{a}=(9,\ 2,)", tex_template=myTemplate, font_size=48)
-        colm = MathTex(r"\begin{bmatrix}\Vect{a}\end{bmatrix}", r"=", r"\begin{bmatrix}9\\ 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
-        film = MathTex(r"{\begin{bmatrix}\Vect{a}\end{bmatrix}}^{\T}", r"=", r"\begin{bmatrix}9 & 2\end{bmatrix}", tex_template=myTemplate, font_size=48)
-        r_v = Tex(tr("vector", "vector"), font_size=30, color=GRAY_B)
-        r_c = Tex(tr(r"matriz columna, $2\times 1$", r"column matrix, $2\times 1$"), font_size=30, color=GRAY_B)
-        r_f = Tex(tr(r"matriz fila, $1\times 2$", r"row matrix, $1\times 2$"), font_size=30, color=GRAY_B)
-        grupos = VGroup(*[VGroup(f, r).arrange(DOWN, buff=0.4) for f, r in [(v, r_v), (colm, r_c), (film, r_f)]])
-        grupos.arrange(RIGHT, buff=1.2, aligned_edge=DOWN).move_to([0, 0.6, 0])
-        sis_c = MathTex(r"\begin{bmatrix}\begin{pmatrix}9\\ 2\end{pmatrix};\end{bmatrix}", tex_template=myTemplate, font_size=44).next_to(r_c, DOWN, buff=0.35)
-        sis_f = MathTex(r"\left[(9,);\ (2,);\right]", tex_template=myTemplate, font_size=44).next_to(r_f, DOWN, buff=0.35).match_y(sis_c)
-        l_c = Tex(tr(r"un vector de $\R[2]$", r"one vector of $\R[2]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_c, DOWN, buff=0.25)
-        l_f = Tex(tr(r"dos vectores de $\R[1]$", r"two vectors of $\R[1]$"), tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(sis_f, DOWN, buff=0.25).match_y(l_c)
-        distintos = MathTex(r"(9,\ 2,)", r"\neq", r"\begin{bmatrix}9\\ 2\end{bmatrix}", r"\neq", r"\begin{bmatrix}9 & 2\end{bmatrix}",
-                            font_size=48).move_to([0, -2.3, 0])
+        cabecera = Tex(tr("Matriz columna y matriz fila", "Column matrix and row matrix"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+        colm = MathTex(r"\begin{bmatrix}9\\ 2\end{bmatrix}", tex_template=myTemplate, font_size=52)
+        film = MathTex(r"{\begin{bmatrix}9\\ 2\end{bmatrix}}^{\T}", r"=", r"\begin{bmatrix}9 & 2\end{bmatrix}", tex_template=myTemplate, font_size=52)
+        r_c = Tex(tr(r"matriz columna, $2\times 1$", r"column matrix, $2\times 1$"), font_size=32, color=GRAY_B)
+        r_f = Tex(tr(r"matriz fila, $1\times 2$", r"row matrix, $1\times 2$"), font_size=32, color=GRAY_B)
+        grupos = VGroup(*[VGroup(f, r).arrange(DOWN, buff=0.5) for f, r in [(colm, r_c), (film, r_f)]])
+        grupos.arrange(RIGHT, buff=1.6, aligned_edge=DOWN).move_to([0, 0, 0])
         
-        with self.voiceover(text=tr("""En el vídeo anterior vimos que un vector entre corchetes es una matriz con una sola columna: <bookmark mark='c'/> una matriz columna.""",
-                                    """In the previous video we saw that a vector in square brackets is a matrix with a single column: <bookmark mark='c'/> a column matrix.""")) as tracker:
-            self.play(Write(cabecera), FadeIn(grupos[0]), run_time=1)
-            self.play(FadeIn(colm), run_time=1)
+        with self.voiceover(text=tr("""Por ejemplo, <bookmark mark='c'/> la transpuesta de una matriz columna <bookmark mark='f'/> es una matriz fila.""",
+                                    """For example, <bookmark mark='c'/> the transpose of a column matrix <bookmark mark='f'/> is a row matrix.""")) as tracker:
+            self.play(Write(cabecera), run_time=0.8)
             self.wait_until_bookmark("c")
-            self.play(FadeIn(r_c), run_time=0.6)
-        
-        with self.voiceover(text=tr("""Su transpuesta tiene una sola fila: <bookmark mark='f'/> es una matriz fila.""",
-                                    """Its transpose has a single row: <bookmark mark='f'/> it is a row matrix.""")) as tracker:
-            self.play(FadeIn(film[0]), run_time=0.8)
-            self.play(TransformFromCopy(colm[2], film[2]), FadeIn(film[1]), run_time=1.2)
+            self.play(FadeIn(colm), FadeIn(r_c), run_time=0.8)
             self.wait_until_bookmark("f")
-            self.play(FadeIn(r_f), run_time=0.6)
-        
-        with self.voiceover(text=tr("""Escritas como listas se ve la diferencia: <bookmark mark='c'/> la matriz columna es una lista con un solo vector de dos componentes, <bookmark mark='f'/> y la matriz fila, una lista con dos vectores de una componente.""",
-                                    """Written as lists, the difference shows: <bookmark mark='c'/> the column matrix is a list with a single vector of two components, <bookmark mark='f'/> and the row matrix, a list with two vectors of one component.""")) as tracker:
-            self.wait_until_bookmark("c")
-            self.play(TransformFromCopy(colm[2], sis_c), FadeIn(l_c), run_time=0.8)
-            self.wait_until_bookmark("f")
-            self.play(TransformFromCopy(film[2], sis_f), FadeIn(l_f), run_time=0.8)
-            self.wait(max(0.5, tracker.get_remaining_duration() - 0.8))
-            self.play(FadeOut(VGroup(sis_c, l_c, sis_f, l_f)), run_time=0.8)
-        
-        with self.voiceover(text=tr("""Así, un vector, una matriz columna y una matriz fila son tres objetos distintos, aunque tengan los mismos números.""",
-                                    """So a vector, a column matrix and a row matrix are three different objects, even if they have the same numbers.""")) as tracker:
-            self.play(FadeIn(distintos), run_time=1.2)
+            self.play(FadeIn(film), FadeIn(r_f), run_time=1.2)
         
         self.pausa_media()
 
@@ -539,31 +602,53 @@ class L01_V10_E05_Propiedades(MiEscenaConVoz):
                   MathTex(r"\phantom{\eleMT{A}{i}{j}}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=48)]
         columna_de_lineas(cadena, x0=-2.6, y0=1.6, dy=1.15)
         x_rot = 1.4
-        reglas = [rotulo(tr("da igual el orden", "the order does not matter"), cadena[0], x=x_rot),
+        reglas = [rotulo(tr("da igual el orden de selección", "the order of selection does not matter"), cadena[0], x=x_rot),
                   rotulo(tr("definición de transpuesta", "definition of the transpose"), cadena[1], x=x_rot),
                   rotulo(tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"), cadena[2], x=x_rot),
-                  rotulo(tr("da igual el orden", "the order does not matter"), cadena[3], x=x_rot)]
+                  rotulo(tr("da igual el orden de selección", "the order of selection does not matter"), cadena[3], x=x_rot)]
         regla = MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=56).move_to([1.2, 1.6, 0])
         idea = aviso("idea").next_to(regla, LEFT, buff=0.8)
         doble = MathTex(r"\elemLRp{\TransP*{\MatT{A}}}{i}{j}", r"=", r"\eleMT{A}{j}{i}", r"=", r"\eleM{A}{i}{j}", tex_template=myTemplate, font_size=52).move_to([0, -0.3, 0])
         final = MathTex(r"\TransP*{\MatT{A}}=\Mat{A}", tex_template=myTemplate, font_size=56).move_to([0, -1.8, 0])
+        cols = MathTex(r"\VectC{A}{i}", r"=", r"\elemRp{\TransP*{\MatT{A}}}{i}", r"=", r"\elemLp{\MatT{A}}{i}", tex_template=myTemplate, font_size=52).move_to([0, -0.3, 0])
         
-        with self.voiceover(text=tr("""Veamos el efecto de la transposición sobre una componente. Empezamos por una componente cualquiera de la transpuesta.""",
-                                    """Let us see the effect of transposition on a component. We start with any component of the transpose.""")) as tracker:
+        with self.voiceover(text=tr("""Veamos el efecto de la transposición sobre las componentes. Empezamos por una componente cualquiera de la transpuesta.""",
+                                    """Let us see the effect of transposition on the components. We start with any component of the transpose.""")) as tracker:
             self.play(Write(cabecera), FadeIn(cadena[0][0]), run_time=1.2)
         
-        pasos = [(tr("""Como da igual el orden, podemos seleccionar primero la columna.""",
-                     """Since the order does not matter, we can select the column first."""), cadena[0]),
-                 (tr("""Por la definición de transpuesta, podemos sustituir esa columna por la fila de A con el mismo índice.""",
-                     """By the definition of the transpose, we can replace that column with the row of A with the same index."""), cadena[1]),
-                 (tr("""Esa fila es un vector, así que podemos pasar el selector al otro lado.""",
-                     """That row is a vector, so we can move the selector to the other side."""), cadena[2]),
-                 (tr("""Y como da igual el orden, podemos quitar los paréntesis.""",
-                     """And since the order does not matter, we can drop the parentheses."""), cadena[3])]
-        for k, (texto, linea) in enumerate(pasos):
+        # Glifos de las expresiones de la derecha:
+        #   cadena[0]: i | ( ( A T ) | j )    cadena[1]: i | ( j | A )
+        #   cadena[2]: ( j | A ) | i          cadena[3]: j | A | i
+        # Cada expresión nace de la anterior (la primera, del lado izquierdo, i|(A T)|j): lo que no cambia se
+        # copia al empezar la frase (o en la marca 'y') y lo que cambia se transforma cuando la voz describe el cambio (marca 'x').
+        # Parejas (glifo de origen, glifo de destino).
+        d = [linea[2] for linea in cadena]
+        origen = [cadena[0][0]] + d[:-1]
+        pasos = [(tr("""Como da igual el orden en que se aplican los selectores, <bookmark mark='y'/> podemos seleccionar primero la columna, <bookmark mark='x'/> y luego la fila.""",
+                     """Since the order in which the selectors are applied does not matter, <bookmark mark='y'/> we can select the column first, <bookmark mark='x'/> and then the row."""),
+                  [(2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8)],   # (A T)|j se desplaza
+                  [(0, 0), (1, 1), (2, 2), (5, 9)]),                  # i| se desplaza y los paréntesis se duplican
+                 (tr("""Por la definición de transpuesta, <bookmark mark='x'/> podemos sustituir esa columna por la fila de A con el mismo índice.""",
+                     """By the definition of the transpose, <bookmark mark='x'/> we can replace that column with the row of A with the same index."""),
+                  [(0, 0), (1, 1), (2, 2), (9, 6)],    # i|( ) se copia
+                  [(4, 5), (7, 4), (8, 3)]),           # (A T)|j pasa a ser j|A
+                 (tr("""Esa fila es un vector, así que <bookmark mark='x'/> podemos pasar el selector al otro lado.""",
+                     """That row is a vector, so <bookmark mark='x'/> we can move the selector to the other side."""),
+                  [(2, 0), (3, 1), (4, 2), (5, 3), (6, 4)],   # (j|A) se copia
+                  [(0, 6), (1, 5)]),                          # i| pasa al otro lado
+                 (tr("""Y como da igual el orden en que se aplican los selectores, podemos quitar los paréntesis.""",
+                     """And since the order in which the selectors are applied does not matter, we can drop the parentheses."""),
+                  [(1, 0), (2, 1), (3, 2), (5, 3), (6, 4)],   # j|A|i se copia; los paréntesis no aparecen
+                  [])]
+        for k, (texto, fijos, cambios) in enumerate(pasos):
             with self.voiceover(text=texto) as tracker:
                 self.play(FadeIn(reglas[k]), run_time=0.6)
-                self.play(Write(linea[1:]), run_time=1.2)
+                if "mark='y'" in texto:   # lo que no cambia, cuando la voz lo nombra
+                    self.wait_until_bookmark("y")
+                self.play(FadeIn(cadena[k][1]), *[TransformFromCopy(origen[k][i], d[k][j]) for i, j in fijos], run_time=1.2)
+                if cambios:
+                    self.wait_until_bookmark("x")
+                    self.play(*[TransformFromCopy(origen[k][i], d[k][j]) for i, j in cambios], run_time=1.5)
         
         with self.voiceover(text=tr("""Hemos demostrado que transponer intercambia los índices: <bookmark mark='f'/> el de la fila pasa a ser el de la columna, <bookmark mark='c'/> y el de la columna, el de la fila.""",
                                     """We have proved that transposing swaps the indices: <bookmark mark='f'/> the row index becomes the column index, <bookmark mark='c'/> and the column index becomes the row index.""")) as tracker:
@@ -585,17 +670,40 @@ class L01_V10_E05_Propiedades(MiEscenaConVoz):
                                invitacion_voz=tr("Pause el vídeo e intente demostrar que la transpuesta de la transpuesta de A es A.",
                                                  "Pause the video and try to prove that the transpose of the transpose of A is A."))
         
-        with self.voiceover(text=tr("""Empezamos por una componente cualquiera. <bookmark mark='a'/> Por la regla, podemos quitar la transposición exterior cambiando de lado los índices, <bookmark mark='b'/> y, por la misma regla, podemos quitar la otra, y los índices vuelven a su sitio.""",
-                                    """We start with any component. <bookmark mark='a'/> By the rule, we can remove the outer transposition by swapping the sides of the indices, <bookmark mark='b'/> and, by the same rule, we can remove the other one, and the indices go back to their places.""")) as tracker:
+        with self.voiceover(text=tr("""Empezamos por una componente cualquiera. <bookmark mark='a'/> Por la regla, podemos quitar la transposición exterior <bookmark mark='x1'/> cambiando de lado los índices. <bookmark mark='b'/> Por la misma regla, podemos quitar la transposición que queda, <bookmark mark='x2'/> y los índices vuelven a su sitio.""",
+                                    """We start with any component. <bookmark mark='a'/> By the rule, we can remove the outer transposition <bookmark mark='x1'/> by swapping the sides of the indices. <bookmark mark='b'/> By the same rule, we can remove the remaining transposition, <bookmark mark='x2'/> and the indices go back to their places.""")) as tracker:
+            # Glifos: i | ( ( A T ) T ) | j  =  j | ( A T ) | i  =  i | A | j
             self.play(FadeIn(doble[0]), run_time=1)
             self.wait_until_bookmark("a")
-            self.play(Write(doble[1:3]), run_time=1)
+            copia = copia_literal(self, doble[0], doble[2], doble[1])
+            self.wait_until_bookmark("x1")
+            transforma_copia(self, copia, doble[2], [(3, 2), (4, 3), (5, 4), (6, 5), (0, 7), (1, 6), (10, 0), (9, 1)], se_van=[2, 7, 8])
             self.wait_until_bookmark("b")
-            self.play(Write(doble[3:]), run_time=1)
+            copia = copia_literal(self, doble[2], doble[4], doble[3])
+            self.wait_until_bookmark("x2")
+            transforma_copia(self, copia, doble[4], [(3, 2), (0, 4), (1, 3), (7, 0), (6, 1)], se_van=[2, 4, 5])
         
         with self.voiceover(text=tr("""Las dos matrices tienen el mismo orden y las mismas componentes, así que son iguales.""",
                                     """Both matrices have the same order and the same components, so they are equal.""")) as tracker:
             self.play(Write(final), run_time=1.2)
+        
+        # Las columnas de A son las filas de la transpuesta (apartado (c) del ejercicio del libro), con lo recién probado.
+        # Glifos: A | i  =  ( ( A T ) T ) | i  =  i | ( A T )
+        self.play(FadeOut(doble), run_time=0.6)
+        with self.voiceover(text=tr("""Con esto vemos también que las columnas de A son las filas de su transpuesta.""",
+                                    """This also shows that the columns of A are the rows of its transpose.""")) as tracker:
+            self.play(FadeIn(cols[0]), run_time=1)
+        with self.voiceover(text=tr("""Como la transpuesta de la transpuesta es A, <bookmark mark='x'/> podemos escribir A como la transpuesta de su transpuesta.""",
+                                    """Since the transpose of the transpose is A, <bookmark mark='x'/> we can write A as the transpose of its transpose.""")) as tracker:
+            copia = copia_literal(self, cols[0], cols[2], cols[1])
+            self.play(Indicate(final, color=COLOR_ESCALAR, scale_factor=1.1), run_time=0.8)
+            self.wait_until_bookmark("x")
+            transforma_copia(self, copia, cols[2], [(0, 2), (1, 7), (2, 8)], aparecen=[0, 1, 3, 4, 5, 6])
+        with self.voiceover(text=tr("""Y por la definición de transpuesta, <bookmark mark='x'/> esa columna es la fila de la transpuesta con el mismo índice.""",
+                                    """And by the definition of the transpose, <bookmark mark='x'/> that column is the row of the transpose with the same index.""")) as tracker:
+            copia = copia_literal(self, cols[2], cols[4], cols[3])
+            self.wait_until_bookmark("x")
+            transforma_copia(self, copia, cols[4], [(1, 2), (2, 3), (3, 4), (4, 5), (8, 0), (7, 1)], se_van=[0, 5, 6])
         
         self.pausa_media()
 
@@ -605,10 +713,10 @@ class L01_V10_E06_Resumen(MiEscenaConVoz):
         self.creditos()
         cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         formulas = [r"\eleVL{a}{i}=\eleVR{a}{i}", r"\elemRp{\VectF{A}{i}}{j}=\elemLp{\VectC{A}{j}}{i}=\eleM{A}{i}{j}",
-                    r"\VectTC{A}{i}=\VectF{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
+                    r"\VectTC{A}{i}=\VectF{A}{i},\qquad \elemLp{\MatT{A}}{i}=\VectC{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
         rotulos = [tr("el selector, por cualquier lado de un vector", "the selector, on either side of a vector"),
-                   tr("da igual el orden", "the order does not matter"),
-                   tr("las columnas de la transpuesta son las filas", "the columns of the transpose are the rows"),
+                   tr("da igual el orden de selección", "the order of selection does not matter"),
+                   tr("las columnas de la transpuesta son las filas, y sus filas, las columnas", "the columns of the transpose are the rows, and its rows, the columns"),
                    tr("transponer = cambiar de lado los índices", "transposing = swapping the sides of the indices")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=44), Tex(r, font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.4).move_to([0, -0.5, 0])
@@ -619,8 +727,8 @@ class L01_V10_E06_Resumen(MiEscenaConVoz):
             self.wait_until_bookmark("o")
             self.play(FadeIn(filas[1]), run_time=0.8)
         
-        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
-                                    """The columns of the transpose of a matrix are the rows of the matrix. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
+        with self.voiceover(text=tr("""Las columnas de la transpuesta de una matriz son las filas de la matriz, y sus filas, las columnas. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y la transpuesta de la transpuesta es la matriz original.""",
+                                    """The columns of the transpose of a matrix are the rows of the matrix, and its rows, the columns. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and the transpose of the transpose is the original matrix.""")) as tracker:
             self.play(FadeIn(filas[2]), run_time=0.8)
             self.wait_until_bookmark("r")
             self.play(FadeIn(filas[3]), run_time=0.8)
