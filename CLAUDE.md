@@ -378,11 +378,18 @@ Escribir las frases nuevas ya en la forma buena.
 
 ## Reglas
 
-- **Copias de lo no versionado** (`lib/media` de los dos idiomas, mp4 y srt finales): solo en el
-  Synology. Mientras un vídeo no está publicado, su caché de voz (`lib/media/voiceovers`) es lo que
-  más importa: guarda las tomas aprobadas, y Azure no repite la misma toma. Tras publicar, se
-  puede borrar lo regenerable (`media/videos`, `Tex`, `images`); conviene conservar el mp4 y el srt
-  finales y la caché de voz, por si hay que retocar un vídeo publicado (V07 se retocó tras aprobarse).
+- **Copias de lo no versionado** (acordado con Marcos el 2026-10-30). `lib/media` de los dos
+  idiomas y los mp4/srt finales no van a git; se protegen solo en el Synology. Tras publicar un
+  vídeo en los dos idiomas:
+  - **Borrar** sus renders, que se regeneran: `lib/media/videos/<fichero>/`, y `Tex` e `images`
+    (en total eran 3,6 GB entre los dos idiomas el 2026-10-30).
+  - **Conservar** su caché de voz (`lib/media/voiceovers`, las entradas de `cache.json` y sus
+    mp3: ~250 MB por idioma para toda la serie) y el mp4 y el srt finales (YouTube solo devuelve
+    una versión recomprimida). La caché es lo único que no se regenera igual: Azure no repite la
+    misma toma, y algunas se eligieron entre varias tiradas. Sirve para retocar un vídeo publicado
+    sin volver a revisar el audio (V07 se retocó tras aprobarse).
+  - Copia extra opcional en el OneDrive de la UCM (decisión de Marcos), sobre todo de las cachés de
+    voz mientras los vídeos están en producción.
 
 - No hacer commit ni push sin que Marcos lo pida. Los `.mp4`, `media/`,
   `tmp/` y `music/` están ignorados y así deben seguir.
