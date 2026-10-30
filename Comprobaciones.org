@@ -1,0 +1,49 @@
+#+TITLE: Comprobaciones antes de dar por bueno un vídeo
+#+AUTHOR: Marcos Bujosa
+
+Lista que se repasa en cada vídeo nuevo y **cada vez que se retoca la narración**, antes de
+enseñárselo a Marcos. Las reglas de estilo están en =CLAUDE.md=; aquí solo lo que hay que
+comprobar.
+
+* Coherencia de la narración (desde 2026-10-29)
+
+Origen: en V09 (escena 3), un retoque del último repaso movió un punto y dejó la frase «Igual que
+dos vectores son distintos si sus listas de números son diferentes, la matriz A es una lista de
+tres vectores...», que no tiene sentido. Nadie lo vio hasta el HD aprobado. En la misma revisión
+salieron un «Por eso» que no se seguía de lo anterior (escena 5) y «este mismo criterio» (el de
+igualdad) para anunciar la definición de las operaciones (escena 4).
+
+Se hace sobre el guion en prosa (bloque =guion= del org, en los dos idiomas), leyéndolo **sin
+mirar la pantalla**, frase a frase:
+
+1. *Cada frase está completa.* Si empieza con una subordinada («Igual que...», «Como...»,
+   «Aunque...», «Si...»), la oración principal la cierra y dice lo que la subordinada anuncia.
+2. *Cada conector se justifica con la frase anterior.* «Por eso», «así que», «por tanto»: lo
+   anterior es la causa. «Es decir»: reformula lo anterior, sin añadir nada. «Aun así», «pero»,
+   «en cambio»: hay un contraste de verdad. «Del mismo modo»: el caso es paralelo.
+   «Efectivamente»: confirma algo que ya se ha dicho o supuesto.
+3. *Las referencias apuntan a algo que existe.* «Este criterio», «esos números», «esta tabla»: se
+   sabe a qué se refieren y es eso. «Como vimos en el vídeo anterior»: ese vídeo lo dijo (mirar su
+   guion). «Veamos...»: el vídeo lo enseña a continuación. «En el próximo vídeo...»: coincide con
+   el plan de =NotacionNacal.org=.
+4. *Lo que se afirma es cierto según el libro* (definiciones, órdenes, «por columnas», etc.).
+5. *El español y el inglés dicen lo mismo*, frase a frase.
+6. *Tras cualquier retoque* (mover un punto, partir o unir frases, quitar un trozo), releer la
+   frase resultante entera, con la anterior y la siguiente. El error de V09 nació así.
+7. *Lectura en frío:* pasar el guion de los dos idiomas a un revisor sin contexto (un subagente que
+   solo reciba el guion) con el encargo de señalar frases incompletas, conectores que no se siguen y
+   referencias sueltas. Lo que señale se comprueba aquí; no se corrige a ciegas.
+
+* Audio (tras sintetizar con Azure)
+
+- =tmp/pausas_raras.py CACHE [horas]=: silencios >= 300 ms sin puntuación.
+- =tmp/tomas_cortadas.py CACHE=: tomas que Azure corta a media palabra.
+- Letras sueltas: =tmp/mide_cache.py= (y las marcas de palabra de Azure); umbral práctico 150 ms.
+- Si una toma sale mal: tiradas (=tmp/tiradas.py=) y quedarse con la mejor (=CLAUDE.md=).
+
+* Imagen y montaje
+
+- Fotogramas alrededor de cada unión (bloque =fotogramas=).
+- Una tira de fotogramas en cada marca que espere la animación (marcas iniciales: =CLAUDE.md=).
+- Subtítulos: sin marcas ni comillas de letras; capítulos de la ficha con los «empieza en» del
+  último =montaje= (redondeando hacia abajo).
