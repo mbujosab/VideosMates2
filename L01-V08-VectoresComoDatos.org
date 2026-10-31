@@ -571,8 +571,9 @@ x0, x1 = paises.get_left()[0] - 0.15, d.get_right()[0] + 0.15
 om = omega("duda").to_corner(DR, buff=0.5).shift(0.8*UP)   # lleva la pregunta
 globo = bocadillo(tr(r"¿Qué país no creció\\ en 2003?", r"Which country did not\\ grow in 2003?"), om, ancho=3.4)
 
+# el inglés difiere del español publicado: la segunda frase decía dos veces lo mismo (Marcos, 2026-10-30)
 with self.voiceover(text=tr("""De manera similar podemos emplear un vector para mostrar datos económicos. Este vector recoge <bookmark mark='d'/> el crecimiento del PIB de cinco países en 2003: las cifras muestran el crecimiento porcentual de los países ese año.""",
-                            """In a similar way we can use a vector to show economic data. This vector holds <bookmark mark='d'/> the GDP growth of five countries in 2003: the figures show the percentage growth of the countries that year.""")) as tracker:
+                            """In a similar way we can use a vector to show economic data. This vector holds <bookmark mark='d'/> the percentage GDP growth of five countries in 2003.""")) as tracker:
     self.wait_until_bookmark("d")
     self.play(FadeIn(d), FadeIn(nombre), FadeIn(paises), run_time=1.2)
 

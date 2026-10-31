@@ -73,7 +73,10 @@ REPITEN dentro del vídeo y frases YA CONTADAS en el anterior.
 2. *Economía.* Si se puede decir con menos palabras sin perder nada, se acorta («Las columnas de
    la transpuesta... y sus filas, las columnas» → «La transposición transforma las filas en
    columnas, y viceversa»). Fuera conectores de relleno, apuntes laterales y frases que repiten la
-   anterior con otro énfasis.
+   anterior con otro énfasis. Tampoco dentro de una frase: que no diga dos veces lo mismo con otras
+   palabras (V08 en, escena 4: «This vector holds the GDP growth of five countries in 2003: the
+   figures show the percentage growth of the countries that year» → «This vector holds the
+   percentage GDP growth of five countries in 2003»).
 3. *Conectores justificados.* «Por eso», «así que», «por tanto»: lo anterior es la causa. «Es
    decir»: reformula, sin añadir. «Pero», «aun así», «en cambio»: hay un contraste de verdad
    (V10: «Pero aquí el selector actúa por la izquierda» no se oponía a nada). «Del mismo modo»: el
