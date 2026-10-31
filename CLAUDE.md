@@ -406,8 +406,8 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | Vídeo | Español      | Inglés       | Estado                                  |
 |-------+--------------+--------------+-----------------------------------------|
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
-| V08   | mié 28-10-26 | sáb 31-10-26 | es publicado el miércoles 28 (w62nh5CvJtM), con pantalla final; en con tres frases distintas del español (2026-10-30), HD listo para el sábado |
-| V09   | jue 05-11-26 | sáb 07-11-26 | HD rehecho el 2026-10-30 tras los retoques de coherencia; falta que Marcos lo vea |
+| V08   | mié 28-10-26 | sáb 31-10-26 | publicado (es w62nh5CvJtM, en C2QvSW4yX-Y el sábado 31 a las 14:34; en con tres frases distintas del español) |
+| V09   | jue 05-11-26 | sáb 07-11-26 | narración retocada y HD rehecho el 2026-10-31 (5:21 es, 5:13 en); aprobado por Marcos en los dos idiomas; falta su último repaso |
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.

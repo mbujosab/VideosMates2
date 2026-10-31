@@ -25,13 +25,13 @@ Noveno vídeo de la lección primera del curso de álgebra lineal.
 
 00:00 Título
 00:06 De la tabla del PIB a la matriz
-00:38 Un ejemplo: la posición de cada vector importa
-01:00 El orden de una matriz
-01:54 Igualdad de matrices
-02:14 Notación: corchetes, matriz columna y matriz nula
-03:30 Componentes, filas y columnas con el operador selector
-04:29 Resumen
-05:16 Créditos finales
+00:36 Un ejemplo: la posición de cada vector importa
+00:58 El orden de una matriz
+01:53 Igualdad de matrices
+02:11 Notación: corchetes, matriz columna y matriz nula
+03:27 Componentes, filas y columnas con el operador selector
+04:26 Resumen
+05:06 Créditos finales
 
 La tabla con el crecimiento del PIB de cinco países del vídeo anterior es una matriz: una lista de vectores, que son sus columnas. Con tres vectores de dos componentes formamos una matriz y vemos que, si los cambiamos de sitio en la lista, la matriz es otra. Una segunda matriz, hecha con las filas de la primera, tiene los mismos números pero es una lista distinta: eso es lo que indica el orden (filas por columnas). De ahí la igualdad de matrices, columna a columna. Después, la notación (corchetes alrededor de vectores separados por puntos y comas, la matriz columna, que no es un vector, y la matriz nula) y el operador selector, que por la izquierda selecciona una fila, por la derecha una columna y por los dos lados una componente.
 
@@ -56,13 +56,13 @@ Ninth video of the first lesson of the linear algebra course.
 
 00:00 Title
 00:06 From the GDP table to a matrix
-00:37 An example: the position of each vector matters
-00:59 The order of a matrix
-01:56 Equality of matrices
-02:16 Notation: square brackets, column matrix and zero matrix
-03:29 Components, rows and columns with the selector operator
-04:27 Key takeaways
-05:13 Closing credits
+00:35 An example: the position of each vector matters
+00:57 The order of a matrix
+01:54 Equality of matrices
+02:08 Notation: square brackets, column matrix and zero matrix
+03:22 Components, rows and columns with the selector operator
+04:18 Key takeaways
+04:58 Closing credits
 
 The table with the GDP growth of five countries from the previous video is a matrix: a list of vectors, which are its columns. With three vectors of two components we build a matrix and see that, if we move them to other places in the list, we get a different matrix. A second matrix, made from the rows of the first, has the same numbers but is a different list: that is what its order (rows by columns) tells us. Hence the equality of matrices, column by column. Then the notation (square brackets around vectors separated by semicolons, the column matrix, which is not a vector, and the zero matrix) and the selector operator, which selects a row from the left, a column from the right, and a component from both sides.
 

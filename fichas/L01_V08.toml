@@ -39,7 +39,7 @@ Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 """
 
 [en]
-# youtube = ""   # fill in after upload
+youtube = "C2QvSW4yX-Y"   # subido por la API el 2026-10-31
 video = "../videoMath2/L01_V08_VectorsAsData.mp4"
 subtitulos = "../videoMath2/L01_V08_VectorsAsData.srt"
 idioma = "en"
