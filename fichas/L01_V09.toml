@@ -11,7 +11,7 @@ privacidad = "public"   # public | unlisted | private
 # miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
-# youtube = ""   # rellenar tras subirlo
+youtube = "9w6gEv3XrTc"   # subido por la API el 2026-11-03
 video = "L01_V09_MatricesFilasYColumnas.mp4"
 subtitulos = "L01_V09_MatricesFilasYColumnas.srt"
 idioma = "es"

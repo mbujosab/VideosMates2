@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-11-03 mar 15:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 09: matrices</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 09: matrices</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org89dfbbe">1. Matrices - V09</a>
+<ul>
+<li><a href="#org70d209f">1.1. Guion (escenas)</a></li>
+<li><a href="#org88940cf">1.2. Ensamblado de los ficheros de python (uno por idioma)</a></li>
+<li><a href="#orgce4fe7a">1.3. Clases de las escenas</a></li>
+<li><a href="#orgbdd7a9f">1.4. Título del vídeo</a></li>
+<li><a href="#orge18ca6c">1.5. Utilidades del vídeo</a></li>
+<li><a href="#orgc6714cd">1.6. Código de cada escena</a>
+<ul>
+<li><a href="#org5436264">1.6.1. Portada (escena 0)</a></li>
+<li><a href="#org5c58433">1.6.2. Escena 1 - La tabla del PIB es una matriz; la definición</a></li>
+<li><a href="#orgc52d77a">1.6.3. Escena 2 - Ejemplos: la posición de cada vector importa</a></li>
+<li><a href="#org3997cad">1.6.4. Escena 3 - Listas con distinto número de vectores: el orden</a></li>
+<li><a href="#orgbd18144">1.6.5. Escena 4 - La igualdad de matrices</a></li>
+<li><a href="#org0c6dc10">1.6.6. Escena 5 - Notación</a></li>
+<li><a href="#org23ebdf4">1.6.7. Escena 6 - Resumen y anuncio de V10</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb91b3fb">2. Trozos comunes de código</a></li>
+<li><a href="#org9887f1a">3. Rodando: 1,2,3&hellip; ¡acción!</a>
+<ul>
+<li><a href="#orgef1da24">3.1. Generamos un fichero <code>mpeg</code> por cada escena</a></li>
+<li><a href="#org6225773">3.2. Montaje: concatenar las escenas, música de entrada y salida, subtítulos</a></li>
+<li><a href="#org881d916">3.3. Comprobar las uniones y los subtítulos</a></li>
+<li><a href="#org18564b1">3.4. Extraer el guion (la narración) para revisarlo</a></li>
+<li><a href="#org51a658b">3.5. Tangle desde la terminal (sin abrir Emacs)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org89dfbbe" class="outline-2">
+<h2 id="org89dfbbe"><span class="section-number-2">1.</span> Matrices - V09</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cubre las Secciones 1.4 a 1.4.3 del libro (matrices de
+\(\R[m\times n]\), filas, columnas y el resumen de la notación) y sigue
+las transparencias de clase de Marcos (<code>MatematicasII-SRC</code>, lección 1,
+transparencias "Matrices" y "Más notación"). Segunda versión
+(2026-10-18); la primera, más apoyada en los datos del PIB y con un
+apéndice sobre \(\R[0]\), está en <code>ZZ_Basura_L01_V09.org</code>. El apéndice
+pasa a un vídeo de ampliación aparte (L01 X01, véase el plan en
+<code>NotacionNacal.org</code>).
+</p>
+
+<p>
+Tercera versión (2026-10-18): paralela a V01 (Marcos), con su misma
+secuencia: definición (qué indica cada letra del superíndice), ejemplos
+(la posición importa; listas con distinto número de vectores, el orden;
+en consecuencia, la igualdad), notación (corchetes, columnas siempre en
+vertical, letras, matriz nula) y componentes (lo habitual, \(a_{ij}\), y el
+selector).
+</p>
+
+<ol class="org-ol">
+<li>enlace con V08: la tabla del PIB es una lista ordenada de vectores,
+una matriz; definición; las dos letras del superíndice;</li>
+<li>\(\Mat{A}=[\Vect{a};\Vect{b};\Vect{c};]\neq[\Vect{c};\Vect{b};\Vect{a};]\)
+(ejemplo de la transparencia, como \((1,2,3)\neq(3,2,1)\) en V01);</li>
+<li>\(\Mat{B}\) con las filas de \(\Mat{A}\): listas distintas (tres vectores
+de dos números frente a dos de tres); eso dice el orden;
+\(\Matdim{A}{2}{3}\neq\Matdim{B}{3}{2}\); Omega; \(\R[2\times 3]\);</li>
+<li>en consecuencia, la igualdad (mismo orden y columna a columna);</li>
+<li>notación: paréntesis y corchetes; columna entre corchetes = matriz
+columna (como \((3)\neq(3,)\)); mayúsculas en negrita; matriz nula;</li>
+<li>resumen y anuncio de V10 (la selección; hasta el 2026-11-03 había
+aquí dos escenas más, véase abajo).</li>
+</ol>
+
+<p>
+Cuarta versión (2026-11-02): Marcos vio V09 y V10 seguidos y la escena de
+componentes de V09 se solapaba con «primero la fila o primero la
+columna» de V10, que justificaba un vídeo después la notación sin
+paréntesis. Las escenas 1 y 2 de V10 pasan aquí (escena 7) y V10 queda
+solo con la transposición (<code>L01-V10-Transposicion.org</code>).
+</p>
+
+<p>
+Partición (2026-11-03, Marcos): los vídeos son una referencia en
+abierto y la selección con el operador selector necesita un vídeo propio
+al que enlazar desde todas las descripciones. Las escenas 6 («Filas y
+columnas») y 7 («Componentes») viven ahora en <code>L01-V10-Seleccion.org</code>
+(escenas 1 y 2), y este vídeo queda como «Matrices»: escenas 1-5 y un
+resumen con la definición y el orden, que anuncia la selección.
+</p>
+
+<p>
+En inglés, "orden" se traduce por <i>order</i> (Marcos, 2026-10-17: "the
+order of a matrix &#x2026; m by n"; además "of order n" = cuadrada, como en
+el libro) y "matriz columna" por <i>column matrix</i>.
+</p>
+
+<p>
+Este fichero es una <b>fuente única bilingüe</b> (véase la plantilla
+<code>LXX-VYY-NombreVideo.org</code>): genera <code>./lib/L01_V09_MatricesFilasYColumnas.py</code>
+(español) y <code>../videoMath2/lib/L01_V09_MatricesRowsAndColumns.py</code> (inglés).
+</p>
+</div>
+<div id="outline-container-org70d209f" class="outline-3">
+<h3 id="org70d209f"><span class="section-number-3">1.1.</span> Guion (escenas)</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Escena</th>
+<th scope="col" class="org-left">Contenido</th>
+<th scope="col" class="org-left">Pausas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Portada</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Enlace con V08; definición; las letras del superíndice</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">\([\Vect{a};\Vect{b};\Vect{c};]\neq[\Vect{c};\Vect{b};\Vect{a};]\): la posición importa</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">\(\Mat{B}\); listas distintas; el orden; Omega; \(\R[2\times 3]\)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Igualdad de matrices (consecuencia), columna a columna</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">Notación: corchetes, matriz columna, letras, matriz nula</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">Resumen (definición y orden) y anuncio de V10 (la selección)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org88940cf" class="outline-3">
+<h3 id="org88940cf"><span class="section-number-3">1.2.</span> Ensamblado de los ficheros de python (uno por idioma)</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 1 </span>Fichero de python del vídeo en español</label><pre class="src src-python" id="orgb35b57f"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "es")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 2 </span>Fichero de python del vídeo en inglés</label><pre class="src src-python" id="orga58d43f"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "en")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce4fe7a" class="outline-3">
+<h3 id="orgce4fe7a"><span class="section-number-3">1.3.</span> Clases de las escenas</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 3 </span>Vídeo completo y escenas separadas</label><pre class="src src-python" id="org04839b1"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_MatricesFilasYColumnas</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Primera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Segunda escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Tercera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Cuarta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Quinta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Sexta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        <span style="font-weight: bold;">self</span>.creditos_finales()
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E00_Portada</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E01_LaMatriz</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Primera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E02_Ejemplos</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Segunda escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E03_Orden</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Tercera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E04_Igualdad</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Cuarta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E05_Notacion</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Quinta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V09_E06_Resumen</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Sexta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ZCreditosFinales</span>(CreditosFinales):   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">manim solo renderiza clases definidas en este fichero
+</span>    <span style="font-weight: bold;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbdd7a9f" class="outline-3">
+<h3 id="orgbdd7a9f"><span class="section-number-3">1.4.</span> Título del vídeo</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+<pre class="src src-python" id="org7abe31d"><span style="font-weight: bold; font-style: italic;">TITULO</span> = tr(<span style="font-style: italic;">"Matrices"</span>, <span style="font-style: italic;">"Matrices"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge18ca6c" class="outline-3">
+<h3 id="orge18ca6c"><span class="section-number-3">1.5.</span> Utilidades del vídeo</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><code>vector(valores)</code> y <code>matriz(filas)</code>: un vector entre paréntesis y una
+matriz entre corchetes, con números de un decimal (o enteros con
+<code>decimales=0</code>); sus componentes se animan una a una
+(<code>get_entries()</code>, <code>get_rows()</code>, <code>get_columns()</code>).</li>
+<li><code>leyenda(rotulos, entradas, x_der)</code>: rótulos alineados a la derecha
+de <code>x_der</code>, cada uno a la altura de su entrada (los países).</li>
+<li><code>tabla_pib(centro)</code>: la matriz del PIB con los países a la izquierda
+y los años encima de cada columna.</li>
+<li><code>franja_fila</code> y <code>franja_columna</code>: franja amarilla translúcida sobre
+una fila o una columna (la de las filas, como en V08).</li>
+<li><code>con_nombre(tex, mob)</code>: la fórmula <code>tex</code> (p. ej. <code>"\Mat{A}</code>"<code>) a la
+  izquierda de la matriz o vector =mob</code>.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org64747f3"><span style="font-weight: bold; font-style: italic;">PAISES</span> = [tr(<span style="font-style: italic;">"Espa&#241;a"</span>, <span style="font-style: italic;">"Spain"</span>), tr(<span style="font-style: italic;">"Francia"</span>, <span style="font-style: italic;">"France"</span>), tr(<span style="font-style: italic;">"Alemania"</span>, <span style="font-style: italic;">"Germany"</span>),
+          tr(<span style="font-style: italic;">"Reino Unido"</span>, <span style="font-style: italic;">"United Kingdom"</span>), tr(<span style="font-style: italic;">"EE. UU."</span>, <span style="font-style: italic;">"USA"</span>)]
+<span style="font-weight: bold; font-style: italic;">PIB</span> = {2003: [2.9, 0.9, -0.2, 2.5, 1.8], 2004: [3.1, 2.0, 1.1, 3.2, 3.1],
+       2005: [3.3, 1.6, 0.7, 1.9, 3.7], 2006: [3.3, 2.0, 0.9, 1.5, 3.5]}   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Secci&#243;n 1.3 del libro (fuente: ICAE)
+</span><span style="font-weight: bold; font-style: italic;">ANYOS</span> = <span style="font-weight: bold;">list</span>(PIB)
+<span style="font-weight: bold; font-style: italic;">FILAS_PIB</span> = [[PIB[a][k] <span style="font-weight: bold;">for</span> a <span style="font-weight: bold;">in</span> ANYOS] <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(PAISES))]
+
+<span style="font-weight: bold; font-style: italic;">A_EJ</span> = [[4, -1, 0], [2, 2, 7]]      <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">transparencia "Matrices": a=(4,2,), b=(-1,2,), c=(0,7,)
+</span><span style="font-weight: bold; font-style: italic;">COLOR_FILA</span>, <span style="font-weight: bold; font-style: italic;">COLOR_COLUMNA</span> = COLOR_A, COLOR_B   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#237;ndice de la fila y de la columna (letras del super&#237;ndice)
+</span>
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">vector</span>(valores, color=WHITE, decimales=1, escala=0.8):
+    <span style="font-weight: bold; font-style: italic;">conf</span> = {<span style="font-style: italic;">"num_decimal_places"</span>: decimales, <span style="font-style: italic;">"group_with_commas"</span>: <span style="font-weight: bold; text-decoration: underline;">False</span>}
+    <span style="font-weight: bold;">if</span> decimales:
+        <span style="font-weight: bold; font-style: italic;">v</span> = DecimalMatrix([[x] <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> valores], left_bracket=<span style="font-style: italic;">"("</span>, right_bracket=<span style="font-style: italic;">")"</span>, v_buff=0.62, element_to_mobject_config=conf)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">v</span> = IntegerMatrix([[x] <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> valores], left_bracket=<span style="font-style: italic;">"("</span>, right_bracket=<span style="font-style: italic;">")"</span>, v_buff=0.62)
+    v.get_entries().set_color(color)
+    <span style="font-weight: bold;">return</span> v.scale(escala)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">matriz</span>(filas, color=WHITE, decimales=1, escala=0.8, h_buff=1.3):
+    <span style="font-weight: bold; font-style: italic;">conf</span> = {<span style="font-style: italic;">"num_decimal_places"</span>: decimales, <span style="font-style: italic;">"group_with_commas"</span>: <span style="font-weight: bold; text-decoration: underline;">False</span>}
+    <span style="font-weight: bold;">if</span> decimales:
+        <span style="font-weight: bold; font-style: italic;">m</span> = DecimalMatrix(filas, v_buff=0.62, h_buff=h_buff, element_to_mobject_config=conf)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">m</span> = IntegerMatrix(filas, v_buff=0.62, h_buff=h_buff)
+    m.get_entries().set_color(color)
+    <span style="font-weight: bold;">return</span> m.scale(escala)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">con_nombre</span>(tex, mob, font_size=48):
+    <span style="font-weight: bold;">return</span> VGroup(MathTex(tex, tex_template=myTemplate, font_size=font_size), mob).arrange(RIGHT, buff=0.2)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">leyenda</span>(rotulos, entradas, x_der, font_size=30):
+    <span style="font-style: italic;">"""R&#243;tulos alineados a la derecha de x_der, cada uno a la altura de su entrada."""</span>
+    <span style="font-weight: bold; font-style: italic;">filas</span> = VGroup(*[Tex(r, font_size=font_size) <span style="font-weight: bold;">for</span> r <span style="font-weight: bold;">in</span> rotulos])
+    <span style="font-weight: bold;">for</span> f, e <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(filas, entradas):
+        f.move_to([x_der - f.width/2, e.get_y(), 0])
+    <span style="font-weight: bold;">return</span> filas
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tabla_pib</span>(centro=ORIGIN, font_size=30):
+    <span style="font-style: italic;">"""La matriz del PIB: [0] la matriz, [1] los pa&#237;ses, [2] los a&#241;os (encima de cada columna)."""</span>
+    <span style="font-weight: bold; font-style: italic;">M</span> = matriz(FILAS_PIB).move_to(centro)
+    <span style="font-weight: bold; font-style: italic;">paises</span> = leyenda(PAISES, M.get_columns()[0], M.get_left()[0] - 0.3, font_size=font_size)
+    <span style="font-weight: bold; font-style: italic;">anyos</span> = VGroup(*[Tex(<span style="font-weight: bold;">str</span>(a), font_size=font_size, color=GRAY_B).next_to(col, UP, buff=0.35).set_y(M.get_top()[1] + 0.3)
+                     <span style="font-weight: bold;">for</span> a, col <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(ANYOS, M.get_columns())])
+    <span style="font-weight: bold;">return</span> VGroup(M, paises, anyos)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">franja_fila</span>(m, i, x0=<span style="font-weight: bold; text-decoration: underline;">None</span>, x1=<span style="font-weight: bold; text-decoration: underline;">None</span>, color=COLOR_ESCALAR):
+    <span style="font-style: italic;">"""Franja sobre la fila i (desde 0) de la matriz m, de x0 a x1 (por defecto, la matriz entera)."""</span>
+    <span style="font-weight: bold; font-style: italic;">x0</span> = m.get_left()[0] <span style="font-weight: bold;">if</span> x0 <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> x0
+    <span style="font-weight: bold; font-style: italic;">x1</span> = m.get_right()[0] <span style="font-weight: bold;">if</span> x1 <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> x1
+    <span style="font-weight: bold; font-style: italic;">y</span> = m.get_rows()[i].get_y()
+    <span style="font-weight: bold;">return</span> Rectangle(width=x1 - x0, height=0.45, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([(x0 + x1)/2, y, 0])
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">franja_columna</span>(m, j, color=COLOR_ESCALAR):
+    <span style="font-style: italic;">"""Franja sobre la columna j (desde 0) de la matriz m."""</span>
+    <span style="font-weight: bold; font-style: italic;">col</span> = m.get_columns()[j]
+    <span style="font-weight: bold;">return</span> Rectangle(width=col.width + 0.35, height=m.get_brackets()[0].height, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([col.get_x(), m.get_y(), 0])
+
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc6714cd" class="outline-3">
+<h3 id="orgc6714cd"><span class="section-number-3">1.6.</span> Código de cada escena</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org5436264" class="outline-4">
+<h4 id="org5436264"><span class="section-number-4">1.6.1.</span> Portada (escena 0)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+<pre class="src src-python" id="org5e47c4b"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">portada</span> = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(<span style="font-weight: bold;">min</span>(portada.width, config.frame_width*0.9))
+<span style="font-weight: bold;">self</span>.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+<span style="font-weight: bold;">self</span>.wait(4.5)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c58433" class="outline-4">
+<h4 id="org5c58433"><span class="section-number-4">1.6.2.</span> Escena 1 - La tabla del PIB es una matriz; la definición</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Empieza como acabó V08: la tabla del PIB. Una franja recorre sus
+columnas (cada una, un vector) y la voz la llama matriz. Después, la
+definición general y, como en V01 ("la R indica que los números son
+reales y el superíndice n, cuántos hay"), qué indica cada letra del
+superíndice.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org2003daa"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">titulo</span> = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+<span style="font-weight: bold; font-style: italic;">tabla</span> = tabla_pib([0.8, -0.6, 0], font_size=32)
+<span style="font-weight: bold; font-style: italic;">M</span> = tabla[0]
+<span style="font-weight: bold; font-style: italic;">defin</span> = Tex(tr(r<span style="font-style: italic;">"Una \emph{matriz} de "</span>, r<span style="font-style: italic;">"A \emph{matrix} in "</span>), r<span style="font-style: italic;">"$\R[m\times n]$"</span>,
+            tr(r<span style="font-style: italic;">" es una lista ordenada\\ de "</span>, r<span style="font-style: italic;">" is an ordered list\\ of "</span>), r<span style="font-style: italic;">"$n$"</span>,
+            tr(r<span style="font-style: italic;">" vectores de "</span>, r<span style="font-style: italic;">" vectors in "</span>), r<span style="font-style: italic;">"$\R[m]$"</span>, tr(r<span style="font-style: italic;">": sus \emph{columnas}."</span>, r<span style="font-style: italic;">": its \emph{columns}."</span>),
+            tex_template=myTemplate, font_size=48).move_to([0, 0.6, 0])
+<span style="font-weight: bold; font-style: italic;">m_s</span> = VGroup(defin[1][1], defin[5][1])    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la m del super&#237;ndice y la de R^m
+</span><span style="font-weight: bold; font-style: italic;">n_s</span> = VGroup(defin[1][3], defin[3][0])    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la n del super&#237;ndice y la de "n vectores"
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el v&#237;deo anterior pusimos uno al lado del otro los cuatro vectores con el crecimiento del PIB de cinco pa&#237;ses, y obtuvimos esta tabla de n&#250;meros."""</span>,
+                            <span style="font-style: italic;">"""In the previous video we placed side by side the four vectors with the GDP growth of five countries, and we got this table of numbers."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(titulo), run_time=1.2)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(tabla), run_time=1.5)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Cada columna de la tabla es uno de esos vectores."""</span>,
+                            <span style="font-style: italic;">"""Each column of the table is one of those vectors."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;">franja</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+    <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(4):
+        <span style="font-weight: bold; font-style: italic;">nueva</span> = franja_columna(M, j)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(nueva) <span style="font-weight: bold;">if</span> franja <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> ReplacementTransform(franja, nueva), run_time=0.5)
+        <span style="font-weight: bold; font-style: italic;">franja</span> = nueva
+    <span style="font-weight: bold;">self</span>.play(FadeOut(franja), run_time=0.4)
+
+<span style="font-weight: bold;">self</span>.wait(0.5)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una pausa antes de la definici&#243;n (Marcos, 2026-10-26)
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la definici&#243;n se dice una sola vez (antes: &#171;se llama matriz&#187; y &#171;En general, una matriz es...&#187;; Marcos, 2026-10-31)
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin &#171;, y esos vectores son sus columnas&#187;: ya lo dice la frase anterior (Marcos, 2026-11-02)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Una lista ordenada de vectores como esta, todos con el mismo n&#250;mero de componentes, &lt;bookmark mark='d'/&gt; se llama matriz."""</span>,
+                            <span style="font-style: italic;">"""An ordered list of vectors like this one, all with the same number of components, &lt;bookmark mark='d'/&gt; is called a matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(tabla[1]), FadeOut(tabla[2]), M.animate.move_to([0, -0.6, 0]), run_time=1)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">solo la matriz, en el centro
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeOut(M), run_time=0.6)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(defin), run_time=1)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el super&#237;ndice, la primera letra indica cu&#225;ntas componentes tiene cada vector, &lt;bookmark mark='n'/&gt; y la segunda, cu&#225;ntos vectores hay en la lista."""</span>,
+                            <span style="font-style: italic;">"""In the superscript, the first letter tells how many components each vector has, &lt;bookmark mark='n'/&gt; and the second, how many vectors there are in the list."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Indicate(m_s, color=COLOR_FILA, scale_factor=1.5), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(m_s.animate.set_color(COLOR_FILA), run_time=0.3)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Indicate devuelve el color original
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"n"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(n_s, color=COLOR_COLUMNA, scale_factor=1.5), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(n_s.animate.set_color(COLOR_COLUMNA), run_time=0.3)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc52d77a" class="outline-4">
+<h4 id="orgc52d77a"><span class="section-number-4">1.6.3.</span> Escena 2 - Ejemplos: la posición de cada vector importa</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+El primer ejemplo de V01, \((1,2,3)\neq(3,2,1)\), en versión matricial
+(transparencia "Matrices"): los tres vectores, escritos en vertical,
+pasan a ser las columnas de \(\Mat{A}\); con los vectores en otra posición
+la matriz es otra.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org891a730"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Ejemplos"</span>, <span style="font-style: italic;">"Examples"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">cols</span> = <span style="font-weight: bold;">list</span>(<span style="font-weight: bold;">zip</span>(*A_EJ))   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las columnas de A: a, b y c
+</span><span style="font-weight: bold; font-style: italic;">COLORES</span> = [COLOR_A, COLOR_B, COLOR_C]   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">un color por vector, para seguirlos cuando cambian de sitio
+</span><span style="font-weight: bold; font-style: italic;">vs</span> = [vector(c, color=k, decimales=0) <span style="font-weight: bold;">for</span> c, k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(cols, COLORES)]
+<span style="font-weight: bold; font-style: italic;">vecs</span> = VGroup(*[con_nombre(rf<span style="font-style: italic;">"\Vect{{</span>{l}<span style="font-style: italic;">}}="</span>, v) <span style="font-weight: bold;">for</span> l, v <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(<span style="font-style: italic;">"abc"</span>, vs)]).arrange(RIGHT, buff=1.0).move_to([0, 1.9, 0])
+<span style="font-weight: bold;">for</span> v, k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(vecs, COLORES):
+    v[0][0][0].set_color(k)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la letra del vector
+</span><span style="font-weight: bold; font-style: italic;">A</span> = matriz(A_EJ, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_A</span> = con_nombre(r<span style="font-style: italic;">"\Mat{A}=\begin{bmatrix}\Vect{a}; &amp; \Vect{b}; &amp; \Vect{c};\end{bmatrix}="</span>, A).move_to([0, -0.1, 0])
+<span style="font-weight: bold; font-style: italic;">ORDEN</span> = (1, 2, 0)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la nueva lista [b; c; a]: todos los vectores cambian de sitio
+</span><span style="font-weight: bold; font-style: italic;">POS</span> = {j: p <span style="font-weight: bold;">for</span> p, j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(ORDEN)}   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">posici&#243;n de cada vector en la nueva lista
+</span><span style="font-weight: bold; font-style: italic;">C</span> = matriz([[r[j] <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> ORDEN] <span style="font-weight: bold;">for</span> r <span style="font-weight: bold;">in</span> A_EJ], decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_C</span> = VGroup(MathTex(r<span style="font-style: italic;">"\begin{bmatrix}\Vect{b}; &amp; \Vect{c}; &amp; \Vect{a};\end{bmatrix}="</span>, tex_template=myTemplate, font_size=48), C,
+             MathTex(r<span style="font-style: italic;">"\neq\Mat{A}"</span>, tex_template=myTemplate, font_size=48)).arrange(RIGHT, buff=0.2).move_to([0, -2.4, 0])
+f_C.shift((f_A[1].get_x() - C.get_x())*RIGHT)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las dos matrices num&#233;ricas, una encima de la otra
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: f_A[0] = A = [ a ; b ; c ; ] =  (letras 3, 5, 7);  f_C[0] = [ b ; c ; a ; ] =  (letras 1, 3, 5)
+</span><span style="font-weight: bold; font-style: italic;">letras_A</span> = [f_A[0][0][3], f_A[0][0][5], f_A[0][0][7]]
+<span style="font-weight: bold; font-style: italic;">letras_C</span> = [f_C[0][0][1 + 2*POS[j]] <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(3)]   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">d&#243;nde acaba cada vector (a, b, c)
+</span><span style="font-weight: bold;">for</span> k, la, lc <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(COLORES, letras_A, letras_C):
+    la.set_color(k); lc.set_color(k)
+<span style="font-weight: bold;">for</span> j, k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(COLORES):
+    A.get_columns()[j].set_color(k)
+    C.get_columns()[POS[j]].set_color(k)
+<span style="font-weight: bold; font-style: italic;">resto_C</span> = VGroup(*[g <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> f_C[0][0] <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">all</span>(g <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> l <span style="font-weight: bold;">for</span> l <span style="font-weight: bold;">in</span> letras_C)], C.get_brackets(), f_C[2])
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Veamos un ejemplo con tres vectores de dos componentes."""</span>,
+                            <span style="font-style: italic;">"""Let us look at an example with three vectors of two components."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), LaggedStart(*[FadeIn(v) <span style="font-weight: bold;">for</span> v <span style="font-weight: bold;">in</span> vecs], lag_ratio=0.4), run_time=1.5)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con ellos formamos la matriz A, &lt;bookmark mark='l'/&gt; que es la lista de los tres vectores entre corchetes. &lt;bookmark mark='c'/&gt; Cada vector es una columna, y las columnas se escriben una al lado de la otra."""</span>,
+                            <span style="font-style: italic;">"""With them we build the matrix A, &lt;bookmark mark='l'/&gt; which is the list of the three vectors in square brackets. &lt;bookmark mark='c'/&gt; Each vector is a column, and the columns are written side by side."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(f_A[0]), run_time=1.2)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(A.get_brackets()), run_time=0.4)
+    <span style="font-weight: bold;">self</span>.play(LaggedStart(*[TransformFromCopy(v.get_entries(), col) <span style="font-weight: bold;">for</span> v, col <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(vs, A.get_columns())], lag_ratio=0.5), run_time=2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Como en los vectores, la posici&#243;n importa: &lt;bookmark mark='o'/&gt; si colocamos los vectores en otro lugar de la lista, obtenemos una matriz distinta."""</span>,
+                            <span style="font-style: italic;">"""As with vectors, position matters: &lt;bookmark mark='o'/&gt; if we place the vectors elsewhere in the list, we get a different matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"o"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(resto_C), run_time=0.6)
+    <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> ORDEN:   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">b, c y a, por el orden de la nueva lista: copias de las columnas de A
+</span>        <span style="font-weight: bold; font-style: italic;">fr</span> = franja_columna(A, j)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(fr), run_time=0.3)
+        <span style="font-weight: bold;">self</span>.play(TransformFromCopy(letras_A[j], letras_C[j]), TransformFromCopy(A.get_columns()[j], C.get_columns()[POS[j]]), run_time=0.9)
+        <span style="font-weight: bold;">self</span>.play(FadeOut(fr), run_time=0.2)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3997cad" class="outline-4">
+<h4 id="org3997cad"><span class="section-number-4">1.6.4.</span> Escena 3 - Listas con distinto número de vectores: el orden</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+El segundo ejemplo de V01 (\(\R[4]\) frente a \(\R[2]\)) en versión
+matricial. \(\Mat{B}\) se forma con dos vectores que llevan los números de
+las filas de \(\Mat{A}\) (semilla de la transposición). Omega cree que son
+la misma matriz (mismos números); son listas distintas de vectores
+(tres de dos números frente a dos de tres, como dos vectores con listas
+distintas), y eso es lo que dice el orden (Marcos, 2026-10-18). Al
+final, como "pertenece a \(\R[4]\) por ser una lista de cuatro números":
+\(\Mat{A}\in\R[2\times 3]\) y \(\Mat{B}\in\R[3\times 2]\). Al decir que son listas distintas,
+cada matriz se escribe como la lista de sus columnas, entre paréntesis y
+seguidas de ";", como en el libro (Marcos, 2026-10-18), y vuelve a su
+forma de tabla para hablar del orden.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orga4a68b7"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"El orden de una matriz"</span>, <span style="font-style: italic;">"The order of a matrix"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">A</span> = matriz(A_EJ, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_A</span> = con_nombre(r<span style="font-style: italic;">"\Mat{A}="</span>, A).move_to([-4.2, 0.9, 0])
+<span style="font-weight: bold; font-style: italic;">ll_f</span> = Brace(A, RIGHT, buff=0.1)
+<span style="font-weight: bold; font-style: italic;">ll_c</span> = Brace(A, UP, buff=0.15)
+<span style="font-weight: bold; font-style: italic;">r_f</span> = ll_f.get_tex(tr(r<span style="font-style: italic;">"2\ \text{filas}"</span>, r<span style="font-style: italic;">"2\ \text{rows}"</span>), buff=0.1).scale(0.8)
+<span style="font-weight: bold; font-style: italic;">r_c</span> = ll_c.get_tex(tr(r<span style="font-style: italic;">"3\ \text{columnas}"</span>, r<span style="font-style: italic;">"3\ \text{columns}"</span>), buff=0.1).scale(0.8)
+<span style="font-weight: bold; font-style: italic;">B</span> = matriz([<span style="font-weight: bold;">list</span>(f) <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(*A_EJ)], decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_B</span> = con_nombre(r<span style="font-style: italic;">"\Mat{B}="</span>, B).move_to([2.0, 0.9, 0])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">deja sitio a A escrita como lista
+</span><span style="font-weight: bold; font-style: italic;">llB_f</span> = Brace(B, RIGHT, buff=0.1)
+<span style="font-weight: bold; font-style: italic;">llB_c</span> = Brace(B, UP, buff=0.15)
+<span style="font-weight: bold; font-style: italic;">rB_f</span> = llB_f.get_tex(tr(r<span style="font-style: italic;">"3\ \text{filas}"</span>, r<span style="font-style: italic;">"3\ \text{rows}"</span>), buff=0.1).scale(0.8)
+<span style="font-weight: bold; font-style: italic;">rB_c</span> = llB_c.get_tex(tr(r<span style="font-style: italic;">"2\ \text{columnas}"</span>, r<span style="font-style: italic;">"2\ \text{columns}"</span>), buff=0.1).scale(0.8)
+<span style="font-weight: bold; font-style: italic;">dimA</span> = MathTex(r<span style="font-style: italic;">"\Matdim{A}{2}{3}"</span>, tex_template=myTemplate, font_size=56)
+<span style="font-weight: bold; font-style: italic;">dimB</span> = MathTex(r<span style="font-style: italic;">"\Matdim{B}{3}{2}"</span>, tex_template=myTemplate, font_size=56)
+<span style="font-weight: bold; font-style: italic;">neq</span> = MathTex(r<span style="font-style: italic;">"\neq"</span>, font_size=56)
+<span style="font-weight: bold; font-style: italic;">abajo</span> = VGroup(dimA, neq, dimB).arrange(RIGHT, buff=0.5).move_to([-1.2, -2.6, 0])
+<span style="font-weight: bold; font-style: italic;">conj</span> = MathTex(r<span style="font-style: italic;">"\Mat{A}\in\R[2\times 3]"</span>, r<span style="font-style: italic;">"\qquad"</span>, r<span style="font-style: italic;">"\Mat{B}\in\R[3\times 2]"</span>, tex_template=myTemplate, font_size=52).move_to(abajo)
+<span style="font-weight: bold; font-style: italic;">om</span> = omega(<span style="font-style: italic;">"duda"</span>, mira=LEFT, alto=1.4).to_corner(DR, buff=0.3)
+<span style="font-weight: bold; font-style: italic;">globo</span> = bocadillo(tr(r<span style="font-style: italic;">"&#191;La misma matriz?"</span>, r<span style="font-style: italic;">"The same matrix?"</span>), om, ancho=3.0)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">como_lista</span>(filas, m):
+    <span style="font-style: italic;">"""La matriz m escrita como en el libro: la lista de sus columnas, cada una entre par&#233;ntesis y seguida de ";"."""</span>
+    <span style="font-weight: bold; font-style: italic;">cols</span> = [r<span style="font-style: italic;">"\begin{pmatrix}"</span> + r<span style="font-style: italic;">"\\ "</span>.join(<span style="font-weight: bold;">str</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> c) + r<span style="font-style: italic;">"\end{pmatrix};"</span> <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(*filas)]
+    <span style="font-weight: bold; font-style: italic;">lista</span> = MathTex(r<span style="font-style: italic;">"\begin{bmatrix}"</span> + r<span style="font-style: italic;">" &amp; "</span>.join(cols) + r<span style="font-style: italic;">"\end{bmatrix}"</span>, font_size=40)
+    <span style="font-weight: bold;">return</span> lista.move_to(m, aligned_edge=LEFT)
+
+<span style="font-weight: bold; font-style: italic;">A_lista</span> = como_lista(A_EJ, A)
+<span style="font-weight: bold; font-style: italic;">B_lista</span> = como_lista([<span style="font-weight: bold;">list</span>(f) <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(*A_EJ)], B)
+<span style="font-weight: bold; font-style: italic;">A_de_nuevo</span>, <span style="font-weight: bold; font-style: italic;">B_de_nuevo</span> = A.copy(), B.copy()
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Formemos ahora otra matriz B con dos vectores de tres componentes: &lt;bookmark mark='x'/&gt; el primero lleva los n&#250;meros de la primera fila de A, &lt;bookmark mark='y'/&gt; y el segundo, los de la segunda.&lt;bookmark mark='v3'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""Now let us build another matrix B with two vectors of three components: &lt;bookmark mark='x'/&gt; the first one carries the numbers of the first row of A, &lt;bookmark mark='y'/&gt; and the second one, those of the second row.&lt;bookmark mark='v2'/&gt;"""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(f_A), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(f_B[0]), FadeIn(B.get_brackets()), run_time=0.8)
+    <span style="font-weight: bold;">for</span> i, marca <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>([<span style="font-style: italic;">"x"</span>, <span style="font-style: italic;">"y"</span>]):
+        <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold; font-style: italic;">fr</span> = franja_fila(A, i)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(fr), run_time=0.4)
+        <span style="font-weight: bold;">self</span>.play(TransformFromCopy(A.get_rows()[i], B.get_columns()[i]), run_time=1.2)
+        <span style="font-weight: bold;">self</span>.play(FadeOut(fr), run_time=0.3)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Omega cree que las matrices A y B son la misma, porque tienen los mismos n&#250;meros."""</span>,
+                            <span style="font-style: italic;">"""Omega thinks that the matrices A and B are the same, because they have the same numbers."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    entra(<span style="font-weight: bold;">self</span>, om)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(globo, scale=0.8), run_time=0.6)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Pero son listas distintas: &lt;bookmark mark='a'/&gt; la matriz A es una lista de tres vectores, con dos n&#250;meros cada uno, &lt;bookmark mark='b'/&gt; y B es una lista de solo dos vectores, con tres n&#250;meros cada uno.&lt;bookmark mark='v4'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""But they are different lists: &lt;bookmark mark='a'/&gt; the matrix A is a list of three vectors, with two numbers each, &lt;bookmark mark='b'/&gt; and B is a list of only two vectors, with three numbers each."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(globo), run_time=0.4)
+    cambia(<span style="font-weight: bold;">self</span>, om, <span style="font-style: italic;">"sorpresa"</span>)
+    <span style="font-weight: bold;">self</span>.wait(0.6)
+    cambia(<span style="font-weight: bold;">self</span>, om, <span style="font-style: italic;">"normal"</span>, mira=UL)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la sorpresa dura un instante; ahora atiende
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"a"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(A, A_lista), run_time=1.2)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la lista de vectores, como en el libro
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"b"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(B, B_lista), run_time=1.2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""El orden de una matriz indica precisamente esas cantidades. Primero, el n&#250;mero de componentes de sus vectores, &lt;bookmark mark='f'/&gt; que es el n&#250;mero de filas; despu&#233;s, el n&#250;mero de vectores, &lt;bookmark mark='c'/&gt; que es el n&#250;mero de columnas. &lt;bookmark mark='o'/&gt; La matriz A es de orden dos por tres, &lt;bookmark mark='p'/&gt; y B, de orden tres por dos."""</span>,
+                            <span style="font-style: italic;">"""The order of a matrix gives precisely those quantities. First, the number of components of its vectors, &lt;bookmark mark='f'/&gt; which is the number of rows; then, the number of vectors, &lt;bookmark mark='c'/&gt; which is the number of columns. &lt;bookmark mark='o'/&gt; The matrix A is of order two by three, &lt;bookmark mark='p'/&gt; and B is of order three by two."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(A_lista, A_de_nuevo), FadeTransform(B_lista, B_de_nuevo), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold;">self</span>.play(GrowFromCenter(ll_f), FadeIn(r_f), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(GrowFromCenter(ll_c), FadeIn(r_c), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"o"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(dimA), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    <span style="font-weight: bold;">self</span>.play(GrowFromCenter(llB_f), FadeIn(rB_f), GrowFromCenter(llB_c), FadeIn(rB_c), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.play(Write(dimB), run_time=1)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Dos matrices de distinto orden son necesariamente distintas."""</span>,
+                            <span style="font-style: italic;">"""Two matrices of different orders are necessarily different."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(neq), run_time=0.6)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Otra forma de indicar el orden de estas matrices es decir que &lt;bookmark mark='a'/&gt; A pertenece al conjunto de las matrices de dos por tres, &lt;bookmark mark='b'/&gt; y B, al de las matrices de tres por dos."""</span>,
+                            <span style="font-style: italic;">"""Another way to give the order of these matrices is to say that &lt;bookmark mark='a'/&gt; A belongs to the set of two-by-three matrices, &lt;bookmark mark='b'/&gt; and B to the set of three-by-two matrices."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"a"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la pertenencia de A, cuando la voz la nombra (Marcos, 2026-10-27)
+</span>    <span style="font-weight: bold;">self</span>.play(ReplacementTransform(VGroup(dimA, neq), conj[0]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"b"</span>)
+    <span style="font-weight: bold;">self</span>.play(ReplacementTransform(dimB, conj[2]), run_time=1)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbd18144" class="outline-4">
+<h4 id="orgbd18144"><span class="section-number-4">1.6.5.</span> Escena 4 - La igualdad de matrices</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<p>
+La igualdad, por analogía con la de vectores (no como consecuencia de la
+escena anterior, que confundía al oyente; Marcos, 2026-10-26): dos
+matrices son iguales si lo son sus listas, es decir, columnas iguales una a una. Una franja recorre las columnas de
+las dos a la vez mientras la voz las empareja; debajo, el criterio en
+palabras («columna j de A = columna j de B»): el selector por la derecha
+no se ha presentado aún (llega en la escena 6). La versión A|j = B|j, para
+V11, con las operaciones columna a columna (Marcos, 2026-10-30).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org2937f07"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">A</span> = matriz(A_EJ, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">B</span> = matriz(A_EJ, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">par</span> = VGroup(con_nombre(r<span style="font-style: italic;">"\Mat{A}="</span>, A), con_nombre(r<span style="font-style: italic;">"\Mat{B}="</span>, B)).arrange(RIGHT, buff=1.5).move_to([0, 1, 0])
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">en palabras: el selector por la derecha (A|j) no se presenta hasta la escena 6 (Marcos, 2026-10-30)
+</span><span style="font-weight: bold; font-style: italic;">criterio</span> = MathTex(r<span style="font-style: italic;">"\Mat{A}=\Mat{B}"</span>, r<span style="font-style: italic;">"\iff"</span>,
+                   tr(r<span style="font-style: italic;">"\text{columna } j \text{ de } \Mat{A}=\text{columna } j \text{ de } \Mat{B}"</span>,
+                      r<span style="font-style: italic;">"\text{column } j \text{ of } \Mat{A}=\text{column } j \text{ of } \Mat{B}"</span>),
+                   tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">rango</span> = MathTex(tr(r<span style="font-style: italic;">"\text{para } j=1:n"</span>, r<span style="font-style: italic;">"\text{for } j=1:n"</span>), tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">criterio</span> = VGroup(criterio, rango).arrange(DOWN, buff=0.3).move_to([0, -1.9, 0])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">en una l&#237;nea no cabe en espa&#241;ol
+</span><span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Igualdad de matrices"</span>, <span style="font-style: italic;">"Equality of matrices"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Como ocurre con los vectores, dos matrices son iguales si, y solo si, lo son sus respectivas listas. &lt;bookmark mark='c1'/&gt; La primera columna de una debe ser igual a la primera de la otra, &lt;bookmark mark='c2'/&gt; la segunda a la segunda, &lt;bookmark mark='c3'/&gt; y as&#237; con todas."""</span>,
+                            <span style="font-style: italic;">"""As with vectors, two matrices are equal if, and only if, their respective lists are equal. &lt;bookmark mark='c1'/&gt; Their first columns must be equal, &lt;bookmark mark='c2'/&gt; and so must the second ones, &lt;bookmark mark='c3'/&gt; and so on with all of them."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(par), run_time=1)
+    <span style="font-weight: bold; font-style: italic;">franjas</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+    <span style="font-weight: bold;">for</span> j, marca <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>([<span style="font-style: italic;">"c1"</span>, <span style="font-style: italic;">"c2"</span>, <span style="font-style: italic;">"c3"</span>]):
+        <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold; font-style: italic;">nuevas</span> = VGroup(franja_columna(A, j), franja_columna(B, j))
+        <span style="font-weight: bold;">self</span>.play(FadeIn(nuevas) <span style="font-weight: bold;">if</span> franjas <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> ReplacementTransform(franjas, nuevas), run_time=0.6)
+        <span style="font-weight: bold; font-style: italic;">franjas</span> = nuevas
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin el anuncio de que las operaciones se definir&#225;n columna a columna: se ver&#225; en su v&#237;deo (Marcos, 2026-10-31)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Es decir, columna a columna."""</span>,
+                            <span style="font-style: italic;">"""That is, column by column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(franjas), Write(criterio), run_time=1.5)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0c6dc10" class="outline-4">
+<h4 id="org0c6dc10"><span class="section-number-4">1.6.6.</span> Escena 5 - Notación</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<p>
+La escena de notación de V01, en versión matricial, un bloque cada vez:
+</p>
+<ol class="org-ol">
+<li>corchetes (la frase de la transparencia, en paralelo a los paréntesis
+de los vectores);</li>
+<li>con un vector daba igual escribirlo en horizontal o en vertical; en
+una matriz cada vector va en vertical, como columna. Por eso, con la
+escena despejada (Marcos, 2026-10-27): vector ≠ matriz columna ≠ matriz fila
+(lista de números, lista con un vector de R², lista de dos vectores de R¹;
+antes eran dos comparaciones que se repetían, la otra en ZZ<sub>Basura</sub>), escritas un instante como listas
+del libro, y \(3\neq(3,)\neq[3]\) (número, lista de números, lista de
+listas de números);</li>
+<li>letras mayúsculas en negrita y la matriz nula (se volverá a contar en
+V11 con las matrices especiales).</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org6f46053"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Notaci&#243;n"</span>, <span style="font-style: italic;">"Notation"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">1. par&#233;ntesis y corchetes
+</span><span style="font-weight: bold; font-style: italic;">v_ej</span> = con_nombre(r<span style="font-style: italic;">"\Vect{a}="</span>, MathTex(r<span style="font-style: italic;">"(4,\ 2,)"</span>, font_size=48))
+<span style="font-weight: bold; font-style: italic;">A1</span> = MathTex(r<span style="font-style: italic;">"\Mat{A}="</span>, r<span style="font-style: italic;">"\begin{bmatrix}\Vect{a}; &amp; \Vect{b}; &amp; \Vect{c};\end{bmatrix}"</span>, tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">bloque1</span> = VGroup(v_ej, A1).arrange(RIGHT, buff=2.0).move_to([0, 1.2, 0])
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2. horizontal o vertical; matriz columna, matriz fila y vector, escritos un instante como listas del libro
+</span><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">par</span>(izq, der, r_izq, r_der, x=0, y=1.0):
+    <span style="font-style: italic;">"""Dos objetos separados por "&#8800;", con un r&#243;tulo gris debajo de cada uno."""</span>
+    <span style="font-weight: bold; font-style: italic;">g</span> = VGroup(VGroup(izq, Tex(r_izq, font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3),
+               MathTex(r<span style="font-style: italic;">"\neq"</span>, font_size=48),
+               VGroup(der, Tex(r_der, font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3))
+    g.arrange(RIGHT, buff=0.6)
+    g[2][0].match_y(g[0][0]); g[2][1].match_y(g[0][1]); g[1].match_y(g[0][0])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">objetos y r&#243;tulos a la misma altura
+</span>    <span style="font-weight: bold;">return</span> g.move_to([x, y, 0])
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">como_lista</span>(tex, rotulo, sobre):
+    <span style="font-style: italic;">"""La forma de lista del libro, debajo de su objeto, con un r&#243;tulo amarillo."""</span>
+    <span style="font-weight: bold; font-style: italic;">l</span> = MathTex(tex, tex_template=myTemplate, font_size=44).next_to(sobre, DOWN, buff=1.0)
+    <span style="font-weight: bold;">return</span> VGroup(l, Tex(rotulo, tex_template=myTemplate, font_size=30, color=COLOR_ESCALAR).next_to(l, DOWN, buff=0.25))
+<span style="font-weight: bold; font-style: italic;">hv</span> = MathTex(r<span style="font-style: italic;">"(4,\ 2,)"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\begin{pmatrix}4\\ 2\end{pmatrix}"</span>, font_size=48)
+<span style="font-weight: bold; font-style: italic;">bloque_hv</span> = VGroup(hv, Tex(tr(<span style="font-style: italic;">"el mismo vector"</span>, <span style="font-style: italic;">"the same vector"</span>), font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3).move_to([0, -1.6, 0])
+<span style="font-weight: bold; font-style: italic;">COL</span> = r<span style="font-style: italic;">"\begin{bmatrix}4\\ 2\end{bmatrix}"</span>
+<span style="font-weight: bold; font-style: italic;">FIL</span> = r<span style="font-style: italic;">"\begin{bmatrix}4 &amp; 2\end{bmatrix}"</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">vector, matriz columna y matriz fila: tres objetos distintos (Marcos, 2026-10-27)
+</span><span style="font-weight: bold; font-style: italic;">vf</span> = par(MathTex(r<span style="font-style: italic;">"\begin{pmatrix}4\\ 2\end{pmatrix}"</span>, font_size=48), MathTex(COL, font_size=48), tr(<span style="font-style: italic;">"vector"</span>, <span style="font-style: italic;">"vector"</span>), tr(<span style="font-style: italic;">"matriz columna"</span>, <span style="font-style: italic;">"column matrix"</span>))
+<span style="font-weight: bold; font-style: italic;">vf_f</span> = VGroup(MathTex(r<span style="font-style: italic;">"\neq"</span>, font_size=48), VGroup(MathTex(FIL, font_size=48), Tex(tr(<span style="font-style: italic;">"matriz fila"</span>, <span style="font-style: italic;">"row matrix"</span>), font_size=30, color=GRAY_B)).arrange(DOWN, buff=0.3))
+vf_f.arrange(RIGHT, buff=0.6).next_to(vf, RIGHT, buff=0.6)
+vf_f[1][0].match_y(vf[0][0]); vf_f[1][1].match_y(vf[0][1]); vf_f[0].match_y(vf[0][0])
+vf.add(*vf_f).move_to([0, 1.0, 0])
+<span style="font-weight: bold; font-style: italic;">l_vec</span> = como_lista(r<span style="font-style: italic;">"(4,\ 2,)"</span>, tr(<span style="font-style: italic;">"dos n&#250;meros"</span>, <span style="font-style: italic;">"two numbers"</span>), vf[0])
+<span style="font-weight: bold; font-style: italic;">l_vc</span> = como_lista(r<span style="font-style: italic;">"\begin{bmatrix}\begin{pmatrix}4\\ 2\end{pmatrix};\end{bmatrix}"</span>, tr(r<span style="font-style: italic;">"un vector de $\R[2]$"</span>, r<span style="font-style: italic;">"one vector of $\R[2]$"</span>), vf[2])
+<span style="font-weight: bold; font-style: italic;">l_vf</span> = como_lista(r<span style="font-style: italic;">"\left[(4,);\ (2,);\right]"</span>, tr(r<span style="font-style: italic;">"dos vectores de $\R[1]$"</span>, r<span style="font-style: italic;">"two vectors of $\R[1]$"</span>), vf[4])
+<span style="font-weight: bold;">for</span> l <span style="font-weight: bold;">in</span> (l_vc, l_vf): l.match_y(l_vec)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">n&#250;mero, vector y matriz con un solo n&#250;mero
+</span><span style="font-weight: bold; font-style: italic;">tres</span> = MathTex(r<span style="font-style: italic;">"3"</span>, r<span style="font-style: italic;">"\neq"</span>, r<span style="font-style: italic;">"(3,)"</span>, r<span style="font-style: italic;">"\neq"</span>, r<span style="font-style: italic;">"\begin{bmatrix}3\end{bmatrix}"</span>, font_size=48)
+<span style="font-weight: bold; font-style: italic;">r_tr</span> = Tex(tr(<span style="font-style: italic;">"n&#250;mero, vector y matriz"</span>, <span style="font-style: italic;">"number, vector and matrix"</span>), font_size=30, color=GRAY_B)
+<span style="font-weight: bold; font-style: italic;">fila3</span> = VGroup(tres, r_tr).arrange(DOWN, buff=0.3).move_to([-0.4, -1.6, 0])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">hueco a la derecha para [(3,);]
+</span><span style="font-weight: bold; font-style: italic;">lista3</span> = MathTex(r<span style="font-style: italic;">"\begin{bmatrix}(3,);\end{bmatrix}"</span>, font_size=48).move_to(tres[4], aligned_edge=LEFT)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una lista con un vector que contiene un n&#250;mero
+</span><span style="font-weight: bold; font-style: italic;">tres_de_nuevo</span> = tres[4].copy()
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">3. letras y matriz nula
+</span><span style="font-weight: bold; font-style: italic;">letras</span> = MathTex(r<span style="font-style: italic;">"\Mat{A},\ \Mat{B},\ \Mat{C},\ \ldots"</span>, tex_template=myTemplate, font_size=56).move_to([0, 1.2, 0])
+<span style="font-weight: bold; font-style: italic;">ceros</span> = VGroup(*[con_nombre(r<span style="font-style: italic;">"\Mat{0}="</span>, matriz([[0]*n <span style="font-weight: bold;">for</span> _ <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(m)], decimales=0, h_buff=0.8))
+                 <span style="font-weight: bold;">for</span> m, n <span style="font-weight: bold;">in</span> [(2, 2), (2, 3), (3, 2)]]).arrange(RIGHT, buff=0.8).move_to([0, -1.5, 0])
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el mismo cero con su orden debajo, para cuando el contexto no lo deja claro
+</span><span style="font-weight: bold; font-style: italic;">ceros_dim</span> = [MathTex(rf<span style="font-style: italic;">"\Matdim{{0}}{{</span>{m}<span style="font-style: italic;">}}{{</span>{n}<span style="font-style: italic;">}}"</span>, tex_template=myTemplate, font_size=48) <span style="font-weight: bold;">for</span> m, n <span style="font-weight: bold;">in</span> [(2, 2), (2, 3), (3, 2)]]
+<span style="font-weight: bold;">for</span> c, d <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(ceros, ceros_dim):
+    <span style="font-weight: bold; font-style: italic;">cero</span> = <span style="font-weight: bold;">max</span>(d[0], key=<span style="font-weight: bold;">lambda</span> g: g.height)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el cero en negrita (el orden va en peque&#241;o)
+</span>    d.shift(c[0][0][0].get_center() - cero.get_center())
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Repasemos la notaci&#243;n que ya conocemos. Unos par&#233;ntesis alrededor de una lista de n&#250;meros, &lt;bookmark mark='cm'/&gt; cada uno seguido de una coma, denotan un vector, &lt;bookmark mark='k'/&gt; y unos corchetes alrededor de una lista de vectores, &lt;bookmark mark='pc'/&gt; cada uno seguido de un punto y coma, denotan una matriz."""</span>,
+                            <span style="font-style: italic;">"""Let us review the notation we already know. Parentheses around a list of numbers, &lt;bookmark mark='cm'/&gt; each followed by a comma, denote a vector, &lt;bookmark mark='k'/&gt; and square brackets around a list of vectors, &lt;bookmark mark='pc'/&gt; each followed by a semicolon, denote a matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(v_ej), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"cm"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(VGroup(v_ej[1][0][2], v_ej[1][0][4]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"k"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(A1), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"pc"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(VGroup(*[A1[1][k] <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (2, 4, 6)]), color=COLOR_ESCALAR, scale_factor=2), run_time=1)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Un vector se puede escribir en horizontal o en vertical. &lt;bookmark mark='c'/&gt; En una matriz, en cambio, cada vector de la lista se escribe en vertical, como una columna.&lt;bookmark mark='v2'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""A vector can be written horizontally or vertically. &lt;bookmark mark='c'/&gt; In a matrix, however, each vector in the list is written vertically, as a column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(bloque_hv), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(A1[1], color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la escena se despeja para comparar (Marcos, 2026-10-27)
+</span><span style="font-weight: bold;">self</span>.play(FadeOut(VGroup(bloque1, bloque_hv)), run_time=0.8)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Aunque un vector, una matriz columna y una matriz fila tengan los mismos n&#250;meros, son objetos distintos. &lt;bookmark mark='v'/&gt; El vector es una lista de n n&#250;meros; &lt;bookmark mark='c'/&gt; la matriz columna, una lista con un solo vector; &lt;bookmark mark='f'/&gt; y la matriz fila, una lista de n vectores de una componente."""</span>,
+                            <span style="font-style: italic;">"""Even if a vector, a column matrix and a row matrix have the same numbers, they are different objects. &lt;bookmark mark='v'/&gt; The vector is a list of n numbers; &lt;bookmark mark='c'/&gt; the column matrix, a list with a single vector; &lt;bookmark mark='f'/&gt; and the row matrix, a list of n vectors of one component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(vf), run_time=1)
+    <span style="font-weight: bold;">for</span> marca, k, l <span style="font-weight: bold;">in</span> [(<span style="font-style: italic;">"v"</span>, 0, l_vec), (<span style="font-style: italic;">"c"</span>, 2, l_vc), (<span style="font-style: italic;">"f"</span>, 4, l_vf)]:
+        <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold;">self</span>.play(TransformFromCopy(vf[k][0], l[0]), FadeIn(l[1]), run_time=0.8)
+
+<span style="font-weight: bold;">self</span>.wait(2.5)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tiempo para mirar las listas antes de quitarlas (Marcos, 2026-10-27)
+</span><span style="font-weight: bold;">self</span>.play(FadeOut(VGroup(l_vec, l_vc, l_vf)), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Del mismo modo, un n&#250;mero, un vector con un solo n&#250;mero y una matriz con un solo n&#250;mero son objetos distintos: &lt;bookmark mark='n'/&gt; un n&#250;mero, &lt;bookmark mark='l'/&gt; una lista de n&#250;meros, &lt;bookmark mark='ll'/&gt; y una lista de listas de n&#250;meros.&lt;bookmark mark='v2'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""Likewise, a number, a vector with a single number and a matrix with a single number are different objects: &lt;bookmark mark='n'/&gt; a number, &lt;bookmark mark='l'/&gt; a list of numbers, &lt;bookmark mark='ll'/&gt; and a list of lists of numbers."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fila3), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"n"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(tres[0], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.7)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(tres[2], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.7)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"ll"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(tres[4], lista3), run_time=1)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la matriz, como lista con un vector de un n&#250;mero
+</span>
+<span style="font-weight: bold;">self</span>.play(FadeTransform(lista3, tres_de_nuevo), run_time=1)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">vuelve a su forma habitual
+</span><span style="font-weight: bold;">self</span>.wait(0.5)
+<span style="font-weight: bold;">self</span>.play(FadeOut(VGroup(vf, fila3, tres_de_nuevo)), run_time=0.8)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Para denotar matrices usaremos letras may&#250;sculas en negrita."""</span>,
+                            <span style="font-style: italic;">"""To denote matrices we will use bold capital letters."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(letras), run_time=1)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Un cero en negrita denota una matriz cuyas componentes son todas nulas. &lt;bookmark mark='o'/&gt; Como con el vector nulo, frecuentemente su orden se deduce del contexto. &lt;bookmark mark='e'/&gt; Cuando no est&#225; claro, se puede indicar expl&#237;citamente debajo del cero.&lt;bookmark mark='v2'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""A bold zero denotes a matrix whose components are all zero. &lt;bookmark mark='o'/&gt; As with the zero vector, its order can often be deduced from the context. &lt;bookmark mark='e'/&gt; When it is not clear, it can be shown explicitly under the zero."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(ceros[0]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"o"</span>)
+    <span style="font-weight: bold;">self</span>.play(LaggedStart(*[FadeIn(c) <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> ceros[1:]], lag_ratio=0.5), run_time=1.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"e"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[ReplacementTransform(c[0][0][0], d) <span style="font-weight: bold;">for</span> c, d <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(ceros, ceros_dim)], run_time=1.2)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org23ebdf4" class="outline-4">
+<h4 id="org23ebdf4"><span class="section-number-4">1.6.7.</span> Escena 6 - Resumen y anuncio de V10</h4>
+<div class="outline-text-4" id="text-1-6-7">
+<p>
+La definición y el orden. Hasta el 2026-11-03 (escena 8) llevaba además
+la tabla de notación (fila, componente y columna) y el orden de
+selección, que pasaron al resumen de <code>L01-V10-Seleccion.org</code>. Anuncio
+del siguiente vídeo (la selección).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org716dc2d"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Resumen"</span>, <span style="font-style: italic;">"Key Takeaways"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">defin</span> = Tex(tr(r<span style="font-style: italic;">"Matriz de "</span>, r<span style="font-style: italic;">"Matrix in "</span>), r<span style="font-style: italic;">"$\R[m\times n]$"</span>, tr(r<span style="font-style: italic;">": "</span>, r<span style="font-style: italic;">": an "</span>), tr(r<span style="font-style: italic;">"lista ordenada"</span>, r<span style="font-style: italic;">"ordered list"</span>), tr(r<span style="font-style: italic;">" de "</span>, r<span style="font-style: italic;">" of "</span>),
+            r<span style="font-style: italic;">"$n$"</span>, tr(r<span style="font-style: italic;">" vectores de "</span>, r<span style="font-style: italic;">" vectors in "</span>), r<span style="font-style: italic;">"$\R[m]$"</span>, tr(r<span style="font-style: italic;">"\\ (sus columnas), entre corchetes."</span>, r<span style="font-style: italic;">"\\ (its columns), in square brackets."</span>),
+            tex_template=myTemplate, font_size=34)
+<span style="font-weight: bold; font-style: italic;">orden</span> = Tex(tr(r<span style="font-style: italic;">"Orden "</span>, r<span style="font-style: italic;">"Order "</span>), r<span style="font-style: italic;">"$m\times n$"</span>, tr(r<span style="font-style: italic;">": primero las filas, despu&#233;s las columnas."</span>, r<span style="font-style: italic;">": rows first, then columns."</span>),
+            tex_template=myTemplate, font_size=34)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: orden[1] = m, &#215;, n
+</span><span style="font-weight: bold; font-style: italic;">bloque</span> = VGroup(defin, orden).arrange(DOWN, buff=0.6).move_to([0, 0.6, 0])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">dos l&#237;neas: en medio del hueco bajo la cabecera
+</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">se&#241;ales en la definici&#243;n (Marcos, 2026-10-27): un efecto cada vez, cuando la voz lo nombra
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Resumamos. Una matriz es una &lt;bookmark mark='l'/&gt; lista ordenada &lt;bookmark mark='n'/&gt; de vectores &lt;bookmark mark='m'/&gt; con el mismo n&#250;mero de componentes; dichos vectores son las columnas de la matriz. La lista de vectores se escribe entre corchetes. &lt;bookmark mark='o'/&gt; El orden de la matriz indica &lt;bookmark mark='f'/&gt; el n&#250;mero de filas primero &lt;bookmark mark='c'/&gt; y el n&#250;mero de columnas despu&#233;s.&lt;bookmark mark='v3'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""Let us sum up. A matrix is an &lt;bookmark mark='l'/&gt; ordered list &lt;bookmark mark='n'/&gt; of vectors &lt;bookmark mark='m'/&gt; with the same number of components; these vectors are the columns of the matrix. The list of vectors is written in square brackets. &lt;bookmark mark='o'/&gt; The order of the matrix gives &lt;bookmark mark='f'/&gt; the number of rows first &lt;bookmark mark='c'/&gt; and the number of columns second."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(defin), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l"</span>)
+    <span style="font-weight: bold;">self</span>.play(Circumscribe(defin[3], color=COLOR_ESCALAR, buff=0.08), run_time=1)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(los Indicate de m y n en la definici&#243;n se quitaron: no daban el efecto buscado; Marcos, 2026-10-27)
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"o"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(orden), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(orden[1][0], color=COLOR_FILA, scale_factor=1.8), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(orden[1][2], color=COLOR_COLUMNA, scale_factor=1.8), run_time=1)
+
+<span style="font-weight: bold;">self</span>.wait(0.5)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una pausa antes de anunciar el pr&#243;ximo v&#237;deo, como en V08
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el anuncio solo anticipa: explicar el resultado lo dejaba incompleto o pisaba el v&#237;deo siguiente (Marcos, 2026-10-31)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el pr&#243;ximo v&#237;deo veremos la selecci&#243;n de filas, columnas y componentes de una matriz."""</span>,
+                            <span style="font-style: italic;">"""In the next video we will see the selection of rows, columns and components of a matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">pass</span>
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb91b3fb" class="outline-2">
+<h2 id="orgb91b3fb"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Viven en <code>Comunes.org</code>, que se tangle a <code>lib/vm2comun.py</code> (y a
+<code>../videoMath2/lib/vm2comun.py</code>): carga de librerías, <code>LANG</code> y <code>tr()</code>,
+voces de Azure, código de colores, <code>myTemplate</code>, <code>MiEscenaConVoz</code> (con
+<code>voiceover</code>, <code>anuncia_regla=/=destaca_regla</code>, créditos, tarjeta de
+pausa), la pantalla de créditos, Omega y los vectores de \(\mathbb{R}^2\)
+y \(\mathbb{R}^3\). Si <code>vm2comun.py</code> no existe o está anticuado, tangle
+primero <code>Comunes.org</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org9887f1a" class="outline-2">
+<h2 id="org9887f1a"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgef1da24" class="outline-3">
+<h3 id="orgef1da24"><span class="section-number-3">3.1.</span> Generamos un fichero <code>mpeg</code> por cada escena</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-bash" id="orgbbdbbab">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -pql $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org279a1fe">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -qh $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6225773" class="outline-3">
+<h3 id="org6225773"><span class="section-number-3">3.2.</span> Montaje: concatenar las escenas, música de entrada y salida, subtítulos</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen <code>volumen</code>) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena <code>cierre</code> (bajo la voz, con
+<code>volumen_voz</code>), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con <code>loudnorm</code> en una pasada, que
+subía el volumen poco a poco al empezar). Los <code>.srt</code> de las escenas se desplazan y se
+funden en un único <code>video.srt</code> junto al mp4 (para subirlo a YouTube).
+</p>
+
+<p>
+<code>escenas</code> es la lista ordenada de clases; <code>cierre</code> la escena en la que
+vuelve la música (el resumen). El mp4 y el srt finales quedan en la raíz del repositorio del
+idioma.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orga0db71b"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">LC_ALL</span>=C   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">decimales con punto para bc y printf
+</span>[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+<span style="font-weight: bold; font-style: italic;">dir</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/lib/media/videos/$<span style="font-weight: bold; font-style: italic;">fichero</span>/$<span style="font-weight: bold; font-style: italic;">calidad</span>
+<span style="font-weight: bold; font-style: italic;">tmp</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/$<span style="font-weight: bold; font-style: italic;">video</span>; mkdir -p $<span style="font-weight: bold; font-style: italic;">tmp</span>; rm -f $<span style="font-weight: bold; font-style: italic;">tmp</span>/seg_*.mp4
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">1. Un segmento por escena, con audio y v&#237;deo de la misma duraci&#243;n exacta
+</span><span style="font-weight: bold; font-style: italic;">i</span>=0; <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">T</span>=0; <span style="font-weight: bold; font-style: italic;">T0</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">Tc</span>=<span style="font-style: italic;">""</span>
+<span style="font-weight: bold;">for</span> esc<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">escenas</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold; font-style: italic;">seg</span>=$(<span style="font-weight: bold;">printf "%s/seg_%02d.mp4" $tmp $i</span>)
+  <span style="font-weight: bold; font-style: italic;">dur</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold; font-style: italic;">fps</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold;">if</span> ffprobe -loglevel error -select_streams a -show_entries <span style="font-weight: bold; font-style: italic;">stream</span>=codec_type -of <span style="font-weight: bold; font-style: italic;">csv</span>=<span style="font-weight: bold; font-style: italic;">p</span>=0 $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 | grep -q audio; <span style="font-weight: bold;">then</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -af <span style="font-style: italic;">"aresample=48000,apad"</span> -ac 2 -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">else</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -f lavfi -i <span style="font-weight: bold; font-style: italic;">anullsrc</span>=<span style="font-weight: bold; font-style: italic;">r</span>=48000:<span style="font-weight: bold; font-style: italic;">cl</span>=stereo -map 0:v -map 1:a -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">fi</span>
+  <span style="font-weight: bold; font-style: italic;">d</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg</span>)
+  <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">"$offsets $T"</span>; [ <span style="font-style: italic;">"$esc"</span> = <span style="font-style: italic;">"$cierre"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"%2d  %-55s %8.3f s  (empieza en %8.3f)\n"</span> $<span style="font-weight: bold; font-style: italic;">i</span> $<span style="font-weight: bold; font-style: italic;">esc</span> $<span style="font-weight: bold; font-style: italic;">d</span> $<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold; font-style: italic;">T</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T+$d"</span>); [ -z <span style="font-style: italic;">"$T0"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">T0</span>=$<span style="font-weight: bold; font-style: italic;">d</span>; <span style="font-weight: bold; font-style: italic;">dl</span>=$<span style="font-weight: bold; font-style: italic;">d</span>
+  <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">"$lista $seg"</span>; <span style="font-weight: bold; font-style: italic;">i</span>=$(<span style="font-weight: bold;">(i+1</span>))
+<span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">n</span>=$<span style="font-weight: bold; font-style: italic;">i</span>; <span style="font-weight: bold; font-style: italic;">Tl</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$dl"</span>); [ -z <span style="font-style: italic;">"$Tc"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">Tl</span>
+<span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Duraci&#243;n total %.3f s; m&#250;sica hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (cr&#233;ditos)\n"</span> $<span style="font-weight: bold; font-style: italic;">T</span> $<span style="font-weight: bold; font-style: italic;">T0</span> $<span style="font-weight: bold; font-style: italic;">Tc</span> $<span style="font-weight: bold; font-style: italic;">Tl</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2. Concatenaci&#243;n recodificada, voz normalizada, m&#250;sica de entrada y salida, fundido final
+</span><span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">k</span>=0
+<span style="font-weight: bold;">for</span> seg<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">lista</span>; <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">"$inputs -i $seg"</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">"$fc[$k:v][$k:a]"</span>; <span style="font-weight: bold; font-style: italic;">k</span>=$(<span style="font-weight: bold;">(k+1</span>)); <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB m&#225;s baja.)
+</span><span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold;">for</span> k<span style="font-weight: bold;"> in</span> $(<span style="font-weight: bold;">seq 0 $((n-1</span>))); <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">"$ia[$k:a]"</span>; <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">I</span>=$(<span style="font-weight: bold;">ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2&gt;&amp;1 | awk '$1=="I:"{v=$2} END{print v}'</span>)
+<span style="font-weight: bold; font-style: italic;">ganancia</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "-16 - ($I</span><span style="font-style: italic;">)"</span>); <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Voz: %s LUFS; ganancia %.2f dB\n"</span> $<span style="font-weight: bold; font-style: italic;">I</span> $<span style="font-weight: bold; font-style: italic;">ganancia</span>
+<span style="font-weight: bold; font-style: italic;">fin_m1</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T0+5"</span>); <span style="font-weight: bold; font-style: italic;">tfade</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-6"</span>)
+<span style="font-weight: bold; font-style: italic;">dur_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$Tl-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m2</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tc*1000"</span>)); <span style="font-weight: bold; font-style: italic;">fade_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$dur_m2-1"</span>)
+<span style="font-weight: bold; font-style: italic;">fin_m3</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m3</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tl*1000"</span>))
+ffmpeg -loglevel error -y $<span style="font-weight: bold; font-style: italic;">inputs</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -filter_complex <span style="font-style: italic;">"
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$(</span><span style="font-weight: bold;">(n+1</span><span style="font-style: italic;">)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$(</span><span style="font-weight: bold;">(n+2</span><span style="font-style: italic;">)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]"</span> <span style="font-style: italic;">\</span>
+  -map <span style="font-style: italic;">"[v]"</span> -map <span style="font-style: italic;">"[a]"</span> -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"V&#237;deo: $raiz/$video.mp4"</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">3. Subt&#237;tulos: desplazar el srt de cada escena y fundirlos en uno
+</span><span style="font-weight: bold; font-style: italic;">ESCENAS</span>=<span style="font-style: italic;">"$escenas"</span> <span style="font-weight: bold; font-style: italic;">OFFSETS</span>=<span style="font-style: italic;">"$offsets"</span> python3 - <span style="font-style: italic;">"$dir"</span> <span style="font-style: italic;">"$raiz/$video.srt"</span> &lt;&lt;<span style="font-style: italic;">'EOF'</span><span style="font-weight: bold;">
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) &lt; 3 or "--&gt;" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("--&gt;")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --&gt; {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subt&#237;tulos: {salida} ({k-1} entradas)")
+EOF</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org881d916" class="outline-3">
+<h3 id="org881d916"><span class="section-number-3">3.3.</span> Comprobar las uniones y los subtítulos</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime <a href="#orga0db71b">No description for this link</a>) para mirar que no haya parones ni desfases.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org829d11f">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+mkdir -p $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+<span style="font-weight: bold;">for</span> t<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">tiempos</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold;">for</span> dt<span style="font-weight: bold;"> in</span> -0.1 0.1; <span style="font-weight: bold;">do</span>
+    <span style="font-weight: bold; font-style: italic;">ti</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$t+$dt"</span>); [ $(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$ti &lt; 0"</span>) = 1 ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">ti</span>=0
+    ffmpeg -loglevel error -y -ss $<span style="font-weight: bold; font-style: italic;">ti</span> -i $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4 -frames:v 1 $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas/$(<span style="font-weight: bold;">printf "%08.2f" $ti</span>).png
+  <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold;">done</span>
+ls $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org18564b1" class="outline-3">
+<h3 id="org18564b1"><span class="section-number-3">3.4.</span> Extraer el guion (la narración) para revisarlo</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Recorre el fichero de python y saca, escena por escena, los textos
+<code>tr(...)</code> del idioma pedido: en prosa la narración (los que están dentro
+de <code>self.voiceover</code>) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en <code>LANG</code>, lee siempre el fichero español (<code>./lib/</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgf06f4cd"><span style="font-weight: bold;">import</span> ast, textwrap
+
+<span style="font-weight: bold; font-style: italic;">arbol</span> = ast.parse(<span style="font-weight: bold;">open</span>(f<span style="font-style: italic;">"lib/</span>{fichero}<span style="font-style: italic;">.py"</span>, encoding=<span style="font-style: italic;">"utf-8"</span>).read())
+<span style="font-weight: bold; font-style: italic;">idx</span>   = 0 <span style="font-weight: bold;">if</span> idioma == <span style="font-style: italic;">"es"</span> <span style="font-weight: bold;">else</span> 1
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">texto</span>(nodo):
+    <span style="font-weight: bold;">try</span>:
+        <span style="font-weight: bold;">return</span> ast.literal_eval(nodo)
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+        <span style="font-weight: bold;">return</span> ast.unparse(nodo)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_tr</span>(n):
+    <span style="font-weight: bold;">return</span> (<span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Name)
+            <span style="font-weight: bold;">and</span> n.func.<span style="font-weight: bold;">id</span> == <span style="font-style: italic;">"tr"</span> <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">len</span>(n.args) &gt;= 2)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_borrado</span>(stmt):
+    <span style="font-weight: bold;">return</span> ast.unparse(stmt).startswith(<span style="font-style: italic;">"self.play(*[FadeOut(mob) for mob in self.mobjects])"</span>)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Primera clase con construct(): la del v&#237;deo completo.
+</span><span style="font-weight: bold; font-style: italic;">construct</span> = <span style="font-weight: bold;">next</span>(f <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> arbol.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(c, ast.ClassDef)
+                 <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> c.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(f, ast.FunctionDef) <span style="font-weight: bold;">and</span> f.name == <span style="font-style: italic;">"construct"</span>)
+
+<span style="font-weight: bold; font-style: italic;">escena</span>, <span style="font-weight: bold; font-style: italic;">items</span> = 0, []   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la portada es la escena 0
+</span><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">volcar</span>():
+    <span style="font-weight: bold;">global</span> items
+    <span style="font-weight: bold;">if</span> items:
+        <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"==== </span>{'Escena' <span style="font-weight: bold;">if</span> idioma == 'es' <span style="font-weight: bold;">else</span> 'Scene'}<span style="font-style: italic;"> </span>{escena}<span style="font-style: italic;"> ====</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+        <span style="font-weight: bold;">for</span> tipo, t <span style="font-weight: bold;">in</span> items:
+            <span style="font-weight: bold;">if</span> tipo == <span style="font-style: italic;">"voz"</span>:
+                <span style="font-weight: bold;">print</span>(textwrap.fill(t, 72), <span style="font-style: italic;">"</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"    [</span>{t}<span style="font-style: italic;">]</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+    <span style="font-weight: bold; font-style: italic;">items</span> = []
+
+<span style="font-weight: bold;">for</span> stmt <span style="font-weight: bold;">in</span> construct.body:
+    <span style="font-weight: bold;">if</span> es_borrado(stmt):
+        volcar(); <span style="font-weight: bold; font-style: italic;">escena</span> += 1; <span style="font-weight: bold;">continue</span>
+    <span style="font-weight: bold; font-style: italic;">en_voz</span> = <span style="font-weight: bold;">set</span>()
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt):
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Attribute) <span style="font-weight: bold;">and</span> n.func.attr == <span style="font-style: italic;">"voiceover"</span>:
+            <span style="font-weight: bold; font-style: italic;">en_voz</span> |= {<span style="font-weight: bold;">id</span>(s) <span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> ast.walk(n) <span style="font-weight: bold;">if</span> es_tr(s)}
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">sorted</span>((n <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt) <span style="font-weight: bold;">if</span> es_tr(n)), key=<span style="font-weight: bold;">lambda</span> n: (n.lineno, n.col_offset)):
+        items.append((<span style="font-style: italic;">"voz"</span> <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">id</span>(n) <span style="font-weight: bold;">in</span> en_voz <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"pantalla"</span>, texto(n.args[idx])))
+volcar()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org51a658b" class="outline-3">
+<h3 id="org51a658b"><span class="section-number-3">3.5.</span> Tangle desde la terminal (sin abrir Emacs)</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-bash">emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "Comunes.org")'</span>   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">solo si cambi&#243; el c&#243;digo com&#250;n
+</span>emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "L01-V09-MatricesFilasYColumnas.org")'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2026-11-03 mar 15:51</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

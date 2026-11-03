@@ -61,9 +61,9 @@ selector, "componente a componente", etc.).
 - Web: cada vídeo publicado lleva su entrada en `README.org` (python, html
   del org, enlaces a YouTube es/en) y su org exportado a html. El org del
   vídeo se exporta en batch con htmlize cargado (`emacs --batch -l
-  exporta.el --visit=FICHERO.org -f org-html-export-to-html`, con
-  `exporta.el` añadiendo `~/.emacs.d/elpa/htmlize-*` al load-path); sale
-  igual que el de V05. El `index.html`, en cambio, **no** se reexporta en
+  lib/exporta.el --visit=FICHERO.org -f org-html-export-to-html`, desde la raíz;
+  `lib/exporta.el` añade `~/.emacs.d/elpa/htmlize-*` al load-path y no evalúa
+  bloques); sale igual que el de V05. El `index.html`, en cambio, **no** se reexporta en
   batch: el tema de la web (estilo UCM, `worg.css` incrustado) solo sale
   con `C-c C-e h h` desde el Emacs abierto de Marcos (su configuración
   `~/.emacs.d`, no scimax); cargar ese `init.el` en batch no lo reproduce
@@ -504,14 +504,14 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 |-------+--------------+--------------+-----------------------------------------|
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
 | V08   | mié 28-10-26 | sáb 31-10-26 | publicado (es w62nh5CvJtM, en C2QvSW4yX-Y el sábado 31 a las 14:34; en con tres frases distintas del español) |
-| V09   | jue 05-11-26 | sáb 07-11-26 | «Matrices» desde la **partición del 2026-11-03** (escenas 1-5 y resumen con la definición y el orden; anuncia la selección): solo el resumen y la portada son nuevos (una toma nueva por idioma, la frase D); HD es `L01_V09_MatricesFilasYColumnas.mp4` (4:04) y en `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4` (3:59), capítulos y título «Matrices \| Álgebra lineal 1.9» en la ficha. Las escenas 1-5 estaban aprobadas por Marcos (2026-11-02/03); falta que escuche el resumen nuevo y su último repaso; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)**; resumen: solo viaja la expresión del medio, a «fila primero» en «la fila» y de vuelta en «o la columna» (marcas f, c injertadas; es/en 480p y HD rehechos) |
+| V09   | lun 03-11-26 | sáb 07-11-26 | **es publicado el lunes 3 (9w6gEv3XrTc, adelantado por Marcos: tres vídeos de reserva)**; «Siguiente vídeo» puesto en V08 es; falta en. «Matrices» desde la **partición del 2026-11-03** (escenas 1-5 y resumen con la definición y el orden; anuncia la selección): solo el resumen y la portada son nuevos (una toma nueva por idioma, la frase D); HD es `L01_V09_MatricesFilasYColumnas.mp4` (4:04) y en `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4` (3:59), capítulos y título «Matrices \| Álgebra lineal 1.9» en la ficha. Las escenas 1-5 estaban aprobadas por Marcos (2026-11-02/03); falta que escuche el resumen nuevo y su último repaso; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)**; resumen: solo viaja la expresión del medio, a «fila primero» en «la fila» y de vuelta en «o la columna» (marcas f, c injertadas; es/en 480p y HD rehechos) |
 | V10   | jue 12-11-26 | sáb 14-11-26 | «Selección de filas, columnas y componentes» (título en YouTube: «Filas, columnas y componentes | Álgebra lineal 1.10») (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V11   | jue 19-11-26 | sáb 21-11-26 | la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V12   | después      | después      | tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): prueba gTTS, a la espera de la revisión de Marcos |
 
 Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, el título
-«Tema | Álgebra lineal 1.N» y la descripción completa; todos tienen ficha. Al publicar V09 hay que añadir su enlace como «Siguiente vídeo» en la ficha de V08 y
-lanzar `actualizar --solo-metadatos` (los dos idiomas).
+«Tema | Álgebra lineal 1.N» y la descripción completa; todos tienen ficha. V09 es publicado el 2026-11-03 y enlazado desde V08 es; al subir V09 en, lo mismo en la sección `[en]` de V08
+(`actualizar --solo-metadatos`) y su enlace inglés en `README.org`/`index.html`. En cada subida, mismo patrón con el anterior.
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
