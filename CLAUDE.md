@@ -72,8 +72,11 @@ selector, "componente a componente", etc.).
 - Comprobar visualmente: extraer fotogramas con ffmpeg (bloque
   `fotogramas`, en especial alrededor de cada unión) y mirarlos.
 - **Antes de enseñar un vídeo a Marcos, y tras cada retoque de la narración, repasar
-  `Comprobaciones.org`** (cinco pasadas: contenido, lenguaje, ritmo, imagen, audio y entrega; la de
-  lenguaje empieza con `python3 lib/revisa_guion.py lib/FICHERO.py --anterior lib/ANTERIOR.py`).
+  `Comprobaciones.org`** (seis pasadas: contenido, lenguaje, ritmo, imagen, audio y entrega, y publicación en
+  abierto, esta última añadida el 2026-11-02: licencia CC BY-SA 4.0 y música en créditos y descripción, fuentes
+  de datos, línea fija sobre la notación, enlaces de navegación, título «Tema | Álgebra lineal 1.9», miniatura,
+  pantalla final, prueba de radio y de mudo, un alumno real, ver el vídeo subido, erratas con comentario fijado;
+  la de lenguaje empieza con `python3 lib/revisa_guion.py lib/FICHERO.py --anterior lib/ANTERIOR.py`).
   Nació el 2026-10-29 de una frase rota en V09 que llegó hasta el HD aprobado.
 
 ## Entorno
@@ -176,6 +179,10 @@ Escribir las frases nuevas ya en la forma buena.
   Funciona "And property eight of the reals lets us drop the one." (0 ms; queda
   una pausa natural tras "of the reals"). Ya no queda ningún "by property N" en
   los vídeos en inglés.
+- **Órdenes "n por m"** (V10, 2026-11-01): Tristan dijo "m por m" en "es de orden n por m" (la n
+  delante de "por" se asimila a m), y la m final sonaba "meme". Funcionó entrecomillar las dos
+  letras, "es de orden 'n' por 'm'", eligiendo de oído una de tres tiradas. Escribir así los órdenes
+  desde el principio y que Marcos escuche las tomas: la duración de la letra no lo detecta.
 - Las letras a final de frase ("las de a.") quedan en 110-150 ms en todas
   las tiradas: es la caída natural del final, no hace falta perseguirla.
 - Cuando algo "suena raro", **medirlo**: `tmp/huecos.py` (silencio
@@ -220,8 +227,8 @@ Escribir las frases nuevas ya en la forma buena.
 
 ## Estilo de los vídeos (acordado 2026-10-11)
 
-- Esqueleto fijo: portada, enlace con el vídeo anterior en una o dos
-  frases, cuerpo, resumen con el resultado en pantalla, una frase que
+- Esqueleto fijo: portada, arranque que dice qué se va a ver (en una o dos frases; lo de vídeos
+  anteriores se nombra solo donde se usa, no en el arranque: Marcos, 2026-11-02, V11), cuerpo, resumen con el resultado en pantalla, una frase que
   anuncie el siguiente vídeo, créditos. Menos de diez minutos.
 - **Título y cabeceras** (Marcos, 2026-10-19): la escena 1 lleva arriba el título del vídeo
   (`Title(TITULO)`, como en V05-V10) y cada escena siguiente una cabecera corta
@@ -354,11 +361,50 @@ Escribir las frases nuevas ya en la forma buena.
   Sin preguntas en la voz (Azure las entona mal): la pregunta va en
   pantalla y la voz la parafrasea en afirmativo. Las observaciones
   generales van en el resumen final, no intercaladas en una demostración.
+- **Nada que ya no toca puede verse ni un instante** (Marcos, 2026-11-02, V11: al volver de 3|A|3 a
+  i|A|i asomaba 1|A|1). Causa: `Transform`/`ReplacementTransform(x, y)` deforma los puntos de `x`
+  hacia `y`, así que `x` deja de ser lo que era; si después se usa `x` como destino de otro
+  `Transform`, se anima hacia su forma deformada. Regla: un objeto que ya fue *origen* de una
+  transformación no vuelve a ser *destino*; para volver a una forma anterior, transformar hacia una
+  copia hecha al crearla (`a_ii_fin = a_ii.copy()` antes de cualquier animación). Comprobar cada
+  transformación encadenada con una tira de fotogramas recortada a la fórmula (2-3 fps).
+  Qué animación elegir (comparadas el 2026-11-02 en la diagonal de V11):
+  - `ReplacementTransform`: se ven glifos a medio deformar ("2" volviéndose "3") y deja inservible
+    el origen. Solo cuando se quiere *ver* un glifo convertirse en otro o viajar a su sitio.
+  - `TransformMatchingTex`: deja quietas las partes comunes, pero exige partir la fórmula en
+    trozos y eso **cambia el espaciado** de las macros nacal (`i | A | i` en vez de `i|A|i`). No usar
+    con fórmulas nacal.
+  - **Lo preferido** para cambiar parte de una fórmula: una `MathTex` entera por estado, alineadas
+    por un glifo común, y `FadeTransform` solo de los glifos que cambian (índices de la imagen
+    numerada); después `self.remove(actual, *actual[0]); self.add(nuevo)`. Conserva la composición
+    del libro, lo común no se mueve y no deforma nada (V11, escena 2).
+- **La pantalla acompaña cada palabra de la narración** (Marcos, 2026-11-03; modelo: V09 escena 7 y V10
+  escena 2, retocadas ese día). Al escribir cada frase:
+  1. Cada cosa que la voz nombra se señala en su palabra: marca justo delante del sintagma («una fila de la
+     transpuesta», «los índices de la fila», «el siete») y resaltado sostenido con el color de la serie (fila
+     amarillo, columna verde), que dura hasta la siguiente cosa nombrada o 0,8 s. Cambio de color y tamaño
+     inmediato (0,25 s), no `Indicate`, que llega tarde.
+  2. Cada acción que la voz dice se anima en su verbo («podemos quitar los paréntesis», «desplazar»,
+     «seleccionar primero»): la transformación arranca en esa marca, no al empezar la frase. Al empezar la
+     frase solo aparece el rótulo de la regla.
+  3. Cada regla que se recuerda se escenifica, no solo se nombra: «da igual el orden de selección» = los
+     paréntesis de los dos lados viajan a la otra colocación y vuelven (`Transform` con
+     `there_and_back_with_pause`, 2 s); «vectores iguales, mismas componentes» = los dos selectores aparecen a
+     la vez. Misma animación que cuando se enseñó la regla, para que se reconozca.
+  4. La pantalla se ordena como la frase: lo que la fórmula pone a la izquierda está a la izquierda arriba
+     (V10: Aᵀ bajo (Aᵀ)|i y A bajo i|A).
+  5. Mover una marca o añadirla no obliga a resintetizar: injertar el `input_text` y el `ssml` nuevos en la
+     entrada de la toma buena (véase «Mover una marca sin pagar»). Comprobar cada frase con marcas con una
+     tira de fotogramas a 3-4 fps recortada a la fórmula.
 - Nada aparece en pantalla y luego se recoloca: cada elemento se crea ya
   en su posición final (los `set_x`/`arrange` antes de la primera
   animación que lo muestre).
 - Legible en un móvil: fórmulas con `font_size` >= 40 en 1080p, márgenes,
   no más de un bloque de texto y una fórmula grande a la vez.
+- **Primero un ejemplo, después lo simbólico** (Marcos, 2026-11-02, V11): el curso es para principiantes
+  con poca experiencia matemática y la notación sola no basta. Cada escena que define, enuncia o
+  demuestra algo empieza con un ejemplo numérico en pantalla (V11: S = Sᵀ antes de A = Aᵀ ⇒ a_ij = a_ji;
+  una D diagonal transpuesta antes del ejercicio).
 - Decir explícitamente cuándo una escena ilustra y cuándo demuestra.
 - Música solo de entrada y salida (lo hace `montaje`); silencio durante
   el contenido y en las pausas para pensar.
@@ -369,8 +415,9 @@ Escribir las frases nuevas ya en la forma buena.
   sobre un vídeo subido a mano). Credenciales OAuth en
   `lib/client_secret_youtube.json` y `lib/token_youtube.json`
   (ignorados). Los capítulos salen de los "empieza en" del `montaje`.
-  Formato heredado de los vídeos ya publicados: título "L01 V0N Nombre
-  (Español)" / "(English)", resumen de una línea, ordinal del vídeo,
+  Título (formato desde el 2026-11-02, `Comprobaciones.org` pasada 6): "Tema del vídeo | Álgebra lineal 1.9" /
+  "Topic | Linear algebra 1.9", menos de 60 caracteres; V05-V08 publicados llevan aún "L01 V0N Nombre
+  (Español)" / "(English)" y se retitulan con `actualizar --id` cuando Marcos quiera, resumen de una línea, ordinal del vídeo,
   capítulos, enlace a la sección del libro y a los notebooks; categoría
   Educación; listas «Curso de Álgebra Lineal» (es) y «Linear Algebra
   Course» (en), por título en la ficha; la lista antigua «Álgebra Lineal»
@@ -391,6 +438,11 @@ Escribir las frases nuevas ya en la forma buena.
   - Copia extra opcional en el OneDrive de la UCM (decisión de Marcos), sobre todo de las cachés de
     voz mientras los vídeos están en producción.
 
+- **Erratas y mejoras del libro** (Marcos, 2026-11-01): todo lo que se detecte en el libro al
+  preparar un vídeo (huecos en demostraciones, notación usada antes de justificarla, erratas) se
+  apunta como `TODO` en `../CursoDeAlgebraLineal-SRC/PendientesDesdeLosVideos.org`, con el vídeo,
+  las líneas del `.tex` y la solución que se usó en el vídeo. No se corrige el libro: Marcos lo hará
+  al acabar los vídeos de la lección 1.
 - No hacer commit ni push sin que Marcos lo pida. Los `.mp4`, `media/`,
   `tmp/` y `music/` están ignorados y así deben seguir.
 - Los descartes se guardan en `ZZ_Basura_*.org`, no se borran.
@@ -407,7 +459,8 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 |-------+--------------+--------------+-----------------------------------------|
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
 | V08   | mié 28-10-26 | sáb 31-10-26 | publicado (es w62nh5CvJtM, en C2QvSW4yX-Y el sábado 31 a las 14:34; en con tres frases distintas del español) |
-| V09   | jue 05-11-26 | sáb 07-11-26 | narración retocada y HD rehecho el 2026-10-31 (5:21 es, 5:13 en); aprobado por Marcos en los dos idiomas; falta su último repaso |
+| V09   | jue 05-11-26 | sáb 07-11-26 | narración retocada y HD rehecho el 2026-10-31; resumen con «El orden de la matriz» y HD rehecho el 2026-11-01; escena 1 sin «y esos vectores son sus columnas» el 2026-11-02 (5:21 es, 5:11 en); **reorganizado con V10 el 2026-11-02** (Marcos los vio seguidos): nueva escena 6 «Filas y columnas», escena 7 «Componentes» con «primero la fila o primero la columna» (antes en V10) y resumen con «da igual el orden de selección»; Azure es 480p el 2026-11-02 (`L01_V09_MatricesFilasYColumnas_azure480p.mp4`, 6:17; 8 tomas nuevas, «Cada componente...» sustituida por una tirada con 90 ms antes de «está» en vez de 470); **español aprobado por Marcos el 2026-11-02** (con el resaltado de la escena 6 solo en los vectores y los créditos nuevos); resumen con el viaje de los paréntesis al decir «da igual» (marca p injertada, 2026-11-03; HD es/en rehechos); escena 6: al decir «el elemento de la lista» la matriz se transforma en la lista [(1;7);(2;0);(1;3);] y la franja recorre los vectores, vuelve a los números en «Por ejemplo» (marca l injertada), y «selecciona la primera columna» / «fila» sin «de A» (4 tomas nuevas; Marcos, 2026-11-03; HD es 6:18, en 6:11, capítulos en de la ficha ajustados); Azure en 480p el mismo día (`../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4`, 6:12, 8 tomas nuevas limpias) **aprobado por Marcos**; **HD es hecho** (`L01_V09_MatricesFilasYColumnas.mp4`, 6:18, capítulos en la ficha); **HD en hecho** (`../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 6:13) y capítulos de los dos idiomas en la ficha: **listo para subir el jueves 5 (es) y el sábado 7 (en)**, pendiente solo de su último repaso |
+| V10   | jue 12-11-26 | sáb 14-11-26 | HD es/en y ficha el 2026-11-02 (4:25 es, 4:28 en); **reducido a la transposición el 2026-11-02** (`L01-V10-Transposicion.org`, título «La transposición»; las escenas del selector pasaron a V09); Azure es 480p el 2026-11-02 (`L01_V10_Transposicion_azure480p.mp4`, 3:06; 3 tomas nuevas, la de «En el vídeo anterior vimos que da igual el orden...» salió cortada por Azure y con 410 ms antes de «que», sustituida por una tirada entera); «Por tanto, transponer intercambia los índices...» en vez de «Hemos demostrado que...» (y no «Así que», repetido con la frase anterior) (Marcos: la cadena constata que la notación funciona, no demuestra un resultado; 2026-11-02) y la tercera línea de la ida nace en la marca «podemos quitar los paréntesis» (marca movida sin resintetizar: SSML nuevo injertado en la toma buena b3d5ffe6); resumen «y transponer dos veces devuelve la matriz original» (Tristan pausaba 320-610 ms en «la transpuesta | de la transpuesta» en todas las tiradas; Marcos, 2026-11-02); montaje rehecho (3:05) y **español aprobado por Marcos el 2026-11-02**; Azure en 480p (`../videoMath2/L01_V10_Transposition_azure480p.mp4`, 3:04; 4 tomas nuevas; resumen «transposing twice returns» porque Ollie pausaba 320-370 ms antes de «gives back») a la espera de su escucha; escena 1 con Aᵀ a la izquierda y A a la derecha, como los lados de la definición (Marcos, 2026-11-03), rehecha en 480p es/en y HD es; escena 2: al decir «da igual el orden...» los paréntesis exteriores de los dos lados viajan y vuelven, como en V09 (marca «o», SSML injertado en las tomas buenas de los dos idiomas; Marcos, 2026-11-03); en la vuelta, «una fila de la transpuesta» destaca i| sobre Aᵀ (amarillo) y «una columna de A» el |i sobre A (verde), marcas f y c injertadas (Marcos, 2026-11-03); misma pareja de resaltados en la última frase de la vuelta (marcas r, c) y el selector |i en verde en «una columna cualquiera» de la escena 3 (marca c); **HD es hecho** (`L01_V10_Transposicion.mp4`, 3:05, capítulos es en la ficha); falta el HD en inglés |
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
@@ -475,17 +528,41 @@ Al publicar un vídeo, actualizar esta tabla.
   `tmp/guion_V09_es.txt`. La versión 1 y el apéndice de R⁰ están en `ZZ_Basura_L01_V09.org`. En inglés,
   "orden" = *order* (Marcos). **Azure es 480p el 2026-10-18**: `L01_V09_MatricesFilasYColumnas_azure480p.mp4`
   (5:01); dos tomas repetidas con `v2` (una cortada por Azure a media frase, otra con 620 ms antes de
-  "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. 2026-10-19: cabeceras añadidas a las escenas 2, 3 y 6 («Ejemplos», «El orden de una matriz», «Componentes, filas y columnas») y HD rehecho sin sintetizar. Falta su último repaso y la subida (5 y 7 de noviembre).
-- V10 (`L01-V10-SeleccionYTransposicion.org`, Secciones 1.4.4-1.4.5; inglés
-  `L01_V10_SelectionAndTransposition`): estructura aprobada por Marcos el 2026-10-18 (selector por la
-  izquierda de un vector y da igual el orden; transposición, con la B de V09 = Aᵀ; matriz fila; regla
-  "transponer = cambiar de lado los índices" demostrada y (Aᵀ)ᵀ = A con tarjeta de pausa). El escalar a la
-  derecha y las reglas con escalares van a V11; la notación como programa, a X03. Primer uso del rótulo
-  `aviso("idea")`. Prueba gTTS 480p: `L01_V10_SeleccionYTransposicion_prueba480p.mp4`, guion en
-  `tmp/guion_V10_es.txt`. 2026-10-19 (Marcos): título en la escena 1, cabecera en la 2 y, en la escena 4,
-  la matriz columna y la matriz fila escritas un instante como listas del libro, [(9;2);] y [(9,);(2,);],
-  con «un vector de R²» / «dos vectores de R¹» (nacal: `Matrix([Vector([9]), Vector([2])])`; el
-  Python, para X03). Nueva prueba: 5:17. Falta: revisión de Marcos, Azure, HD, ficha.
+  "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. 2026-10-19: cabeceras añadidas a las escenas 2, 3 y 6 («Ejemplos», «El orden de una matriz», «Componentes, filas y columnas») y HD rehecho sin sintetizar. **Cuarta versión, 2026-11-02** (Marcos vio V09 y V10 seguidos: la escena de
+  componentes imponía la notación sin paréntesis y V10 la justificaba un vídeo después): escena 6 «Filas y
+  columnas» (selector a la derecha = elemento de la lista, una columna; a la izquierda, una fila), escena 7
+  «Componentes» con las escenas 1-2 de V10 casi literales (frases nuevas: «Cada componente de una matriz
+  está a la vez...», «El siete, por ejemplo, es componente de dos vectores distintos...», «Por eso podemos
+  escribir el selector a ambos lados de la matriz, sin paréntesis») y, al final, lo habitual (a_21) frente al
+  selector; escena 8 resumen con la línea «da igual el orden de selección» y anuncio solo de la
+  transposición. La escena 6 anterior está en `ZZ_Basura_L01_V09.org`. Las frases movidas sin cambios
+  conservan sus tomas de Azure (la caché es común a todos los vídeos). Falta: revisión de Marcos de la prueba
+  gTTS, Azure, HD, capítulos de la ficha; la subida del 5 de noviembre depende de ese repaso.
+- V10 (`L01-V10-Transposicion.org`, Sección 1.4.5; inglés `L01_V10_Transposition`; hasta el 2026-11-02
+  `L01-V10-SeleccionYTransposicion.org`, Secciones 1.4.4-1.4.5): estructura aprobada por Marcos el 2026-10-18
+  (selector por la izquierda de un vector y da igual el orden; transposición, con la B de V09 = Aᵀ; matriz
+  fila; regla "transponer = cambiar de lado los índices" demostrada y (Aᵀ)ᵀ = A con tarjeta de pausa). El
+  escalar a la derecha y las reglas con escalares van a V13; la notación como programa, a X03. Primer uso del
+  rótulo `aviso("idea")` (ahora en V09, escena 7). HD es/en y ficha el 2026-11-02 (4:25 es, 4:28 en).
+  **Reducido a la transposición el 2026-11-02**: las escenas 1-2 (enlace y «primero la fila o primero la
+  columna») pasaron a V09 (código guardado en `ZZ_Basura_L01_V10.org`); queda arranque + transposición,
+  cambio de índices (recuerda de V09 que da igual el orden de selección), (Aᵀ)ᵀ = A y resumen de dos líneas.
+  Título «La transposición» / «Transposition». Falta: revisión de Marcos de la prueba gTTS, Azure (solo las
+  frases nuevas: arranque, recuerdo y «Resumamos...»), HD, capítulos de la ficha.
+- **Partición de V09 (decidida el 2026-11-03, encargo en `tmp/HANDOFF_V09_particion.md`)**: V09 queda
+  como «Matrices» (escenas 1-5 y resumen recortado), la selección de filas, columnas y componentes pasa
+  a un V10 propio (`L01-V10-Seleccion.org`, destino de la línea de notación de las descripciones), la
+  transposición pasa a V11 y los tipos de matrices a V12 (y los siguientes corren un número). Motivo:
+  referencia en abierto; un vídeo que solo cuente la selección es enlazable. Cinco frases nuevas por
+  idioma, todo lo demás conserva sus tomas. Calendario: V09 jue 5/sáb 7, V10 jue 12/sáb 14, V11 jue
+  19/sáb 21 de noviembre. Mientras el encargo no esté hecho, las entradas de arriba describen el estado
+  anterior a la partición.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.
+- V11 (`L01-V11-TiposDeMatrices.org`, Sección 1.4.6; inglés `L01_V11_TypesOfMatrices`): «Tipos de
+  matrices» (no «matrices especiales»: da nombre a las matrices por sus características). Reparto del
+  resto de la lección 1 (2026-11-02): V11 tipos, V12 suma y producto por escalar (1.5-1.5.2), V13
+  transposición lineal, escalar a la derecha, operaciones por filas y reglas (1.5.3-1.6). Prueba gTTS
+  480p 2026-11-02 (6:22 es, 5:58 en) con ejemplos iniciales e igualdad componente a componente en la
+  escena 3. Falta: revisión de Marcos, Azure, HD, ficha.

@@ -421,3 +421,107 @@ with self.voiceover(text=tr("""Por eso, una matriz columna y una matriz fila con
 self.wait(2.5)   # tiempo para mirar las listas antes de quitarlas (Marcos, 2026-10-27)
 self.play(FadeOut(VGroup(cf, l_col, l_fil)), run_time=0.8)
 #+END_SRC
+
+* Escena 6 (componentes, filas y columnas) hasta el 2026-11-02
+
+Marcos vio V09 y V10 seguidos: esta escena imponía la notación $\eleM{A}{2}{1}$ sin paréntesis y la
+justificación (primero la fila o primero la columna) estaba en V10. Ahora V09 cuenta primero filas y
+columnas (escena 6) y después las componentes con la narración que era de V10 (escena 7); V10 queda
+solo con la transposición.
+
+** Escena 6 - Componentes, filas y columnas
+
+Como la escena 3 de V01: lo habitual ($a_{ij}$) y después el selector
+(transparencia "Más notación", sin el nombre largo =elem=, que no se va
+a usar por ahora y recargaba la línea). Una sola matriz pequeña arriba
+y, debajo, una línea por selector; la franja marca en la matriz lo que
+se selecciona. La fila y la columna son vectores.
+
+#+name: Sexta escena (hasta el 2026-11-02)
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Componentes, filas y columnas", "Components, rows and columns"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+A = matriz(A_SEL, decimales=0, h_buff=1.0)
+f_A = con_nombre(r"\Mat{A}=", A).move_to([0, 2.0, 0])
+x0 = -4.6
+comp = MathTex(r"\eleM{A}{2}{1}", r"\;=\;", r"a_{21}", r"\;=\;7", tex_template=myTemplate, font_size=48)
+fila = MathTex(r"\VectF{A}{1}", r"\;=\;(1,\ 2,\ 1,)", tex_template=myTemplate, font_size=48)
+col = MathTex(r"\VectC{A}{1}", r"\;=\;\begin{pmatrix}1\\ 7\end{pmatrix}", tex_template=myTemplate, font_size=48)
+for linea, y in [(comp, 0.3), (fila, -1.1), (col, -2.8)]:   # hueco para la fila en vertical
+    linea.move_to([x0 + linea.width/2, y, 0])
+for linea in (fila, col):   # el "=" que sigue al selector, alineado con el de la componente
+    linea.shift((comp[1].get_left()[0] - linea[1].get_left()[0])*RIGHT)
+r_hab = Tex(tr("lo habitual", "the usual way"), font_size=28, color=GRAY_B).next_to(comp[2], UP, buff=0.2)
+r_sel = Tex(tr("selector", "selector"), font_size=28, color=GRAY_B).next_to(comp[0], UP, buff=0.2)
+# glifos: a_{21} = a, 2, 1; 2|A|1 = 2, |, A, |, 1
+sub_f, sub_c = comp[2][1], comp[2][2]
+sel_i, sel_d = comp[0][0:2], comp[0][3:5]
+# la fila y la columna, primero con un índice genérico (i, j) que pasa a ser 1 en el ejemplo
+fila_g = MathTex(r"\VectF{A}{i}", tex_template=myTemplate, font_size=48)
+fila_g.shift(fila[0][2].get_center() - fila_g[0][2].get_center())   # glifos: i, |, A
+col_g = MathTex(r"\VectC{A}{j}", tex_template=myTemplate, font_size=48)
+col_g.shift(col[0][0].get_center() - col_g[0][0].get_center())       # glifos: A, |, j
+# la otra forma de escribir la fila y la columna, detrás de un "=" (Marcos, 2026-10-27)
+fila_v = MathTex(r"=\begin{pmatrix}1\\ 2\\ 1\end{pmatrix}", font_size=48).next_to(fila, RIGHT, buff=0.25)
+col_h = MathTex(r"=(1,\ 7,)", font_size=48).next_to(col, RIGHT, buff=0.25)
+
+with self.voiceover(text=tr("""Para seleccionar una componente de un vector, el operador selector necesita un índice. En una matriz necesita dos: <bookmark mark='f'/> el de la fila <bookmark mark='c'/> y el de la columna.""",
+                            """To select a component of a vector, the selector operator needs one index. In a matrix it needs two: <bookmark mark='f'/> the row index <bookmark mark='c'/> and the column index.""")) as tracker:
+    self.play(Write(cabecera), FadeIn(f_A), run_time=1)
+    self.wait_until_bookmark("f")
+    ff = franja_fila(A, 1)
+    self.play(FadeIn(ff), run_time=0.5)
+    self.wait_until_bookmark("c")
+    fc = franja_columna(A, 0)
+    self.play(FadeIn(fc), run_time=0.5)
+    self.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+
+with self.voiceover(text=tr("""Lo habitual es escribir la componente con la letra de la matriz en minúscula y dos subíndices: <bookmark mark='i'/> primero el de la fila <bookmark mark='j'/> y después el de la columna.""",
+                            """The usual way is to write the component with the letter of the matrix in lower case and two subscripts: <bookmark mark='i'/> first the row <bookmark mark='j'/> and then the column.""")) as tracker:
+    self.play(FadeIn(comp[2:]), FadeIn(r_hab), run_time=1)
+    self.wait_until_bookmark("i")
+    self.play(Indicate(sub_f, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+    self.wait_until_bookmark("j")
+    self.play(Indicate(sub_c, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+
+with self.voiceover(text=tr("""Pero en este curso, como con los vectores, usaremos principalmente el operador selector, <bookmark mark='s'/> con el índice de la fila a la izquierda de la matriz <bookmark mark='d'/> y el de la columna a la derecha.""",
+                            """But in this course, as with vectors, we will mainly use the selector operator, <bookmark mark='s'/> with the row index on the left of the matrix <bookmark mark='d'/> and the column index on the right.""")) as tracker:
+    self.play(FadeIn(comp[:2]), FadeIn(r_sel), run_time=1)
+    self.wait_until_bookmark("s")
+    self.play(Indicate(sel_i, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("d")
+    self.play(Indicate(sel_d, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+
+# el símbolo aparece un instante antes de que la voz lo describa (Marcos, 2026-10-18)
+self.play(FadeOut(ff), FadeOut(fc), FadeIn(fila_g), run_time=0.6)
+with self.voiceover(text=tr("""Si el operador actúa solo por la izquierda, selecciona una fila: la que indica el índice. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='f'/> selecciona la primera fila de A, que es un vector.""",
+                            """If the operator acts only on the left, it selects a row: the one given by the index. <bookmark mark='e'/> For example, with index one, <bookmark mark='f'/> it selects the first row of A, which is a vector.""")) as tracker:
+    self.play(Indicate(fila_g[0][0:2], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("e")
+    self.play(ReplacementTransform(fila_g, fila[0]), run_time=0.8)   # i pasa a ser 1
+    self.wait_until_bookmark("f")
+    ff = franja_fila(A, 0)
+    self.play(FadeIn(ff), FadeIn(fila[1]), run_time=0.8)
+
+self.play(FadeOut(ff), FadeIn(col_g), run_time=0.6)
+with self.voiceover(text=tr("""Y si actúa solo por la derecha, selecciona una columna. <bookmark mark='e'/> Por ejemplo, con el índice uno, <bookmark mark='c'/> selecciona la primera columna de A, que también es un vector.""",
+                            """And if it acts only on the right, it selects a column. <bookmark mark='e'/> For example, with index one, <bookmark mark='c'/> it selects the first column of A, which is also a vector.""")) as tracker:
+    self.play(Indicate(col_g[0][1:3], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    self.wait_until_bookmark("e")
+    self.play(ReplacementTransform(col_g, col[0]), run_time=0.8)   # j pasa a ser 1
+    self.wait_until_bookmark("c")
+    fc = franja_columna(A, 0)
+    self.play(FadeIn(fc), FadeIn(col[1]), run_time=0.8)
+
+self.wait(0.6)   # una pausa antes de la conclusión (Marcos, 2026-10-27)
+with self.voiceover(text=tr("""Por eso, una vez seleccionada, una fila o una columna <bookmark mark='h'/> se puede escribir tanto en horizontal como en vertical, <bookmark mark='p'/> siempre entre paréntesis.""",
+                            """So, once selected, a row or a column <bookmark mark='h'/> can be written either horizontally or vertically, <bookmark mark='p'/> always in parentheses.""")) as tracker:
+    self.play(FadeOut(fc), run_time=0.5)
+    self.wait_until_bookmark("h")
+    self.play(FadeIn(fila_v), FadeIn(col_h), run_time=1)
+    self.wait_until_bookmark("p")
+    self.play(*[Indicate(m, color=COLOR_ESCALAR, scale_factor=1.1) for m in (fila[1], col[1], fila_v, col_h)], run_time=1.2)
+
+self.pausa_media()
+#+END_SRC
+

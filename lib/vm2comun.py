@@ -165,10 +165,14 @@ class MiEscenaConVoz(VoiceoverScene):
         self.play(FadeOut(tarjeta1), run_time=0.6)
 
 def pantalla_de_creditos(escena, segundos=15):
-    """Copyright y enlace a GitHub; `segundos` deja sitio a las tarjetas de enlaces de YouTube."""
-    copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
-    github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
-    escena.add(VGroup(copyright, github).scale(1.1))
+    """Autor y licencia, enlace y música, en el tercio inferior: el resto queda libre para los elementos de
+    pantalla final de YouTube (Comprobaciones.org, pasada 6; desde el 2026-11-02). `segundos`: 15, lo que duran."""
+    lineas = VGroup(Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa \quad$\cdot$\quad CC BY-SA 4.0"),
+                    Tex(r"\texttt{https://github.com/mbujosab}"),
+                    Tex(tr(r"Música: \emph{Zeta}, de Vincent Rubinetti", r"Music: \emph{Zeta}, by Vincent Rubinetti"),
+                        font_size=34).set_color(GRAY_B))
+    lineas.arrange(DOWN, buff=0.28).to_edge(DOWN, buff=0.6)
+    escena.add(lineas)
     escena.wait(segundos)
 
 

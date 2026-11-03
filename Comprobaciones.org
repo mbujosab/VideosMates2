@@ -51,8 +51,29 @@ Sobre el guion en prosa, **sin mirar la pantalla**.
 5. *Ilustra o demuestra.* Se dice explícitamente qué hace cada escena.
 6. *Notación.* Nada aparece en pantalla (ni se nombra) antes de presentarse; ninguna letra sin
    definir (V10: $[\Vect{a}]$ sin haber presentado $\Vect{a}$).
-7. *Esqueleto.* Portada, enlace con el vídeo anterior en una o dos frases, cuerpo, resumen con el
-   resultado en pantalla, una frase que anuncia el siguiente, créditos.
+7. *Esqueleto.* Portada, arranque que dice qué se va a ver en este vídeo (no lo que se vio en el
+   anterior: lo de vídeos anteriores se recuerda solo en el momento en que se usa; V11, 2026-11-02),
+   cuerpo, resumen con el resultado en pantalla, una frase que anuncia el siguiente, créditos.
+8. *Lógica de cada demostración* (2026-11-01). Cada paso se apoya en algo ya establecido: una
+   definición del libro, un convenio o un resultado demostrado antes en el vídeo o en la serie. Nada
+   es circular: un resultado no puede usarse para demostrar aquello de lo que se deduce. Además, la
+   conclusión debe encajar con la definición que se aplica: la igualdad de vectores es componente a
+   componente y la de matrices, columna a columna. Leer la cadena preguntando en cada igualdad «¿por
+   qué?» y comprobar que la respuesta ya se ha dado. (V10: (Aᵀ)ᵀ = A acababa en una igualdad de
+   componentes, y el paso «las filas de Aᵀ son las columnas de A» se atribuía a la definición, que
+   solo habla de columnas.)
+9. *Ejemplos con objetivo y conclusión.* Antes de un ejemplo o de un cálculo se dice qué se busca, y
+   al terminar la voz dice que se ha obtenido. No basta con que el resultado esté en pantalla (V10:
+   los dos caminos hasta el siete no decían que el objetivo era el siete ni que los dos llegaban a
+   él).
+10. *Partes del vídeo.* Si el vídeo tiene varias partes, la voz avisa de que empieza una nueva con
+    una frase corta, y la cabecera aparece a la vez. La cabecera sola no basta, porque solo se ve.
+    (V10, 2026-11-01: la parte de la transposición empezaba con «En el vídeo anterior formamos la
+    matriz B...» y parecía que seguía el tema del selector; se añadió «Pasemos ahora a una operación
+    con matrices».)
+11. *Contraste con el libro.* Lo que el vídeo hace de otra manera que el libro, o lo que se descubre
+    mal en el libro (huecos, erratas, notación usada antes de justificarla), se apunta en
+    =../CursoDeAlgebraLineal-SRC/PendientesDesdeLosVideos.org= (=CLAUDE.md=).
 
 * Pasada 2. Lenguaje
 
@@ -87,7 +108,9 @@ REPITEN dentro del vídeo y frases YA CONTADAS en el anterior.
 5. *Términos sin doble sentido.* Una palabra con dos significados en el vídeo se precisa, y el
    término elegido se usa igual en toda la narración y en los rótulos (V10: «da igual el orden»,
    con «orden» = número de filas y columnas → «el orden en que se aplican los selectores»; «el
-   orden de los selectores» tampoco valía: parecía que se intercambian).
+   orden de los selectores» tampoco valía: parecía que se intercambian). Lo mismo con las
+   formulaciones: una regla se enuncia igual en el título, la voz, los rótulos y el resumen (V10:
+   «intercambia los índices» frente a «cambiar de lado los índices»).
 6. *No leer la pantalla.* La voz nombra y explica; no recita fórmulas.
 7. *Discurso natural.* Frases completas y enlazadas, como hablaría un profesor; nada de titulares
    sueltos. Tratamiento de usted.
@@ -99,6 +122,9 @@ REPITEN dentro del vídeo y frases YA CONTADAS en el anterior.
     que solo reciba el guion) con el encargo de señalar frases incompletas, conectores que no se
     siguen, referencias sueltas y repeticiones. Lo que señale se comprueba aquí; no se corrige a
     ciegas (un revisor sin pantalla marca como sueltas referencias que la imagen resuelve).
+    Comprobar antes que el material es el correcto. Los dos =py= contienen los dos idiomas dentro
+    de =tr()=, así que el inglés se extrae del segundo argumento. Si los dos guiones salen
+    idénticos, la extracción ha fallado (V10, 2026-11-01).
 
 * Pasada 3. Ritmo (fase B, con Azure)
 
@@ -114,7 +140,9 @@ Azure.
 3. *Final de frase.* Cada frase acaba en la palabra importante, no en un complemento colgado.
 4. *Duración.* Menos de diez minutos; ninguna escena se hace larga para lo que cuenta (si una
    escena explicativa pasa de ~90 s, ¿qué sobra?). La columna de segundos de =revisa_guion.py=
-   ayuda a ver la escena desproporcionada.
+   ayuda a ver la escena desproporcionada. Tampoco al revés: una escena de una sola frase, con
+   cabecera propia, se nota como un corte (V10: la escena «Matriz columna y matriz fila» duraba 6
+   s; se integró al final de la anterior).
 5. *Interés.* Cada escena tiene algo que mirar mientras habla la voz; ningún tramo largo con la
    pantalla quieta y la voz explicando.
 
@@ -141,6 +169,8 @@ Lo que no depende de cuándo cae cada palabra. Las marcas sí se colocan ya en e
    fila se marcó en amarillo y una columna en verde, sus índices también); título en la escena 1
    y cabecera corta en las demás; tarjeta de pausa con la invitación concreta; rótulos de aviso.
 6. *Uniones.* Fotogramas alrededor de cada unión del montaje.
+7. *Nada solo por color.* Un resaltado también cambia de tamaño o se recuadra, para que se vea en
+   un móvil, a baja resolución y con daltonismo (la regla de la pista de V06, generalizada).
 
 ** 4b. Sincronía (fase B, con Azure)
 
@@ -148,7 +178,15 @@ Lo que no depende de cuándo cae cada palabra. Las marcas sí se colocan ya en e
    de fotogramas en cada marca. Resaltados sostenidos mientras se habla de algo (cambio de color
    rápido que dura hasta la palabra siguiente), no un parpadeo que llega a su máximo tarde.
 2. *Animaciones que no caben* en el tramo entre dos marcas (la voz ya va por la frase siguiente).
+   Repasarlo siempre que se acorte una frase: las animaciones que tenía siguen durando lo mismo
+   (V10: al acortar «Hemos demostrado que transponer intercambia los índices...», el resaltado de
+   las j caía con la voz ya callada).
 3. *Marcas al principio de un texto*: se disparan al final (=CLAUDE.md=).
+4. *La pantalla acompaña cada palabra* (2026-11-03, regla en =CLAUDE.md=; modelos: V09 escena 7 y V10
+   escena 2). Por cada frase: cada cosa nombrada tiene su marca y su resaltado sostenido en el color de la
+   serie; cada acción dicha arranca en su verbo; cada regla recordada se escenifica con la animación con que
+   se enseñó; la disposición de la pantalla sigue el orden de la fórmula. Tira a 3-4 fps recortada a la
+   fórmula por cada frase con marcas.
 
 * Pasada 5. Audio y entrega (fase B)
 
@@ -162,3 +200,66 @@ Con Azure a 480p; los puntos 6 y 7, también sobre el HD.
 6. Música solo en la entrada y la salida; voz a -16 LUFS (lo hace =montaje=).
 7. Subtítulos sin marcas ni comillas de letras; capítulos de la ficha con los «empieza en» del
    último =montaje= (redondeando hacia abajo).
+
+* Pasada 6. Publicación en abierto
+
+Añadida el 2026-11-02. Los vídeos son clases para alumnos de primero de Economía, pero se publican
+en abierto para que sirvan de referencia a cualquiera que quiera aprender álgebra lineal. Esta
+pasada recoge lo que distingue un vídeo de clase de un material de referencia: lo que ve quien
+llega suelto desde una búsqueda, lo que pasa cuando hay un error ya publicado, y lo que exige
+publicar con licencia. Se comprueba sobre la ficha, los créditos y el vídeo ya subido.
+
+** 6a. Antes de subir (ficha y créditos)
+
+1. *Licencia.* Los vídeos se publican con Creative Commons BY-SA 4.0 (Marcos, 2026-11-02:
+   reconocimiento de autoría y, si se modifican, misma licencia). Va en los créditos finales
+   (=pantalla_de_creditos= en =Comunes.org=) y en la descripción de cada vídeo. En YouTube
+   Studio, marcar además la licencia del vídeo como Creative Commons.
+2. *Música.* La pieza es «Zeta», de Vincent Rubinetti (banda sonora de 3Blue1Brown); Marcos
+   compró el derecho de uso hace un par de años. Se cita en los créditos y en la descripción
+   («Música: Zeta, de Vincent Rubinetti»). Si alguna vez se cambia de pieza, comprobar la licencia
+   antes de usarla: una reclamación de derechos afecta a todos los vídeos del canal.
+3. *Fuentes de datos.* Todo dato real que aparezca en pantalla se cita en la descripción, como en
+   el libro (el PIB de V08 y V09: ICAE).
+4. *Notación del curso.* Quien llega a un vídeo suelto no conoce el selector ni los convenios del
+   libro. Cada descripción lleva una línea fija: «Este curso usa la notación del libro, explicada
+   en [vídeo de notación / vídeo 1]», con enlace. Cuando exista el vídeo de la notación (plan en
+   =NotacionNacal.org=, serie de ampliación), el enlace va a él.
+5. *Navegación.* En la descripción: enlace al vídeo anterior, al siguiente (se añade al publicarlo)
+   y a la lista de reproducción del curso en ese idioma. El id del vídeo anterior está en su ficha.
+6. *Título.* Lo primero que lee el buscador es el principio del título; el prefijo «L01 V09» no lo
+   busca nadie. Formato desde el 2026-11-02: «Tema del vídeo | Álgebra lineal 1.9» (es) y
+   «Topic | Linear algebra 1.9» (en); el idioma lo da el propio título y la lista. Menos de 60
+   caracteres. Los vídeos ya publicados se pueden retitular con
+   =lib/subir_youtube.py actualizar FICHA IDIOMA --id ID= (título y descripción se editan sin
+   volver a subir el vídeo).
+7. *Miniatura.* YouTube elige un fotograma al azar. Una miniatura con plantilla de la serie
+   (número de lección y vídeo, título de pocas palabras legible en un móvil) hace que la lista se
+   vea como un curso. Se genera desde el org (=miniatura= en la ficha) cuando haya plantilla.
+8. *Pantalla final.* Los últimos 15 s (créditos) llevan encima los elementos de pantalla final de
+   YouTube (siguiente vídeo, lista, suscribirse). El texto de los créditos va en el tercio inferior
+   y deja libre el resto; se colocan en Studio después de subir (solo se puede allí).
+
+** 6b. Dos pruebas antes de dar por bueno el guion
+
+9. *Prueba de radio y prueba de mudo.* Escuchar el vídeo sin pantalla: debe entenderse lo que pasa.
+   Verlo sin sonido, con subtítulos: debe poder seguirse. La primera descubre narración que depende
+   de «esto», «aquí» y «la otra»; la segunda, imagen que no explica nada sola. Complementa el
+   punto 10 de la pasada 2 (lectura en frío).
+10. *Un alumno de verdad.* Que un estudiante de primero vea el vídeo y diga en una frase qué ha
+    aprendido. Si no coincide con el objetivo del punto 1 de la pasada 1, falla el vídeo. Es la
+    única comprobación que no puede hacer un revisor automático.
+
+** 6c. Después de subir
+
+11. *Ver el vídeo subido, no el mp4.* YouTube recomprime; las líneas finas de las fórmulas y las
+    franjas translúcidas sufren. Una vez por vídeo, verlo publicado en un móvil a 480p.
+12. *Subtítulos y metadatos.* Comprobar en YouTube que el subtítulo está en el idioma correcto y
+    que la lista, los capítulos y la pantalla final (Studio) están puestos.
+13. *Erratas sin volver a subir.* Sustituir el vídeo pierde visitas, comentarios y enlaces. Un error
+    detectado tras publicar se corrige con un comentario fijado del autor y una nota al principio
+    de la descripción («Corrección: ...»), y se apunta en la ficha (campo =erratas=) y en
+    =PendientesDesdeLosVideos.org= si afecta al libro. Solo se vuelve a subir si el error hace el
+    vídeo inservible.
+14. *Enlace al siguiente.* Al publicar un vídeo, añadir su enlace en la descripción del anterior
+    (=actualizar --id=).

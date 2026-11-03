@@ -337,7 +337,11 @@ def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4, invitacion=N
 
 *** Pantalla final de créditos
 
-La misma pantalla en todos los vídeos. =pantalla_de_creditos(escena)= la
+La misma pantalla en todos los vídeos: autor con la licencia CC BY-SA 4.0, el
+enlace a GitHub y la música (Zeta, de Vincent Rubinetti; Marcos compró el
+derecho de uso), en el tercio inferior para dejar sitio a la pantalla final de
+YouTube (desde el 2026-11-02; V05-V08 publicados llevan la pantalla anterior,
+solo el copyright y el enlace, centrados). =pantalla_de_creditos(escena)= la
 dibuja en cualquier escena; =MiEscenaConVoz.creditos_finales()= la usa al
 final del vídeo completo, y =CreditosFinales= es la escena suelta que se
 renderiza para el montaje. Como manim solo renderiza las clases
@@ -347,10 +351,14 @@ definidas en el fichero del vídeo, cada org declara
 #+name: Créditos finales
 #+BEGIN_SRC python :eval no
 def pantalla_de_creditos(escena, segundos=15):
-    """Copyright y enlace a GitHub; `segundos` deja sitio a las tarjetas de enlaces de YouTube."""
-    copyright = Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa")
-    github = Tex(r"\texttt{https://github.com/mbujosab}").next_to(copyright, DOWN)
-    escena.add(VGroup(copyright, github).scale(1.1))
+    """Autor y licencia, enlace y música, en el tercio inferior: el resto queda libre para los elementos de
+    pantalla final de YouTube (Comprobaciones.org, pasada 6; desde el 2026-11-02). `segundos`: 15, lo que duran."""
+    lineas = VGroup(Tex(r"\textcopyright{\;} 2026 \; Marcos Bujosa \quad$\cdot$\quad CC BY-SA 4.0"),
+                    Tex(r"\texttt{https://github.com/mbujosab}"),
+                    Tex(tr(r"Música: \emph{Zeta}, de Vincent Rubinetti", r"Music: \emph{Zeta}, by Vincent Rubinetti"),
+                        font_size=34).set_color(GRAY_B))
+    lineas.arrange(DOWN, buff=0.28).to_edge(DOWN, buff=0.6)
+    escena.add(lineas)
     escena.wait(segundos)
 
 

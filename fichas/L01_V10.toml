@@ -1,0 +1,83 @@
+# Ficha de YouTube del vídeo L01 V10 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V10.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V10.toml en
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60 del 2026-11-02 en español; el inglés, pendiente de su HD).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+
+[es]
+# youtube = ""   # rellenar tras subirlo
+video = "L01_V10_Transposicion.mp4"
+subtitulos = "L01_V10_Transposicion.srt"
+idioma = "es"
+titulo = "La transposición | Álgebra lineal 1.10"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "matrices", "matriz", "transpuesta", "transposición", "filas", "columnas",
+             "matemáticas", "GECO", "UCM"]
+descripcion = """
+Transponer una matriz convierte sus filas en columnas, y equivale a cambiar de lado los índices.
+
+Décimo vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 La transposición
+00:48 Transponer es cambiar de lado los índices
+01:44 La transpuesta de la transpuesta (ejercicio)
+02:34 Resumen
+02:50 Créditos finales
+
+La matriz B del vídeo anterior, formada con las filas de A, es la transpuesta de A: cada columna de la transpuesta es la fila de A con el mismo índice, y su orden es el inverso. La transpuesta de una matriz columna es una matriz fila. De la definición comprobamos la regla de reescritura «transponer, o quitar la transposición, intercambia los índices de lado», y que las filas de la transpuesta son las columnas de la matriz. Por último, un ejercicio: la transpuesta de la transpuesta es la matriz original.
+
+Correspondiente sección del libro (Sección 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/(id de V09 al publicarlo)
+Siguiente vídeo: (se añade al publicarlo)
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+# youtube = ""   # fill in after upload
+video = "../videoMath2/L01_V10_Transposition.mp4"
+subtitulos = "../videoMath2/L01_V10_Transposition.srt"
+idioma = "en"
+titulo = "Transposition | Linear algebra 1.10"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "matrices", "matrix", "transpose", "transposition", "rows", "columns",
+             "mathematics", "GECO", "UCM"]
+descripcion = """
+Transposing a matrix turns its rows into columns, and amounts to swapping the sides of the indices.
+
+Tenth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 Transposition
+00:50 Transposing swaps the sides of the indices
+01:49 The transpose of the transpose (exercise)
+02:38 Key takeaways
+02:58 Closing credits
+
+The matrix B of the previous video, built from the rows of A, is the transpose of A: each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we check the rewriting rule "transposing, or removing the transposition, swaps the sides of the indices", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
+
+Corresponding book section (Section 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/(id de V09 al publicarlo)
+Next video: (added when published)
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""
