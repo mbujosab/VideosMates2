@@ -106,7 +106,9 @@ REPITEN dentro del vídeo y frases YA CONTADAS en el anterior.
    caso es paralelo. Ante la duda, quitarlo.
 4. *Referencias con antecedente.* «La otra», «esa columna», «esto», «aquí»: con la voz sola se sabe
    a qué se refieren. Si no, nombrar la cosa (V10: «quitar la otra» → «quitar la transposición
-   que queda»).
+   que queda»). Lo que está en pantalla se señala con «este», no con «un»: «lo hemos visto en un
+   ejemplo» parecía remitir a un ejemplo anterior que no existía (V10, 2026-11-03; lo notó Andrés,
+   el hermano de Marcos, viendo los tres últimos vídeos: un espectador ajeno es la mejor lectura en frío).
 5. *Términos sin doble sentido.* Una palabra con dos significados en el vídeo se precisa, y el
    término elegido se usa igual en toda la narración y en los rótulos (V10: «da igual el orden»,
    con «orden» = número de filas y columnas → «el orden en que se aplican los selectores»; «el

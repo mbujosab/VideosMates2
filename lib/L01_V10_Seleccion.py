@@ -242,8 +242,9 @@ class L01_V10_Seleccion(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.3) for x in parentesis], run_time=0.3)
             self.play(FadeIn(conclusion[3:]), run_time=1)
         
-        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna, que son vectores.""",
-                                    """We have seen it in an example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column, which are vectors.""")) as tracker:
+        # «este ejemplo», no «un ejemplo»: parecía remitir a un ejemplo anterior (Andrés, hermano de Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Lo hemos visto en este ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna, que son vectores.""",
+                                    """We have seen it in this example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column, which are vectors.""")) as tracker:
             self.wait_until_bookmark("g")
             self.play(*[ReplacementTransform(conclusion[p][g], general[p][g]) for p in range(5) for g in range(len(conclusion[p]))], run_time=1.5)
             # las tres i (fila) y después las tres j (columna), con los colores de las franjas; el resaltado
@@ -530,8 +531,9 @@ class L01_V10_E02_Componentes(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.3) for x in parentesis], run_time=0.3)
             self.play(FadeIn(conclusion[3:]), run_time=1)
         
-        with self.voiceover(text=tr("""Lo hemos visto en un ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna, que son vectores.""",
-                                    """We have seen it in an example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column, which are vectors.""")) as tracker:
+        # «este ejemplo», no «un ejemplo»: parecía remitir a un ejemplo anterior (Andrés, hermano de Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Lo hemos visto en este ejemplo, pero <bookmark mark='g'/> vale para cualquier componente de cualquier matriz, porque toda componente está a la vez en su <bookmark mark='f'/> fila y en su <bookmark mark='c'/> columna, que son vectores.""",
+                                    """We have seen it in this example, but <bookmark mark='g'/> it holds for any component of any matrix, because every component lies both in its <bookmark mark='f'/> row and in its <bookmark mark='c'/> column, which are vectors.""")) as tracker:
             self.wait_until_bookmark("g")
             self.play(*[ReplacementTransform(conclusion[p][g], general[p][g]) for p in range(5) for g in range(len(conclusion[p]))], run_time=1.5)
             # las tres i (fila) y después las tres j (columna), con los colores de las franjas; el resaltado

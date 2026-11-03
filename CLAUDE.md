@@ -361,6 +361,9 @@ Escribir las frases nuevas ya en la forma buena.
   solo se repite si hace falta recordarlo para entender el vídeo, y como recuerdo breve, no como
   algo nuevo (V10 repetía vector/matriz columna/matriz fila de V09; el selector por la izquierda
   ya estaba en V01). Comprobarlo con el guion del vídeo anterior (`Comprobaciones.org`).
+- **«Este», no «un», para lo que está en pantalla** (Andrés, hermano de Marcos, 2026-11-03, V10): «lo hemos
+  visto en un ejemplo» hacía buscar un ejemplo anterior; «en este ejemplo» señala el de la pantalla. Lo mismo
+  con «esta matriz», «este vector»: el artículo indeterminado solo para lo que no se ve.
 - **Discurso natural, no lectura de puntos** (Marcos, 2026-10-14): frases
   completas y enlazadas, como hablaría un profesor. Nada de titulares
   sueltos ("Definición de suma.", "La componente i-ésima del lado

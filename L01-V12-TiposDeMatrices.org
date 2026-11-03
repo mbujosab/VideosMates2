@@ -460,6 +460,14 @@ self.pausa_media()
 
 *** Escena 3 - Matrices simétricas
 
+PENDIENTE (comentario de un espectador, 2026-11-03, recogido por Marcos): cuando se enuncie aquí el
+criterio «dos matrices son iguales si y solo si sus componentes son iguales», cerrar el círculo con
+V11 con una frase y la cadena en pantalla: «Con este criterio, la transpuesta de la transpuesta se
+demuestra en dos pasos, aplicando dos veces la regla de los índices»,
+$\eleM{\TransP*{\MatT{A}}}{i}{j}=\eleMT{A}{j}{i}=\eleM{A}{i}{j}$. V11 no cambia (su demostración va
+columna a columna, con lo que el alumno tenía entonces); esto es la segunda demostración, que muestra
+lo que el criterio permite. Decidir en la revisión pedagógica de Marcos si va aquí o en el resumen.
+
 Definición $\Mat{A}=\MatT{A}$. De ella sale que es cuadrada, por el orden
 de la transpuesta (V11). Después, sus componentes: la cadena
 $\eleM{A}{i}{j}=\eleMT{A}{i}{j}=\eleM{A}{j}{i}$, cada expresión nacida de la
