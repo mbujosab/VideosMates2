@@ -16,7 +16,7 @@ privacidad = "public"   # public | unlisted | private
 video = "L01_V10_Seleccion.mp4"
 subtitulos = "L01_V10_Seleccion.srt"
 idioma = "es"
-titulo = "Selección de filas, columnas y componentes | Álgebra lineal 1.10"
+titulo = "Filas, columnas y componentes | Álgebra lineal 1.10"   # «Selección de...» tenía 64 caracteres (Marcos, 2026-11-03)
 titulo_miniatura = "Seleccionar\nfilas y columnas"
 miniatura = "miniaturas/L01_V10_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
@@ -53,7 +53,7 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 video = "../videoMath2/L01_V10_Selection.mp4"
 subtitulos = "../videoMath2/L01_V10_Selection.srt"
 idioma = "en"
-titulo = "Selecting rows, columns and components | Linear algebra 1.10"
+titulo = "Rows, columns and components | Linear algebra 1.10"
 titulo_miniatura = "Selecting rows\nand columns"
 miniatura = "miniaturas/L01_V10_en.png"
 lista = "Linear Algebra Course"
@@ -72,7 +72,7 @@ Tenth video of the first lesson of the linear algebra course.
 
 A matrix is a list of vectors, so the selector on the right, as with vectors, selects the element of the list in that position: a column. On the left it selects a row. Rows and columns are vectors, and they are written horizontally or vertically, always in parentheses. Each component lies both in a row and in a column: the seven in the example is obtained by selecting the row first or the column first, with the same result. It is an associative property, and that is why the selector is written on both sides of the matrix, without parentheses. Finally, the usual textbook notation, a sub ij, next to the selector.
 
-Corresponding book section (Section 1.4.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.3
+Corresponding book section (Section 1.4.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.3 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

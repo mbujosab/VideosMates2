@@ -1,0 +1,80 @@
+# Ficha de YouTube del vídeo L01 V01 (una sección por idioma), escrita el 2026-11-03 para un vídeo ya publicado
+# (voces antiguas, anterior a las fichas). Solo metadatos: se usa siempre con --solo-metadatos, porque sus
+# subtítulos (arreglados el 2026-10-13) no se tocan, y por eso no hay campo `subtitulos`.
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V01.toml es --solo-metadatos
+# Capítulos: los de la descripción anterior (metadatos guardados en tmp/metadatos_V01-V04_antes.txt).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "HWaQrbSc8WA"
+video = "L01_V01_Vectores.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "es"
+# titulo = "L01 V01 Vectores (Español)"   # hasta el 2026-11-03
+titulo = "Vectores | Álgebra lineal 1.1"
+titulo_miniatura = "Vectores"
+miniatura = "miniaturas/L01_V01_es.png"
+lista = "Curso de Álgebra Lineal"
+etiquetas = ["álgebra lineal", "vectores", "vectores de Rn", "notación", "operador selector", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Un vector de Rn es una lista ordenada de n números reales: cómo se escribe y cómo se nombran sus componentes con el operador selector.
+
+Primer vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:04 Definición de vector
+00:52 Notación con vectores
+01:57 Notación para sus elementos
+03:14 Créditos finales
+
+Un vector de Rn es una lista ordenada de n números reales: importa el orden, así que dos vectores son iguales solo si sus listas son idénticas. Como lo que cuenta es la lista, el mismo vector se puede escribir en horizontal o en vertical, siempre entre paréntesis y, en horizontal, con una coma detrás de cada número; así se distingue un número entre paréntesis de un vector de R1. Los vectores se nombran con minúsculas en negrita, y el cero en negrita es el vector nulo. Para las componentes, en lugar del subíndice habitual, el curso usa el operador selector: una barra vertical entre el vector y la posición, que puede actuar por la derecha o por la izquierda.
+
+Correspondiente sección del libro (Sección 1.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.1
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Siguiente vídeo: https://youtu.be/LvcerzXX3IM
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este vídeo presenta la notación del libro (listas y operador selector) que usa todo el curso.
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+youtube = "9Je758iM6Dc"
+video = "../videoMath2/L01_V01_Vectors.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "en"
+# titulo = "L01 V01 Vectors (English)"   # hasta el 2026-11-03
+titulo = "Vectors | Linear algebra 1.1"
+titulo_miniatura = "Vectors"
+miniatura = "miniaturas/L01_V01_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "vectors in Rn", "notation", "selector operator", "mathematics", "GECO", "UCM"]
+descripcion = """
+A vector in Rn is an ordered list of n real numbers: how to write it and how to name its components with the selector operator.
+
+First video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:04 Definition of a vector
+00:47 Vector notation
+01:50 Notation for its components
+03:03 End credits
+
+A vector in Rn is an ordered list of n real numbers: order matters, so two vectors are equal only if their lists are identical. Since what counts is the list, the same vector can be written horizontally or vertically, always in parentheses and, horizontally, with a comma after each number; this tells a number in parentheses apart from a vector in R1. Vectors are named with bold lowercase letters, and a bold zero is the zero vector. For the components, instead of the usual subscript, the course uses the selector operator: a vertical bar between the vector and the position, which can act from the right or from the left.
+
+Corresponding book section (Section 1.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.1 (the book is in Spanish)
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Next video: https://youtu.be/k-eMu1gxLRE
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This video introduces the notation of the book (lists and the selector operator) used throughout the course.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""

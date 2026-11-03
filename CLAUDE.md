@@ -443,8 +443,11 @@ Escribir las frases nuevas ya en la forma buena.
   Título (formato desde el 2026-11-02, `Comprobaciones.org` pasada 6): "Tema del vídeo | Álgebra lineal 1.9" /
   "Topic | Linear algebra 1.9", menos de 60 caracteres; **V05-V08 retitulados el 2026-11-03** con `actualizar`
   (título antiguo comentado en la ficha), con la descripción completa (anterior/siguiente, lista, notación con enlace
-  a V01, música, licencia, fuentes) y miniatura; V01-V04 conservan título y descripción antiguos y solo llevan la
-  miniatura nueva (`subir_youtube.py miniatura`). Al borrar y volver a subir subtítulos, YouTube tarda unos segundos
+  a V01, música, licencia, fuentes) y miniatura; **V01-V04 también, el mismo día**, con fichas nuevas
+  (`fichas/L01_V01.toml`...; sin `subtitulos`: los suyos, de 2026-10-13, no se tocan) y `actualizar --solo-metadatos`
+  (metadatos anteriores en `tmp/metadatos_V01-V04_antes.txt`; capítulos los de la descripción anterior; «Zeta» suena en
+  los cuatro en español y en V03-V04 en inglés, no en V01-V02 en). Las fichas inglesas dicen «(the book is in Spanish)»
+  tras el enlace al libro. Al borrar y volver a subir subtítulos, YouTube tarda unos segundos
   en liberar la pista (409 `captionExists`): el script reintenta. Resumen de una línea, ordinal del vídeo,
   capítulos, enlace a la sección del libro y a los notebooks; categoría
   Educación; listas «Curso de Álgebra Lineal» (es) y «Linear Algebra
@@ -452,6 +455,9 @@ Escribir las frases nuevas ya en la forma buena.
   (confinamiento) se deja como está hasta rehacer los determinantes.
   Licencia: `actualizar` conserva la que tenga el vídeo (estándar de YouTube; la CC BY-SA 4.0 va en la
   descripción y los créditos, `Comprobaciones.org` 6a).
+  `actualizar ... --solo-metadatos` (desde el 2026-11-03) pone título, descripción, etiquetas, idioma y lista sin
+  tocar subtítulos ni miniatura: usarlo para añadir cada semana el «Siguiente vídeo» al anterior (el modo completo
+  borra y resube la pista de subtítulos y el vídeo puede quedarse un rato sin ella) y siempre en V01-V04.
 - **Miniaturas** (plantilla elegida por Marcos el 2026-11-03, variante F): `lib/miniatura.py` (cabecera
   documentada) genera `miniaturas/<clave>_<idioma>.png` (van a git) con el número en un disco, el título
   corto de la ficha (`titulo_miniatura`), «Álgebra lineal» debajo y un dibujo del vídeo (`MOTIVOS`):
@@ -496,13 +502,13 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | V07   | jue 22-10-26 | sáb 24-10-26 | publicado (es GOqglYkmOiA, en cNfCZMC8QcM) |
 | V08   | mié 28-10-26 | sáb 31-10-26 | publicado (es w62nh5CvJtM, en C2QvSW4yX-Y el sábado 31 a las 14:34; en con tres frases distintas del español) |
 | V09   | jue 05-11-26 | sáb 07-11-26 | «Matrices» desde la **partición del 2026-11-03** (escenas 1-5 y resumen con la definición y el orden; anuncia la selección): solo el resumen y la portada son nuevos (una toma nueva por idioma, la frase D); HD es `L01_V09_MatricesFilasYColumnas.mp4` (4:04) y en `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4` (3:59), capítulos y título «Matrices \| Álgebra lineal 1.9» en la ficha. Las escenas 1-5 estaban aprobadas por Marcos (2026-11-02/03); falta que escuche el resumen nuevo y su último repaso; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)**; resumen: solo viaja la expresión del medio, a «fila primero» en «la fila» y de vuelta en «o la columna» (marcas f, c injertadas; es/en 480p y HD rehechos) |
-| V10   | jue 12-11-26 | sáb 14-11-26 | «Selección de filas, columnas y componentes» (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
+| V10   | jue 12-11-26 | sáb 14-11-26 | «Selección de filas, columnas y componentes» (título en YouTube: «Filas, columnas y componentes | Álgebra lineal 1.10») (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V11   | jue 19-11-26 | sáb 21-11-26 | la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V12   | después      | después      | tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): prueba gTTS, a la espera de la revisión de Marcos |
 
-Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, y V05-V08 el título
-«Tema | Álgebra lineal 1.N». Al publicar V09 hay que añadir su enlace como «Siguiente vídeo» en la ficha de V08 y
-lanzar `actualizar` (los dos idiomas).
+Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, el título
+«Tema | Álgebra lineal 1.N» y la descripción completa; todos tienen ficha. Al publicar V09 hay que añadir su enlace como «Siguiente vídeo» en la ficha de V08 y
+lanzar `actualizar --solo-metadatos` (los dos idiomas).
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
@@ -623,6 +629,13 @@ Al publicar un vídeo, actualizar esta tabla.
 - **Encargo de mantenimiento para Opus** (2026-11-03, `tmp/HANDOFF_mantenimiento_y_publicados.md`): deduplicar
   las cachés de voz, retitular y completar las descripciones de V05-V08 publicados (con Marcos para el token),
   prototipos de miniaturas y, opcional, borrador de estructura de X00.
+- **Para la corrección y traducción del libro** (sesión y repositorio aparte, más adelante; Marcos, 2026-11-03):
+  (1) el glosario inglés de `NotacionNacal.org` es la referencia de términos para la traducción, mantenerlo al
+  día; (2) centralizar el pie común de las descripciones de YouTube (lista, notación, nota «the book is in
+  Spanish», música, licencia) en un fichero por idioma que lea `subir_youtube.py`, para cambiarlo de una vez
+  cuando haya libro inglés o vídeo X00 (encargo pequeño para Opus); (3) si la traducción conserva la
+  estructura de secciones, los enlaces `#subsection.1.4.3` del PDF valen cambiando solo el nombre del
+  fichero; (4) corregir primero el español (con `PendientesDesdeLosVideos.org`) y traducir después.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.

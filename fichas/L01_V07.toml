@@ -80,7 +80,7 @@ Seventh video of the first lesson of the linear algebra course.
 
 As in the previous video, each property is first posed as an exercise (pause the video and try it) and then proved step by step: a chain of equalities from the i-th component of the left-hand side to that of the right-hand side, using in each step a single definition or a single property of the real numbers. Together with the four properties of addition, these are the eight properties that will define a vector space.
 
-Corresponding book section (Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+Corresponding book section (Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

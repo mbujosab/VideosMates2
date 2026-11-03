@@ -1,0 +1,98 @@
+# Ficha de YouTube del vídeo L01 V04 (una sección por idioma), escrita el 2026-11-03 para un vídeo ya publicado
+# (voces antiguas, anterior a las fichas). Solo metadatos: se usa siempre con --solo-metadatos, porque sus
+# subtítulos (arreglados el 2026-10-13) no se tocan, y por eso no hay campo `subtitulos`.
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V04.toml es --solo-metadatos
+# Capítulos: los de la descripción anterior (metadatos guardados en tmp/metadatos_V01-V04_antes.txt).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "SG4ZwRAIQLY"
+video = "L01_V04_ProductoDeUnVectorPorUnEscalar.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "es"
+# titulo = "L01 V04 Producto de un vector de Rn por un escalar (Español)"   # hasta el 2026-11-03
+titulo = "Multiplicar un vector por un escalar | Álgebra lineal 1.4"
+titulo_miniatura = "Multiplicar\npor un escalar"
+miniatura = "miniaturas/L01_V04_es.png"
+lista = "Curso de Álgebra Lineal"
+etiquetas = ["álgebra lineal", "vectores", "producto por un escalar", "reescalado", "operador selector", "interpretación geométrica", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Multiplicar un vector por un escalar multiplica cada componente; los múltiplos de un vector no nulo forman una recta que pasa por el origen.
+
+Cuarto vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:03 Introducción
+00:57 Definición del producto de un vector de Rn por un escalar
+02:00 Interpretación geométrica del producto de dos números naturales
+03:04 Producto de un número real positivo por un número natural
+03:24 Hacia el producto de dos números reales
+04:41 Procedimiento geométrico para multiplicar dos números reales
+06:18 Interpretación del producto de un vector de R2 por un escalar
+08:35 Interpretación del producto de un vector de R3 por un escalar
+09:55 Lo más importante son las propiedades, no la interpretación geométrica
+10:32 Créditos finales
+
+El producto de un vector por un escalar se define componente a componente, y con el operador selector se escribe para Rn: de ahí sale la segunda regla de cálculo simbólico, la asociativa del selector respecto del producto, que permite desplazar los paréntesis. Para interpretarlo geométricamente, el vídeo presenta primero un método gráfico para multiplicar dos números reales cualesquiera con una recta paralela a la diagonal de un rectángulo, que respeta la regla de los signos. Con ese método se multiplican las dos componentes de un vector de R2 por el mismo número: el vector se alarga, se acorta o cambia de sentido, y todos sus múltiplos quedan en una recta que pasa por el origen. Lo mismo ocurre en R3. Esta presentación del producto de números reales no es habitual en otros vídeos o manuales de álgebra lineal.
+
+Correspondiente sección del libro (Sección 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+El libro no trata la interpretación geométrica, solo las propiedades algebraicas de las operaciones.
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/kSgd-davYhw
+Siguiente vídeo: https://youtu.be/nfftYHyi0hU
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+youtube = "SHu1-X0MWk0"
+video = "../videoMath2/L01_V04_Geometric_Interpretation_of_Vector_Scaling.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "en"
+# titulo = "L01 V04 Product of a vector in Rn by a scalar (English)"   # hasta el 2026-11-03
+titulo = "Scaling a vector | Linear algebra 1.4"
+titulo_miniatura = "Scaling vectors"
+miniatura = "miniaturas/L01_V04_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "scalar multiplication", "scaling", "selector operator", "geometric interpretation", "mathematics", "GECO", "UCM"]
+descripcion = """
+Multiplying a vector by a scalar multiplies each component; the multiples of a nonzero vector form a line through the origin.
+
+Fourth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:03 Introduction
+00:47 Definition of the product of a vector in Rn by a scalar
+01:38 Geometric interpretation of the product of two natural numbers
+02:25 Product of a positive real number by a natural number
+02:45 Towards the product of two real numbers
+03:28 Sign rules multiplying two real numbers
+04:04 Using any axes
+04:35 Interpretation of the product of a vector in R2 by a scalar
+06:26 Interpretation of the product of a vector in R3 by a scalar
+07:44 Prioritize manipulation rules over interpretation
+08:08 Closing credits
+
+Multiplying a vector by a scalar is defined component by component, and the selector operator writes it for Rn: this gives the second rule of symbolic calculation, the associativity of the selector with respect to the product, which lets the parentheses be moved. To interpret it geometrically, the video first presents a graphical method to multiply any two real numbers with a line parallel to the diagonal of a rectangle, which respects the sign rules. With this method both components of a vector in R2 are multiplied by the same number: the vector gets longer, shorter or reverses direction, and all its multiples lie on a line through the origin. The same happens in R3. This presentation of the product of real numbers is not common in other linear algebra videos or textbooks.
+
+Corresponding book section (Section 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
+The book does not cover the geometric interpretation, only the algebraic properties of the operations.
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/yrwrxVB9uto
+Next video: https://youtu.be/gAWXJVMWO7M
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""

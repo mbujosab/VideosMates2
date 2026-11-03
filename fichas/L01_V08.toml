@@ -76,7 +76,7 @@ Eighth video of the first lesson of the linear algebra course.
 
 Three friends prepare a dinner; each recipe is a vector with the ingredients for one serving, always in the same order. Adding the recipes component-wise and multiplying by the number of diners gives the shopping basket, and adding four more servings of tortilla gives a linear combination of the recipes. Then the same use of vectors with economic data: the GDP growth of five countries from 2003 to 2006, which will become a matrix in the next video.
 
-Corresponding book section (Section 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3
+Corresponding book section (Section 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

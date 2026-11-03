@@ -1,0 +1,82 @@
+# Ficha de YouTube del vídeo L01 V02 (una sección por idioma), escrita el 2026-11-03 para un vídeo ya publicado
+# (voces antiguas, anterior a las fichas). Solo metadatos: se usa siempre con --solo-metadatos, porque sus
+# subtítulos (arreglados el 2026-10-13) no se tocan, y por eso no hay campo `subtitulos`.
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V02.toml es --solo-metadatos
+# Capítulos: los de la descripción anterior (metadatos guardados en tmp/metadatos_V01-V04_antes.txt).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "LvcerzXX3IM"
+video = "L01_V02_SumaDeVectores-I.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "es"
+# titulo = "L01 V02 Suma de vectores I (Español)"   # hasta el 2026-11-03
+titulo = "Suma de vectores | Álgebra lineal 1.2"
+titulo_miniatura = "Suma\nde vectores"
+miniatura = "miniaturas/L01_V02_es.png"
+lista = "Curso de Álgebra Lineal"
+etiquetas = ["álgebra lineal", "vectores", "suma de vectores", "operador selector", "propiedad conmutativa", "demostraciones", "matemáticas", "GECO", "UCM"]
+descripcion = """
+La suma de vectores se define componente a componente, y con el operador selector se demuestra que es conmutativa.
+
+Segundo vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:04 Suma de vectores de Rn
+00:43 Notación genérica para la suma
+01:31 Demostración de la propiedad conmutativa de la suma
+02:56 Créditos finales
+
+Dos vectores con el mismo número de componentes se suman componente a componente: la primera componente de la suma es la suma de las primeras, y así con todas. Para definir la suma en Rn sin escribir la lista entera se usa el operador selector: la componente i-ésima de la suma es la suma de las componentes i-ésimas. De ahí sale la primera regla de cálculo simbólico, la propiedad distributiva del selector respecto de la suma. Con ella se demuestra, paso a paso, que el orden de los sumandos no altera la suma: se parte de la componente i-ésima de un lado y se llega a la del otro usando solo esa regla y la conmutativa de los números reales.
+
+Correspondiente sección del libro (Sección 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/HWaQrbSc8WA
+Siguiente vídeo: https://youtu.be/kSgd-davYhw
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+youtube = "k-eMu1gxLRE"
+video = "../videoMath2/L01_V02_SumOfVectors-I.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "en"
+# titulo = "L01 V02 Sum of Vectors I (English)"   # hasta el 2026-11-03
+titulo = "Vector addition | Linear algebra 1.2"
+titulo_miniatura = "Vector addition"
+miniatura = "miniaturas/L01_V02_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "vector addition", "selector operator", "commutative property", "proofs", "mathematics", "GECO", "UCM"]
+descripcion = """
+Vector addition is defined component by component, and the selector operator is used to prove that it is commutative.
+
+Second video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:03 Vector addition in Rn
+00:41 Generic notation for addition
+01:33 Proof of the commutative property of addition
+02:56 Final credits
+
+Two vectors with the same number of components are added component by component: the first component of the sum is the sum of the first components, and so on. To define addition in Rn without writing out the whole list, the selector operator is used: the i-th component of the sum is the sum of the i-th components. This gives the first rule of symbolic calculation, the distributive property of the selector over addition. With it, the video proves step by step that the order of the summands does not change the sum: it starts from the i-th component of one side and reaches that of the other using only this rule and the commutativity of the real numbers.
+
+Corresponding book section (Section 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/9Je758iM6Dc
+Next video: https://youtu.be/yrwrxVB9uto
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""

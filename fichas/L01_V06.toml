@@ -80,7 +80,7 @@ Sixth video of the first lesson of the linear algebra course.
 
 Each property is first posed as an exercise (pause the video and try it) and then proved step by step: a chain of equalities from the i-th component of the left-hand side to that of the right-hand side, using in each step a single definition or a single property of the real numbers (those seen in the previous video). That way the proof holds for vectors of any size.
 
-Corresponding book section (Section 1.1.1 and Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+Corresponding book section (Section 1.1.1 and Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

@@ -73,7 +73,7 @@ Eleventh video of the first lesson of the linear algebra course.
 
 The matrix B of the video on matrices, built from the rows of A, is the transpose of A: each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we check the rewriting rule "transposing, or removing the transposition, swaps the sides of the indices", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
 
-Corresponding book section (Section 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5
+Corresponding book section (Section 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

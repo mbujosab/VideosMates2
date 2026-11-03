@@ -1,0 +1,89 @@
+# Ficha de YouTube del vídeo L01 V03 (una sección por idioma), escrita el 2026-11-03 para un vídeo ya publicado
+# (voces antiguas, anterior a las fichas). Solo metadatos: se usa siempre con --solo-metadatos, porque sus
+# subtítulos (arreglados el 2026-10-13) no se tocan, y por eso no hay campo `subtitulos`.
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V03.toml es --solo-metadatos
+# Capítulos: los de la descripción anterior (metadatos guardados en tmp/metadatos_V01-V04_antes.txt).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "kSgd-davYhw"
+video = "L01_V03_SumaDeVectores-II.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "es"
+# titulo = "L01 V03 Suma de vectores II (Español)"   # hasta el 2026-11-03
+titulo = "Interpretación geométrica de la suma | Álgebra lineal 1.3"
+titulo_miniatura = "La suma,\ngeométricamente"
+miniatura = "miniaturas/L01_V03_es.png"
+lista = "Curso de Álgebra Lineal"
+etiquetas = ["álgebra lineal", "vectores", "suma de vectores", "interpretación geométrica", "regla del paralelogramo", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Como la suma de vectores es componente a componente y conmutativa, tiene una interpretación geométrica: la regla del paralelogramo.
+
+Tercer vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:04 Propiedades sobre las que se basa la interpretación geométrica
+00:16 Interpretación de la suma en R2
+04:25 Interpretación de la suma en R3
+04:55 Interpretación de la suma en Rn
+05:52 Lo más importante son las propiedades, no la interpretación geométrica
+06:25 Créditos finales
+
+En R2 cada vector se interpreta como un punto del plano, con sus componentes como coordenadas, y se señala con una flecha desde el origen. Sumar dos vectores es seguir primero las indicaciones de una flecha y después las de la otra; como la suma es conmutativa, el orden da igual y los dos caminos forman un paralelogramo cuya diagonal es la suma. Lo mismo ocurre en R3, y en Rn sirve como esquema, aunque ya no se pueda dibujar. El vídeo insiste en que la representación de un vector es el punto, y la flecha solo una ayuda. Y en que lo fundamental no es el dibujo, sino las reglas de las que nace: el selector es distributivo respecto de la suma y la suma de números reales es conmutativa.
+
+Correspondiente sección del libro (Sección 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+El libro no trata la interpretación geométrica, solo las propiedades algebraicas de las operaciones.
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/LvcerzXX3IM
+Siguiente vídeo: https://youtu.be/SG4ZwRAIQLY
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+youtube = "yrwrxVB9uto"
+video = "../videoMath2/L01_V03_GeometricInterpretationOfAddition.mp4"   # no se sube: el vídeo ya está publicado
+idioma = "en"
+# titulo = "L01 V03 Sum of Vectors II (English)"   # hasta el 2026-11-03
+titulo = "Geometric interpretation of addition | Linear algebra 1.3"
+titulo_miniatura = "Adding,\ngeometrically"
+miniatura = "miniaturas/L01_V03_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "vectors", "vector addition", "geometric interpretation", "parallelogram rule", "mathematics", "GECO", "UCM"]
+descripcion = """
+Since vector addition is component-wise and commutative, it has a geometric interpretation: the parallelogram rule.
+
+Third video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:04 Properties on which the geometric interpretation is based
+00:16 Interpretation of addition in R2
+04:22 Interpretation of addition in R3
+04:52 Interpretation of addition in Rn
+05:49 The most important thing is the properties, not the geometric interpretation
+06:24 Final credits
+
+In R2 each vector is read as a point of the plane, with its components as coordinates, and is marked with an arrow from the origin. Adding two vectors means following the directions of one arrow and then those of the other; since addition is commutative, the order does not matter and the two paths form a parallelogram whose diagonal is the sum. The same happens in R3, and in Rn it works as a sketch, even though it can no longer be drawn. The video stresses that a vector is represented by the point, and the arrow is only an aid. And that what matters is not the picture but the rules it comes from: the selector distributes over addition, and addition of real numbers is commutative.
+
+Corresponding book section (Section 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
+The book does not cover the geometric interpretation, only the algebraic properties of the operations.
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/k-eMu1gxLRE
+Next video: https://youtu.be/SHu1-X0MWk0
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""

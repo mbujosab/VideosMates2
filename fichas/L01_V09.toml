@@ -78,7 +78,7 @@ Ninth video of the first lesson of the linear algebra course.
 
 The table with the GDP growth of five countries from the previous video is a matrix: a list of vectors, which are its columns. With three vectors of two components we build a matrix and see that, if we move them to other places in the list, we get a different matrix. A second matrix, made from the rows of the first, has the same numbers but is a different list: that is what its order (rows by columns) tells us. Hence the equality of matrices, column by column. Then the notation (square brackets around vectors separated by semicolons, the column matrix, which is not a vector, and the zero matrix).
 
-Corresponding book section (Section 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4
+Corresponding book section (Section 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

@@ -76,7 +76,7 @@ Fifth video of the first lesson of the linear algebra course.
 
 This video does not follow a section of the book: it shows with ruler and compass, in the manner of the Greek geometers, the properties of the real numbers that Section 1.2 takes for granted, and that the next video will use to study the operations with vectors. The properties are illustrated, not proved; and the geometric construction turns out to be cumbersome, which is where the modern way of operating with symbols comes from.
 
-Corresponding book section: https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
+Corresponding book section: https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 

@@ -6,7 +6,11 @@ Modos:
                                      idioma, categoría, privacidad, subtítulos y lista
   actualizar FICHA IDIOMA [--id ID]  lo mismo sobre un vídeo ya subido (p. ej. a mano en
                                      YouTube Studio), sin tocar el mp4; el id sale de la
-                                     ficha (campo `youtube`) si no se da
+                                     ficha (campo `youtube`) si no se da. Con
+                                     --solo-metadatos: título, descripción, etiquetas, idioma,
+                                     categoría, privacidad y lista, sin tocar subtítulos ni
+                                     miniatura (para añadir cada semana el «Siguiente vídeo»
+                                     al anterior, y para V01-V04, cuyos subtítulos no se tocan)
   ver        ID                      muestra título, descripción, subtítulos y listas
   listas                             todas las listas propias (también no listadas), con su id
   subtitulos ID IDIOMA FICHERO.srt   sube o sustituye solo los subtítulos de ese idioma
@@ -254,6 +258,8 @@ def main():
         q.add_argument("idioma", choices=["es", "en"])
         if modo == "actualizar":
             q.add_argument("--id", help="identificador del vídeo ya subido (si falta, el campo `youtube` de la ficha)")
+            q.add_argument("--solo-metadatos", action="store_true",
+                           help="no tocar subtítulos ni miniatura (borrar y resubir la pista deja el vídeo un rato sin ella)")
     q = sub.add_parser("ver")
     q.add_argument("id")
     sub.add_parser("listas")
@@ -287,9 +293,13 @@ def main():
         if not video_id:
             sys.exit("Falta el identificador del vídeo: --id o el campo `youtube` en la ficha")
         actualiza_metadatos(yt, d, video_id)
-    pone_subtitulos(yt, d, video_id)
+    if getattr(args, "solo_metadatos", False):
+        print("Solo metadatos: subtítulos y miniatura sin tocar")
+    else:
+        pone_subtitulos(yt, d, video_id)
     pone_en_lista(yt, d, video_id)
-    pone_miniatura(yt, d, video_id)
+    if not getattr(args, "solo_metadatos", False):
+        pone_miniatura(yt, d, video_id)
     print("Hecho:", f"https://youtu.be/{video_id}")
 
 
