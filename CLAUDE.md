@@ -211,8 +211,11 @@ Escribir las frases nuevas ya en la forma buena.
   "inicio del texto" "<bookmark mark='x'/>"` (render, injerto, render). Ojo (2026-11-03): `cache.json` acumula
   una entrada repetida, con el mismo mp3, cada vez que un render reutiliza una toma (unas 7.000 entradas por
   idioma para 1.250 mp3), y tras un injerto queda además la toma sobrante con el mismo texto: la «buena» es la
-  **primera en orden** con ese texto, nunca la más reciente. Deduplicar la caché conservando la primera entrada
-  de cada mp3 es una tarea pendiente sin prisa.
+  **primera en orden** con ese texto, nunca la más reciente. **Deduplicadas el 2026-11-03** con
+  `tmp/dedup_cache.py CACHE --escribe` (es 7.015 → 1.268 entradas, 33 → 5,6 MB; en 7.575 → 1.259, 34 → 4,9 MB;
+  copias en `tmp/cache_{es,en}_antes_dedup.json`): conserva la primera entrada de cada `input_data` (la que gana
+  la búsqueda) y la primera de cada mp3, comprueba que ninguna búsqueda cambia y que todo mp3 sigue con entrada.
+  Repetirlo cuando la caché vuelva a crecer (sin renders en marcha); una prueba de render no debe crear mp3.
 - **Una marca al principio del texto se dispara al final.** manim-voiceover
   interpola el tiempo de una marca en la posición 0 (antes de la primera
   palabra) y la manda al final del audio (aviso "TimeInterpolator received
@@ -438,12 +441,23 @@ Escribir las frases nuevas ya en la forma buena.
   `lib/client_secret_youtube.json` y `lib/token_youtube.json`
   (ignorados). Los capítulos salen de los "empieza en" del `montaje`.
   Título (formato desde el 2026-11-02, `Comprobaciones.org` pasada 6): "Tema del vídeo | Álgebra lineal 1.9" /
-  "Topic | Linear algebra 1.9", menos de 60 caracteres; V05-V08 publicados llevan aún "L01 V0N Nombre
-  (Español)" / "(English)" y se retitulan con `actualizar --id` cuando Marcos quiera, resumen de una línea, ordinal del vídeo,
+  "Topic | Linear algebra 1.9", menos de 60 caracteres; **V05-V08 retitulados el 2026-11-03** con `actualizar`
+  (título antiguo comentado en la ficha), con la descripción completa (anterior/siguiente, lista, notación con enlace
+  a V01, música, licencia, fuentes) y miniatura; V01-V04 conservan título y descripción antiguos y solo llevan la
+  miniatura nueva (`subir_youtube.py miniatura`). Al borrar y volver a subir subtítulos, YouTube tarda unos segundos
+  en liberar la pista (409 `captionExists`): el script reintenta. Resumen de una línea, ordinal del vídeo,
   capítulos, enlace a la sección del libro y a los notebooks; categoría
   Educación; listas «Curso de Álgebra Lineal» (es) y «Linear Algebra
   Course» (en), por título en la ficha; la lista antigua «Álgebra Lineal»
   (confinamiento) se deja como está hasta rehacer los determinantes.
+  Licencia: `actualizar` conserva la que tenga el vídeo (estándar de YouTube; la CC BY-SA 4.0 va en la
+  descripción y los créditos, `Comprobaciones.org` 6a).
+- **Miniaturas** (plantilla elegida por Marcos el 2026-11-03, variante F): `lib/miniatura.py` (cabecera
+  documentada) genera `miniaturas/<clave>_<idioma>.png` (van a git) con el número en un disco, el título
+  corto de la ficha (`titulo_miniatura`), «Álgebra lineal» debajo y un dibujo del vídeo (`MOTIVOS`):
+  `cd lib && ~/.venvs/manim/bin/python miniatura.py L01_V12`. La ficha la cita con `miniatura = "..."` en
+  cada idioma y `subir`/`actualizar` la envían; `subir_youtube.py miniatura ID FICHERO.png` pone solo la
+  miniatura (V01-V04, sin ficha). Para un vídeo nuevo: añadir su motivo, generar y mirar a 320 px de ancho.
 
 ## Reglas
 
@@ -485,6 +499,10 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | V10   | jue 12-11-26 | sáb 14-11-26 | «Selección de filas, columnas y componentes» (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V11   | jue 19-11-26 | sáb 21-11-26 | la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V12   | después      | después      | tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): prueba gTTS, a la espera de la revisión de Marcos |
+
+Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, y V05-V08 el título
+«Tema | Álgebra lineal 1.N». Al publicar V09 hay que añadir su enlace como «Siguiente vídeo» en la ficha de V08 y
+lanzar `actualizar` (los dos idiomas).
 
 **Recordatorio:** al empezar cada sesión, mirar la fecha. Si quedan tres días o menos para la
 próxima publicación y ese vídeo no está subido, recordárselo a Marcos antes de nada.
@@ -602,6 +620,9 @@ Al publicar un vídeo, actualizar esta tabla.
   formamos la matriz B»); dice «Tomemos una matriz A y formemos otra matriz B con dos vectores...» (Marcos: quien
   llegue suelto al vídeo no conoce B; la escena la construye en pantalla). Toma nueva por idioma, montajes es 480p/HD
   y en 480p rehechos (3:05), capítulos es en la ficha; el HD en espera su escucha del inglés.
+- **Encargo de mantenimiento para Opus** (2026-11-03, `tmp/HANDOFF_mantenimiento_y_publicados.md`): deduplicar
+  las cachés de voz, retitular y completar las descripciones de V05-V08 publicados (con Marcos para el token),
+  prototipos de miniaturas y, opcional, borrador de estructura de X00.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.

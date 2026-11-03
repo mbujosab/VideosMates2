@@ -7,14 +7,17 @@
 [comun]
 categoria = "27"        # Educación
 privacidad = "public"   # public | unlisted | private
-# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+# miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
 youtube = "w62nh5CvJtM"   # subido por la API el 2026-10-28
 video = "L01_V08_VectoresComoDatos.mp4"
 subtitulos = "L01_V08_VectoresComoDatos.srt"
 idioma = "es"
-titulo = "L01 V08 Los vectores como representación de datos (Español)"
+# titulo = "L01 V08 Los vectores como representación de datos (Español)"   # hasta el 2026-11-03
+titulo = "Los vectores como datos | Álgebra lineal 1.8"
+titulo_miniatura = "Vectores\ncomo datos"
+miniatura = "miniaturas/L01_V08_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "vectores", "datos", "combinación lineal", "suma de vectores",
              "producto por escalares", "PIB", "matemáticas", "GECO", "UCM"]
@@ -36,6 +39,14 @@ Tres amigos preparan una cena; cada receta es un vector con los ingredientes de 
 Correspondiente sección del libro (Sección 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3
 
 Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/GOqglYkmOiA
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Datos del PIB: ICAE (Instituto Complutense de Análisis Económico).
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 """
 
 [en]
@@ -43,7 +54,10 @@ youtube = "C2QvSW4yX-Y"   # subido por la API el 2026-10-31
 video = "../videoMath2/L01_V08_VectorsAsData.mp4"
 subtitulos = "../videoMath2/L01_V08_VectorsAsData.srt"
 idioma = "en"
-titulo = "L01 V08 Vectors as a representation of data (English)"
+# titulo = "L01 V08 Vectors as a representation of data (English)"   # hasta el 2026-11-03
+titulo = "Vectors as data | Linear algebra 1.8"
+titulo_miniatura = "Vectors\nas data"
+miniatura = "miniaturas/L01_V08_en.png"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "vectors", "data", "linear combination", "vector addition",
              "scalar multiplication", "GDP", "mathematics", "GECO", "UCM"]
@@ -65,4 +79,12 @@ Three friends prepare a dinner; each recipe is a vector with the ingredients for
 Corresponding book section (Section 1.3): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/cNfCZMC8QcM
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+GDP data: ICAE (Complutense Institute for Economic Analysis).
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """

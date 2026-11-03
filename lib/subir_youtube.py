@@ -11,6 +11,9 @@ Modos:
   listas                             todas las listas propias (también no listadas), con su id
   subtitulos ID IDIOMA FICHERO.srt   sube o sustituye solo los subtítulos de ese idioma
   idioma     ID es|en                cambia solo el idioma declarado (título y audio)
+  miniatura  ID FICHERO.png         pone solo la miniatura (sin tocar título ni descripción;
+                                    para los vídeos sin ficha, V01-V04). Las miniaturas las
+                                    genera lib/miniatura.py en miniaturas/
 
 La pantalla final (vídeo siguiente, suscripción) y las tarjetas no se pueden poner por la API:
 se hacen en YouTube Studio (se puede copiar la pantalla final de otro vídeo del canal).
@@ -99,7 +102,7 @@ def cuerpo(d):
         "status": {
             "privacyStatus": d["privacidad"],
             "selfDeclaredMadeForKids": False,
-            "license": "youtube",
+            "license": d.get("licencia") or "youtube",   # "creativeCommon" = CC BY de YouTube
         },
     }
 
@@ -124,6 +127,10 @@ def sube_video(yt, d):
 def actualiza_metadatos(yt, d, video_id):
     body = cuerpo(d)
     body["id"] = video_id
+    # Conservar la licencia que tenga el vídeo (la de Creative Commons se marca en Studio) salvo que la
+    # ficha diga otra: si no, cada `actualizar` la devolvería a la estándar de YouTube.
+    actual = yt.videos().list(part="status", id=video_id).execute()["items"][0]["status"]
+    body["status"]["license"] = d.get("licencia") or actual.get("license", "youtube")
     yt.videos().update(part="snippet,status", body=body).execute()
     print(f"Metadatos puestos en https://youtu.be/{video_id}: «{d['titulo']}»")
 
@@ -144,10 +151,22 @@ def pone_subtitulos(yt, d, video_id):
         if previa["snippet"]["language"] == idioma and previa["snippet"].get("trackKind") == "standard":   # no tocar las automáticas (asr)
             yt.captions().delete(id=previa["id"]).execute()
             print(f"Subtítulos ({idioma}) anteriores borrados")
-    yt.captions().insert(part="snippet", media_body=media, sync=False,
-                         body={"snippet": {"videoId": video_id, "language": idioma,
-                                           "name": NOMBRE_SUBTITULOS.get(idioma, idioma),
-                                           "isDraft": False}}).execute()
+    # Tras borrar, YouTube tarda unos segundos en soltar el nombre de la pista (409 captionExists,
+    # visto el 2026-11-03 en V05 es): se reintenta.
+    import time
+    from googleapiclient.errors import HttpError
+    for intento in range(6):
+        try:
+            yt.captions().insert(part="snippet", media_body=media, sync=False,
+                                 body={"snippet": {"videoId": video_id, "language": idioma,
+                                                   "name": NOMBRE_SUBTITULOS.get(idioma, idioma),
+                                                   "isDraft": False}}).execute()
+            break
+        except HttpError as e:
+            if e.resp.status != 409 or intento == 5:
+                raise
+            print("La pista anterior aún no se ha liberado; reintento en 5 s")
+            time.sleep(5)
     print(f"Subtítulos ({idioma}) añadidos")
 
 
@@ -183,6 +202,8 @@ def pone_en_lista(yt, d, video_id):
 def pone_miniatura(yt, d, video_id):
     from googleapiclient.http import MediaFileUpload
 
+    if d.get("miniatura") and not os.path.exists(d["miniatura"]):
+        print(f"AVISO: no existe la miniatura {d['miniatura']}; no se pone")
     if d.get("miniatura") and os.path.exists(d["miniatura"]):
         yt.thumbnails().set(videoId=video_id, media_body=MediaFileUpload(d["miniatura"])).execute()
         print("Miniatura puesta")
@@ -238,6 +259,8 @@ def main():
     sub.add_parser("listas")
     q = sub.add_parser("subtitulos", help="sube (o sustituye) solo los subtítulos de un vídeo")
     q.add_argument("id"); q.add_argument("idioma", choices=["es", "en"]); q.add_argument("srt")
+    q = sub.add_parser("miniatura", help="pone solo la miniatura de un vídeo")
+    q.add_argument("id"); q.add_argument("png")
     q = sub.add_parser("idioma", help="cambia solo el idioma declarado de un vídeo")
     q.add_argument("id"); q.add_argument("codigo", choices=["es", "en"])
     args = p.parse_args()
@@ -249,6 +272,11 @@ def main():
         return listas(yt)
     if args.modo == "subtitulos":
         return pone_subtitulos(yt, {"idioma": args.idioma, "subtitulos": os.path.abspath(args.srt)}, args.id)
+    if args.modo == "miniatura":
+        png = os.path.abspath(args.png)
+        if not os.path.exists(png):
+            sys.exit(f"No existe {png}")
+        return pone_miniatura(yt, {"miniatura": png}, args.id)
     if args.modo == "idioma":
         return pone_idioma(yt, args.id, args.codigo)
     d = lee_ficha(args.ficha, args.idioma)

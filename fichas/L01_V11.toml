@@ -8,7 +8,7 @@
 erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
 categoria = "27"        # Educación
 privacidad = "public"   # public | unlisted | private
-# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+# miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
 # youtube = ""   # rellenar tras subirlo
@@ -16,6 +16,8 @@ video = "L01_V11_Transposicion.mp4"
 subtitulos = "L01_V11_Transposicion.srt"
 idioma = "es"
 titulo = "La transposición | Álgebra lineal 1.11"
+titulo_miniatura = "La transposición"
+miniatura = "miniaturas/L01_V11_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "matrices", "matriz", "transpuesta", "transposición", "filas", "columnas",
              "matemáticas", "GECO", "UCM"]
@@ -41,7 +43,7 @@ Vídeo anterior: https://youtu.be/(id de V10, la selección, al publicarlo)
 Siguiente vídeo: (se añade al publicarlo)
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
-Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
 Música: Zeta, de Vincent Rubinetti.
 Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 """
@@ -52,6 +54,8 @@ video = "../videoMath2/L01_V11_Transposition.mp4"
 subtitulos = "../videoMath2/L01_V11_Transposition.srt"
 idioma = "en"
 titulo = "Transposition | Linear algebra 1.11"
+titulo_miniatura = "Transposition"
+miniatura = "miniaturas/L01_V11_en.png"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "matrices", "matrix", "transpose", "transposition", "rows", "columns",
              "mathematics", "GECO", "UCM"]
@@ -77,7 +81,7 @@ Previous video: https://youtu.be/(id de V10, la selección, al publicarlo)
 Next video: (added when published)
 Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
 
-This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
 Music: Zeta, by Vincent Rubinetti.
 License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """

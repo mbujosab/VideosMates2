@@ -220,8 +220,11 @@ publicar con licencia. Se comprueba sobre la ficha, los créditos y el vídeo ya
 
 1. *Licencia.* Los vídeos se publican con Creative Commons BY-SA 4.0 (Marcos, 2026-11-02:
    reconocimiento de autoría y, si se modifican, misma licencia). Va en los créditos finales
-   (=pantalla_de_creditos= en =Comunes.org=) y en la descripción de cada vídeo. En YouTube
-   Studio, marcar además la licencia del vídeo como Creative Commons.
+   (=pantalla_de_creditos= en =Comunes.org=) y en la descripción de cada vídeo. En YouTube se deja
+   la licencia estándar (decidido el 2026-11-03): la única Creative Commons que ofrece YouTube es la
+   BY 3.0, sin «compartir igual», y marcarla concedería más de lo decidido; la BY-SA 4.0 declarada en
+   la descripción y en los créditos es la que vale. =lib/subir_youtube.py actualizar= conserva la
+   licencia que tenga el vídeo (campo opcional =licencia= en la ficha para cambiarla).
 2. *Música.* La pieza es «Zeta», de Vincent Rubinetti (banda sonora de 3Blue1Brown); Marcos
    compró el derecho de uso hace un par de años. Se cita en los créditos y en la descripción
    («Música: Zeta, de Vincent Rubinetti»). Si alguna vez se cambia de pieza, comprobar la licencia
@@ -229,8 +232,9 @@ publicar con licencia. Se comprueba sobre la ficha, los créditos y el vídeo ya
 3. *Fuentes de datos.* Todo dato real que aparezca en pantalla se cita en la descripción, como en
    el libro (el PIB de V08 y V09: ICAE).
 4. *Notación del curso.* Quien llega a un vídeo suelto no conoce el selector ni los convenios del
-   libro. Cada descripción lleva una línea fija: «Este curso usa la notación del libro, explicada
-   en [vídeo de notación / vídeo 1]», con enlace. Cuando exista el vídeo de la notación (plan en
+   libro. Cada descripción lleva una línea fija: «Este curso usa la notación del libro, presentada en
+   el primer vídeo», con enlace directo a V01 (es =HWaQrbSc8WA=, en =9Je758iM6Dc=; decidido el
+   2026-11-03) y, desde que se publique V10, «y en el vídeo 1.10» con el suyo. Cuando exista el vídeo de la notación (plan en
    =NotacionNacal.org=, serie de ampliación), el enlace va a él.
 5. *Navegación.* En la descripción: enlace al vídeo anterior, al siguiente (se añade al publicarlo)
    y a la lista de reproducción del curso en ese idioma. El id del vídeo anterior está en su ficha.
@@ -240,9 +244,13 @@ publicar con licencia. Se comprueba sobre la ficha, los créditos y el vídeo ya
    caracteres. Los vídeos ya publicados se pueden retitular con
    =lib/subir_youtube.py actualizar FICHA IDIOMA --id ID= (título y descripción se editan sin
    volver a subir el vídeo).
-7. *Miniatura.* YouTube elige un fotograma al azar. Una miniatura con plantilla de la serie
-   (número de lección y vídeo, título de pocas palabras legible en un móvil) hace que la lista se
-   vea como un curso. Se genera desde el org (=miniatura= en la ficha) cuando haya plantilla.
+7. *Miniatura.* YouTube elige un fotograma al azar. Plantilla de la serie elegida el 2026-11-03
+   (variante F de =tmp/miniaturas_prototipos_DEF.png=): número «1.N» en un disco azul arriba a la
+   izquierda, título corto de dos a cuatro palabras a su derecha, dibujo del vídeo centrado debajo
+   (el mismo sitio para el disco y el título en toda la serie), «Álgebra lineal» pequeño bajo el
+   título y no en la esquina inferior derecha (ahí YouTube pone la duración). La genera
+   =lib/miniatura.py= desde la ficha (campo =titulo_miniatura= para el título corto) y la sube
+   =subir_youtube.py= con el campo =miniatura=. Todos los vídeos, desde V01.
 8. *Pantalla final.* Los últimos 15 s (créditos) llevan encima los elementos de pantalla final de
    YouTube (siguiente vídeo, lista, suscribirse). El texto de los créditos va en el tercio inferior
    y deja libre el resto; se colocan en Studio después de subir (solo se puede allí).

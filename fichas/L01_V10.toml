@@ -9,7 +9,7 @@
 erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
 categoria = "27"        # Educación
 privacidad = "public"   # public | unlisted | private
-# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+# miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
 # youtube = ""   # rellenar tras subirlo
@@ -17,6 +17,8 @@ video = "L01_V10_Seleccion.mp4"
 subtitulos = "L01_V10_Seleccion.srt"
 idioma = "es"
 titulo = "Selección de filas, columnas y componentes | Álgebra lineal 1.10"
+titulo_miniatura = "Seleccionar\nfilas y columnas"
+miniatura = "miniaturas/L01_V10_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "matrices", "matriz", "operador selector", "selector", "filas", "columnas",
              "componentes", "notación", "matemáticas", "GECO", "UCM"]
@@ -41,7 +43,7 @@ Vídeo anterior: https://youtu.be/(id de V09 al publicarlo)
 Siguiente vídeo: (se añade al publicarlo)
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
-Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo y en este: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo (https://youtu.be/HWaQrbSc8WA) y en este.
 Música: Zeta, de Vincent Rubinetti.
 Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 """
@@ -52,6 +54,8 @@ video = "../videoMath2/L01_V10_Selection.mp4"
 subtitulos = "../videoMath2/L01_V10_Selection.srt"
 idioma = "en"
 titulo = "Selecting rows, columns and components | Linear algebra 1.10"
+titulo_miniatura = "Selecting rows\nand columns"
+miniatura = "miniaturas/L01_V10_en.png"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "matrices", "matrix", "selector operator", "selector", "rows", "columns",
              "components", "notation", "mathematics", "GECO", "UCM"]
@@ -76,7 +80,7 @@ Previous video: https://youtu.be/(id de V09 al publicarlo)
 Next video: (added when published)
 Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
 
-This course uses the notation of the book (lists and the selector operator), introduced in the first video and in this one: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+This course uses the notation of the book (lists and the selector operator), introduced in the first video (https://youtu.be/9Je758iM6Dc) and in this one.
 Music: Zeta, by Vincent Rubinetti.
 License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """

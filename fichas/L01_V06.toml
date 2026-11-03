@@ -7,14 +7,17 @@
 [comun]
 categoria = "27"        # Educación
 privacidad = "public"   # public | unlisted | private
-# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+# miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
 youtube = "Hrkks90PbVE"   # https://youtu.be/Hrkks90PbVE (subido 2026-10-17)
 video = "L01_V06_PropiedadesDeLaSumaDeVectores.mp4"
 subtitulos = "L01_V06_PropiedadesDeLaSumaDeVectores.srt"
 idioma = "es"
-titulo = "L01 V06 Propiedades de la suma de vectores (Español)"
+# titulo = "L01 V06 Propiedades de la suma de vectores (Español)"   # hasta el 2026-11-03
+titulo = "Propiedades de la suma de vectores | Álgebra lineal 1.6"
+titulo_miniatura = "Propiedades\nde la suma"
+miniatura = "miniaturas/L01_V06_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "vectores", "suma de vectores", "vector nulo", "vector opuesto",
              "demostraciones", "propiedades algebraicas", "matemáticas", "GECO", "UCM"]
@@ -38,6 +41,14 @@ Cada propiedad se propone primero como ejercicio (pause el vídeo e inténtelo) 
 Correspondiente sección del libro (Sección 1.1.1 y Ejercicio 4 de la Sección 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 
 Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/nfftYHyi0hU
+Siguiente vídeo: https://youtu.be/GOqglYkmOiA
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 """
 
 [en]
@@ -45,7 +56,10 @@ youtube = "WudpCJUYBiA"   # https://youtu.be/WudpCJUYBiA (subido 2026-10-17)
 video = "../videoMath2/L01_V06_PropertiesOfVectorAddition.mp4"
 subtitulos = "../videoMath2/L01_V06_PropertiesOfVectorAddition.srt"
 idioma = "en"
-titulo = "L01 V06 Properties of vector addition (English)"
+# titulo = "L01 V06 Properties of vector addition (English)"   # hasta el 2026-11-03
+titulo = "Properties of vector addition | Linear algebra 1.6"
+titulo_miniatura = "Properties\nof addition"
+miniatura = "miniaturas/L01_V06_en.png"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "vectors", "vector addition", "zero vector", "opposite vector",
              "proofs", "algebraic properties", "mathematics", "GECO", "UCM"]
@@ -69,4 +83,12 @@ Each property is first posed as an exercise (pause the video and try it) and the
 Corresponding book section (Section 1.1.1 and Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/gAWXJVMWO7M
+Next video: https://youtu.be/cNfCZMC8QcM
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """

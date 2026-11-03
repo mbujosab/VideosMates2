@@ -7,14 +7,17 @@
 [comun]
 categoria = "27"        # Educación
 privacidad = "public"   # public | unlisted | private
-# miniatura = "tmp/miniatura.png"   # opcional (jpg o png, 1280x720)
+# miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
 youtube = "GOqglYkmOiA"   # subido por la API el 2026-10-22
 video = "L01_V07_PropiedadesDelProductoPorEscalares.mp4"
 subtitulos = "L01_V07_PropiedadesDelProductoPorEscalares.srt"
 idioma = "es"
-titulo = "L01 V07 Propiedades del producto por escalares (Español)"
+# titulo = "L01 V07 Propiedades del producto por escalares (Español)"   # hasta el 2026-11-03
+titulo = "Propiedades del producto por escalares | Álgebra lineal 1.7"
+titulo_miniatura = "Propiedades\ndel producto"
+miniatura = "miniaturas/L01_V07_es.png"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "vectores", "producto por escalares", "propiedad distributiva",
              "propiedad asociativa", "demostraciones", "propiedades algebraicas", "matemáticas", "GECO", "UCM"]
@@ -38,6 +41,14 @@ Como en el vídeo anterior, cada propiedad se propone primero como ejercicio (pa
 Correspondiente sección del libro (Ejercicio 4 de la Sección 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 
 Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/Hrkks90PbVE
+Siguiente vídeo: https://youtu.be/w62nh5CvJtM
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
 """
 
 [en]
@@ -45,7 +56,10 @@ youtube = "cNfCZMC8QcM"   # subido por la API el 2026-10-24
 video = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.mp4"
 subtitulos = "../videoMath2/L01_V07_PropertiesOfScalarMultiplication.srt"
 idioma = "en"
-titulo = "L01 V07 Properties of scalar multiplication (English)"
+# titulo = "L01 V07 Properties of scalar multiplication (English)"   # hasta el 2026-11-03
+titulo = "Properties of scalar multiplication | Linear algebra 1.7"
+titulo_miniatura = "Properties\nof scaling"
+miniatura = "miniaturas/L01_V07_en.png"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "vectors", "scalar multiplication", "distributive property",
              "associative property", "proofs", "algebraic properties", "mathematics", "GECO", "UCM"]
@@ -69,4 +83,12 @@ As in the previous video, each property is first posed as an exercise (pause the
 Corresponding book section (Exercise 4 of Section 1.2.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/WudpCJUYBiA
+Next video: https://youtu.be/C2QvSW4yX-Y
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """
