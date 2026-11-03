@@ -79,7 +79,7 @@ CAMPANITA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sonidos", 
 
 
 class Panel:
-    """Panel de herramientas como el de V06-V07 (copia del PanelV10 de V10), con una pieza a cada lado:
+    """Panel de herramientas como el de V06-V07 (copia del PanelV10 de V11), con una pieza a cada lado:
     [(cabecera, clave, fórmula), ...]. Pista (amarillo y recuadro), parpadeo antes de cada paso y
     contador de usos con campanita."""
     def __init__(self, escena, piezas, y_sup=2.95, font_size=36):
@@ -119,7 +119,7 @@ class Panel:
             self.escena.play(FadeIn(nuevo, scale=0.5), run_time=run_time)
         self.contadores[clave] = nuevo
 
-class L01_V11_TiposDeMatrices(MiEscenaConVoz):
+class L01_V12_TiposDeMatrices(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
@@ -437,9 +437,13 @@ class L01_V11_TiposDeMatrices(MiEscenaConVoz):
             marco = SurroundingRectangle(enunciado[1], color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(marco), Indicate(enunciado[1], color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hemos usado dos veces la regla de los índices y dos veces la definición de matriz diagonal. En particular, la matriz identidad, que es diagonal y cuadrada, es simétrica.""",
-                                    """We have used the index rule twice and the definition of a diagonal matrix twice. In particular, the identity matrix, which is a square diagonal matrix, is symmetric.""")) as tracker:
-            self.play(*[Indicate(panel.contadores[c], color=COLOR_ESCALAR) for c in ("regla", "diag")], run_time=1.2)
+        # cada contador se señala cuando la voz lo nombra, no los dos a la vez (regla de V11, Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Hemos usado <bookmark mark='a'/> dos veces la regla de los índices <bookmark mark='b'/> y dos veces la definición de matriz diagonal. En particular, la matriz identidad, que es diagonal y cuadrada, es simétrica.""",
+                                    """We have used <bookmark mark='a'/> the index rule twice <bookmark mark='b'/> and the definition of a diagonal matrix twice. In particular, the identity matrix, which is a square diagonal matrix, is symmetric.""")) as tracker:
+            self.wait_until_bookmark("a")
+            self.play(Indicate(panel.contadores["regla"], color=COLOR_ESCALAR), run_time=1.0)
+            self.wait_until_bookmark("b")
+            self.play(Indicate(panel.contadores["diag"], color=COLOR_ESCALAR), run_time=1.0)
         
         self.pausa_media()
 
@@ -482,7 +486,7 @@ class L01_V11_TiposDeMatrices(MiEscenaConVoz):
         self.creditos_finales()
 
 
-class L01_V11_E00_Portada(MiEscenaConVoz):
+class L01_V12_E00_Portada(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
@@ -491,7 +495,7 @@ class L01_V11_E00_Portada(MiEscenaConVoz):
         self.wait(4.5)
 
 
-class L01_V11_E01_Cuadradas(MiEscenaConVoz):
+class L01_V12_E01_Cuadradas(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
@@ -526,7 +530,7 @@ class L01_V11_E01_Cuadradas(MiEscenaConVoz):
         self.pausa_media()
 
 
-class L01_V11_E02_Diagonales(MiEscenaConVoz):
+class L01_V12_E02_Diagonales(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         # primero la diagonal de una matriz cualquiera; la cabecera cambia al definir las matrices diagonales (Marcos, 2026-11-02)
@@ -617,7 +621,7 @@ class L01_V11_E02_Diagonales(MiEscenaConVoz):
         self.pausa_media()
 
 
-class L01_V11_E03_Simetricas(MiEscenaConVoz):
+class L01_V12_E03_Simetricas(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Matrices simétricas", "Symmetric matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -718,7 +722,7 @@ class L01_V11_E03_Simetricas(MiEscenaConVoz):
         self.pausa_media()
 
 
-class L01_V11_E04_DiagonalSimetrica(MiEscenaConVoz):
+class L01_V12_E04_DiagonalSimetrica(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Diagonal y cuadrada, luego simétrica", "Square diagonal, hence symmetric"), font_size=40).set_color(COLOR_TITULO).to_edge(UP, buff=0.25)
@@ -804,14 +808,18 @@ class L01_V11_E04_DiagonalSimetrica(MiEscenaConVoz):
             marco = SurroundingRectangle(enunciado[1], color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(marco), Indicate(enunciado[1], color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hemos usado dos veces la regla de los índices y dos veces la definición de matriz diagonal. En particular, la matriz identidad, que es diagonal y cuadrada, es simétrica.""",
-                                    """We have used the index rule twice and the definition of a diagonal matrix twice. In particular, the identity matrix, which is a square diagonal matrix, is symmetric.""")) as tracker:
-            self.play(*[Indicate(panel.contadores[c], color=COLOR_ESCALAR) for c in ("regla", "diag")], run_time=1.2)
+        # cada contador se señala cuando la voz lo nombra, no los dos a la vez (regla de V11, Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Hemos usado <bookmark mark='a'/> dos veces la regla de los índices <bookmark mark='b'/> y dos veces la definición de matriz diagonal. En particular, la matriz identidad, que es diagonal y cuadrada, es simétrica.""",
+                                    """We have used <bookmark mark='a'/> the index rule twice <bookmark mark='b'/> and the definition of a diagonal matrix twice. In particular, the identity matrix, which is a square diagonal matrix, is symmetric.""")) as tracker:
+            self.wait_until_bookmark("a")
+            self.play(Indicate(panel.contadores["regla"], color=COLOR_ESCALAR), run_time=1.0)
+            self.wait_until_bookmark("b")
+            self.play(Indicate(panel.contadores["diag"], color=COLOR_ESCALAR), run_time=1.0)
         
         self.pausa_media()
 
 
-class L01_V11_E05_Resumen(MiEscenaConVoz):
+class L01_V12_E05_Resumen(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)

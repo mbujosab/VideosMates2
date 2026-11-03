@@ -6,8 +6,8 @@ Extrae la narración (los tr() dentro de self.voiceover) escena a escena, como e
 es una pregunta para la revisión, no un error seguro.
 
 Uso (desde la raíz del repositorio):
-  python3 lib/revisa_guion.py lib/L01_V10_Transposicion.py
-  python3 lib/revisa_guion.py lib/L01_V10_Transposicion.py --anterior lib/L01_V09_MatricesFilasYColumnas.py
+  python3 lib/revisa_guion.py lib/L01_V11_Transposicion.py
+  python3 lib/revisa_guion.py lib/L01_V11_Transposicion.py --anterior lib/L01_V10_Seleccion.py
   python3 lib/revisa_guion.py FICHERO.py --idioma en --ambiguas order,rank --max-palabras 22
 """
 import argparse, ast, difflib, re, sys

@@ -110,7 +110,7 @@ class PanelV10:
             self.escena.play(FadeIn(nuevo, scale=0.5), run_time=run_time)
         self.contadores[clave] = nuevo
 
-class L01_V10_Transposicion(MiEscenaConVoz):
+class L01_V11_Transposicion(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
@@ -138,8 +138,10 @@ class L01_V10_Transposicion(MiEscenaConVoz):
                                     """In this video we will see an operation on matrices: transposition.""")) as tracker:
             self.play(Write(titulo), run_time=1.2)
         
-        with self.voiceover(text=tr("""En el vídeo anterior formamos la matriz B con dos vectores: <bookmark mark='x'/> el primero llevaba los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
-                                    """In the previous video we built the matrix B with two vectors: <bookmark mark='x'/> the first one carried the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
+        # sin remitir a V09 («Al presentar las matrices formamos la matriz B»): quien llegue suelto al vídeo no conoce B; la
+        # escena la construye en pantalla, así que se dice como construcción presente (Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Tomemos una matriz A y formemos otra matriz B con dos vectores: <bookmark mark='x'/> el primero lleva los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
+                                    """Take a matrix A and build another matrix B with two vectors: <bookmark mark='x'/> the first one carries the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
             self.play(FadeIn(f_A), FadeIn(f_T[0]), FadeIn(T.get_brackets()), run_time=1)
             for i, marca in enumerate(["x", "y"]):
                 self.wait_until_bookmark(marca)
@@ -386,9 +388,13 @@ class L01_V10_Transposicion(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices],
                       Create(marco), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hemos usado una vez la definición de transpuesta y una vez lo que vimos sobre sus filas.""",
-                                    """We have used the definition of the transpose once, and what we saw about its rows once.""")) as tracker:
-            self.play(*[Indicate(panel.contadores[c], color=COLOR_ESCALAR) for c in ("def", "filas")], run_time=1.2)
+        # cada contador se señala cuando la voz lo nombra, no los dos a la vez (Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Hemos usado <bookmark mark='a'/> una vez la definición de transpuesta <bookmark mark='b'/> y una vez lo que vimos sobre sus filas.""",
+                                    """We have used <bookmark mark='a'/> the definition of the transpose once, <bookmark mark='b'/> and what we saw about its rows once.""")) as tracker:
+            self.wait_until_bookmark("a")
+            self.play(Indicate(panel.contadores["def"], color=COLOR_ESCALAR), run_time=1.0)
+            self.wait_until_bookmark("b")
+            self.play(Indicate(panel.contadores["filas"], color=COLOR_ESCALAR), run_time=1.0)
         
         self.pausa_media()
 
@@ -421,7 +427,7 @@ class L01_V10_Transposicion(MiEscenaConVoz):
         self.creditos_finales()
 
 
-class L01_V10_E00_Portada(MiEscenaConVoz):
+class L01_V11_E00_Portada(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
@@ -430,7 +436,7 @@ class L01_V10_E00_Portada(MiEscenaConVoz):
         self.wait(4.5)
 
 
-class L01_V10_E01_Transposicion(MiEscenaConVoz):
+class L01_V11_E01_Transposicion(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
@@ -450,8 +456,10 @@ class L01_V10_E01_Transposicion(MiEscenaConVoz):
                                     """In this video we will see an operation on matrices: transposition.""")) as tracker:
             self.play(Write(titulo), run_time=1.2)
         
-        with self.voiceover(text=tr("""En el vídeo anterior formamos la matriz B con dos vectores: <bookmark mark='x'/> el primero llevaba los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
-                                    """In the previous video we built the matrix B with two vectors: <bookmark mark='x'/> the first one carried the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
+        # sin remitir a V09 («Al presentar las matrices formamos la matriz B»): quien llegue suelto al vídeo no conoce B; la
+        # escena la construye en pantalla, así que se dice como construcción presente (Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Tomemos una matriz A y formemos otra matriz B con dos vectores: <bookmark mark='x'/> el primero lleva los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
+                                    """Take a matrix A and build another matrix B with two vectors: <bookmark mark='x'/> the first one carries the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
             self.play(FadeIn(f_A), FadeIn(f_T[0]), FadeIn(T.get_brackets()), run_time=1)
             for i, marca in enumerate(["x", "y"]):
                 self.wait_until_bookmark(marca)
@@ -501,7 +509,7 @@ class L01_V10_E01_Transposicion(MiEscenaConVoz):
         self.pausa_media()
 
 
-class L01_V10_E02_CambioDeIndices(MiEscenaConVoz):
+class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Transponer es cambiar de lado los índices", "Transposing swaps the sides of the indices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -632,7 +640,7 @@ class L01_V10_E02_CambioDeIndices(MiEscenaConVoz):
         self.pausa_media()
 
 
-class L01_V10_E03_TranspuestaDeLaTranspuesta(MiEscenaConVoz):
+class L01_V11_E03_TranspuestaDeLaTranspuesta(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("La transpuesta de la transpuesta", "The transpose of the transpose"), font_size=40).set_color(COLOR_TITULO).to_edge(UP, buff=0.25)
@@ -700,14 +708,18 @@ class L01_V10_E03_TranspuestaDeLaTranspuesta(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices],
                       Create(marco), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
         
-        with self.voiceover(text=tr("""Hemos usado una vez la definición de transpuesta y una vez lo que vimos sobre sus filas.""",
-                                    """We have used the definition of the transpose once, and what we saw about its rows once.""")) as tracker:
-            self.play(*[Indicate(panel.contadores[c], color=COLOR_ESCALAR) for c in ("def", "filas")], run_time=1.2)
+        # cada contador se señala cuando la voz lo nombra, no los dos a la vez (Marcos, 2026-11-03)
+        with self.voiceover(text=tr("""Hemos usado <bookmark mark='a'/> una vez la definición de transpuesta <bookmark mark='b'/> y una vez lo que vimos sobre sus filas.""",
+                                    """We have used <bookmark mark='a'/> the definition of the transpose once, <bookmark mark='b'/> and what we saw about its rows once.""")) as tracker:
+            self.wait_until_bookmark("a")
+            self.play(Indicate(panel.contadores["def"], color=COLOR_ESCALAR), run_time=1.0)
+            self.wait_until_bookmark("b")
+            self.play(Indicate(panel.contadores["filas"], color=COLOR_ESCALAR), run_time=1.0)
         
         self.pausa_media()
 
 
-class L01_V10_E04_Resumen(MiEscenaConVoz):
+class L01_V11_E04_Resumen(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)

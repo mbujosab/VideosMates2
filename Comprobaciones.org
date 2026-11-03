@@ -51,7 +51,9 @@ Sobre el guion en prosa, **sin mirar la pantalla**.
 5. *Ilustra o demuestra.* Se dice explícitamente qué hace cada escena.
 6. *Notación.* Nada aparece en pantalla (ni se nombra) antes de presentarse; ninguna letra sin
    definir (V10: $[\Vect{a}]$ sin haber presentado $\Vect{a}$).
-7. *Esqueleto.* Portada, arranque que dice qué se va a ver en este vídeo (no lo que se vio en el
+7. *Esqueleto y autonomía.* Quien llegue suelto desde una búsqueda debe poder seguir el vídeo: ningún
+   objeto de un vídeo anterior aparece sin construirlo en pantalla (V11, 2026-11-03: «la matriz B»).
+   Portada, arranque que dice qué se va a ver en este vídeo (no lo que se vio en el
    anterior: lo de vídeos anteriores se recuerda solo en el momento en que se usa; V11, 2026-11-02),
    cuerpo, resumen con el resultado en pantalla, una frase que anuncia el siguiente, créditos.
 8. *Lógica de cada demostración* (2026-11-01). Cada paso se apoya en algo ya establecido: una
@@ -182,11 +184,14 @@ Lo que no depende de cuándo cae cada palabra. Las marcas sí se colocan ya en e
    (V10: al acortar «Hemos demostrado que transponer intercambia los índices...», el resaltado de
    las j caía con la voz ya callada).
 3. *Marcas al principio de un texto*: se disparan al final (=CLAUDE.md=).
-4. *La pantalla acompaña cada palabra* (2026-11-03, regla en =CLAUDE.md=; modelos: V09 escena 7 y V10
-   escena 2). Por cada frase: cada cosa nombrada tiene su marca y su resaltado sostenido en el color de la
+4. *La pantalla acompaña cada palabra* (2026-11-03, regla en =CLAUDE.md=; modelos: V10 escena 2 y V11
+   escena 2; hasta la renumeración del 2026-11-03, V09 escena 7 y V10 escena 2). Por cada frase: cada cosa nombrada tiene su marca y su resaltado sostenido en el color de la
    serie; cada acción dicha arranca en su verbo; cada regla recordada se escenifica con la animación con que
-   se enseñó; la disposición de la pantalla sigue el orden de la fórmula. Tira a 3-4 fps recortada a la
-   fórmula por cada frase con marcas.
+   se enseñó; la disposición de la pantalla sigue el orden de la fórmula; cuando la voz nombra alternativas
+   («primero la fila o la columna»), solo se mueve la expresión que no muestra ya la alternativa nombrada;
+   cuando enumera («una vez la definición y una vez lo de sus filas»), cada elemento se señala en su palabra,
+   nunca todos a la vez (V11, cuenta final de los contadores, 2026-11-03).
+   Tira a 3-4 fps recortada a la fórmula por cada frase con marcas.
 
 * Pasada 5. Audio y entrega (fase B)
 
@@ -195,7 +200,9 @@ Con Azure a 480p; los puntos 6 y 7, también sobre el HD.
 1. =tmp/pausas_raras.py CACHE [horas]=: silencios >= 300 ms sin puntuación.
 2. =tmp/tomas_cortadas.py CACHE=: tomas que Azure corta a media palabra.
 3. Letras sueltas: =tmp/mide_cache.py= y las marcas de palabra de Azure; umbral práctico 150 ms.
-4. Si una toma sale mal: tiradas (=tmp/tiradas.py=) y quedarse con la mejor (=CLAUDE.md=).
+4. Si una toma sale mal: tiradas (=tmp/tiradas.py=) y quedarse con la mejor (=CLAUDE.md=). Marcas
+   nuevas o movidas: =tmp/injerta_marca.py= (la toma buena es la primera en orden de la caché; =cache.json=
+   acumula entradas repetidas, no contar entradas como control).
 5. Escuchar el vídeo entero en los dos idiomas (junto con la pasada 3).
 6. Música solo en la entrada y la salida; voz a -16 LUFS (lo hace =montaje=).
 7. Subtítulos sin marcas ni comillas de letras; capítulos de la ficha con los «empieza en» del

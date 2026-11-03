@@ -1,4 +1,4 @@
-#+TITLE: Descartes de L01-V10 (selección y transposición)
+#+TITLE: Descartes de L01-V11 (transposición; hasta el 2026-11-03, L01-V10 selección y transposición)
 
 * Escena 4 larga (vector, matriz columna y matriz fila), sustituida el 2026-10-30
 

@@ -2,7 +2,7 @@
 # Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V09.toml es --id ID   # tras subirlo a mano en Studio
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py actualizar fichas/L01_V09.toml en --id ID
-# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60 del 2026-11-02, los dos idiomas).
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (versión 1080p60 del 2026-11-03, tras la partición: las escenas 6-7 pasaron a V10).
 
 [comun]
 erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
@@ -15,10 +15,10 @@ privacidad = "public"   # public | unlisted | private
 video = "L01_V09_MatricesFilasYColumnas.mp4"
 subtitulos = "L01_V09_MatricesFilasYColumnas.srt"
 idioma = "es"
-titulo = "Matrices: filas y columnas | Álgebra lineal 1.9"
+titulo = "Matrices | Álgebra lineal 1.9"
 lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
 etiquetas = ["álgebra lineal", "matrices", "matriz", "filas", "columnas", "orden de una matriz",
-             "operador selector", "componentes", "vectores", "matemáticas", "GECO", "UCM"]
+             "matriz columna", "matriz nula", "vectores", "matemáticas", "GECO", "UCM"]
 descripcion = """
 Una matriz es una lista ordenada de vectores con el mismo número de componentes: sus columnas.
 
@@ -30,12 +30,10 @@ Noveno vídeo de la lección primera del curso de álgebra lineal.
 00:56 El orden de una matriz
 01:51 Igualdad de matrices
 02:09 Notación: corchetes, matriz columna y matriz nula
-03:25 Filas y columnas con el operador selector
-04:02 Componentes: primero la fila o primero la columna
-05:23 Resumen
-06:03 Créditos finales
+03:25 Resumen
+03:49 Créditos finales
 
-La tabla con el crecimiento del PIB de cinco países del vídeo anterior es una matriz: una lista de vectores, que son sus columnas. Con tres vectores de dos componentes formamos una matriz y vemos que, si los cambiamos de sitio en la lista, la matriz es otra. Una segunda matriz, hecha con las filas de la primera, tiene los mismos números pero es una lista distinta: eso es lo que indica el orden (filas por columnas). De ahí la igualdad de matrices, columna a columna. Después, la notación (corchetes alrededor de vectores separados por puntos y comas, la matriz columna, que no es un vector, y la matriz nula) y el operador selector, que por la derecha selecciona una columna y por la izquierda una fila. Cada componente está a la vez en una fila y en una columna, así que se puede seleccionar primero la fila o primero la columna, con el mismo resultado: es una propiedad asociativa, y por eso el selector se escribe a ambos lados de la matriz sin paréntesis.
+La tabla con el crecimiento del PIB de cinco países del vídeo anterior es una matriz: una lista de vectores, que son sus columnas. Con tres vectores de dos componentes formamos una matriz y vemos que, si los cambiamos de sitio en la lista, la matriz es otra. Una segunda matriz, hecha con las filas de la primera, tiene los mismos números pero es una lista distinta: eso es lo que indica el orden (filas por columnas). De ahí la igualdad de matrices, columna a columna. Después, la notación (corchetes alrededor de vectores separados por puntos y comas, la matriz columna, que no es un vector, y la matriz nula).
 
 Correspondiente sección del libro (Sección 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4
 
@@ -56,10 +54,10 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 video = "../videoMath2/L01_V09_MatricesRowsAndColumns.mp4"
 subtitulos = "../videoMath2/L01_V09_MatricesRowsAndColumns.srt"
 idioma = "en"
-titulo = "Matrices: rows and columns | Linear algebra 1.9"
+titulo = "Matrices | Linear algebra 1.9"
 lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "matrices", "matrix", "rows", "columns", "order of a matrix",
-             "selector operator", "components", "vectors", "mathematics", "GECO", "UCM"]
+             "column matrix", "zero matrix", "vectors", "mathematics", "GECO", "UCM"]
 descripcion = """
 A matrix is an ordered list of vectors with the same number of components: its columns.
 
@@ -71,12 +69,10 @@ Ninth video of the first lesson of the linear algebra course.
 00:55 The order of a matrix
 01:52 Equality of matrices
 02:06 Notation: square brackets, column matrix and zero matrix
-03:19 Rows and columns with the selector operator
-03:55 Components: row first or column first
-05:18 Key takeaways
-05:56 Closing credits
+03:19 Key takeaways
+03:44 Closing credits
 
-The table with the GDP growth of five countries from the previous video is a matrix: a list of vectors, which are its columns. With three vectors of two components we build a matrix and see that, if we move them to other places in the list, we get a different matrix. A second matrix, made from the rows of the first, has the same numbers but is a different list: that is what its order (rows by columns) tells us. Hence the equality of matrices, column by column. Then the notation (square brackets around vectors separated by semicolons, the column matrix, which is not a vector, and the zero matrix) and the selector operator, which selects a column from the right and a row from the left. Each component lies both in a row and in a column, so we can select the row or the column first, with the same result: it is an associative property, and that is why the selector is written on both sides of the matrix without parentheses.
+The table with the GDP growth of five countries from the previous video is a matrix: a list of vectors, which are its columns. With three vectors of two components we build a matrix and see that, if we move them to other places in the list, we get a different matrix. A second matrix, made from the rows of the first, has the same numbers but is a different list: that is what its order (rows by columns) tells us. Hence the equality of matrices, column by column. Then the notation (square brackets around vectors separated by semicolons, the column matrix, which is not a vector, and the zero matrix).
 
 Corresponding book section (Section 1.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4
 

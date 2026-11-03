@@ -1,4 +1,4 @@
-#+TITLE: Lección 1 del curso - Vídeo 10: la transposición
+#+TITLE: Lección 1 del curso - Vídeo 11: la transposición
 #+AUTHOR: Marcos Bujosa
 #+LANGUAGE: es
 #+STARTUP: show4levels
@@ -23,14 +23,18 @@
 #+END_SRC
 
 
-* La transposición - V10
+* La transposición - V11
+
+Hasta el 2026-11-03 era V10 (=L01-V10-Transposicion.org=): la partición de
+V09 dio a la selección un vídeo propio (=L01-V10-Seleccion.org=) y la
+transposición pasó a V11.
 
 Cubre la Sección 1.4.5 del libro (la transposición) y la transparencia
 "Matrices transpuestas" de las clases de Marcos (lección 3 en clase).
 Estructura aprobada por Marcos el 2026-10-18 y reducida el 2026-11-02:
 las dos escenas del selector (una componente está en una fila y en una
 columna; primero la fila o primero la columna, y por eso se quitan los
-paréntesis) pasaron a V09 (escena 7), porque vistos seguidos V09 imponía
+paréntesis) pasaron a V09 (escena 7; desde el 2026-11-03, V10, escena 2), porque vistos seguidos V09 imponía
 la notación sin paréntesis y V10 la justificaba un vídeo después. Queda
 una sola cuestión, la transposición:
 
@@ -39,23 +43,23 @@ una sola cuestión, la transposición:
    una matriz columna es una matriz fila (una frase; lo demás ya está en V09);
 2. la regla "transponer = cambiar de lado los índices", demostrada paso a
    paso (ida y vuelta); usa «da igual el orden de selección» recordándolo
-   de V09;
+   del vídeo anterior (V10, la selección);
 3. $\TransP*{\MatT{A}}=\Mat{A}$ como ejercicio con la tarjeta de pausa
    (pista y pausa);
-4. resumen y anuncio de V11.
+4. resumen y anuncio de V12.
 
 Fuera de V10 (decisión del 2026-10-18): el escalar a la derecha
 ($\Vect{a}\lambda$) y las dos reglas de reescritura con escalares de
-1.4.4 van a V13, junto a las operaciones por filas (reparto del
+1.4.4 van a V14, junto a las operaciones por filas (reparto del
 2026-11-02), y la notación como programa, a X03. Las escenas de V10
-anteriores al 2026-11-02 están en =ZZ_Basura_L01_V10.org=.
+anteriores al 2026-11-02 están en =ZZ_Basura_L01_V11.org=.
 
 En inglés: "transposition", "transpose" (la matriz), "row matrix",
 "column matrix".
 
 Este fichero es una *fuente única bilingüe* (véase la plantilla
-=LXX-VYY-NombreVideo.org=): genera =./lib/L01_V10_Transposicion.py=
-(español) y =../videoMath2/lib/L01_V10_Transposition.py= (inglés).
+=LXX-VYY-NombreVideo.org=): genera =./lib/L01_V11_Transposicion.py=
+(español) y =../videoMath2/lib/L01_V11_Transposition.py= (inglés).
 
 ** Guion (escenas)
 
@@ -65,13 +69,13 @@ Este fichero es una *fuente única bilingüe* (véase la plantilla
 |      1 | Arranque; la transposición; orden $n\times m$; matriz columna y matriz fila |        |
 |      2 | Transponer = cambiar de lado los índices (ida); filas de $\MatT{A}$ (vuelta) |    |
 |      3 | $\TransP*{\MatT{A}}=\Mat{A}$ con panel, como V06-V07                     | 1      |
-|      4 | Resumen y anuncio de V11                                                  |        |
+|      4 | Resumen y anuncio de V12                                                  |        |
 
 ** Ensamblado de los ficheros de python (uno por idioma)
 
 #+caption: Fichero de python del vídeo en español
 #+name: Fichero en español
-#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V10_Transposicion.py
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V11_Transposicion.py
 from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es")
 
 <<Título del vídeo>>
@@ -83,7 +87,7 @@ from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es
 
 #+caption: Fichero de python del vídeo en inglés
 #+name: Fichero en inglés
-#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V10_Transposition.py
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V11_Transposition.py
 from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "en")
 
 <<Título del vídeo>>
@@ -99,7 +103,7 @@ from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "en
 #+caption: Vídeo completo y escenas separadas
 #+name: Clases de las escenas
 #+BEGIN_SRC python :noweb no-export :eval no
-class L01_V10_Transposicion(MiEscenaConVoz):
+class L01_V11_Transposicion(MiEscenaConVoz):
     def construct(self):
         <<Portada>>
 
@@ -124,27 +128,27 @@ class L01_V10_Transposicion(MiEscenaConVoz):
         self.creditos_finales()
 
 
-class L01_V10_E00_Portada(MiEscenaConVoz):
+class L01_V11_E00_Portada(MiEscenaConVoz):
     def construct(self):
         <<Portada>>
 
 
-class L01_V10_E01_Transposicion(MiEscenaConVoz):
+class L01_V11_E01_Transposicion(MiEscenaConVoz):
     def construct(self):
         <<Primera escena>>
 
 
-class L01_V10_E02_CambioDeIndices(MiEscenaConVoz):
+class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
     def construct(self):
         <<Segunda escena>>
 
 
-class L01_V10_E03_TranspuestaDeLaTranspuesta(MiEscenaConVoz):
+class L01_V11_E03_TranspuestaDeLaTranspuesta(MiEscenaConVoz):
     def construct(self):
         <<Tercera escena>>
 
 
-class L01_V10_E04_Resumen(MiEscenaConVoz):
+class L01_V11_E04_Resumen(MiEscenaConVoz):
     def construct(self):
         <<Cuarta escena>>
 
@@ -322,8 +326,10 @@ with self.voiceover(text=tr("""En este vídeo veremos una operación con matrice
                             """In this video we will see an operation on matrices: transposition.""")) as tracker:
     self.play(Write(titulo), run_time=1.2)
 
-with self.voiceover(text=tr("""En el vídeo anterior formamos la matriz B con dos vectores: <bookmark mark='x'/> el primero llevaba los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
-                            """In the previous video we built the matrix B with two vectors: <bookmark mark='x'/> the first one carried the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
+# sin remitir a V09 («Al presentar las matrices formamos la matriz B»): quien llegue suelto al vídeo no conoce B; la
+# escena la construye en pantalla, así que se dice como construcción presente (Marcos, 2026-11-03)
+with self.voiceover(text=tr("""Tomemos una matriz A y formemos otra matriz B con dos vectores: <bookmark mark='x'/> el primero lleva los números de la primera fila de A, <bookmark mark='y'/> y el segundo, los de la segunda.""",
+                            """Take a matrix A and build another matrix B with two vectors: <bookmark mark='x'/> the first one carries the numbers of the first row of A, <bookmark mark='y'/> and the second one, those of the second row.""")) as tracker:
     self.play(FadeIn(f_A), FadeIn(f_T[0]), FadeIn(T.get_brackets()), run_time=1)
     for i, marca in enumerate(["x", "y"]):
         self.wait_until_bookmark(marca)
@@ -385,7 +391,7 @@ regla se vuelven a poner los paréntesis, $\elemRp{\VectTF{A}{i}}{j}=
 \elemLp{\VectC{A}{i}}{j}$, y como eso vale para cualquier componente,
 el índice $j$ desaparece: $\elemLp{\MatT{A}}{i}=\VectC{A}{i}$. La escena
 3 se apoya en la definición y en este resultado. La versión anterior
-(cadena de cuatro pasos) está en =ZZ_Basura_L01_V10.org=.
+(cadena de cuatro pasos) está en =ZZ_Basura_L01_V11.org=.
 
 #+name: Segunda escena
 #+BEGIN_SRC python :eval no
@@ -597,18 +603,22 @@ with self.voiceover(text=tr("""Como esto es cierto para <bookmark mark='c'/> cua
     self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices],
               Create(marco), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
 
-with self.voiceover(text=tr("""Hemos usado una vez la definición de transpuesta y una vez lo que vimos sobre sus filas.""",
-                            """We have used the definition of the transpose once, and what we saw about its rows once.""")) as tracker:
-    self.play(*[Indicate(panel.contadores[c], color=COLOR_ESCALAR) for c in ("def", "filas")], run_time=1.2)
+# cada contador se señala cuando la voz lo nombra, no los dos a la vez (Marcos, 2026-11-03)
+with self.voiceover(text=tr("""Hemos usado <bookmark mark='a'/> una vez la definición de transpuesta <bookmark mark='b'/> y una vez lo que vimos sobre sus filas.""",
+                            """We have used <bookmark mark='a'/> the definition of the transpose once, <bookmark mark='b'/> and what we saw about its rows once.""")) as tracker:
+    self.wait_until_bookmark("a")
+    self.play(Indicate(panel.contadores["def"], color=COLOR_ESCALAR), run_time=1.0)
+    self.wait_until_bookmark("b")
+    self.play(Indicate(panel.contadores["filas"], color=COLOR_ESCALAR), run_time=1.0)
 
 self.pausa_media()
 #+END_SRC
 
-*** Escena 4 - Resumen y anuncio de V11
+*** Escena 4 - Resumen y anuncio de V12
 
-Las dos fórmulas del vídeo (desde el 2026-11-02 las del selector están en el resumen de V09). Anuncio de V11 (tipos de
-matrices; la suma y el producto por un escalar pasan a V12 y las reglas
-con escalares a V13, reparto del 2026-11-02).
+Las dos fórmulas del vídeo (desde el 2026-11-02 las del selector están en el resumen de V09, y desde el 2026-11-03 en el de V10). Anuncio de V12 (tipos de
+matrices; la suma y el producto por un escalar pasan a V13 y las reglas
+con escalares a V14, reparto del 2026-11-02 con la numeración del 2026-11-03).
 
 #+name: Cuarta escena
 #+BEGIN_SRC python :eval no
@@ -648,28 +658,28 @@ primero =Comunes.org=.
 
 * Rodando: 1,2,3\dots ¡acción!
 
-# +call: rodando(fichero="L01_V10_Transposicion", escena="1", idioma="es", voz="gtts")
-# +call: rodando(fichero="L01_V10_Transposition", escena="1", idioma="en", voz="gtts")
+# +call: rodando(fichero="L01_V11_Transposicion", escena="1", idioma="es", voz="gtts")
+# +call: rodando(fichero="L01_V11_Transposition", escena="1", idioma="en", voz="gtts")
 
-# +call: rodandoHD(fichero="L01_V10_Transposicion", escena="a", idioma="es")
-# +call: rodandoHD(fichero="L01_V10_Transposition", escena="a", idioma="en")
+# +call: rodandoHD(fichero="L01_V11_Transposicion", escena="a", idioma="es")
+# +call: rodandoHD(fichero="L01_V11_Transposition", escena="a", idioma="en")
 
-# +call: montaje(fichero="L01_V10_Transposicion", escenas="L01_V10_E00_Portada L01_V10_E01_Transposicion L01_V10_E02_CambioDeIndices L01_V10_E03_TranspuestaDeLaTranspuesta L01_V10_E04_Resumen ZCreditosFinales", cierre="L01_V10_E04_Resumen", video="L01_V10_Transposicion", idioma="es")
-# +call: montaje(fichero="L01_V10_Transposition", escenas="L01_V10_E00_Portada L01_V10_E01_Transposicion L01_V10_E02_CambioDeIndices L01_V10_E03_TranspuestaDeLaTranspuesta L01_V10_E04_Resumen ZCreditosFinales", cierre="L01_V10_E04_Resumen", video="L01_V10_Transposition", idioma="en")
+# +call: montaje(fichero="L01_V11_Transposicion", escenas="L01_V11_E00_Portada L01_V11_E01_Transposicion L01_V11_E02_CambioDeIndices L01_V11_E03_TranspuestaDeLaTranspuesta L01_V11_E04_Resumen ZCreditosFinales", cierre="L01_V11_E04_Resumen", video="L01_V11_Transposicion", idioma="es")
+# +call: montaje(fichero="L01_V11_Transposition", escenas="L01_V11_E00_Portada L01_V11_E01_Transposicion L01_V11_E02_CambioDeIndices L01_V11_E03_TranspuestaDeLaTranspuesta L01_V11_E04_Resumen ZCreditosFinales", cierre="L01_V11_E04_Resumen", video="L01_V11_Transposition", idioma="en")
 
-# +call: guion(fichero="L01_V10_Transposicion", idioma="es")
-# +call: guion(fichero="L01_V10_Transposicion", idioma="en")
+# +call: guion(fichero="L01_V11_Transposicion", idioma="es")
+# +call: guion(fichero="L01_V11_Transposicion", idioma="en")
 
 ** Generamos un fichero ~mpeg~ por cada escena
 
 #+name: rodando
-#+BEGIN_SRC bash :var fichero="L01_V10_Transposicion" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+#+BEGIN_SRC bash :var fichero="L01_V11_Transposicion" :var escena="1" :var idioma="es" :var voz="azure" :results silent
 [ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
 echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
 #+END_SRC
 
 #+name: rodandoHD
-#+BEGIN_SRC bash :var fichero="L01_V10_Transposicion" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+#+BEGIN_SRC bash :var fichero="L01_V11_Transposicion" :var escena="1" :var idioma="es" :var voz="azure" :results silent
 [ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
 echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
 #+END_SRC
@@ -849,5 +859,5 @@ volcar()
 
 #+BEGIN_SRC bash :results silent
 emacs --batch -l org --eval '(org-babel-tangle-file "Comunes.org")'   # solo si cambió el código común
-emacs --batch -l org --eval '(org-babel-tangle-file "L01-V10-Transposicion.org")'
+emacs --batch -l org --eval '(org-babel-tangle-file "L01-V11-Transposicion.org")'
 #+END_SRC

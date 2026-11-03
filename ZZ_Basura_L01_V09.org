@@ -525,3 +525,11 @@ with self.voiceover(text=tr("""Por eso, una vez seleccionada, una fila o una col
 self.pausa_media()
 #+END_SRC
 
+
+* Escenas 6 y 7 y parte del resumen: pasaron a V10 (2026-11-03)
+
+Partición de V09 decidida por Marcos el 2026-11-03 (referencia en abierto: la selección necesita
+un vídeo propio al que enlazar). La escena 6 («Filas y columnas»), la 7 («Componentes») y, del
+resumen (escena 8), la tabla de notación y la línea «da igual el orden de selección» viven ahora
+en =L01-V10-Seleccion.org= (escenas 1, 2 y 3). No se copia aquí el código: la versión viva es esa.
+El resumen de V09 se quedó con la definición y el orden y anuncia la selección.
