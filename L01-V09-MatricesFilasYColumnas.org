@@ -29,7 +29,7 @@ $\R[m\times n]$, filas, columnas y el resumen de la notación) y sigue
 las transparencias de clase de Marcos (=MatematicasII-SRC=, lección 1,
 transparencias "Matrices" y "Más notación"). Segunda versión
 (2026-10-18); la primera, más apoyada en los datos del PIB y con un
-apéndice sobre $\R[0]$, está en =ZZ_Basura_L01_V09.org=. El apéndice
+apéndice sobre $\R[0]$, está en =descartes/ZZ_Basura_L01_V09.org=. El apéndice
 pasa a un vídeo de ampliación aparte (L01 X01, véase el plan en
 =NotacionNacal.org=).
 

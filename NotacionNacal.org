@@ -296,6 +296,6 @@ Así se desarrollan mejor y no alargan los vídeos principales.
 | Vídeo | Amplía | Tema                                                                 |
 |-------+--------+----------------------------------------------------------------------|
 | X00   | todos  | *la notación del curso* (Marcos, 2026-11-02: una de las aportaciones más originales y valiosas del curso; puede ser largo). Lo que el libro explica en la introducción: listas y selector, por qué «operativa» y no «descriptiva», paréntesis y corchetes, el selector por los dos lados, cómo se escribe una demostración con la notación. Enlazado desde la descripción de todos los vídeos («Este curso usa la notación del libro, explicada en...»). Va en la lista de ampliación, no en la del curso |
-| X01   | V09    | listas y $\R[0]$: $(2,)$ frente a $2$, tuplas de Python, $\R[n+1]=\R\times\R[n]$, por qué $[1\ 2\ 3]\neq(1,2,3,)$ y no hay vectores fila ni columna (nota a pie de 1.4.3; borrador del apéndice en =ZZ_Basura_L01_V09.org=) |
+| X01   | V09    | listas y $\R[0]$: $(2,)$ frente a $2$, tuplas de Python, $\R[n+1]=\R\times\R[n]$, por qué $[1\ 2\ 3]\neq(1,2,3,)$ y no hay vectores fila ni columna (nota a pie de 1.4.3; borrador del apéndice en =descartes/ZZ_Basura_L01_V09.org=) |
 | X02   | V13    | $\R[m\times n]$ es $\R[mn]$ disfrazado: apilar las columnas; las ocho propiedades salen gratis |
 | X03   | V11    | la notación como programa: linealidad del selector, demostraciones por sustitución, $\Vect{a}\lambda$, comprobado con =nacal= |

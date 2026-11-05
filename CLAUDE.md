@@ -216,7 +216,7 @@ Escribir las frases nuevas ya en la forma buena.
   idioma para 1.250 mp3), y tras un injerto queda además la toma sobrante con el mismo texto: la «buena» es la
   **primera en orden** con ese texto, nunca la más reciente. **Deduplicadas el 2026-11-03** con
   `tmp/dedup_cache.py CACHE --escribe` (es 7.015 → 1.268 entradas, 33 → 5,6 MB; en 7.575 → 1.259, 34 → 4,9 MB;
-  copias en `tmp/cache_{es,en}_antes_dedup.json`): conserva la primera entrada de cada `input_data` (la que gana
+  copias en `tmp/cache_{es,en}_antes_dedup.json`, borradas el 2026-11-05; **repetida el 2026-11-05**: es 1.791 → 1.386, en 1.827 → 1.398, copias junto a cada caché en `cache.json.antes_dedup_20261105`): conserva la primera entrada de cada `input_data` (la que gana
   la búsqueda) y la primera de cada mp3, comprueba que ninguna búsqueda cambia y que todo mp3 sigue con entrada.
   Repetirlo cuando la caché vuelva a crecer (sin renders en marcha); una prueba de render no debe crear mp3.
 - **Una marca al principio del texto se dispara al final.** manim-voiceover
@@ -479,7 +479,7 @@ Escribir las frases nuevas ya en la forma buena.
   corto de la ficha (`titulo_miniatura`), «Álgebra lineal» debajo y un dibujo del vídeo (`MOTIVOS`):
   `cd lib && ~/.venvs/manim/bin/python miniatura.py L01_V12`. La ficha la cita con `miniatura = "..."` en
   cada idioma y `subir`/`actualizar` la envían; `subir_youtube.py miniatura ID FICHERO.png` pone solo la
-  miniatura (V01-V04, sin ficha). Para un vídeo nuevo: añadir su motivo, generar y mirar a 320 px de ancho.
+  miniatura (V01-V04, sin ficha). Para un vídeo nuevo: añadir su motivo, generar y mirar a 320 px de ancho. Idioma de un vistazo (Marcos, 2026-11-05): en español disco claro con número oscuro, en inglés disco y franja `BLUE_E` con número blanco, y «(Esp)» / «(Eng)» tras el nombre de la asignatura (`COLORES_IDIOMA`, `ETIQUETA_IDIOMA`); las 24 regeneradas y las 19 de los vídeos ya subidos (V01-V09 es/en, V10 es) puestas en YouTube ese día con `subir_youtube.py miniatura` (50 unidades de cuota cada una).
 
 ## Reglas
 
@@ -503,7 +503,7 @@ Escribir las frases nuevas ya en la forma buena.
   al acabar los vídeos de la lección 1.
 - No hacer commit ni push sin que Marcos lo pida. Los `.mp4`, `media/`,
   `tmp/` y `music/` están ignorados y así deben seguir.
-- Los descartes se guardan en `ZZ_Basura_*.org`, no se borran.
+- Los descartes se guardan en `descartes/ZZ_Basura_*.org`, no se borran.
 - Español primero para la revisión pedagógica; el inglés se genera del
   mismo org (objetivo: una sola fuente bilingüe).
 
@@ -589,7 +589,7 @@ Al publicar un vídeo, actualizar esta tabla.
   ejemplos (posición; listas distintas = orden; igualdad como consecuencia), notación (corchetes,
   matriz columna como (3)≠(3,), mayúsculas, matriz nula) y componentes (a_ij y el selector; sin `elem`).
   Prueba gTTS 480p: `L01_V09_MatricesFilasYColumnas_prueba480p.mp4`, guion en
-  `tmp/guion_V09_es.txt`. La versión 1 y el apéndice de R⁰ están en `ZZ_Basura_L01_V09.org`. En inglés,
+  `tmp/guion_V09_es.txt`. La versión 1 y el apéndice de R⁰ están en `descartes/ZZ_Basura_L01_V09.org`. En inglés,
   "orden" = *order* (Marcos). **Azure es 480p el 2026-10-18**: `L01_V09_MatricesFilasYColumnas_azure480p.mp4`
   (5:01); dos tomas repetidas con `v2` (una cortada por Azure a media frase, otra con 620 ms antes de
   "orden"). Inglés con Azure (Ollie) 480p el mismo día: `../videoMath2/L01_V09_MatricesRowsAndColumns_azure480p.mp4` (4:53); "...denotes a matrix." salía cortada por Azure en todas las tiradas: en plural ("Parentheses ... denote", "square brackets ... denote a matrix") sale entera. **Aprobado por Marcos en los dos idiomas y HD el 2026-10-18** (`L01_V09_MatricesFilasYColumnas.mp4`, 4:55, y `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4`, 4:54, con sus srt); ficha `fichas/L01_V09.toml`. 2026-10-19: cabeceras añadidas a las escenas 2, 3 y 6 («Ejemplos», «El orden de una matriz», «Componentes, filas y columnas») y HD rehecho sin sintetizar. **Cuarta versión, 2026-11-02** (Marcos vio V09 y V10 seguidos: la escena de
@@ -599,13 +599,13 @@ Al publicar un vídeo, actualizar esta tabla.
   está a la vez...», «El siete, por ejemplo, es componente de dos vectores distintos...», «Por eso podemos
   escribir el selector a ambos lados de la matriz, sin paréntesis») y, al final, lo habitual (a_21) frente al
   selector; escena 8 resumen con la línea «da igual el orden de selección» y anuncio solo de la
-  transposición. La escena 6 anterior está en `ZZ_Basura_L01_V09.org`. Las frases movidas sin cambios
+  transposición. La escena 6 anterior está en `descartes/ZZ_Basura_L01_V09.org`. Las frases movidas sin cambios
   conservan sus tomas de Azure (la caché es común a todos los vídeos). Falta: revisión de Marcos de la prueba
   gTTS, Azure, HD, capítulos de la ficha; la subida del 5 de noviembre depende de ese repaso.
   **Quinta versión, 2026-11-03 (partición)**: V09 queda como «Matrices» (título nuevo, también en la portada):
   escenas 1-5 sin cambios y resumen (escena 6, `L01_V09_E06_Resumen`) con la definición y el orden y el
   anuncio «En el próximo vídeo veremos la selección de filas, columnas y componentes de una matriz.». Las
-  escenas 6-7 y la tabla del selector del resumen pasaron a V10 (nota en `ZZ_Basura_L01_V09.org`). HD es/en
+  escenas 6-7 y la tabla del selector del resumen pasaron a V10 (nota en `descartes/ZZ_Basura_L01_V09.org`). HD es/en
   y capítulos hechos; falta que Marcos escuche el resumen nuevo y su último repaso.
 - V10 (`L01-V10-Seleccion.org`, Secciones 1.4.3-1.4.4; inglés `L01_V10_Selection`; desde el 2026-11-03):
   «Selección de filas, columnas y componentes». Escena 1 = antigua escena 6 de V09 con el título y el
@@ -622,7 +622,7 @@ Al publicar un vídeo, actualizar esta tabla.
   escalar a la derecha y las reglas con escalares van a V14; la notación como programa, a X03. Primer uso del
   rótulo `aviso("idea")` (ahora en V10, escena 2). HD es/en y ficha el 2026-11-02 (4:25 es, 4:28 en).
   **Reducido a la transposición el 2026-11-02**: las escenas 1-2 (enlace y «primero la fila o primero la
-  columna») pasaron a V09 (código guardado en `ZZ_Basura_L01_V11.org`, antes `_V10`); queda arranque + transposición,
+  columna») pasaron a V09 (código guardado en `descartes/ZZ_Basura_L01_V11.org`, antes `_V10`); queda arranque + transposición,
   cambio de índices (recuerda de V09 que da igual el orden de selección), (Aᵀ)ᵀ = A y resumen de dos líneas.
   Título «La transposición» / «Transposition». Español aprobado con Azure y HD el 2026-11-02/03. Tras la
   partición (2026-11-03): ficheros, clases y montajes renombrados a `L01_V11_*`, ficha `fichas/L01_V11.toml`
@@ -656,7 +656,7 @@ Al publicar un vídeo, actualizar esta tabla.
   fichero; (4) corregir primero el español (con `PendientesDesdeLosVideos.org`) y traducir después.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
-  de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `ZZ_Basura_L01_V09.org`); se decide al tener X01.
+  de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `descartes/ZZ_Basura_L01_V09.org`); se decide al tener X01.
 - V12 (`L01-V12-TiposDeMatrices.org`, Sección 1.4.6; inglés `L01_V12_TypesOfMatrices`; era V11 hasta el
   2026-11-03): «Tipos de
   matrices» (no «matrices especiales»: da nombre a las matrices por sus características). Reparto del

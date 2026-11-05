@@ -52,7 +52,7 @@ Fuera de V10 (decisión del 2026-10-18): el escalar a la derecha
 ($\Vect{a}\lambda$) y las dos reglas de reescritura con escalares de
 1.4.4 van a V14, junto a las operaciones por filas (reparto del
 2026-11-02), y la notación como programa, a X03. Las escenas de V10
-anteriores al 2026-11-02 están en =ZZ_Basura_L01_V11.org=.
+anteriores al 2026-11-02 están en =descartes/ZZ_Basura_L01_V11.org=.
 
 En inglés: "transposition", "transpose" (la matriz), "row matrix",
 "column matrix".
@@ -391,7 +391,7 @@ regla se vuelven a poner los paréntesis, $\elemRp{\VectTF{A}{i}}{j}=
 \elemLp{\VectC{A}{i}}{j}$, y como eso vale para cualquier componente,
 el índice $j$ desaparece: $\elemLp{\MatT{A}}{i}=\VectC{A}{i}$. La escena
 3 se apoya en la definición y en este resultado. La versión anterior
-(cadena de cuatro pasos) está en =ZZ_Basura_L01_V11.org=.
+(cadena de cuatro pasos) está en =descartes/ZZ_Basura_L01_V11.org=.
 
 #+name: Segunda escena
 #+BEGIN_SRC python :eval no

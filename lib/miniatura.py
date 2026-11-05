@@ -1,12 +1,15 @@
 """Miniaturas de YouTube de la serie (1280x720, png), plantilla elegida por Marcos el 2026-11-03.
 
 Composición (variante F de los prototipos; `Comprobaciones.org`, pasada 6, punto 7):
-  - disco azul con el número «1.N» arriba a la izquierda;
+  - disco con el número «1.N» arriba a la izquierda;
   - título corto (dos a cuatro palabras, una o dos líneas) a su derecha, con tamaño de letra fijo;
-  - «Álgebra lineal» / «Linear algebra» en pequeño bajo el título (nunca abajo a la derecha: ahí pone
-    YouTube la duración);
+  - «Álgebra lineal (Esp)» / «Linear algebra (Eng)» en pequeño bajo el título (nunca abajo a la derecha:
+    ahí pone YouTube la duración);
   - el dibujo del vídeo centrado debajo, con los colores de la serie;
-  - franja azul al pie.
+  - franja al pie.
+El idioma se distingue de un vistazo (Marcos, 2026-11-05): en español, disco claro (azul de la serie un 50 %
+hacia el blanco) con el número oscuro y franja del azul de la serie; en inglés, disco y franja BLUE_E con el
+número blanco. El título va siempre en el azul de la serie.
 El disco, el título y el rótulo están siempre en el mismo sitio; solo cambian el número, el texto y el dibujo.
 
 Generar (desde lib/, con el entorno virtual de manim):
@@ -49,6 +52,10 @@ FUENTE = "Latin Modern Sans"
 TAM_TITULO = 80          # tamaño fijo del título (todas iguales)
 ANCHO_TITULO = 10.2      # si un título no cabe, se reduce solo ese (aviso en la salida)
 COLOR_FILA, COLOR_COLUMNA = COLOR_ESCALAR, GREEN   # código de V10
+# Colores por idioma: (disco, número, franja)
+COLORES_IDIOMA = {"es": (interpolate_color(ManimColor(COLOR_TITULO), WHITE, 0.5), "#0B2530", COLOR_TITULO),
+                  "en": (BLUE_E, WHITE, BLUE_E)}
+ETIQUETA_IDIOMA = {"es": "(Esp)", "en": "(Eng)"}
 
 
 # ---------- piezas de dibujo ----------
@@ -226,9 +233,10 @@ class Miniatura(Scene):
         W, H = config.frame_width, config.frame_height
         self.camera.background_color = BLACK
 
-        franja = Rectangle(width=W, height=0.18, stroke_width=0, fill_color=COLOR_TITULO, fill_opacity=1).to_edge(DOWN, buff=0)
-        disco = Circle(radius=1.15, stroke_width=0, fill_color=COLOR_TITULO, fill_opacity=1)
-        num = Text(numero, font=FUENTE, weight=BOLD, font_size=100, color=WHITE)
+        c_disco, c_numero, c_franja = COLORES_IDIOMA[idioma]
+        franja = Rectangle(width=W, height=0.18, stroke_width=0, fill_color=c_franja, fill_opacity=1).to_edge(DOWN, buff=0)
+        disco = Circle(radius=1.15, stroke_width=0, fill_color=c_disco, fill_opacity=1)
+        num = Text(numero, font=FUENTE, weight=BOLD, font_size=100, color=c_numero)
         num.scale_to_fit_width(min(num.width, 1.85)).move_to(disco)
         sello = VGroup(disco, num).move_to([-W/2 + 0.5 + 1.15, H/2 - 0.5 - 1.15, 0])
 
@@ -241,7 +249,8 @@ class Miniatura(Scene):
             titulo.scale_to_fit_width(ANCHO_TITULO)
         # dos líneas caben en el alto del disco; una sola se centra con él
         titulo.move_to([izquierda + titulo.width/2, sello.get_y(), 0])
-        rotulo = Text("Álgebra lineal" if idioma == "es" else "Linear algebra", font=FUENTE, font_size=40, color=GREY_B)
+        rotulo = Text(("Álgebra lineal " if idioma == "es" else "Linear algebra ") + ETIQUETA_IDIOMA[idioma],
+                      font=FUENTE, font_size=40, color=GREY_B)
         rotulo.move_to([izquierda + rotulo.width/2, sello.get_bottom()[1] - 0.35, 0])
 
         dibujo = MOTIVOS[clave](idioma)

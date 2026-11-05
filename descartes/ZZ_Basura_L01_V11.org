@@ -363,7 +363,7 @@ es una matriz fila, con sus órdenes en los rótulos (caso de la regla
 $m\times n \to n\times m$ con que acaba la escena 3). El vector, la
 matriz columna y la matriz fila como listas, y la cadena de
 desigualdades, ya los contó V09 (escena 5): no se repiten. La versión
-larga está en =ZZ_Basura_L01_V10.org=.
+larga está en =descartes/ZZ_Basura_L01_V10.org=.
 
 #+name: Cuarta escena
 #+BEGIN_SRC python :eval no
