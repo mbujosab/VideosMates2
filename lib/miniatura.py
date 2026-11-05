@@ -189,9 +189,20 @@ def motivo_v11(idioma):          # transponer: las columnas pasan a filas
     return VGroup(VGroup(a, t), MathTex("=", font_size=72), b).arrange(RIGHT, buff=0.35)
 
 
+def motivo_v12(idioma):          # una matriz simétrica: diagonal en amarillo, pares iguales a ambos lados
+    m = _matriz([[1, 2, 3], [2, 4, 5], [3, 5, 6]])
+    e = m.get_entries()
+    for k in (0, 4, 8):
+        e[k].set_color(COLOR_ESCALAR)
+    for (i, j), c in (((1, 3), COLOR_A), ((2, 6), COLOR_B), ((5, 7), COLOR_C)):
+        e[i].set_color(c); e[j].set_color(c)
+    t = MathTex(r"\Mat{S}", "=", r"\MatT{S}", tex_template=myTemplate, font_size=72)
+    return VGroup(m, t).arrange(RIGHT, buff=0.8)
+
+
 MOTIVOS = {f"L01_V{n:02d}": f for n, f in enumerate(
     [motivo_v01, motivo_v02, motivo_v03, motivo_v04, motivo_v05, motivo_v06, motivo_v07, motivo_v08,
-     motivo_v09, motivo_v10, motivo_v11], start=1)}
+     motivo_v09, motivo_v10, motivo_v11, motivo_v12], start=1)}
 ESCALA_EXTRA = {"L01_V11": 0.9}     # V11: la ecuación es lo más ancho; un diez por ciento menor
 
 

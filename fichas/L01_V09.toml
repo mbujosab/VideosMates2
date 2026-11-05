@@ -42,7 +42,7 @@ Correspondiente sección del libro (Sección 1.4): https://mbujosab.github.io/Cu
 Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Vídeo anterior: https://youtu.be/w62nh5CvJtM
-Siguiente vídeo: (se añade al publicarlo)
+Siguiente vídeo: https://youtu.be/gpVJnl4nAdU
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
 Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
@@ -52,7 +52,7 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 """
 
 [en]
-# youtube = ""   # fill in after upload
+youtube = "t40aDUbc1oE"   # subido por la API el 2026-11-03 (la cuota se agotó tras el mp4; etiquetas, subtítulos, miniatura y lista con `actualizar` el 2026-11-04)
 video = "../videoMath2/L01_V09_MatricesRowsAndColumns.mp4"
 subtitulos = "../videoMath2/L01_V09_MatricesRowsAndColumns.srt"
 idioma = "en"

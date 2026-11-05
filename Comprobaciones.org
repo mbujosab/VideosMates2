@@ -47,7 +47,10 @@ Sobre el guion en prosa, **sin mirar la pantalla**.
    transpuesta son las filas, *y viceversa*). Cada paso de una demostración nombra la regla que
    usa. El resumen recoge todo lo nuevo y nada más.
 4. *Exactitud.* Lo que se afirma es cierto según el libro (definiciones, órdenes, «por columnas»,
-   «componente a componente»...).
+   «componente a componente»...). La igualdad se enuncia siempre «iguales columna a columna» /
+   «iguales componente a componente», nunca «tienen las mismas componentes» (V12, 2026-11-03: como
+   conjunto, [1 0] y [0 1] tienen las mismas componentes), y con la misma fórmula en el criterio, en
+   la cadena y en la conclusión.
 5. *Ilustra o demuestra.* Se dice explícitamente qué hace cada escena.
 6. *Notación.* Nada aparece en pantalla (ni se nombra) antes de presentarse; ninguna letra sin
    definir (V10: $[\Vect{a}]$ sin haber presentado $\Vect{a}$).

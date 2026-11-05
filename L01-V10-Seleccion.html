@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-11-05 jue 09:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 10: selección de filas, columnas y componentes</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 10: selección de filas, columnas y componentes</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org903be32">1. Selección de filas, columnas y componentes - V10</a>
+<ul>
+<li><a href="#org8a5ae16">1.1. Guion (escenas)</a></li>
+<li><a href="#org4a73531">1.2. Ensamblado de los ficheros de python (uno por idioma)</a></li>
+<li><a href="#org7c00f65">1.3. Clases de las escenas</a></li>
+<li><a href="#org6e8f444">1.4. Título del vídeo</a></li>
+<li><a href="#orga73ba6c">1.5. Utilidades del vídeo</a></li>
+<li><a href="#orgb5fe6c0">1.6. Código de cada escena</a>
+<ul>
+<li><a href="#org7c0154b">1.6.1. Portada (escena 0)</a></li>
+<li><a href="#org15a9f07">1.6.2. Escena 1 - Arranque; filas y columnas</a></li>
+<li><a href="#orgaebe03d">1.6.3. Escena 2 - Componentes: primero la fila o primero la columna</a></li>
+<li><a href="#org5c90ea4">1.6.4. Escena 3 - Resumen y anuncio de la transposición</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org49c5f37">2. Trozos comunes de código</a></li>
+<li><a href="#org9ad9e7f">3. Rodando: 1,2,3&hellip; ¡acción!</a>
+<ul>
+<li><a href="#orgec9ed54">3.1. Generamos un fichero <code>mpeg</code> por cada escena</a></li>
+<li><a href="#org3d249b8">3.2. Montaje: concatenar las escenas, música de entrada y salida, subtítulos</a></li>
+<li><a href="#orgf074eb3">3.3. Comprobar las uniones y los subtítulos</a></li>
+<li><a href="#org5c9d070">3.4. Extraer el guion (la narración) para revisarlo</a></li>
+<li><a href="#org18aae3a">3.5. Tangle desde la terminal (sin abrir Emacs)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org903be32" class="outline-2">
+<h2 id="org903be32"><span class="section-number-2">1.</span> Selección de filas, columnas y componentes - V10</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cubre las Secciones 1.4.3 y 1.4.4 del libro: filas y columnas de una
+matriz, el resumen de la notación y el selector por la izquierda de un
+vector (con el que da igual seleccionar primero la fila o la columna).
+</p>
+
+<p>
+Nace el 2026-11-03 de la partición de V09 (Marcos): las escenas 6 y 7
+de <code>L01-V09-MatricesFilasYColumnas.org</code> («Filas y columnas» y
+«Componentes») pasan aquí casi literales, y V09 queda como «Matrices».
+Motivo: los vídeos son una referencia en abierto, y la selección con el
+operador selector necesita un vídeo propio al que enlazar desde la línea
+de notación de todas las descripciones. Las frases que vienen de V09
+conservan sus tomas de Azure (la caché es común); solo son nuevas el
+arranque, la primera frase del resumen y el anuncio de la transposición.
+</p>
+
+<ol class="org-ol">
+<li>filas y columnas: el selector a la derecha selecciona un elemento de
+la lista (una columna) y a la izquierda, una fila; ambas son vectores;</li>
+<li>componentes: el siete está en una fila y en una columna, y se obtiene
+de dos maneras (selector a la derecha o a la izquierda de un vector,
+convenio de V01); es una propiedad asociativa y por eso
+\(\eleM{A}{2}{1}\) sin paréntesis; lo habitual, \(a_{21}\);</li>
+<li>resumen (tabla de notación, orden de selección) y anuncio de la
+transposición.</li>
+</ol>
+
+<p>
+Este fichero es una <b>fuente única bilingüe</b> (véase la plantilla
+<code>LXX-VYY-NombreVideo.org</code>): genera <code>./lib/L01_V10_Seleccion.py</code>
+(español) y <code>../videoMath2/lib/L01_V10_Selection.py</code> (inglés).
+</p>
+</div>
+<div id="outline-container-org8a5ae16" class="outline-3">
+<h3 id="org8a5ae16"><span class="section-number-3">1.1.</span> Guion (escenas)</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Escena</th>
+<th scope="col" class="org-left">Contenido</th>
+<th scope="col" class="org-left">Pausas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Portada</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Arranque; filas y columnas: el selector a la derecha y a la izquierda</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Componentes: primero la fila o primero la columna; \(a_{ij}\) frente al selector</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Resumen (tabla de notación, orden de selección) y anuncio de la transposición</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4a73531" class="outline-3">
+<h3 id="org4a73531"><span class="section-number-3">1.2.</span> Ensamblado de los ficheros de python (uno por idioma)</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 1 </span>Fichero de python del vídeo en español</label><pre class="src src-python" id="org4261cfe"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "es")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 2 </span>Fichero de python del vídeo en inglés</label><pre class="src src-python" id="orged83503"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "en")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7c00f65" class="outline-3">
+<h3 id="org7c00f65"><span class="section-number-3">1.3.</span> Clases de las escenas</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 3 </span>Vídeo completo y escenas separadas</label><pre class="src src-python" id="orga63be82"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V10_Seleccion</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Primera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Segunda escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Tercera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        <span style="font-weight: bold;">self</span>.creditos_finales()
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V10_E00_Portada</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V10_E01_FilasYColumnas</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Primera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V10_E02_Componentes</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Segunda escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V10_E03_Resumen</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Tercera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ZCreditosFinales</span>(CreditosFinales):   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">manim solo renderiza clases definidas en este fichero
+</span>    <span style="font-weight: bold;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e8f444" class="outline-3">
+<h3 id="org6e8f444"><span class="section-number-3">1.4.</span> Título del vídeo</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+<pre class="src src-python" id="org4756b52"><span style="font-weight: bold; font-style: italic;">TITULO</span> = tr(<span style="font-style: italic;">"Selecci&#243;n de filas, columnas y componentes"</span>, <span style="font-style: italic;">"Selecting rows, columns and components"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga73ba6c" class="outline-3">
+<h3 id="orga73ba6c"><span class="section-number-3">1.5.</span> Utilidades del vídeo</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><code>vector(valores)</code> y <code>matriz(filas)</code>: un vector entre paréntesis y una
+matriz entre corchetes, con números de un decimal (o enteros con
+<code>decimales=0</code>); sus componentes se animan una a una
+(<code>get_entries()</code>, <code>get_rows()</code>, <code>get_columns()</code>).</li>
+<li><code>franja_fila</code> y <code>franja_columna</code>: franja amarilla translúcida sobre
+una fila o una columna (la de las filas, como en V08).</li>
+<li><code>con_nombre(tex, mob)</code>: la fórmula <code>tex</code> (p. ej. <code>"\Mat{A}</code>"<code>) a la
+  izquierda de la matriz o vector =mob</code>.</li>
+<li><code>columna_de_lineas(lineas, x0, y0, dy)</code>: fórmulas de varias partes una
+debajo de otra, con el "=" (la parte 1) alineado (escena 2).</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org0296763"><span style="font-weight: bold; font-style: italic;">A_SEL</span> = [[1, 2, 1], [7, 0, 3]]      <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">transparencia "M&#225;s notaci&#243;n"
+</span><span style="font-weight: bold; font-style: italic;">COLOR_FILA</span>, <span style="font-weight: bold; font-style: italic;">COLOR_COLUMNA</span> = COLOR_A, COLOR_B   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#237;ndice de la fila y de la columna (letras del super&#237;ndice)
+</span>
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">vector</span>(valores, color=WHITE, decimales=1, escala=0.8):
+    <span style="font-weight: bold; font-style: italic;">conf</span> = {<span style="font-style: italic;">"num_decimal_places"</span>: decimales, <span style="font-style: italic;">"group_with_commas"</span>: <span style="font-weight: bold; text-decoration: underline;">False</span>}
+    <span style="font-weight: bold;">if</span> decimales:
+        <span style="font-weight: bold; font-style: italic;">v</span> = DecimalMatrix([[x] <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> valores], left_bracket=<span style="font-style: italic;">"("</span>, right_bracket=<span style="font-style: italic;">")"</span>, v_buff=0.62, element_to_mobject_config=conf)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">v</span> = IntegerMatrix([[x] <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> valores], left_bracket=<span style="font-style: italic;">"("</span>, right_bracket=<span style="font-style: italic;">")"</span>, v_buff=0.62)
+    v.get_entries().set_color(color)
+    <span style="font-weight: bold;">return</span> v.scale(escala)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">matriz</span>(filas, color=WHITE, decimales=1, escala=0.8, h_buff=1.3):
+    <span style="font-weight: bold; font-style: italic;">conf</span> = {<span style="font-style: italic;">"num_decimal_places"</span>: decimales, <span style="font-style: italic;">"group_with_commas"</span>: <span style="font-weight: bold; text-decoration: underline;">False</span>}
+    <span style="font-weight: bold;">if</span> decimales:
+        <span style="font-weight: bold; font-style: italic;">m</span> = DecimalMatrix(filas, v_buff=0.62, h_buff=h_buff, element_to_mobject_config=conf)
+    <span style="font-weight: bold;">else</span>:
+        <span style="font-weight: bold; font-style: italic;">m</span> = IntegerMatrix(filas, v_buff=0.62, h_buff=h_buff)
+    m.get_entries().set_color(color)
+    <span style="font-weight: bold;">return</span> m.scale(escala)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">con_nombre</span>(tex, mob, font_size=48):
+    <span style="font-weight: bold;">return</span> VGroup(MathTex(tex, tex_template=myTemplate, font_size=font_size), mob).arrange(RIGHT, buff=0.2)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">franja_fila</span>(m, i, x0=<span style="font-weight: bold; text-decoration: underline;">None</span>, x1=<span style="font-weight: bold; text-decoration: underline;">None</span>, color=COLOR_ESCALAR):
+    <span style="font-style: italic;">"""Franja sobre la fila i (desde 0) de la matriz m, de x0 a x1 (por defecto, la matriz entera)."""</span>
+    <span style="font-weight: bold; font-style: italic;">x0</span> = m.get_left()[0] <span style="font-weight: bold;">if</span> x0 <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> x0
+    <span style="font-weight: bold; font-style: italic;">x1</span> = m.get_right()[0] <span style="font-weight: bold;">if</span> x1 <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> x1
+    <span style="font-weight: bold; font-style: italic;">y</span> = m.get_rows()[i].get_y()
+    <span style="font-weight: bold;">return</span> Rectangle(width=x1 - x0, height=0.45, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([(x0 + x1)/2, y, 0])
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">franja_columna</span>(m, j, color=COLOR_ESCALAR):
+    <span style="font-style: italic;">"""Franja sobre la columna j (desde 0) de la matriz m."""</span>
+    <span style="font-weight: bold; font-style: italic;">col</span> = m.get_columns()[j]
+    <span style="font-weight: bold;">return</span> Rectangle(width=col.width + 0.35, height=m.get_brackets()[0].height, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([col.get_x(), m.get_y(), 0])
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">columna_de_lineas</span>(lineas, x0, y0, dy):
+    <span style="font-style: italic;">"""F&#243;rmulas de varias partes una debajo de otra, con la parte 1 (el "=") alineada en x0."""</span>
+    <span style="font-weight: bold;">for</span> k, l <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(lineas):
+        l.shift([x0 - l[1].get_left()[0], y0 - k*dy - l.get_y(), 0])
+    <span style="font-weight: bold;">return</span> VGroup(*lineas)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb5fe6c0" class="outline-3">
+<h3 id="orgb5fe6c0"><span class="section-number-3">1.6.</span> Código de cada escena</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-org7c0154b" class="outline-4">
+<h4 id="org7c0154b"><span class="section-number-4">1.6.1.</span> Portada (escena 0)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+<pre class="src src-python" id="org96338c5"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">portada</span> = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(<span style="font-weight: bold;">min</span>(portada.width, config.frame_width*0.9))
+<span style="font-weight: bold;">self</span>.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+<span style="font-weight: bold;">self</span>.wait(4.5)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org15a9f07" class="outline-4">
+<h4 id="org15a9f07"><span class="section-number-4">1.6.2.</span> Escena 1 - Arranque; filas y columnas</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Primero lo que sale de la definición: una matriz es una lista de
+vectores, así que el selector a la derecha, como en los vectores,
+selecciona el elemento de la lista que ocupa esa posición, una columna
+(la franja recorre las tres). Después el selector a la izquierda, que
+selecciona una fila. Ambas son listas ordenadas de números, es decir,
+vectores, y por eso se escriben en horizontal o en vertical, siempre
+entre paréntesis. La componente (dos índices) va en la escena 2, que
+justifica la notación sin paréntesis. Hasta el 2026-11-03 era la escena 6
+de V09; la escena 1 añade el título del vídeo y la frase de arranque.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org076fe94"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">titulo</span> = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+<span style="font-weight: bold; font-style: italic;">A</span> = matriz(A_SEL, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_A</span> = con_nombre(r<span style="font-style: italic;">"\Mat{A}="</span>, A).move_to([0, 2.0, 0])
+<span style="font-weight: bold; font-style: italic;">x0</span> = -4.6
+<span style="font-weight: bold; font-style: italic;">col</span> = MathTex(r<span style="font-style: italic;">"\VectC{A}{1}"</span>, r<span style="font-style: italic;">"\;=\;\begin{pmatrix}1\\ 7\end{pmatrix}"</span>, tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">fila</span> = MathTex(r<span style="font-style: italic;">"\VectF{A}{1}"</span>, r<span style="font-style: italic;">"\;=\;(1,\ 2,\ 1,)"</span>, tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold;">for</span> linea, y <span style="font-weight: bold;">in</span> [(col, 0.5), (fila, -1.5)]:   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">hueco para la fila en vertical
+</span>    linea.move_to([x0 + linea.width/2, y, 0])
+fila.shift((col[1].get_left()[0] - fila[1].get_left()[0])*RIGHT)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos "=" alineados
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la columna y la fila, primero con un &#237;ndice gen&#233;rico (j, i) que pasa a ser 1 en el ejemplo
+</span><span style="font-weight: bold; font-style: italic;">col_g</span> = MathTex(r<span style="font-style: italic;">"\VectC{A}{j}"</span>, tex_template=myTemplate, font_size=48)
+col_g.shift(col[0][0].get_center() - col_g[0][0].get_center())       <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: A, |, j
+</span><span style="font-weight: bold; font-style: italic;">fila_g</span> = MathTex(r<span style="font-style: italic;">"\VectF{A}{i}"</span>, tex_template=myTemplate, font_size=48)
+fila_g.shift(fila[0][2].get_center() - fila_g[0][2].get_center())   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: i, |, A
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la otra forma de escribir la columna y la fila, detr&#225;s de un "=" (Marcos, 2026-10-27)
+</span><span style="font-weight: bold; font-style: italic;">col_h</span> = MathTex(r<span style="font-style: italic;">"=(1,\ 7,)"</span>, font_size=48).next_to(col, RIGHT, buff=0.25)
+<span style="font-weight: bold; font-style: italic;">fila_v</span> = MathTex(r<span style="font-style: italic;">"=\begin{pmatrix}1\\ 2\\ 1\end{pmatrix}"</span>, font_size=48).next_to(fila, RIGHT, buff=0.25)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">al decir &#171;el elemento de la lista&#187;, la matriz de n&#250;meros se transforma en la lista de sus tres columnas (la
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">notaci&#243;n de la escena 5) y al decir &#171;una columna&#187; la franja recorre los tres vectores; vuelve a los n&#250;meros al
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">empezar la frase siguiente (Marcos, 2026-11-03). Glifos de A_lista: [ ( 1 7 ) ; ( 2 0 ) ; ( 1 3 ) ; ]
+</span><span style="font-weight: bold; font-style: italic;">A_lista</span> = MathTex(r<span style="font-style: italic;">"\left[\begin{pmatrix}1\\ 7\end{pmatrix};\ \begin{pmatrix}2\\ 0\end{pmatrix};\ \begin{pmatrix}1\\ 3\end{pmatrix};\right]"</span>,
+                  tex_template=myTemplate, font_size=44).move_to(A).align_to(A, LEFT)
+<span style="font-weight: bold; font-style: italic;">vectores_lista</span> = [A_lista[0][1:5], A_lista[0][6:10], A_lista[0][11:15]]
+<span style="font-weight: bold; font-style: italic;">A_num</span> = A.copy()   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">copia hecha antes de cualquier animaci&#243;n: A no vuelve a ser destino (CLAUDE.md)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En este v&#237;deo veremos la selecci&#243;n de filas, columnas y componentes de una matriz."""</span>,
+                            <span style="font-style: italic;">"""In this video we will see the selection of rows, columns and components of a matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(titulo), run_time=1.2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""El operador selector tambi&#233;n act&#250;a sobre matrices. &lt;bookmark mark='s'/&gt; Con el &#237;ndice a la derecha selecciona, como en los vectores, &lt;bookmark mark='l'/&gt; el elemento de la lista que ocupa esa posici&#243;n: &lt;bookmark mark='c'/&gt; una columna."""</span>,
+                            <span style="font-style: italic;">"""The selector operator also acts on matrices. &lt;bookmark mark='s'/&gt; With the index on the right it selects, as with vectors, &lt;bookmark mark='l'/&gt; the element of the list in that position: &lt;bookmark mark='c'/&gt; a column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(f_A), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(col_g), run_time=0.6)
+    <span style="font-weight: bold;">self</span>.play(Indicate(col_g[0][1:3], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l"</span>)
+    <span style="font-weight: bold; font-style: italic;">A_tmp</span> = A.copy()
+    <span style="font-weight: bold;">self</span>.remove(A); <span style="font-weight: bold;">self</span>.add(A_tmp)
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(A_tmp, A_lista), run_time=0.8)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los n&#250;meros se convierten en la lista de vectores
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold; font-style: italic;">franja</span> = <span style="font-weight: bold; text-decoration: underline;">None</span>
+    <span style="font-weight: bold;">for</span> v <span style="font-weight: bold;">in</span> vectores_lista:   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cada elemento de la lista es una columna
+</span>        <span style="font-weight: bold; font-style: italic;">nueva</span> = SurroundingRectangle(v, color=COLOR_ESCALAR, fill_color=COLOR_ESCALAR, fill_opacity=0.22, stroke_width=0, buff=0.08)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(nueva) <span style="font-weight: bold;">if</span> franja <span style="font-weight: bold;">is</span> <span style="font-weight: bold; text-decoration: underline;">None</span> <span style="font-weight: bold;">else</span> ReplacementTransform(franja, nueva), run_time=0.4)
+        <span style="font-weight: bold; font-style: italic;">franja</span> = nueva
+    <span style="font-weight: bold;">self</span>.play(FadeOut(franja), run_time=0.3)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Por ejemplo, con el &#237;ndice uno, &lt;bookmark mark='c'/&gt; selecciona la primera columna."""</span>,   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin &#171;de A&#187;: solo hay una matriz (Marcos, 2026-11-03)
+</span>                            <span style="font-style: italic;">"""For example, with index one, &lt;bookmark mark='c'/&gt; it selects the first column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeTransform(A_lista, A_num), ReplacementTransform(col_g, col[0]), run_time=0.8)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">vuelven los n&#250;meros; j pasa a ser 1
+</span>    <span style="font-weight: bold;">self</span>.remove(A_num); <span style="font-weight: bold;">self</span>.add(A)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el objeto original, intacto, para las franjas que vienen
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold; font-style: italic;">fc</span> = franja_columna(A, 0)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fc), FadeIn(col[1]), run_time=0.8)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el s&#237;mbolo aparece un instante antes de que la voz lo describa (Marcos, 2026-10-18)
+</span><span style="font-weight: bold;">self</span>.play(FadeIn(fila_g), run_time=0.6)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Y con el &#237;ndice a la izquierda selecciona una fila. &lt;bookmark mark='e'/&gt; Por ejemplo, con el &#237;ndice uno, &lt;bookmark mark='f'/&gt; selecciona la primera fila."""</span>,
+                            <span style="font-style: italic;">"""And with the index on the left it selects a row. &lt;bookmark mark='e'/&gt; For example, with index one, &lt;bookmark mark='f'/&gt; it selects the first row."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Indicate(fila_g[0][0:2], color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"e"</span>)
+    <span style="font-weight: bold;">self</span>.play(ReplacementTransform(fila_g, fila[0]), run_time=0.8)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">i pasa a ser 1
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold; font-style: italic;">ff</span> = franja_fila(A, 0)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(ff), FadeIn(fila[1]), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Cada fila y cada columna es una lista ordenada de n&#250;meros, es decir, un vector."""</span>,
+                            <span style="font-style: italic;">"""Each row and each column is an ordered list of numbers, that is, a vector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Indicate(ff, color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(Indicate(fc, color=COLOR_ESCALAR, scale_factor=1.05), run_time=1)
+
+<span style="font-weight: bold;">self</span>.wait(0.6)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una pausa antes de la conclusi&#243;n (Marcos, 2026-10-27)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Por eso, una vez seleccionada, una fila o una columna &lt;bookmark mark='h'/&gt; se puede escribir tanto en horizontal como en vertical, &lt;bookmark mark='p'/&gt; siempre entre par&#233;ntesis."""</span>,
+                            <span style="font-style: italic;">"""So, once selected, a row or a column &lt;bookmark mark='h'/&gt; can be written either horizontally or vertically, &lt;bookmark mark='p'/&gt; always in parentheses."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(ff), FadeOut(fc), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"h"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fila_v), FadeIn(col_h), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">solo los vectores, sin los signos de igual (glifo 0 de cada parte; Marcos, 2026-11-02)
+</span>    <span style="font-weight: bold;">self</span>.play(*[Indicate(m, color=COLOR_ESCALAR, scale_factor=1.1) <span style="font-weight: bold;">for</span> m <span style="font-weight: bold;">in</span> (fila[1][1:], col[1][1:], fila_v[0][1:], col_h[0][1:])], run_time=1.2)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaebe03d" class="outline-4">
+<h4 id="orgaebe03d"><span class="section-number-4">1.6.3.</span> Escena 2 - Componentes: primero la fila o primero la columna</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+Escena 7 de V09 hasta el 2026-11-03; antes, escenas 1 y 2 de la
+antigua V10 (hasta el 2026-11-02; Marcos: vistos seguidos, V09 imponía
+la notación \(\eleM{A}{2}{1}\) sin paréntesis y V10 la justificaba un
+vídeo después). Una componente está a la vez en una fila
+y en una columna, que son vectores (escena 1), así que el siete se
+obtiene de dos maneras: primero la fila, \(\elemRp{\VectF{A}{2}}{1}\), con
+el selector a la derecha de un vector, como siempre; o primero la
+columna, \(\elemLp{\VectC{A}{1}}{2}\), con el selector a la izquierda de
+un vector. El convenio del libro, \(\eleVL{a}{i}=\eleVR{a}{i}\), es la
+última frase de V01 (se recuerda con el rótulo "Idea clave", no se
+introduce). Con él las dos formas coinciden, es una propiedad
+asociativa, y por eso se escribe el selector a ambos lados sin
+paréntesis. La escena ilustra con un ejemplo y la voz dice por qué vale
+en general. Al final, lo habitual en los libros (\(a_{21}\)) frente al
+selector, como en la escena 3 de V01.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org1478b4a"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Componentes"</span>, <span style="font-style: italic;">"Components"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">A</span> = matriz(A_SEL, decimales=0, h_buff=1.0)
+<span style="font-weight: bold; font-style: italic;">f_A</span> = con_nombre(r<span style="font-style: italic;">"\Mat{A}="</span>, A).move_to([0, 2.0, 0])
+<span style="font-weight: bold; font-style: italic;">por_fila</span> = MathTex(r<span style="font-style: italic;">"\elemRp{\VectF{A}{2}}{1}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\elemR{(7,\ 0,\ 3,)}{1}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"7"</span>, tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">por_col</span> = MathTex(r<span style="font-style: italic;">"\elemLp{\VectC{A}{1}}{2}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\elemL{\begin{pmatrix}1\\ 7\end{pmatrix}}{2}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"7"</span>, tex_template=myTemplate, font_size=48)
+<span style="font-weight: bold; font-style: italic;">lineas</span> = columna_de_lineas([por_fila, por_col], x0=-1.6, y0=0.3, dy=1.45)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Glifos de cada l&#237;nea: primero la fila (o la columna) seleccionada, despu&#233;s lo que la completa
+</span><span style="font-weight: bold; font-style: italic;">fila</span> = VGroup(por_fila[0][1:4], por_fila[1], por_fila[2][:8])                       <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2|A = (7, 0, 3,)
+</span><span style="font-weight: bold; font-style: italic;">fila_resto</span> = VGroup(por_fila[0][0], por_fila[0][4:], por_fila[2][8:], por_fila[3:])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">( )|1, |1, = 7
+</span><span style="font-weight: bold; font-style: italic;">col</span> = VGroup(por_col[0][3:6], por_col[1], por_col[2][2:])                            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">A|1 = (1; 7)
+</span><span style="font-weight: bold; font-style: italic;">col_resto</span> = VGroup(por_col[0][:3], por_col[0][6], por_col[2][:2], por_col[3:])       <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2|( ), 2|, = 7
+</span><span style="font-weight: bold; font-style: italic;">convenio</span> = MathTex(r<span style="font-style: italic;">"\eleVL{a}{i}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\eleVR{a}{i}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"a_i"</span>, tex_template=myTemplate, font_size=52).move_to([0.8, -2.7, 0])
+<span style="font-weight: bold; font-style: italic;">idea</span> = aviso(<span style="font-style: italic;">"idea"</span>).next_to(convenio, LEFT, buff=0.8)
+<span style="font-weight: bold; font-style: italic;">conclusion</span> = MathTex(r<span style="font-style: italic;">"\elemRp{\VectF{A}{2}}{1}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\elemLp{\VectC{A}{1}}{2}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\eleM{A}{2}{1}"</span>,
+                     tex_template=myTemplate, font_size=52).move_to([0, 0.2, 0])
+<span style="font-weight: bold; font-style: italic;">general</span> = MathTex(r<span style="font-style: italic;">"\elemRp{\VectF{A}{i}}{j}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\elemLp{\VectC{A}{j}}{i}"</span>, r<span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\eleM{A}{i}{j}"</span>,
+                  tex_template=myTemplate, font_size=52).move_to(conclusion)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">mismos glifos: el 2 pasa a i y el 1 a j
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">lo habitual en los libros (a_21) frente al selector, en el ejemplo (como en la escena 3 de V01)
+</span><span style="font-weight: bold; font-style: italic;">comp</span> = MathTex(r<span style="font-style: italic;">"\eleM{A}{2}{1}"</span>, r<span style="font-style: italic;">"\;=\;"</span>, r<span style="font-style: italic;">"a_{21}"</span>, r<span style="font-style: italic;">"\;=\;7"</span>, tex_template=myTemplate, font_size=48).move_to([0, -1.7, 0])
+<span style="font-weight: bold; font-style: italic;">r_hab</span> = Tex(tr(<span style="font-style: italic;">"lo habitual"</span>, <span style="font-style: italic;">"the usual way"</span>), font_size=28, color=GRAY_B).next_to(comp[2], UP, buff=0.2)
+<span style="font-weight: bold; font-style: italic;">r_sel</span> = Tex(tr(<span style="font-style: italic;">"selector"</span>, <span style="font-style: italic;">"selector"</span>), font_size=28, color=GRAY_B).next_to(comp[0], UP, buff=0.2)
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: a_{21} = a, 2, 1; 2|A|1 = 2, |, A, |, 1
+</span><span style="font-weight: bold; font-style: italic;">sub_f</span>, <span style="font-weight: bold; font-style: italic;">sub_c</span> = comp[2][1], comp[2][2]
+<span style="font-weight: bold; font-style: italic;">sel_i</span>, <span style="font-weight: bold; font-style: italic;">sel_d</span> = comp[0][0:2], comp[0][3:5]
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Cada componente de una matriz est&#225; a la vez &lt;bookmark mark='f'/&gt; en una fila y &lt;bookmark mark='c'/&gt; en una columna."""</span>,
+                            <span style="font-style: italic;">"""Each component of a matrix lies both &lt;bookmark mark='f'/&gt; in a row and &lt;bookmark mark='c'/&gt; in a column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(f_A), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold; font-style: italic;">ff</span> = franja_fila(A, 1)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(ff), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold; font-style: italic;">fc</span> = franja_columna(A, 0, color=COLOR_C)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fc), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""El siete, por ejemplo, es componente de dos vectores distintos: &lt;bookmark mark='f'/&gt; es la primera componente de la segunda fila, &lt;bookmark mark='c'/&gt; y la segunda componente de la primera columna."""</span>,
+                            <span style="font-style: italic;">"""The seven, for example, is a component of two different vectors: &lt;bookmark mark='f'/&gt; it is the first component of the second row, &lt;bookmark mark='c'/&gt; and the second component of the first column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold;">self</span>.play(ff.animate.set_fill(opacity=0.55), fc.animate.set_fill(opacity=0.06), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(ff.animate.set_fill(opacity=0.06), fc.animate.set_fill(opacity=0.55), run_time=0.5)
+<span style="font-weight: bold;">self</span>.play(FadeOut(ff), FadeOut(fc), run_time=0.5)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Obtengamos el siete de las dos maneras. Seleccionemos primero &lt;bookmark mark='f'/&gt; la fila, &lt;bookmark mark='c'/&gt; y despu&#233;s su primera componente."""</span>,
+                            <span style="font-style: italic;">"""Let us get the seven in both ways. First, let us select &lt;bookmark mark='f'/&gt; the row, &lt;bookmark mark='c'/&gt; and then its first component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold; font-style: italic;">ff</span> = franja_fila(A, 1)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(ff), FadeIn(fila), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fila_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Ahora seleccionemos primero &lt;bookmark mark='c'/&gt; la columna, &lt;bookmark mark='s'/&gt; y despu&#233;s su segunda componente: &lt;bookmark mark='v'/&gt; tambi&#233;n obtenemos el siete."""</span>,
+                            <span style="font-style: italic;">"""Now let us first select &lt;bookmark mark='c'/&gt; the column, &lt;bookmark mark='s'/&gt; and then its second component: &lt;bookmark mark='v'/&gt; we get the seven again."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(ff), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold; font-style: italic;">fc</span> = franja_columna(A, 0, color=COLOR_C)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(fc), FadeIn(col), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(col_resto), Indicate(A.get_rows()[1][0], color=COLOR_ESCALAR, scale_factor=1.4), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"v"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos caminos acaban en el mismo siete (Marcos, 2026-11-01)
+</span>    <span style="font-weight: bold;">self</span>.play(*[Indicate(x, color=COLOR_ESCALAR, scale_factor=1.4) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> (por_fila[4], por_col[4], A.get_rows()[1][0])], run_time=1.2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Aqu&#237; el selector act&#250;a por la izquierda de un vector. &lt;bookmark mark='a'/&gt; Ya en el primer v&#237;deo del curso admitimos que el selector puede actuar por cualquier lado de un vector, &lt;bookmark mark='d'/&gt; con el mismo resultado."""</span>,
+                            <span style="font-style: italic;">"""Here the selector acts on the left of a vector. &lt;bookmark mark='a'/&gt; Back in the first video of the course, we agreed that the selector can act on either side of a vector, &lt;bookmark mark='d'/&gt; with the same result."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;">sel_izq</span> = VGroup(por_col[0][:2], por_col[2][:2])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos selectores por la izquierda, resaltados toda la frase
+</span>    <span style="font-weight: bold;">self</span>.play(FadeOut(fc), *[s.animate.set_color(COLOR_ESCALAR).scale(1.25) <span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> sel_izq], run_time=0.6)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"a"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[s.animate.set_color(WHITE).scale(1/1.25) <span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> sel_izq], FadeIn(idea), FadeIn(convenio[0]), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(convenio[1:]), run_time=0.8)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la asociatividad del selector justifica la notaci&#243;n sin par&#233;ntesis (Marcos, 2026-10-31)
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: conclusion[0] = ( 2 | A ) | 1 (par&#233;ntesis 0 y 4); conclusion[2] = 2 | ( A | 1 ) (par&#233;ntesis 2 y 6)
+</span><span style="font-weight: bold; font-style: italic;">parentesis</span> = [conclusion[0][0], conclusion[0][4], conclusion[2][2], conclusion[2][6]]
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con este convenio, da igual seleccionar primero la fila o la columna: &lt;bookmark mark='p'/&gt; podemos desplazar los par&#233;ntesis sin cambiar el resultado."""</span>,
+                            <span style="font-style: italic;">"""With this convention, it makes no difference whether we select the row or the column first: &lt;bookmark mark='p'/&gt; we can move the parentheses without changing the result."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(ReplacementTransform(por_fila[0], conclusion[0]), ReplacementTransform(por_col[0], conclusion[2]), FadeIn(conclusion[1]),
+              FadeOut(VGroup(por_fila[1:], por_col[1:])), run_time=1.2)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.3) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> parentesis], run_time=0.3)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">como en V04: los glifos de la izquierda van a las posiciones de la derecha y vuelven
+</span>    <span style="font-weight: bold; font-style: italic;">destino</span> = conclusion[2].copy().move_to(conclusion[0])
+    <span style="font-weight: bold;">self</span>.play(*[Transform(conclusion[0][i], destino[j], rate_func=rate_functions.there_and_back_with_pause)
+                <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(<span style="font-weight: bold;">range</span>(7), [2, 0, 1, 3, 6, 4, 5])], run_time=2.2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Es una propiedad asociativa, como la del producto por un escalar. &lt;bookmark mark='q'/&gt; Por eso podemos escribir el selector a ambos lados de la matriz, sin par&#233;ntesis."""</span>,
+                            <span style="font-style: italic;">"""It is an associative property, like that of scalar multiplication. &lt;bookmark mark='q'/&gt; That is why we can write the selector on both sides of the matrix, with no parentheses."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"q"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(WHITE).scale(1/1.3) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> parentesis], run_time=0.3)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(conclusion[3:]), run_time=1)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;este ejemplo&#187;, no &#171;un ejemplo&#187;: parec&#237;a remitir a un ejemplo anterior (Andr&#233;s, hermano de Marcos, 2026-11-03)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Lo hemos visto en este ejemplo, pero &lt;bookmark mark='g'/&gt; vale para cualquier componente de cualquier matriz, porque toda componente est&#225; a la vez en su &lt;bookmark mark='f'/&gt; fila y en su &lt;bookmark mark='c'/&gt; columna, que son vectores."""</span>,
+                            <span style="font-style: italic;">"""We have seen it in this example, but &lt;bookmark mark='g'/&gt; it holds for any component of any matrix, because every component lies both in its &lt;bookmark mark='f'/&gt; row and in its &lt;bookmark mark='c'/&gt; column, which are vectors."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"g"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[ReplacementTransform(conclusion[p][g], general[p][g]) <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(5) <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(conclusion[p]))], run_time=1.5)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las tres i (fila) y despu&#233;s las tres j (columna), con los colores de las franjas; el resaltado
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">empieza en cuanto la voz dice la palabra (sin la subida lenta de Indicate) y dura hasta la siguiente
+</span>    <span style="font-weight: bold; font-style: italic;">ies</span> = [general[p][g] <span style="font-weight: bold;">for</span> p, g <span style="font-weight: bold;">in</span> [(0, 1), (2, 0), (4, 0)]]
+    <span style="font-weight: bold; font-style: italic;">jotas</span> = [general[p][g] <span style="font-weight: bold;">for</span> p, g <span style="font-weight: bold;">in</span> [(0, 6), (2, 5), (4, 4)]]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.5) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> ies], run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(WHITE).scale(1/1.5) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> ies], *[x.animate.set_color(COLOR_C).scale(1.5) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> jotas], run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait(0.8)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(WHITE).scale(1/1.5) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> jotas], run_time=0.4)
+
+<span style="font-weight: bold;">self</span>.wait(0.4)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Lo habitual es escribir la componente con la letra de la matriz en min&#250;scula y dos sub&#237;ndices: &lt;bookmark mark='i'/&gt; primero el de la fila &lt;bookmark mark='j'/&gt; y despu&#233;s el de la columna."""</span>,
+                            <span style="font-style: italic;">"""The usual way is to write the component with the letter of the matrix in lower case and two subscripts: &lt;bookmark mark='i'/&gt; first the row &lt;bookmark mark='j'/&gt; and then the column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeOut(convenio), FadeOut(idea), FadeIn(comp[2:]), FadeIn(r_hab), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"i"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(sub_f, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"j"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(sub_c, color=COLOR_ESCALAR, scale_factor=1.8), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Pero en este curso, como con los vectores, usaremos principalmente el operador selector, &lt;bookmark mark='s'/&gt; con el &#237;ndice de la fila a la izquierda de la matriz &lt;bookmark mark='d'/&gt; y el de la columna a la derecha."""</span>,
+                            <span style="font-style: italic;">"""But in this course, as with vectors, we will mainly use the selector operator, &lt;bookmark mark='s'/&gt; with the row index on the left of the matrix &lt;bookmark mark='d'/&gt; and the column index on the right."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(comp[:2]), FadeIn(r_sel), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(sel_i, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(sel_d, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c90ea4" class="outline-4">
+<h4 id="org5c90ea4"><span class="section-number-4">1.6.4.</span> Escena 3 - Resumen y anuncio de la transposición</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+La tabla de notación del libro (fila, componente y columna) y que da
+igual el orden de selección. La definición y el orden de una matriz
+quedan en el resumen de V09. Anuncio del siguiente vídeo (la
+transposición).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgf53c88a"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Resumen"</span>, <span style="font-style: italic;">"Key Takeaways"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">encabezados</span> = [tr(<span style="font-style: italic;">"fila $i$"</span>, <span style="font-style: italic;">"row $i$"</span>), tr(<span style="font-style: italic;">"componente $ij$"</span>, <span style="font-style: italic;">"component $ij$"</span>), tr(<span style="font-style: italic;">"columna $j$"</span>, <span style="font-style: italic;">"column $j$"</span>)]
+<span style="font-weight: bold; font-style: italic;">formulas</span> = [r<span style="font-style: italic;">"\VectF{A}{i}\in\R[n]"</span>, r<span style="font-style: italic;">"\eleM{A}{i}{j}=a_{ij}"</span>, r<span style="font-style: italic;">"\VectC{A}{j}\in\R[m]"</span>]
+<span style="font-weight: bold; font-style: italic;">tabla</span> = VGroup(*[VGroup(Tex(e, tex_template=myTemplate, font_size=32, color=GRAY_B), MathTex(f, tex_template=myTemplate, font_size=44)).arrange(DOWN, buff=0.3)
+                 <span style="font-weight: bold;">for</span> e, f <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(encabezados, formulas)]).arrange(RIGHT, buff=1.2)
+<span style="font-weight: bold; font-style: italic;">asoc</span> = VGroup(MathTex(r<span style="font-style: italic;">"\elemRp{\VectF{A}{i}}{j}=\elemLp{\VectC{A}{j}}{i}=\eleM{A}{i}{j}"</span>, tex_template=myTemplate, font_size=40),
+              Tex(tr(<span style="font-style: italic;">"da igual el orden de selecci&#243;n"</span>, <span style="font-style: italic;">"the order of selection does not matter"</span>), font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
+<span style="font-weight: bold; font-style: italic;">bloque</span> = VGroup(tabla, asoc).arrange(DOWN, buff=0.6).move_to([0, 0.3, 0])
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el operador se destaca cuando la voz dice por qu&#233; lado act&#250;a (Marcos, 2026-10-27)
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: tabla[0][1] = i, |, A, ...;  tabla[1][1] = i, |, A, |, j, ...;  tabla[2][1] = A, |, j, ...
+</span><span style="font-weight: bold; font-style: italic;">sel_fila</span>, <span style="font-weight: bold; font-style: italic;">sel_col</span> = tabla[0][1][0][0:2], tabla[2][1][0][1:3]
+<span style="font-weight: bold; font-style: italic;">sel_comp</span> = [tabla[1][1][0][0:2], tabla[1][1][0][3:5]]
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;operador selector&#187; una sola vez (antes, tres veces &#171;Con el operador selector actuando&#187;; Marcos, 2026-10-31)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Resumamos. Con el operador selector actuando &lt;bookmark mark='i'/&gt; por la izquierda, seleccionamos una fila; &lt;bookmark mark='d'/&gt; por la derecha, una columna; &lt;bookmark mark='a'/&gt; y por ambos lados, una componente."""</span>,
+                            <span style="font-style: italic;">"""Let us sum up. With the selector operator acting &lt;bookmark mark='i'/&gt; on the left, we select a row; &lt;bookmark mark='d'/&gt; on the right, a column; &lt;bookmark mark='a'/&gt; and on both sides, a component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(tabla[0]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"i"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(sel_fila, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(tabla[2]), run_time=0.4)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">FadeIn e Indicate a la vez dejaban el selector invisible
+</span>    <span style="font-weight: bold;">self</span>.play(Indicate(sel_col, color=COLOR_ESCALAR, scale_factor=1.6), run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"a"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(tabla[1]), run_time=0.4)
+    <span style="font-weight: bold;">self</span>.play(*[Indicate(g, color=COLOR_ESCALAR, scale_factor=1.6) <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> sel_comp], run_time=0.9)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Solo se mueve la expresi&#243;n del medio (Marcos, 2026-11-03): la de la izquierda ya ense&#241;a &#171;fila primero&#187; y no debe
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cambiar mientras la voz dice &#171;la fila&#187;; la del medio pasa a &#171;fila primero&#187; al decir &#171;la fila&#187; y vuelve a &#171;columna
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">primero&#187; al decir &#171;o la columna&#187;. Para volver se transforma hacia una copia hecha al crearla (CLAUDE.md).
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos de asoc[0][0]: ( i | A ) | j = i | ( A | j ) = i | A | j  (0-6, 7, 8-14, 15, 16-20)
+</span><span style="font-weight: bold; font-style: italic;">med</span> = asoc[0][0][8:15]
+<span style="font-weight: bold; font-style: italic;">med_orig</span> = med.copy()
+<span style="font-weight: bold; font-style: italic;">otra_med</span> = MathTex(r<span style="font-style: italic;">"\elemRp{\VectF{A}{i}}{j}"</span>, tex_template=myTemplate, font_size=40).move_to(med)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">( i | A ) | j
+</span><span style="font-weight: bold; font-style: italic;">parentesis</span> = [med[2], med[6]]
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Y &lt;bookmark mark='p'/&gt; da igual seleccionar primero &lt;bookmark mark='f'/&gt; la fila &lt;bookmark mark='c'/&gt; o la columna."""</span>,
+                            <span style="font-style: italic;">"""And it makes no difference &lt;bookmark mark='p'/&gt; whether we select &lt;bookmark mark='f'/&gt; the row &lt;bookmark mark='c'/&gt; or the column first."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(asoc), run_time=0.6)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.3) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> parentesis], run_time=0.3)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"f"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[Transform(med[i], otra_med[0][j]) <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(<span style="font-weight: bold;">range</span>(7), [1, 2, 0, 3, 5, 6, 4])], run_time=0.6)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">a &#171;fila primero&#187;
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[Transform(med[i], med_orig[i]) <span style="font-weight: bold;">for</span> i <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(7)], run_time=0.6)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">de vuelta a &#171;columna primero&#187;
+</span>    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_color(WHITE).scale(1/1.3) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> parentesis], run_time=0.3)
+
+<span style="font-weight: bold;">self</span>.wait(0.5)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una pausa antes de anunciar el pr&#243;ximo v&#237;deo, como en V08
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el anuncio solo anticipa: explicar el resultado lo dejaba incompleto o pisaba el v&#237;deo siguiente (Marcos, 2026-10-31)
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin &#171;como hicimos al formar la matriz B&#187;: B no aparece en este v&#237;deo (2026-11-03)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el pr&#243;ximo v&#237;deo veremos la transposici&#243;n, que convierte las filas de una matriz en las columnas de otra."""</span>,
+                            <span style="font-style: italic;">"""In the next video we will meet transposition, which turns the rows of a matrix into the columns of another."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">pass</span>
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org49c5f37" class="outline-2">
+<h2 id="org49c5f37"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Viven en <code>Comunes.org</code>, que se tangle a <code>lib/vm2comun.py</code> (y a
+<code>../videoMath2/lib/vm2comun.py</code>): carga de librerías, <code>LANG</code> y <code>tr()</code>,
+voces de Azure, código de colores, <code>myTemplate</code>, <code>MiEscenaConVoz</code> (con
+<code>voiceover</code>, <code>anuncia_regla=/=destaca_regla</code>, créditos, tarjeta de
+pausa), la pantalla de créditos, Omega y los vectores de \(\mathbb{R}^2\)
+y \(\mathbb{R}^3\). Si <code>vm2comun.py</code> no existe o está anticuado, tangle
+primero <code>Comunes.org</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org9ad9e7f" class="outline-2">
+<h2 id="org9ad9e7f"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgec9ed54" class="outline-3">
+<h3 id="orgec9ed54"><span class="section-number-3">3.1.</span> Generamos un fichero <code>mpeg</code> por cada escena</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-bash" id="orge94517e">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -pql $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgeb53124">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -qh $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d249b8" class="outline-3">
+<h3 id="org3d249b8"><span class="section-number-3">3.2.</span> Montaje: concatenar las escenas, música de entrada y salida, subtítulos</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen <code>volumen</code>) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena <code>cierre</code> (bajo la voz, con
+<code>volumen_voz</code>), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con <code>loudnorm</code> en una pasada, que
+subía el volumen poco a poco al empezar). Los <code>.srt</code> de las escenas se desplazan y se
+funden en un único <code>video.srt</code> junto al mp4 (para subirlo a YouTube).
+</p>
+
+<p>
+<code>escenas</code> es la lista ordenada de clases; <code>cierre</code> la escena en la que
+vuelve la música (el resumen). El mp4 y el srt finales quedan en la raíz del repositorio del
+idioma.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgeca476d"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">LC_ALL</span>=C   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">decimales con punto para bc y printf
+</span>[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+<span style="font-weight: bold; font-style: italic;">dir</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/lib/media/videos/$<span style="font-weight: bold; font-style: italic;">fichero</span>/$<span style="font-weight: bold; font-style: italic;">calidad</span>
+<span style="font-weight: bold; font-style: italic;">tmp</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/$<span style="font-weight: bold; font-style: italic;">video</span>; mkdir -p $<span style="font-weight: bold; font-style: italic;">tmp</span>; rm -f $<span style="font-weight: bold; font-style: italic;">tmp</span>/seg_*.mp4
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">1. Un segmento por escena, con audio y v&#237;deo de la misma duraci&#243;n exacta
+</span><span style="font-weight: bold; font-style: italic;">i</span>=0; <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">T</span>=0; <span style="font-weight: bold; font-style: italic;">T0</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">Tc</span>=<span style="font-style: italic;">""</span>
+<span style="font-weight: bold;">for</span> esc<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">escenas</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold; font-style: italic;">seg</span>=$(<span style="font-weight: bold;">printf "%s/seg_%02d.mp4" $tmp $i</span>)
+  <span style="font-weight: bold; font-style: italic;">dur</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold; font-style: italic;">fps</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold;">if</span> ffprobe -loglevel error -select_streams a -show_entries <span style="font-weight: bold; font-style: italic;">stream</span>=codec_type -of <span style="font-weight: bold; font-style: italic;">csv</span>=<span style="font-weight: bold; font-style: italic;">p</span>=0 $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 | grep -q audio; <span style="font-weight: bold;">then</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -af <span style="font-style: italic;">"aresample=48000,apad"</span> -ac 2 -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">else</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -f lavfi -i <span style="font-weight: bold; font-style: italic;">anullsrc</span>=<span style="font-weight: bold; font-style: italic;">r</span>=48000:<span style="font-weight: bold; font-style: italic;">cl</span>=stereo -map 0:v -map 1:a -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">fi</span>
+  <span style="font-weight: bold; font-style: italic;">d</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg</span>)
+  <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">"$offsets $T"</span>; [ <span style="font-style: italic;">"$esc"</span> = <span style="font-style: italic;">"$cierre"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"%2d  %-55s %8.3f s  (empieza en %8.3f)\n"</span> $<span style="font-weight: bold; font-style: italic;">i</span> $<span style="font-weight: bold; font-style: italic;">esc</span> $<span style="font-weight: bold; font-style: italic;">d</span> $<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold; font-style: italic;">T</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T+$d"</span>); [ -z <span style="font-style: italic;">"$T0"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">T0</span>=$<span style="font-weight: bold; font-style: italic;">d</span>; <span style="font-weight: bold; font-style: italic;">dl</span>=$<span style="font-weight: bold; font-style: italic;">d</span>
+  <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">"$lista $seg"</span>; <span style="font-weight: bold; font-style: italic;">i</span>=$(<span style="font-weight: bold;">(i+1</span>))
+<span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">n</span>=$<span style="font-weight: bold; font-style: italic;">i</span>; <span style="font-weight: bold; font-style: italic;">Tl</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$dl"</span>); [ -z <span style="font-style: italic;">"$Tc"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">Tl</span>
+<span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Duraci&#243;n total %.3f s; m&#250;sica hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (cr&#233;ditos)\n"</span> $<span style="font-weight: bold; font-style: italic;">T</span> $<span style="font-weight: bold; font-style: italic;">T0</span> $<span style="font-weight: bold; font-style: italic;">Tc</span> $<span style="font-weight: bold; font-style: italic;">Tl</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2. Concatenaci&#243;n recodificada, voz normalizada, m&#250;sica de entrada y salida, fundido final
+</span><span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">k</span>=0
+<span style="font-weight: bold;">for</span> seg<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">lista</span>; <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">"$inputs -i $seg"</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">"$fc[$k:v][$k:a]"</span>; <span style="font-weight: bold; font-style: italic;">k</span>=$(<span style="font-weight: bold;">(k+1</span>)); <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB m&#225;s baja.)
+</span><span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold;">for</span> k<span style="font-weight: bold;"> in</span> $(<span style="font-weight: bold;">seq 0 $((n-1</span>))); <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">"$ia[$k:a]"</span>; <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">I</span>=$(<span style="font-weight: bold;">ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2&gt;&amp;1 | awk '$1=="I:"{v=$2} END{print v}'</span>)
+<span style="font-weight: bold; font-style: italic;">ganancia</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "-16 - ($I</span><span style="font-style: italic;">)"</span>); <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Voz: %s LUFS; ganancia %.2f dB\n"</span> $<span style="font-weight: bold; font-style: italic;">I</span> $<span style="font-weight: bold; font-style: italic;">ganancia</span>
+<span style="font-weight: bold; font-style: italic;">fin_m1</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T0+5"</span>); <span style="font-weight: bold; font-style: italic;">tfade</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-6"</span>)
+<span style="font-weight: bold; font-style: italic;">dur_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$Tl-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m2</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tc*1000"</span>)); <span style="font-weight: bold; font-style: italic;">fade_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$dur_m2-1"</span>)
+<span style="font-weight: bold; font-style: italic;">fin_m3</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m3</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tl*1000"</span>))
+ffmpeg -loglevel error -y $<span style="font-weight: bold; font-style: italic;">inputs</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -filter_complex <span style="font-style: italic;">"
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$(</span><span style="font-weight: bold;">(n+1</span><span style="font-style: italic;">)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$(</span><span style="font-weight: bold;">(n+2</span><span style="font-style: italic;">)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]"</span> <span style="font-style: italic;">\</span>
+  -map <span style="font-style: italic;">"[v]"</span> -map <span style="font-style: italic;">"[a]"</span> -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"V&#237;deo: $raiz/$video.mp4"</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">3. Subt&#237;tulos: desplazar el srt de cada escena y fundirlos en uno
+</span><span style="font-weight: bold; font-style: italic;">ESCENAS</span>=<span style="font-style: italic;">"$escenas"</span> <span style="font-weight: bold; font-style: italic;">OFFSETS</span>=<span style="font-style: italic;">"$offsets"</span> python3 - <span style="font-style: italic;">"$dir"</span> <span style="font-style: italic;">"$raiz/$video.srt"</span> &lt;&lt;<span style="font-style: italic;">'EOF'</span><span style="font-weight: bold;">
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) &lt; 3 or "--&gt;" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("--&gt;")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --&gt; {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subt&#237;tulos: {salida} ({k-1} entradas)")
+EOF</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf074eb3" class="outline-3">
+<h3 id="orgf074eb3"><span class="section-number-3">3.3.</span> Comprobar las uniones y los subtítulos</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime <a href="#orgeca476d">No description for this link</a>) para mirar que no haya parones ni desfases.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orge50fc24">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+mkdir -p $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+<span style="font-weight: bold;">for</span> t<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">tiempos</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold;">for</span> dt<span style="font-weight: bold;"> in</span> -0.1 0.1; <span style="font-weight: bold;">do</span>
+    <span style="font-weight: bold; font-style: italic;">ti</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$t+$dt"</span>); [ $(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$ti &lt; 0"</span>) = 1 ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">ti</span>=0
+    ffmpeg -loglevel error -y -ss $<span style="font-weight: bold; font-style: italic;">ti</span> -i $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4 -frames:v 1 $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas/$(<span style="font-weight: bold;">printf "%08.2f" $ti</span>).png
+  <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold;">done</span>
+ls $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c9d070" class="outline-3">
+<h3 id="org5c9d070"><span class="section-number-3">3.4.</span> Extraer el guion (la narración) para revisarlo</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Recorre el fichero de python y saca, escena por escena, los textos
+<code>tr(...)</code> del idioma pedido: en prosa la narración (los que están dentro
+de <code>self.voiceover</code>) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en <code>LANG</code>, lee siempre el fichero español (<code>./lib/</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgf870422"><span style="font-weight: bold;">import</span> ast, textwrap
+
+<span style="font-weight: bold; font-style: italic;">arbol</span> = ast.parse(<span style="font-weight: bold;">open</span>(f<span style="font-style: italic;">"lib/</span>{fichero}<span style="font-style: italic;">.py"</span>, encoding=<span style="font-style: italic;">"utf-8"</span>).read())
+<span style="font-weight: bold; font-style: italic;">idx</span>   = 0 <span style="font-weight: bold;">if</span> idioma == <span style="font-style: italic;">"es"</span> <span style="font-weight: bold;">else</span> 1
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">texto</span>(nodo):
+    <span style="font-weight: bold;">try</span>:
+        <span style="font-weight: bold;">return</span> ast.literal_eval(nodo)
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+        <span style="font-weight: bold;">return</span> ast.unparse(nodo)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_tr</span>(n):
+    <span style="font-weight: bold;">return</span> (<span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Name)
+            <span style="font-weight: bold;">and</span> n.func.<span style="font-weight: bold;">id</span> == <span style="font-style: italic;">"tr"</span> <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">len</span>(n.args) &gt;= 2)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_borrado</span>(stmt):
+    <span style="font-weight: bold;">return</span> ast.unparse(stmt).startswith(<span style="font-style: italic;">"self.play(*[FadeOut(mob) for mob in self.mobjects])"</span>)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Primera clase con construct(): la del v&#237;deo completo.
+</span><span style="font-weight: bold; font-style: italic;">construct</span> = <span style="font-weight: bold;">next</span>(f <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> arbol.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(c, ast.ClassDef)
+                 <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> c.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(f, ast.FunctionDef) <span style="font-weight: bold;">and</span> f.name == <span style="font-style: italic;">"construct"</span>)
+
+<span style="font-weight: bold; font-style: italic;">escena</span>, <span style="font-weight: bold; font-style: italic;">items</span> = 0, []   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la portada es la escena 0
+</span><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">volcar</span>():
+    <span style="font-weight: bold;">global</span> items
+    <span style="font-weight: bold;">if</span> items:
+        <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"==== </span>{'Escena' <span style="font-weight: bold;">if</span> idioma == 'es' <span style="font-weight: bold;">else</span> 'Scene'}<span style="font-style: italic;"> </span>{escena}<span style="font-style: italic;"> ====</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+        <span style="font-weight: bold;">for</span> tipo, t <span style="font-weight: bold;">in</span> items:
+            <span style="font-weight: bold;">if</span> tipo == <span style="font-style: italic;">"voz"</span>:
+                <span style="font-weight: bold;">print</span>(textwrap.fill(t, 72), <span style="font-style: italic;">"</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"    [</span>{t}<span style="font-style: italic;">]</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+    <span style="font-weight: bold; font-style: italic;">items</span> = []
+
+<span style="font-weight: bold;">for</span> stmt <span style="font-weight: bold;">in</span> construct.body:
+    <span style="font-weight: bold;">if</span> es_borrado(stmt):
+        volcar(); <span style="font-weight: bold; font-style: italic;">escena</span> += 1; <span style="font-weight: bold;">continue</span>
+    <span style="font-weight: bold; font-style: italic;">en_voz</span> = <span style="font-weight: bold;">set</span>()
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt):
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Attribute) <span style="font-weight: bold;">and</span> n.func.attr == <span style="font-style: italic;">"voiceover"</span>:
+            <span style="font-weight: bold; font-style: italic;">en_voz</span> |= {<span style="font-weight: bold;">id</span>(s) <span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> ast.walk(n) <span style="font-weight: bold;">if</span> es_tr(s)}
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">sorted</span>((n <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt) <span style="font-weight: bold;">if</span> es_tr(n)), key=<span style="font-weight: bold;">lambda</span> n: (n.lineno, n.col_offset)):
+        items.append((<span style="font-style: italic;">"voz"</span> <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">id</span>(n) <span style="font-weight: bold;">in</span> en_voz <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"pantalla"</span>, texto(n.args[idx])))
+volcar()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org18aae3a" class="outline-3">
+<h3 id="org18aae3a"><span class="section-number-3">3.5.</span> Tangle desde la terminal (sin abrir Emacs)</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-bash">emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "Comunes.org")'</span>   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">solo si cambi&#243; el c&#243;digo com&#250;n
+</span>emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "L01-V10-Seleccion.org")'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2026-11-05 jue 09:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

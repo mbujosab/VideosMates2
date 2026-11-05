@@ -396,7 +396,7 @@ el índice $j$ desaparece: $\elemLp{\MatT{A}}{i}=\VectC{A}{i}$. La escena
 #+name: Segunda escena
 #+BEGIN_SRC python :eval no
 self.creditos()
-cabecera = Tex(tr("Transponer es cambiar de lado los índices", "Transposing swaps the sides of the indices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+cabecera = Tex(tr("Transponer es cambiar de lado los índices", "Transposing moves the indices to the other side"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 orden_sel = tr("da igual el orden de selección", "the order of selection does not matter")
 x_rot = 1.6
 # Ida. Glifos:
@@ -481,7 +481,7 @@ with self.voiceover(text=tr("""Por tanto, transponer intercambia los índices <b
 
 self.play(FadeOut(VGroup(ida[0], ida[1], *rot_ida)), ReplacementTransform(ida[2], regla), run_time=1.2)   # la última línea es la regla
 with self.voiceover(text=tr("""De aquí sale una regla de reescritura: transponer, o quitar la transposición, intercambia los índices de lado.""",
-                            """This gives us a rewriting rule: transposing, or removing the transposition, swaps the sides of the indices.""")) as tracker:
+                            """This gives us a rewriting rule: transposing, or removing the transposition, moves the indices to the other side.""")) as tracker:
     self.play(FadeIn(idea), run_time=0.8)
 
 # Vuelta: en la regla se vuelven a poner los paréntesis (fila de la transpuesta y columna de A)
@@ -575,7 +575,7 @@ with self.voiceover(text=tr("""Empezamos por <bookmark mark='c'/> una columna cu
     self.play(sel_col.animate.set_color(WHITE).scale(1/1.4), run_time=0.4)
 
 with self.voiceover(text=tr("""Por la definición de transpuesta, <bookmark mark='a'/> podemos quitar la transposición exterior <bookmark mark='x'/> cambiando de lado el índice.""",
-                            """By the definition of the transpose, <bookmark mark='a'/> we can remove the outer transposition <bookmark mark='x'/> by swapping the side of the index.""")) as tracker:
+                            """By the definition of the transpose, <bookmark mark='a'/> we can remove the outer transposition <bookmark mark='x'/> by moving the index to the other side.""")) as tracker:
     panel.senala("def")
     self.wait_until_bookmark("a")
     copia = copia_literal(self, doble[0], doble[2], doble[1])
@@ -626,14 +626,14 @@ self.creditos()
 cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
 formulas = [r"\VectTC{A}{i}=\VectF{A}{i},\qquad \elemLp{\MatT{A}}{i}=\VectC{A}{i}", r"\eleMT{A}{i}{j}=\eleM{A}{j}{i},\qquad \TransP*{\MatT{A}}=\Mat{A}"]
 rotulos = [tr("transponer convierte las filas en columnas, y viceversa", "transposing turns rows into columns, and vice versa"),
-           tr("transponer = cambiar de lado los índices", "transposing = swapping the sides of the indices")]
+           tr("transponer = cambiar de lado los índices", "transposing = moving the indices to the other side")]
 filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=44), Tex(r, font_size=28, color=GRAY_B)).arrange(DOWN, buff=0.2)
                  for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.7).move_to([0, -0.2, 0])
 
 # «transponer dos veces devuelve» y no «la transpuesta de la transpuesta es»: Tristan pausaba 320-610 ms antes del
 # segundo «de» en todas las tiradas (Marcos lo oyó, 2026-11-02); con el verbo, 40-60 ms
 with self.voiceover(text=tr("""Resumamos. La transposición transforma las filas en columnas, y viceversa. <bookmark mark='r'/> Transponer equivale a cambiar de lado los índices, y transponer dos veces devuelve la matriz original.""",
-                            """Let us sum up. Transposition turns rows into columns, and vice versa. <bookmark mark='r'/> Transposing amounts to swapping the sides of the indices, and transposing twice returns the original matrix.""")) as tracker:   # «returns»: Ollie pausaba 320-370 ms antes de «gives back» en todas las tiradas; con «returns», 180 ms
+                            """Let us sum up. Transposition turns rows into columns, and vice versa. <bookmark mark='r'/> Transposing amounts to moving the indices to the other side, and transposing twice returns the original matrix.""")) as tracker:   # «returns»: Ollie pausaba 320-370 ms antes de «gives back» en todas las tiradas; con «returns», 180 ms
     self.play(Write(cabecera), FadeIn(filas[0]), run_time=1)
     self.wait_until_bookmark("r")
     self.play(FadeIn(filas[1]), run_time=0.8)

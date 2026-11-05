@@ -1,0 +1,91 @@
+# Ficha de YouTube del vídeo L01 V12 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V12.toml es
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V12.toml en
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (HD de los dos idiomas, 2026-11-04).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+# youtube = ""   # rellenar tras subirlo
+video = "L01_V12_TiposDeMatrices.mp4"
+subtitulos = "L01_V12_TiposDeMatrices.srt"
+idioma = "es"
+titulo = "Tipos de matrices | Álgebra lineal 1.12"
+titulo_miniatura = "Tipos de matrices"
+miniatura = "miniaturas/L01_V12_es.png"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "matrices", "matriz cuadrada", "matriz diagonal", "matriz identidad",
+             "matriz simétrica", "transpuesta", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Matrices cuadradas, diagonales, nulas, identidad y simétricas, descritas con la notación del curso.
+
+Duodécimo vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Matrices cuadradas
+00:38 Matrices diagonales, nulas e identidad
+01:35 Matrices simétricas
+02:27 Componentes de una matriz simétrica
+03:20 Diagonal y cuadrada, luego simétrica (ejercicio)
+05:07 Resumen
+05:44 Créditos finales
+
+Una matriz es cuadrada si tiene tantas filas como columnas, y diagonal si sus componentes fuera de la diagonal principal son nulas; las matrices nulas y las matrices identidad son casos particulares. Una matriz es simétrica si es igual a su transpuesta. Demostramos que toda matriz simétrica es cuadrada y, con el criterio de igualdad componente a componente, que sus componentes son la imagen especular unas de otras respecto a la diagonal principal. Por último, un ejercicio: toda matriz diagonal y cuadrada es simétrica; por tanto, las matrices identidad son simétricas.
+
+Correspondiente sección del libro (Sección 1.4.6): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6
+
+Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/(id de V11, la transposición, al publicarlo)
+Siguiente vídeo: (se añade al publicarlo)
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+# youtube = ""   # fill in after upload
+video = "../videoMath2/L01_V12_TypesOfMatrices.mp4"
+subtitulos = "../videoMath2/L01_V12_TypesOfMatrices.srt"
+idioma = "en"
+titulo = "Types of matrices | Linear algebra 1.12"
+titulo_miniatura = "Types of matrices"
+miniatura = "miniaturas/L01_V12_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "matrices", "square matrix", "diagonal matrix", "identity matrix",
+             "symmetric matrix", "transpose", "mathematics", "GECO", "UCM"]
+descripcion = """
+Square, diagonal, zero, identity and symmetric matrices, described with the notation of the course.
+
+Twelfth video of the first lesson of the linear algebra course.
+
+00:00 Title
+00:06 Square matrices
+00:37 Diagonal, zero and identity matrices
+01:32 Symmetric matrices
+02:26 Components of a symmetric matrix
+03:21 Square diagonal, hence symmetric (exercise)
+05:11 Key takeaways
+05:50 Closing credits
+
+A matrix is square if it has as many rows as columns, and diagonal if its components outside the main diagonal are zero; zero matrices and identity matrices are particular cases. A matrix is symmetric if it is equal to its transpose. We prove that every symmetric matrix is square and, with the criterion of equality component by component, that its components mirror each other across the main diagonal. Finally, an exercise: every square diagonal matrix is symmetric; hence identity matrices are symmetric.
+
+Corresponding book section (Section 1.4.6): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6 (the book is in Spanish)
+
+Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/(id de V11, la transposición, al publicarlo)
+Next video: (added when published)
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""

@@ -243,6 +243,9 @@ element*, "lado izquierdo/derecho" = *left-/right-hand side*.
 Fijado en V09 (2026-10-17): "orden $m$ por $n$" = *order m by n*
 ("this matrix is of order five by four"; Marcos), "matriz columna" =
 *column matrix*. Pendiente: "reglas de reescritura" (*rewriting rules*).
+Fijado en V11/V12 (2026-11-04, Marcos): "cambiar de lado los índices" = *move the indices to the other
+side* (un índice: *move the index to the other side*; "transponer cambia de lado los índices" =
+*transposing moves the indices to the other side*). Antes *swap the sides of the indices*, poco natural.
 
 * Código de colores de la serie (chunk =Código de colores= de la plantilla)
 

@@ -12,7 +12,7 @@ privacidad = "public"   # public | unlisted | private
 # miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
-# youtube = ""   # rellenar tras subirlo
+youtube = "gpVJnl4nAdU"   # subido por la API el 2026-11-05 (adelantado por Marcos del jueves 12)
 video = "L01_V10_Seleccion.mp4"
 subtitulos = "L01_V10_Seleccion.srt"
 idioma = "es"
@@ -39,7 +39,7 @@ Correspondiente sección del libro (Sección 1.4.3): https://mbujosab.github.io/
 
 Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
-Vídeo anterior: https://youtu.be/(id de V09 al publicarlo)
+Vídeo anterior: https://youtu.be/9w6gEv3XrTc
 Siguiente vídeo: (se añade al publicarlo)
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
@@ -76,7 +76,7 @@ Corresponding book section (Section 1.4.3): https://mbujosab.github.io/CursoDeAl
 
 Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
-Previous video: https://youtu.be/(id de V09 al publicarlo)
+Previous video: https://youtu.be/t40aDUbc1oE
 Next video: (added when published)
 Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
 

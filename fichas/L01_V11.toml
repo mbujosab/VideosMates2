@@ -2,7 +2,7 @@
 # Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V11.toml es
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V11.toml en
-# Los capítulos son los inicios de escena que imprime el bloque `montaje` (rehechos con el montaje del 2026-11-03, tras la renumeración V10 → V11: español del HD; inglés provisional, del 480p, hasta su HD).
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (español del HD del 2026-11-03; inglés del HD del 2026-11-04).
 
 [comun]
 erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
@@ -60,18 +60,18 @@ lista = "Linear Algebra Course"
 etiquetas = ["linear algebra", "matrices", "matrix", "transpose", "transposition", "rows", "columns",
              "mathematics", "GECO", "UCM"]
 descripcion = """
-Transposing a matrix turns its rows into columns, and amounts to swapping the sides of the indices.
+Transposing a matrix turns its rows into columns, and amounts to moving the indices to the other side.
 
 Eleventh video of the first lesson of the linear algebra course.
 
 00:00 Title
 00:06 Transposition
-00:49 Transposing swaps the sides of the indices
+00:49 Transposing moves the indices to the other side
 01:44 The transpose of the transpose (exercise)
 02:32 Key takeaways
 02:50 Closing credits
 
-The matrix B of the video on matrices, built from the rows of A, is the transpose of A: each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we check the rewriting rule "transposing, or removing the transposition, swaps the sides of the indices", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
+The matrix B of the video on matrices, built from the rows of A, is the transpose of A: each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we check the rewriting rule "transposing, or removing the transposition, moves the indices to the other side", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
 
 Corresponding book section (Section 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5 (the book is in Spanish)
 
