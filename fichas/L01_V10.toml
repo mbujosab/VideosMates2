@@ -49,7 +49,7 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 """
 
 [en]
-# youtube = ""   # fill in after upload
+youtube = "LTM7l1w0yY4"
 video = "../videoMath2/L01_V10_Selection.mp4"
 subtitulos = "../videoMath2/L01_V10_Selection.srt"
 idioma = "en"
