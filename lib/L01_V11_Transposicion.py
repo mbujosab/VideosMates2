@@ -188,7 +188,8 @@ class L01_V11_Transposicion(MiEscenaConVoz):
             self.wait_until_bookmark("f")
             self.play(FadeIn(film), FadeIn(r_f), run_time=1.2)
         
-        self.pausa_media()
+        # en inglés, un instante más para asimilar el ejemplo antes de cambiar de escena (Marcos, 2026-11-11)
+        self.pausa_media(tr(1.5, 2.3))
 
         self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
 
@@ -205,7 +206,7 @@ class L01_V11_Transposicion(MiEscenaConVoz):
                MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=48)]
         columna_de_lineas(ida, x0=-1.0, y0=1.6, dy=1.2)
         rot_ida = [rotulo(tr("definición de transpuesta", "definition of the transpose"), ida[0], x=x_rot),
-                   rotulo(tr("vectores iguales: mismas componentes", "equal vectors: same components"), ida[1], x=x_rot),
+                   rotulo(tr("iguales componente a componente", "equal component by component"), ida[1], x=x_rot),
                    rotulo(orden_sel, ida[2], x=x_rot)]
         regla = MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=56).move_to([1.2, 1.6, 0])
         idea = aviso("idea").next_to(regla, LEFT, buff=0.8)
@@ -229,8 +230,8 @@ class L01_V11_Transposicion(MiEscenaConVoz):
             self.wait_until_bookmark("d")
             self.play(FadeIn(ida[0]), FadeIn(rot_ida[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Son dos vectores iguales, así que tienen las mismas componentes. <bookmark mark='y'/> Seleccionamos la componente i-ésima de los dos: <bookmark mark='x1'/> en la columna, por la izquierda, <bookmark mark='x2'/> y en la fila, por la derecha.""",
-                                    """They are two equal vectors, so they have the same components. <bookmark mark='y'/> We select the i-th component of both: <bookmark mark='x1'/> in the column, from the left, <bookmark mark='x2'/> and in the row, from the right.""")) as tracker:
+        with self.voiceover(text=tr("""Son dos vectores iguales, así que lo son componente a componente. <bookmark mark='y'/> Seleccionamos la componente i-ésima de los dos: <bookmark mark='x1'/> en la columna, por la izquierda, <bookmark mark='x2'/> y en la fila, por la derecha.""",
+                                    """They are two equal vectors, so they are equal component by component. <bookmark mark='y'/> We select the i-th component of both: <bookmark mark='x1'/> in the column, from the left, <bookmark mark='x2'/> and in the row, from the right.""")) as tracker:
             self.play(FadeIn(rot_ida[1]), run_time=0.6)
             self.wait_until_bookmark("y")
             self.play(FadeIn(ida[1][1]), *copia(ida[0][0], ida[1][0], [(0, 3), (1, 4), (2, 5), (3, 6), (4, 7), (5, 8)]),
@@ -277,7 +278,7 @@ class L01_V11_Transposicion(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in jotas], run_time=0.4)
         
         self.play(FadeOut(VGroup(ida[0], ida[1], *rot_ida)), ReplacementTransform(ida[2], regla), run_time=1.2)   # la última línea es la regla
-        with self.voiceover(text=tr("""De aquí sale una regla de reescritura: transponer, o quitar la transposición, intercambia los índices de lado.""",
+        with self.voiceover(text=tr("""De aquí sale una regla de reescritura: transponer, o quitar la transposición, cambia de lado los índices.""",
                                     """This gives us a rewriting rule: transposing, or removing the transposition, moves the indices to the other side.""")) as tracker:
             self.play(FadeIn(idea), run_time=0.8)
         
@@ -302,8 +303,8 @@ class L01_V11_Transposicion(MiEscenaConVoz):
         
         # «la fila de la transpuesta» destaca i| sobre Aᵀ y «la columna de A» el |i sobre A, en la línea nueva (Marcos, 2026-11-03)
         sel_fila_T2, sel_col_A2 = vuelta[1][0][0:2], vuelta[1][2][1:3]   # glifos: i | ( A T )  y  A | i
-        with self.voiceover(text=tr("""Los dos vectores tienen las mismas componentes, <bookmark mark='f'/> así que <bookmark mark='r'/> la fila de la transpuesta es <bookmark mark='c'/> la columna de A con el mismo índice.<bookmark mark='v4'/>""",
-                                    """The two vectors have the same components, <bookmark mark='f'/> so <bookmark mark='r'/> the row of the transpose is <bookmark mark='c'/> the column of A with the same index.<bookmark mark='v4'/>""")) as tracker:
+        with self.voiceover(text=tr("""Los dos vectores son iguales componente a componente, <bookmark mark='f'/> así que <bookmark mark='r'/> la fila de la transpuesta es <bookmark mark='c'/> la columna de A con el mismo índice.<bookmark mark='v4'/>""",
+                                    """The two vectors are equal component by component, <bookmark mark='f'/> so <bookmark mark='r'/> the row of the transpose is <bookmark mark='c'/> the column of A with the same index.<bookmark mark='v4'/>""")) as tracker:
             jotas = [vuelta[0][0][9], vuelta[0][2][0]]   # el índice de la componente, que va a desaparecer
             self.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.5) for x in jotas], run_time=0.3)
             self.wait(0.8)
@@ -506,7 +507,8 @@ class L01_V11_E01_Transposicion(MiEscenaConVoz):
             self.wait_until_bookmark("f")
             self.play(FadeIn(film), FadeIn(r_f), run_time=1.2)
         
-        self.pausa_media()
+        # en inglés, un instante más para asimilar el ejemplo antes de cambiar de escena (Marcos, 2026-11-11)
+        self.pausa_media(tr(1.5, 2.3))
 
 
 class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
@@ -524,7 +526,7 @@ class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
                MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=48)]
         columna_de_lineas(ida, x0=-1.0, y0=1.6, dy=1.2)
         rot_ida = [rotulo(tr("definición de transpuesta", "definition of the transpose"), ida[0], x=x_rot),
-                   rotulo(tr("vectores iguales: mismas componentes", "equal vectors: same components"), ida[1], x=x_rot),
+                   rotulo(tr("iguales componente a componente", "equal component by component"), ida[1], x=x_rot),
                    rotulo(orden_sel, ida[2], x=x_rot)]
         regla = MathTex(r"\eleMT{A}{i}{j}", r"=", r"\eleM{A}{j}{i}", tex_template=myTemplate, font_size=56).move_to([1.2, 1.6, 0])
         idea = aviso("idea").next_to(regla, LEFT, buff=0.8)
@@ -548,8 +550,8 @@ class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
             self.wait_until_bookmark("d")
             self.play(FadeIn(ida[0]), FadeIn(rot_ida[0]), run_time=1)
         
-        with self.voiceover(text=tr("""Son dos vectores iguales, así que tienen las mismas componentes. <bookmark mark='y'/> Seleccionamos la componente i-ésima de los dos: <bookmark mark='x1'/> en la columna, por la izquierda, <bookmark mark='x2'/> y en la fila, por la derecha.""",
-                                    """They are two equal vectors, so they have the same components. <bookmark mark='y'/> We select the i-th component of both: <bookmark mark='x1'/> in the column, from the left, <bookmark mark='x2'/> and in the row, from the right.""")) as tracker:
+        with self.voiceover(text=tr("""Son dos vectores iguales, así que lo son componente a componente. <bookmark mark='y'/> Seleccionamos la componente i-ésima de los dos: <bookmark mark='x1'/> en la columna, por la izquierda, <bookmark mark='x2'/> y en la fila, por la derecha.""",
+                                    """They are two equal vectors, so they are equal component by component. <bookmark mark='y'/> We select the i-th component of both: <bookmark mark='x1'/> in the column, from the left, <bookmark mark='x2'/> and in the row, from the right.""")) as tracker:
             self.play(FadeIn(rot_ida[1]), run_time=0.6)
             self.wait_until_bookmark("y")
             self.play(FadeIn(ida[1][1]), *copia(ida[0][0], ida[1][0], [(0, 3), (1, 4), (2, 5), (3, 6), (4, 7), (5, 8)]),
@@ -596,7 +598,7 @@ class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
             self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in jotas], run_time=0.4)
         
         self.play(FadeOut(VGroup(ida[0], ida[1], *rot_ida)), ReplacementTransform(ida[2], regla), run_time=1.2)   # la última línea es la regla
-        with self.voiceover(text=tr("""De aquí sale una regla de reescritura: transponer, o quitar la transposición, intercambia los índices de lado.""",
+        with self.voiceover(text=tr("""De aquí sale una regla de reescritura: transponer, o quitar la transposición, cambia de lado los índices.""",
                                     """This gives us a rewriting rule: transposing, or removing the transposition, moves the indices to the other side.""")) as tracker:
             self.play(FadeIn(idea), run_time=0.8)
         
@@ -621,8 +623,8 @@ class L01_V11_E02_CambioDeIndices(MiEscenaConVoz):
         
         # «la fila de la transpuesta» destaca i| sobre Aᵀ y «la columna de A» el |i sobre A, en la línea nueva (Marcos, 2026-11-03)
         sel_fila_T2, sel_col_A2 = vuelta[1][0][0:2], vuelta[1][2][1:3]   # glifos: i | ( A T )  y  A | i
-        with self.voiceover(text=tr("""Los dos vectores tienen las mismas componentes, <bookmark mark='f'/> así que <bookmark mark='r'/> la fila de la transpuesta es <bookmark mark='c'/> la columna de A con el mismo índice.<bookmark mark='v4'/>""",
-                                    """The two vectors have the same components, <bookmark mark='f'/> so <bookmark mark='r'/> the row of the transpose is <bookmark mark='c'/> the column of A with the same index.<bookmark mark='v4'/>""")) as tracker:
+        with self.voiceover(text=tr("""Los dos vectores son iguales componente a componente, <bookmark mark='f'/> así que <bookmark mark='r'/> la fila de la transpuesta es <bookmark mark='c'/> la columna de A con el mismo índice.<bookmark mark='v4'/>""",
+                                    """The two vectors are equal component by component, <bookmark mark='f'/> so <bookmark mark='r'/> the row of the transpose is <bookmark mark='c'/> the column of A with the same index.<bookmark mark='v4'/>""")) as tracker:
             jotas = [vuelta[0][0][9], vuelta[0][2][0]]   # el índice de la componente, que va a desaparecer
             self.play(*[x.animate.set_color(COLOR_ESCALAR).scale(1.5) for x in jotas], run_time=0.3)
             self.wait(0.8)

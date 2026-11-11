@@ -519,7 +519,7 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | V08   | mié 28-10-26 | sáb 31-10-26 | publicado (es w62nh5CvJtM, en C2QvSW4yX-Y el sábado 31 a las 14:34; en con tres frases distintas del español) |
 | V09   | lun 03-11-26 | sáb 07-11-26 | **es publicado el lunes 3 (9w6gEv3XrTc, adelantado por Marcos: tres vídeos de reserva)**; «Siguiente vídeo» puesto en V08 es; **en publicado el martes 3 por la noche (t40aDUbc1oE), también adelantado por Marcos**: el mp4 subió público con título y descripción, pero la cuota diaria de la API (10 000 unidades) se agotó justo después, y el 4 de noviembre a las 09:00 se completó con `actualizar` (etiquetas, subtítulos, miniatura y lista) y se puso el «Next video» en V08 en con `--solo-metadatos`. Falta solo la pantalla final en Studio. **Lección aprendida**: la cuota de la API es de 10 000 unidades al día (se renueva a las 09:00 de Madrid) y una subida con todo gasta ~1 700; no encadenar retitulados masivos y una subida el mismo día. «Matrices» desde la **partición del 2026-11-03** (escenas 1-5 y resumen con la definición y el orden; anuncia la selección): solo el resumen y la portada son nuevos (una toma nueva por idioma, la frase D); HD es `L01_V09_MatricesFilasYColumnas.mp4` (4:04) y en `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4` (3:59), capítulos y título «Matrices \| Álgebra lineal 1.9» en la ficha. Las escenas 1-5 estaban aprobadas por Marcos (2026-11-02/03); falta que escuche el resumen nuevo y su último repaso; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)**; resumen: solo viaja la expresión del medio, a «fila primero» en «la fila» y de vuelta en «o la columna» (marcas f, c injertadas; es/en 480p y HD rehechos) |
 | V10   | jue 05-11-26 | sáb 07-11-26 | **es publicado el jueves 5 a las 09:45 (gpVJnl4nAdU, adelantado por Marcos del jueves 12)**, enlazado desde V09 es, entrada en README/index y html del org; **en publicado el sábado 7 a las 12:15 (LTM7l1w0yY4, adelantado por Marcos de las 15:00)**, con id en la ficha, «Next video» en V09 en y enlace inglés en README/index; falta la pantalla final en Studio · «Selección de filas, columnas y componentes» (título en YouTube: «Filas, columnas y componentes | Álgebra lineal 1.10») (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
-| V11   | jue 12-11-26 | sáb 14-11-26 | la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
+| V11   | mié 11-11-26 | sáb 14-11-26 | **es publicado el miércoles 11 (P6B-AIrPugs, adelantado por Marcos del jueves 12)**, con los retoques de ese día (escena 2: «componente a componente», «cambia de lado los índices», toma A2), id en la ficha, «Siguiente vídeo» en V10 es, entrada en README/index y html del org; falta la pantalla final en Studio. **Inglés**: HD rehecho el 11 (3:07; dos tomas nuevas de Ollie y pausa de 2,3 s tras el ejemplo de la matriz columna), **aprobado por Marcos el 11 de noviembre**, listo para subir el sábado 14 a las 15:00; al subirlo, «Previous video» = LTM7l1w0yY4 en la ficha. Historia anterior: la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V12   | jue 19-11-26 | sáb 21-11-26 | (miniatura aprobada por Marcos el 2026-11-05; falta su último repaso)  tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): **aprobado por Marcos en los dos idiomas el 2026-11-04 (Azure 480p), HD es/en hechos ese día, ficha `fichas/L01_V12.toml` con capítulos y miniatura (matriz simétrica y S = Sᵀ, aprobada por Marcos el 2026-11-05)**; **revisado y rehecho el 2026-11-03** (seis escenas: la 3 partida en «Matrices simétricas» y «Componentes de una matriz simétrica»); prueba gTTS `L01_V12_TiposDeMatrices_prueba480p.mp4` (7:14) y `../videoMath2/L01_V12_TypesOfMatrices_prueba480p.mp4` (6:54), a la espera de la revisión de Marcos |
 
 Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, el título
@@ -640,6 +640,15 @@ Al publicar un vídeo, actualizar esta tabla.
   sustituida por la tirada 1, sin la pausa de 380 ms antes del segundo «one»). Ojo: manim-voiceover añade
   a `cache.json` una entrada repetida por cada frase que reutiliza, así que la caché crece más que las
   tomas nuevas; contar los mp3 nuevos o las entradas con `original_audio` no visto antes.
+- V11, **2026-11-11 (víspera de la subida; Marcos aprobó aplicar los dos retoques)**: en la escena 2, «Son dos vectores
+  iguales, así que lo son componente a componente» y «Los dos vectores son iguales componente a componente, así que...»
+  (antes «tienen las mismas componentes», contra la regla de V12), rótulo «iguales componente a componente» (el más largo se salía por la derecha), y la
+  regla dice «cambia de lado los índices» (antes «intercambia los índices de lado»); en inglés «equal component by
+  component». Tres tomas nuevas de Tristan y dos de Ollie; Azure 480p y HD rehechos en los dos idiomas (es 3:03, en 3:06),
+  capítulos y descripción de la ficha al día. La frase de la regla acababa con entonación de continuar (Marcos; «índices» terminaba en 133 Hz): entre siete tiradas en `tmp/escucha_V11/` Marcos eligió de oído la **A2** (termina en ~80 Hz), puesta en la caché real con el mismo nombre; 480p y HD es rehechos (3:03). Falta su visto bueno al resto de tomas nuevas (dos es, dos en) antes de subir. Marcos preguntó
+  si cambiar la demostración de (Aᵀ)ᵀ = A por la de la regla de los índices: se mantiene la de columnas (usa la igualdad
+  como está definida, estrena el patrón «seleccionamos una columna» de V13; el criterio componente a componente no se
+  construye hasta V12).
 - V11 (transposición), 2026-11-03 tras la partición: la escena 1 ya no remite a V09 («Al presentar las matrices
   formamos la matriz B»); dice «Tomemos una matriz A y formemos otra matriz B con dos vectores...» (Marcos: quien
   llegue suelto al vídeo no conoce B; la escena la construye en pantalla). Toma nueva por idioma, montajes es 480p/HD
@@ -657,6 +666,37 @@ Al publicar un vídeo, actualizar esta tabla.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `descartes/ZZ_Basura_L01_V09.org`); se decide al tener X01.
+- V13 (`L01-V13-OperacionesConMatrices.org`, Secciones 1.5-1.5.2; inglés `L01_V13_OperationsWithMatrices`):
+  «Suma de matrices y producto por escalares». **Primera versión el 2026-11-10** (prueba gTTS 480p, a la espera de
+  la revisión de Marcos). Antes se revisó el libro (Marcos, en otra sesión; pendientes en
+  `PendientesDesdeLosVideos.org`, apartado «V13-V14»): orden nuevo de la Sección 1.5, columnas ⇒ componentes (1.5.1) ⇒
+  propiedades (1.5.2) ⇒ filas (1.5.3) ⇒ transposición lineal (1.5.4); 1.6 con el convenio Aλ = λA como definición.
+  **Idea central (Marcos, 2026-11-10)**: las definiciones de las matrices son las de los vectores con mayúsculas y las
+  reglas de abajo son las de los reales en negrita; las reglas de manipulación son idénticas, así que las demostraciones
+  ya están hechas: «la gran ventaja del álgebra». Acordado: no repetir las ocho demostraciones; se **traducen en
+  pantalla** dos (la 1, conmutativa, y la 4, la del opuesto) con un cambio de símbolos en tres etapas (vectores →
+  matrices, componente → columna, números → vectores; utilidades `traducible`, `versiones`, `etapa`, `Panel` del org:
+  las fórmulas se escriben una vez, para vectores, y las de matrices salen por sustitución, con los mismos glifos) y
+  las otras seis quedan como ejercicio con la tarjeta de pausa («Si le queda alguna duda...»). La matriz opuesta se
+  define por columnas (no como (−1)A), para que las cuatro definiciones se traduzcan símbolo a símbolo. Sin «múltiplo».
+  ℝ^(m×n) como ℝ^(mn) queda para X02. Si la duración pasa de ocho minutos, **decirle a Marcos por cuánto antes de
+  recortar** (prefiere no recortar: el mensaje sobre la notación y el álgebra es pieza fundamental). Prueba gTTS:
+  `L01_V13_OperacionesConMatrices_prueba480p.mp4` (8:06) y `../videoMath2/L01_V13_OperationsWithMatrices_prueba480p.mp4`
+  (7:24). Lectura en frío aplicada (doce puntos); el más importante: la traducción literal falla en la **propiedad 6**
+  (en V07 son tres pasos de reales y con matrices uno solo, la propiedad 6 de los vectores), así que la tarjeta de
+  pausa propone solo «otra propiedad de la suma». **2026-11-10 (Marcos, tras ver la prueba)**: las tres cadenas
+  (escenas 3, 6 y 7) nacen ya glifo a glifo (`nace`, `paso`, `entera` del org: primero se copia lo que no cambia,
+  después viaja lo que el paso mueve) y el panel cuenta cada uso con la insignia y la campanita (`Panel.cuenta`); tras
+  el cambio de símbolos los contadores se reinician y la relectura los vuelve a subir (`relee`). En la escena 2 los
+  paréntesis de la definición del producto viajan y vuelven, como en V10. **Regla para todos los vídeos**: toda cadena
+  de pasos se anima con estas transformaciones (a Marcos le parece una ilustración excelente para principiantes; V06 y
+  V07 no la tienen solo porque no se le ocurrió entonces) y toda demostración con panel lleva contadores y campanita.
+  Prueba gTTS rehecha: 8:07 es, 7:25 en. **Azure es 480p el 2026-11-10**: `L01_V13_OperacionesConMatrices_azure480p.mp4` (6:19; gTTS es mucho más lento), a la espera de la escucha de Marcos; inglés con Azure sin hacer hasta que apruebe el español. Diez escenas
+  (0-9); montaje con `tmp/montaje_v13_{es,en}.sh`; guion en `tmp/guion_V13_{es,en}.txt`. V14: filas, transposición
+  lineal, escalar por la derecha y reglas (1.5.3-1.6), a escribir sobre el libro ya corregido. Revisión completa de la
+  lección 1 del libro el 2026-11-10 (sin cambio de numeración): contrastada con V06-V13, ningún guion publicado queda
+  en contradicción. Para V14: 1.4.4 y 1.6 siguen ahora el mismo esquema (selector por la izquierda lineal; convenio
+  bλ = λb «por definición»; reglas comprobadas con cadenas de pasos nombrados).
 - V12 (`L01-V12-TiposDeMatrices.org`, Sección 1.4.6; inglés `L01_V12_TypesOfMatrices`; era V11 hasta el
   2026-11-03): «Tipos de
   matrices» (no «matrices especiales»: da nombre a las matrices por sus características). Reparto del
