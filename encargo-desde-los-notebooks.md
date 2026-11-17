@@ -78,3 +78,10 @@ también para el libro.
   actualizar los metadatos, dejaba sin querer desactivada la inserción en otras webs. Corregido el script
   y los 22 vídeos publicados (V01 a V11, es y en): vuelven a poder insertarse. Los Notebooks no tienen
   que cambiar nada.
+
+## Publicado V12 en español (2026-11-17)
+
+- **V12 «Tipos de matrices | Álgebra lineal 1.12»**, español: https://youtu.be/zKef0mF4YHQ (id `zKef0mF4YHQ`),
+  publicado el martes 17 de noviembre, adelantado por Marcos del jueves 19. Va en «Tipos de matrices» del
+  Notebook 1.4. Se puede insertar en otras webs. La versión inglesa sigue prevista para el sábado 21; su id
+  se anotará aquí al publicarla.
