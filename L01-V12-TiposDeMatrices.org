@@ -221,6 +221,19 @@ def diagonal(m):
     return [filas[k][k] for k in range(min(len(filas), len(filas[0])))]
 
 
+def franja_fila(m, i, color=COLOR_ESCALAR):
+    """Franja translúcida sobre la fila i (desde 0) de la matriz m, como en V10 (el siete en su fila y su columna)."""
+    return Rectangle(width=m.width, height=0.45, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([m.get_x(), m.get_rows()[i].get_y(), 0])
+
+
+def franja_columna(m, j, color=COLOR_C):
+    """Franja translúcida sobre la columna j (desde 0) de la matriz m."""
+    col = m.get_columns()[j]
+    return Rectangle(width=col.width + 0.35, height=m.get_brackets()[0].height, stroke_width=0, fill_color=color,
+                     fill_opacity=0.22).move_to([col.get_x(), m.get_y(), 0])
+
+
 def resalta(escena, mobs, color=COLOR_ESCALAR, factor=1.3, run_time=0.3):
     """Resaltado inmediato y sostenido (color y tamaño), sin la subida lenta de Indicate."""
     escena.play(*[x.animate.set_color(color).scale(factor) for x in mobs], run_time=run_time)
@@ -344,12 +357,15 @@ r_C = Tex(r"$3\times 3$", font_size=34, color=GRAY_B)
 r_R = Tex(r"$2\times 3$", font_size=34, color=GRAY_B)
 gC, gR = VGroup(C, r_C).arrange(DOWN, buff=0.45), VGroup(R, r_R).arrange(DOWN, buff=0.45)
 VGroup(gC, gR).arrange(RIGHT, buff=2.0, aligned_edge=DOWN).move_to([0, -0.5, 0])
-n_C = Tex(tr("cuadrada, de orden 3", "square, of order 3"), font_size=34, color=GRAY_B).move_to(r_C)
-n_R = Tex(tr(r"rectangular, de orden $2\times 3$", r"rectangular, of order $2\times 3$"), font_size=34, color=GRAY_B).move_to(r_R)
+n_C = Tex(tr("cuadrada: de orden 3", "square: of order 3"), font_size=34, color=GRAY_B).move_to(r_C)
+n_R = Tex(tr(r"rectangular: de orden $2\times 3$", r"rectangular: of order $2\times 3$"), font_size=34, color=GRAY_B).move_to(r_R)
+n_filas, n_columnas = n_R[0][-3], n_R[0][-1]   # el 2 y el 3, señalados al decir «filas» y «columnas» (Marcos, 2026-11-16)
 
-with self.voiceover(text=tr("""En este vídeo vamos a dar nombre a distintos tipos de matrices, según su forma y la disposición de sus componentes.""",
-                            """In this video we are going to name different types of matrices, according to their shape and the arrangement of their components.""")) as tracker:
+# «y para describirlos aprovecharemos la notación del curso» (Marcos, 2026-11-16): el vídeo ilustra la notación al describir matrices
+with self.voiceover(text=tr("""En este vídeo vamos a dar nombre a distintos tipos de matrices, según su forma y la disposición de sus componentes, y para describirlos aprovecharemos la notación del curso.""",
+                            """In this video we are going to name different types of matrices, according to their shape and the arrangement of their components, and to describe them we will make use of the notation of the course.""")) as tracker:
     self.play(Write(titulo), run_time=1.2)
+self.wait(0.8)   # respiro tras el arranque, antes de la primera definición (Marcos, 2026-11-16)
 
 with self.voiceover(text=tr("""Una matriz es cuadrada cuando tiene el mismo número de filas que de columnas.""",
                             """A matrix is square when it has the same number of rows as columns.""")) as tracker:
@@ -360,12 +376,20 @@ with self.voiceover(text=tr("""Como el número de filas y el de columnas coincid
                             """Since the number of rows and the number of columns are the same, we can abbreviate and say that number just once. <bookmark mark='o'/> So just saying that a matrix is of order 'n' already tells us that it is square.""")) as tracker:
     self.wait_until_bookmark("o")
     self.play(FadeTransform(r_C, n_C), run_time=1)
+self.wait(1.0)   # pausa entre una definición y la siguiente (Marcos, 2026-11-16)
 
-with self.voiceover(text=tr("""Las matrices que no son cuadradas se llaman rectangulares. <bookmark mark='r'/> Para indicar su orden hacen falta los dos números, el de filas y el de columnas.""",   # acaba en «columnas»: toma B1 elegida por Marcos de oído (2026-11-04)
-                            """Matrices that are not square are called rectangular. <bookmark mark='r'/> To give their order we need both numbers, the number of rows and the number of columns.""")) as tracker:
+# marcas f y c injertadas en la toma B1 (2026-11-16): el 2 (filas, amarillo) y el 3 (columnas, verde) en su palabra
+with self.voiceover(text=tr("""Las matrices que no son cuadradas se llaman rectangulares. <bookmark mark='r'/> Para indicar su orden hacen falta los dos números, el de <bookmark mark='f'/>filas y el de <bookmark mark='c'/>columnas.""",   # acaba en «columnas»: toma B1 elegida por Marcos de oído (2026-11-04)
+                            """Matrices that are not square are called rectangular. <bookmark mark='r'/> To give their order we need both numbers, the number of <bookmark mark='f'/>rows and the number of <bookmark mark='c'/>columns.""")) as tracker:
     self.play(FadeIn(R), run_time=1)
     self.wait_until_bookmark("r")
     self.play(FadeIn(n_R), run_time=0.8)
+    self.wait_until_bookmark("f")
+    resalta(self, [n_filas], color=COLOR_ESCALAR, factor=1.4, run_time=0.25)
+    self.wait_until_bookmark("c")
+    self.play(n_filas.animate.set_color(GRAY_B).scale(1/1.4), n_columnas.animate.set_color(COLOR_C).scale(1.4), run_time=0.25)
+self.wait(0.8)
+apaga(self, [n_columnas], color=GRAY_B, factor=1.4)
 
 self.pausa_media()
 #+END_SRC
@@ -416,7 +440,9 @@ ceros_FG = fuera(F) + fuera(G)
 for x in ceros_FG:
     x.set_color(COLOR_A)
 diagonales = diagonal(D) + diagonal(F) + diagonal(G)
-nulos = [Integer(0).scale(0.8).set_color(COLOR_ESCALAR).move_to(x) for x in diagonales]   # la diagonal pasa a ceros: matrices nulas
+# la diagonal pasa a ceros: matrices nulas. Alineados por la esquina DR, como las componentes de IntegerMatrix
+# (centrado, el cero del -1 quedaba a la izquierda de su columna; Marcos, 2026-11-16)
+nulos = [Integer(0).scale(0.8).set_color(COLOR_ESCALAR).move_to(x.get_corner(DR), aligned_edge=DR) for x in diagonales]
 om = omega("duda", mira=UL, alto=1.2).to_corner(DR, buff=0.3)
 globo = bocadillo(tr(r"¿Diagonal, luego cuadrada?", r"Diagonal, hence square?"), om, ancho=3.4)
 I2 = con_nombre(r"\Matdim{I}{2}{2}=", matriz([[1, 0], [0, 1]])).move_to([-3.0, 0.9, 0])
@@ -435,25 +461,39 @@ def_id = MathTex(r"\eleM{I}{i}{j}=", r"\begin{cases} 1 & " + si + r"i=j \\ 0 & "
                  tex_template=myTemplate, font_size=48).move_to([0, -1.6, 0])
 def_id[1][1].set_color(COLOR_ESCALAR); def_id[1][7].set_color(COLOR_A)   # el uno de la diagonal, amarillo; el cero de fuera, azul
 
-with self.voiceover(text=tr("""La diagonal principal de una matriz la forman <bookmark mark='g'/> las componentes cuyos dos índices son iguales: <bookmark mark='a'/> la de la primera fila y la primera columna, <bookmark mark='b'/> la de la segunda fila y la segunda columna, <bookmark mark='c'/> y así sucesivamente.""",
-                            """The main diagonal of a matrix is made up of <bookmark mark='g'/> the components whose two indices are equal: <bookmark mark='a'/> the one in the first row and the first column, <bookmark mark='b'/> the one in the second row and the second column, <bookmark mark='c'/> and so on.""")) as tracker:
+# cada componente de la diagonal con su fila (franja amarilla) y su columna (verde) en su palabra, como el siete de V10
+# (Marcos, 2026-11-16); marcas f1, c1, f2, c2 injertadas en la toma aprobada
+with self.voiceover(text=tr("""La diagonal principal de una matriz la forman <bookmark mark='g'/> las componentes cuyos dos índices son iguales: <bookmark mark='a'/> la de la <bookmark mark='f1'/>primera fila y la <bookmark mark='c1'/>primera columna, <bookmark mark='b'/> la de la <bookmark mark='f2'/>segunda fila y la <bookmark mark='c2'/>segunda columna, <bookmark mark='c'/> y así sucesivamente.""",
+                            """The main diagonal of a matrix is made up of <bookmark mark='g'/> the components whose two indices are equal: <bookmark mark='a'/> the one in the <bookmark mark='f1'/>first row and the <bookmark mark='c1'/>first column, <bookmark mark='b'/> the one in the <bookmark mark='f2'/>second row and the <bookmark mark='c2'/>second column, <bookmark mark='c'/> and so on.""")) as tracker:
     self.play(Write(cab_diag), FadeIn(C), run_time=1)
     self.wait_until_bookmark("g")
     # la diagonal en amarillo y lo de fuera atenuado, a la vez que aparece i|A|i
     self.play(Write(a_ii), *[x.animate.set_color(COLOR_ESCALAR) for x in diag_C],
               *[x.animate.set_opacity(0.3) for x in fuera_C], run_time=1)
     actual = a_ii
+    franjas = []
     for k, marca in enumerate(["a", "b", "c"]):
         self.wait_until_bookmark(marca)
-        # i|A|i pasa a k|A|k mientras la componente k crece
+        # i|A|i pasa a k|A|k mientras la componente k crece; se van las franjas de la anterior
         self.play(diag_C[k].animate.scale(1.35), *([diag_C[k-1].animate.scale(1/1.35)] if k else []),
-                  FadeTransform(actual[0][0], a_kk[k][0][0]), FadeTransform(actual[0][4], a_kk[k][0][4]), run_time=0.4)
+                  FadeTransform(actual[0][0], a_kk[k][0][0]), FadeTransform(actual[0][4], a_kk[k][0][4]),
+                  *[FadeOut(f) for f in franjas], run_time=0.4)
         self.remove(actual, *actual[0]); self.add(a_kk[k])
         actual = a_kk[k]
+        ff, fc = franja_fila(C, k), franja_columna(C, k)
+        franjas = [ff, fc]
+        if k < 2:   # «primera fila» ... «primera columna», cada franja en su palabra
+            self.wait_until_bookmark(f"f{k+1}")
+            self.play(FadeIn(ff), run_time=0.3)
+            self.wait_until_bookmark(f"c{k+1}")
+            self.play(FadeIn(fc), run_time=0.3)
+        else:       # «y así sucesivamente»: las dos a la vez
+            self.play(FadeIn(ff), FadeIn(fc), run_time=0.3)
     self.wait(0.6)
     self.play(diag_C[2].animate.scale(1/1.35), FadeTransform(actual[0][0], a_ii_fin[0][0]),
-              FadeTransform(actual[0][4], a_ii_fin[0][4]), run_time=0.5)
+              FadeTransform(actual[0][4], a_ii_fin[0][4]), *[FadeOut(f) for f in franjas], run_time=0.5)
     self.remove(actual, *actual[0]); self.add(a_ii_fin)
+self.wait(1.0)   # pausa entre una definición y la siguiente (Marcos, 2026-11-16)
 
 with self.voiceover(text=tr("""Una matriz es diagonal cuando todas las componentes <bookmark mark='f'/> fuera de su diagonal principal son nulas, <bookmark mark='d'/> como esta matriz de orden tres.""",
                             """A matrix is diagonal when all the components <bookmark mark='f'/> outside its main diagonal are zero, <bookmark mark='d'/> like this matrix of order three.""")) as tracker:
@@ -479,6 +519,7 @@ with self.voiceover(text=tr("""Pero la definición solo exige <bookmark mark='z'
     self.wait_until_bookmark("f")
     self.play(FadeIn(ejemplos[1]), FadeIn(ejemplos[2]), *[x.animate.scale(1/1.3) for x in ceros_D], run_time=1)
     cambia(self, om, "normal", mira=UL)   # la sorpresa dura un instante; ahora atiende
+self.wait(1.0)   # pausa antes de las matrices nulas (Marcos, 2026-11-16)
 
 with self.voiceover(text=tr("""Las componentes de la diagonal principal pueden ser cualquier número, también cero. <bookmark mark='z'/> Por eso las matrices nulas, que tienen ceros en todas partes, también son diagonales.""",
                             """The components of the main diagonal can be any number, zero included. <bookmark mark='z'/> That is why the zero matrices, with zeros everywhere, are diagonal too.""")) as tracker:
@@ -487,6 +528,7 @@ with self.voiceover(text=tr("""Las componentes de la diagonal principal pueden s
     self.wait_until_bookmark("z")
     # Transform (no ReplacementTransform): la componente sigue dentro de su matriz y el grupo entero se desvanece después
     self.play(*[Transform(x, z) for x, z in zip(diagonales, nulos)], run_time=0.8)
+self.wait(1.0)   # pausa antes de las matrices identidad (Marcos, 2026-11-16)
 
 corchetes = VGroup(I2[1].get_brackets(), I3[1].get_brackets())
 with self.voiceover(text=tr("""Unas matrices diagonales muy importantes son <bookmark mark='i'/> las matrices identidad: <bookmark mark='c'/> son cuadradas, <bookmark mark='u'/> y todas las componentes de su diagonal principal son unos. <bookmark mark='e'/> Se escriben con la letra i, en mayúscula y negrita, con su orden debajo cuando hace falta.""",
@@ -527,7 +569,7 @@ defin = MathTex(r"\Mat{A}", r"=", r"\MatT{A}", tex_template=myTemplate, font_siz
 o_A = MathTex(r"\Mat{A}\in\R[m\times n]", tex_template=myTemplate, font_size=48)
 o_T = MathTex(r"\MatT{A}\in\R[n\times m]", tex_template=myTemplate, font_size=48)
 o_ig = MathTex(r"\Rightarrow\quad m=n", tex_template=myTemplate, font_size=48)
-ordenes = VGroup(o_A, o_T, o_ig).arrange(RIGHT, buff=0.9).move_to([0, 0.3, 0])
+ordenes = VGroup(o_A, o_T, o_ig).arrange(RIGHT, buff=0.9).move_to([0, -1.2, 0])   # más abajo: centra el conjunto (Marcos, 2026-11-16)
 concl = Tex(tr("Toda matriz simétrica es cuadrada", "Every symmetric matrix is square"), font_size=36).move_to([0, 1.1, 0])
 # ejemplos antes de lo general (Marcos, 2026-11-02): una simétrica y una rectangular que no puede serlo
 S1, S1T = matriz(S_EJ), matriz([list(f) for f in zip(*S_EJ)])
@@ -554,6 +596,7 @@ with self.voiceover(text=tr("""Por ejemplo, tomemos esta matriz. <bookmark mark=
     construye_transpuesta(self, S1, S1T, nombreT=ej_S[1][0])
     self.wait_until_bookmark("i")
     self.play(Indicate(S1.get_entries(), color=COLOR_A, scale_factor=1.1), Indicate(S1T.get_entries(), color=COLOR_A, scale_factor=1.1), run_time=1.2)
+self.wait(1.2)   # tras «es simétrica», tiempo para comprobarlo (Marcos, 2026-11-16)
 
 with self.voiceover(text=tr("""En cambio, esta matriz cuadrada no es simétrica: <bookmark mark='t'/> al transponerla <bookmark mark='d'/> obtenemos una matriz distinta.""",
                             """On the other hand, this square matrix is not symmetric: <bookmark mark='t'/> when we transpose it <bookmark mark='d'/> we get a different matrix.""")) as tracker:
@@ -592,10 +635,14 @@ with self.voiceover(text=tr("""Para asegurarnos de que es así, lo demostramos <
     self.wait_until_bookmark("a")
     self.play(FadeIn(o_A), run_time=0.8)
 
-with self.voiceover(text=tr("""Su transpuesta es de orden 'n' por 'm', <bookmark mark='i'/> y como las dos son iguales, m y n coinciden. <bookmark mark='q'/> Así pues, toda matriz simétrica es cuadrada.""",
-                            """Its transpose is of order 'n' by 'm', <bookmark mark='i'/> and since they are equal, the two orders coincide. <bookmark mark='q'/> So every symmetric matrix is square.""")) as tracker:
+# «las dos son iguales» señala A = Aᵀ (Marcos, 2026-11-16); marca m injertada en la toma buena
+with self.voiceover(text=tr("""Su transpuesta es de orden 'n' por 'm', <bookmark mark='i'/> y como las dos son iguales, <bookmark mark='m'/> m y n coinciden. <bookmark mark='q'/> Así pues, toda matriz simétrica es cuadrada.""",
+                            """Its transpose is of order 'n' by 'm', <bookmark mark='i'/> and since they are equal, <bookmark mark='m'/> the two orders coincide. <bookmark mark='q'/> So every symmetric matrix is square.""")) as tracker:
     self.play(FadeIn(o_T), run_time=0.8)
     self.wait_until_bookmark("i")
+    resalta(self, [defin], factor=1.15, run_time=0.25)
+    self.wait_until_bookmark("m")
+    apaga(self, [defin], factor=1.15, run_time=0.25)
     self.play(FadeIn(o_ig), run_time=0.8)
     self.wait_until_bookmark("q")
     self.play(FadeTransform(pregunta, concl), run_time=0.8)
@@ -669,6 +716,7 @@ with self.voiceover(text=tr("""Veamos ahora la disposición de las componentes d
     # el paso intermedio se atenúa: queda el criterio, matrices iguales = iguales componente a componente
     self.play(FadeIn(igualdad_nota), *[m.animate.set_opacity(0.35) for m in (igualdad[1], igualdad[2], ig_cols)],
               *[m.animate.set_color(COLOR_ESCALAR) for m in (igualdad[0], igualdad[3], igualdad[4])], run_time=0.6)
+self.wait(1.0)   # respiro tras el criterio, antes de aplicarlo (Marcos, 2026-11-16)
 
 with self.voiceover(text=tr("""Tomemos una matriz simétrica cualquiera. <bookmark mark='c'/> Como es igual a su transpuesta, las dos son iguales componente a componente. <bookmark mark='r'/> Cambiando de lado los índices, <bookmark mark='x'/> podemos quitar la transposición.""",
                             """Take any symmetric matrix. <bookmark mark='c'/> Since it is equal to its transpose, the two are equal component by component. <bookmark mark='r'/> By moving the indices to the other side, <bookmark mark='x'/> we can remove the transposition.""")) as tracker:
@@ -894,6 +942,20 @@ with self.voiceover(text=tr("""Una matriz es simétrica si es igual a su transpu
     self.play(FadeIn(filas[4]), run_time=0.8)
     self.wait_until_bookmark("y")
     self.play(FadeIn(filas[5]), run_time=0.8)
+self.wait(0.8)
+
+# v3: tercera tirada (la 1 y la 2 pausaban 320-380 ms en «matrices | se describe»)
+# lo que el vídeo ilustra, dicho al final con las fórmulas a la vista (Marcos, 2026-11-16): las fórmulas en «una igualdad
+# corta»; en «hemos demostrado» quedan señaladas solo las de las propiedades demostradas (simétrica ⇒ ..., Dᵀ = D, Iᵀ = I)
+fs = [f[0] for f in filas]
+with self.voiceover(text=tr("""Cada uno de estos tipos de matrices se describe con <bookmark mark='g'/> una igualdad corta escrita con la notación del curso, y con esas igualdades <bookmark mark='p'/> hemos demostrado algunas de sus propiedades.<bookmark mark='v3'/>""",
+                            """Each of these types of matrices is described by <bookmark mark='g'/> a short equation in the notation of the course, and with those equations <bookmark mark='p'/> we have proved some of their properties.""")) as tracker:
+    self.wait_until_bookmark("g")
+    self.play(*[f.animate.set_color(COLOR_ESCALAR) for f in fs], run_time=0.25)
+    self.wait_until_bookmark("p")
+    self.play(*[f.animate.set_color(WHITE) for f in fs[:3]], run_time=0.25)
+self.wait(0.8)
+self.play(*[f.animate.set_color(WHITE) for f in fs[3:]], run_time=0.3)
 
 with self.voiceover(text=tr("""En el próximo vídeo veremos las operaciones con matrices: la suma y el producto por un escalar.""",
                             """In the next video we will look at operations with matrices: addition and multiplication by a scalar.""")) as tracker:

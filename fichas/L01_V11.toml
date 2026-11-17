@@ -33,14 +33,15 @@ Undécimo vídeo de la lección primera del curso de álgebra lineal.
 02:31 Resumen
 02:48 Créditos finales
 
-A partir de una matriz A formamos otra matriz B cuyas columnas son las filas de A: B es la transpuesta de A; cada columna de la transpuesta es la fila de A con el mismo índice, y su orden es el inverso. La transpuesta de una matriz columna es una matriz fila. De la definición comprobamos la regla de reescritura «transponer, o quitar la transposición, cambia de lado los índices», y que las filas de la transpuesta son las columnas de la matriz. Por último, un ejercicio: la transpuesta de la transpuesta es la matriz original.
+A partir de una matriz A formamos otra matriz B cuyas columnas son las filas de A: B es la transpuesta de A; cada columna de la transpuesta es la fila de A con el mismo índice, y su orden es el inverso. La transpuesta de una matriz columna es una matriz fila. De la definición demostramos la regla de reescritura «transponer, o quitar la transposición, cambia de lado los índices», y que las filas de la transpuesta son las columnas de la matriz. Por último, un ejercicio: la transpuesta de la transpuesta es la matriz original.
 
 Correspondiente sección del libro (Sección 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5
 
-Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.4.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Vídeo anterior: https://youtu.be/gpVJnl4nAdU
-Siguiente vídeo: (se añade al publicarlo)
+Siguiente vídeo: https://youtu.be/zKef0mF4YHQ
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
 Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
@@ -71,11 +72,12 @@ Eleventh video of the first lesson of the linear algebra course.
 02:34 Key takeaways
 02:51 Closing credits
 
-From a matrix A we build another matrix B whose columns are the rows of A: B is the transpose of A; each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we check the rewriting rule "transposing, or removing the transposition, moves the indices to the other side", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
+From a matrix A we build another matrix B whose columns are the rows of A: B is the transpose of A; each column of the transpose is the row of A with the same index, and its order is reversed. The transpose of a column matrix is a row matrix. From the definition we prove the rewriting rule "transposing, or removing the transposition, moves the indices to the other side", and that the rows of the transpose are the columns of the matrix. Finally, an exercise: the transpose of the transpose is the original matrix.
 
 Corresponding book section (Section 1.4.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5 (the book is in Spanish)
 
-Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.4-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Previous video: https://youtu.be/LTM7l1w0yY4
 Next video: (added when published)

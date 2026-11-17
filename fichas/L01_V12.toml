@@ -11,7 +11,7 @@ privacidad = "public"   # public | unlisted | private
 # miniatura: en cada idioma (lib/miniatura.py)
 
 [es]
-# youtube = ""   # rellenar tras subirlo
+youtube = "zKef0mF4YHQ"   # subido por la API el 2026-11-17 (adelantado por Marcos del jueves 19)
 video = "L01_V12_TiposDeMatrices.mp4"
 subtitulos = "L01_V12_TiposDeMatrices.srt"
 idioma = "es"
@@ -28,20 +28,21 @@ Duodécimo vídeo de la lección primera del curso de álgebra lineal.
 
 00:00 Título
 00:06 Matrices cuadradas
-00:38 Matrices diagonales, nulas e identidad
-01:35 Matrices simétricas
-02:27 Componentes de una matriz simétrica
-03:20 Diagonal y cuadrada, luego simétrica (ejercicio)
-05:07 Resumen
-05:44 Créditos finales
+00:44 Matrices diagonales, nulas e identidad
+01:44 Matrices simétricas
+02:37 Componentes de una matriz simétrica
+03:31 Diagonal y cuadrada, luego simétrica (ejercicio)
+05:18 Resumen
+06:07 Créditos finales
 
 Una matriz es cuadrada si tiene tantas filas como columnas, y diagonal si sus componentes fuera de la diagonal principal son nulas; las matrices nulas y las matrices identidad son casos particulares. Una matriz es simétrica si es igual a su transpuesta. Demostramos que toda matriz simétrica es cuadrada y, con el criterio de igualdad componente a componente, que sus componentes son la imagen especular unas de otras respecto a la diagonal principal. Por último, un ejercicio: toda matriz diagonal y cuadrada es simétrica; por tanto, las matrices identidad son simétricas.
 
 Correspondiente sección del libro (Sección 1.4.6): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6
 
-Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.4.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
-Vídeo anterior: https://youtu.be/(id de V11, la transposición, al publicarlo)
+Vídeo anterior: https://youtu.be/P6B-AIrPugs
 Siguiente vídeo: (se añade al publicarlo)
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
 
@@ -68,20 +69,21 @@ Twelfth video of the first lesson of the linear algebra course.
 
 00:00 Title
 00:06 Square matrices
-00:37 Diagonal, zero and identity matrices
-01:32 Symmetric matrices
-02:26 Components of a symmetric matrix
-03:21 Square diagonal, hence symmetric (exercise)
-05:11 Key takeaways
-05:50 Closing credits
+00:44 Diagonal, zero and identity matrices
+01:43 Symmetric matrices
+02:37 Components of a symmetric matrix
+03:34 Square diagonal, hence symmetric (exercise)
+05:24 Key takeaways
+06:14 Closing credits
 
 A matrix is square if it has as many rows as columns, and diagonal if its components outside the main diagonal are zero; zero matrices and identity matrices are particular cases. A matrix is symmetric if it is equal to its transpose. We prove that every symmetric matrix is square and, with the criterion of equality component by component, that its components mirror each other across the main diagonal. Finally, an exercise: every square diagonal matrix is symmetric; hence identity matrices are symmetric.
 
 Corresponding book section (Section 1.4.6): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6 (the book is in Spanish)
 
-Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.4-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
-Previous video: https://youtu.be/(id de V11, la transposición, al publicarlo)
+Previous video: https://youtu.be/MVSR4d0SwNc
 Next video: (added when published)
 Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
 

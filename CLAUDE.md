@@ -7,6 +7,24 @@ prompt de traducción. `../videoMath2` es solo la **carpeta de salida del inglé
 caché de Azure de Ollie, mp4 y srt); su git está congelado desde el 2026-10-30 (no hacer commits
 allí; `LEEME.txt`).
 
+## Encargos de otras sesiones
+
+Los encargos de otras sesiones (libro, NAcAL, material de clase, Notebooks) llegan a la raíz en ficheros
+`encargo-*.md` y `respuesta-*.md`. Un fichero de esos nuevo o con cambios sin confirmar en git es un
+encargo sin tratar. Reglas completas en `coordinacion-entre-repositorios.md` (copia del fichero del libro).
+
+- Un hook (`.claude/settings.json`) lo comprueba cada vez que Marcos escribe y avisa con una línea
+  «ENCARGOS SIN TRATAR». Si el aviso no aparece al empezar la sesión, hacer la comprobación a mano:
+  `git status --short -- 'encargo-*.md' 'respuesta-*.md'`.
+- Si hay alguno, leerlo, decir en pantalla cuál es y de qué repositorio viene, resumir lo que pide en
+  pocas líneas y preguntar a Marcos qué hacer. No cambiar nada hasta que responda. Si Marcos ha pedido
+  otra cosa en ese mensaje, atenderla y dar el aviso al final.
+- Cuando el encargo esté tratado, anotar la respuesta al final del fichero y confirmarlo en git (solo ese
+  fichero: es la excepción a «no hacer commit sin que Marcos lo pida»). Mientras no se confirme, el aviso
+  seguirá saliendo.
+- Para pedir algo a otro repositorio, escribir allí un fichero con uno de esos nombres y no confirmarlo en
+  git: lo confirma quien lo recibe. Para el libro vale también `PendientesDesdeLosVideos.org`.
+
 ## Antes de escribir cualquier escena
 
 Leer `NotacionNacal.org`: convenios del libro, macros de `nacal.sty`,
@@ -81,6 +99,13 @@ selector, "componente a componente", etc.).
 
 ## Entorno
 
+- **NAcAL en los vídeos** (`encargo-desde-nacal.md`, 2026-11-15): los alumnos tienen la 0.2.2 de PyPI y la 0.5.0 se publica en la
+  primera quincena de enero de 2027. Hasta entonces el entorno de los vídeos se queda en la 0.2.2 (no actualizarlo) y ningún vídeo
+  enseña nada posterior (`desarrollo`, `idioma`, `Polinomio`, `fracciones`). Los nombres de la librería pueden revisarse: no enseñar
+  en pantalla llamadas con nombres en español (`SEL`, `InvMat`...) ni escribir vídeos con mucho código (X03) hasta que Marcos decida.
+  **Único código de NAcAL en pantalla** (Marcos, 2026-11-16): las dos líneas de la introducción del libro en la escena 9 del vídeo
+  de la notación (`Vector([...])`, `Matrix([...])`); NAcAL garantiza que `Vector`, `Matrix`, `|` y `.n` no cambiarán de nombre. Nada más:
+  de lo demás se enseña la salida, no la orden.
 - `~/.venvs/manim`: manim 0.21.0, manim-voiceover 0.4.0 (azure, gtts,
   translate), nacal, sympy, ipython, opencv. El manim 0.19 del usuario
   sigue en `~/.local` por si hay que regenerar vídeos antiguos.
@@ -380,10 +405,13 @@ Escribir las frases nuevas ya en la forma buena.
   por la componente i-ésima del lado izquierdo", "Para demostrarla
   necesitará ...", "Hemos usado tres veces la definición de producto ...".
   Directo no significa telegráfico.
-- **«Comprobar» frente a «demostrar»** (Marcos, 2026-11-02, V11): una regla de reescritura de la notación
-  (i|Aᵀ|j = j|A|i) se *comprueba* («Por tanto, transponer intercambia los índices...»): la notación está
-  construida para que ocurra. Una propiedad de los objetos ((Aᵀ)ᵀ = A, las ocho de los vectores) se
-  *demuestra*, con el formato de ejercicio de la serie. «Hemos demostrado» en lo primero es excesivo.
+- **«Demostrar» frente a «comprobar»** (criterio del libro desde el 2026-11-14, recuadro de la Sección 1.4.5;
+  sustituye al del 2026-11-02, que nació en V11): una regla que se deduce de las definiciones se *demuestra*,
+  aunque la deducción sea breve y aunque sea una regla de reescritura (i|Aᵀ|j = j|A|i, el escalar a la derecha).
+  Las definiciones y los convenios de notación no se demuestran. *Comprobar* es verificar una igualdad en un
+  caso concreto, y eso no la demuestra para todos. Vale para los guiones y fichas nuevos; V11 (publicado) dice
+  «Por tanto...» en la voz; su descripción en YouTube pasó a «demostramos la regla» / «we prove» el 2026-11-15.
+  V15 la demuestra con una cadena breve con rótulos, sin panel ni tarjeta (tres pasos, vídeo corto).
 - **Igualdad «columna a columna» y «componente a componente», nunca «las mismas componentes»** (Marcos, 2026-11-03, V12):
   «dos matrices son iguales cuando tienen las mismas componentes» es falso como está dicho (como conjunto, [1 0] y [0 1]
   tienen las mismas componentes). Decir «son iguales si lo son columna a columna» / «si lo son componente a componente»,
@@ -520,7 +548,7 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | V09   | lun 03-11-26 | sáb 07-11-26 | **es publicado el lunes 3 (9w6gEv3XrTc, adelantado por Marcos: tres vídeos de reserva)**; «Siguiente vídeo» puesto en V08 es; **en publicado el martes 3 por la noche (t40aDUbc1oE), también adelantado por Marcos**: el mp4 subió público con título y descripción, pero la cuota diaria de la API (10 000 unidades) se agotó justo después, y el 4 de noviembre a las 09:00 se completó con `actualizar` (etiquetas, subtítulos, miniatura y lista) y se puso el «Next video» en V08 en con `--solo-metadatos`. Falta solo la pantalla final en Studio. **Lección aprendida**: la cuota de la API es de 10 000 unidades al día (se renueva a las 09:00 de Madrid) y una subida con todo gasta ~1 700; no encadenar retitulados masivos y una subida el mismo día. «Matrices» desde la **partición del 2026-11-03** (escenas 1-5 y resumen con la definición y el orden; anuncia la selección): solo el resumen y la portada son nuevos (una toma nueva por idioma, la frase D); HD es `L01_V09_MatricesFilasYColumnas.mp4` (4:04) y en `../videoMath2/L01_V09_MatricesRowsAndColumns.mp4` (3:59), capítulos y título «Matrices \| Álgebra lineal 1.9» en la ficha. Las escenas 1-5 estaban aprobadas por Marcos (2026-11-02/03); falta que escuche el resumen nuevo y su último repaso; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)**; resumen: solo viaja la expresión del medio, a «fila primero» en «la fila» y de vuelta en «o la columna» (marcas f, c injertadas; es/en 480p y HD rehechos) |
 | V10   | jue 05-11-26 | sáb 07-11-26 | **es publicado el jueves 5 a las 09:45 (gpVJnl4nAdU, adelantado por Marcos del jueves 12)**, enlazado desde V09 es, entrada en README/index y html del org; **en publicado el sábado 7 a las 12:15 (LTM7l1w0yY4, adelantado por Marcos de las 15:00)**, con id en la ficha, «Next video» en V09 en y enlace inglés en README/index; falta la pantalla final en Studio · «Selección de filas, columnas y componentes» (título en YouTube: «Filas, columnas y componentes | Álgebra lineal 1.10») (`L01-V10-Seleccion.org`, nuevo el 2026-11-03 con las escenas 6-7 de V09, aprobadas): tres frases nuevas por idioma (arranque, primera del resumen, anuncio de la transposición); Azure 480p `L01_V10_Seleccion_azure480p.mp4` (2:45) y `../videoMath2/L01_V10_Selection_azure480p.mp4` (2:45) a la espera de su escucha; HD es `L01_V10_Seleccion.mp4` (2:46) y en `../videoMath2/L01_V10_Selection.mp4` (2:45) hechos, con capítulos; ficha `fichas/L01_V10.toml`; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V11   | mié 11-11-26 | sáb 14-11-26 | **es publicado el miércoles 11 (P6B-AIrPugs, adelantado por Marcos del jueves 12)**, con los retoques de ese día (escena 2: «componente a componente», «cambia de lado los índices», toma A2), id en la ficha, «Siguiente vídeo» en V10 es, entrada en README/index y html del org; falta la pantalla final en Studio. **Inglés**: HD rehecho el 11 (3:07; dos tomas nuevas de Ollie y pausa de 2,3 s tras el ejemplo de la matriz columna), **aprobado por Marcos el 11 de noviembre** y **publicado el sábado 14 de madrugada (MVSR4d0SwNc, adelantado por Marcos de las 15:00)**, con id en la ficha, «Next video» en V10 en y enlace inglés en README/index (la descripción inglesa ya no remite al vídeo de matrices: «From a matrix A we build another matrix B...»); falta la pantalla final en Studio. Las etiquetas tardan un par de minutos en aparecer en `ver` tras una subida (salen `None` al principio). Historia anterior: la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
-| V12   | jue 19-11-26 | sáb 21-11-26 | (miniatura aprobada por Marcos el 2026-11-05; falta su último repaso)  tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): **aprobado por Marcos en los dos idiomas el 2026-11-04 (Azure 480p), HD es/en hechos ese día, ficha `fichas/L01_V12.toml` con capítulos y miniatura (matriz simétrica y S = Sᵀ, aprobada por Marcos el 2026-11-05)**; **revisado y rehecho el 2026-11-03** (seis escenas: la 3 partida en «Matrices simétricas» y «Componentes de una matriz simétrica»); prueba gTTS `L01_V12_TiposDeMatrices_prueba480p.mp4` (7:14) y `../videoMath2/L01_V12_TypesOfMatrices_prueba480p.mp4` (6:54), a la espera de la revisión de Marcos |
+| V12   | mar 17-11-26 | sáb 21-11-26 | **es publicado el martes 17 (zKef0mF4YHQ, adelantado por Marcos del jueves 19)**, con id en la ficha, «Siguiente vídeo» en V11 es, entrada en README/index, html del org y aviso a los Notebooks; falta la pantalla final en Studio; en, el sábado 21 · **último repaso de Marcos el 2026-11-16**: «cuadrada: de orden 3», el 2 y el 3 señalados en «filas»/«columnas», pausas de 1 s entre definiciones (escenas 1-2) y tras «es simétrica», A = Aᵀ resaltada en «las dos son iguales», escena 3 más centrada, respiro tras el arranque, cero del −1 en su columna; marcas injertadas sin sintetizar; dos frases nuevas por idioma (arranque «...y para describirlos aprovecharemos la notación del curso» y, en el resumen, «Cada uno de estos tipos... se describe con una igualdad corta... hemos demostrado algunas de sus propiedades»; es: tirada v3); Azure 480p es/en rehechos, franjas de fila (amarilla) y columna (verde) en cada componente de la diagonal, como el siete de V10 (marcas f1, c1, f2, c2 injertadas); **español aprobado por Marcos y HD es rehecho el 2026-11-16 (6:22), capítulos es de la ficha corregidos; inglés aprobado también y HD en rehecho (6:29), capítulos en corregidos; pausa de 1 s tras el criterio de igualdad (escena 4); «component by component» se mantiene en la voz (vocabulario del 2026-11-15)**; listo para subir el jue 19 / sáb 21 (miniatura aprobada por Marcos el 2026-11-05)  tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): **aprobado por Marcos en los dos idiomas el 2026-11-04 (Azure 480p), HD es/en hechos ese día, ficha `fichas/L01_V12.toml` con capítulos y miniatura (matriz simétrica y S = Sᵀ, aprobada por Marcos el 2026-11-05)**; **revisado y rehecho el 2026-11-03** (seis escenas: la 3 partida en «Matrices simétricas» y «Componentes de una matriz simétrica»); prueba gTTS `L01_V12_TiposDeMatrices_prueba480p.mp4` (7:14) y `../videoMath2/L01_V12_TypesOfMatrices_prueba480p.mp4` (6:54), a la espera de la revisión de Marcos |
 
 Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, el título
 «Tema | Álgebra lineal 1.N» y la descripción completa; todos tienen ficha. V09 es publicado el 2026-11-03 y enlazado desde V08 es; al subir V09 en, lo mismo en la sección `[en]` de V08
@@ -533,6 +561,12 @@ Pese al aviso del script, la API publica en **público** (V05 y V07 es, 2026-10-
 se lanza a la hora de publicar. El token caduca cada semana: si da `invalid_grant`, apartar
 `lib/token_youtube.json` y repetir; se abre el navegador para autorizar. La pantalla final, en Studio.
 Después se apunta el id en la ficha y se añaden la entrada de `README.org`/`index.html` y el html del org.
+**Inserción en otras webs** (2026-11-16): `videos.update` con `part=status` pone a `False` lo que no se envía, y cada `actualizar`
+dejaba el vídeo sin poder insertarse (los Notebooks en Binder mostraban «El propietario ha inhabilitado su reproducción en otros sitios
+web»). `cuerpo()` envía ya `embeddable` y `publicStatsViewable` a `True`; V01-V11 corregidos ese día. Las descripciones enlazan desde
+entonces al Notebook de la sección con Binder (V01 → 1.1, V02-V08 → 1.2, V09-V12 → 1.4, V13-V15 → 1.5) y, debajo, al repositorio.
+**Y se avisa a los Notebooks** (`encargo-desde-los-notebooks.md`, 2026-11-16): fecha e identificadores de los dos idiomas, al final de ese
+fichero, para que enlacen el vídeo (V12 en «Tipos de matrices» del Notebook 1.4; V13-V15 en el 1.5).
 Al publicar un vídeo, actualizar esta tabla.
 
 ## Pendiente
@@ -663,6 +697,28 @@ Al publicar un vídeo, actualizar esta tabla.
   cuando haya libro inglés o vídeo X00 (encargo pequeño para Opus); (3) si la traducción conserva la
   estructura de secciones, los enlaces `#subsection.1.4.3` del PDF valen cambiando solo el nombre del
   fichero; (4) corregir primero el español (con `PendientesDesdeLosVideos.org`) y traducir después.
+- **Vídeo de la notación para profesores** (`P00-LaNotacion.org`, nombre provisional; Marcos, 2026-11-15): acompaña a la
+  «Introducción al libro» (`../CursoDeAlgebraLineal-SRC/partes/Cap00B-IntroduccionAlLibro.tex`), solo la sección de la notación
+  (sin eliminación por columnas). Público: quien ya enseña álgebra lineal; fuera de la lista del curso; puede ser largo y debe
+  convencer: da soporte a cada decisión y pesa su coste. Voz de Tristan/Ollie, bilingüe, sin primera persona («el libro»).
+  **Guion escrito el 2026-11-15** (doce escenas, unos 17 min: resultado, comodidad de la notación habitual, su precio, cuatro
+  decisiones con lo que resuelven y lo que cuestan, demostraciones, NAcAL, coste, cierre); sin código y sin aprobar. Dudas al
+  final del org (citas originales de Poole y Larson para el inglés, nombres propios en la voz, título). No sustituye a X00.
+  **Primera versión con código el 2026-11-15** (mismo org, sección «Código»; clases `P00_E00_Portada`...`P00_E11_Cierre`; tangle a
+  `lib/P00_LaNotacion.py` y `../videoMath2/lib/P00_Notation.py`; montaje con `tmp/montaje_p00_{es,en}.sh`). Prueba gTTS 480p:
+  `P00_LaNotacion_prueba480p.mp4` (19:07) y `../videoMath2/P00_Notation_prueba480p.mp4` (18:18); con Azure serán unos 16-17 min.
+  Animación sencilla (cada cosa aparece en su marca) salvo la cadena de la asociatividad, que nace glifo a glifo (escena 8), y las
+  tres lecturas de `i|AB|j` (escena 7, `TransformMatchingShapes`). Falta: revisión de Marcos, letra más grande (muchos textos a
+  24-30 pt), paréntesis que viajen en las escenas 2, 5 y 6, una salida real de NAcAL en la escena 9, fase A de `Comprobaciones.org`.
+  La narración está dos veces en el org (guion y `tr()`): cambiar las dos.
+  **Azure es 480p el 2026-11-15** (pedido por Marcos para escucharlo mejor narrado, guion aún sin aprobar):
+  `P00_LaNotacion_azure480p.mp4` (14:44). Sin tomas cortadas; nombres propios y pausas sin escuchar. Inglés sin Azure.
+  **Segunda versión, 2026-11-15 (Marcos, tras escucharlo: «difícil de seguir»)**: ritmo sosegado y ayudas visuales. Clase
+  `EscenaP00` (pausa tras cada locución: 1,2 s, y `pausa=2.5`-3 tras las ideas principales); escena 3 rehecha, con la proyección de
+  Strang y el orden de cada factor debajo (rojo «no encajan» ⇒ número; verde «encajan» ⇒ matriz; `aᵀb` en amarillo; narración nueva
+  en cuatro locuciones); escenas 1, 2, 5 y 7 con resaltados (`mat`, `pinta`, `orden`). Azure es 480p rehecho (17:22). Las escenas 4,
+  6 y 8-11 solo tienen las pausas: falta darles las mismas ayudas. **Criterio para este vídeo**: tras cada idea, pausa; cada cosa
+  que la voz nombra se señala; cuando el argumento depende de órdenes o tipos, se escriben debajo de cada símbolo.
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `descartes/ZZ_Basura_L01_V09.org`); se decide al tener X01.
@@ -696,7 +752,10 @@ Al publicar un vídeo, actualizar esta tabla.
   lineal, escalar por la derecha y reglas (1.5.3-1.6), a escribir sobre el libro ya corregido. Revisión completa de la
   lección 1 del libro el 2026-11-10 (sin cambio de numeración): contrastada con V06-V13, ningún guion publicado queda
   en contradicción. Para V14: 1.4.4 y 1.6 siguen ahora el mismo esquema (selector por la izquierda lineal; convenio
-  bλ = λb «por definición»; reglas comprobadas con cadenas de pasos nombrados).
+  bλ = λb «por definición»; reglas demostradas con cadenas de pasos nombrados).
+  2026-11-15 (novedades del libro): la Sección 1.4.6 «Tipos de matrices» sigue ahora el orden de V12, y la resta de
+  vectores está definida al final de la Sección 1.2 («restar un vector es sumar su opuesto»; la de matrices, en 1.5):
+  se puede usar en los guiones nuevos remitiendo a esas secciones.
 - V14 (`L01-V14-FilasYTransposicion.org`, Secciones 1.5.3-1.5.4; inglés `L01_V14_RowsAndTransposition`): «Operaciones
   fila a fila y transposición» (título provisional). **Primer borrador el 2026-11-11**, adelantado mientras Marcos revisa
   V13; **nada aprobado**: ni la estructura ni la partición. Siete escenas (0-6): ejemplo de V13 mirado por filas; la suma
@@ -707,6 +766,13 @@ Al publicar un vídeo, actualizar esta tabla.
   Prueba gTTS: `L01_V14_FilasYTransposicion_prueba480p.mp4` (6:19) y `../videoMath2/L01_V14_RowsAndTransposition_prueba480p.mp4`
   (5:42); montaje con `tmp/montaje_v14_{es,en}.sh`. Falta toda la fase A de `Comprobaciones.org` (`revisa_guion.py` falla
   porque el org no tiene la clase del vídeo completo; añadirla), la lectura en frío y la revisión fina de fotogramas.
+  **Azure 480p el 2026-11-15** (pedido por Marcos, aún sin aprobar el guion): `L01_V14_FilasYTransposicion_azure480p.mp4` (4:55) y
+  `../videoMath2/L01_V14_RowsAndTransposition_azure480p.mp4` (4:47); una toma inglesa cortada por Azure («...added row by row»)
+  repetida. No renderizar es y en con Azure a la vez: Azure devuelve 429. Falta mirar la sincronía de las marcas en fotogramas.
+  **Escena 2 rehecha el 2026-11-15 (Marcos)**: la suma fila a fila se demuestra solo con las definiciones,
+  `(i|(A+B))|j = i|((A+B)|j) = i|(A|j+B|j) = i|A|j + i|B|j = (i|A + i|B)|j` (desplazar los paréntesis; suma de matrices; suma de
+  vectores dos veces), sin la suma componente a componente del libro (anotado en `PendientesDesdeLosVideos.org`); panel con las
+  dos definiciones, contadores 1 y 2. Seis tomas nuevas por idioma y Azure 480p rehecho.
 - V15 (`L01-V15-EscalarALaDerecha.org`, Secciones 1.4.4 y 1.6; inglés `L01_V15_ScalarOnTheRight`): «El escalar a la
   derecha». **Primer borrador el 2026-11-11**, para que Marcos valore la partición con V14 y V15 delante; **nada
   aprobado**. Seis escenas (0-5): el problema (por la derecha basta desplazar los paréntesis; por la izquierda el escalar
@@ -715,6 +781,8 @@ Al publicar un vídeo, actualizar esta tabla.
   («notación asociativa»; cierra con «Con este vídeo termina la primera lección», provisional). Prueba gTTS:
   `L01_V15_EscalarALaDerecha_prueba480p.mp4` (3:20) y `../videoMath2/L01_V15_ScalarOnTheRight_prueba480p.mp4` (3:05);
   montaje con `tmp/montaje_v15_{es,en}.sh`. Falta la fase A de `Comprobaciones.org` entera.
+  **Azure 480p el 2026-11-15**: `L01_V15_EscalarALaDerecha_azure480p.mp4` (2:38) y `../videoMath2/L01_V15_ScalarOnTheRight_azure480p.mp4`
+  (2:34), ya con «demostrar» en la escena 3.
 - V12 (`L01-V12-TiposDeMatrices.org`, Sección 1.4.6; inglés `L01_V12_TypesOfMatrices`; era V11 hasta el
   2026-11-03): «Tipos de
   matrices» (no «matrices especiales»: da nombre a las matrices por sus características). Reparto del
