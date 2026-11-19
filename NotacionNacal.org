@@ -221,6 +221,12 @@ libro recomienda paréntesis siempre: =(3*b)|2=.
 
 * Terminología en inglés ya fijada en los vídeos traducidos (=videoMath2=)
 
+Desde el 2026-11-15 la tabla común de vocabulario (libro, material de clase y vídeos) es
+=../CursoDeAlgebraLineal-SRC/vocabulario-es-en.org=: consultarla al escribir el inglés de un guion y
+anotar allí, en «Notas desde los vídeos», lo que no encaje. Decidido por Marcos el 2026-11-15: orden m×n = «order m by n»
+(no «size»), componente de una matriz = «component» (nunca «entry»), «selector operator», y
+«component-wise» (término técnico) junto a «component by component» (forma hablada, desde V11).
+
 | Español                              | Inglés usado en los vídeos                      |
 |--------------------------------------+-------------------------------------------------|
 | vector de $\R[n]$                    | vector in / of $\R[n]$                          |
@@ -272,11 +278,11 @@ side* (un índice: *move the index to the other side*; "transponer cambia de lad
 | V07   | 1.2.1             | HD es/en 2026-10-17, se publica es 22-10 y en 24-10: propiedades 5-8, la proposición completa y «espacio vectorial» |
 | V08   | 1.3               | HD es/en 2026-10-17, se publica es 29-10 y en 31-10: vectores como datos (cena, cesta, combinación lineal, PIB) y la criatura Omega |
 | V09   | 1.4 a 1.4.2       | «Matrices» desde la partición del 2026-11-03: matrices, orden, igualdad, notación (segunda versión 2026-10-18, sigue las transparencias de clase) |
-| V10   | 1.4.3 a 1.4.4     | «Selección de filas, columnas y componentes» (2026-11-03, escenas 6-7 de V09; =L01-V10-Seleccion.org=): filas, columnas y componentes con «primero la fila o primero la columna»; destino de la línea de notación de las descripciones |
+| V10   | 1.4.1 a 1.4.3     | «Selección de filas, columnas y componentes» (2026-11-03, escenas 6-7 de V09; =L01-V10-Seleccion.org=): filas, columnas y componentes con «primero la fila o primero la columna»; destino de la línea de notación de las descripciones |
 | V11   | 1.4.5             | la transposición (=L01-V11-Transposicion.org=; era V10 hasta el 2026-11-03) |
 | V12   | 1.4.6             | tipos de matrices (era V11): cuadradas, rectangulares, diagonales, nula, identidad, simétricas; diagonal y cuadrada ⇒ simétrica (pausa) |
-| V13   | 1.5 a 1.5.2       | pendiente: suma y producto por escalares (por columnas), matriz opuesta, las ocho propiedades (tabla en paralelo), componente a componente |
-| V14   | 1.5.3 a 1.6       | pendiente: transposición lineal, escalar por la derecha, operaciones por filas, reglas de reescritura |
+| V13   | 1.5 a 1.5.2       | primera versión 2026-11-10 (=L01-V13-OperacionesConMatrices.org=): suma y producto por escalares por columnas, componente a componente, nulas y opuesta, y las ocho propiedades por cambio de símbolos sobre las demostraciones de los vectores (se traducen la 1 y la 4) |
+| V14   | 1.5.3 a 1.6       | pendiente: operaciones por filas (desde las componentes), transposición lineal, escalar por la derecha, reglas de reescritura (orden del libro revisado el 2026-11-10) |
 
 ** Vídeos de ampliación (serie X, propuesta 2026-10-18)
 

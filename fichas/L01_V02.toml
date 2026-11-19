@@ -35,7 +35,8 @@ Dos vectores con el mismo número de componentes se suman componente a component
 
 Correspondiente sección del libro (Sección 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 
-Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.2.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Vídeo anterior: https://youtu.be/HWaQrbSc8WA
 Siguiente vídeo: https://youtu.be/kSgd-davYhw
@@ -71,7 +72,8 @@ Two vectors with the same number of components are added component by component:
 
 Corresponding book section (Section 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
 
-Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.2-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Previous video: https://youtu.be/9Je758iM6Dc
 Next video: https://youtu.be/yrwrxVB9uto

@@ -211,6 +211,11 @@ Escribir las frases nuevas ya en la forma buena.
   En inglés (V12, 2026-11-04), Ollie funde «'n' columns» en «ncolumns» (n de 120 ms en todas las tiradas, también
   con «and with»): decir «of order 'm' by 'n'» (n 240-280 ms; Marcos: «se entiende»). `tmp/parte_toma.py` parte una
   toma por palabras en dos entradas de caché para resintetizar solo una frase de un voiceover.
+- **Final en suspenso** (V13, 2026-11-18): Marcos oyó dos frases que «parecían continuar» («...seleccionamos primero
+  la columna.», «...ahora obtenemos una columna.»). Se mide con `tmp/f0_final.py CACHE N` (tono de la última palabra):
+  las buenas bajan hasta ~70-80 Hz sin pico alto; las malas suben a 145-200 Hz en la tónica o acaban por encima de
+  85 Hz. Tres o cuatro tiradas de dos o tres redacciones, mandar a Marcos las que cierran y que elija de oído; «antes»
+  delante del verbo («donde antes obteníamos») dio la única toma sin pico.
 - Las letras a final de frase ("las de a.") quedan en 110-150 ms en todas
   las tiradas: es la caída natural del final, no hace falta perseguirla.
 - Cuando algo "suena raro", **medirlo**: `tmp/huecos.py` (silencio

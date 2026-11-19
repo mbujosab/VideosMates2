@@ -300,9 +300,10 @@ pista en la escena y se invita a pausar por tercera vez).
 #+name: Pausa para pensar
 #+BEGIN_SRC python :eval no
 def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4, invitacion=None, invitacion_voz=None,
-                      al_dar_la_pista=None):
+                      al_dar_la_pista=None, al_invitar=None):
     """Tarjeta que invita a pausar el vídeo; opcionalmente da una pista y vuelve a invitar.
     `invitacion` cambia el texto de la primera tarjeta (e `invitacion_voz` lo que dice la voz);
+    `al_invitar` se ejecuta mientras la voz invita (por ejemplo, recuadrar lo que se propone demostrar);
     `al_dar_la_pista` es una función que se ejecuta mientras la voz da la pista (por ejemplo,
     iluminar en amarillo las piezas que hacen falta)."""
     def tarjeta(texto):
@@ -320,6 +321,8 @@ def pausa_para_pensar(self, pista=None, pista_voz=None, segundos=4, invitacion=N
     tarjeta1 = tarjeta(invitacion)
     with self.voiceover(text=invitacion_voz or invitacion) as tracker:
         self.play(FadeIn(tarjeta1), run_time=min(0.8, tracker.duration))
+        if al_invitar is not None:
+            al_invitar()
     self.wait(segundos)
     if pista is not None:
         tarjeta2 = tarjeta(tr("Pista: ", "Hint: ") + pista)

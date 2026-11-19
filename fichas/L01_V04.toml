@@ -42,7 +42,8 @@ El producto de un vector por un escalar se define componente a componente, y con
 Correspondiente sección del libro (Sección 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2
 El libro no trata la interpretación geométrica, solo las propiedades algebraicas de las operaciones.
 
-Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.2.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Vídeo anterior: https://youtu.be/kSgd-davYhw
 Siguiente vídeo: https://youtu.be/nfftYHyi0hU
@@ -86,7 +87,8 @@ Multiplying a vector by a scalar is defined component by component, and the sele
 Corresponding book section (Section 1.2): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2 (the book is in Spanish)
 The book does not cover the geometric interpretation, only the algebraic properties of the operations.
 
-Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.2-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Previous video: https://youtu.be/yrwrxVB9uto
 Next video: https://youtu.be/gAWXJVMWO7M

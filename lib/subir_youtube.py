@@ -106,6 +106,10 @@ def cuerpo(d):
         "status": {
             "privacyStatus": d["privacidad"],
             "selfDeclaredMadeForKids": False,
+            # `videos.update` con part=status devuelve a False lo que no se envía: sin estas dos líneas cada
+            # `actualizar` prohibía insertar el vídeo en otras webs (los Notebooks en Binder; 2026-11-16).
+            "embeddable": True,
+            "publicStatsViewable": True,
             "license": d.get("licencia") or "youtube",   # "creativeCommon" = CC BY de YouTube
         },
     }

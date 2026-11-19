@@ -35,7 +35,8 @@ Un vector de Rn es una lista ordenada de n números reales: importa el orden, as
 
 Correspondiente sección del libro (Sección 1.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.1
 
-Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.1.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Siguiente vídeo: https://youtu.be/LvcerzXX3IM
 Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
@@ -70,7 +71,8 @@ A vector in Rn is an ordered list of n real numbers: order matters, so two vecto
 
 Corresponding book section (Section 1.1): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.1 (the book is in Spanish)
 
-Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.1-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
 
 Next video: https://youtu.be/k-eMu1gxLRE
 Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y

@@ -1,0 +1,639 @@
+#+TITLE: Lección 1 del curso - Vídeo 15: el escalar a la derecha
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es
+#+STARTUP: show4levels
+
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+
+# Para que no ejecute todo el código al exportar
+#+PROPERTY: header-args :eval never-export
+#+PROPERTY: header-args:emacs-lisp :eval export :results silent
+
+#+LATEX: \maketitle
+
+****** COMMENT Para exportar a pdf
+
+#+CALL: NombreEnChunksDeCodigo()
+#+NAME: NombreEnChunksDeCodigo
+#+BEGIN_SRC emacs-lisp :results none :exports none
+(setq org-babel-exp-code-template
+      (concat "\n#+ATTR_LATEX: :options label=%name\n"
+              org-babel-exp-code-template))
+#+END_SRC
+
+
+* El escalar a la derecha - V15
+
+Cubre las Secciones 1.4.4 (extensión de la notación vectorial y reglas de reescritura) y 1.6 (lo mismo
+para matrices) del libro, tras la revisión del 2026-11-10. Vídeo corto, propuesto el 2026-11-11 para no
+alargar V14; pendiente de que Marcos apruebe la partición.
+
+La regla se deduce del convenio y de las definiciones, así que se *demuestra* (criterio del libro desde
+el 2026-11-14, recuadro de la Sección 1.4.5; «comprobar» queda para un caso concreto). El borrador la
+cuenta con una cadena breve con rótulos, sin panel, sin contadores y sin tarjeta de pausa: son tres
+pasos y el vídeo es corto (decidido el 2026-11-15, con el visto bueno de Marcos).
+
+** Guion (escenas)
+
+| Escena | Contenido                                                                             | Pausas |
+|--------+---------------------------------------------------------------------------------------+--------|
+|      0 | Portada                                                                               |        |
+|      1 | Arranque; el problema: por la derecha basta desplazar los paréntesis, por la izquierda no |    |
+|      2 | El convenio: el escalar a la derecha de un vector (ejemplo numérico)                  |        |
+|      3 | Demostración: con el escalar a la derecha vuelve a bastar desplazar los paréntesis    |        |
+|      4 | Lo mismo con matrices: filas, columnas y transposición                                |        |
+|      5 | Resumen: notación asociativa; fin de la lección                                       |        |
+
+** Ensamblado de los ficheros de python (uno por idioma)
+
+#+caption: Fichero de python del vídeo en español
+#+name: Fichero en español
+#+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V15_EscalarALaDerecha.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+#+caption: Fichero de python del vídeo en inglés
+#+name: Fichero en inglés
+#+BEGIN_SRC python :noweb tangle :tangle ../videoMath2/lib/L01_V15_ScalarOnTheRight.py
+from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "en")
+
+<<Título del vídeo>>
+
+<<Utilidades del vídeo>>
+
+<<Clases de las escenas>>
+#+END_SRC
+
+
+** Clases de las escenas
+
+#+caption: Escenas separadas
+#+name: Clases de las escenas
+#+BEGIN_SRC python :noweb no-export :eval no
+class L01_V15_E00_Portada(MiEscenaConVoz):
+    def construct(self):
+        <<Portada>>
+
+
+class L01_V15_E01_Problema(MiEscenaConVoz):
+    def construct(self):
+        <<Primera escena>>
+
+
+class L01_V15_E02_Convenio(MiEscenaConVoz):
+    def construct(self):
+        <<Segunda escena>>
+
+
+class L01_V15_E03_Comprobacion(MiEscenaConVoz):
+    def construct(self):
+        <<Tercera escena>>
+
+
+class L01_V15_E04_Matrices(MiEscenaConVoz):
+    def construct(self):
+        <<Cuarta escena>>
+
+
+class L01_V15_E05_Resumen(MiEscenaConVoz):
+    def construct(self):
+        <<Quinta escena>>
+
+
+class ZCreditosFinales(CreditosFinales):   # manim solo renderiza clases definidas en este fichero
+    pass
+#+END_SRC
+
+
+** Título del vídeo
+
+#+name: Título del vídeo
+#+BEGIN_SRC python :eval no
+TITULO = tr("El escalar a la derecha", "The scalar on the right")
+#+END_SRC
+
+** Utilidades del vídeo
+
+=nace= y =entera= son las de V13 y V14 (cada expresión nace de la anterior). =viaje= es el viaje de ida
+y vuelta de los paréntesis de V10 y V13: los glifos de un lado van a la colocación del otro y vuelven.
+
+#+name: Utilidades del vídeo
+#+BEGIN_SRC python :eval no
+COLOR_SELECTOR = GREEN     # el selector, en verde; el escalar, en amarillo (COLOR_ESCALAR)
+
+# Las reglas del vídeo: (lado izquierdo, lado derecho)
+DER_VEC  = (r"\elemRp{\lambda\Vect{b}}{i}", r"\lambda\eleVRpE{b}{i}")      # ( λ b ) | i  =  λ ( b | i )
+IZQ_VEC  = (r"\elemLp{\lambda\Vect{b}}{i}", r"\lambda\eleVLPE{b}{i}")      # i | ( λ b )  =  λ ( i | b )
+IZQ_VEC2 = (r"\elemLp{\Vect{b}\lambda}{i}", r"\eleVLPE{b}{i}\lambda")      # i | ( b λ )  =  ( i | b ) λ
+FIL_MAT  = (r"\elemLp{\Mat{A}\lambda}{i}", r"\VectFpE{A}{i}\lambda")       # i | ( A λ )  =  ( i | A ) λ
+COL_MAT  = (r"\elemRp{\lambda\Mat{A}}{j}", r"\lambda\VectCpE{A}{j}")       # ( λ A ) | j  =  λ ( A | j )
+TRA_MAT  = (r"\Transp{\Mat{A}\lambda}", r"\MatTpE{A}\lambda")              # ( A λ ) T  =  ( A T ) λ
+
+
+def regla(par, font_size=48):
+    return MathTex(par[0], "=", par[1], tex_template=myTemplate, font_size=font_size)
+
+
+def fila_vec(fila):
+    """Un vector numérico escrito en horizontal, entre paréntesis y con la coma final del libro."""
+    return "(" + r",\;".join(str(x) for x in fila) + ",)"
+
+
+def resalta(escena, mobs, color=COLOR_ESCALAR, factor=1.3, run_time=0.3):
+    """Resaltado inmediato y sostenido (color y tamaño), sin la subida lenta de Indicate."""
+    escena.play(*[x.animate.set_color(color).scale(factor) for x in mobs], run_time=run_time)
+
+
+def apaga(escena, mobs, color=WHITE, factor=1.3, run_time=0.3):
+    escena.play(*[x.animate.set_color(color).scale(1/factor) for x in mobs], run_time=run_time)
+
+
+def viaje(escena, formula, mapa, run_time=2.4):
+    """Los glifos del lado izquierdo de la regla viajan a la colocación del derecho y vuelven (V10, V13):
+    mapa[i] es el glifo del lado derecho al que va el glifo i del izquierdo."""
+    destino = formula[2].copy().move_to(formula[0])
+    escena.play(*[Transform(formula[0][i], destino[j], rate_func=rate_functions.there_and_back_with_pause)
+                  for i, j in enumerate(mapa)], run_time=run_time)
+
+
+def rotulo(texto, junto_a, x, font_size=28):
+    """Rótulo gris pequeño a la derecha de una línea (lo que justifica el paso)."""
+    r = Tex(texto, tex_template=myTemplate, font_size=font_size, color=GRAY_B).next_to(junto_a, RIGHT, buff=0.6)
+    return r.shift((x - r.get_left()[0])*RIGHT)
+
+
+def nace(escena, origen, destino, fijos, moviles=(), aparecen=(), con_igual=True, extra=(), marca=None,
+         t_fijos=0.8, t_moviles=0.9):
+    """Una expresión nace de la anterior (CLAUDE.md, «Cada expresión nace de la anterior»). Primero, mientras la
+    voz nombra la regla, se copia lo que no cambia (fijos: parejas glifo de origen, glifo de destino) y aparece el
+    igual; después (en la marca, si se da) viaja lo que el paso mueve (moviles) y surge lo nuevo (aparecen)."""
+    cubiertos = sorted({j for _, j in fijos} | {j for _, j in moviles} | set(aparecen) | ({0} if con_igual else set()))
+    assert cubiertos == list(range(len(destino))), (cubiertos, len(destino))
+    escena.play(*extra, *([FadeIn(destino[0])] if con_igual else []),
+                *[TransformFromCopy(origen[i], destino[j]) for i, j in fijos], run_time=t_fijos)
+    if marca is not None:
+        escena.wait_until_bookmark(marca)
+    if moviles or aparecen:
+        escena.play(*[TransformFromCopy(origen[i], destino[j]) for i, j in moviles],
+                    *[FadeIn(destino[j]) for j in aparecen], run_time=t_moviles)
+
+
+def entera(escena, linea):
+    """Tras nacer glifo a glifo, la línea vuelve a estar en la escena como un solo objeto."""
+    escena.remove(*linea[0]); escena.add(linea)
+#+END_SRC
+
+** Código de cada escena
+
+*** Portada (escena 0)
+
+#+name: Portada
+#+BEGIN_SRC python :eval no
+self.creditos()
+portada = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(min(portada.width, config.frame_width*0.9))
+self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+self.wait(4.5)
+#+END_SRC
+
+*** Escena 1 - Arranque; el problema
+
+Con el selector a la derecha, sacar el escalar es «desplazar los paréntesis»: los símbolos no cambian
+de orden (se ve viajar la pareja de paréntesis). Con el selector a la izquierda, el escalar y el
+selector intercambian sus posiciones: la imagen de los paréntesis ya no sirve.
+
+#+name: Primera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+der = regla(DER_VEC).move_to([0, 1.2, 0])
+izq = regla(IZQ_VEC).move_to([0, -1.2, 0])
+r_der = Tex(tr("selector a la derecha: basta desplazar los paréntesis", "selector on the right: moving the parentheses is enough"),
+            font_size=30, color=GRAY_B).next_to(der, DOWN, buff=0.35)
+r_izq = Tex(tr("selector a la izquierda: el escalar y el selector se cruzan", "selector on the left: the scalar and the selector cross"),
+            font_size=30, color=GRAY_B).next_to(izq, DOWN, buff=0.35)
+# glifos de izq: i | ( λ b ) (0-5)  =  λ ( i | b ) (0-5)
+sel = [izq[0][0:2], izq[2][2:4]]
+esc = [izq[0][3], izq[2][0]]
+
+with self.voiceover(text=tr("""En este vídeo veremos una última extensión de la notación: escribir el escalar a la derecha de un vector o de una matriz.""",
+                            """In this video we will see one last extension of the notation: writing the scalar on the right of a vector or a matrix.""")) as tracker:
+    self.play(Write(titulo), run_time=1.2)
+
+with self.voiceover(text=tr("""Cuando el selector actúa por la derecha de un vector, la definición de producto por un escalar permite <bookmark mark='p'/> desplazar los paréntesis. Los símbolos no cambian de orden.""",
+                            """When the selector acts on the right of a vector, the definition of the product by a scalar lets us <bookmark mark='p'/> move the parentheses. The symbols do not change their order.""")) as tracker:
+    self.play(FadeIn(der), run_time=0.8)
+    self.wait_until_bookmark("p")
+    parentesis = [der[0][0], der[0][3], der[2][1], der[2][5]]
+    resalta(self, parentesis, factor=1.25)
+    viaje(self, der, [1, 0, 2, 5, 3, 4])
+    apaga(self, parentesis, factor=1.25)
+    self.play(FadeIn(r_der), run_time=0.5)
+
+with self.voiceover(text=tr("""El selector también puede actuar por la izquierda, con el mismo resultado. <bookmark mark='x'/> Pero entonces, al sacar el escalar, <bookmark mark='c'/> el escalar y el selector intercambian sus posiciones. Ya no basta con desplazar los paréntesis.""",
+                            """The selector can also act on the left, with the same result. <bookmark mark='x'/> But then, when we take the scalar out, <bookmark mark='c'/> the scalar and the selector swap their positions. Moving the parentheses is no longer enough.""")) as tracker:
+    self.play(FadeIn(izq[0]), run_time=0.8)
+    self.wait_until_bookmark("x")
+    self.play(FadeIn(izq[1]), FadeIn(izq[2]), run_time=0.8)
+    self.wait_until_bookmark("c")
+    self.play(*[x.animate.set_color(COLOR_SELECTOR).scale(1.2) for x in sel], *[x.animate.set_color(COLOR_ESCALAR).scale(1.2) for x in esc], run_time=0.4)
+    self.play(FadeIn(r_izq), run_time=0.5)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 2 - El convenio
+
+El convenio $\Vect{b}\lambda=\lambda\Vect{b}$, «por definición» (recuadro de la Sección 1.4.4), con
+un ejemplo numérico. No es una operación nueva, y no es la escritura habitual (nota al pie del libro).
+
+#+name: Segunda escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Un convenio de notación", "A notational convention"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+convenio = MathTex(r"\Vect{b}\lambda", "=", r"\lambda\Vect{b}", tex_template=myTemplate, font_size=60).move_to([0, 1.3, 0])
+caja = SurroundingRectangle(convenio, color=COLOR_ESCALAR, buff=0.25, corner_radius=0.15, stroke_width=3)
+ejemplo = MathTex(fila_vec([1, 2, 3]), "2", "=", "2", fila_vec([1, 2, 3]), "=", fila_vec([2, 4, 6]), tex_template=myTemplate, font_size=44).move_to([0, -0.7, 0])
+ejemplo[1].set_color(COLOR_ESCALAR); ejemplo[3].set_color(COLOR_ESCALAR)
+habitual = Tex(tr(r"Lo habitual es escribir el escalar primero: $2\Vect{b}$", r"The usual way is to write the scalar first: $2\Vect{b}$"),
+               tex_template=myTemplate, font_size=32, color=GRAY_B).move_to([0, -2.3, 0])
+
+with self.voiceover(text=tr("""Para recuperar esa regla adoptamos un convenio: <bookmark mark='c'/> aceptamos escribir el escalar a la derecha del vector. Por definición, significa lo mismo que con el escalar a la izquierda.""",
+                            """To recover that rule we adopt a convention: <bookmark mark='c'/> we accept writing the scalar on the right of the vector. By definition, it means the same as with the scalar on the left.""")) as tracker:
+    self.play(Write(cabecera), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(FadeIn(convenio[0]), run_time=0.8)
+    self.wait(1.5)
+    self.play(FadeIn(convenio[1]), FadeIn(convenio[2]), Create(caja), run_time=1)
+
+with self.voiceover(text=tr("""En este ejemplo, <bookmark mark='e'/> el vector por dos es lo mismo que dos por el vector.""",
+                            """In this example, <bookmark mark='e'/> the vector times two is the same as two times the vector.""")) as tracker:
+    self.wait_until_bookmark("e")
+    self.play(FadeIn(ejemplo[0:2]), run_time=0.6)
+    self.play(FadeIn(ejemplo[2:]), run_time=0.8)
+
+with self.voiceover(text=tr("""No es una operación nueva, sino otra manera de escribir el mismo producto. <bookmark mark='h'/> Lo habitual es escribir el escalar primero. Aquí lo escribiremos a la derecha solo cuando convenga a la notación.""",
+                            """It is not a new operation, but another way of writing the same product. <bookmark mark='h'/> The usual way is to write the scalar first. Here we will write it on the right only when it suits the notation.""")) as tracker:
+    self.wait_until_bookmark("h")
+    self.play(FadeIn(habitual), run_time=0.8)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 3 - Demostración
+
+La cadena de la Sección 1.4.4, $\elemLp{\Vect{b}\lambda}{i}=\elemLp{\lambda\Vect{b}}{i}=
+\lambda\eleVLPE{b}{i}=\eleVLPE{b}{i}\lambda$, con un rótulo por paso (convenio; el selector deja fuera
+al escalar; producto de dos números). Después los dos extremos se recogen en la regla y los paréntesis
+viajan: con el escalar a la derecha vuelve a bastar desplazarlos.
+
+#+name: Tercera escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Con el escalar a la derecha", "With the scalar on the right"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+# Glifos: i | ( b λ ) (0-5);  = i | ( λ b ) (0-6);  = λ ( i | b ) (0-6);  = ( i | b ) λ (0-6)
+cadena = [MathTex(f, tex_template=myTemplate, font_size=48) for f in
+          (IZQ_VEC2[0], "=" + IZQ_VEC[0], "=" + IZQ_VEC[1], "=" + IZQ_VEC2[1])]
+for k, l in enumerate(cadena):
+    l.move_to([0, 1.7 - 0.95*k, 0]).align_to([-3.6 + (0.7 if k else 0), 0, 0], LEFT)
+rotulos = [rotulo(t, l, 0.6) for t, l in zip([tr("el convenio", "the convention"),
+                                              tr("el selector deja fuera al escalar", "the selector leaves the scalar outside"),
+                                              tr("producto de dos números", "product of two numbers")], cadena[1:])]
+final = regla(IZQ_VEC2, 52).move_to([0, -2.6, 0])
+
+with self.voiceover(text=tr("""Vamos a demostrar que funciona. <bookmark mark='l0'/> Seleccionamos por la izquierda una componente del producto, escrito con el escalar a la derecha.""",
+                            """Let us prove that it works. <bookmark mark='l0'/> We select, on the left, a component of the product, written with the scalar on the right.""")) as tracker:
+    self.play(Write(cabecera), run_time=1)
+    self.wait_until_bookmark("l0")
+    self.play(Write(cadena[0]), run_time=1)
+
+with self.voiceover(text=tr("""Por el convenio, <bookmark mark='x'/> podemos escribir el escalar a la izquierda.""",
+                            """By the convention, <bookmark mark='x'/> we can write the scalar on the left.""")) as tracker:
+    # el vector y el escalar se cruzan dentro de los paréntesis
+    nace(self, cadena[0][0], cadena[1][0], [(0, 1), (1, 2), (2, 3), (5, 6)], [(3, 5), (4, 4)], extra=[FadeIn(rotulos[0])], marca="x")
+    entera(self, cadena[1])
+
+with self.voiceover(text=tr("""El selector actúa igual por los dos lados del vector, así que <bookmark mark='x'/> también deja fuera al escalar.""",
+                            """The selector acts in the same way on both sides of the vector, so <bookmark mark='x'/> it also leaves the scalar outside.""")) as tracker:
+    nace(self, cadena[1][0], cadena[2][0], [(5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4), (3, 2)], extra=[FadeIn(rotulos[1])], marca="x")
+    entera(self, cadena[2])
+
+with self.voiceover(text=tr("""Lo que queda es un producto de dos números, así que <bookmark mark='x'/> podemos cambiarlos de orden.""",
+                            """What remains is a product of two numbers, so <bookmark mark='x'/> we can change their order.""")) as tracker:
+    nace(self, cadena[2][0], cadena[3][0], [(2, 1), (3, 2), (4, 3), (5, 4), (6, 5)], [(1, 6)], extra=[FadeIn(rotulos[2])], marca="x")
+    entera(self, cadena[3])
+
+self.pausa_corta()
+
+with self.voiceover(text=tr("""Reunamos los dos extremos de la cadena. <bookmark mark='p'/> Con el escalar a la derecha, vuelve a bastar con desplazar los paréntesis.""",
+                            """Let us put the two ends of the chain together. <bookmark mark='p'/> With the scalar on the right, moving the parentheses is enough again.""")) as tracker:
+    self.play(TransformFromCopy(cadena[0][0], final[0]), FadeIn(final[1]), TransformFromCopy(cadena[3][0][1:], final[2]), run_time=1.2)
+    self.wait_until_bookmark("p")
+    # glifos: i | ( b λ ) (0-5)  ->  ( i | b ) λ (0-5)
+    parentesis = [final[0][2], final[0][5], final[2][0], final[2][4]]
+    resalta(self, parentesis, factor=1.25)
+    viaje(self, final, [1, 2, 0, 3, 5, 4])
+    apaga(self, parentesis, factor=1.25)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 4 - Lo mismo con matrices
+
+Definición 1.21 del libro, $\Mat{A}\lambda=\lambda\Mat{A}$, y sus tres consecuencias (Sección 1.6): con
+el selector de filas basta desplazar los paréntesis; con el de columnas y con la transposición, el
+escalar puede quedarse a la derecha. No se repiten las cadenas («con los mismos pasos»).
+
+#+name: Cuarta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Lo mismo con matrices", "The same with matrices"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+convenio = MathTex(r"\Mat{A}\lambda", "=", r"\lambda\Mat{A}", tex_template=myTemplate, font_size=56).move_to([0, 1.9, 0])
+caja = SurroundingRectangle(convenio, color=COLOR_ESCALAR, buff=0.22, corner_radius=0.15, stroke_width=3)
+filas = regla(FIL_MAT).move_to([0, 0.2, 0])
+tras = regla(TRA_MAT).move_to([0, -1.5, 0])
+r_filas = Tex(tr("filas: basta desplazar los paréntesis", "rows: moving the parentheses is enough"), font_size=28, color=GRAY_B).next_to(filas, DOWN, buff=0.3)
+r_tras = Tex(tr("transposición: el escalar se queda a la derecha", "transposition: the scalar stays on the right"), font_size=28, color=GRAY_B).next_to(tras, DOWN, buff=0.3)
+
+with self.voiceover(text=tr("""Con las matrices adoptamos el mismo convenio: <bookmark mark='c'/> una matriz con el escalar a la derecha significa, por definición, lo mismo que con el escalar a la izquierda.""",
+                            """With matrices we adopt the same convention: <bookmark mark='c'/> a matrix with the scalar on the right means, by definition, the same as with the scalar on the left.""")) as tracker:
+    self.play(Write(cabecera), run_time=1)
+    self.wait_until_bookmark("c")
+    self.play(FadeIn(convenio), Create(caja), run_time=1)
+
+with self.voiceover(text=tr("""Así, con el selector de filas, que actúa por la izquierda, <bookmark mark='p'/> también basta con desplazar los paréntesis. Se demuestra con los mismos pasos.""",
+                            """So with the row selector, which acts on the left, <bookmark mark='p'/> moving the parentheses is enough too. It is proved with the same steps.""")) as tracker:
+    self.play(FadeIn(filas), run_time=0.8)
+    self.wait_until_bookmark("p")
+    # glifos: i | ( A λ ) (0-5)  ->  ( i | A ) λ (0-5)
+    parentesis = [filas[0][2], filas[0][5], filas[2][0], filas[2][4]]
+    resalta(self, parentesis, factor=1.25)
+    viaje(self, filas, [1, 2, 0, 3, 5, 4])
+    apaga(self, parentesis, factor=1.25)
+    self.play(FadeIn(r_filas), run_time=0.5)
+
+with self.voiceover(text=tr("""Y al transponer, <bookmark mark='t'/> el escalar puede quedarse a la derecha.""",
+                            """And when we transpose, <bookmark mark='t'/> the scalar can stay on the right.""")) as tracker:
+    self.wait_until_bookmark("t")
+    self.play(FadeIn(tras), FadeIn(r_tras), run_time=1)
+
+self.pausa_media()
+#+END_SRC
+
+*** Escena 5 - Resumen
+
+Las reglas de reescritura del recuadro de la Sección 1.6 y su consecuencia: la notación es asociativa,
+así que los paréntesis se pueden omitir (en las demostraciones se siguen escribiendo). Cierra la
+lección 1 (provisional: depende del plan de Marcos para lo que siga).
+
+#+name: Quinta escena
+#+BEGIN_SRC python :eval no
+self.creditos()
+cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+convenios = MathTex(r"\Vect{b}\lambda=\lambda\Vect{b}\qquad\quad \Mat{A}\lambda=\lambda\Mat{A}", tex_template=myTemplate, font_size=44).move_to([0, 1.7, 0])
+reglas = MathTex(COL_MAT[0] + "=" + COL_MAT[1] + r"\qquad\quad " + FIL_MAT[0] + "=" + FIL_MAT[1], tex_template=myTemplate, font_size=44).move_to([0, 0.2, 0])
+r_reglas = Tex(tr("por los dos lados, basta desplazar los paréntesis", "on both sides, moving the parentheses is enough"), font_size=28, color=GRAY_B).next_to(reglas, DOWN, buff=0.3)
+sin = MathTex(r"\lambda\VectC{A}{j}\qquad\quad \VectF{A}{i}\lambda", tex_template=myTemplate, font_size=44).move_to([0, -1.6, 0])
+r_sin = Tex(tr("notación asociativa: los paréntesis se pueden omitir", "associative notation: the parentheses can be omitted"), font_size=28, color=GRAY_B).next_to(sin, DOWN, buff=0.3)
+
+with self.voiceover(text=tr("""Resumamos. Aceptamos escribir el escalar a la derecha de un vector o de una matriz, con el mismo significado. <bookmark mark='r'/> Así, tanto si el selector actúa por la derecha como por la izquierda, basta con desplazar los paréntesis.""",
+                            """Let us sum up. We accept writing the scalar on the right of a vector or a matrix, with the same meaning. <bookmark mark='r'/> So whether the selector acts on the right or on the left, moving the parentheses is enough.""")) as tracker:
+    self.play(Write(cabecera), FadeIn(convenios), run_time=1)
+    self.wait_until_bookmark("r")
+    self.play(FadeIn(reglas), FadeIn(r_reglas), run_time=0.8)
+
+with self.voiceover(text=tr("""Como el resultado no depende de la colocación de los paréntesis, <bookmark mark='o'/> muchas veces podremos omitirlos. En las demostraciones los seguiremos escribiendo, para ver qué regla se aplica en cada paso.""",
+                            """Since the result does not depend on where the parentheses are, <bookmark mark='o'/> we will often be able to omit them. In proofs we will keep writing them, to see which rule is applied at each step.""")) as tracker:
+    self.wait_until_bookmark("o")
+    self.play(FadeIn(sin), FadeIn(r_sin), run_time=0.8)
+
+with self.voiceover(text=tr("""Con este vídeo termina la primera lección del curso.""",
+                            """This video ends the first lesson of the course.""")) as tracker:
+    pass
+
+self.pausa_media()
+#+END_SRC
+
+
+* Trozos comunes de código
+
+Viven en =Comunes.org=, que se tangle a =lib/vm2comun.py= (y a
+=../videoMath2/lib/vm2comun.py=): carga de librerías, =LANG= y =tr()=,
+voces de Azure, código de colores, =myTemplate=, =MiEscenaConVoz= (con
+=voiceover=, =anuncia_regla=/=destaca_regla=, créditos, tarjeta de
+pausa), la pantalla de créditos, Omega y los vectores de $\mathbb{R}^2$
+y $\mathbb{R}^3$. Si =vm2comun.py= no existe o está anticuado, tangle
+primero =Comunes.org=.
+
+* Rodando: 1,2,3\dots ¡acción!
+
+# +call: rodando(fichero="L01_V15_EscalarALaDerecha", escena="1", idioma="es", voz="gtts")
+# +call: rodando(fichero="L01_V15_ScalarOnTheRight", escena="1", idioma="en", voz="gtts")
+
+# +call: rodandoHD(fichero="L01_V15_EscalarALaDerecha", escena="a", idioma="es")
+# +call: rodandoHD(fichero="L01_V15_ScalarOnTheRight", escena="a", idioma="en")
+
+# +call: montaje(fichero="L01_V15_EscalarALaDerecha", escenas="L01_V15_E00_Portada L01_V15_E01_Problema L01_V15_E02_Convenio L01_V15_E03_Comprobacion L01_V15_E04_Matrices L01_V15_E05_Resumen ZCreditosFinales", cierre="L01_V15_E05_Resumen", video="L01_V15_EscalarALaDerecha", idioma="es")
+# +call: montaje(fichero="L01_V15_ScalarOnTheRight", escenas="L01_V15_E00_Portada L01_V15_E01_Problema L01_V15_E02_Convenio L01_V15_E03_Comprobacion L01_V15_E04_Matrices L01_V15_E05_Resumen ZCreditosFinales", cierre="L01_V15_E05_Resumen", video="L01_V15_ScalarOnTheRight", idioma="en")
+
+# +call: guion(fichero="L01_V15_EscalarALaDerecha", idioma="es")
+# +call: guion(fichero="L01_V15_EscalarALaDerecha", idioma="en")
+
+** Generamos un fichero ~mpeg~ por cada escena
+
+#+name: rodando
+#+BEGIN_SRC bash :var fichero="L01_V15_EscalarALaDerecha" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -pql $fichero.py --disable_caching
+#+END_SRC
+
+#+name: rodandoHD
+#+BEGIN_SRC bash :var fichero="L01_V15_EscalarALaDerecha" :var escena="1" :var idioma="es" :var voz="azure" :results silent
+[ "$idioma" = "en" ] && cd ../videoMath2/lib || cd lib
+echo "$escena" | VOZ=$voz ~/.venvs/manim/bin/manim -qh $fichero.py --disable_caching
+#+END_SRC
+
+** Montaje: concatenar las escenas, música de entrada y salida, subtítulos
+
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen =volumen=) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena =cierre= (bajo la voz, con
+=volumen_voz=), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con =loudnorm= en una pasada, que
+subía el volumen poco a poco al empezar). Los =.srt= de las escenas se desplazan y se
+funden en un único =video.srt= junto al mp4 (para subirlo a YouTube).
+
+=escenas= es la lista ordenada de clases; =cierre= la escena en la que
+vuelve la música (el resumen). El mp4 y el srt finales quedan en la raíz del repositorio del
+idioma.
+
+#+name: montaje
+#+BEGIN_SRC bash :var fichero="LXX_VYY_FileName" :var escenas="L01_V15_E00_Portada L01_V15_E01_Problema L01_V15_E02_Convenio L01_V15_E03_Comprobacion L01_V15_E04_Matrices L01_V15_E05_Resumen ZCreditosFinales" :var cierre="LXX_VYY_E05_Resumen" :var video="LXX_VYY_NombreVideo" :var idioma="es" :var calidad="1080p60" :var musica="music/3Blue1Brown-Zeta-X3.mp3" :var volumen="0.25" :var volumen_voz="0.04" :results output
+export LC_ALL=C   # decimales con punto para bc y printf
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+dir=$raiz/lib/media/videos/$fichero/$calidad
+tmp=$raiz/tmp/$video; mkdir -p $tmp; rm -f $tmp/seg_*.mp4
+
+# 1. Un segmento por escena, con audio y vídeo de la misma duración exacta
+i=0; lista=""; offsets=""; T=0; T0=""; Tc=""
+for esc in $escenas; do
+  seg=$(printf "%s/seg_%02d.mp4" $tmp $i)
+  dur=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4)
+  fps=$(ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4)
+  if ffprobe -loglevel error -select_streams a -show_entries stream=codec_type -of csv=p=0 $dir/$esc.mp4 | grep -q audio; then
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -af "aresample=48000,apad" -ac 2 -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  else
+    ffmpeg -loglevel error -y -i $dir/$esc.mp4 -f lavfi -i anullsrc=r=48000:cl=stereo -map 0:v -map 1:a -t $dur -r $fps -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $seg
+  fi
+  d=$(ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg)
+  offsets="$offsets $T"; [ "$esc" = "$cierre" ] && Tc=$T
+  printf "%2d  %-55s %8.3f s  (empieza en %8.3f)\n" $i $esc $d $T
+  T=$(bc -l <<< "$T+$d"); [ -z "$T0" ] && T0=$d; dl=$d
+  lista="$lista $seg"; i=$((i+1))
+done
+n=$i; Tl=$(bc -l <<< "$T-$dl"); [ -z "$Tc" ] && Tc=$Tl
+printf "Duración total %.3f s; música hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (créditos)\n" $T $T0 $Tc $Tl
+
+# 2. Concatenación recodificada, voz normalizada, música de entrada y salida, fundido final
+inputs=""; fc=""; k=0
+for seg in $lista; do inputs="$inputs -i $seg"; fc="$fc[$k:v][$k:a]"; k=$((k+1)); done
+# La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+# (loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB más baja.)
+ia=""; for k in $(seq 0 $((n-1))); do ia="$ia[$k:a]"; done
+I=$(ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2>&1 | awk '$1=="I:"{v=$2} END{print v}')
+ganancia=$(bc -l <<< "-16 - ($I)"); printf "Voz: %s LUFS; ganancia %.2f dB\n" $I $ganancia
+fin_m1=$(bc -l <<< "$T0+5"); tfade=$(bc -l <<< "$T-6")
+dur_m2=$(bc -l <<< "$Tl-$Tc"); ms_m2=$(printf "%.0f" $(bc -l <<< "$Tc*1000")); fade_m2=$(bc -l <<< "$dur_m2-1")
+fin_m3=$(bc -l <<< "$T-$Tc"); ms_m3=$(printf "%.0f" $(bc -l <<< "$Tl*1000"))
+ffmpeg -loglevel error -y $inputs -i $musica -i $musica -i $musica -filter_complex "
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$((n+1)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$((n+2)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]" \
+  -map "[v]" -map "[a]" -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $raiz/$video.mp4
+echo "Vídeo: $raiz/$video.mp4"
+
+# 3. Subtítulos: desplazar el srt de cada escena y fundirlos en uno
+ESCENAS="$escenas" OFFSETS="$offsets" python3 - "$dir" "$raiz/$video.srt" <<'EOF'
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) < 3 or "-->" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("-->")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --> {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subtítulos: {salida} ({k-1} entradas)")
+EOF
+#+END_SRC
+
+** Comprobar las uniones y los subtítulos
+
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime [[montaje]]) para mirar que no haya parones ni desfases.
+
+#+name: fotogramas
+#+BEGIN_SRC bash :var video="LXX_VYY_NombreVideo" :var idioma="es" :var tiempos="0 10 20" :results output
+[ "$idioma" = "en" ] && raiz=../videoMath2 || raiz=.
+mkdir -p $raiz/tmp/fotogramas
+for t in $tiempos; do
+  for dt in -0.1 0.1; do
+    ti=$(bc -l <<< "$t+$dt"); [ $(bc -l <<< "$ti < 0") = 1 ] && ti=0
+    ffmpeg -loglevel error -y -ss $ti -i $raiz/$video.mp4 -frames:v 1 $raiz/tmp/fotogramas/$(printf "%08.2f" $ti).png
+  done
+done
+ls $raiz/tmp/fotogramas
+#+END_SRC
+
+** Extraer el guion (la narración) para revisarlo
+
+Recorre el fichero de python y saca, escena por escena, los textos
+~tr(...)~ del idioma pedido: en prosa la narración (los que están dentro
+de ~self.voiceover~) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en =LANG=, lee siempre el fichero español (=./lib/=).
+
+#+name: guion
+#+BEGIN_SRC python :python python3 :var fichero="LXX_VYY_FileName" :var idioma="es" :results output
+import ast, textwrap
+
+arbol = ast.parse(open(f"lib/{fichero}.py", encoding="utf-8").read())
+idx   = 0 if idioma == "es" else 1
+
+def texto(nodo):
+    try:
+        return ast.literal_eval(nodo)
+    except Exception:
+        return ast.unparse(nodo)
+
+def es_tr(n):
+    return (isinstance(n, ast.Call) and isinstance(n.func, ast.Name)
+            and n.func.id == "tr" and len(n.args) >= 2)
+
+def es_borrado(stmt):
+    return ast.unparse(stmt).startswith("self.play(*[FadeOut(mob) for mob in self.mobjects])")
+
+# Primera clase con construct(): la del vídeo completo.
+construct = next(f for c in arbol.body if isinstance(c, ast.ClassDef)
+                 for f in c.body if isinstance(f, ast.FunctionDef) and f.name == "construct")
+
+escena, items = 0, []   # la portada es la escena 0
+def volcar():
+    global items
+    if items:
+        print(f"==== {'Escena' if idioma == 'es' else 'Scene'} {escena} ====\n")
+        for tipo, t in items:
+            if tipo == "voz":
+                print(textwrap.fill(t, 72), "\n")
+            else:
+                print(f"    [{t}]\n")
+    items = []
+
+for stmt in construct.body:
+    if es_borrado(stmt):
+        volcar(); escena += 1; continue
+    en_voz = set()
+    for n in ast.walk(stmt):
+        if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute) and n.func.attr == "voiceover":
+            en_voz |= {id(s) for s in ast.walk(n) if es_tr(s)}
+    for n in sorted((n for n in ast.walk(stmt) if es_tr(n)), key=lambda n: (n.lineno, n.col_offset)):
+        items.append(("voz" if id(n) in en_voz else "pantalla", texto(n.args[idx])))
+volcar()
+#+END_SRC
+
+** Tangle desde la terminal (sin abrir Emacs)
+
+#+BEGIN_SRC bash :results silent
+emacs --batch -l org --eval '(org-babel-tangle-file "Comunes.org")'   # solo si cambió el código común
+emacs --batch -l org --eval '(org-babel-tangle-file "L01-V15-EscalarALaDerecha.org")'
+#+END_SRC

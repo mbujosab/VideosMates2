@@ -24,7 +24,7 @@
 
 * Selección de filas, columnas y componentes - V10
 
-Cubre las Secciones 1.4.3 y 1.4.4 del libro: filas y columnas de una
+Cubre las Secciones 1.4.1 a 1.4.3 del libro (la 1.4.4, el escalar a la derecha, es de V15): filas y columnas de una
 matriz, el resumen de la notación y el selector por la izquierda de un
 vector (con el que da igual seleccionar primero la fila o la columna).
 
