@@ -52,7 +52,7 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 """
 
 [en]
-# youtube = ""   # fill in after upload
+youtube = "OqIOSLtdpyo"   # subido por la API el 2026-11-21 (sábado)
 video = "../videoMath2/L01_V12_TypesOfMatrices.mp4"
 subtitulos = "../videoMath2/L01_V12_TypesOfMatrices.srt"
 idioma = "en"
