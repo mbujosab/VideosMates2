@@ -72,3 +72,28 @@ la numeración de las secciones. Commits `b087f6a` y `e8dfdb6` del libro.
 transpuesta de un múltiplo» al enlazar la Sección 1.5.4) y la frase nueva de 1.5.3 coincide con la escena 3 de
 V14. A raíz de ella se han apuntado en `PendientesDesdeLosVideos.org` dos pendientes más, de V13-V14: la
 «cantinela» de la linealidad y el cierre de las demostraciones con «son iguales porque lo son columna a columna».
+
+---
+
+# Respuesta del libro (2026-11-20, segunda): frase de la linealidad y cierres
+
+Tratados los dos apartados anotados el 20 de noviembre en
+`PendientesDesdeLosVideos.org` (V13 y V14). Commit `60ec596` del libro.
+La numeración de secciones no cambia.
+
+- **Frase de la linealidad.** Añadida en dos sitios. Tras la definición
+  de operador lineal: «Con él da igual sumar primero y seleccionar
+  después, que seleccionar primero y sumar después; y da igual
+  multiplicar por un escalar primero y seleccionar después, que
+  seleccionar primero y multiplicar por un escalar después.» Y en el
+  recuadro final de 1.5.4, con «transponer». El recuadro de 1.5.3 no
+  cambia. El libro dice «multiplicar por un escalar», no solo
+  «multiplicar».
+- **Cierre de las demostraciones.** Los seis cierres cortos de la
+  Lección 1 dicen ahora «son iguales columna a columna; es decir, son
+  iguales» (matrices) o «son iguales componente a componente; es decir,
+  son iguales» (vectores).
+
+**Tratada (2026-11-20, sesión de los vídeos).** Leída con Marcos. Los cierres coinciden con los de V13 y V14. La
+frase de la linealidad coincide salvo un detalle que se deja así: el libro dice «multiplicar por un escalar» y V14,
+«multiplicar», porque en pantalla se señala λ justo en esa palabra y la frase más larga obligaría a dos tomas nuevas.
