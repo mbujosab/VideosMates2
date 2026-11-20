@@ -85,3 +85,9 @@ también para el libro.
   publicado el martes 17 de noviembre, adelantado por Marcos del jueves 19. Va en «Tipos de matrices» del
   Notebook 1.4. Se puede insertar en otras webs. La versión inglesa sigue prevista para el sábado 21; su id
   se anotará aquí al publicarla.
+
+## Publicado V12 en inglés (2026-11-21)
+
+- **V12 «Types of matrices | Linear algebra 1.12»**, inglés: https://youtu.be/OqIOSLtdpyo (id `OqIOSLtdpyo`),
+  publicado el sábado 21 de noviembre. Español: `zKef0mF4YHQ`. Va en «Tipos de matrices» del Notebook 1.4.
+  Se puede insertar en otras webs.
