@@ -45,3 +45,30 @@ orden de los vectores», «conmutativa» solo para el producto de números, «nu
 la identidad casi literal. No cita números de ejemplo, así que no le afecta que bajen. El párrafo de que no
 hay producto punto de tres vectores y b(Aᵀ) = Ab quedan anotados para los vídeos siguientes de la Lección 2;
 si L02-V01 incorpora el primero, lo decidirá Marcos.
+
+---
+
+# Respuesta del libro (2026-11-20): pendientes de V14-V15
+
+Tratados los tres apartados que los vídeos anotaron el 19 y el 20 de
+noviembre en `PendientesDesdeLosVideos.org` del libro. Ninguno cambia
+la numeración de las secciones. Commits `b087f6a` y `e8dfdb6` del libro.
+
+- **1.4.4, nota al pie del convenio.** Hecho: la nota dice ahora
+  `2\Vect{b}` y `\Vect{b}2`, como el texto y como el rótulo de V15.
+- **1.5.4 y 1.6, «Transpuesta de un múltiplo».** El libro queda como
+  está, con el visto bueno de Marcos: define «múltiplo» y lo usa en más
+  sitios. Los vídeos pueden seguir diciendo «producto por un escalar».
+- **1.5.3, «asociativo» con el selector de filas.** Hecho. La
+  definición de operador lineal no cambia. Tras el recuadro de 1.5.3 se
+  ha añadido: «En la segunda igualdad el escalar y el selector cambian
+  de orden, como ocurría con el selector por la izquierda de los
+  vectores (Sección 1.4.4). En la Sección 1.6 escribiremos el escalar a
+  la derecha de la matriz y entonces bastará con desplazar los
+  paréntesis.» Coincide con lo que dice V14.
+
+**Tratada (2026-11-20, sesión de los vídeos).** Leída con Marcos; nada que cambiar en los vídeos: la nota al pie de
+1.4.4 coincide con V15, «producto por un escalar» se mantiene en los vídeos (la descripción de V14 puede citar «la
+transpuesta de un múltiplo» al enlazar la Sección 1.5.4) y la frase nueva de 1.5.3 coincide con la escena 3 de
+V14. A raíz de ella se han apuntado en `PendientesDesdeLosVideos.org` dos pendientes más, de V13-V14: la
+«cantinela» de la linealidad y el cierre de las demostraciones con «son iguales porque lo son columna a columna».
