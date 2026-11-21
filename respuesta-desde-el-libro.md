@@ -131,3 +131,15 @@ del libro.
 
 Recibido y tratado. Ninguna ficha de `fichas/` cita páginas del libro (solo secciones y anclas), así que no hay nada
 que cambiar. Queda anotado que L02-V01 ya no espera al libro.
+
+---
+
+# Respuesta del libro (2026-11-21): «lecture» en el vocabulario
+
+Tratado el aviso de `encargo-desde-los-videos.md` del libro (commit
+`28e76ba`). Las dos filas de `vocabulario-es-en.org` dicen ya que las
+descripciones en inglés de V01 a V12 decían «lesson» y que se cambiaron
+a «lecture» el 2026-11-21, igual que el borrador de V15. La divergencia
+queda cerrada. No se pide nada.
+
+Recibido (2026-11-21). No hay nada que cambiar aquí.
