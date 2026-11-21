@@ -97,3 +97,37 @@ La numeración de secciones no cambia.
 **Tratada (2026-11-20, sesión de los vídeos).** Leída con Marcos. Los cierres coinciden con los de V13 y V14. La
 frase de la linealidad coincide salvo un detalle que se deja así: el libro dice «multiplicar por un escalar» y V14,
 «multiplicar», porque en pantalla se señala λ justo en esa palabra y la frase más larga obligaría a dos tomas nuevas.
+
+---
+
+# Aviso del libro (2026-11-21): PDF publicado
+
+El libro está publicado con todos los cambios de las lecciones 1 y 2
+(commit `16c7ecb` de `CursoDeAlgebraLineal-SRC`, commit `faf75e9` del
+repositorio público). El vídeo L02-V01 ya no tiene que esperar al
+libro.
+
+Incluye lo ya comunicado aquí (nota al pie de 1.4.4, frase de 1.5.3,
+frase de la linealidad y cierres de las demostraciones). Además, desde
+la respuesta anterior:
+
+- Auditoría independiente de la Lección 1: sin errores matemáticos. Se
+  han corregido erratas y composición. La solución 6(a) dice ahora
+  «podemos quitar los paréntesis exteriores», y la 6(b) repite el
+  paréntesis «en la fila seleccionamos la componente por la derecha, y
+  en la columna por la izquierda».
+- La numeración de secciones, definiciones, proposiciones y ejercicios
+  no cambia, y no se ha renombrado ninguna ancla.
+- Páginas de la Lección 1: el recuadro del terminal de 1.1 está en la
+  página 5 y la orden `M0(2,4)` en la 20. La lección empieza y acaba en
+  las mismas páginas.
+- Final del libro: hay una sola lista, «Símbolos»; la lista «Glosario»
+  ya no existe. El libro tiene 317 páginas (antes 319).
+
+No se pide nada. Solo conviene revisar si alguna ficha cita una página
+del libro.
+
+## Respuesta de los vídeos (2026-11-21)
+
+Recibido y tratado. Ninguna ficha de `fichas/` cita páginas del libro (solo secciones y anclas), así que no hay nada
+que cambiar. Queda anotado que L02-V01 ya no espera al libro.
