@@ -236,6 +236,16 @@ def relee(escena, panel, clave, nueva, anterior=None, run_time=0.8):
     panel.cuenta(clave)
 
 
+def senala_selector(escena, lineas, color=COLOR_COLUMNA, factor=1.8, espera=1.6):
+    """«Componente a componente», «columna a columna»: el selector de los dos extremos de la cadena (la barra y el
+    índice, sus dos últimos glifos) crece y cambia de color mientras la voz lo dice (auditoría 2026-11-21: el índice
+    solo, 1,5 veces, casi no se veía)."""
+    sels = [l[0][-2:] for l in lineas]
+    escena.play(*[x.animate.set_color(color).scale(factor, about_edge=LEFT) for x in sels], run_time=0.3)
+    escena.wait(espera)
+    escena.play(*[x.animate.set_color(WHITE).scale(1/factor, about_edge=LEFT) for x in sels], run_time=0.3)
+
+
 def enunciado_traducible(numero):
     """El enunciado de la propiedad, en el hueco entre los dos lados del panel (como en V06)."""
     e = traducible(versiones(PROPIEDADES_VECTORES[numero-1]), 40)
@@ -279,6 +289,8 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
         with self.voiceover(text=tr("""En este vídeo veremos la suma de matrices y el producto de una matriz por un escalar. Y descubriremos que sus propiedades ya están demostradas.""",
                                     """In this video we will look at the addition of matrices and the multiplication of a matrix by a scalar. And we will find that their properties have already been proved.""")) as tracker:
             self.play(Write(titulo), run_time=1.2)
+        
+        self.wait(1.0)   # respiro tras el arranque (auditoría 2026-11-21)
         
         with self.voiceover(text=tr("""Las columnas de una matriz <bookmark mark='k'/> son vectores, <break time="200ms"/> que ya sabemos sumar. Por eso definimos la suma de <bookmark mark='m'/> dos matrices del mismo orden columna a columna.""",
                                     """The columns of a matrix <bookmark mark='k'/> are vectors, and we already know how to add vectors. That is why we define the sum of <bookmark mark='m'/> two matrices of the same order column by column.""")) as tracker:
@@ -368,10 +380,21 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
                 self.wait(0.9)
         self.wait(0.8)
         
-        with self.voiceover(text=tr("""Esta es la definición de producto de una matriz por un escalar: <bookmark mark='d'/> cada columna del producto es el producto del escalar por la columna correspondiente. Con nuestra notación, <bookmark mark='p'/> la definición permite desplazar los paréntesis.""",
-                                    """This is the definition of the product of a matrix by a scalar: <bookmark mark='d'/> each column of the product is the scalar times the corresponding column. In our notation, <bookmark mark='p'/> the definition lets us move the parentheses.""")) as tracker:
+        with self.voiceover(text=tr("""Esta es la definición de producto de una matriz por un escalar: <bookmark mark='d'/> cada columna del producto es el producto <bookmark mark='b'/> del escalar por <bookmark mark='c'/> la columna correspondiente. Con nuestra notación, <bookmark mark='p'/> la definición permite desplazar los paréntesis.""",
+                                    """This is the definition of the product of a matrix by a scalar: <bookmark mark='d'/> each column of the product is <bookmark mark='b'/> the scalar times <bookmark mark='c'/> the corresponding column. In our notation, <bookmark mark='p'/> the definition lets us move the parentheses.""")) as tracker:
             # la definición se lee, como la de la suma, y se escribe con «Esta es» (Marcos, 2026-11-20)
             self.play(FadeOut(marcos), Write(def_prod), run_time=1.2)
+            # cada pieza se señala cuando la voz la nombra (Marcos, 2026-11-21): la columna del producto (lado izquierdo),
+            # el escalar y la columna de la matriz. glifos: ( λ A ) | j (0-5)  =  λ ( A | j ) (7-12)
+            col_prod, escalar, col_mat = def_prod[0][0:6], def_prod[0][7], def_prod[0][9:12]
+            self.wait_until_bookmark("d")
+            resalta(self, [col_prod], color=COLOR_COLUMNA, factor=1.12)
+            self.wait_until_bookmark("b")
+            self.play(col_prod.animate.set_color(WHITE).scale(1/1.12), escalar.animate.set_color(COLOR_ESCALAR).scale(1.4), run_time=0.25)
+            self.wait_until_bookmark("c")
+            self.play(escalar.animate.set_color(WHITE).scale(1/1.4), col_mat.animate.set_color(COLOR_COLUMNA).scale(1.15), run_time=0.25)
+            self.wait(1.3)
+            apaga(self, [col_mat], factor=1.15, run_time=0.25)
             self.wait_until_bookmark("p")
             resalta(self, parentesis, factor=1.25)
             # como en V10 (escena 2): los glifos de la izquierda viajan a la colocación de la derecha y vuelven, para que se
@@ -596,8 +619,8 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
         # «demostrarla» (Marcos, 2026-11-18): el antecedente es «la propiedad conmutativa». Partida en dos: la primera frase es
         # una toma nueva; el resto sale recortado de la toma anterior (tmp/parte_toma.py). La marca l1 estaba al principio del
         # resto: el paso se anima al empezar la segunda locución, sin esperar (una marca en la posición 0 se dispara al final).
-        with self.voiceover(text=tr("""Para demostrarla, <bookmark mark='l0'/> seleccionamos una componente.""",
-                                    """To prove it, <bookmark mark='l0'/> we select a component.""")) as tracker:
+        with self.voiceover(text=tr("""Para demostrarla, <bookmark mark='l0'/> seleccionamos una componente cualquiera.""",   # «cualquiera» (auditoría 2026-11-21): la conclusión ya no lo dice
+                                    """To prove it, <bookmark mark='l0'/> we select any component.""")) as tracker:
             # glifos: ( a + b ) | i (0-6);  = a | i + b | i (0-7);  = ( b + a ) | i (0-7)
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=0.9)
@@ -623,10 +646,7 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
             self.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.1), Indicate(cadena[3], color=COLOR_ESCALAR, scale_factor=1.1),
                       Indicate(enunciado, color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[3][0][-1]]   # el índice de la componente, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[3]], color=COLOR_ESCALAR)   # el selector de componentes, a los dos extremos
         
         self.pausa()
         
@@ -667,16 +687,14 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
             self.wait_until_bookmark("l3")   # los dos selectores se reúnen en uno
             paso(self, panel, "suma", cadena[2], cadena[3], [(1, 2), (4, 3), (5, 4)], [(2, 6), (3, 7), (6, 6), (7, 7)], aparecen=[1, 5])
         
+        self.wait(0.4)   # el punto entre el último paso y la conclusión (auditoría 2026-11-21)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna. La suma de matrices es conmutativa. No hemos tenido que cambiar ningún paso.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column. Matrix addition is commutative. We did not have to change a single step.""")) as tracker:
             self.wait_until_bookmark("ok")
             caja = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[3][0][-1]]   # el índice de la columna, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[3]])   # el selector de columnas, a los dos extremos
         
         self.pausa_media()
 
@@ -741,16 +759,14 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, panel, "nulo", cadena[3], cadena[4], [(1, 1)], aparecen=[2, 3], **rapido)
         
+        self.wait(0.4)   # el punto entre el último paso y la conclusión (auditoría 2026-11-21)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna. Sumar una matriz y su opuesta da una matriz nula.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column. Adding a matrix and its opposite gives a zero matrix.""")) as tracker:
             self.wait_until_bookmark("ok")
             caja = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[4][0][-1]]   # el índice de la columna, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[4]])   # el selector de columnas, a los dos extremos
         
         self.pausa()
         
@@ -796,6 +812,7 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
                                invitacion_voz=tr("Para convencerse, pause el vídeo e intente demostrar otra de las propiedades de la suma: escriba la demostración para vectores y cambie los símbolos.",
                                                  "To convince yourself, pause the video and try to prove another of the properties of addition: write down the proof for vectors and change the symbols."),
                                al_invitar=lambda: self.play(   # las que quedan son la 2 y la 3; la 1 y la 4 ya están hechas (auditoría 2026-11-19)
+                                   FadeOut(nota),   # la tarjeta la tapaba a medias (auditoría 2026-11-21)
                                    *[Create(marco(t[k], COLOR_ESCALAR)) for t in (vectores, matrices) for k in (1, 2)],
                                    *[t[k].animate.set_opacity(0.35) for t in (vectores, matrices) for k in (0, 3)], run_time=0.8))
         
@@ -810,7 +827,7 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
                     r"\Mat{A}+\Mat{B}=\Mat{B}+\Mat{A},\quad\ldots,\quad 1\Mat{A}=\Mat{A}"]
         rotulos = [tr("suma y producto por un escalar: columna a columna", "addition and scalar multiplication: column by column"),
                    tr("y por tanto, componente a componente", "and therefore, component-wise"),
-                   tr("las mismas ocho propiedades que los vectores, y se demuestran del mismo modo", "the same eight properties as vectors, proved in the same way")]
+                   tr(r"las mismas ocho propiedades que los vectores,\\ y se demuestran del mismo modo", "the same eight properties as vectors, proved in the same way")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=40), Tex(r, tex_template=myTemplate, font_size=32, color=GRAY_A)).arrange(DOWN, buff=0.18)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.45).move_to([0, 0.35, 0])
         idea = aviso("idea", tr("Las demostraciones solo usan reglas para manipular símbolos", "Proofs only use rules for manipulating symbols"), font_size=32).to_edge(DOWN, buff=0.45)
@@ -878,6 +895,8 @@ class L01_V13_E01_Suma(MiEscenaConVoz):
         with self.voiceover(text=tr("""En este vídeo veremos la suma de matrices y el producto de una matriz por un escalar. Y descubriremos que sus propiedades ya están demostradas.""",
                                     """In this video we will look at the addition of matrices and the multiplication of a matrix by a scalar. And we will find that their properties have already been proved.""")) as tracker:
             self.play(Write(titulo), run_time=1.2)
+        
+        self.wait(1.0)   # respiro tras el arranque (auditoría 2026-11-21)
         
         with self.voiceover(text=tr("""Las columnas de una matriz <bookmark mark='k'/> son vectores, <break time="200ms"/> que ya sabemos sumar. Por eso definimos la suma de <bookmark mark='m'/> dos matrices del mismo orden columna a columna.""",
                                     """The columns of a matrix <bookmark mark='k'/> are vectors, and we already know how to add vectors. That is why we define the sum of <bookmark mark='m'/> two matrices of the same order column by column.""")) as tracker:
@@ -968,10 +987,21 @@ class L01_V13_E02_Producto(MiEscenaConVoz):
                 self.wait(0.9)
         self.wait(0.8)
         
-        with self.voiceover(text=tr("""Esta es la definición de producto de una matriz por un escalar: <bookmark mark='d'/> cada columna del producto es el producto del escalar por la columna correspondiente. Con nuestra notación, <bookmark mark='p'/> la definición permite desplazar los paréntesis.""",
-                                    """This is the definition of the product of a matrix by a scalar: <bookmark mark='d'/> each column of the product is the scalar times the corresponding column. In our notation, <bookmark mark='p'/> the definition lets us move the parentheses.""")) as tracker:
+        with self.voiceover(text=tr("""Esta es la definición de producto de una matriz por un escalar: <bookmark mark='d'/> cada columna del producto es el producto <bookmark mark='b'/> del escalar por <bookmark mark='c'/> la columna correspondiente. Con nuestra notación, <bookmark mark='p'/> la definición permite desplazar los paréntesis.""",
+                                    """This is the definition of the product of a matrix by a scalar: <bookmark mark='d'/> each column of the product is <bookmark mark='b'/> the scalar times <bookmark mark='c'/> the corresponding column. In our notation, <bookmark mark='p'/> the definition lets us move the parentheses.""")) as tracker:
             # la definición se lee, como la de la suma, y se escribe con «Esta es» (Marcos, 2026-11-20)
             self.play(FadeOut(marcos), Write(def_prod), run_time=1.2)
+            # cada pieza se señala cuando la voz la nombra (Marcos, 2026-11-21): la columna del producto (lado izquierdo),
+            # el escalar y la columna de la matriz. glifos: ( λ A ) | j (0-5)  =  λ ( A | j ) (7-12)
+            col_prod, escalar, col_mat = def_prod[0][0:6], def_prod[0][7], def_prod[0][9:12]
+            self.wait_until_bookmark("d")
+            resalta(self, [col_prod], color=COLOR_COLUMNA, factor=1.12)
+            self.wait_until_bookmark("b")
+            self.play(col_prod.animate.set_color(WHITE).scale(1/1.12), escalar.animate.set_color(COLOR_ESCALAR).scale(1.4), run_time=0.25)
+            self.wait_until_bookmark("c")
+            self.play(escalar.animate.set_color(WHITE).scale(1/1.4), col_mat.animate.set_color(COLOR_COLUMNA).scale(1.15), run_time=0.25)
+            self.wait(1.3)
+            apaga(self, [col_mat], factor=1.15, run_time=0.25)
             self.wait_until_bookmark("p")
             resalta(self, parentesis, factor=1.25)
             # como en V10 (escena 2): los glifos de la izquierda viajan a la colocación de la derecha y vuelven, para que se
@@ -1200,8 +1230,8 @@ class L01_V13_E06_Conmutativa(MiEscenaConVoz):
         # «demostrarla» (Marcos, 2026-11-18): el antecedente es «la propiedad conmutativa». Partida en dos: la primera frase es
         # una toma nueva; el resto sale recortado de la toma anterior (tmp/parte_toma.py). La marca l1 estaba al principio del
         # resto: el paso se anima al empezar la segunda locución, sin esperar (una marca en la posición 0 se dispara al final).
-        with self.voiceover(text=tr("""Para demostrarla, <bookmark mark='l0'/> seleccionamos una componente.""",
-                                    """To prove it, <bookmark mark='l0'/> we select a component.""")) as tracker:
+        with self.voiceover(text=tr("""Para demostrarla, <bookmark mark='l0'/> seleccionamos una componente cualquiera.""",   # «cualquiera» (auditoría 2026-11-21): la conclusión ya no lo dice
+                                    """To prove it, <bookmark mark='l0'/> we select any component.""")) as tracker:
             # glifos: ( a + b ) | i (0-6);  = a | i + b | i (0-7);  = ( b + a ) | i (0-7)
             self.wait_until_bookmark("l0")
             self.play(Write(cadena[0]), run_time=0.9)
@@ -1227,10 +1257,7 @@ class L01_V13_E06_Conmutativa(MiEscenaConVoz):
             self.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.1), Indicate(cadena[3], color=COLOR_ESCALAR, scale_factor=1.1),
                       Indicate(enunciado, color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[3][0][-1]]   # el índice de la componente, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[3]], color=COLOR_ESCALAR)   # el selector de componentes, a los dos extremos
         
         self.pausa()
         
@@ -1271,16 +1298,14 @@ class L01_V13_E06_Conmutativa(MiEscenaConVoz):
             self.wait_until_bookmark("l3")   # los dos selectores se reúnen en uno
             paso(self, panel, "suma", cadena[2], cadena[3], [(1, 2), (4, 3), (5, 4)], [(2, 6), (3, 7), (6, 6), (7, 7)], aparecen=[1, 5])
         
+        self.wait(0.4)   # el punto entre el último paso y la conclusión (auditoría 2026-11-21)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna. La suma de matrices es conmutativa. No hemos tenido que cambiar ningún paso.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column. Matrix addition is commutative. We did not have to change a single step.""")) as tracker:
             self.wait_until_bookmark("ok")
             caja = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[3][0][-1]]   # el índice de la columna, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[3]])   # el selector de columnas, a los dos extremos
         
         self.pausa_media()
 
@@ -1346,16 +1371,14 @@ class L01_V13_E07_Opuesta(MiEscenaConVoz):
             self.wait_until_bookmark("l4")
             paso(self, panel, "nulo", cadena[3], cadena[4], [(1, 1)], aparecen=[2, 3], **rapido)
         
+        self.wait(0.4)   # el punto entre el último paso y la conclusión (auditoría 2026-11-21)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna. Sumar una matriz y su opuesta da una matriz nula.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column. Adding a matrix and its opposite gives a zero matrix.""")) as tracker:
             self.wait_until_bookmark("ok")
             caja = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
             self.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
             self.wait_until_bookmark("c")
-            indices = [cadena[0][0][-1], cadena[4][0][-1]]   # el índice de la columna, a los dos extremos
-            self.play(*[x.animate.set_color(COLOR_COLUMNA).scale(1.5) for x in indices], run_time=0.3)
-            self.wait(0.8)
-            self.play(*[x.animate.set_color(WHITE).scale(1/1.5) for x in indices], run_time=0.3)
+            senala_selector(self, [cadena[0], cadena[4]])   # el selector de columnas, a los dos extremos
         
         self.pausa()
         
@@ -1402,6 +1425,7 @@ class L01_V13_E08_OchoPropiedades(MiEscenaConVoz):
                                invitacion_voz=tr("Para convencerse, pause el vídeo e intente demostrar otra de las propiedades de la suma: escriba la demostración para vectores y cambie los símbolos.",
                                                  "To convince yourself, pause the video and try to prove another of the properties of addition: write down the proof for vectors and change the symbols."),
                                al_invitar=lambda: self.play(   # las que quedan son la 2 y la 3; la 1 y la 4 ya están hechas (auditoría 2026-11-19)
+                                   FadeOut(nota),   # la tarjeta la tapaba a medias (auditoría 2026-11-21)
                                    *[Create(marco(t[k], COLOR_ESCALAR)) for t in (vectores, matrices) for k in (1, 2)],
                                    *[t[k].animate.set_opacity(0.35) for t in (vectores, matrices) for k in (0, 3)], run_time=0.8))
         
@@ -1417,7 +1441,7 @@ class L01_V13_E09_Resumen(MiEscenaConVoz):
                     r"\Mat{A}+\Mat{B}=\Mat{B}+\Mat{A},\quad\ldots,\quad 1\Mat{A}=\Mat{A}"]
         rotulos = [tr("suma y producto por un escalar: columna a columna", "addition and scalar multiplication: column by column"),
                    tr("y por tanto, componente a componente", "and therefore, component-wise"),
-                   tr("las mismas ocho propiedades que los vectores, y se demuestran del mismo modo", "the same eight properties as vectors, proved in the same way")]
+                   tr(r"las mismas ocho propiedades que los vectores,\\ y se demuestran del mismo modo", "the same eight properties as vectors, proved in the same way")]
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=40), Tex(r, tex_template=myTemplate, font_size=32, color=GRAY_A)).arrange(DOWN, buff=0.18)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.45).move_to([0, 0.35, 0])
         idea = aviso("idea", tr("Las demostraciones solo usan reglas para manipular símbolos", "Proofs only use rules for manipulating symbols"), font_size=32).to_edge(DOWN, buff=0.45)

@@ -791,6 +791,16 @@ Al publicar un vídeo, actualizar esta tabla.
   montaje con `tmp/montaje_v15_{es,en}.sh`. Falta la fase A de `Comprobaciones.org` entera.
   **Azure 480p el 2026-11-15**: `L01_V15_EscalarALaDerecha_azure480p.mp4` (2:38) y `../videoMath2/L01_V15_ScalarOnTheRight_azure480p.mp4`
   (2:34), ya con «demostrar» en la escena 3.
+- **Segunda auditoría externa de V13, V14 y V15 (2026-11-21, `tmp/auditoria_V13_V14_V15_2.md`)**, tras la escucha de Marcos del
+  20-21; aplicada ese día lo que Marcos indicó (nota al principio de cada org). Azure 480p español rehechos: V13 6:50, V14 5:24,
+  V15 3:18. Cuatro tomas nuevas de Tristan, a la espera de su escucha (`tmp/escucha_reauditoria2/`): «...seleccionamos una
+  componente cualquiera» (V13), «Cada fila del producto es el producto del escalar por la fila correspondiente» (V14), «...así que
+  también podemos sacar el escalar» y «Por eso decimos que el selector es asociativo con el producto por un escalar» (V15). Inglés:
+  solo los `tr()`. Dos técnicas nuevas para los vídeos siguientes: (1) **una definición o un enunciado que la voz lee se señala
+  pieza a pieza** en su palabra (V13 escena 2, V14 escena 2); (2) **cuando lo que no cambia, solo, se leería como una igualdad
+  falsa** durante un preámbulo largo («= ( A )»), baja atenuado y sin el igual, y el igual aparece cuando llega lo que el paso
+  mueve (`nace(..., tenue=True)` en V14 y V15). Las marcas se injertaron sin sintetizar corrigiendo también los `text_offset`
+  de las palabras (copia de la caché anterior en `lib/media/voiceovers/cache.json.antes_reauditoria_20261121`).
 - V12 (`L01-V12-TiposDeMatrices.org`, Sección 1.4.6; inglés `L01_V12_TypesOfMatrices`; era V11 hasta el
   2026-11-03): «Tipos de
   matrices» (no «matrices especiales»: da nombre a las matrices por sus características). Reparto del

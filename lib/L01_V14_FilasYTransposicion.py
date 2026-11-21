@@ -83,7 +83,7 @@ class Panel:
                 grupo.add(VGroup(Tex(cab, font_size=22).set_color(GRAY_B), m).arrange(DOWN, aligned_edge=LEFT, buff=0.2))
             lados.append(grupo.arrange(DOWN, aligned_edge=LEFT, buff=0.42))
         lados[0].to_edge(LEFT, buff=0.4)
-        lados[1].to_edge(RIGHT, buff=1.5)   # deja sitio al contador sin tocar la firma del margen
+        lados[1].to_edge(RIGHT, buff=1.8)   # deja sitio al contador sin tocar la firma del margen (1.5 lo dejaba al ras del borde)
         for g in lados:
             g.align_to([0, y_sup, 0], UP)
         self.todo = VGroup(*lados)
@@ -164,14 +164,21 @@ def coloca_cadena(cadena, y_sup=0.45, salto=0.78, x_izq=-2.9, sangria=0.6):
 
 
 def nace(escena, origen, destino, fijos, moviles=(), aparecen=(), con_igual=True, extra=(), marca=None,
-         t_fijos=0.8, t_moviles=0.9):
+         t_fijos=0.8, t_moviles=0.9, tenue=False):
     """Una expresión nace de la anterior (CLAUDE.md, «Cada expresión nace de la anterior»). origen y destino son
     listas de glifos. Primero, mientras la voz nombra la regla, se copia lo que no cambia (fijos: parejas glifo de
     origen, glifo de destino) y aparece el igual; después (en la marca, si se da) viaja lo que el paso mueve
-    (moviles) y surge lo nuevo (aparecen). Lo que se quita no aparece. Un glifo de origen puede ir a dos sitios."""
+    (moviles) y surge lo nuevo (aparecen). Lo que se quita no aparece. Un glifo de origen puede ir a dos sitios.
+    Con tenue=True (cuando lo fijo, solo, se leería como una igualdad falsa durante un preámbulo largo), lo fijo
+    baja atenuado y sin el igual; el igual aparece y lo fijo se enciende cuando llega lo móvil."""
     cubiertos = sorted({j for _, j in fijos} | {j for _, j in moviles} | set(aparecen) | ({0} if con_igual else set()))
     assert cubiertos == list(range(len(destino))), (cubiertos, len(destino))
-    escena.play(*extra, *([FadeIn(destino[0])] if con_igual else []),
+    al_final = []
+    if tenue:
+        for _, j in fijos:
+            destino[j].set_opacity(0.35)
+        al_final = [destino[j].animate.set_opacity(1) for _, j in fijos] + ([FadeIn(destino[0])] if con_igual else [])
+    escena.play(*extra, *([FadeIn(destino[0])] if con_igual and not tenue else []),
                 *[TransformFromCopy(origen[i], destino[j]) for i, j in fijos], run_time=t_fijos)
     if marca is not None:
         escena.wait_until_bookmark(marca)
@@ -186,7 +193,7 @@ def nace(escena, origen, destino, fijos, moviles=(), aparecen=(), con_igual=True
             else:
                 vistos.add(j)
                 anims.append(TransformFromCopy(origen[i], destino[j]))
-        escena.play(*anims, *[FadeIn(destino[j]) for j in aparecen], run_time=t_moviles)
+        escena.play(*anims, *[FadeIn(destino[j]) for j in aparecen], *al_final, run_time=t_moviles)
         escena.remove(*sobran)
 
 
@@ -196,12 +203,12 @@ def entera(escena, linea):
 
 
 def paso(escena, panel, clave, origen, destino, fijos, moviles=(), aparecen=(), marca=None, t_fijos=0.8, t_moviles=0.9, t_cuenta=0.5,
-         parte=None):
+         parte=None, tenue=False):
     """Un paso de una demostración con panel, en el orden de V06: la pieza parpadea en el panel mientras se copia
     lo que no cambia, la línea se completa (en la marca, si se da) y entonces sube el contador con la campanita.
     Con clave None el paso no usa ninguna pieza del panel (poner o quitar paréntesis)."""
     nace(escena, origen[0], destino[0], fijos, moviles, aparecen, extra=panel.senala(clave, parte) if clave else [], marca=marca,
-         t_fijos=t_fijos, t_moviles=t_moviles)
+         t_fijos=t_fijos, t_moviles=t_moviles, tenue=tenue)
     entera(escena, destino)
     if clave:
         panel.cuenta(clave, run_time=t_cuenta)
@@ -302,7 +309,7 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         panel = Panel(self, [(tr("Definición de suma de matrices", "Definition of matrix addition"), "mat", COLS_SUMA)],
                             [(tr("Definición de suma de vectores", "Definition of vector addition"), "vec",   # con el selector a la derecha y a la izquierda: la cadena usa las dos formas
                               r"\elemRp{\Vect{a}+\Vect{b}}{j}&=\eleVR{a}{j}+\eleVR{b}{j}\\ \elemLp{\Vect{a}+\Vect{b}}{i}&=\eleVL{a}{i}+\eleVL{b}{i}")])
-        enunciado = MathTex(FILAS_SUMA, tex_template=myTemplate, font_size=44).move_to([0, 1.55, 0])
+        enunciado = MathTex(FILAS_SUMA, tex_template=myTemplate, font_size=44).move_to([-0.9, 1.55, 0])   # a la izquierda: a su derecha, a la misma altura, está la segunda fórmula del panel
         # Glifos: ( i | ( A + B ) ) | j (0-10);  = i | ( ( A + B ) | j ) (0-11);  = i | ( A | j + B | j ) (0-11);
         #         = i | A | j + i | B | j (0-11);  = ( i | A + i | B ) | j (0-11)
         cadena = coloca_cadena([linea(r"\elemR{\Big(\elemLp{\Mat{A}+\Mat{B}}{i}\Big)}{j}"),
@@ -319,6 +326,8 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
             self.play(Write(cabecera), run_time=0.8)
             self.wait_until_bookmark("e")
             self.play(Write(enunciado), run_time=1.2)
+        
+        self.wait(0.5)
         
         with self.voiceover(text=tr("""Las filas son vectores, y dos vectores son iguales si lo son <bookmark mark='k'/> componente a componente. Usaremos <bookmark mark='p'/> la definición de suma de matrices <bookmark mark='q'/> y la definición de suma de vectores.""",
                                     """Rows are vectors, and two vectors are equal if they are equal <bookmark mark='k'/> component by component. We will use <bookmark mark='p'/> the definition of matrix addition <bookmark mark='q'/> and the definition of vector addition.""")) as tracker:
@@ -341,6 +350,7 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
             self.wait(0.8)
             self.play(sel.animate.set_color(WHITE).scale(1/1.3), run_time=0.4)
             entera(self, cadena[0])
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Como da igual seleccionar primero la fila o la columna, <bookmark mark='x'/> podemos desplazar los paréntesis.""",
                                     """Since it does not matter whether we select the row or the column first, <bookmark mark='x'/> we can move the parentheses.""")) as tracker:
@@ -393,11 +403,27 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         
         self.wait(1.0)
         
-        with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo, y se demuestra con los mismos pasos. <bookmark mark='r'/> Cada fila del producto es el producto de la fila por el escalar.""",
-                                    """The same happens with scalar multiplication, and it is proved with the same steps. <bookmark mark='r'/> Each row of the product is the product of the row by the scalar.""")) as tracker:
-            self.play(FadeOut(VGroup(*cadena)), FadeOut(panel.todo), FadeOut(VGroup(*panel.contadores.values())), FadeOut(caja), run_time=0.8)
-            self.wait_until_bookmark("r")
-            self.play(Write(res_prod), run_time=1.2)
+        # partida en dos (auditoría 2026-11-21): la primera frase conserva su toma, recortada (tmp/parte_toma.py); la segunda es
+        # nueva: decía «el producto de la fila por el escalar» con el escalar delante en pantalla
+        with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo, y se demuestra con los mismos pasos.""",
+                                    """The same happens with scalar multiplication, and it is proved with the same steps.""")) as tracker:
+            # al retirar el panel, el enunciado vuelve al centro
+            self.play(FadeOut(VGroup(*cadena)), FadeOut(panel.todo), FadeOut(VGroup(*panel.contadores.values())), FadeOut(caja),
+                      enunciado.animate.set_x(0), run_time=0.8)
+        
+        with self.voiceover(text=tr("""Cada fila del producto es el producto <bookmark mark='e'/> del escalar por <bookmark mark='g'/> la fila correspondiente.""",
+                                    """Each row of the product is <bookmark mark='e'/> the scalar times <bookmark mark='g'/> the corresponding row.""")) as tracker:
+            # cada pieza se señala cuando la voz la nombra (Marcos, 2026-11-21): la fila del producto (lado izquierdo), el
+            # escalar y la fila de la matriz. glifos: i | ( λ A ) (0-5)  =  λ ( i | A ) (7-12)
+            fila_prod, escalar, fila_mat = res_prod[0][0:6], res_prod[0][7], res_prod[0][9:12]
+            fila_prod.set_color(COLOR_FILA)
+            self.play(FadeIn(res_prod), run_time=0.5)
+            self.wait_until_bookmark("e")
+            self.play(fila_prod.animate.set_color(WHITE), escalar.animate.set_color(COLOR_ESCALAR).scale(1.4), run_time=0.25)
+            self.wait_until_bookmark("g")
+            self.play(escalar.animate.set_color(WHITE).scale(1/1.4), fila_mat.animate.set_color(COLOR_FILA).scale(1.15), run_time=0.25)
+            self.wait(1.2)
+            apaga(self, [fila_mat], factor=1.15, run_time=0.25)
         
         self.pausa_media()
 
@@ -413,8 +439,8 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         cols, fils = columna([COLS_SUMA, COLS_PROD], -3.4), columna([FILAS_SUMA, FILAS_PROD], 3.4)
         r_cols = Tex(tr("Selector de columnas", "Column selector"), font_size=34).set_color(COLOR_COLUMNA).move_to([-3.4, 2.0, 0])
         r_fils = Tex(tr("Selector de filas", "Row selector"), font_size=34).set_color(COLOR_FILA).move_to([3.4, 2.0, 0])
-        idea = aviso("idea", tr("Operador lineal: distributivo con la suma y asociativo con el producto por escalares",
-                                "Linear operator: distributive over sums and associative with scalar multiplication"), font_size=30).to_edge(DOWN, buff=0.5)
+        idea = aviso("idea", tr(r"Operador lineal: se distribuye en las sumas\\ y es asociativo con el producto por un escalar",   # en dos líneas y con las palabras de la voz
+                                r"Linear operator: it distributes over sums\\ and is associative with scalar multiplication"), font_size=34).to_edge(DOWN, buff=0.4)
         
         def distribuye(formula, origen, destinos, color):
             """«Se distribuye» (V13): copias del selector de la izquierda viajan a cada sumando de la derecha."""
@@ -436,6 +462,8 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
             self.play(Write(cabecera), FadeIn(r_cols), FadeIn(cols), run_time=1)
             self.wait_until_bookmark("f")
             self.play(FadeIn(r_fils), FadeIn(fils), run_time=0.8)
+        
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Los dos <bookmark mark='s'/> se distribuyen en las sumas. <bookmark mark='p'/> Y los dos son asociativos con el producto por un escalar.""",
                                     """Both <bookmark mark='s'/> distribute over sums. <bookmark mark='p'/> And both are associative with scalar multiplication.""")) as tracker:
@@ -459,6 +487,8 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
                       fils[1][0][3].animate.set_color(COLOR_ESCALAR), fils[1][0][7].animate.set_color(COLOR_ESCALAR),
                       VGroup(*cols[1][0][4:6], *cols[1][0][10:12]).animate.set_color(COLOR_COLUMNA),
                       VGroup(*fils[1][0][0:2], *fils[1][0][9:11]).animate.set_color(COLOR_FILA), run_time=0.3)
+        
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Con el de columnas <bookmark mark='c'/> basta desplazar los paréntesis. Con el de filas, <bookmark mark='f'/> el escalar pasa delante del selector.""",
                                     """With the column selector <bookmark mark='c'/> it is enough to move the parentheses. With the row selector, <bookmark mark='f'/> the scalar moves in front of the selector.""")) as tracker:
@@ -558,15 +588,15 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""Este ejemplo solo lo ilustra. <bookmark mark='v'/> Vamos a demostrar que siempre da igual <bookmark mark='e1'/> sumar primero y <bookmark mark='e2'/> transponer después, que <bookmark mark='e3'/> transponer primero y <bookmark mark='e4'/> sumar después.""",
                                     """This example only illustrates it. <bookmark mark='v'/> We are going to prove that it always makes no difference whether we <bookmark mark='e1'/> add first and <bookmark mark='e2'/> transpose afterwards, or <bookmark mark='e3'/> transpose first and <bookmark mark='e4'/> add afterwards.""")) as tracker:
-            # transición a letras: la fila de abajo se escribe con letras y pasa a ser el enunciado
-            self.wait(0.5)
-            self.play(FadeOut(arriba), *[FadeTransform(n, l) for n, l in zip(abajo, letras)], run_time=1.0)
+            # transición a letras: cada matriz de la fila de abajo se funde con su nombre (fundido cruzado: FadeTransform
+            # agrandaba las letras al tamaño de las matrices) y, tras reposar un segundo, la fila pasa a ser el enunciado
+            self.play(FadeOut(arriba), *[FadeOut(n) for n in abajo], *[FadeIn(l) for l in letras], run_time=1.0)
             self.wait_until_bookmark("v")
             # cada trozo viaja a su lado del enunciado: (A+B)^T a la izquierda, A^T + B^T a la derecha
             e = enunciado[0]
             destinos = [VGroup(*e[7:9]), e[9], VGroup(*e[10:12]), e[6], VGroup(*e[0:6])]
             llegadas = [d.copy() for d in destinos]
-            self.play(FadeIn(panel.todo), *[ReplacementTransform(l, d, path_arc=PI/2) for l, d in zip(letras, llegadas)], run_time=1.4)   # los lados se cruzan por arriba y por abajo
+            self.play(*[ReplacementTransform(l, d, path_arc=PI/2) for l, d in zip(letras, llegadas)], run_time=1.4)   # los lados se cruzan por arriba y por abajo
             self.remove(*llegadas); self.add(enunciado)
             # la cantinela sobre el enunciado: la suma y la transposición, cada una en su verbo
             cantinela(self, [("e1", [e[2]], COLOR_ESCALAR), ("e2", [e[5]], COLOR_TRANSP),
@@ -574,6 +604,7 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""Para demostrarlo necesitará <bookmark mark='p'/> la definición de transpuesta, <bookmark mark='q'/> que el selector de filas es lineal, <bookmark mark='r'/> y la definición de suma de matrices.""",
                                     """To prove it you will need <bookmark mark='p'/> the definition of the transpose, <bookmark mark='q'/> the fact that the row selector is linear, <bookmark mark='r'/> and the definition of matrix addition.""")) as tracker:
+            self.play(FadeIn(panel.todo), run_time=0.6)   # el panel aparece cuando la voz lo nombra (auditoría 2026-11-21)
             for marca, clave in (("p", "def"), ("q", "filas"), ("r", "suma")):
                 self.wait_until_bookmark(marca)
                 panel.pista(clave)
@@ -672,14 +703,16 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
             self.wait_until_bookmark("l1")   # el selector cruza a la izquierda; la T y los paréntesis de fuera no aparecen
             paso(self, panel, "def", cadena[0], cadena[1], [(1, 3), (2, 4), (3, 5), (4, 6)], [(7, 2), (8, 1)], **rapido)
             self.wait_until_bookmark("l2")   # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
-            # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve)
-            paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", **rapido)
+            # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve). «( A )»
+            # baja atenuado y sin el igual, para que no se lea «= ( A )» mientras la voz dice el preámbulo (2026-11-21)
+            paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", tenue=True, **rapido)
             self.wait_until_bookmark("l3")   # el índice vuelve a la derecha, con la T y sus paréntesis
             paso(self, panel, "def", cadena[2], cadena[3], [(1, 1), (2, 2), (6, 9), (5, 4)], [(3, 8), (4, 7)], aparecen=[3, 5, 6], **rapido)
             self.wait_until_bookmark("l4")   # los paréntesis pasan a rodear el producto y dejan fuera el selector
             paso(self, panel, "prod", cadena[3], cadena[4], [(1, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 8), (8, 9)], [(2, 1), (9, 7)], marca="m4", **rapido)
             panel.suelta()
         
+        self.wait(0.4)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column.""")) as tracker:
             self.wait_until_bookmark("ok")
@@ -817,7 +850,7 @@ class L01_V14_E02_SumaPorFilas(MiEscenaConVoz):
         panel = Panel(self, [(tr("Definición de suma de matrices", "Definition of matrix addition"), "mat", COLS_SUMA)],
                             [(tr("Definición de suma de vectores", "Definition of vector addition"), "vec",   # con el selector a la derecha y a la izquierda: la cadena usa las dos formas
                               r"\elemRp{\Vect{a}+\Vect{b}}{j}&=\eleVR{a}{j}+\eleVR{b}{j}\\ \elemLp{\Vect{a}+\Vect{b}}{i}&=\eleVL{a}{i}+\eleVL{b}{i}")])
-        enunciado = MathTex(FILAS_SUMA, tex_template=myTemplate, font_size=44).move_to([0, 1.55, 0])
+        enunciado = MathTex(FILAS_SUMA, tex_template=myTemplate, font_size=44).move_to([-0.9, 1.55, 0])   # a la izquierda: a su derecha, a la misma altura, está la segunda fórmula del panel
         # Glifos: ( i | ( A + B ) ) | j (0-10);  = i | ( ( A + B ) | j ) (0-11);  = i | ( A | j + B | j ) (0-11);
         #         = i | A | j + i | B | j (0-11);  = ( i | A + i | B ) | j (0-11)
         cadena = coloca_cadena([linea(r"\elemR{\Big(\elemLp{\Mat{A}+\Mat{B}}{i}\Big)}{j}"),
@@ -834,6 +867,8 @@ class L01_V14_E02_SumaPorFilas(MiEscenaConVoz):
             self.play(Write(cabecera), run_time=0.8)
             self.wait_until_bookmark("e")
             self.play(Write(enunciado), run_time=1.2)
+        
+        self.wait(0.5)
         
         with self.voiceover(text=tr("""Las filas son vectores, y dos vectores son iguales si lo son <bookmark mark='k'/> componente a componente. Usaremos <bookmark mark='p'/> la definición de suma de matrices <bookmark mark='q'/> y la definición de suma de vectores.""",
                                     """Rows are vectors, and two vectors are equal if they are equal <bookmark mark='k'/> component by component. We will use <bookmark mark='p'/> the definition of matrix addition <bookmark mark='q'/> and the definition of vector addition.""")) as tracker:
@@ -856,6 +891,7 @@ class L01_V14_E02_SumaPorFilas(MiEscenaConVoz):
             self.wait(0.8)
             self.play(sel.animate.set_color(WHITE).scale(1/1.3), run_time=0.4)
             entera(self, cadena[0])
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Como da igual seleccionar primero la fila o la columna, <bookmark mark='x'/> podemos desplazar los paréntesis.""",
                                     """Since it does not matter whether we select the row or the column first, <bookmark mark='x'/> we can move the parentheses.""")) as tracker:
@@ -908,11 +944,27 @@ class L01_V14_E02_SumaPorFilas(MiEscenaConVoz):
         
         self.wait(1.0)
         
-        with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo, y se demuestra con los mismos pasos. <bookmark mark='r'/> Cada fila del producto es el producto de la fila por el escalar.""",
-                                    """The same happens with scalar multiplication, and it is proved with the same steps. <bookmark mark='r'/> Each row of the product is the product of the row by the scalar.""")) as tracker:
-            self.play(FadeOut(VGroup(*cadena)), FadeOut(panel.todo), FadeOut(VGroup(*panel.contadores.values())), FadeOut(caja), run_time=0.8)
-            self.wait_until_bookmark("r")
-            self.play(Write(res_prod), run_time=1.2)
+        # partida en dos (auditoría 2026-11-21): la primera frase conserva su toma, recortada (tmp/parte_toma.py); la segunda es
+        # nueva: decía «el producto de la fila por el escalar» con el escalar delante en pantalla
+        with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo, y se demuestra con los mismos pasos.""",
+                                    """The same happens with scalar multiplication, and it is proved with the same steps.""")) as tracker:
+            # al retirar el panel, el enunciado vuelve al centro
+            self.play(FadeOut(VGroup(*cadena)), FadeOut(panel.todo), FadeOut(VGroup(*panel.contadores.values())), FadeOut(caja),
+                      enunciado.animate.set_x(0), run_time=0.8)
+        
+        with self.voiceover(text=tr("""Cada fila del producto es el producto <bookmark mark='e'/> del escalar por <bookmark mark='g'/> la fila correspondiente.""",
+                                    """Each row of the product is <bookmark mark='e'/> the scalar times <bookmark mark='g'/> the corresponding row.""")) as tracker:
+            # cada pieza se señala cuando la voz la nombra (Marcos, 2026-11-21): la fila del producto (lado izquierdo), el
+            # escalar y la fila de la matriz. glifos: i | ( λ A ) (0-5)  =  λ ( i | A ) (7-12)
+            fila_prod, escalar, fila_mat = res_prod[0][0:6], res_prod[0][7], res_prod[0][9:12]
+            fila_prod.set_color(COLOR_FILA)
+            self.play(FadeIn(res_prod), run_time=0.5)
+            self.wait_until_bookmark("e")
+            self.play(fila_prod.animate.set_color(WHITE), escalar.animate.set_color(COLOR_ESCALAR).scale(1.4), run_time=0.25)
+            self.wait_until_bookmark("g")
+            self.play(escalar.animate.set_color(WHITE).scale(1/1.4), fila_mat.animate.set_color(COLOR_FILA).scale(1.15), run_time=0.25)
+            self.wait(1.2)
+            apaga(self, [fila_mat], factor=1.15, run_time=0.25)
         
         self.pausa_media()
 
@@ -929,8 +981,8 @@ class L01_V14_E03_Lineales(MiEscenaConVoz):
         cols, fils = columna([COLS_SUMA, COLS_PROD], -3.4), columna([FILAS_SUMA, FILAS_PROD], 3.4)
         r_cols = Tex(tr("Selector de columnas", "Column selector"), font_size=34).set_color(COLOR_COLUMNA).move_to([-3.4, 2.0, 0])
         r_fils = Tex(tr("Selector de filas", "Row selector"), font_size=34).set_color(COLOR_FILA).move_to([3.4, 2.0, 0])
-        idea = aviso("idea", tr("Operador lineal: distributivo con la suma y asociativo con el producto por escalares",
-                                "Linear operator: distributive over sums and associative with scalar multiplication"), font_size=30).to_edge(DOWN, buff=0.5)
+        idea = aviso("idea", tr(r"Operador lineal: se distribuye en las sumas\\ y es asociativo con el producto por un escalar",   # en dos líneas y con las palabras de la voz
+                                r"Linear operator: it distributes over sums\\ and is associative with scalar multiplication"), font_size=34).to_edge(DOWN, buff=0.4)
         
         def distribuye(formula, origen, destinos, color):
             """«Se distribuye» (V13): copias del selector de la izquierda viajan a cada sumando de la derecha."""
@@ -952,6 +1004,8 @@ class L01_V14_E03_Lineales(MiEscenaConVoz):
             self.play(Write(cabecera), FadeIn(r_cols), FadeIn(cols), run_time=1)
             self.wait_until_bookmark("f")
             self.play(FadeIn(r_fils), FadeIn(fils), run_time=0.8)
+        
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Los dos <bookmark mark='s'/> se distribuyen en las sumas. <bookmark mark='p'/> Y los dos son asociativos con el producto por un escalar.""",
                                     """Both <bookmark mark='s'/> distribute over sums. <bookmark mark='p'/> And both are associative with scalar multiplication.""")) as tracker:
@@ -975,6 +1029,8 @@ class L01_V14_E03_Lineales(MiEscenaConVoz):
                       fils[1][0][3].animate.set_color(COLOR_ESCALAR), fils[1][0][7].animate.set_color(COLOR_ESCALAR),
                       VGroup(*cols[1][0][4:6], *cols[1][0][10:12]).animate.set_color(COLOR_COLUMNA),
                       VGroup(*fils[1][0][0:2], *fils[1][0][9:11]).animate.set_color(COLOR_FILA), run_time=0.3)
+        
+        self.wait(0.4)
         
         with self.voiceover(text=tr("""Con el de columnas <bookmark mark='c'/> basta desplazar los paréntesis. Con el de filas, <bookmark mark='f'/> el escalar pasa delante del selector.""",
                                     """With the column selector <bookmark mark='c'/> it is enough to move the parentheses. With the row selector, <bookmark mark='f'/> the scalar moves in front of the selector.""")) as tracker:
@@ -1075,15 +1131,15 @@ class L01_V14_E04_TranspuestaDeLaSuma(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""Este ejemplo solo lo ilustra. <bookmark mark='v'/> Vamos a demostrar que siempre da igual <bookmark mark='e1'/> sumar primero y <bookmark mark='e2'/> transponer después, que <bookmark mark='e3'/> transponer primero y <bookmark mark='e4'/> sumar después.""",
                                     """This example only illustrates it. <bookmark mark='v'/> We are going to prove that it always makes no difference whether we <bookmark mark='e1'/> add first and <bookmark mark='e2'/> transpose afterwards, or <bookmark mark='e3'/> transpose first and <bookmark mark='e4'/> add afterwards.""")) as tracker:
-            # transición a letras: la fila de abajo se escribe con letras y pasa a ser el enunciado
-            self.wait(0.5)
-            self.play(FadeOut(arriba), *[FadeTransform(n, l) for n, l in zip(abajo, letras)], run_time=1.0)
+            # transición a letras: cada matriz de la fila de abajo se funde con su nombre (fundido cruzado: FadeTransform
+            # agrandaba las letras al tamaño de las matrices) y, tras reposar un segundo, la fila pasa a ser el enunciado
+            self.play(FadeOut(arriba), *[FadeOut(n) for n in abajo], *[FadeIn(l) for l in letras], run_time=1.0)
             self.wait_until_bookmark("v")
             # cada trozo viaja a su lado del enunciado: (A+B)^T a la izquierda, A^T + B^T a la derecha
             e = enunciado[0]
             destinos = [VGroup(*e[7:9]), e[9], VGroup(*e[10:12]), e[6], VGroup(*e[0:6])]
             llegadas = [d.copy() for d in destinos]
-            self.play(FadeIn(panel.todo), *[ReplacementTransform(l, d, path_arc=PI/2) for l, d in zip(letras, llegadas)], run_time=1.4)   # los lados se cruzan por arriba y por abajo
+            self.play(*[ReplacementTransform(l, d, path_arc=PI/2) for l, d in zip(letras, llegadas)], run_time=1.4)   # los lados se cruzan por arriba y por abajo
             self.remove(*llegadas); self.add(enunciado)
             # la cantinela sobre el enunciado: la suma y la transposición, cada una en su verbo
             cantinela(self, [("e1", [e[2]], COLOR_ESCALAR), ("e2", [e[5]], COLOR_TRANSP),
@@ -1091,6 +1147,7 @@ class L01_V14_E04_TranspuestaDeLaSuma(MiEscenaConVoz):
         
         with self.voiceover(text=tr("""Para demostrarlo necesitará <bookmark mark='p'/> la definición de transpuesta, <bookmark mark='q'/> que el selector de filas es lineal, <bookmark mark='r'/> y la definición de suma de matrices.""",
                                     """To prove it you will need <bookmark mark='p'/> the definition of the transpose, <bookmark mark='q'/> the fact that the row selector is linear, <bookmark mark='r'/> and the definition of matrix addition.""")) as tracker:
+            self.play(FadeIn(panel.todo), run_time=0.6)   # el panel aparece cuando la voz lo nombra (auditoría 2026-11-21)
             for marca, clave in (("p", "def"), ("q", "filas"), ("r", "suma")):
                 self.wait_until_bookmark(marca)
                 panel.pista(clave)
@@ -1190,14 +1247,16 @@ class L01_V14_E05_TranspuestaDelProducto(MiEscenaConVoz):
             self.wait_until_bookmark("l1")   # el selector cruza a la izquierda; la T y los paréntesis de fuera no aparecen
             paso(self, panel, "def", cadena[0], cadena[1], [(1, 3), (2, 4), (3, 5), (4, 6)], [(7, 2), (8, 1)], **rapido)
             self.wait_until_bookmark("l2")   # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
-            # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve)
-            paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", **rapido)
+            # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve). «( A )»
+            # baja atenuado y sin el igual, para que no se lea «= ( A )» mientras la voz dice el preámbulo (2026-11-21)
+            paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", tenue=True, **rapido)
             self.wait_until_bookmark("l3")   # el índice vuelve a la derecha, con la T y sus paréntesis
             paso(self, panel, "def", cadena[2], cadena[3], [(1, 1), (2, 2), (6, 9), (5, 4)], [(3, 8), (4, 7)], aparecen=[3, 5, 6], **rapido)
             self.wait_until_bookmark("l4")   # los paréntesis pasan a rodear el producto y dejan fuera el selector
             paso(self, panel, "prod", cadena[3], cadena[4], [(1, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 8), (8, 9)], [(2, 1), (9, 7)], marca="m4", **rapido)
             panel.suelta()
         
+        self.wait(0.4)
         with self.voiceover(text=tr("""Así pues, <bookmark mark='ok'/> las dos matrices son iguales, porque lo son <bookmark mark='c'/> columna a columna.""",
                                     """So <bookmark mark='ok'/> the two matrices are equal, because they are equal <bookmark mark='c'/> column by column.""")) as tracker:
             self.wait_until_bookmark("ok")
