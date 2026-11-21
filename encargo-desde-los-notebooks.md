@@ -91,3 +91,61 @@ también para el libro.
 - **V12 «Types of matrices | Linear algebra 1.12»**, inglés: https://youtu.be/OqIOSLtdpyo (id `OqIOSLtdpyo`),
   publicado el sábado 21 de noviembre. Español: `zKef0mF4YHQ`. Va en «Tipos de matrices» del Notebook 1.4.
   Se puede insertar en otras webs.
+
+## Añadido desde los Notebooks (2026-11-21): V12 leído, dónde dejar los avisos y «lesson» en las descripciones
+
+Viene de la sesión de los Notebooks, que ha repasado la Lección 1 tras
+la revisión del libro, de los vídeos y del material. Esa sesión no ha
+cambiado nada de este repositorio.
+
+1. **V12, leído.** Los identificadores `zKef0mF4YHQ` (es) y
+   `OqIOSLtdpyo` (en) están anotados. El enlace irá al principio de
+   «Tipos de matrices» del Notebook 1.4, en los dos idiomas, cuando
+   Marcos lo apruebe.
+2. **Dónde dejar los avisos de publicación.** Los dos avisos de V12 se
+   anotaron en este fichero y se confirmaron aquí. Por eso el aviso
+   automático de los Notebooks no saltó, y V12 en español ha estado
+   cuatro días sin enlazar. El fallo viene del encargo original, que
+   decía «dejar aquí la fecha y los identificadores». Petición: al
+   publicar un vídeo, añadir el aviso al final de
+   `../NAcAL-Jupyter-Notebooks-SRC/encargo-desde-los-videos.md` (se
+   crea si no existe) y no confirmarlo en git. Lo confirma la sesión de
+   los Notebooks cuando lo ha enlazado.
+3. **«lesson» en las descripciones en inglés.** Las fichas de V01 a
+   V12 dicen en la descripción inglesa «… video of the first lesson of
+   the linear algebra course». El vocabulario del libro
+   (`vocabulario-es-en.org`, línea de «Lección N») tiene decidido
+   *Lecture* y dice que ningún vídeo publicado dice «lesson». Los
+   títulos y la locución no lo dicen, pero las descripciones sí. Se
+   pueden cambiar con `actualizar --solo-metadatos`. Decide Marcos.
+4. **Sitio previsto para V13, V14 y V15 en el Notebook 1.5.** V13 al
+   principio de «Suma de matrices y producto por un escalar». V14 al
+   principio de «Operaciones fila a fila»; vale también para «La
+   transposición es un operador lineal». V15 en un apartado nuevo
+   sobre el escalar a la derecha y las reglas de reescritura de la
+   Sección 1.6, que hoy solo es un ejercicio. Si la partición de V14 y
+   V15 cambia, conviene avisarlo.
+
+5. **Añadido el mismo día, después: Notebooks publicados.** V12 ya
+   está enlazado en el Notebook 1.4 público, en los dos idiomas. La
+   Lección 2 está publicada en tres Notebooks, uno por sección:
+   `Esp/Lecc02-Secc2.1.ipynb`, `2.2` y `2.3`, y en `Eng/` los mismos
+   con `-Eng`. `Lecc02.ipynb` y `Lecc02-Eng.ipynb` ya no existen. La
+   ficha de L02-V01 puede enlazar el del 2.1 con la misma forma de
+   enlace de Binder que las de la Lección 1.
+
+## Respuesta de los vídeos (2026-11-21) al añadido de ese día
+
+Marcos aceptó los puntos 2 y 3.
+
+1. **V12**: anotado; nada que hacer aquí.
+2. **Avisos de publicación**: desde hoy se dejan al final de
+   `../NAcAL-Jupyter-Notebooks-SRC/encargo-desde-los-videos.md`, sin confirmar en git. La regla de `CLAUDE.md`
+   («Y se avisa a los Notebooks») está cambiada. El primer aviso en ese fichero es esta respuesta.
+3. **«lesson» → «lecture»**: cambiado en la descripción inglesa de las doce fichas (V01-V12, «... video of the
+   first lecture of the linear algebra course») y puesto en YouTube con `actualizar --solo-metadatos`
+   (comprobado en V12 en). También en la locución inglesa del borrador de V15 («This video ends the first
+   lecture of the course. The next one starts the second lecture...»), que no tiene toma de Ollie. Avisado el
+   libro para que ponga al día `vocabulario-es-en.org`.
+4. **Sitios de V13-V15 en el Notebook 1.5**: anotados en `CLAUDE.md`. La partición V14/V15 se mantiene; si
+   cambia, se avisa.
