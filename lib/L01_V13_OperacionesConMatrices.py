@@ -671,7 +671,7 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
         self.pausa()
         
         with self.voiceover(text=tr("""Ahora cambiemos los símbolos. <bookmark mark='m'/> Donde había vectores, ponemos matrices. <bookmark mark='c'/> Donde se seleccionaba una componente, se selecciona una columna. <bookmark mark='v'/> Y a la derecha, en lugar de las propiedades de los números, <bookmark mark='w'/> ponemos las de los vectores, que ya están demostradas: son las mismas, <bookmark mark='b'/> con las letras en negrita.""",
-                                    """Now let us change the symbols. <bookmark mark='m'/> Where there were vectors, we put matrices. <bookmark mark='c'/> Where a component was selected, a column is selected. <bookmark mark='v'/> And on the right, instead of the properties of numbers, <bookmark mark='w'/> we put those of vectors, which are already proved: they are the same, <bookmark mark='b'/> with the letters in bold.""")) as tracker:
+                                    """Now let us change the symbols. <bookmark mark='m'/> Where there were vectors, we put matrices. <bookmark mark='c'/> Where a component was selected, a column is selected. <bookmark mark='v'/> And on the right, instead of the properties of numbers, <bookmark mark='w'/> we put those of vectors, which are already proved: they are the same, <bookmark mark='b'/> with the letters in bold.<bookmark mark='v2'/>""")) as tracker:
             for k, marca in enumerate(["m", "c"], start=1):
                 self.wait_until_bookmark(marca)
                 self.play(*cambio_de_simbolos(k, panel, enunciado, cadena), run_time=1.5)
@@ -831,12 +831,11 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
         self.pausa_para_pensar(invitacion=tr("Pause el vídeo y demuestre otra propiedad de la suma.", "Pause the video and prove another property of addition."),
                                invitacion_voz=tr("Para convencerse, pause el vídeo e intente demostrar otra de las propiedades de la suma: escriba la demostración para vectores y cambie los símbolos.",
                                                  "To convince yourself, pause the video and try to prove another of the properties of addition: write down the proof for vectors and change the symbols."),
+                               segundos=0.2,   # sin pausa tras «pause el vídeo»: pasa sin más al resumen (Marcos, 2026-11-23)
                                al_invitar=lambda: self.play(   # las que quedan son la 2 y la 3; la 1 y la 4 ya están hechas (auditoría 2026-11-19)
                                    FadeOut(nota),   # la tarjeta la tapaba a medias (auditoría 2026-11-21)
                                    *[Create(marco(t[k], COLOR_ESCALAR)) for t in (vectores, matrices) for k in (1, 2)],
                                    *[t[k].animate.set_opacity(0.35) for t in (vectores, matrices) for k in (0, 3)], run_time=0.8))
-        
-        self.pausa()
 
         self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
 
@@ -1302,7 +1301,7 @@ class L01_V13_E06_Conmutativa(MiEscenaConVoz):
         self.pausa()
         
         with self.voiceover(text=tr("""Ahora cambiemos los símbolos. <bookmark mark='m'/> Donde había vectores, ponemos matrices. <bookmark mark='c'/> Donde se seleccionaba una componente, se selecciona una columna. <bookmark mark='v'/> Y a la derecha, en lugar de las propiedades de los números, <bookmark mark='w'/> ponemos las de los vectores, que ya están demostradas: son las mismas, <bookmark mark='b'/> con las letras en negrita.""",
-                                    """Now let us change the symbols. <bookmark mark='m'/> Where there were vectors, we put matrices. <bookmark mark='c'/> Where a component was selected, a column is selected. <bookmark mark='v'/> And on the right, instead of the properties of numbers, <bookmark mark='w'/> we put those of vectors, which are already proved: they are the same, <bookmark mark='b'/> with the letters in bold.""")) as tracker:
+                                    """Now let us change the symbols. <bookmark mark='m'/> Where there were vectors, we put matrices. <bookmark mark='c'/> Where a component was selected, a column is selected. <bookmark mark='v'/> And on the right, instead of the properties of numbers, <bookmark mark='w'/> we put those of vectors, which are already proved: they are the same, <bookmark mark='b'/> with the letters in bold.<bookmark mark='v2'/>""")) as tracker:
             for k, marca in enumerate(["m", "c"], start=1):
                 self.wait_until_bookmark(marca)
                 self.play(*cambio_de_simbolos(k, panel, enunciado, cadena), run_time=1.5)
@@ -1464,12 +1463,11 @@ class L01_V13_E08_OchoPropiedades(MiEscenaConVoz):
         self.pausa_para_pensar(invitacion=tr("Pause el vídeo y demuestre otra propiedad de la suma.", "Pause the video and prove another property of addition."),
                                invitacion_voz=tr("Para convencerse, pause el vídeo e intente demostrar otra de las propiedades de la suma: escriba la demostración para vectores y cambie los símbolos.",
                                                  "To convince yourself, pause the video and try to prove another of the properties of addition: write down the proof for vectors and change the symbols."),
+                               segundos=0.2,   # sin pausa tras «pause el vídeo»: pasa sin más al resumen (Marcos, 2026-11-23)
                                al_invitar=lambda: self.play(   # las que quedan son la 2 y la 3; la 1 y la 4 ya están hechas (auditoría 2026-11-19)
                                    FadeOut(nota),   # la tarjeta la tapaba a medias (auditoría 2026-11-21)
                                    *[Create(marco(t[k], COLOR_ESCALAR)) for t in (vectores, matrices) for k in (1, 2)],
                                    *[t[k].animate.set_opacity(0.35) for t in (vectores, matrices) for k in (0, 3)], run_time=0.8))
-        
-        self.pausa()
 
 
 class L01_V13_E09_Resumen(MiEscenaConVoz):

@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+<!-- 2026-11-23 lun 17:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 1 del curso - Vídeo 13: suma de matrices y producto por escalares</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 1 del curso - Vídeo 13: suma de matrices y producto por escalares</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>&Iacute;ndice</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga86380b">1. Suma de matrices y producto por escalares - V13</a>
+<ul>
+<li><a href="#org1e0d6d1">1.1. Guion (escenas)</a></li>
+<li><a href="#org37ba6f2">1.2. Ensamblado de los ficheros de python (uno por idioma)</a></li>
+<li><a href="#org23eafc9">1.3. Clases de las escenas</a></li>
+<li><a href="#org05b719b">1.4. Título del vídeo</a></li>
+<li><a href="#org2b9a6c4">1.5. Utilidades del vídeo</a></li>
+<li><a href="#org7635ea2">1.6. Código de cada escena</a>
+<ul>
+<li><a href="#orge39de40">1.6.1. Portada (escena 0)</a></li>
+<li><a href="#org34fc8da">1.6.2. Escena 1 - Arranque; suma de matrices</a></li>
+<li><a href="#org213d717">1.6.3. Escena 2 - Producto por un escalar</a></li>
+<li><a href="#org25d3239">1.6.4. Escena 3 - Componente a componente</a></li>
+<li><a href="#org8e15d69">1.6.5. Escena 4 - Matrices nulas y matriz opuesta</a></li>
+<li><a href="#orgc4c59a2">1.6.6. Escena 5 - Las mismas definiciones</a></li>
+<li><a href="#org3789286">1.6.7. Escena 6 - La conmutativa: el cambio de símbolos</a></li>
+<li><a href="#orga74d5c2">1.6.8. Escena 7 - La del opuesto, con el mismo cambio; la ventaja del álgebra</a></li>
+<li><a href="#orgc912933">1.6.9. Escena 8 - Las ocho propiedades; las otras seis, como ejercicio</a></li>
+<li><a href="#org3aee595">1.6.10. Escena 9 - Resumen y anuncio de V14</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc820de9">2. Trozos comunes de código</a></li>
+<li><a href="#org64389f2">3. Rodando: 1,2,3&hellip; ¡acción!</a>
+<ul>
+<li><a href="#orgc2f858c">3.1. Generamos un fichero <code>mpeg</code> por cada escena</a></li>
+<li><a href="#org8b3124f">3.2. Montaje: concatenar las escenas, música de entrada y salida, subtítulos</a></li>
+<li><a href="#org6db8c3c">3.3. Comprobar las uniones y los subtítulos</a></li>
+<li><a href="#org4b976eb">3.4. Extraer el guion (la narración) para revisarlo</a></li>
+<li><a href="#org76f9a92">3.5. Tangle desde la terminal (sin abrir Emacs)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga86380b" class="outline-2">
+<h2 id="orga86380b"><span class="section-number-2">1.</span> Suma de matrices y producto por escalares - V13</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Cubre las Secciones 1.5, 1.5.1 y 1.5.2 del libro, en el orden de la revisión del 2026-11-10
+(columnas ⇒ componentes ⇒ propiedades; las filas y la transposición quedan para V14).
+</p>
+
+<p>
+<b>Idea central</b> (Marcos, 2026-11-10): las definiciones de las matrices son las de los vectores con
+las letras en mayúscula, y las reglas que se aplican debajo son las de los números reales con las
+letras en negrita (las propiedades de los vectores). Las reglas de manipulación son idénticas, así
+que las demostraciones ya están hechas. Es la ventaja del álgebra: una vez traducidas las
+definiciones y las propiedades a reglas de manipulación simbólica, da igual a qué objetos se
+refieran los símbolos. El vídeo no repite las ocho demostraciones: <b>traduce en pantalla</b> dos de ellas
+(la 1, conmutativa, y la 4, la del opuesto, que usa las cuatro definiciones) cambiando los símbolos
+sobre la demostración de los vectores, y deja las otras seis como ejercicio.
+</p>
+
+<p>
+Decisiones:
+</p>
+<ul class="org-ul">
+<li>La matriz opuesta se define por columnas, \(\elemRp{-\Mat{A}}{j}=-\VectCpE{A}{j}\), en paralelo con
+el vector opuesto (el libro la definía como \((-1)\Mat{A}\); apuntado en
+<code>PendientesDesdeLosVideos.org</code>). Así las cuatro definiciones se traducen símbolo a símbolo.</li>
+<li>No se usa «múltiplo» (no hace falta en este vídeo).</li>
+<li>\(\R[m\times n]\) como \(\R[mn]\) (apilar columnas) queda para X02: es otro argumento para lo mismo y
+compite con la idea central.</li>
+<li>El cambio de símbolos se hace en tres etapas, cada una en su palabra: vectores → matrices
+(minúscula → mayúscula), componente → columna (índice \(i\) → \(j\)) y números → vectores (las
+propiedades de la derecha pasan a negrita). Las fórmulas tienen los mismos glifos en las cuatro
+versiones, así que cada glifo se transforma en su correspondiente (aquí <b>sí</b> se quiere ver un
+glifo convertirse en otro).</li>
+</ul>
+
+<p>
+En inglés: "matrix addition", "scalar multiplication", "column by column", "component-wise",
+"zero matrix", "opposite matrix", "change of symbols".
+</p>
+
+<p>
+Este fichero es una <b>fuente única bilingüe</b> (véase la plantilla
+<code>LXX-VYY-NombreVideo.org</code>): genera <code>./lib/L01_V13_OperacionesConMatrices.py</code>
+(español) y <code>../videoMath2/lib/L01_V13_OperationsWithMatrices.py</code> (inglés).
+</p>
+
+<p>
+Auditoría externa del 2026-11-19 (<code>tmp/auditoria_V13.md</code>): aplicada salvo «demostramos» en la escena 6 (toma C3
+elegida por Marcos de oído) y los tramos quietos de la escena 4 y del arranque. La descripción de YouTube debe decir
+que las demostraciones de las propiedades 2 y 3 (y las ocho cadenas) están en el libro, Sección 1.5.2 (punto B1).
+Copia del org anterior en <code>tmp/L01-V13-OperacionesConMatrices.antes_auditoria.org</code>.
+</p>
+
+<p>
+<b>Conclusiones (Marcos, 2026-11-20, como en V14).</b> Las tres demostraciones acaban con el criterio de igualdad: «Así pues,
+los dos vectores (las dos matrices) son iguales, porque lo son componente a componente (columna a columna)», en vez de
+«Como esto es cierto para cualquier&#x2026;»; el índice de los extremos de la cadena se señala en «columna a columna». La
+locución de la demostración con vectores conserva su toma, recortada antes de la conclusión (<code>tmp/parte_toma.py</code>). Tres
+tomas nuevas (la de vectores, tirada 1). Azure 480p español rehecho: 6:45. Escenas 1 y 2 (Marcos, mismo día): fuera «En este ejemplo»
+(sonaba a que en otro ejemplo podría no ser así): «La primera columna de la suma es&#x2026;», «Cada columna del resultado
+es&#x2026;»; dos tomas nuevas (el recorte de las anteriores se notaba; «&#x2026;las terceras», tirada 1). Y «Las columnas de una matriz son
+vectores, que ya sabemos sumar» (antes «y los vectores ya sabemos sumarlos»), con un <code>&lt;break&gt;</code> de 200 ms en la coma:
+sin él Tristan no pausaba (0-40 ms en cinco tiradas) y la relativa sonaba especificativa. Escena 2: la definición del producto se
+lee, como la de la suma: «&#x2026;por un escalar: cada columna del producto es el producto del escalar por la columna
+correspondiente» (sin «múltiplo»); se escribe con «Esta es» (también la de la suma). Toma nueva, tirada 1 (la primera pausaba 650 ms).
+Marcos (2026-11-20): «&#x2026;porque lo son columna a columna.» quedaba en suspenso en las escenas 6 y 7 (la toma acababa en 138 y 163 Hz).
+Tiradas puestas con el mismo nombre en la caché: escena 6 la v13 (b2ec2d22, elegida de oído por Marcos entre tres; la v5 dejaba «paso» en suspenso), escena 7 la v8 (pico 137, cierra en 82 Hz).
+</p>
+
+<p>
+<b>Segunda auditoría externa (2026-11-21, <code>tmp/auditoria_V13_V14_V15_2.md</code>), aplicada por indicación de Marcos.</b> A1: la nota
+de la escena 8 se retira al salir la tarjeta de pausa (la tapaba a medias). A2: el tercer rótulo del resumen, partido a mano
+(«modo» quedaba sola). A3: respiro de 1 s tras el arranque y de 0,4 s delante de las conclusiones de las escenas 6 (relectura)
+y 7. B1: «Para demostrarla, seleccionamos una componente cualquiera» (toma nueva; con la conclusión nueva nadie decía que el
+índice es arbitrario). B2: en «columna a columna» se señala el selector entero de los dos extremos (<code>senala_selector</code>: la
+barra y el índice, 1,8 veces, 1,6 s; en amarillo con vectores, en verde con matrices). Y, a propuesta de Marcos, en la
+escena 2 la definición del producto se señala pieza a pieza mientras la voz la lee (la columna del producto, el escalar,
+la columna de la matriz), como el enunciado del producto fila a fila de V14; marcas injertadas, sin sintetizar.
+</p>
+</div>
+<div id="outline-container-org1e0d6d1" class="outline-3">
+<h3 id="org1e0d6d1"><span class="section-number-3">1.1.</span> Guion (escenas)</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Escena</th>
+<th scope="col" class="org-left">Contenido</th>
+<th scope="col" class="org-left">Pausas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">Portada</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Arranque; suma de matrices: ejemplo columna a columna y definición</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Producto por un escalar: ejemplo y definición</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">Componente a componente: se deduce de las definiciones (cadena de cuatro pasos)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Matrices nulas y matriz opuesta, por columnas</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">Las cuatro definiciones de las matrices junto a las cuatro de los vectores</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">La conmutativa: la demostración de los vectores y el cambio de símbolos</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">La del opuesto, con el mismo cambio; la ventaja del álgebra</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">Las ocho propiedades, vectores y matrices; las otras seis como ejercicio</td>
+<td class="org-left">1</td>
+</tr>
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left">Resumen y anuncio de V14</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org37ba6f2" class="outline-3">
+<h3 id="org37ba6f2"><span class="section-number-3">1.2.</span> Ensamblado de los ficheros de python (uno por idioma)</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 1 </span>Fichero de python del vídeo en español</label><pre class="src src-python" id="org6c63a1d"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "es")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 2 </span>Fichero de python del vídeo en inglés</label><pre class="src src-python" id="orgef67d04"><span style="font-weight: bold;">from</span> vm2comun <span style="font-weight: bold;">import</span> *   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">m&#243;dulo com&#250;n generado desde Comunes.org (LANG = "en")
+</span>
+&lt;&lt;T&#237;tulo <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Utilidades <span style="font-weight: bold;">del</span> v&#237;deo&gt;&gt;
+
+&lt;&lt;Clases de las escenas&gt;&gt;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org23eafc9" class="outline-3">
+<h3 id="org23eafc9"><span class="section-number-3">1.3.</span> Clases de las escenas</h3>
+<div class="outline-text-3" id="text-1-3">
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listado de programa 3 </span>Vídeo completo y escenas separadas</label><pre class="src src-python" id="orga2c3974"><span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_OperacionesConMatrices</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Primera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Segunda escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Tercera escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Cuarta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Quinta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Sexta escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;S&#233;ptima escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Octava escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        &lt;&lt;Novena escena&gt;&gt;
+
+        <span style="font-weight: bold;">self</span>.play(*[FadeOut(mob) <span style="font-weight: bold;">for</span> mob <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.mobjects])  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">borrado de todo
+</span>
+        <span style="font-weight: bold;">self</span>.creditos_finales()
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E00_Portada</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Portada&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E01_Suma</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Primera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E02_Producto</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Segunda escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E03_Componentes</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Tercera escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E04_NulaYOpuesta</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Cuarta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E05_Definiciones</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Quinta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E06_Conmutativa</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Sexta escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E07_Opuesta</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;S&#233;ptima escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E08_OchoPropiedades</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Octava escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">L01_V13_E09_Resumen</span>(MiEscenaConVoz):
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">construct</span>(<span style="font-weight: bold;">self</span>):
+        &lt;&lt;Novena escena&gt;&gt;
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ZCreditosFinales</span>(CreditosFinales):   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">manim solo renderiza clases definidas en este fichero
+</span>    <span style="font-weight: bold;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org05b719b" class="outline-3">
+<h3 id="org05b719b"><span class="section-number-3">1.4.</span> Título del vídeo</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+<pre class="src src-python" id="orgff192d9"><span style="font-weight: bold; font-style: italic;">TITULO</span> = tr(<span style="font-style: italic;">"Suma de matrices y producto por escalares"</span>, <span style="font-style: italic;">"Matrix addition and scalar multiplication"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b9a6c4" class="outline-3">
+<h3 id="org2b9a6c4"><span class="section-number-3">1.5.</span> Utilidades del vídeo</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Las definiciones y las propiedades se escriben <b>una sola vez, para vectores</b>; las de las matrices
+salen de ellas con el mismo cambio de símbolos que el vídeo enseña (<code>a_matrices</code> y \(i\to j\)). Una
+fórmula <code>traducible</code> guarda sus cuatro versiones (vectores; matrices; matrices con \(j\); y la final,
+con vectores donde había números) y <code>etapa(k, ...)</code> transforma cada una en su versión <code>k</code>, glifo a
+glifo (las cuatro versiones tienen los mismos glifos; se comprueba al construirlas).
+</p>
+
+<p>
+El <code>Panel</code> es el de V06 (definiciones a la izquierda, propiedades de la suma de números reales a la
+derecha, 28 pt), con sus contadores y la campanita: los usos se cuentan en la demostración para vectores y
+se vuelven a contar, desde cero, al releerla ya para matrices.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org6923c1e"><span style="font-weight: bold; font-style: italic;">A_EJ</span>      = [[1, 1, 9], [2, 0, 2]]       <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las dos matrices de orden 2 por 3 del ejemplo del libro (Secci&#243;n 1.5)
+</span><span style="font-weight: bold; font-style: italic;">B_EJ</span>      = [[1, 2, 3], [0, -1, 7]]
+<span style="font-weight: bold; font-style: italic;">S_EJ</span>      = [[2, 3, 12], [2, -1, 9]]     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">A + B
+</span><span style="font-weight: bold; font-style: italic;">DOSB_EJ</span>   = [[2, 4, 6], [0, -2, 14]]     <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2B
+</span><span style="font-weight: bold; font-style: italic;">MENOSB_EJ</span> = [[-1, -2, -3], [0, 1, -7]]   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">-B
+</span><span style="font-weight: bold; font-style: italic;">COLOR_COLUMNA</span> = GREEN                    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las columnas, en verde (como en V10)
+</span><span style="font-weight: bold; font-style: italic;">CAMPANITA</span> = os.path.join(os.path.dirname(os.path.abspath(__file__)), <span style="font-style: italic;">"sonidos"</span>, <span style="font-style: italic;">"campanita.wav"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">suena al subir un contador
+</span>
+<span style="font-weight: bold; font-style: italic;">PROPIEDADES_REALES</span> = [r<span style="font-style: italic;">"a+b=b+a"</span>, r<span style="font-style: italic;">"a+(b+c)=(a+b)+c"</span>, r<span style="font-style: italic;">"a+0=a"</span>, r<span style="font-style: italic;">"a+(-a)=0"</span>,
+                      r<span style="font-style: italic;">"ab=ba"</span>, r<span style="font-style: italic;">"a(b+c)=ab+ac"</span>, r<span style="font-style: italic;">"a(bc)=(ab)c"</span>, r<span style="font-style: italic;">"1a=a"</span>]
+
+<span style="font-weight: bold; font-style: italic;">PROPIEDADES_VECTORES</span> = [r<span style="font-style: italic;">"\Vect{a}+\Vect{b}=\Vect{b}+\Vect{a}"</span>,
+                        r<span style="font-style: italic;">"\Vect{a}+(\Vect{b}+\Vect{c})=(\Vect{a}+\Vect{b})+\Vect{c}"</span>,
+                        r<span style="font-style: italic;">"\Vect{a}+\Vect{0}=\Vect{a}"</span>,
+                        r<span style="font-style: italic;">"\Vect{a}+(-\Vect{a})=\Vect{0}"</span>,
+                        r<span style="font-style: italic;">"\lambda(\Vect{a}+\Vect{b})=\lambda\Vect{a}+\lambda\Vect{b}"</span>,
+                        r<span style="font-style: italic;">"(\lambda+\varphi)\Vect{a}=\lambda\Vect{a}+\varphi\Vect{a}"</span>,
+                        r<span style="font-style: italic;">"\lambda(\varphi\Vect{a})=(\lambda\varphi)\Vect{a}"</span>,
+                        r<span style="font-style: italic;">"1\Vect{a}=\Vect{a}"</span>]
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Las cuatro definiciones de los vectores: (clave, lado izquierdo, lado derecho, lado derecho final).
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">El lado derecho final solo se da cuando el cambio de s&#237;mbolos no basta: el n&#250;mero cero pasa a vector nulo.
+</span><span style="font-weight: bold; font-style: italic;">DEFINICIONES</span> = [(<span style="font-style: italic;">"suma"</span>,     r<span style="font-style: italic;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>, r<span style="font-style: italic;">"\eleVR{a}{i}+\eleVR{b}{i}"</span>, <span style="font-weight: bold; text-decoration: underline;">None</span>),
+                (<span style="font-style: italic;">"producto"</span>, r<span style="font-style: italic;">"\elemRp{\lambda\Vect{a}}{i}"</span>,   r<span style="font-style: italic;">"\lambda\eleVRpE{a}{i}"</span>,     <span style="font-weight: bold; text-decoration: underline;">None</span>),
+                (<span style="font-style: italic;">"nulo"</span>,     r<span style="font-style: italic;">"\eleVR{0}{i}"</span>,                  r<span style="font-style: italic;">"0"</span>,                         r<span style="font-style: italic;">"\Vect{0}"</span>),
+                (<span style="font-style: italic;">"opuesto"</span>,  r<span style="font-style: italic;">"\elemRp{-\Vect{a}}{i}"</span>,         r<span style="font-style: italic;">"-\eleVRpE{a}{i}"</span>,           <span style="font-weight: bold; text-decoration: underline;">None</span>)]
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">a_matrices</span>(s):
+    <span style="font-style: italic;">"""El cambio de s&#237;mbolos del v&#237;deo: cada vector pasa a ser la matriz de la misma letra en may&#250;scula."""</span>
+    <span style="font-weight: bold; font-style: italic;">s</span> = re.sub(r<span style="font-style: italic;">"\\eleVRpE\{(\w)\}"</span>, <span style="font-weight: bold;">lambda</span> m: r<span style="font-style: italic;">"\VectCpE{"</span> + m.group(1).upper() + <span style="font-style: italic;">"}"</span>, s)
+    <span style="font-weight: bold; font-style: italic;">s</span> = re.sub(r<span style="font-style: italic;">"\\eleVR\{(\w)\}"</span>,   <span style="font-weight: bold;">lambda</span> m: r<span style="font-style: italic;">"\VectC{"</span> + m.group(1).upper() + <span style="font-style: italic;">"}"</span>, s)
+    <span style="font-weight: bold; font-style: italic;">s</span> = re.sub(r<span style="font-style: italic;">"\\Vect\{(\w)\}"</span>,    <span style="font-weight: bold;">lambda</span> m: r<span style="font-style: italic;">"\Mat{"</span> + m.group(1).upper() + <span style="font-style: italic;">"}"</span>, s)
+    <span style="font-weight: bold;">return</span> s
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">a_columnas</span>(s):
+    <span style="font-weight: bold;">return</span> s.replace(<span style="font-style: italic;">"{i}"</span>, <span style="font-style: italic;">"{j}"</span>)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">versiones</span>(s, final=<span style="font-weight: bold; text-decoration: underline;">None</span>):
+    <span style="font-style: italic;">"""Las cuatro versiones de una f&#243;rmula escrita para vectores: [vectores, matrices, matrices con j, final]."""</span>
+    <span style="font-weight: bold; font-style: italic;">s2</span> = a_columnas(a_matrices(s))
+    <span style="font-weight: bold;">return</span> [s, a_matrices(s), s2, final <span style="font-weight: bold;">or</span> s2]
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">definicion_matrices</span>(clave):
+    <span style="font-style: italic;">"""(lado izquierdo, lado derecho) de la definici&#243;n para matrices."""</span>
+    <span style="font-weight: bold; font-style: italic;">_</span>, <span style="font-weight: bold; font-style: italic;">izq</span>, <span style="font-weight: bold; font-style: italic;">der</span>, <span style="font-weight: bold; font-style: italic;">fin</span> = <span style="font-weight: bold;">next</span>(d <span style="font-weight: bold;">for</span> d <span style="font-weight: bold;">in</span> DEFINICIONES <span style="font-weight: bold;">if</span> d[0] == clave)
+    <span style="font-weight: bold;">return</span> a_columnas(a_matrices(izq)), fin <span style="font-weight: bold;">or</span> a_columnas(a_matrices(der))
+
+
+<span style="font-weight: bold; font-style: italic;">DEF_MAT</span> = {clave: <span style="font-style: italic;">"="</span>.join(definicion_matrices(clave)) <span style="font-weight: bold;">for</span> clave, *_ <span style="font-weight: bold;">in</span> DEFINICIONES}
+<span style="font-weight: bold; font-style: italic;">PROPIEDADES_MATRICES</span> = [a_matrices(p) <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> PROPIEDADES_VECTORES]
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">traducible</span>(vers, font_size=36, color=WHITE):
+    <span style="font-style: italic;">"""F&#243;rmula en su primera versi&#243;n; en .etapas guarda las dem&#225;s (se colocan con coloca_etapas).
+    Cada versi&#243;n es una cadena o una tupla de cadenas (las partes de MathTex)."""</span>
+    <span style="font-weight: bold; font-style: italic;">partes</span> = [v <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(v, (<span style="font-weight: bold;">tuple</span>, <span style="font-weight: bold;">list</span>)) <span style="font-weight: bold;">else</span> (v,) <span style="font-weight: bold;">for</span> v <span style="font-weight: bold;">in</span> vers]
+    <span style="font-weight: bold; font-style: italic;">ms</span> = [MathTex(*p, tex_template=myTemplate, font_size=font_size).set_color(color) <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> partes]
+    <span style="font-weight: bold;">for</span> m <span style="font-weight: bold;">in</span> ms[1:]:   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">mismo n&#250;mero de glifos en todas las versiones: cada glifo tiene su pareja
+</span>        <span style="font-weight: bold;">assert</span> [<span style="font-weight: bold;">len</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> m] == [<span style="font-weight: bold;">len</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> ms[0]], (partes[0], [<span style="font-weight: bold;">len</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> m], [<span style="font-weight: bold;">len</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> ms[0]])
+    <span style="font-weight: bold; font-style: italic;">m</span> = ms[0]
+    m.<span style="font-weight: bold; font-style: italic;">versiones</span>, m.<span style="font-weight: bold; font-style: italic;">etapas</span>, m.<span style="font-weight: bold; font-style: italic;">color_base</span> = partes, ms, color
+    <span style="font-weight: bold;">return</span> m
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">coloca_etapas</span>(m, alinea=LEFT):
+    <span style="font-style: italic;">"""Las versiones siguientes, en el sitio de la primera (alineadas por la izquierda, o centradas)."""</span>
+    <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> m.etapas[1:]:
+        t.scale(m.height/m.etapas[0].height <span style="font-weight: bold;">if</span> m <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> m.etapas[0] <span style="font-weight: bold;">else</span> 1)
+        t.move_to(m)
+        <span style="font-weight: bold;">if</span> alinea <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+            t.align_to(m, alinea)
+    <span style="font-weight: bold;">return</span> m
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">etapa</span>(k, mobs):
+    <span style="font-style: italic;">"""Animaciones del cambio de s&#237;mbolos n&#250;mero k (solo las f&#243;rmulas que cambian en esa etapa)."""</span>
+    <span style="font-weight: bold;">return</span> [Transform(m, m.etapas[k]) <span style="font-weight: bold;">for</span> m <span style="font-weight: bold;">in</span> mobs <span style="font-weight: bold;">if</span> m.versiones[k] != m.versiones[k-1]]
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">matriz</span>(filas, color=WHITE, escala=0.8, h_buff=1.0):
+    <span style="font-weight: bold; font-style: italic;">m</span> = IntegerMatrix(filas, v_buff=0.62, h_buff=h_buff)
+    m.get_entries().set_color(color)
+    <span style="font-weight: bold;">return</span> m.scale(escala)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">columnas</span>(filas):
+    <span style="font-weight: bold;">return</span> [<span style="font-weight: bold;">list</span>(c) <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(*filas)]
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">vec</span>(col):
+    <span style="font-style: italic;">"""Un vector num&#233;rico, en vertical y entre par&#233;ntesis."""</span>
+    <span style="font-weight: bold;">return</span> r<span style="font-style: italic;">"\begin{pmatrix}"</span> + r<span style="font-style: italic;">"\\"</span>.join(<span style="font-weight: bold;">str</span>(x) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> col) + r<span style="font-style: italic;">"\end{pmatrix}"</span>
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">marco</span>(mob, color=COLOR_COLUMNA):
+    <span style="font-weight: bold;">return</span> SurroundingRectangle(mob, color=color, buff=0.12, corner_radius=0.1, stroke_width=3)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">resalta</span>(escena, mobs, color=COLOR_ESCALAR, factor=1.3, run_time=0.3):
+    <span style="font-style: italic;">"""Resaltado inmediato y sostenido (color y tama&#241;o), sin la subida lenta de Indicate."""</span>
+    escena.play(*[x.animate.set_color(color).scale(factor) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> mobs], run_time=run_time)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">apaga</span>(escena, mobs, color=WHITE, factor=1.3, run_time=0.3):
+    escena.play(*[x.animate.set_color(color).scale(1/factor) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> mobs], run_time=run_time)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">ilumina</span>(escena, nueva=<span style="font-weight: bold; text-decoration: underline;">None</span>, anterior=<span style="font-weight: bold; text-decoration: underline;">None</span>, run_time=0.25):
+    <span style="font-style: italic;">"""Se&#241;ala una l&#237;nea de la cadena mientras la voz la lee (amarillo y algo mayor); la anterior vuelve a su color."""</span>
+    <span style="font-weight: bold; font-style: italic;">anims</span> = []
+    <span style="font-weight: bold;">if</span> nueva <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+        anims.append(nueva.animate.set_color(COLOR_ESCALAR).scale(1.08, about_edge=LEFT))
+    <span style="font-weight: bold;">if</span> anterior <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+        anims.append(anterior.animate.set_color(anterior.color_base).scale(1/1.08, about_edge=LEFT))
+    escena.play(*anims, run_time=run_time)
+
+
+<span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Panel</span>:
+    <span style="font-style: italic;">"""Panel de herramientas de V06: definiciones a la izquierda y las cuatro propiedades de la suma de
+    n&#250;meros reales a la derecha. Todas sus piezas son traducibles: con el cambio de s&#237;mbolos las
+    definiciones pasan a ser las de las matrices y las propiedades, las de los vectores."""</span>
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">__init__</span>(<span style="font-weight: bold;">self</span>, escena, y_sup=2.95, font_size=28):
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">escena</span>, <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">piezas</span>, <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">usos</span>, <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">contadores</span> = escena, {}, {}, {}
+        <span style="font-weight: bold; font-style: italic;">izq</span> = VGroup(*[traducible(versiones(i + <span style="font-style: italic;">"="</span> + d, a_columnas(a_matrices(i)) + <span style="font-style: italic;">"="</span> + f <span style="font-weight: bold;">if</span> f <span style="font-weight: bold;">else</span> <span style="font-weight: bold; text-decoration: underline;">None</span>), font_size)
+                       <span style="font-weight: bold;">for</span> _, i, d, f <span style="font-weight: bold;">in</span> DEFINICIONES]).arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+        <span style="font-weight: bold;">for</span> (clave, *_), m <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(DEFINICIONES, izq):
+            <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">piezas</span>[clave] = m
+        <span style="font-weight: bold; font-style: italic;">der</span> = VGroup(*[traducible([(f<span style="font-style: italic;">"</span>{k+1}<span style="font-style: italic;">.</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">;"</span>, PROPIEDADES_REALES[k])]*3 + [(f<span style="font-style: italic;">"</span>{k+1}<span style="font-style: italic;">.</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">;"</span>, PROPIEDADES_VECTORES[k])], font_size)
+                       <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(4)]).arrange(DOWN, aligned_edge=LEFT, buff=0.22)
+        <span style="font-weight: bold;">for</span> k, m <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(der):
+            <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">piezas</span>[k+1] = m
+        <span style="font-weight: bold; font-style: italic;">cab_izq</span> = Tex(tr(<span style="font-style: italic;">"Definiciones"</span>, <span style="font-style: italic;">"Definitions"</span>), font_size=24).set_color(GRAY_B)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">cab_der</span> = Tex(tr(<span style="font-style: italic;">"N&#250;meros reales"</span>, <span style="font-style: italic;">"Real numbers"</span>), font_size=24).set_color(GRAY_B)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">izq</span> = VGroup(cab_izq, izq).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(LEFT, buff=0.35)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">der</span> = VGroup(<span style="font-weight: bold;">self</span>.cab_der, der).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(RIGHT, buff=1.0)
+        <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> (<span style="font-weight: bold;">self</span>.izq, <span style="font-weight: bold;">self</span>.der):
+            g.align_to([0, y_sup, 0], UP)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">cab_der_fin</span> = Tex(tr(<span style="font-style: italic;">"Vectores"</span>, <span style="font-style: italic;">"Vectors"</span>), font_size=24).set_color(GRAY_B).move_to(<span style="font-weight: bold;">self</span>.cab_der).align_to(<span style="font-weight: bold;">self</span>.cab_der, LEFT)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">traducibles</span> = [*izq, *der]
+        <span style="font-weight: bold;">for</span> m <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.traducibles:
+            coloca_etapas(m)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">todo</span> = VGroup(<span style="font-weight: bold;">self</span>.izq, <span style="font-weight: bold;">self</span>.der)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">senala</span>(<span style="font-weight: bold;">self</span>, clave):
+        <span style="font-weight: bold;">return</span> Indicate(<span style="font-weight: bold;">self</span>.piezas[clave], color=COLOR_RESULTADO, scale_factor=1.12)
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">cuenta</span>(<span style="font-weight: bold;">self</span>, clave, run_time=0.5):
+        <span style="font-style: italic;">"""Despu&#233;s del paso: sube el contador de usos de la pieza, con la campanita (insignia de V06). La insignia
+        se coloca a la derecha de la versi&#243;n m&#225;s ancha de la pieza, para que el cambio de s&#237;mbolos no la pise."""</span>
+        <span style="font-weight: bold; font-style: italic;">pieza</span> = <span style="font-weight: bold;">self</span>.piezas[clave]
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">usos</span>[clave] = <span style="font-weight: bold;">self</span>.usos.get(clave, 0) + 1
+        <span style="font-weight: bold; font-style: italic;">disco</span> = Circle(radius=0.17, fill_color=COLOR_TITULO, fill_opacity=1, stroke_width=0)
+        <span style="font-weight: bold; font-style: italic;">numero</span> = Tex(f<span style="font-style: italic;">"</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">textbf{{</span>{<span style="font-weight: bold;">self</span>.usos[clave]}<span style="font-style: italic;">}}"</span>, font_size=24).set_color(WHITE).move_to(disco)
+        <span style="font-weight: bold; font-style: italic;">x</span> = <span style="font-weight: bold;">max</span>(t.get_right()[0] <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> pieza.etapas)
+        <span style="font-weight: bold; font-style: italic;">nuevo</span> = VGroup(disco, numero).move_to([x + 0.3 + 0.17, pieza.get_y() + 0.1, 0])
+        <span style="font-weight: bold;">self</span>.escena.add_sound(CAMPANITA)
+        <span style="font-weight: bold;">if</span> clave <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.contadores:
+            <span style="font-weight: bold;">self</span>.escena.play(ReplacementTransform(<span style="font-weight: bold;">self</span>.contadores[clave], nuevo), run_time=run_time)
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">self</span>.escena.play(FadeIn(nuevo, scale=0.5), run_time=run_time)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">contadores</span>[clave] = nuevo
+
+    <span style="font-weight: bold;">def</span> <span style="font-weight: bold;">reinicia</span>(<span style="font-weight: bold;">self</span>, run_time=0.6):
+        <span style="font-style: italic;">"""Los contadores vuelven a cero (desaparecen): la demostraci&#243;n se va a contar otra vez, ya para matrices."""</span>
+        <span style="font-weight: bold;">self</span>.escena.play(*[FadeOut(c) <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">self</span>.contadores.values()], run_time=run_time)
+        <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">usos</span>, <span style="font-weight: bold;">self</span>.<span style="font-weight: bold; font-style: italic;">contadores</span> = {}, {}
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">linea</span>(formula, de_abajo=<span style="font-weight: bold; text-decoration: underline;">False</span>, final=<span style="font-weight: bold; text-decoration: underline;">None</span>):
+    <span style="font-style: italic;">"""Una l&#237;nea de la cadena, traducible. En teal los pasos que usan una propiedad del nivel de abajo
+    (de los n&#250;meros en la demostraci&#243;n para vectores; de los vectores en la de las matrices)."""</span>
+    <span style="font-weight: bold;">return</span> traducible(versiones(formula, final), 36, COLOR_REGLA <span style="font-weight: bold;">if</span> de_abajo <span style="font-weight: bold;">else</span> WHITE)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">coloca_cadena</span>(cadena, y_sup=0.55, salto=0.66, x_izq=-3.3, sangria=0.6):
+    <span style="font-style: italic;">"""Como en V06: la primera l&#237;nea en x_izq y las siguientes (que empiezan por '=') sangradas."""</span>
+    <span style="font-weight: bold;">for</span> k, l <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(cadena):
+        l.move_to([0, y_sup - k*salto, 0]).align_to([x_izq + (sangria <span style="font-weight: bold;">if</span> k <span style="font-weight: bold;">else</span> 0), 0, 0], LEFT)
+        coloca_etapas(l)
+    <span style="font-weight: bold;">return</span> cadena
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">nace</span>(escena, origen, destino, fijos, moviles=(), aparecen=(), con_igual=<span style="font-weight: bold; text-decoration: underline;">True</span>, extra=(), marca=<span style="font-weight: bold; text-decoration: underline;">None</span>,
+         t_fijos=0.8, t_moviles=0.9):
+    <span style="font-style: italic;">"""Una expresi&#243;n nace de la anterior (CLAUDE.md, &#171;Cada expresi&#243;n nace de la anterior&#187;). origen y destino son
+    listas de glifos. Primero, mientras la voz nombra la regla, se copia lo que no cambia (fijos: parejas glifo de
+    origen, glifo de destino) y aparece el igual; despu&#233;s (en la marca, si se da) viaja lo que el paso mueve
+    (moviles) y surge lo nuevo (aparecen). Lo que se quita no aparece. Un glifo de origen puede ir a dos sitios."""</span>
+    <span style="font-weight: bold; font-style: italic;">cubiertos</span> = <span style="font-weight: bold;">sorted</span>({j <span style="font-weight: bold;">for</span> _, j <span style="font-weight: bold;">in</span> fijos} | {j <span style="font-weight: bold;">for</span> _, j <span style="font-weight: bold;">in</span> moviles} | <span style="font-weight: bold;">set</span>(aparecen) | ({0} <span style="font-weight: bold;">if</span> con_igual <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">set</span>()))
+    <span style="font-weight: bold;">assert</span> cubiertos == <span style="font-weight: bold;">list</span>(<span style="font-weight: bold;">range</span>(<span style="font-weight: bold;">len</span>(destino))), (cubiertos, <span style="font-weight: bold;">len</span>(destino))
+    escena.play(*extra, *([FadeIn(destino[0])] <span style="font-weight: bold;">if</span> con_igual <span style="font-weight: bold;">else</span> []),
+                *[TransformFromCopy(origen[i], destino[j]) <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> fijos], run_time=t_fijos)
+    <span style="font-weight: bold;">if</span> marca <span style="font-weight: bold;">is</span> <span style="font-weight: bold;">not</span> <span style="font-weight: bold; text-decoration: underline;">None</span>:
+        escena.wait_until_bookmark(marca)
+    <span style="font-weight: bold;">if</span> moviles <span style="font-weight: bold;">or</span> aparecen:
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">si dos glifos de origen se re&#250;nen en uno de destino (factor com&#250;n), el segundo viaja como copia y se retira
+</span>        <span style="font-weight: bold; font-style: italic;">vistos</span>, <span style="font-weight: bold; font-style: italic;">anims</span>, <span style="font-weight: bold; font-style: italic;">sobran</span> = <span style="font-weight: bold;">set</span>(), [], []
+        <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> moviles:
+            <span style="font-weight: bold;">if</span> j <span style="font-weight: bold;">in</span> vistos:
+                <span style="font-weight: bold; font-style: italic;">viajero</span> = origen[i].copy()
+                sobran.append(viajero)
+                anims.append(Transform(viajero, destino[j].copy()))
+            <span style="font-weight: bold;">else</span>:
+                vistos.add(j)
+                anims.append(TransformFromCopy(origen[i], destino[j]))
+        escena.play(*anims, *[FadeIn(destino[j]) <span style="font-weight: bold;">for</span> j <span style="font-weight: bold;">in</span> aparecen], run_time=t_moviles)
+        escena.remove(*sobran)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">entera</span>(escena, linea):
+    <span style="font-style: italic;">"""Tras nacer glifo a glifo, la l&#237;nea vuelve a estar en la escena como un solo objeto."""</span>
+    escena.remove(*linea[0]); escena.add(linea)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">paso</span>(escena, panel, clave, origen, destino, fijos, moviles=(), aparecen=(), marca=<span style="font-weight: bold; text-decoration: underline;">None</span>, t_fijos=0.8, t_moviles=0.9, t_cuenta=0.5):
+    <span style="font-style: italic;">"""Un paso de una demostraci&#243;n con panel, en el orden de V06: la pieza parpadea en el panel mientras se copia
+    lo que no cambia, la l&#237;nea se completa y entonces sube el contador con la campanita."""</span>
+    nace(escena, origen[0], destino[0], fijos, moviles, aparecen, extra=[panel.senala(clave)], marca=marca,
+         t_fijos=t_fijos, t_moviles=t_moviles)
+    entera(escena, destino)
+    panel.cuenta(clave, run_time=t_cuenta)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">relee</span>(escena, panel, clave, nueva, anterior=<span style="font-weight: bold; text-decoration: underline;">None</span>, run_time=0.8):
+    <span style="font-style: italic;">"""Relectura de un paso ya traducido: la l&#237;nea se ilumina, la pieza parpadea y su contador vuelve a subir."""</span>
+    ilumina(escena, nueva, anterior)
+    escena.play(panel.senala(clave), run_time=run_time)
+    panel.cuenta(clave)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">senala_selector</span>(escena, lineas, color=COLOR_COLUMNA, factor=1.8, espera=1.6):
+    <span style="font-style: italic;">"""&#171;Componente a componente&#187;, &#171;columna a columna&#187;: el selector de los dos extremos de la cadena (la barra y el
+    &#237;ndice, sus dos &#250;ltimos glifos) crece y cambia de color mientras la voz lo dice (auditor&#237;a 2026-11-21: el &#237;ndice
+    solo, 1,5 veces, casi no se ve&#237;a)."""</span>
+    <span style="font-weight: bold; font-style: italic;">sels</span> = [l[0][-2:] <span style="font-weight: bold;">for</span> l <span style="font-weight: bold;">in</span> lineas]
+    escena.play(*[x.animate.set_color(color).scale(factor, about_edge=LEFT) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> sels], run_time=0.3)
+    escena.wait(espera)
+    escena.play(*[x.animate.set_color(WHITE).scale(1/factor, about_edge=LEFT) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> sels], run_time=0.3)
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">enunciado_traducible</span>(numero):
+    <span style="font-style: italic;">"""El enunciado de la propiedad, en el hueco entre los dos lados del panel (como en V06)."""</span>
+    <span style="font-weight: bold; font-style: italic;">e</span> = traducible(versiones(PROPIEDADES_VECTORES[numero-1]), 40)
+    <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> e.etapas:
+        t.move_to([-0.3, 2.2, 0])
+    <span style="font-weight: bold;">return</span> e
+
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">cambio_de_simbolos</span>(k, panel, enunciado, cadena):
+    <span style="font-style: italic;">"""Todas las animaciones de la etapa k del cambio de s&#237;mbolos (panel, enunciado y cadena)."""</span>
+    <span style="font-weight: bold; font-style: italic;">anims</span> = etapa(k, [*panel.traducibles, enunciado, *cadena])
+    <span style="font-weight: bold;">if</span> k == 3:
+        anims.append(Transform(panel.cab_der, panel.cab_der_fin))
+    <span style="font-weight: bold;">return</span> anims
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7635ea2" class="outline-3">
+<h3 id="org7635ea2"><span class="section-number-3">1.6.</span> Código de cada escena</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-orge39de40" class="outline-4">
+<h4 id="orge39de40"><span class="section-number-4">1.6.1.</span> Portada (escena 0)</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<div class="org-src-container">
+<pre class="src src-python" id="orgd173e5a"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">portada</span> = Tex(TITULO, tex_template=myTemplate, font_size=60).set_color(COLOR_TITULO)
+portada.scale_to_fit_width(<span style="font-weight: bold;">min</span>(portada.width, config.frame_width*0.9))
+<span style="font-weight: bold;">self</span>.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
+<span style="font-weight: bold;">self</span>.wait(4.5)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org34fc8da" class="outline-4">
+<h4 id="org34fc8da"><span class="section-number-4">1.6.2.</span> Escena 1 - Arranque; suma de matrices</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+El arranque dice qué se va a ver y adelanta la sorpresa («sus propiedades ya están demostradas»).
+Primero el ejemplo del libro (dos matrices de orden 2 por 3), sumado columna a columna: bajo las
+matrices se ve la suma de los dos vectores de cada columna (entre paréntesis: son vectores). Después
+la definición, y lo que dice con la notación: el selector de columnas se distribuye.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orge9cfcc2"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">titulo</span> = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+<span style="font-weight: bold; font-style: italic;">A</span>, <span style="font-weight: bold; font-style: italic;">B</span>, <span style="font-weight: bold; font-style: italic;">S</span> = matriz(A_EJ, COLOR_A), matriz(B_EJ, COLOR_B), matriz(S_EJ)
+<span style="font-weight: bold; font-style: italic;">mas</span>, <span style="font-weight: bold; font-style: italic;">igual</span> = MathTex(<span style="font-style: italic;">"+"</span>, font_size=48), MathTex(<span style="font-style: italic;">"="</span>, font_size=48)
+VGroup(A, mas, B, igual, S).arrange(RIGHT, buff=0.3).move_to([0, 1.25, 0])
+<span style="font-weight: bold; font-style: italic;">nombres</span> = VGroup(*[MathTex(t, tex_template=myTemplate, font_size=40).next_to(m, DOWN, buff=0.25)
+                   <span style="font-weight: bold;">for</span> t, m <span style="font-weight: bold;">in</span> ((r<span style="font-style: italic;">"\Mat{A}"</span>, A), (r<span style="font-style: italic;">"\Mat{B}"</span>, B), (r<span style="font-style: italic;">"\Mat{A}+\Mat{B}"</span>, S))])
+nombres[0].set_color(COLOR_A); nombres[1].set_color(COLOR_B)
+<span style="font-weight: bold; font-style: italic;">sumas</span> = [MathTex(vec(a), <span style="font-style: italic;">"+"</span>, vec(b), <span style="font-style: italic;">"="</span>, vec(s), tex_template=myTemplate, font_size=44).move_to([0, -1.15, 0])
+         <span style="font-weight: bold;">for</span> a, b, s <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(columnas(A_EJ), columnas(B_EJ), columnas(S_EJ))]
+<span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> sumas:
+    s[0].set_color(COLOR_A); s[2].set_color(COLOR_B)
+<span style="font-weight: bold; font-style: italic;">def_suma</span> = MathTex(DEF_MAT[<span style="font-style: italic;">"suma"</span>], tex_template=myTemplate, font_size=52).move_to([0, -2.75, 0])
+<span style="font-weight: bold; font-style: italic;">selectores</span> = [def_suma[0][5:7], def_suma[0][9:11], def_suma[0][13:15]]   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los tres &#171;|j&#187;
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En este v&#237;deo veremos la suma de matrices y el producto de una matriz por un escalar. Y descubriremos que sus propiedades ya est&#225;n demostradas."""</span>,
+                            <span style="font-style: italic;">"""In this video we will look at the addition of matrices and the multiplication of a matrix by a scalar. And we will find that their properties have already been proved."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(titulo), run_time=1.2)
+
+<span style="font-weight: bold;">self</span>.wait(1.0)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">respiro tras el arranque (auditor&#237;a 2026-11-21)
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Las columnas de una matriz &lt;bookmark mark='k'/&gt; son vectores, &lt;break time="200ms"/&gt; que ya sabemos sumar. Por eso definimos la suma de &lt;bookmark mark='m'/&gt; dos matrices del mismo orden columna a columna."""</span>,
+                            <span style="font-style: italic;">"""The columns of a matrix &lt;bookmark mark='k'/&gt; are vectors, and we already know how to add vectors. That is why we define the sum of &lt;bookmark mark='m'/&gt; two matrices of the same order column by column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las dos matrices del ejemplo se ven desde que la voz habla de columnas; el signo de sumar, al decir &#171;sumar&#187;
+</span>    <span style="font-weight: bold;">self</span>.play(FadeIn(A), FadeIn(B), FadeIn(nombres[0]), FadeIn(nombres[1]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"k"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una columna enmarcada, la misma que despu&#233;s (auditor&#237;a 2026-11-19)
+</span>    <span style="font-weight: bold; font-style: italic;">col_k</span> = marco(A.get_columns()[0])
+    <span style="font-weight: bold;">self</span>.play(Create(col_k), run_time=0.4)
+    <span style="font-weight: bold;">self</span>.wait(0.8)
+    <span style="font-weight: bold;">self</span>.play(FadeOut(col_k), run_time=0.3)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"m"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(mas), run_time=0.6)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el prop&#243;sito, dicho (Marcos, 2026-11-21: el &#171;por eso&#187; lo dejaba impl&#237;cito); locuci&#243;n aparte para conservar la toma
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">anterior. Las columnas de las dos matrices se enmarcan mientras la voz lo dice: son los vectores que se aprovechan
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""As&#237; aprovechamos todo lo que ya hemos aprendido sobre los vectores."""</span>,
+                            <span style="font-style: italic;">"""This way we reuse everything we have learned about vectors."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;">cols</span> = VGroup(*[marco(c) <span style="font-weight: bold;">for</span> M <span style="font-weight: bold;">in</span> (A, B) <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> M.get_columns()])
+    <span style="font-weight: bold;">self</span>.play(Create(cols, lag_ratio=0.15), run_time=1.2)
+    <span style="font-weight: bold;">self</span>.wait(<span style="font-weight: bold;">max</span>(tracker.duration - 1.6, 0.1))
+    <span style="font-weight: bold;">self</span>.play(FadeOut(cols), run_time=0.4)
+
+<span style="font-weight: bold;">self</span>.wait(0.6)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""La primera columna de la suma es la suma de las primeras columnas, &lt;bookmark mark='c2'/&gt; la segunda es la suma de las segundas, &lt;bookmark mark='c3'/&gt; y la tercera, la suma de las terceras."""</span>,
+                            <span style="font-style: italic;">"""The first column of the sum is the sum of the first columns, &lt;bookmark mark='c2'/&gt; the second is the sum of the second columns, &lt;bookmark mark='c3'/&gt; and the third, the sum of the third columns."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(igual), FadeIn(S.get_brackets()), FadeIn(nombres[2]), run_time=0.6)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin &#171;En este ejemplo&#187; (Marcos, 2026-11-20: sonaba a que en otro ejemplo podr&#237;a no ser as&#237;); la toma es la
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">nueva (el recorte se notaba) y la primera columna se se&#241;ala al empezar la frase
+</span>    <span style="font-weight: bold;">for</span> k, marca <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>([<span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-style: italic;">"c2"</span>, <span style="font-style: italic;">"c3"</span>]):
+        <span style="font-weight: bold;">if</span> marca:
+            <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold; font-style: italic;">nuevos</span> = VGroup(marco(A.get_columns()[k]), marco(B.get_columns()[k]))
+        <span style="font-weight: bold;">if</span> k == 0:
+            <span style="font-weight: bold; font-style: italic;">marcos</span> = nuevos
+            <span style="font-weight: bold;">self</span>.play(Create(marcos), FadeIn(sumas[0]), run_time=0.6)
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">self</span>.play(Transform(marcos, nuevos), FadeOut(sumas[k-1]), FadeIn(sumas[k]), run_time=0.6)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(S.get_columns()[k]), run_time=0.5)
+
+<span style="font-weight: bold;">self</span>.wait(1.0)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Esta es la definici&#243;n de suma de matrices: &lt;bookmark mark='d'/&gt; cada columna de la suma es la suma de &lt;bookmark mark='c'/&gt; las columnas correspondientes. Con nuestra notaci&#243;n, &lt;bookmark mark='s'/&gt; el selector de columnas &lt;bookmark mark='v'/&gt; se distribuye entre los sumandos."""</span>,
+                            <span style="font-style: italic;">"""This is the definition of matrix addition: &lt;bookmark mark='d'/&gt; each column of the sum is the sum of &lt;bookmark mark='c'/&gt; the corresponding columns. In our notation, &lt;bookmark mark='s'/&gt; the column selector &lt;bookmark mark='v'/&gt; distributes over the terms."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la definici&#243;n se escribe con &#171;Esta es&#187; (Marcos, 2026-11-20: si no, la voz se&#241;ala algo que no est&#225;)
+</span>    <span style="font-weight: bold;">self</span>.play(FadeOut(marcos), Write(def_suma), run_time=1.2)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cada pieza se se&#241;ala cuando la voz la nombra, como en la definici&#243;n del producto (Marcos, 2026-11-21): la columna
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">de la suma (lado izquierdo) y las columnas de los sumandos. glifos: ( A + B ) | j (0-6)  =  A | j (8-10)  +  B | j (12-14)
+</span>    <span style="font-weight: bold; font-style: italic;">col_suma</span>, <span style="font-weight: bold; font-style: italic;">cols</span> = def_suma[0][0:7], [def_suma[0][8:11], def_suma[0][12:15]]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, [col_suma], color=COLOR_COLUMNA, factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(col_suma.animate.set_color(WHITE).scale(1/1.12), *[x.animate.set_color(COLOR_COLUMNA).scale(1.15) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> cols], run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait(1.3)
+    apaga(<span style="font-weight: bold;">self</span>, cols, factor=1.15, run_time=0.25)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;el selector de columnas&#187;: el |j de la izquierda; &#171;se distribuye&#187;: dos copias suyas viajan a los dos sumandos
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(Marcos, 2026-11-18); los |j de la derecha se aten&#250;an un instante para que se vea llegar cada copia
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, selectores[:1], color=COLOR_COLUMNA, factor=1.25)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"v"</span>)
+    <span style="font-weight: bold; font-style: italic;">llegadas</span> = [x.copy().set_color(COLOR_COLUMNA).scale(1.25) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> selectores[1:]]
+    <span style="font-weight: bold;">self</span>.play(*[x.animate.set_opacity(0.15) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> selectores[1:]], run_time=0.25)
+    <span style="font-weight: bold;">self</span>.play(*[TransformFromCopy(selectores[0], y) <span style="font-weight: bold;">for</span> y <span style="font-weight: bold;">in</span> llegadas], run_time=1.0)
+    <span style="font-weight: bold;">self</span>.remove(*llegadas)
+    <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> selectores[1:]:
+        x.set_opacity(1).set_color(COLOR_COLUMNA).scale(1.25)
+    <span style="font-weight: bold;">self</span>.wait(1.2)
+    apaga(<span style="font-weight: bold;">self</span>, selectores, factor=1.25)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org213d717" class="outline-4">
+<h4 id="org213d717"><span class="section-number-4">1.6.3.</span> Escena 2 - Producto por un escalar</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+Mismo esquema: el doble de la matriz \(\Mat{B}\) del ejemplo, columna a columna, y la definición, que
+con la notación permite desplazar los paréntesis.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgcc60670"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Producto de una matriz por un escalar"</span>, <span style="font-style: italic;">"Product of a matrix by a scalar"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">dos</span> = MathTex(<span style="font-style: italic;">"2"</span>, font_size=56).set_color(COLOR_ESCALAR)
+<span style="font-weight: bold; font-style: italic;">B</span>, <span style="font-weight: bold; font-style: italic;">P</span> = matriz(B_EJ, COLOR_B), matriz(DOSB_EJ)
+<span style="font-weight: bold; font-style: italic;">igual</span> = MathTex(<span style="font-style: italic;">"="</span>, font_size=48)
+VGroup(dos, B, igual, P).arrange(RIGHT, buff=0.3).move_to([0, 1.25, 0])
+<span style="font-weight: bold; font-style: italic;">nombres</span> = VGroup(*[MathTex(t, tex_template=myTemplate, font_size=40).next_to(m, DOWN, buff=0.25)
+                   <span style="font-weight: bold;">for</span> t, m <span style="font-weight: bold;">in</span> ((r<span style="font-style: italic;">"\Mat{B}"</span>, B), (r<span style="font-style: italic;">"2\Mat{B}"</span>, P))])
+nombres[0].set_color(COLOR_B)
+<span style="font-weight: bold; font-style: italic;">prods</span> = [MathTex(<span style="font-style: italic;">"2"</span>, vec(b), <span style="font-style: italic;">"="</span>, vec(p), tex_template=myTemplate, font_size=44).move_to([0, -1.15, 0])
+         <span style="font-weight: bold;">for</span> b, p <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(columnas(B_EJ), columnas(DOSB_EJ))]
+<span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> prods:
+    p[0].set_color(COLOR_ESCALAR); p[1].set_color(COLOR_B)
+<span style="font-weight: bold; font-style: italic;">def_prod</span> = MathTex(DEF_MAT[<span style="font-style: italic;">"producto"</span>], tex_template=myTemplate, font_size=52).move_to([0, -2.75, 0])
+<span style="font-weight: bold; font-style: italic;">parentesis</span> = [def_prod[0][0], def_prod[0][3], def_prod[0][8], def_prod[0][12]]
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con el producto por un escalar hacemos lo mismo: para multiplicar una matriz por un n&#250;mero, multiplicamos &lt;bookmark mark='c0'/&gt; cada una de sus columnas por ese n&#250;mero."""</span>,
+                            <span style="font-style: italic;">"""With scalar multiplication we do the same: to multiply a matrix by a number, we multiply &lt;bookmark mark='c0'/&gt; each of its columns by that number."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(dos), FadeIn(B), FadeIn(nombres[0]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c0"</span>)
+    <span style="font-weight: bold; font-style: italic;">marcos</span> = marco(B.get_columns()[0])
+    <span style="font-weight: bold;">self</span>.play(Create(marcos), run_time=0.4)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Cada columna del resultado es el doble de la columna correspondiente de la matriz."""</span>,
+                            <span style="font-style: italic;">"""Each column of the result is twice the corresponding column of the matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(igual), FadeIn(P.get_brackets()), FadeIn(nombres[1]), run_time=0.6)
+    <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(3):   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">unos 1,5 s por columna (auditor&#237;a 2026-11-19)
+</span>        <span style="font-weight: bold;">if</span> k == 0:
+            <span style="font-weight: bold;">self</span>.play(FadeIn(prods[0]), run_time=0.5)
+        <span style="font-weight: bold;">else</span>:
+            <span style="font-weight: bold;">self</span>.play(Transform(marcos, marco(B.get_columns()[k])), FadeOut(prods[k-1]), FadeIn(prods[k]), run_time=0.5)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(P.get_columns()[k]), run_time=0.4)
+        <span style="font-weight: bold;">self</span>.wait(0.9)
+<span style="font-weight: bold;">self</span>.wait(0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Esta es la definici&#243;n de producto de una matriz por un escalar: &lt;bookmark mark='d'/&gt; cada columna del producto es el producto &lt;bookmark mark='b'/&gt; del escalar por &lt;bookmark mark='c'/&gt; la columna correspondiente. Con nuestra notaci&#243;n, &lt;bookmark mark='p'/&gt; la definici&#243;n permite desplazar los par&#233;ntesis."""</span>,
+                            <span style="font-style: italic;">"""This is the definition of the product of a matrix by a scalar: &lt;bookmark mark='d'/&gt; each column of the product is &lt;bookmark mark='b'/&gt; the scalar times &lt;bookmark mark='c'/&gt; the corresponding column. In our notation, &lt;bookmark mark='p'/&gt; the definition lets us move the parentheses."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la definici&#243;n se lee, como la de la suma, y se escribe con &#171;Esta es&#187; (Marcos, 2026-11-20)
+</span>    <span style="font-weight: bold;">self</span>.play(FadeOut(marcos), Write(def_prod), run_time=1.2)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cada pieza se se&#241;ala cuando la voz la nombra (Marcos, 2026-11-21): la columna del producto (lado izquierdo),
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el escalar y la columna de la matriz. glifos: ( &#955; A ) | j (0-5)  =  &#955; ( A | j ) (7-12)
+</span>    <span style="font-weight: bold; font-style: italic;">col_prod</span>, <span style="font-weight: bold; font-style: italic;">escalar</span>, <span style="font-weight: bold; font-style: italic;">col_mat</span> = def_prod[0][0:6], def_prod[0][7], def_prod[0][9:12]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, [col_prod], color=COLOR_COLUMNA, factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"b"</span>)
+    <span style="font-weight: bold;">self</span>.play(col_prod.animate.set_color(WHITE).scale(1/1.12), escalar.animate.set_color(COLOR_ESCALAR).scale(1.4), run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(escalar.animate.set_color(WHITE).scale(1/1.4), col_mat.animate.set_color(COLOR_COLUMNA).scale(1.15), run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait(1.3)
+    apaga(<span style="font-weight: bold;">self</span>, [col_mat], factor=1.15, run_time=0.25)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, parentesis, factor=1.25)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">como en V10 (escena 2): los glifos de la izquierda viajan a la colocaci&#243;n de la derecha y vuelven, para que se
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">vea moverse la pareja de par&#233;ntesis, que deja fuera primero el selector y despu&#233;s el escalar (Marcos, 2026-11-10)
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: ( &#955; A ) | j  (0-5)  =  &#955; ( A | j )  (7-12)
+</span>    <span style="font-weight: bold; font-style: italic;">destino</span> = def_prod[0][7:13].copy().move_to(def_prod[0][0:6])
+    <span style="font-weight: bold;">self</span>.play(*[Transform(def_prod[0][i], destino[j], rate_func=rate_functions.there_and_back_with_pause)
+                <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(<span style="font-weight: bold;">range</span>(6), [1, 0, 2, 5, 3, 4])], run_time=2.4)
+    apaga(<span style="font-weight: bold;">self</span>, parentesis, factor=1.25)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org25d3239" class="outline-4">
+<h4 id="org25d3239"><span class="section-number-4">1.6.4.</span> Escena 3 - Componente a componente</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+Lo que el alumno hace al calcular (sumar posición a posición) no es la definición, sino una
+consecuencia: Ejercicio 7 del libro. La cadena de la suma, paso a paso (orden de selección de V10,
+definición de suma de matrices, linealidad del selector de componentes, quitar los paréntesis); la
+del producto solo se enuncia.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org1cac3f7"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Componente a componente"</span>, <span style="font-style: italic;">"Component-wise"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">A</span>, <span style="font-weight: bold; font-style: italic;">B</span>, <span style="font-weight: bold; font-style: italic;">S</span> = matriz(A_EJ, COLOR_A, escala=0.72), matriz(B_EJ, COLOR_B, escala=0.72), matriz(S_EJ, escala=0.72)
+<span style="font-weight: bold; font-style: italic;">mas</span>, <span style="font-weight: bold; font-style: italic;">igual</span> = MathTex(<span style="font-style: italic;">"+"</span>, font_size=40), MathTex(<span style="font-style: italic;">"="</span>, font_size=40)
+VGroup(A, mas, B, igual, S).arrange(RIGHT, buff=0.25).move_to([0, 2.0, 0])
+<span style="font-weight: bold; font-style: italic;">trio</span> = [m.get_rows()[0][2] <span style="font-weight: bold;">for</span> m <span style="font-weight: bold;">in</span> (A, B, S)]   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el nueve, el tres y el doce
+</span>
+<span style="font-weight: bold; font-style: italic;">l0</span> = MathTex(r<span style="font-style: italic;">"\elemLR{(\Mat{A}+\Mat{B})}{i}{j}"</span>, tex_template=myTemplate, font_size=40)
+<span style="font-weight: bold; font-style: italic;">pasos</span> = [MathTex(<span style="font-style: italic;">"="</span>, f, tex_template=myTemplate, font_size=40)
+         <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> (r<span style="font-style: italic;">"\elemL{\Big(\elemRp{\Mat{A}+\Mat{B}}{j}\Big)}{i}"</span>,
+                   r<span style="font-style: italic;">"\elemL{\Big(\VectC{A}{j}+\VectC{B}{j}\Big)}{i}"</span>,
+                   r<span style="font-style: italic;">"\elemLp{\VectC{A}{j}}{i}+\elemLp{\VectC{B}{j}}{i}"</span>,
+                   r<span style="font-style: italic;">"\eleM{A}{i}{j}+\eleM{B}{i}{j}"</span>)]
+<span style="font-weight: bold;">for</span> k, p <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(pasos):   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los &#171;=&#187;, en columna
+</span>    p.move_to([0, 0.75 - 0.82*k, 0])
+    p.shift((-1.6 - p[0].get_left()[0])*RIGHT)
+l0.next_to(pasos[0][0], LEFT, buff=0.2)
+<span style="font-weight: bold; font-style: italic;">res_suma</span> = MathTex(r<span style="font-style: italic;">"\elemLR{(\Mat{A}+\Mat{B})}{i}{j}"</span>, <span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\eleM{A}{i}{j}+\eleM{B}{i}{j}"</span>, tex_template=myTemplate, font_size=44).move_to([0, 0.2, 0])
+<span style="font-weight: bold; font-style: italic;">res_prod</span> = MathTex(r<span style="font-style: italic;">"\elemLR{(\lambda\Mat{A})}{i}{j}"</span>, <span style="font-style: italic;">"="</span>, r<span style="font-style: italic;">"\lambda\big(\eleM{A}{i}{j}\big)"</span>, tex_template=myTemplate, font_size=44).move_to([0, -1.0, 0])
+res_prod.shift((res_suma[1].get_left()[0] - res_prod[1].get_left()[0])*RIGHT)
+<span style="font-weight: bold; font-style: italic;">conclusion</span> = Tex(tr(<span style="font-style: italic;">"tambi&#233;n componente a componente"</span>, <span style="font-style: italic;">"also component-wise"</span>), font_size=36).set_color(COLOR_REGLA).move_to([0, -2.3, 0])
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el ejemplo de la suma, cada componente del resultado es la suma de las componentes que ocupan la misma posici&#243;n. &lt;bookmark mark='x'/&gt; El doce, por ejemplo, es la suma &lt;bookmark mark='n'/&gt; del nueve y &lt;bookmark mark='t'/&gt; el tres."""</span>,
+                            <span style="font-style: italic;">"""In the addition example, each component of the result is the sum of the components in the same position. &lt;bookmark mark='x'/&gt; The twelve, for example, is the sum &lt;bookmark mark='n'/&gt; of the nine and &lt;bookmark mark='t'/&gt; the three."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(A), FadeIn(mas), FadeIn(B), FadeIn(igual), FadeIn(S), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"x"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, [trio[2]], factor=1.4)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"n"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, trio[:1], factor=1.4)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"t"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, trio[1:2], factor=1.4)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""No es una casualidad: se deduce de la definici&#243;n. Para demostrarlo, &lt;bookmark mark='l0'/&gt; seleccionemos una componente cualquiera de la suma."""</span>,
+                            <span style="font-style: italic;">"""This is no coincidence: it follows from the definition. To prove it, &lt;bookmark mark='l0'/&gt; let us select any component of the sum."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(trio[0].animate.set_color(COLOR_A).scale(1/1.4), trio[1].animate.set_color(COLOR_B).scale(1/1.4),
+              trio[2].animate.set_color(WHITE).scale(1/1.4), run_time=0.4)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l0"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(l0), run_time=1)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">v2: tirada A2 elegida por Marcos de o&#237;do (2026-11-18); la primera acababa en suspenso (F0 final ~126 Hz)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Como da igual seleccionar primero la fila o la columna, &lt;bookmark mark='l1'/&gt; seleccionamos primero la columna.&lt;bookmark mark='v2'/&gt;"""</span>,
+                            <span style="font-style: italic;">"""Since it does not matter whether we select the row or the column first, &lt;bookmark mark='l1'/&gt; we select the column first."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: i | ( A + B ) | j (0-8)  -&gt;  i | ( ( A + B ) | j ) (0-10): al seleccionar aparecen los par&#233;ntesis grandes
+</span>    nace(<span style="font-weight: bold;">self</span>, l0[0], pasos[0][1], [(0, 0), (1, 1), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)], aparecen=[2, 10],
+         con_igual=<span style="font-weight: bold; text-decoration: underline;">False</span>, extra=[FadeIn(pasos[0][0])], marca=<span style="font-style: italic;">"l1"</span>)
+<span style="font-weight: bold;">self</span>.wait(1.0)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">descanso tras la frase (Marcos, 2026-11-18)
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Por la definici&#243;n de suma de matrices &lt;bookmark mark='l2'/&gt; podemos distribuir el selector de columnas."""</span>,
+                            <span style="font-style: italic;">"""By the definition of matrix addition &lt;bookmark mark='l2'/&gt; we can distribute the column selector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">-&gt; i | ( A | j + B | j ) (0-10): el selector de columnas va a cada sumando; los par&#233;ntesis de la suma no aparecen
+</span>    nace(<span style="font-weight: bold;">self</span>, pasos[0][1], pasos[1][1], [(0, 0), (1, 1), (2, 2), (10, 10), (4, 3), (5, 6), (6, 7)],
+         [(8, 4), (9, 5), (8, 8), (9, 9)], con_igual=<span style="font-weight: bold; text-decoration: underline;">False</span>, extra=[FadeIn(pasos[1][0])], marca=<span style="font-style: italic;">"l2"</span>)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Dentro de los par&#233;ntesis &lt;bookmark mark='d'/&gt; queda una suma de vectores, as&#237; que &lt;bookmark mark='l3'/&gt; por la definici&#243;n de suma de vectores tambi&#233;n podemos distribuir el selector de componentes."""</span>,
+                            <span style="font-style: italic;">"""Inside the parentheses &lt;bookmark mark='d'/&gt; there is now a sum of vectors, so &lt;bookmark mark='l3'/&gt; by the definition of vector addition we can distribute the component selector too."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;una suma de vectores&#187;: A|j + B|j (glifos 3-9) se resalta en la l&#237;nea de arriba; el paso entero (copia y viaje)
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">espera a la marca, para que la l&#237;nea nueva no se lea a medias (auditor&#237;a 2026-11-19)
+</span>    <span style="font-weight: bold; font-style: italic;">suma_vec</span> = pasos[1][1][3:10]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"d"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, [suma_vec], factor=1.08)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l3"</span>)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">-&gt; i | ( A | j ) + i | ( B | j ) (0-14): el selector de componentes y los par&#233;ntesis van a cada sumando
+</span>    nace(<span style="font-weight: bold;">self</span>, pasos[1][1], pasos[2][1], [(3, 3), (4, 4), (5, 5), (6, 7), (7, 11), (8, 12), (9, 13)],
+         [(0, 0), (1, 1), (0, 8), (1, 9), (2, 2), (2, 10), (10, 6), (10, 14)], con_igual=<span style="font-weight: bold; text-decoration: underline;">False</span>, extra=[FadeIn(pasos[2][0])])
+    apaga(<span style="font-weight: bold;">self</span>, [suma_vec], factor=1.08)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Y al quitar los par&#233;ntesis &lt;bookmark mark='l4'/&gt; queda la suma de las dos componentes."""</span>,
+                            <span style="font-style: italic;">"""And dropping the parentheses &lt;bookmark mark='l4'/&gt; leaves the sum of the two components."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">-&gt; i | A | j + i | B | j (0-10): todo baja a su sitio menos los par&#233;ntesis, que no aparecen
+</span>    nace(<span style="font-weight: bold;">self</span>, pasos[2][1], pasos[3][1], [(0, 0), (1, 1), (3, 2), (4, 3), (5, 4), (7, 5), (8, 6), (9, 7), (11, 8), (12, 9), (13, 10)],
+         con_igual=<span style="font-weight: bold; text-decoration: underline;">False</span>, extra=[FadeIn(pasos[3][0])], t_fijos=1.2)
+    <span style="font-weight: bold;">self</span>.remove(*pasos[3][1]); <span style="font-weight: bold;">self</span>.add(pasos[3])
+
+<span style="font-weight: bold;">self</span>.pausa()
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con el producto por un escalar ocurre lo mismo, y se deduce del mismo modo. &lt;bookmark mark='r'/&gt; As&#237; pues, las matrices tambi&#233;n se suman y se multiplican por un escalar componente a componente."""</span>,
+                            <span style="font-style: italic;">"""The same happens with scalar multiplication, and it is deduced in the same way. &lt;bookmark mark='r'/&gt; So matrices are also added and multiplied by a scalar component-wise."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la cadena se recoge en su resultado (primer y &#250;ltimo miembro) y debajo aparece el del producto
+</span>    <span style="font-weight: bold;">self</span>.remove(*[g <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> pasos[:3] <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> p[1]]); <span style="font-weight: bold;">self</span>.add(*pasos[:3])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">nacieron glifo a glifo
+</span>    <span style="font-weight: bold;">self</span>.play(*[FadeOut(p) <span style="font-weight: bold;">for</span> p <span style="font-weight: bold;">in</span> pasos[:3]], ReplacementTransform(l0, res_suma[0]),
+              ReplacementTransform(pasos[3][0], res_suma[1]), ReplacementTransform(pasos[3][1], res_suma[2]), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(Write(res_prod), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"r"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(conclusion), run_time=0.8)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8e15d69" class="outline-4">
+<h4 id="org8e15d69"><span class="section-number-4">1.6.5.</span> Escena 4 - Matrices nulas y matriz opuesta</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<p>
+Las dos matrices que intervienen en las propiedades 3 y 4, dichas <b>por columnas</b> (es lo que usarán
+las demostraciones): toda columna de una matriz nula es un vector nulo, y las columnas de la opuesta
+son los vectores opuestos. Las matrices nulas ya salieron en V12; la opuesta es nueva.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org4d72982"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Matrices nulas y matriz opuesta"</span>, <span style="font-style: italic;">"Zero matrices and the opposite matrix"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">N</span> = matriz([[0, 0, 0], [0, 0, 0]])
+<span style="font-weight: bold; font-style: italic;">nN</span> = MathTex(r<span style="font-style: italic;">"\Mat{0}="</span>, tex_template=myTemplate, font_size=48)
+VGroup(nN, N).arrange(RIGHT, buff=0.2).move_to([-3.6, 0.9, 0])
+<span style="font-weight: bold; font-style: italic;">def_nula</span> = MathTex(DEF_MAT[<span style="font-style: italic;">"nulo"</span>], tex_template=myTemplate, font_size=48).move_to([-3.6, -1.9, 0])
+<span style="font-weight: bold; font-style: italic;">B</span>, <span style="font-weight: bold; font-style: italic;">mB</span> = matriz(B_EJ, COLOR_B), matriz(MENOSB_EJ)
+<span style="font-weight: bold; font-style: italic;">nB</span> = MathTex(r<span style="font-style: italic;">"\Mat{B}="</span>, tex_template=myTemplate, font_size=48).set_color(COLOR_B)
+<span style="font-weight: bold; font-style: italic;">nmB</span> = MathTex(r<span style="font-style: italic;">"-\Mat{B}="</span>, tex_template=myTemplate, font_size=48)
+VGroup(B, mB).arrange(DOWN, buff=0.45).move_to([3.7, 0.9, 0])
+nB.next_to(B, LEFT, buff=0.2); nmB.next_to(mB, LEFT, buff=0.2)
+<span style="font-weight: bold; font-style: italic;">def_opuesta</span> = MathTex(DEF_MAT[<span style="font-style: italic;">"opuesto"</span>], tex_template=myTemplate, font_size=48).move_to([3.3, -1.9, 0])
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Nos faltan dos definiciones para enunciar las propiedades de la suma. &lt;bookmark mark='n'/&gt; Todas las componentes de las matrices nulas son cero, &lt;bookmark mark='c'/&gt; as&#237; que cada una de sus columnas es un vector nulo."""</span>,
+                            <span style="font-style: italic;">"""We still need two definitions to state the properties of addition. &lt;bookmark mark='n'/&gt; All the components of zero matrices are zero, &lt;bookmark mark='c'/&gt; so each of their columns is a zero vector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"n"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(nN), FadeIn(N), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold; font-style: italic;">marcos</span> = marco(N.get_columns()[0])
+    <span style="font-weight: bold;">self</span>.play(Create(marcos), Write(def_nula), run_time=0.8)
+    <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (1, 2):
+        <span style="font-weight: bold;">self</span>.play(Transform(marcos, marco(N.get_columns()[k])), run_time=0.4)
+    <span style="font-weight: bold;">self</span>.play(FadeOut(marcos), run_time=0.3)
+<span style="font-weight: bold;">self</span>.wait(0.8)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">respiro entre las dos definiciones (auditor&#237;a 2026-11-19)
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""La matriz opuesta de una matriz se obtiene &lt;bookmark mark='o'/&gt; cambiando cada columna por su vector opuesto. &lt;bookmark mark='e'/&gt; La escribimos con un signo menos delante."""</span>,
+                            <span style="font-style: italic;">"""The opposite of a matrix is obtained &lt;bookmark mark='o'/&gt; by replacing each column with its opposite vector. &lt;bookmark mark='e'/&gt; We write it with a minus sign in front."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(nB), FadeIn(B), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"o"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la f&#243;rmula se escribe con la frase que la describe (auditor&#237;a 2026-11-19)
+</span>    <span style="font-weight: bold;">self</span>.play(FadeIn(mB.get_brackets()), Write(def_opuesta), run_time=0.8)
+    <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(3):
+        <span style="font-weight: bold;">self</span>.play(TransformFromCopy(B.get_columns()[k], mB.get_columns()[k]), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"e"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(nmB), run_time=0.8)
+<span style="font-weight: bold;">self</span>.wait(0.6)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con nuestra notaci&#243;n, &lt;bookmark mark='p'/&gt; la definici&#243;n permite desplazar los par&#233;ntesis."""</span>,
+                            <span style="font-style: italic;">"""In our notation, &lt;bookmark mark='p'/&gt; the definition lets us move the parentheses."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">como en la escena 2: los par&#233;ntesis viajan a la colocaci&#243;n de la derecha y vuelven; la escena 7 usa la definici&#243;n
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">justo por eso. glifos: ( &#8722; A ) | j (0-5) = &#8722; ( A | j ) (7-12)
+</span>    <span style="font-weight: bold; font-style: italic;">par_op</span> = [def_opuesta[0][0], def_opuesta[0][3], def_opuesta[0][8], def_opuesta[0][12]]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, par_op, factor=1.25)
+    <span style="font-weight: bold; font-style: italic;">destino</span> = def_opuesta[0][7:13].copy().move_to(def_opuesta[0][0:6])
+    <span style="font-weight: bold;">self</span>.play(*[Transform(def_opuesta[0][i], destino[j], rate_func=rate_functions.there_and_back_with_pause)
+                <span style="font-weight: bold;">for</span> i, j <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(<span style="font-weight: bold;">range</span>(6), [1, 0, 2, 5, 3, 4])], run_time=2.4)
+    apaga(<span style="font-weight: bold;">self</span>, par_op, factor=1.25)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4c59a2" class="outline-4">
+<h4 id="orgc4c59a2"><span class="section-number-4">1.6.6.</span> Escena 5 - Las mismas definiciones</h4>
+<div class="outline-text-4" id="text-1-6-6">
+<p>
+Las cuatro definiciones de las matrices (derecha) junto a las cuatro de los vectores (izquierda): se
+ve que son las mismas reglas con otros símbolos. Es lo que justifica el cambio de símbolos de las
+dos escenas siguientes.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org18508b8"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Las mismas definiciones"</span>, <span style="font-style: italic;">"The same definitions"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">columna</span>(pares, x_igual):
+    <span style="font-weight: bold; font-style: italic;">filas</span> = VGroup(*[MathTex(i, <span style="font-style: italic;">"="</span>, d, tex_template=myTemplate, font_size=42) <span style="font-weight: bold;">for</span> i, d <span style="font-weight: bold;">in</span> pares])
+    <span style="font-weight: bold;">for</span> k, f <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(filas):
+        f.move_to([0, 1.2 - 1.05*k, 0])
+        f.shift((x_igual - f[1].get_left()[0])*RIGHT)
+    <span style="font-weight: bold;">return</span> filas
+
+<span style="font-weight: bold; font-style: italic;">vectores</span> = columna([(i, d) <span style="font-weight: bold;">for</span> _, i, d, _ <span style="font-weight: bold;">in</span> DEFINICIONES], -4.4)
+<span style="font-weight: bold; font-style: italic;">matrices</span> = columna([definicion_matrices(clave) <span style="font-weight: bold;">for</span> clave, *_ <span style="font-weight: bold;">in</span> DEFINICIONES], 2.2)
+<span style="font-weight: bold; font-style: italic;">r_vec</span> = Tex(tr(<span style="font-style: italic;">"Vectores"</span>, <span style="font-style: italic;">"Vectors"</span>), font_size=38).set_color(GRAY_B).move_to([vectores.get_x(), 2.3, 0])
+<span style="font-weight: bold; font-style: italic;">r_mat</span> = Tex(<span style="font-style: italic;">"Matrices"</span>, font_size=38).set_color(GRAY_B).move_to([matrices.get_x(), 2.3, 0])
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Ya tenemos cuatro definiciones para las matrices: &lt;bookmark mark='s'/&gt; la suma, &lt;bookmark mark='p'/&gt; el producto por un escalar, &lt;bookmark mark='n'/&gt; las matrices nulas &lt;bookmark mark='o'/&gt; y la matriz opuesta."""</span>,
+                            <span style="font-style: italic;">"""We now have four definitions for matrices: &lt;bookmark mark='s'/&gt; addition, &lt;bookmark mark='p'/&gt; scalar multiplication, &lt;bookmark mark='n'/&gt; the zero matrices &lt;bookmark mark='o'/&gt; and the opposite matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(r_mat), run_time=1)
+    <span style="font-weight: bold;">for</span> k, marca <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>([<span style="font-style: italic;">"s"</span>, <span style="font-style: italic;">"p"</span>, <span style="font-style: italic;">"n"</span>, <span style="font-style: italic;">"o"</span>]):
+        <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold;">self</span>.play(FadeIn(matrices[k]), run_time=0.5)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Pongamos al lado las cuatro definiciones correspondientes para los vectores."""</span>,
+                            <span style="font-style: italic;">"""Let us put next to them the four corresponding definitions for vectors."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(r_vec), run_time=0.5)
+    <span style="font-weight: bold;">self</span>.play(LaggedStart(*[FadeIn(v) <span style="font-weight: bold;">for</span> v <span style="font-weight: bold;">in</span> vectores], lag_ratio=0.4), run_time=2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Son las mismas reglas. &lt;bookmark mark='m'/&gt; Donde hab&#237;a vectores, en min&#250;scula, ahora hay matrices, en may&#250;scula. &lt;bookmark mark='s'/&gt; Y donde antes obten&#237;amos un n&#250;mero, ahora obtenemos una columna.&lt;bookmark mark='v3'/&gt;"""</span>,   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;columna&#187; (Marcos, 2026-11-18): es lo que da el selector; v3: tirada X1 elegida de o&#237;do (las otras dejaban &#171;columna&#187; en suspenso)
+</span>                            <span style="font-style: italic;">"""They are the same rules. &lt;bookmark mark='m'/&gt; Where there were vectors, in lower case, there are now matrices, in upper case. &lt;bookmark mark='s'/&gt; And where we obtained a number, we now obtain a column."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;">izquierdos</span> = [f[0] <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> vectores] + [f[0] <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> matrices]
+    <span style="font-weight: bold; font-style: italic;">derechos</span> = [f[2] <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> vectores] + [f[2] <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> matrices]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"m"</span>)
+    resalta(<span style="font-weight: bold;">self</span>, izquierdos[:4], factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait(1.0)
+    resalta(<span style="font-weight: bold;">self</span>, izquierdos[4:], factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    apaga(<span style="font-weight: bold;">self</span>, izquierdos, factor=1.12)
+    resalta(<span style="font-weight: bold;">self</span>, derechos[:4], factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait(0.9)
+    resalta(<span style="font-weight: bold;">self</span>, derechos[4:], factor=1.12)
+    <span style="font-weight: bold;">self</span>.wait(1.2)
+    apaga(<span style="font-weight: bold;">self</span>, derechos, factor=1.12)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3789286" class="outline-4">
+<h4 id="org3789286"><span class="section-number-4">1.6.7.</span> Escena 6 - La conmutativa: el cambio de símbolos</h4>
+<div class="outline-text-4" id="text-1-6-7">
+<p>
+El corazón del vídeo. Se recuerda la demostración de V06 (la suma de vectores es conmutativa), con
+su panel, a paso ligero; después el cambio de símbolos en tres etapas, cada una en su palabra
+(vectores → matrices, componente → columna, números → vectores); y se relee la cadena, que ahora
+demuestra la propiedad para matrices sin que haya cambiado ningún paso. La conclusión es el criterio de
+igualdad: «las dos matrices son iguales, porque lo son columna a columna».
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org003e85f"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"La misma demostraci&#243;n"</span>, <span style="font-style: italic;">"The same proof"</span>), font_size=36).set_color(COLOR_TITULO).to_edge(UP, buff=0.25)
+<span style="font-weight: bold; font-style: italic;">panel</span> = Panel(<span style="font-weight: bold;">self</span>)
+<span style="font-weight: bold; font-style: italic;">enunciado</span> = enunciado_traducible(1)
+<span style="font-weight: bold; font-style: italic;">cadena</span> = coloca_cadena([linea(r<span style="font-style: italic;">"\elemRp{\Vect{a}+\Vect{b}}{i}"</span>),
+                        linea(r<span style="font-style: italic;">"=\eleVR{a}{i}+\eleVR{b}{i}"</span>),
+                        linea(r<span style="font-style: italic;">"=\eleVR{b}{i}+\eleVR{a}{i}"</span>, de_abajo=<span style="font-weight: bold; text-decoration: underline;">True</span>),
+                        linea(r<span style="font-style: italic;">"=\elemRp{\Vect{b}+\Vect{a}}{i}"</span>)])
+<span style="font-weight: bold; font-style: italic;">claves</span> = [<span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-style: italic;">"suma"</span>, 1, <span style="font-style: italic;">"suma"</span>]
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con las cuatro definiciones de los vectores y con &lt;bookmark mark='r'/&gt; las propiedades de los n&#250;meros reales demostramos las propiedades de los vectores. &lt;bookmark mark='e'/&gt; Recordemos una de ellas: la propiedad conmutativa de la suma.&lt;bookmark mark='v4'/&gt;"""</span>,   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tirada C3 elegida por Marcos de o&#237;do (2026-11-18): &#171;...es conmutativa&#187; quedaba en suspenso
+</span>                            <span style="font-style: italic;">"""With the four definitions for vectors and &lt;bookmark mark='r'/&gt; the properties of the real numbers we proved the properties of vectors. &lt;bookmark mark='e'/&gt; Let us recall one of them: the commutative property of addition."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(panel.izq), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"r"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(panel.der), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"e"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(enunciado), run_time=1.2)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;demostrarla&#187; (Marcos, 2026-11-18): el antecedente es &#171;la propiedad conmutativa&#187;. Partida en dos: la primera frase es
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">una toma nueva; el resto sale recortado de la toma anterior (tmp/parte_toma.py). La marca l1 estaba al principio del
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">resto: el paso se anima al empezar la segunda locuci&#243;n, sin esperar (una marca en la posici&#243;n 0 se dispara al final).
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Para demostrarla, &lt;bookmark mark='l0'/&gt; seleccionamos una componente cualquiera."""</span>,   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;cualquiera&#187; (auditor&#237;a 2026-11-21): la conclusi&#243;n ya no lo dice
+</span>                            <span style="font-style: italic;">"""To prove it, &lt;bookmark mark='l0'/&gt; we select any component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: ( a + b ) | i (0-6);  = a | i + b | i (0-7);  = ( b + a ) | i (0-7)
+</span>    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l0"</span>)
+    <span style="font-weight: bold;">self</span>.play(Write(cadena[0]), run_time=0.9)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Por la definici&#243;n de suma podemos distribuir el selector. &lt;bookmark mark='l2'/&gt; Los sumandos son n&#250;meros, as&#237; que &lt;bookmark mark='c2'/&gt; por la conmutativa podemos intercambiarlos. &lt;bookmark mark='l3'/&gt; Y por la definici&#243;n de suma podemos sacar el selector como factor com&#250;n."""</span>,
+                            <span style="font-style: italic;">"""By the definition of addition we can distribute the selector. &lt;bookmark mark='l2'/&gt; The terms are numbers, so &lt;bookmark mark='c2'/&gt; by the commutative property we can swap them. &lt;bookmark mark='l3'/&gt; And by the definition of addition we can factor out the selector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cada l&#237;nea nace de la anterior y cada uso se cuenta con la campanita, como en V06 (Marcos, 2026-11-10)
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;Por la definici&#243;n de suma...&#187;: el selector va a cada sumando; los par&#233;ntesis no aparecen
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[0], cadena[1], [(1, 1), (2, 4), (3, 5)], [(5, 2), (6, 3), (5, 6), (6, 7)])
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l2"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;los sumandos son n&#250;meros&#187;
+</span>    <span style="font-weight: bold; font-style: italic;">sumandos</span> = [cadena[1][0][1:4], cadena[1][0][5:8]]
+    <span style="font-weight: bold;">self</span>.play(*[Indicate(g, color=COLOR_REGLA, scale_factor=1.2) <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> sumandos], run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c2"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos sumandos se cruzan
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, 1, cadena[1], cadena[2], [(4, 4)], [(1, 5), (2, 6), (3, 7), (5, 1), (6, 2), (7, 3)])
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l3"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos selectores se re&#250;nen en uno, fuera de los par&#233;ntesis nuevos
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[2], cadena[3], [(1, 2), (4, 3), (5, 4)], [(2, 6), (3, 7), (6, 6), (7, 7)], aparecen=[1, 5])
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la conclusi&#243;n dice el criterio de igualdad (Marcos, 2026-11-20, como en V14): son iguales porque lo son componente a
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">componente; la locuci&#243;n anterior conserva su toma, recortada antes de la conclusi&#243;n (tmp/parte_toma.py)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""As&#237; pues, &lt;bookmark mark='ok'/&gt; los dos vectores son iguales, porque lo son &lt;bookmark mark='c'/&gt; componente a componente."""</span>,
+                            <span style="font-style: italic;">"""So &lt;bookmark mark='ok'/&gt; the two vectors are equal, because they are equal &lt;bookmark mark='c'/&gt; component by component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"ok"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.1), Indicate(cadena[3], color=COLOR_ESCALAR, scale_factor=1.1),
+              Indicate(enunciado, color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    senala_selector(<span style="font-weight: bold;">self</span>, [cadena[0], cadena[3]], color=COLOR_ESCALAR)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el selector de componentes, a los dos extremos
+</span>
+<span style="font-weight: bold;">self</span>.pausa()
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Ahora cambiemos los s&#237;mbolos. &lt;bookmark mark='m'/&gt; Donde hab&#237;a vectores, ponemos matrices. &lt;bookmark mark='c'/&gt; Donde se seleccionaba una componente, se selecciona una columna. &lt;bookmark mark='v'/&gt; Y a la derecha, en lugar de las propiedades de los n&#250;meros, &lt;bookmark mark='w'/&gt; ponemos las de los vectores, que ya est&#225;n demostradas: son las mismas, &lt;bookmark mark='b'/&gt; con las letras en negrita."""</span>,
+                            <span style="font-style: italic;">"""Now let us change the symbols. &lt;bookmark mark='m'/&gt; Where there were vectors, we put matrices. &lt;bookmark mark='c'/&gt; Where a component was selected, a column is selected. &lt;bookmark mark='v'/&gt; And on the right, instead of the properties of numbers, &lt;bookmark mark='w'/&gt; we put those of vectors, which are already proved: they are the same, &lt;bookmark mark='b'/&gt; with the letters in bold."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">for</span> k, marca <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>([<span style="font-style: italic;">"m"</span>, <span style="font-style: italic;">"c"</span>], start=1):
+        <span style="font-weight: bold;">self</span>.wait_until_bookmark(marca)
+        <span style="font-weight: bold;">self</span>.play(*cambio_de_simbolos(k, panel, enunciado, cadena), run_time=1.5)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">tercera etapa (auditor&#237;a 2026-11-19): en &#171;Y a la derecha&#187; se se&#241;alan las propiedades de los n&#250;meros; el cambio
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">llega en &#171;ponemos las de los vectores&#187;, y las letras en negrita se se&#241;alan al nombrarlas
+</span>    <span style="font-weight: bold; font-style: italic;">lado_der</span> = [panel.piezas[k] <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (1, 2, 3, 4)]
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"v"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[Indicate(x, color=COLOR_ESCALAR, scale_factor=1.08) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> lado_der], run_time=1.0)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"w"</span>)
+    <span style="font-weight: bold;">self</span>.play(*cambio_de_simbolos(3, panel, enunciado, cadena), run_time=1.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"b"</span>)
+    <span style="font-weight: bold;">self</span>.play(*[Indicate(x[1] <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">len</span>(x) &gt; 1 <span style="font-weight: bold;">else</span> x, color=COLOR_ESCALAR, scale_factor=1.12) <span style="font-weight: bold;">for</span> x <span style="font-weight: bold;">in</span> lado_der], run_time=1.2)
+
+<span style="font-weight: bold;">self</span>.pausa()
+panel.reinicia()   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los usos se cuentan de nuevo al releer la demostraci&#243;n, ya para matrices
+</span>
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Leamos de nuevo la demostraci&#243;n. &lt;bookmark mark='l0'/&gt; Seleccionamos una columna. &lt;bookmark mark='l1'/&gt; Por la definici&#243;n de suma de matrices podemos distribuir el selector. &lt;bookmark mark='l2'/&gt; Los sumandos son vectores, as&#237; que &lt;bookmark mark='c2'/&gt; por la conmutativa de los vectores podemos intercambiarlos. &lt;bookmark mark='l3'/&gt; Y por la definici&#243;n de suma podemos sacar el selector como factor com&#250;n."""</span>,
+                            <span style="font-style: italic;">"""Let us read the proof again. &lt;bookmark mark='l0'/&gt; We select a column. &lt;bookmark mark='l1'/&gt; By the definition of matrix addition we can distribute the selector. &lt;bookmark mark='l2'/&gt; The terms are vectors, so &lt;bookmark mark='c2'/&gt; by the commutative property of vectors we can swap them. &lt;bookmark mark='l3'/&gt; And by the definition of addition we can factor out the selector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">en la relectura cada paso se vuelve a animar como en la primera lectura (Marcos, 2026-11-18): las l&#237;neas 1-3
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">se retiran y vuelven a nacer de la anterior, ya con matrices (los glifos son los mismos en todas las versiones)
+</span>    <span style="font-weight: bold; font-style: italic;">fantasmas</span> = [c.copy() <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> cadena[1:]]
+    <span style="font-weight: bold;">self</span>.remove(*cadena[1:]); <span style="font-weight: bold;">self</span>.add(*fantasmas)
+    <span style="font-weight: bold;">self</span>.play(*[FadeOut(f) <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> fantasmas], run_time=0.6)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l0"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(cadena[0], color=COLOR_ESCALAR, scale_factor=1.1), run_time=1.0)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l1"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el selector va a cada sumando
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[0], cadena[1], [(1, 1), (2, 4), (3, 5)], [(5, 2), (6, 3), (5, 6), (6, 7)])
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l2"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">&#171;los sumandos son vectores&#187;, como en la primera lectura (auditor&#237;a 2026-11-19)
+</span>    <span style="font-weight: bold; font-style: italic;">sumandos</span> = [cadena[1][0][1:4], cadena[1][0][5:8]]
+    <span style="font-weight: bold;">self</span>.play(*[Indicate(g, color=COLOR_REGLA, scale_factor=1.2) <span style="font-weight: bold;">for</span> g <span style="font-weight: bold;">in</span> sumandos], run_time=0.9)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c2"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos sumandos (vectores) se cruzan
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, 1, cadena[1], cadena[2], [(4, 4)], [(1, 5), (2, 6), (3, 7), (5, 1), (6, 2), (7, 3)])
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l3"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los dos selectores se re&#250;nen en uno
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[2], cadena[3], [(1, 2), (4, 3), (5, 4)], [(2, 6), (3, 7), (6, 6), (7, 7)], aparecen=[1, 5])
+
+<span style="font-weight: bold;">self</span>.wait(0.4)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el punto entre el &#250;ltimo paso y la conclusi&#243;n (auditor&#237;a 2026-11-21)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""As&#237; pues, &lt;bookmark mark='ok'/&gt; las dos matrices son iguales, porque lo son &lt;bookmark mark='c'/&gt; columna a columna. La suma de matrices es conmutativa. No hemos tenido que cambiar ning&#250;n paso."""</span>,
+                            <span style="font-style: italic;">"""So &lt;bookmark mark='ok'/&gt; the two matrices are equal, because they are equal &lt;bookmark mark='c'/&gt; column by column. Matrix addition is commutative. We did not have to change a single step."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"ok"</span>)
+    <span style="font-weight: bold; font-style: italic;">caja</span> = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
+    <span style="font-weight: bold;">self</span>.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    senala_selector(<span style="font-weight: bold;">self</span>, [cadena[0], cadena[3]])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el selector de columnas, a los dos extremos
+</span>
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga74d5c2" class="outline-4">
+<h4 id="orga74d5c2"><span class="section-number-4">1.6.8.</span> Escena 7 - La del opuesto, con el mismo cambio; la ventaja del álgebra</h4>
+<div class="outline-text-4" id="text-1-6-8">
+<p>
+Segunda traducción, más rápida, con la propiedad que usa las otras dos definiciones (nula y
+opuesta): es donde el cambio de símbolos es menos evidente (el cero pasa a vector nulo, y el vector
+nulo, a matriz nula). Después, la idea central del vídeo, con el rótulo de «idea clave».
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgdc59f15"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Otra demostraci&#243;n que ya est&#225; hecha"</span>, <span style="font-style: italic;">"Another proof that is already done"</span>), font_size=36).set_color(COLOR_TITULO).to_edge(UP, buff=0.25)
+<span style="font-weight: bold; font-style: italic;">panel</span> = Panel(<span style="font-weight: bold;">self</span>)
+<span style="font-weight: bold; font-style: italic;">enunciado</span> = enunciado_traducible(4)
+<span style="font-weight: bold; font-style: italic;">cadena</span> = coloca_cadena([linea(r<span style="font-style: italic;">"\elemR{\big(\Vect{a}+(-\Vect{a})\big)}{i}"</span>),
+                        linea(r<span style="font-style: italic;">"=\eleVR{a}{i}+\elemRp{-\Vect{a}}{i}"</span>),
+                        linea(r<span style="font-style: italic;">"=\eleVR{a}{i}+\big(-\eleVRpE{a}{i}\big)"</span>),
+                        linea(r<span style="font-style: italic;">"=0"</span>, de_abajo=<span style="font-weight: bold; text-decoration: underline;">True</span>, final=r<span style="font-style: italic;">"=\Vect{0}"</span>),
+                        linea(r<span style="font-style: italic;">"=\eleVR{0}{i}"</span>)])
+<span style="font-weight: bold; font-style: italic;">claves</span> = [<span style="font-weight: bold; text-decoration: underline;">None</span>, <span style="font-style: italic;">"suma"</span>, <span style="font-style: italic;">"opuesto"</span>, 4, <span style="font-style: italic;">"nulo"</span>]
+<span style="font-weight: bold; font-style: italic;">idea</span> = aviso(<span style="font-style: italic;">"idea"</span>, tr(<span style="font-style: italic;">"Mismas reglas, mismas demostraciones"</span>, <span style="font-style: italic;">"Same rules, same proofs"</span>), font_size=34).to_edge(DOWN, buff=0.3)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Hagamos lo mismo con otra propiedad de los vectores: sumar un vector y su opuesto da un vector nulo."""</span>,
+                            <span style="font-style: italic;">"""Let us do the same with another property of vectors: adding a vector and its opposite gives a zero vector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(panel.todo), run_time=1)
+    <span style="font-weight: bold;">self</span>.play(Write(enunciado), FadeIn(cadena[0]), run_time=1.2)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En su demostraci&#243;n &lt;bookmark mark='l1'/&gt; distribuimos el selector y &lt;bookmark mark='l2'/&gt; desplazamos los par&#233;ntesis por la definici&#243;n de opuesto. &lt;bookmark mark='l3'/&gt; Sumar un n&#250;mero y su opuesto da cero, &lt;bookmark mark='l4'/&gt; y el cero es una componente de un vector nulo."""</span>,
+                            <span style="font-style: italic;">"""In its proof &lt;bookmark mark='l1'/&gt; we distribute the selector and &lt;bookmark mark='l2'/&gt; move the parentheses by the definition of opposite. &lt;bookmark mark='l3'/&gt; Adding a number and its opposite gives zero, &lt;bookmark mark='l4'/&gt; and zero is a component of a zero vector."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">glifos: ( a + ( - a ) ) | i (0-9);  = a | i + ( - a ) | i (0-10);  = a | i + ( - ( a | i ) ) (0-12);  = 0;  = 0 | i
+</span>    <span style="font-weight: bold; font-style: italic;">rapido</span> = <span style="font-weight: bold;">dict</span>(t_fijos=0.5, t_moviles=0.6, t_cuenta=0.35)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l1"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el selector va a cada sumando; los par&#233;ntesis grandes no aparecen
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[0], cadena[1], [(1, 1), (2, 4), (3, 5), (4, 6), (5, 7), (6, 8)],
+         [(8, 2), (9, 3), (8, 9), (9, 10)], **rapido)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l2"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">los par&#233;ntesis pasan a rodear la componente; el sumando entero, entre par&#233;ntesis nuevos
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"opuesto"</span>, cadena[1], cadena[2], [(1, 1), (2, 2), (3, 3), (4, 4), (6, 6), (7, 8), (9, 9), (10, 10)],
+         [(5, 7), (8, 11)], aparecen=[5, 12], **rapido)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l3"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">toda la suma se convierte en el cero
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, 4, cadena[2], cadena[3], [], [(<span style="font-weight: bold;">slice</span>(1, 13), 1)], t_fijos=0.4, t_moviles=0.7, t_cuenta=0.35)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l4"</span>)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">al cero le sale el selector
+</span>    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"nulo"</span>, cadena[3], cadena[4], [(1, 1)], aparecen=[2, 3], **rapido)
+
+<span style="font-weight: bold;">self</span>.pausa()
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Hacemos el mismo cambio de s&#237;mbolos."""</span>,
+                            <span style="font-style: italic;">"""We make the same change of symbols."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (1, 2, 3):
+        <span style="font-weight: bold;">self</span>.play(*cambio_de_simbolos(k, panel, enunciado, cadena), run_time=0.9)
+    panel.reinicia(run_time=0.4)
+<span style="font-weight: bold;">self</span>.wait(0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Ahora la demostraci&#243;n dice que &lt;bookmark mark='l1'/&gt; distribuimos el selector y &lt;bookmark mark='l2'/&gt; desplazamos los par&#233;ntesis por la definici&#243;n de matriz opuesta. &lt;bookmark mark='l3'/&gt; Sumar un vector y su opuesto da un vector nulo, &lt;bookmark mark='l4'/&gt; y ese vector nulo es una columna de una matriz nula."""</span>,
+                            <span style="font-style: italic;">"""Now the proof says that &lt;bookmark mark='l1'/&gt; we distribute the selector and &lt;bookmark mark='l2'/&gt; move the parentheses by the definition of the opposite matrix. &lt;bookmark mark='l3'/&gt; Adding a vector and its opposite gives a zero vector, &lt;bookmark mark='l4'/&gt; and that zero vector is a column of a zero matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cada paso se vuelve a animar, ya con matrices (como la relectura de la escena 6; auditor&#237;a 2026-11-19): se ve
+</span>    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">qu&#233; se convierte en qu&#233;, tambi&#233;n el vector nulo que pasa a ser columna de una matriz nula
+</span>    <span style="font-weight: bold; font-style: italic;">fantasmas</span> = [c.copy() <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> cadena[1:]]
+    <span style="font-weight: bold;">self</span>.remove(*cadena[1:]); <span style="font-weight: bold;">self</span>.add(*fantasmas)
+    <span style="font-weight: bold;">self</span>.play(*[FadeOut(f) <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> fantasmas], run_time=0.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l1"</span>)
+    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"suma"</span>, cadena[0], cadena[1], [(1, 1), (2, 4), (3, 5), (4, 6), (5, 7), (6, 8)],
+         [(8, 2), (9, 3), (8, 9), (9, 10)], **rapido)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l2"</span>)
+    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"opuesto"</span>, cadena[1], cadena[2], [(1, 1), (2, 2), (3, 3), (4, 4), (6, 6), (7, 8), (9, 9), (10, 10)],
+         [(5, 7), (8, 11)], aparecen=[5, 12], **rapido)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l3"</span>)
+    paso(<span style="font-weight: bold;">self</span>, panel, 4, cadena[2], cadena[3], [], [(<span style="font-weight: bold;">slice</span>(1, 13), 1)], t_fijos=0.4, t_moviles=0.7, t_cuenta=0.35)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"l4"</span>)
+    paso(<span style="font-weight: bold;">self</span>, panel, <span style="font-style: italic;">"nulo"</span>, cadena[3], cadena[4], [(1, 1)], aparecen=[2, 3], **rapido)
+
+<span style="font-weight: bold;">self</span>.wait(0.4)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el punto entre el &#250;ltimo paso y la conclusi&#243;n (auditor&#237;a 2026-11-21)
+</span><span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""As&#237; pues, &lt;bookmark mark='ok'/&gt; las dos matrices son iguales, porque lo son &lt;bookmark mark='c'/&gt; columna a columna. Sumar una matriz y su opuesta da una matriz nula."""</span>,
+                            <span style="font-style: italic;">"""So &lt;bookmark mark='ok'/&gt; the two matrices are equal, because they are equal &lt;bookmark mark='c'/&gt; column by column. Adding a matrix and its opposite gives a zero matrix."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"ok"</span>)
+    <span style="font-weight: bold; font-style: italic;">caja</span> = SurroundingRectangle(enunciado, color=COLOR_ESCALAR, buff=0.2, corner_radius=0.15, stroke_width=3)
+    <span style="font-weight: bold;">self</span>.play(Create(caja), Indicate(enunciado, color=COLOR_RESULTADO, scale_factor=1.15), run_time=1.5)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    senala_selector(<span style="font-weight: bold;">self</span>, [cadena[0], cadena[4]])   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">el selector de columnas, a los dos extremos
+</span>
+<span style="font-weight: bold;">self</span>.pausa()
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Esta es la gran ventaja del &#225;lgebra. &lt;bookmark mark='i'/&gt; Las demostraciones solo han usado reglas para manipular s&#237;mbolos, as&#237; que no importa si los s&#237;mbolos representan vectores o matrices. Si unos objetos nuevos cumplen las mismas reglas, las demostraciones de sus propiedades ya est&#225;n hechas."""</span>,
+                            <span style="font-style: italic;">"""This is the great advantage of algebra. &lt;bookmark mark='i'/&gt; The proofs have only used rules for manipulating symbols, so it does not matter whether the symbols stand for vectors or matrices. If new objects obey the same rules, the proofs of their properties are already done."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"i"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(idea, scale=0.9), run_time=0.8)
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc912933" class="outline-4">
+<h4 id="orgc912933"><span class="section-number-4">1.6.9.</span> Escena 8 - Las ocho propiedades; las otras seis, como ejercicio</h4>
+<div class="outline-text-4" id="text-1-6-9">
+<p>
+Las ocho propiedades de los vectores (izquierda; demostradas en V06 y V07) y, con el mismo cambio de
+símbolos, las ocho de las matrices (cada fila se copia y se transforma). La tarjeta de pausa propone
+demostrar, «para convencerse», otra de las propiedades <b>de la suma</b> (Marcos: «si no lo cree, que lo intente»).
+Solo de la suma porque la traducción literal falla en la propiedad 6: su demostración para vectores (V07)
+da tres pasos con números reales (conmutativa, distributiva, conmutativa), y con matrices esos tres pasos
+son uno solo, la propiedad 6 de los vectores (lo notó la lectura en frío del 2026-11-10). Las propiedades
+5, 7 y 8 sí se traducen paso a paso, pero en ellas solo pasa a negrita una de las letras.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orgea649f7"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Las ocho propiedades"</span>, <span style="font-style: italic;">"The eight properties"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">tabla</span>(props, x):
+    <span style="font-weight: bold; font-style: italic;">filas</span> = VGroup(*[MathTex(f<span style="font-style: italic;">"</span>{k+1}<span style="font-style: italic;">.</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">;</span><span style="font-weight: bold; text-decoration: underline;">\\</span><span style="font-style: italic;">;"</span>, p, tex_template=myTemplate, font_size=34) <span style="font-weight: bold;">for</span> k, p <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">enumerate</span>(props)])
+    filas.arrange(DOWN, aligned_edge=LEFT, buff=0.24)
+    <span style="font-weight: bold;">return</span> filas.move_to([x, 0.05, 0])
+
+<span style="font-weight: bold; font-style: italic;">vectores</span>, <span style="font-weight: bold; font-style: italic;">matrices</span> = tabla(PROPIEDADES_VECTORES, -3.4), tabla(PROPIEDADES_MATRICES, 3.4)
+<span style="font-weight: bold;">for</span> v, m <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(vectores, matrices):
+    m.set_y(v.get_y())
+<span style="font-weight: bold; font-style: italic;">r_vec</span> = Tex(tr(<span style="font-style: italic;">"Vectores"</span>, <span style="font-style: italic;">"Vectors"</span>), font_size=36).set_color(GRAY_B).next_to(vectores, UP, buff=0.3)
+<span style="font-weight: bold; font-style: italic;">r_mat</span> = Tex(<span style="font-style: italic;">"Matrices"</span>, font_size=36).set_color(GRAY_B).next_to(matrices, UP, buff=0.3)
+r_mat.set_y(r_vec.get_y())
+<span style="font-weight: bold; font-style: italic;">nota</span> = Tex(tr(<span style="font-style: italic;">"(demostradas en los v&#237;deos 1.6 y 1.7)"</span>, <span style="font-style: italic;">"(proved in videos 1.6 and 1.7)"</span>), font_size=28).set_color(GRAY_A).next_to(vectores, DOWN, buff=0.25).align_to(vectores, LEFT)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Las operaciones con vectores cumplen ocho propiedades: &lt;bookmark mark='s'/&gt; cuatro de la suma &lt;bookmark mark='p'/&gt; y cuatro del producto por escalares."""</span>,
+                            <span style="font-style: italic;">"""Vector operations satisfy eight properties: &lt;bookmark mark='s'/&gt; four for addition &lt;bookmark mark='p'/&gt; and four for scalar multiplication."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(r_vec), FadeIn(nota), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"s"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(vectores[:4]), run_time=0.8)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"p"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(vectores[4:]), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Con el mismo cambio de s&#237;mbolos, &lt;bookmark mark='m'/&gt; las operaciones con matrices cumplen las mismas ocho."""</span>,
+                            <span style="font-style: italic;">"""With the same change of symbols, &lt;bookmark mark='m'/&gt; matrix operations satisfy the same eight."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"m"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(r_mat), *[TransformFromCopy(v, m) <span style="font-weight: bold;">for</span> v, m <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(vectores, matrices)], run_time=2)
+
+<span style="font-weight: bold;">self</span>.pausa_para_pensar(invitacion=tr(<span style="font-style: italic;">"Pause el v&#237;deo y demuestre otra propiedad de la suma."</span>, <span style="font-style: italic;">"Pause the video and prove another property of addition."</span>),
+                       invitacion_voz=tr(<span style="font-style: italic;">"Para convencerse, pause el v&#237;deo e intente demostrar otra de las propiedades de la suma: escriba la demostraci&#243;n para vectores y cambie los s&#237;mbolos."</span>,
+                                         <span style="font-style: italic;">"To convince yourself, pause the video and try to prove another of the properties of addition: write down the proof for vectors and change the symbols."</span>),
+                       segundos=0.2,   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sin pausa tras &#171;pause el v&#237;deo&#187;: pasa sin m&#225;s al resumen (Marcos, 2026-11-23)
+</span>                       al_invitar=<span style="font-weight: bold;">lambda</span>: <span style="font-weight: bold;">self</span>.play(   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">las que quedan son la 2 y la 3; la 1 y la 4 ya est&#225;n hechas (auditor&#237;a 2026-11-19)
+</span>                           FadeOut(nota),   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la tarjeta la tapaba a medias (auditor&#237;a 2026-11-21)
+</span>                           *[Create(marco(t[k], COLOR_ESCALAR)) <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> (vectores, matrices) <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (1, 2)],
+                           *[t[k].animate.set_opacity(0.35) <span style="font-weight: bold;">for</span> t <span style="font-weight: bold;">in</span> (vectores, matrices) <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> (0, 3)], run_time=0.8))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3aee595" class="outline-4">
+<h4 id="org3aee595"><span class="section-number-4">1.6.10.</span> Escena 9 - Resumen y anuncio de V14</h4>
+<div class="outline-text-4" id="text-1-6-10">
+<p>
+Las dos definiciones por columnas, su consecuencia componente a componente, las ocho propiedades y
+la idea central, enlazada con los dibujos de V03-V05 (Marcos: «por eso en los vídeos con la
+representación geométrica siempre se terminó diciendo que lo importante eran las reglas de
+manipulación simbólica»). Anuncio de V14: operaciones por filas y transposición.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org0ff5cb6"><span style="font-weight: bold;">self</span>.creditos()
+<span style="font-weight: bold; font-style: italic;">cabecera</span> = Tex(tr(<span style="font-style: italic;">"Resumen"</span>, <span style="font-style: italic;">"Key Takeaways"</span>), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
+<span style="font-weight: bold; font-style: italic;">formulas</span> = [DEF_MAT[<span style="font-style: italic;">"suma"</span>] + r<span style="font-style: italic;">"\qquad\quad "</span> + DEF_MAT[<span style="font-style: italic;">"producto"</span>],
+            r<span style="font-style: italic;">"\elemLR{(\Mat{A}+\Mat{B})}{i}{j}=\eleM{A}{i}{j}+\eleM{B}{i}{j}\qquad\quad \elemLR{(\lambda\Mat{A})}{i}{j}=\lambda\big(\eleM{A}{i}{j}\big)"</span>,
+            r<span style="font-style: italic;">"\Mat{A}+\Mat{B}=\Mat{B}+\Mat{A},\quad\ldots,\quad 1\Mat{A}=\Mat{A}"</span>]
+<span style="font-weight: bold; font-style: italic;">rotulos</span> = [tr(<span style="font-style: italic;">"suma y producto por un escalar: columna a columna"</span>, <span style="font-style: italic;">"addition and scalar multiplication: column by column"</span>),
+           tr(<span style="font-style: italic;">"y por tanto, componente a componente"</span>, <span style="font-style: italic;">"and therefore, component-wise"</span>),
+           tr(r<span style="font-style: italic;">"las mismas ocho propiedades que los vectores,\\ y se demuestran del mismo modo"</span>, <span style="font-style: italic;">"the same eight properties as vectors, proved in the same way"</span>)]
+<span style="font-weight: bold; font-style: italic;">filas</span> = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=40), Tex(r, tex_template=myTemplate, font_size=32, color=GRAY_A)).arrange(DOWN, buff=0.18)
+                 <span style="font-weight: bold;">for</span> f, r <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">zip</span>(formulas, rotulos)]).arrange(DOWN, buff=0.45).move_to([0, 0.35, 0])
+<span style="font-weight: bold; font-style: italic;">idea</span> = aviso(<span style="font-style: italic;">"idea"</span>, tr(<span style="font-style: italic;">"Las demostraciones solo usan reglas para manipular s&#237;mbolos"</span>, <span style="font-style: italic;">"Proofs only use rules for manipulating symbols"</span>), font_size=32).to_edge(DOWN, buff=0.45)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Resumamos. Las matrices se suman y se multiplican por un escalar columna a columna, &lt;bookmark mark='c'/&gt; y por tanto tambi&#233;n componente a componente."""</span>,
+                            <span style="font-style: italic;">"""Let us sum up. Matrices are added and multiplied by a scalar column by column, &lt;bookmark mark='c'/&gt; and therefore also component-wise."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(Write(cabecera), FadeIn(filas[0]), run_time=1)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(filas[1]), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""Estas operaciones cumplen las mismas ocho propiedades que las operaciones con vectores."""</span>,
+                            <span style="font-style: italic;">"""These operations satisfy the same eight properties as vector operations."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.play(FadeIn(filas[2]), run_time=0.8)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En v&#237;deos anteriores usamos dibujos para entender las operaciones con n&#250;meros y con vectores. Aqu&#237; no ha hecho falta ninguno: &lt;bookmark mark='i'/&gt; las demostraciones solo usan reglas para manipular s&#237;mbolos, y las matrices cumplen las mismas reglas que los vectores."""</span>,
+                            <span style="font-style: italic;">"""In earlier videos we used drawings to understand the operations with numbers and with vectors. Here we have not needed any: &lt;bookmark mark='i'/&gt; the proofs only use rules for manipulating symbols, and matrices obey the same rules as vectors."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"i"</span>)
+    <span style="font-weight: bold;">self</span>.play(FadeIn(idea, scale=0.9), run_time=0.8)
+
+<span style="font-weight: bold;">self</span>.wait(1.0)
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En este v&#237;deo hemos visto que con las matrices podemos operar &lt;bookmark mark='c'/&gt; columna a columna, &lt;bookmark mark='k'/&gt; o componente a componente."""</span>,
+                            <span style="font-style: italic;">"""In this video we have seen that we can operate with matrices &lt;bookmark mark='c'/&gt; column by column, &lt;bookmark mark='k'/&gt; or component by component."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"c"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(filas[0][1], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.0)
+    <span style="font-weight: bold;">self</span>.wait_until_bookmark(<span style="font-style: italic;">"k"</span>)
+    <span style="font-weight: bold;">self</span>.play(Indicate(filas[1][1], color=COLOR_ESCALAR, scale_factor=1.15), run_time=1.0)
+
+<span style="font-weight: bold;">with</span> <span style="font-weight: bold;">self</span>.voiceover(text=tr(<span style="font-style: italic;">"""En el pr&#243;ximo v&#237;deo veremos que las mismas operaciones, la suma y el producto por un escalar, tambi&#233;n se pueden hacer fila a fila. Y veremos lo que ocurre al transponer una suma o un producto por un escalar."""</span>,
+                            <span style="font-style: italic;">"""In the next video we will see that the same operations, addition and scalar multiplication, can also be done row by row. And we will see what happens when we transpose a sum or a product by a scalar."""</span>)) <span style="font-weight: bold;">as</span> tracker:
+    <span style="font-weight: bold;">pass</span>
+
+<span style="font-weight: bold;">self</span>.pausa_media()
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc820de9" class="outline-2">
+<h2 id="orgc820de9"><span class="section-number-2">2.</span> Trozos comunes de código</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Viven en <code>Comunes.org</code>, que se tangle a <code>lib/vm2comun.py</code> (y a
+<code>../videoMath2/lib/vm2comun.py</code>): carga de librerías, <code>LANG</code> y <code>tr()</code>,
+voces de Azure, código de colores, <code>myTemplate</code>, <code>MiEscenaConVoz</code> (con
+<code>voiceover</code>, <code>anuncia_regla=/=destaca_regla</code>, créditos, tarjeta de
+pausa), la pantalla de créditos, Omega y los vectores de \(\mathbb{R}^2\)
+y \(\mathbb{R}^3\). Si <code>vm2comun.py</code> no existe o está anticuado, tangle
+primero <code>Comunes.org</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org64389f2" class="outline-2">
+<h2 id="org64389f2"><span class="section-number-2">3.</span> Rodando: 1,2,3&hellip; ¡acción!</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgc2f858c" class="outline-3">
+<h3 id="orgc2f858c"><span class="section-number-3">3.1.</span> Generamos un fichero <code>mpeg</code> por cada escena</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-bash" id="orgb483326">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -pql $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orga558a6f">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold;">cd</span> ../videoMath2/lib || <span style="font-weight: bold;">cd</span> lib
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$escena"</span> | <span style="font-weight: bold; font-style: italic;">VOZ</span>=$<span style="font-weight: bold; font-style: italic;">voz</span> ~/.venvs/manim/bin/manim -qh $<span style="font-weight: bold; font-style: italic;">fichero</span>.py --disable_caching
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b3124f" class="outline-3">
+<h3 id="org8b3124f"><span class="section-number-3">3.2.</span> Montaje: concatenar las escenas, música de entrada y salida, subtítulos</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+El vídeo final se monta a partir de los mp4 de las escenas (no de la
+clase del vídeo completo): corregir una escena no obliga a renderizarlo
+todo ni a pagar otra vez la voz, y los límites entre escenas quedan
+exactos. Cada segmento se recodifica igualando la duración del audio y
+del vídeo (concatenar sin recodificar deja un parón en cada unión, pues
+manim genera el audio unas décimas más largo que la imagen). La música
+suena en la portada (volumen <code>volumen</code>) y se funde cuando empieza la
+primera escena; vuelve al empezar la escena <code>cierre</code> (bajo la voz, con
+<code>volumen_voz</code>), sube en la última escena (los créditos) y se funde a
+negro con la imagen. La voz se mide entera y se lleva a -16 LUFS con
+una ganancia fija y un limitador (no con <code>loudnorm</code> en una pasada, que
+subía el volumen poco a poco al empezar). Los <code>.srt</code> de las escenas se desplazan y se
+funden en un único <code>video.srt</code> junto al mp4 (para subirlo a YouTube).
+</p>
+
+<p>
+<code>escenas</code> es la lista ordenada de clases; <code>cierre</code> la escena en la que
+vuelve la música (el resumen). El mp4 y el srt finales quedan en la raíz del repositorio del
+idioma.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org1dea0b9"><span style="font-weight: bold;">export</span> <span style="font-weight: bold; font-style: italic;">LC_ALL</span>=C   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">decimales con punto para bc y printf
+</span>[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+<span style="font-weight: bold; font-style: italic;">dir</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/lib/media/videos/$<span style="font-weight: bold; font-style: italic;">fichero</span>/$<span style="font-weight: bold; font-style: italic;">calidad</span>
+<span style="font-weight: bold; font-style: italic;">tmp</span>=$<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/$<span style="font-weight: bold; font-style: italic;">video</span>; mkdir -p $<span style="font-weight: bold; font-style: italic;">tmp</span>; rm -f $<span style="font-weight: bold; font-style: italic;">tmp</span>/seg_*.mp4
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">1. Un segmento por escena, con audio y v&#237;deo de la misma duraci&#243;n exacta
+</span><span style="font-weight: bold; font-style: italic;">i</span>=0; <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">T</span>=0; <span style="font-weight: bold; font-style: italic;">T0</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">Tc</span>=<span style="font-style: italic;">""</span>
+<span style="font-weight: bold;">for</span> esc<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">escenas</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold; font-style: italic;">seg</span>=$(<span style="font-weight: bold;">printf "%s/seg_%02d.mp4" $tmp $i</span>)
+  <span style="font-weight: bold; font-style: italic;">dur</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=duration -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold; font-style: italic;">fps</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -select_streams v:0 -show_entries stream=r_frame_rate -of default=nk=1:nw=1 $dir/$esc.mp4</span>)
+  <span style="font-weight: bold;">if</span> ffprobe -loglevel error -select_streams a -show_entries <span style="font-weight: bold; font-style: italic;">stream</span>=codec_type -of <span style="font-weight: bold; font-style: italic;">csv</span>=<span style="font-weight: bold; font-style: italic;">p</span>=0 $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 | grep -q audio; <span style="font-weight: bold;">then</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -af <span style="font-style: italic;">"aresample=48000,apad"</span> -ac 2 -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">else</span>
+    ffmpeg -loglevel error -y -i $<span style="font-weight: bold; font-style: italic;">dir</span>/$<span style="font-weight: bold; font-style: italic;">esc</span>.mp4 -f lavfi -i <span style="font-weight: bold; font-style: italic;">anullsrc</span>=<span style="font-weight: bold; font-style: italic;">r</span>=48000:<span style="font-weight: bold; font-style: italic;">cl</span>=stereo -map 0:v -map 1:a -t $<span style="font-weight: bold; font-style: italic;">dur</span> -r $<span style="font-weight: bold; font-style: italic;">fps</span> -fps_mode cfr -pix_fmt yuv420p -c:v libx264 -crf 18 -preset fast -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">seg</span>
+  <span style="font-weight: bold;">fi</span>
+  <span style="font-weight: bold; font-style: italic;">d</span>=$(<span style="font-weight: bold;">ffprobe -loglevel error -show_entries format=duration -of default=nk=1:nw=1 $seg</span>)
+  <span style="font-weight: bold; font-style: italic;">offsets</span>=<span style="font-style: italic;">"$offsets $T"</span>; [ <span style="font-style: italic;">"$esc"</span> = <span style="font-style: italic;">"$cierre"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"%2d  %-55s %8.3f s  (empieza en %8.3f)\n"</span> $<span style="font-weight: bold; font-style: italic;">i</span> $<span style="font-weight: bold; font-style: italic;">esc</span> $<span style="font-weight: bold; font-style: italic;">d</span> $<span style="font-weight: bold; font-style: italic;">T</span>
+  <span style="font-weight: bold; font-style: italic;">T</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T+$d"</span>); [ -z <span style="font-style: italic;">"$T0"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">T0</span>=$<span style="font-weight: bold; font-style: italic;">d</span>; <span style="font-weight: bold; font-style: italic;">dl</span>=$<span style="font-weight: bold; font-style: italic;">d</span>
+  <span style="font-weight: bold; font-style: italic;">lista</span>=<span style="font-style: italic;">"$lista $seg"</span>; <span style="font-weight: bold; font-style: italic;">i</span>=$(<span style="font-weight: bold;">(i+1</span>))
+<span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">n</span>=$<span style="font-weight: bold; font-style: italic;">i</span>; <span style="font-weight: bold; font-style: italic;">Tl</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$dl"</span>); [ -z <span style="font-style: italic;">"$Tc"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">Tc</span>=$<span style="font-weight: bold; font-style: italic;">Tl</span>
+<span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Duraci&#243;n total %.3f s; m&#250;sica hasta %.3f s, desde %.3f s (bajo la voz) y desde %.3f s (cr&#233;ditos)\n"</span> $<span style="font-weight: bold; font-style: italic;">T</span> $<span style="font-weight: bold; font-style: italic;">T0</span> $<span style="font-weight: bold; font-style: italic;">Tc</span> $<span style="font-weight: bold; font-style: italic;">Tl</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2. Concatenaci&#243;n recodificada, voz normalizada, m&#250;sica de entrada y salida, fundido final
+</span><span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold; font-style: italic;">k</span>=0
+<span style="font-weight: bold;">for</span> seg<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">lista</span>; <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">inputs</span>=<span style="font-style: italic;">"$inputs -i $seg"</span>; <span style="font-weight: bold; font-style: italic;">fc</span>=<span style="font-style: italic;">"$fc[$k:v][$k:a]"</span>; <span style="font-weight: bold; font-style: italic;">k</span>=$(<span style="font-weight: bold;">(k+1</span>)); <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">La voz se mide entera y recibe una ganancia fija hasta -16 LUFS, con un limitador para los picos.
+</span><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">(loudnorm en una pasada ajusta la ganancia sobre la marcha: la primera frase quedaba 5 dB m&#225;s baja.)
+</span><span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">""</span>; <span style="font-weight: bold;">for</span> k<span style="font-weight: bold;"> in</span> $(<span style="font-weight: bold;">seq 0 $((n-1</span>))); <span style="font-weight: bold;">do</span> <span style="font-weight: bold; font-style: italic;">ia</span>=<span style="font-style: italic;">"$ia[$k:a]"</span>; <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold; font-style: italic;">I</span>=$(<span style="font-weight: bold;">ffmpeg -hide_banner -nostats $inputs -filter_complex "${ia}concat=n=$n:v=0:a=1,ebur128=framelog=quiet" -f null - 2&gt;&amp;1 | awk '$1=="I:"{v=$2} END{print v}'</span>)
+<span style="font-weight: bold; font-style: italic;">ganancia</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "-16 - ($I</span><span style="font-style: italic;">)"</span>); <span style="font-weight: bold;">printf</span> <span style="font-style: italic;">"Voz: %s LUFS; ganancia %.2f dB\n"</span> $<span style="font-weight: bold; font-style: italic;">I</span> $<span style="font-weight: bold; font-style: italic;">ganancia</span>
+<span style="font-weight: bold; font-style: italic;">fin_m1</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T0+5"</span>); <span style="font-weight: bold; font-style: italic;">tfade</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-6"</span>)
+<span style="font-weight: bold; font-style: italic;">dur_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$Tl-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m2</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tc*1000"</span>)); <span style="font-weight: bold; font-style: italic;">fade_m2</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$dur_m2-1"</span>)
+<span style="font-weight: bold; font-style: italic;">fin_m3</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$T-$Tc"</span>); <span style="font-weight: bold; font-style: italic;">ms_m3</span>=$(<span style="font-weight: bold;">printf "%.0f" $(bc -l &lt;&lt;&lt; "$Tl*1000"</span>))
+ffmpeg -loglevel error -y $<span style="font-weight: bold; font-style: italic;">inputs</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -i $<span style="font-weight: bold; font-style: italic;">musica</span> -filter_complex <span style="font-style: italic;">"
+  ${fc}concat=n=$n:v=1:a=1[v0][a0];
+  [a0]volume=${ganancia}dB,alimiter=limit=0.84:level=false[voz];
+  [$n:a]atrim=0:$fin_m1,volume=$volumen,afade=t=in:st=0:d=1,afade=t=out:st=$T0:d=5[m1];
+  [$(</span><span style="font-weight: bold;">(n+1</span><span style="font-style: italic;">)):a]atrim=0:$dur_m2,volume=$volumen_voz,afade=t=in:st=0:d=3,afade=t=out:st=$fade_m2:d=1,adelay=delays=${ms_m2}:all=1[m2];
+  [$(</span><span style="font-weight: bold;">(n+2</span><span style="font-style: italic;">)):a]atrim=$dur_m2:$fin_m3,asetpts=PTS-STARTPTS,volume=$volumen,afade=t=in:st=0:d=1,adelay=delays=${ms_m3}:all=1[m3];
+  [voz][m1][m2][m3]amix=inputs=4:duration=first:normalize=0[mix];
+  [mix]afade=t=out:st=$tfade:d=6[a];
+  [v0]fade=t=out:st=$tfade:d=6[v]"</span> <span style="font-style: italic;">\</span>
+  -map <span style="font-style: italic;">"[v]"</span> -map <span style="font-style: italic;">"[a]"</span> -c:v libx264 -crf 18 -preset medium -pix_fmt yuv420p -c:a aac -b:a 192k $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4
+<span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"V&#237;deo: $raiz/$video.mp4"</span>
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">3. Subt&#237;tulos: desplazar el srt de cada escena y fundirlos en uno
+</span><span style="font-weight: bold; font-style: italic;">ESCENAS</span>=<span style="font-style: italic;">"$escenas"</span> <span style="font-weight: bold; font-style: italic;">OFFSETS</span>=<span style="font-style: italic;">"$offsets"</span> python3 - <span style="font-style: italic;">"$dir"</span> <span style="font-style: italic;">"$raiz/$video.srt"</span> &lt;&lt;<span style="font-style: italic;">'EOF'</span><span style="font-weight: bold;">
+import sys, os, re
+dir, salida = sys.argv[1], sys.argv[2]
+escenas = os.environ["ESCENAS"].split(); offsets = [float(x) for x in os.environ["OFFSETS"].split()]
+def t2s(t):
+    h, m, s = t.strip().split(":"); s, ms = s.split(",")
+    return int(h)*3600 + int(m)*60 + int(s) + int(ms)/1000
+def s2t(x):
+    ms = round(x*1000); h, r = divmod(ms, 3600000); m, r = divmod(r, 60000); s, ms = divmod(r, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+k, out = 1, []
+for esc, off in zip(escenas, offsets):
+    ruta = f"{dir}/{esc}.srt"
+    if not os.path.exists(ruta): continue
+    for bloque in re.split(r"\n\s*\n", open(ruta, encoding="utf-8").read().strip()):
+        lineas = bloque.strip().splitlines()
+        if len(lineas) &lt; 3 or "--&gt;" not in lineas[1]: continue
+        a, _, b = lineas[1].partition("--&gt;")
+        out.append(f"{k}\n{s2t(t2s(a)+off)} --&gt; {s2t(t2s(b)+off)}\n" + "\n".join(lineas[2:])); k += 1
+open(salida, "w", encoding="utf-8").write("\n\n".join(out) + "\n")
+print(f"Subt&#237;tulos: {salida} ({k-1} entradas)")
+EOF</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6db8c3c" class="outline-3">
+<h3 id="org6db8c3c"><span class="section-number-3">3.3.</span> Comprobar las uniones y los subtítulos</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Extrae un fotograma justo antes y justo después de cada instante dado
+(en segundos, separados por espacios; por ejemplo los "empieza en" que
+imprime <a href="#org1dea0b9">No description for this link</a>) para mirar que no haya parones ni desfases.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgf3b998b">[ <span style="font-style: italic;">"$idioma"</span> = <span style="font-style: italic;">"en"</span> ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">raiz</span>=../videoMath2 || <span style="font-weight: bold; font-style: italic;">raiz</span>=.
+mkdir -p $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+<span style="font-weight: bold;">for</span> t<span style="font-weight: bold;"> in</span> $<span style="font-weight: bold; font-style: italic;">tiempos</span>; <span style="font-weight: bold;">do</span>
+  <span style="font-weight: bold;">for</span> dt<span style="font-weight: bold;"> in</span> -0.1 0.1; <span style="font-weight: bold;">do</span>
+    <span style="font-weight: bold; font-style: italic;">ti</span>=$(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$t+$dt"</span>); [ $(<span style="font-weight: bold;">bc -l &lt;&lt;&lt; "$ti &lt; 0"</span>) = 1 ] &amp;&amp; <span style="font-weight: bold; font-style: italic;">ti</span>=0
+    ffmpeg -loglevel error -y -ss $<span style="font-weight: bold; font-style: italic;">ti</span> -i $<span style="font-weight: bold; font-style: italic;">raiz</span>/$<span style="font-weight: bold; font-style: italic;">video</span>.mp4 -frames:v 1 $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas/$(<span style="font-weight: bold;">printf "%08.2f" $ti</span>).png
+  <span style="font-weight: bold;">done</span>
+<span style="font-weight: bold;">done</span>
+ls $<span style="font-weight: bold; font-style: italic;">raiz</span>/tmp/fotogramas
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4b976eb" class="outline-3">
+<h3 id="org4b976eb"><span class="section-number-3">3.4.</span> Extraer el guion (la narración) para revisarlo</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Recorre el fichero de python y saca, escena por escena, los textos
+<code>tr(...)</code> del idioma pedido: en prosa la narración (los que están dentro
+de <code>self.voiceover</code>) y entre corchetes los textos que aparecen en
+pantalla. Sirve para revisar el guion sin leer código y para la
+descripción o los subtítulos del vídeo. Como los dos py solo difieren
+en <code>LANG</code>, lee siempre el fichero español (<code>./lib/</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org0a9f5fc"><span style="font-weight: bold;">import</span> ast, textwrap
+
+<span style="font-weight: bold; font-style: italic;">arbol</span> = ast.parse(<span style="font-weight: bold;">open</span>(f<span style="font-style: italic;">"lib/</span>{fichero}<span style="font-style: italic;">.py"</span>, encoding=<span style="font-style: italic;">"utf-8"</span>).read())
+<span style="font-weight: bold; font-style: italic;">idx</span>   = 0 <span style="font-weight: bold;">if</span> idioma == <span style="font-style: italic;">"es"</span> <span style="font-weight: bold;">else</span> 1
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">texto</span>(nodo):
+    <span style="font-weight: bold;">try</span>:
+        <span style="font-weight: bold;">return</span> ast.literal_eval(nodo)
+    <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">Exception</span>:
+        <span style="font-weight: bold;">return</span> ast.unparse(nodo)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_tr</span>(n):
+    <span style="font-weight: bold;">return</span> (<span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Name)
+            <span style="font-weight: bold;">and</span> n.func.<span style="font-weight: bold;">id</span> == <span style="font-style: italic;">"tr"</span> <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">len</span>(n.args) &gt;= 2)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">es_borrado</span>(stmt):
+    <span style="font-weight: bold;">return</span> ast.unparse(stmt).startswith(<span style="font-style: italic;">"self.play(*[FadeOut(mob) for mob in self.mobjects])"</span>)
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Primera clase con construct(): la del v&#237;deo completo.
+</span><span style="font-weight: bold; font-style: italic;">construct</span> = <span style="font-weight: bold;">next</span>(f <span style="font-weight: bold;">for</span> c <span style="font-weight: bold;">in</span> arbol.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(c, ast.ClassDef)
+                 <span style="font-weight: bold;">for</span> f <span style="font-weight: bold;">in</span> c.body <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(f, ast.FunctionDef) <span style="font-weight: bold;">and</span> f.name == <span style="font-style: italic;">"construct"</span>)
+
+<span style="font-weight: bold; font-style: italic;">escena</span>, <span style="font-weight: bold; font-style: italic;">items</span> = 0, []   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">la portada es la escena 0
+</span><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">volcar</span>():
+    <span style="font-weight: bold;">global</span> items
+    <span style="font-weight: bold;">if</span> items:
+        <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"==== </span>{'Escena' <span style="font-weight: bold;">if</span> idioma == 'es' <span style="font-weight: bold;">else</span> 'Scene'}<span style="font-style: italic;"> </span>{escena}<span style="font-style: italic;"> ====</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+        <span style="font-weight: bold;">for</span> tipo, t <span style="font-weight: bold;">in</span> items:
+            <span style="font-weight: bold;">if</span> tipo == <span style="font-style: italic;">"voz"</span>:
+                <span style="font-weight: bold;">print</span>(textwrap.fill(t, 72), <span style="font-style: italic;">"</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+            <span style="font-weight: bold;">else</span>:
+                <span style="font-weight: bold;">print</span>(f<span style="font-style: italic;">"    [</span>{t}<span style="font-style: italic;">]</span><span style="font-weight: bold; text-decoration: underline;">\n</span><span style="font-style: italic;">"</span>)
+    <span style="font-weight: bold; font-style: italic;">items</span> = []
+
+<span style="font-weight: bold;">for</span> stmt <span style="font-weight: bold;">in</span> construct.body:
+    <span style="font-weight: bold;">if</span> es_borrado(stmt):
+        volcar(); <span style="font-weight: bold; font-style: italic;">escena</span> += 1; <span style="font-weight: bold;">continue</span>
+    <span style="font-weight: bold; font-style: italic;">en_voz</span> = <span style="font-weight: bold;">set</span>()
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt):
+        <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">isinstance</span>(n, ast.Call) <span style="font-weight: bold;">and</span> <span style="font-weight: bold;">isinstance</span>(n.func, ast.Attribute) <span style="font-weight: bold;">and</span> n.func.attr == <span style="font-style: italic;">"voiceover"</span>:
+            <span style="font-weight: bold; font-style: italic;">en_voz</span> |= {<span style="font-weight: bold;">id</span>(s) <span style="font-weight: bold;">for</span> s <span style="font-weight: bold;">in</span> ast.walk(n) <span style="font-weight: bold;">if</span> es_tr(s)}
+    <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">sorted</span>((n <span style="font-weight: bold;">for</span> n <span style="font-weight: bold;">in</span> ast.walk(stmt) <span style="font-weight: bold;">if</span> es_tr(n)), key=<span style="font-weight: bold;">lambda</span> n: (n.lineno, n.col_offset)):
+        items.append((<span style="font-style: italic;">"voz"</span> <span style="font-weight: bold;">if</span> <span style="font-weight: bold;">id</span>(n) <span style="font-weight: bold;">in</span> en_voz <span style="font-weight: bold;">else</span> <span style="font-style: italic;">"pantalla"</span>, texto(n.args[idx])))
+volcar()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org76f9a92" class="outline-3">
+<h3 id="org76f9a92"><span class="section-number-3">3.5.</span> Tangle desde la terminal (sin abrir Emacs)</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-bash">emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "Comunes.org")'</span>   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">solo si cambi&#243; el c&#243;digo com&#250;n
+</span>emacs --batch -l org --eval <span style="font-style: italic;">'(org-babel-tangle-file "L01-V13-OperacionesConMatrices.org")'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2026-11-23 lun 17:25</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

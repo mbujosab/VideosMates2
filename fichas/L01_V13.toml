@@ -1,0 +1,55 @@
+# Ficha de YouTube del vídeo L01 V13 (una sección por idioma).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V13.toml es
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (HD es, 2026-11-23).
+# Título: «Suma de matrices y producto por escalares | Álgebra lineal 1.13» tendría 63 caracteres (más de 60).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "njXt9S3kfWU"   # subido por la API el 2026-11-23 (adelantado por Marcos del jueves 26)
+video = "L01_V13_OperacionesConMatrices.mp4"
+subtitulos = "L01_V13_OperacionesConMatrices.srt"
+idioma = "es"
+titulo = "Operaciones con matrices | Álgebra lineal 1.13"
+titulo_miniatura = "Operaciones\ncon matrices"
+miniatura = "miniaturas/L01_V13_es.png"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "matrices", "suma de matrices", "producto por un escalar", "matriz nula",
+             "matriz opuesta", "propiedades", "matemáticas", "GECO", "UCM"]
+descripcion = """
+La suma de matrices y el producto de una matriz por un escalar, definidos columna a columna, y sus ocho propiedades.
+
+Decimotercer vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Suma de matrices
+00:51 Producto de una matriz por un escalar
+01:20 Componente a componente
+02:14 Matrices nulas y matriz opuesta
+02:38 Las mismas definiciones
+03:02 La conmutativa, cambiando los símbolos
+04:23 La propiedad del opuesto, cambiando los símbolos
+05:24 Las ocho propiedades
+05:45 Resumen
+06:35 Créditos finales
+
+Dos matrices del mismo orden se suman columna a columna, y una matriz se multiplica por un escalar multiplicando cada una de sus columnas; por tanto, ambas operaciones también se hacen componente a componente. Las matrices nulas y la matriz opuesta se definen igual que con los vectores. Las definiciones son las de los vectores con las letras en mayúscula, así que las demostraciones de las propiedades de los vectores sirven para las matrices con solo cambiar los símbolos: lo vemos con la propiedad conmutativa y con la del opuesto, y las demás quedan como ejercicio. Las demostraciones solo usan reglas para manipular símbolos.
+
+Correspondiente sección del libro (Sección 1.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.5
+
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.5.ipynb
+Todos los Notebooks de jupyter: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Vídeo anterior: https://youtu.be/zKef0mF4YHQ
+Siguiente vídeo: (se añade al publicarlo)
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
