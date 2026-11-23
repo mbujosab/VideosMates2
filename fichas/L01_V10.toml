@@ -63,7 +63,7 @@ etiquetas = ["linear algebra", "matrices", "matrix", "selector operator", "selec
 descripcion = """
 The selector operator picks a column from the right, a row from the left and a component from both sides, in any order.
 
-Tenth video of the first lesson of the linear algebra course.
+Tenth video of the first lecture of the linear algebra course.
 
 00:00 Title
 00:06 Rows and columns with the selector operator

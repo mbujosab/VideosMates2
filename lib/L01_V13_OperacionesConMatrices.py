@@ -304,6 +304,17 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
             self.wait_until_bookmark("m")
             self.play(FadeIn(mas), run_time=0.6)
         
+        # el propósito, dicho (Marcos, 2026-11-21: el «por eso» lo dejaba implícito); locución aparte para conservar la toma
+        # anterior. Las columnas de las dos matrices se enmarcan mientras la voz lo dice: son los vectores que se aprovechan
+        with self.voiceover(text=tr("""Así aprovechamos todo lo que ya hemos aprendido sobre los vectores.""",
+                                    """This way we reuse everything we have learned about vectors.""")) as tracker:
+            cols = VGroup(*[marco(c) for M in (A, B) for c in M.get_columns()])
+            self.play(Create(cols, lag_ratio=0.15), run_time=1.2)
+            self.wait(max(tracker.duration - 1.6, 0.1))
+            self.play(FadeOut(cols), run_time=0.4)
+        
+        self.wait(0.6)
+        
         with self.voiceover(text=tr("""La primera columna de la suma es la suma de las primeras columnas, <bookmark mark='c2'/> la segunda es la suma de las segundas, <bookmark mark='c3'/> y la tercera, la suma de las terceras.""",
                                     """The first column of the sum is the sum of the first columns, <bookmark mark='c2'/> the second is the sum of the second columns, <bookmark mark='c3'/> and the third, the sum of the third columns.""")) as tracker:
             self.play(FadeIn(igual), FadeIn(S.get_brackets()), FadeIn(nombres[2]), run_time=0.6)
@@ -322,10 +333,19 @@ class L01_V13_OperacionesConMatrices(MiEscenaConVoz):
         
         self.wait(1.0)
         
-        with self.voiceover(text=tr("""Esta es la definición de suma de matrices: <bookmark mark='d'/> cada columna de la suma es la suma de las columnas correspondientes. Con nuestra notación, <bookmark mark='s'/> el selector de columnas <bookmark mark='v'/> se distribuye entre los sumandos.""",
-                                    """This is the definition of matrix addition: <bookmark mark='d'/> each column of the sum is the sum of the corresponding columns. In our notation, <bookmark mark='s'/> the column selector <bookmark mark='v'/> distributes over the terms.""")) as tracker:
+        with self.voiceover(text=tr("""Esta es la definición de suma de matrices: <bookmark mark='d'/> cada columna de la suma es la suma de <bookmark mark='c'/> las columnas correspondientes. Con nuestra notación, <bookmark mark='s'/> el selector de columnas <bookmark mark='v'/> se distribuye entre los sumandos.""",
+                                    """This is the definition of matrix addition: <bookmark mark='d'/> each column of the sum is the sum of <bookmark mark='c'/> the corresponding columns. In our notation, <bookmark mark='s'/> the column selector <bookmark mark='v'/> distributes over the terms.""")) as tracker:
             # la definición se escribe con «Esta es» (Marcos, 2026-11-20: si no, la voz señala algo que no está)
             self.play(FadeOut(marcos), Write(def_suma), run_time=1.2)
+            # cada pieza se señala cuando la voz la nombra, como en la definición del producto (Marcos, 2026-11-21): la columna
+            # de la suma (lado izquierdo) y las columnas de los sumandos. glifos: ( A + B ) | j (0-6)  =  A | j (8-10)  +  B | j (12-14)
+            col_suma, cols = def_suma[0][0:7], [def_suma[0][8:11], def_suma[0][12:15]]
+            self.wait_until_bookmark("d")
+            resalta(self, [col_suma], color=COLOR_COLUMNA, factor=1.12)
+            self.wait_until_bookmark("c")
+            self.play(col_suma.animate.set_color(WHITE).scale(1/1.12), *[x.animate.set_color(COLOR_COLUMNA).scale(1.15) for x in cols], run_time=0.25)
+            self.wait(1.3)
+            apaga(self, cols, factor=1.15, run_time=0.25)
             # «el selector de columnas»: el |j de la izquierda; «se distribuye»: dos copias suyas viajan a los dos sumandos
             # (Marcos, 2026-11-18); los |j de la derecha se atenúan un instante para que se vea llegar cada copia
             self.wait_until_bookmark("s")
@@ -910,6 +930,17 @@ class L01_V13_E01_Suma(MiEscenaConVoz):
             self.wait_until_bookmark("m")
             self.play(FadeIn(mas), run_time=0.6)
         
+        # el propósito, dicho (Marcos, 2026-11-21: el «por eso» lo dejaba implícito); locución aparte para conservar la toma
+        # anterior. Las columnas de las dos matrices se enmarcan mientras la voz lo dice: son los vectores que se aprovechan
+        with self.voiceover(text=tr("""Así aprovechamos todo lo que ya hemos aprendido sobre los vectores.""",
+                                    """This way we reuse everything we have learned about vectors.""")) as tracker:
+            cols = VGroup(*[marco(c) for M in (A, B) for c in M.get_columns()])
+            self.play(Create(cols, lag_ratio=0.15), run_time=1.2)
+            self.wait(max(tracker.duration - 1.6, 0.1))
+            self.play(FadeOut(cols), run_time=0.4)
+        
+        self.wait(0.6)
+        
         with self.voiceover(text=tr("""La primera columna de la suma es la suma de las primeras columnas, <bookmark mark='c2'/> la segunda es la suma de las segundas, <bookmark mark='c3'/> y la tercera, la suma de las terceras.""",
                                     """The first column of the sum is the sum of the first columns, <bookmark mark='c2'/> the second is the sum of the second columns, <bookmark mark='c3'/> and the third, the sum of the third columns.""")) as tracker:
             self.play(FadeIn(igual), FadeIn(S.get_brackets()), FadeIn(nombres[2]), run_time=0.6)
@@ -928,10 +959,19 @@ class L01_V13_E01_Suma(MiEscenaConVoz):
         
         self.wait(1.0)
         
-        with self.voiceover(text=tr("""Esta es la definición de suma de matrices: <bookmark mark='d'/> cada columna de la suma es la suma de las columnas correspondientes. Con nuestra notación, <bookmark mark='s'/> el selector de columnas <bookmark mark='v'/> se distribuye entre los sumandos.""",
-                                    """This is the definition of matrix addition: <bookmark mark='d'/> each column of the sum is the sum of the corresponding columns. In our notation, <bookmark mark='s'/> the column selector <bookmark mark='v'/> distributes over the terms.""")) as tracker:
+        with self.voiceover(text=tr("""Esta es la definición de suma de matrices: <bookmark mark='d'/> cada columna de la suma es la suma de <bookmark mark='c'/> las columnas correspondientes. Con nuestra notación, <bookmark mark='s'/> el selector de columnas <bookmark mark='v'/> se distribuye entre los sumandos.""",
+                                    """This is the definition of matrix addition: <bookmark mark='d'/> each column of the sum is the sum of <bookmark mark='c'/> the corresponding columns. In our notation, <bookmark mark='s'/> the column selector <bookmark mark='v'/> distributes over the terms.""")) as tracker:
             # la definición se escribe con «Esta es» (Marcos, 2026-11-20: si no, la voz señala algo que no está)
             self.play(FadeOut(marcos), Write(def_suma), run_time=1.2)
+            # cada pieza se señala cuando la voz la nombra, como en la definición del producto (Marcos, 2026-11-21): la columna
+            # de la suma (lado izquierdo) y las columnas de los sumandos. glifos: ( A + B ) | j (0-6)  =  A | j (8-10)  +  B | j (12-14)
+            col_suma, cols = def_suma[0][0:7], [def_suma[0][8:11], def_suma[0][12:15]]
+            self.wait_until_bookmark("d")
+            resalta(self, [col_suma], color=COLOR_COLUMNA, factor=1.12)
+            self.wait_until_bookmark("c")
+            self.play(col_suma.animate.set_color(WHITE).scale(1/1.12), *[x.animate.set_color(COLOR_COLUMNA).scale(1.15) for x in cols], run_time=0.25)
+            self.wait(1.3)
+            apaga(self, cols, factor=1.15, run_time=0.25)
             # «el selector de columnas»: el |j de la izquierda; «se distribuye»: dos copias suyas viajan a los dos sumandos
             # (Marcos, 2026-11-18); los |j de la derecha se atenúan un instante para que se vea llegar cada copia
             self.wait_until_bookmark("s")

@@ -663,6 +663,12 @@ class P00_E09_Programa(EscenaP00):
                          codigo("a @ b        un número" if LANG == "es" else "a @ b        a number", 24)], -6.4, 1.7, 0.6)
         matlab = columna([codigo("Matlab", 24, GRAY_B), codigo("(a'*b)*c     definido" if LANG == "es" else "(a'*b)*c     defined", 24, GREEN),
                           codigo("a'*(b*c)     no definido" if LANG == "es" else "a'*(b*c)     not defined", 24, RED)], 1.7, 1.7, 0.6)
+        # el escalar a la derecha (Marcos, 2026-11-21): convenio no habitual que salió de programar el curso; no hay que
+        # distinguir el lado porque el producto de números reales es conmutativo (pregunta de Andrés al ver V15)
+        conv = VGroup(M(r"\Vect{b}\lambda=\lambda\Vect{b}", 48), M(r"\Mat{A}\lambda=\lambda\Mat{A}", 48)).arrange(RIGHT, buff=1.6).move_to([0, 1.2, 0])
+        conv_n = T("el escalar de un producto, también a la derecha", "the scalar of a product, also on the right", 30, GRAY_B).next_to(conv, DOWN, buff=0.45)
+        conm = VGroup(M(r"\lambda\mu=\mu\lambda", 44, COLOR_ESCALAR),
+                      T("el producto de números reales es conmutativo", "the product of real numbers is commutative", 30, GRAY_B)).arrange(DOWN, buff=0.35).move_to([0, -1.7, 0])
         algos = columna([T("resuelve sistemas", "solves systems", 32), T("invierte matrices", "inverts matrices", 32), T("diagonaliza", "diagonalizes", 32),
                          T("y muestra cada paso con la notación del libro", "and shows each step in the notation of the book", 32, COLOR_ESCALAR)], -3.6, 1.4, 0.8)
         
@@ -682,9 +688,19 @@ class P00_E09_Programa(EscenaP00):
             limpia(self, d1, c1, d2, c2)
             en_marca(self, "t", tipos)
         
+        with self.voiceover(text=tr("""También salió de ese trabajo un convenio que no es el habitual: <bookmark mark='f'/> el libro permite escribir a la derecha el escalar de un producto. <bookmark mark='s'/> Así las expresiones se simplifican mucho, y con ellas el código.""",
+                                    """That work also produced a convention that is not the usual one: <bookmark mark='f'/> the book allows writing the scalar of a product on the right. <bookmark mark='s'/> This makes the expressions much simpler, and the code with them.""")) as tracker:
+            limpia(self, tipos)
+            en_marca(self, "f", conv)
+            en_marca(self, "s", conv_n)
+        
+        with self.voiceover(pausa=2.5, text=tr("""En general, escribir los escalares a la izquierda o a la derecha da estructuras distintas. <bookmark mark='c'/> Aquí no, porque el producto de números reales es conmutativo.""",
+                                               """In general, writing scalars on the left or on the right gives different structures. <bookmark mark='c'/> Not here, because the product of real numbers is commutative.""")) as tracker:
+            en_marca(self, "c", conm)
+        
         with self.voiceover(text=tr("""La distinción entre un vector y una matriz columna tampoco es exclusiva del libro. <bookmark mark='n'/> La biblioteca NumPy distingue una lista de números de una tabla con una sola columna, y multiplica dos listas sin transponer nada.""",
                                     """The distinction between a vector and a column matrix is not exclusive to the book either. <bookmark mark='n'/> The NumPy library tells a list of numbers apart from a table with a single column, and it multiplies two lists without transposing anything.""")) as tracker:
-            limpia(self, tipos)
+            limpia(self, conv, conv_n, conm)
             en_marca(self, "n", numpy)
         
         with self.voiceover(pausa=2.5, text=tr("""<bookmark mark='m'/> En Matlab, en cambio, una matriz de orden uno actúa además como un número. Con esa regla, el primero de estos productos está definido y el segundo no. Tratar todos los objetos como matrices acaba rompiendo la asociatividad que se quería aprovechar.""",

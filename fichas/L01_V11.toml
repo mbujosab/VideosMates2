@@ -63,7 +63,7 @@ etiquetas = ["linear algebra", "matrices", "matrix", "transpose", "transposition
 descripcion = """
 Transposing a matrix turns its rows into columns, and amounts to moving the indices to the other side.
 
-Eleventh video of the first lesson of the linear algebra course.
+Eleventh video of the first lecture of the linear algebra course.
 
 00:00 Title
 00:06 Transposition

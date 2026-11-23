@@ -326,7 +326,7 @@ class L01_V15_EscalarALaDerecha(MiEscenaConVoz):
         self.wait(1.0)
         
         with self.voiceover(text=tr("""Con este vídeo termina la primera lección del curso. En el próximo empieza la segunda, con el producto punto.""",
-                                    """This video ends the first lesson of the course. The next one starts the second lesson, with the dot product.""")) as tracker:
+                                    """This video ends the first lecture of the course. The next one starts the second lecture, with the dot product.""")) as tracker:
             pass
         
         self.pausa_media()
@@ -591,7 +591,7 @@ class L01_V15_E05_Resumen(MiEscenaConVoz):
         self.wait(1.0)
         
         with self.voiceover(text=tr("""Con este vídeo termina la primera lección del curso. En el próximo empieza la segunda, con el producto punto.""",
-                                    """This video ends the first lesson of the course. The next one starts the second lesson, with the dot product.""")) as tracker:
+                                    """This video ends the first lecture of the course. The next one starts the second lecture, with the dot product.""")) as tracker:
             pass
         
         self.pausa_media()

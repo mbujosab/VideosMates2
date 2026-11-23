@@ -677,6 +677,11 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
                                 linea(r"=\lambda\VectTCpE{A}{j}"),
                                 linea(r"=\elemRp{\lambda\MatTpE{A}}{j}")], y_sup=0.2, salto=0.66, x_izq=-1.8)
         idea = aviso("idea", tr("La transposición es un operador lineal", "Transposition is a linear operator"), font_size=32).to_edge(DOWN, buff=0.15)
+        # las dos reglas demostradas, juntas, para la frase que cierra la escena. Glifos: ( A + B ) T = A T + B T (0-11);
+        # ( λ A ) T = λ ( A T ) (0-10)
+        regla_suma, regla_prod = [MathTex(f, tex_template=myTemplate, font_size=52) for f in (TRANS_SUMA, TRANS_PROD)]
+        VGroup(regla_suma, regla_prod).arrange(DOWN, buff=1.0).move_to([0, 0.5, 0])
+        de_fondo = list(self.mobjects)   # lo que no es de la escena (la firma del margen)
         
         with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo: <bookmark mark='e'/> da igual <bookmark mark='e1'/> multiplicar primero y <bookmark mark='e2'/> transponer después, <bookmark mark='d'/> que <bookmark mark='e3'/> transponer primero y <bookmark mark='e4'/> multiplicar después.""",
                                     """The same happens with scalar multiplication: <bookmark mark='e'/> it makes no difference whether we <bookmark mark='e1'/> multiply first and <bookmark mark='e2'/> transpose afterwards, <bookmark mark='d'/> or <bookmark mark='e3'/> transpose first and <bookmark mark='e4'/> multiply afterwards.""")) as tracker:
@@ -694,15 +699,21 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
                                invitacion_voz=tr("Pause el vídeo e intente demostrarlo con los mismos pasos que en la suma.",
                                                  "Pause the video and try to prove it with the same steps as for the sum."))
         
-        with self.voiceover(text=tr("""Los pasos son los mismos. <bookmark mark='l0'/> Seleccionamos una columna <bookmark mark='l1'/> y quitamos la transposición cambiando de lado el índice. <bookmark mark='l2'/> Como el selector de filas es lineal, <bookmark mark='m2'/> podemos sacar el escalar. <bookmark mark='l3'/> La fila es una columna de la transpuesta. <bookmark mark='l4'/> Y por la definición de producto por un escalar <bookmark mark='m4'/> podemos desplazar los paréntesis.""",
-                                    """The steps are the same. <bookmark mark='l0'/> We select a column <bookmark mark='l1'/> and remove the transposition by moving the index to the other side. <bookmark mark='l2'/> Since the row selector is linear, <bookmark mark='m2'/> we can take the scalar out. <bookmark mark='l3'/> The row is a column of the transpose. <bookmark mark='l4'/> And by the definition of the product by a scalar <bookmark mark='m4'/> we can move the parentheses.""")) as tracker:
+        with self.voiceover(text=tr("""Los pasos son los mismos. <bookmark mark='l0'/> Seleccionamos una columna cualquiera <bookmark mark='l1'/> y quitamos la transposición cambiando de lado el índice.""",
+                                    """The steps are the same. <bookmark mark='l0'/> We select any column <bookmark mark='l1'/> and remove the transposition by moving the index to the other side.""")) as tracker:
+            # «una columna cualquiera», como en las escenas 2 y 4 (Marcos, 2026-11-21): la locución se partió tras «...el índice.»
+            # (toma nueva de la primera parte; la segunda conserva la suya) y entre las dos va la pausa que tenía la toma entera
             rapido = dict(t_fijos=0.5, t_moviles=0.6, t_cuenta=0.35)
             self.wait_until_bookmark("l0")
             self.play(TransformFromCopy(enunciado[0][0:5], cadena[0][0][1:6]), FadeIn(cadena[0][0][0]), FadeIn(cadena[0][0][6:]), run_time=0.8)
             entera(self, cadena[0])
             self.wait_until_bookmark("l1")   # el selector cruza a la izquierda; la T y los paréntesis de fuera no aparecen
             paso(self, panel, "def", cadena[0], cadena[1], [(1, 3), (2, 4), (3, 5), (4, 6)], [(7, 2), (8, 1)], **rapido)
-            self.wait_until_bookmark("l2")   # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
+        
+        self.wait(0.45)
+        with self.voiceover(text=tr("""Como el selector de filas es lineal, <bookmark mark='m2'/> podemos sacar el escalar. <bookmark mark='l3'/> La fila es una columna de la transpuesta. <bookmark mark='l4'/> Y por la definición de producto por un escalar <bookmark mark='m4'/> podemos desplazar los paréntesis.""",
+                                    """Since the row selector is linear, <bookmark mark='m2'/> we can take the scalar out. <bookmark mark='l3'/> The row is a column of the transpose. <bookmark mark='l4'/> And by the definition of the product by a scalar <bookmark mark='m4'/> we can move the parentheses.""")) as tracker:
+            # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
             # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve). «( A )»
             # baja atenuado y sin el igual, para que no se lea «= ( A )» mientras la voz dice el preámbulo (2026-11-21)
             paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", tenue=True, **rapido)
@@ -725,10 +736,23 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         
         self.wait(0.8)
         
-        with self.voiceover(text=tr("""La transposición se distribuye en las sumas y es asociativa con el producto por un escalar: <bookmark mark='i'/> también es un operador lineal.""",
-                                    """Transposition distributes over sums and is associative with scalar multiplication: <bookmark mark='i'/> it is a linear operator too.""")) as tracker:
+        # El cierre nombra las dos reglas, así que el espectador las tiene delante (Marcos, 2026-11-21): la demostración se
+        # retira y quedan la regla de la suma (escena 4) y la del producto, cada una señalada en su frase: la transposición
+        # (morado) y la operación (amarillo). Marcas s y p injertadas en la toma que ya había.
+        self.play(FadeOut(*[m for m in self.mobjects if m not in de_fondo]), run_time=0.6)
+        with self.voiceover(text=tr("""La transposición <bookmark mark='s'/> se distribuye en las sumas y <bookmark mark='p'/> es asociativa con el producto por un escalar: <bookmark mark='i'/> también es un operador lineal.""",
+                                    """Transposition <bookmark mark='s'/> distributes over sums and <bookmark mark='p'/> is associative with scalar multiplication: <bookmark mark='i'/> it is a linear operator too.""")) as tracker:
+            rs, rp = regla_suma[0], regla_prod[0]
+            de_suma = [(rs[5], COLOR_TRANSP), (rs[8], COLOR_TRANSP), (rs[11], COLOR_TRANSP), (rs[2], COLOR_ESCALAR), (rs[9], COLOR_ESCALAR)]
+            de_prod = [(rp[4], COLOR_TRANSP), (rp[9], COLOR_TRANSP), (rp[1], COLOR_ESCALAR), (rp[6], COLOR_ESCALAR)]
+            self.play(FadeIn(regla_suma), run_time=0.5)
+            self.wait_until_bookmark("s")
+            self.play(*[g.animate.set_color(c).scale(1.3) for g, c in de_suma], run_time=0.25)
+            self.wait_until_bookmark("p")
+            self.play(*[g.animate.set_color(WHITE).scale(1/1.3) for g, c in de_suma], FadeIn(regla_prod), run_time=0.3)
+            self.play(*[g.animate.set_color(c).scale(1.3) for g, c in de_prod], run_time=0.25)
             self.wait_until_bookmark("i")
-            self.play(FadeIn(idea, scale=0.9), run_time=0.8)
+            self.play(*[g.animate.set_color(WHITE).scale(1/1.3) for g, c in de_prod], FadeIn(idea, scale=0.9), run_time=0.8)
         
         self.pausa_media()
 
@@ -744,8 +768,10 @@ class L01_V14_FilasYTransposicion(MiEscenaConVoz):
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=40), Tex(r, font_size=34, color=GRAY_A)).arrange(DOWN, buff=0.25)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.9).move_to([0, -0.2, 0])
         
-        with self.voiceover(text=tr("""Resumamos. Las matrices también se suman y se multiplican por un escalar fila a fila: el selector de filas es lineal, como el de columnas. <bookmark mark='t'/> La transposición también es lineal. La transpuesta de una suma es la suma de las transpuestas, y la transpuesta de un producto por un escalar es el producto del escalar por la transpuesta.""",
-                                    """Let us sum up. Matrices are also added and multiplied by a scalar row by row: the row selector is linear, like the column selector. <bookmark mark='t'/> Transposition is linear too. The transpose of a sum is the sum of the transposes, and the transpose of a product by a scalar is the scalar times the transpose.""")) as tracker:
+        with self.voiceover(text=tr("""Resumamos. Las matrices también se suman y se multiplican por un escalar fila a fila: el selector de filas es lineal, como el de columnas. <bookmark mark='t'/> La transposición también es lineal.""",
+                                    """Let us sum up. Matrices are also added and multiplied by a scalar row by row: the row selector is linear, like the column selector. <bookmark mark='t'/> Transposition is linear too.""")) as tracker:
+            # la descripción de las dos reglas se quitó (Marcos, 2026-11-21): la escena 5 ya las enseña juntas al cerrar; la
+            # toma es la que había, cortada tras «...también es lineal.»
             self.play(Write(cabecera), FadeIn(filas[0]), run_time=1)
             self.wait_until_bookmark("t")
             self.play(FadeIn(filas[1]), run_time=0.8)
@@ -1221,6 +1247,11 @@ class L01_V14_E05_TranspuestaDelProducto(MiEscenaConVoz):
                                 linea(r"=\lambda\VectTCpE{A}{j}"),
                                 linea(r"=\elemRp{\lambda\MatTpE{A}}{j}")], y_sup=0.2, salto=0.66, x_izq=-1.8)
         idea = aviso("idea", tr("La transposición es un operador lineal", "Transposition is a linear operator"), font_size=32).to_edge(DOWN, buff=0.15)
+        # las dos reglas demostradas, juntas, para la frase que cierra la escena. Glifos: ( A + B ) T = A T + B T (0-11);
+        # ( λ A ) T = λ ( A T ) (0-10)
+        regla_suma, regla_prod = [MathTex(f, tex_template=myTemplate, font_size=52) for f in (TRANS_SUMA, TRANS_PROD)]
+        VGroup(regla_suma, regla_prod).arrange(DOWN, buff=1.0).move_to([0, 0.5, 0])
+        de_fondo = list(self.mobjects)   # lo que no es de la escena (la firma del margen)
         
         with self.voiceover(text=tr("""Con el producto por un escalar ocurre lo mismo: <bookmark mark='e'/> da igual <bookmark mark='e1'/> multiplicar primero y <bookmark mark='e2'/> transponer después, <bookmark mark='d'/> que <bookmark mark='e3'/> transponer primero y <bookmark mark='e4'/> multiplicar después.""",
                                     """The same happens with scalar multiplication: <bookmark mark='e'/> it makes no difference whether we <bookmark mark='e1'/> multiply first and <bookmark mark='e2'/> transpose afterwards, <bookmark mark='d'/> or <bookmark mark='e3'/> transpose first and <bookmark mark='e4'/> multiply afterwards.""")) as tracker:
@@ -1238,15 +1269,21 @@ class L01_V14_E05_TranspuestaDelProducto(MiEscenaConVoz):
                                invitacion_voz=tr("Pause el vídeo e intente demostrarlo con los mismos pasos que en la suma.",
                                                  "Pause the video and try to prove it with the same steps as for the sum."))
         
-        with self.voiceover(text=tr("""Los pasos son los mismos. <bookmark mark='l0'/> Seleccionamos una columna <bookmark mark='l1'/> y quitamos la transposición cambiando de lado el índice. <bookmark mark='l2'/> Como el selector de filas es lineal, <bookmark mark='m2'/> podemos sacar el escalar. <bookmark mark='l3'/> La fila es una columna de la transpuesta. <bookmark mark='l4'/> Y por la definición de producto por un escalar <bookmark mark='m4'/> podemos desplazar los paréntesis.""",
-                                    """The steps are the same. <bookmark mark='l0'/> We select a column <bookmark mark='l1'/> and remove the transposition by moving the index to the other side. <bookmark mark='l2'/> Since the row selector is linear, <bookmark mark='m2'/> we can take the scalar out. <bookmark mark='l3'/> The row is a column of the transpose. <bookmark mark='l4'/> And by the definition of the product by a scalar <bookmark mark='m4'/> we can move the parentheses.""")) as tracker:
+        with self.voiceover(text=tr("""Los pasos son los mismos. <bookmark mark='l0'/> Seleccionamos una columna cualquiera <bookmark mark='l1'/> y quitamos la transposición cambiando de lado el índice.""",
+                                    """The steps are the same. <bookmark mark='l0'/> We select any column <bookmark mark='l1'/> and remove the transposition by moving the index to the other side.""")) as tracker:
+            # «una columna cualquiera», como en las escenas 2 y 4 (Marcos, 2026-11-21): la locución se partió tras «...el índice.»
+            # (toma nueva de la primera parte; la segunda conserva la suya) y entre las dos va la pausa que tenía la toma entera
             rapido = dict(t_fijos=0.5, t_moviles=0.6, t_cuenta=0.35)
             self.wait_until_bookmark("l0")
             self.play(TransformFromCopy(enunciado[0][0:5], cadena[0][0][1:6]), FadeIn(cadena[0][0][0]), FadeIn(cadena[0][0][6:]), run_time=0.8)
             entera(self, cadena[0])
             self.wait_until_bookmark("l1")   # el selector cruza a la izquierda; la T y los paréntesis de fuera no aparecen
             paso(self, panel, "def", cadena[0], cadena[1], [(1, 3), (2, 4), (3, 5), (4, 6)], [(7, 2), (8, 1)], **rapido)
-            self.wait_until_bookmark("l2")   # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
+        
+        self.wait(0.45)
+        with self.voiceover(text=tr("""Como el selector de filas es lineal, <bookmark mark='m2'/> podemos sacar el escalar. <bookmark mark='l3'/> La fila es una columna de la transpuesta. <bookmark mark='l4'/> Y por la definición de producto por un escalar <bookmark mark='m4'/> podemos desplazar los paréntesis.""",
+                                    """Since the row selector is linear, <bookmark mark='m2'/> we can take the scalar out. <bookmark mark='l3'/> The row is a column of the transpose. <bookmark mark='l4'/> And by the definition of the product by a scalar <bookmark mark='m4'/> we can move the parentheses.""")) as tracker:
+            # primero baja «( A )»; en «sacar el escalar» el escalar sale delante y el selector entra
             # en los paréntesis (Marcos, 2026-11-20: antes viajaban los paréntesis, que no son lo que el paso mueve). «( A )»
             # baja atenuado y sin el igual, para que no se lea «= ( A )» mientras la voz dice el preámbulo (2026-11-21)
             paso(self, panel, "filas", cadena[1], cadena[2], [(3, 2), (5, 5), (6, 6)], [(4, 1), (1, 3), (2, 4)], marca="m2", tenue=True, **rapido)
@@ -1269,10 +1306,23 @@ class L01_V14_E05_TranspuestaDelProducto(MiEscenaConVoz):
         
         self.wait(0.8)
         
-        with self.voiceover(text=tr("""La transposición se distribuye en las sumas y es asociativa con el producto por un escalar: <bookmark mark='i'/> también es un operador lineal.""",
-                                    """Transposition distributes over sums and is associative with scalar multiplication: <bookmark mark='i'/> it is a linear operator too.""")) as tracker:
+        # El cierre nombra las dos reglas, así que el espectador las tiene delante (Marcos, 2026-11-21): la demostración se
+        # retira y quedan la regla de la suma (escena 4) y la del producto, cada una señalada en su frase: la transposición
+        # (morado) y la operación (amarillo). Marcas s y p injertadas en la toma que ya había.
+        self.play(FadeOut(*[m for m in self.mobjects if m not in de_fondo]), run_time=0.6)
+        with self.voiceover(text=tr("""La transposición <bookmark mark='s'/> se distribuye en las sumas y <bookmark mark='p'/> es asociativa con el producto por un escalar: <bookmark mark='i'/> también es un operador lineal.""",
+                                    """Transposition <bookmark mark='s'/> distributes over sums and <bookmark mark='p'/> is associative with scalar multiplication: <bookmark mark='i'/> it is a linear operator too.""")) as tracker:
+            rs, rp = regla_suma[0], regla_prod[0]
+            de_suma = [(rs[5], COLOR_TRANSP), (rs[8], COLOR_TRANSP), (rs[11], COLOR_TRANSP), (rs[2], COLOR_ESCALAR), (rs[9], COLOR_ESCALAR)]
+            de_prod = [(rp[4], COLOR_TRANSP), (rp[9], COLOR_TRANSP), (rp[1], COLOR_ESCALAR), (rp[6], COLOR_ESCALAR)]
+            self.play(FadeIn(regla_suma), run_time=0.5)
+            self.wait_until_bookmark("s")
+            self.play(*[g.animate.set_color(c).scale(1.3) for g, c in de_suma], run_time=0.25)
+            self.wait_until_bookmark("p")
+            self.play(*[g.animate.set_color(WHITE).scale(1/1.3) for g, c in de_suma], FadeIn(regla_prod), run_time=0.3)
+            self.play(*[g.animate.set_color(c).scale(1.3) for g, c in de_prod], run_time=0.25)
             self.wait_until_bookmark("i")
-            self.play(FadeIn(idea, scale=0.9), run_time=0.8)
+            self.play(*[g.animate.set_color(WHITE).scale(1/1.3) for g, c in de_prod], FadeIn(idea, scale=0.9), run_time=0.8)
         
         self.pausa_media()
 
@@ -1289,8 +1339,10 @@ class L01_V14_E06_Resumen(MiEscenaConVoz):
         filas = VGroup(*[VGroup(MathTex(f, tex_template=myTemplate, font_size=40), Tex(r, font_size=34, color=GRAY_A)).arrange(DOWN, buff=0.25)
                          for f, r in zip(formulas, rotulos)]).arrange(DOWN, buff=0.9).move_to([0, -0.2, 0])
         
-        with self.voiceover(text=tr("""Resumamos. Las matrices también se suman y se multiplican por un escalar fila a fila: el selector de filas es lineal, como el de columnas. <bookmark mark='t'/> La transposición también es lineal. La transpuesta de una suma es la suma de las transpuestas, y la transpuesta de un producto por un escalar es el producto del escalar por la transpuesta.""",
-                                    """Let us sum up. Matrices are also added and multiplied by a scalar row by row: the row selector is linear, like the column selector. <bookmark mark='t'/> Transposition is linear too. The transpose of a sum is the sum of the transposes, and the transpose of a product by a scalar is the scalar times the transpose.""")) as tracker:
+        with self.voiceover(text=tr("""Resumamos. Las matrices también se suman y se multiplican por un escalar fila a fila: el selector de filas es lineal, como el de columnas. <bookmark mark='t'/> La transposición también es lineal.""",
+                                    """Let us sum up. Matrices are also added and multiplied by a scalar row by row: the row selector is linear, like the column selector. <bookmark mark='t'/> Transposition is linear too.""")) as tracker:
+            # la descripción de las dos reglas se quitó (Marcos, 2026-11-21): la escena 5 ya las enseña juntas al cerrar; la
+            # toma es la que había, cortada tras «...también es lineal.»
             self.play(Write(cabecera), FadeIn(filas[0]), run_time=1)
             self.wait_until_bookmark("t")
             self.play(FadeIn(filas[1]), run_time=0.8)

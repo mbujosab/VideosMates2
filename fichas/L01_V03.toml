@@ -63,7 +63,7 @@ etiquetas = ["linear algebra", "vectors", "vector addition", "geometric interpre
 descripcion = """
 Since vector addition is component-wise and commutative, it has a geometric interpretation: the parallelogram rule.
 
-Third video of the first lesson of the linear algebra course.
+Third video of the first lecture of the linear algebra course.
 
 00:00 Title
 00:04 Properties on which the geometric interpretation is based

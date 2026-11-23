@@ -59,7 +59,7 @@ etiquetas = ["linear algebra", "vectors", "vectors in Rn", "notation", "selector
 descripcion = """
 A vector in Rn is an ordered list of n real numbers: how to write it and how to name its components with the selector operator.
 
-First video of the first lesson of the linear algebra course.
+First video of the first lecture of the linear algebra course.
 
 00:00 Title
 00:04 Definition of a vector

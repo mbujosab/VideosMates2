@@ -99,9 +99,14 @@ selector, "componente a componente", etc.).
 
 ## Entorno
 
-- **NAcAL en los vídeos** (`encargo-desde-nacal.md`, 2026-11-15): los alumnos tienen la 0.2.2 de PyPI y la 0.5.0 se publica en la
-  primera quincena de enero de 2027. Hasta entonces el entorno de los vídeos se queda en la 0.2.2 (no actualizarlo) y ningún vídeo
-  enseña nada posterior (`desarrollo`, `idioma`, `Polinomio`, `fracciones`). Los nombres de la librería pueden revisarse: no enseñar
+- **NAcAL en los vídeos** (`encargo-desde-nacal.md`, 2026-11-15; calendario adelantado el 2026-11-21): los alumnos tienen la 0.2.2 de
+  PyPI y la definitiva (la 0.5.5 o la que la corrija) se publica en la **semana del 14 de diciembre de 2026**; hay una versión de
+  prueba, `0.5.5rc1`, que solo se instala pidiéndola por su número. Hasta la definitiva el entorno de los vídeos se queda en la 0.2.2
+  (no actualizarlo) y ningún vídeo enseña nada posterior (`desarrollo`, `idioma`, `Polinomio`, `fracciones`). **El día de la
+  definitiva**: actualizar `nacal` en `~/.venvs/manim`, renderizar una escena de prueba **con fracciones** (desde la 0.5.5 las matrices
+  y vectores con fracciones separan más sus filas; `fracciones('normal')` da el aspecto anterior) y comparar fotogramas, y poner al
+  día esta nota. Si se vuelve a renderizar V01 con la versión nueva, la componente `0.11` de `Vector([sp.pi, fracc(3,4), 0, 0.11])`
+  saldrá como 11/100 (desde la 0.3.0 los decimales pasan a racionales): escribirla a mano en `MathTex` o aceptar la fracción. Los nombres de la librería pueden revisarse: no enseñar
   en pantalla llamadas con nombres en español (`SEL`, `InvMat`...) ni escribir vídeos con mucho código (X03) hasta que Marcos decida.
   **Único código de NAcAL en pantalla** (Marcos, 2026-11-16): las dos líneas de la introducción del libro en la escena 9 del vídeo
   de la notación (`Vector([...])`, `Matrix([...])`); NAcAL garantiza que `Vector`, `Matrix`, `|` y `.n` no cambiarán de nombre. Nada más:
@@ -573,8 +578,12 @@ Después se apunta el id en la ficha y se añaden la entrada de `README.org`/`in
 dejaba el vídeo sin poder insertarse (los Notebooks en Binder mostraban «El propietario ha inhabilitado su reproducción en otros sitios
 web»). `cuerpo()` envía ya `embeddable` y `publicStatsViewable` a `True`; V01-V11 corregidos ese día. Las descripciones enlazan desde
 entonces al Notebook de la sección con Binder (V01 → 1.1, V02-V08 → 1.2, V09-V12 → 1.4, V13-V15 → 1.5) y, debajo, al repositorio.
-**Y se avisa a los Notebooks** (`encargo-desde-los-notebooks.md`, 2026-11-16): fecha e identificadores de los dos idiomas, al final de ese
-fichero, para que enlacen el vídeo (V12 en «Tipos de matrices» del Notebook 1.4; V13-V15 en el 1.5).
+**Y se avisa a los Notebooks** (desde el 2026-11-21, a petición suya): fecha e identificadores de los dos idiomas, al final de
+`../NAcAL-Jupyter-Notebooks-SRC/encargo-desde-los-videos.md` (se crea si no existe), **sin confirmarlo en git**: lo confirma la sesión de
+los Notebooks cuando ha enlazado el vídeo. No anotarlo en `encargo-desde-los-notebooks.md` de este repositorio: allí su aviso automático
+no salta (V12 es estuvo cuatro días sin enlazar). Sitios previstos: V12 en «Tipos de matrices» del Notebook 1.4; en el 1.5, V13 en «Suma
+de matrices y producto por un escalar», V14 en «Operaciones fila a fila» y V15 en un apartado nuevo sobre la Sección 1.6; si cambia la
+partición V14/V15, avisarles. En inglés, «Lección N» es *Lecture N* (vocabulario del libro): las descripciones dicen «first lecture».
 Al publicar un vídeo, actualizar esta tabla.
 
 ## Pendiente
@@ -727,6 +736,11 @@ Al publicar un vídeo, actualizar esta tabla.
   en cuatro locuciones); escenas 1, 2, 5 y 7 con resaltados (`mat`, `pinta`, `orden`). Azure es 480p rehecho (17:22). Las escenas 4,
   6 y 8-11 solo tienen las pausas: falta darles las mismas ayudas. **Criterio para este vídeo**: tras cada idea, pausa; cada cosa
   que la voz nombra se señala; cuando el argumento depende de órdenes o tipos, se escriben debajo de cada símbolo.
+  **2026-11-21 (Marcos y Andrés, al ver V15)**: dos locuciones nuevas en la escena 9, tras «...salieron de ese trabajo»: el escalar
+  a la derecha es un convenio no habitual que surgió al programar el curso en Python (simplifica las expresiones y el código), y
+  no hay que distinguir el lado del escalar porque el producto de números reales es conmutativo; en pantalla bλ = λb, Aλ = λA y
+  λμ = μλ. Guion y `tr()` al día en los dos idiomas; Azure es 480p rehecho (17:47); dos tomas a escuchar en
+  `tmp/escucha_reauditoria2/P00_E09_*.mp3`. Pedido lo mismo para la introducción del libro (su `encargo-desde-los-videos.md`).
 - **Vídeos de ampliación (serie X)**: lo más abstracto va en vídeos cortos aparte (`L01 X01`...),
   marcados como opcionales y más difíciles; plan y convenios en `NotacionNacal.org`. X01 = el apéndice
   de R⁰ que salió de V09. La frase final de V09 que lo anunciaba se quitó (2026-10-18, a `descartes/ZZ_Basura_L01_V09.org`); se decide al tener X01.
@@ -796,7 +810,20 @@ Al publicar un vídeo, actualizar esta tabla.
   V15 3:18. Cuatro tomas nuevas de Tristan, a la espera de su escucha (`tmp/escucha_reauditoria2/`): «...seleccionamos una
   componente cualquiera» (V13), «Cada fila del producto es el producto del escalar por la fila correspondiente» (V14), «...así que
   también podemos sacar el escalar» y «Por eso decimos que el selector es asociativo con el producto por un escalar» (V15). Inglés:
-  solo los `tr()`. Dos técnicas nuevas para los vídeos siguientes: (1) **una definición o un enunciado que la voz lee se señala
+  solo los `tr()`. **Añadido ese mismo día (Marcos)**: la definición de la suma (V13, escena 1) se señala pieza a pieza como la del
+  producto (marca c injertada, sin sintetizar) y la escena 5 de V14 dice «Seleccionamos una columna cualquiera» (locución partida
+  tras «...el índice.»: primera parte nueva, tirada v2 elegida entre cinco por su cierre, 72 Hz; la segunda conserva su toma); V13
+  sigue en 6:50 y V14 en 5:24; quinta toma a escuchar, `V14_E05_una_columna_cualquiera.mp3`. **Y por la tarde (Marcos)**: en la escena 1 de V13, tras «Por eso
+  definimos la suma... columna a columna», locución nueva «Así aprovechamos todo lo que ya hemos aprendido sobre los vectores»
+  (el «por eso» dejaba el propósito implícito; sin «en lugar de la forma habitual», que el alumno no conoce), con las columnas de
+  A y B enmarcadas; V13 pasa a 6:55; sexta toma a escuchar, `V13_E01_asi_aprovechamos.mp3`; inglés, solo el `tr()`. En V14, el cierre de la escena 5 («La
+  transposición se distribuye en las sumas y es asociativa con el producto por un escalar: también es un operador lineal») retira
+  antes la demostración y enseña juntas las dos reglas, (A+B)ᵀ y (λA)ᵀ, cada una señalada en su frase (marcas s y p injertadas en
+  la toma que había, copiando los `text_offset` de la toma nueva; copia de la caché en `cache.json.antes_cierre_v14_20261121`).
+  Y el resumen (escena 6) ya no describe las dos reglas («La transpuesta de una suma es...»): acaba en «La transposición también
+  es lineal.», con la toma que había cortada ahí (`tmp/parte_toma.py`; a escuchar, `V14_E06_resumen_cortado.mp3`); V14 queda en
+  5:16. Ojo: de «Resumamos. Las matrices también...» hay en la caché tomas de redacciones anteriores; la del vídeo era `a13d681a`.
+  **Regla**: cuando una frase resume dos resultados, los dos están en pantalla y se señalan en su palabra. Dos técnicas nuevas para los vídeos siguientes: (1) **una definición o un enunciado que la voz lee se señala
   pieza a pieza** en su palabra (V13 escena 2, V14 escena 2); (2) **cuando lo que no cambia, solo, se leería como una igualdad
   falsa** durante un preámbulo largo («= ( A )»), baja atenuado y sin el igual, y el igual aparece cuando llega lo que el paso
   mueve (`nace(..., tenue=True)` en V14 y V15). Las marcas se injertaron sin sintetizar corrigiendo también los `text_offset`
@@ -821,3 +848,24 @@ Al publicar un vídeo, actualizar esta tabla.
   que vale como conjunto), en el criterio, la cadena y la conclusión del ejercicio; regla nueva en `CLAUDE.md` (estilo) y
   `Comprobaciones.org` (pasada 1.4). Octava tanda: en la cadena de la escena 4, «Podemos quitar la transposición cambiando de lado los índices» sin nombrar la propiedad (sin antecedente ahí; en el ejercicio sí, por el panel y la pista), rótulo «cambiar de lado los índices». Novena tanda: en el ejercicio la voz dice dónde se usa «cuadrada» («El criterio de igualdad exige que las dos matrices tengan el mismo orden. Como la matriz es cuadrada, su transpuesta tiene el mismo orden que ella, así que basta comparar sus componentes una a una»), con «D, Dᵀ ∈ ℝ^{n×n}» en pantalla; el criterio de la escena 4 ya lleva «del mismo orden» en la voz y en la nota. Tercera lectura en frío (2026-11-03, sobre el guion definitivo): aplicado «una matriz **simétrica** de orden 'm' por 'n'», «esta matriz diagonal **y cuadrada**» en el ejemplo del ejercicio, «basta comprobar que son iguales componente a componente», «Como las matrices identidad son diagonales y cuadradas, también son simétricas» y dos retoques del inglés; no aplicado (decisiones de Marcos o convenciones): nombrar la regla en la cadena, «si y solo si» con premisas en «si», enunciado de la tarjeta. **Azure 480p el 2026-11-03**: `L01_V12_TiposDeMatrices_azure480p.mp4` (5:40) y `../videoMath2/L01_V12_TypesOfMatrices_azure480p.mp4` (5:47). Tomas: en inglés Ollie se tragaba «m and n coincide» (0-50 ms en seis tiradas, con y sin comillas) y pausaba 550 ms en «the | two | are equal»: la frase inglesa pasa a «for a symmetric matrix with 'm' rows and 'n' columns: its transpose has 'n' rows and 'm' columns, and since they are equal, the two orders coincide» (toma v2 injertada); «the ones below» pausaba 440-620 ms antes de «below» en todas las tiradas → «the components below» (tirada 1 injertada); «Take any symmetric matrix...» con 550 ms → sustituida por la tirada 1 (misma clave); en español «lo | demostramos» 490 ms → sustituida por la tirada 1. Letras: español bien (m/n 200-320 ms; la 'i' de «letra i mayúscula» 80 ms en tres tiradas, es la frase: **que Marcos la escuche**); inglés 'n' antes de «columns» 80-130 ms en todas las tiradas, a escuchar. `tomas_cortadas`: ninguna de V12. **Escucha de Marcos del Azure (2026-11-03), once retoques aplicados**: Omega se sorprende al aclarar el criterio (no al aparecer los ejemplos); «con la letra i, en mayúscula y negrita» (la 'i' pasa de 80 a 210 ms); frases que quedaban con entonación de continuar partidas con punto («...las columnas de la transpuesta. Obtenemos la misma matriz», «...de orden 'm' por 'n'. Su transpuesta...», «Cambiando de lado los índices, podemos quitar la transposición», resumen «...como columnas. Es diagonal si...»); coma tras «por encima»; «al quitar la transposición y cambiar de lado los índices»; «Este resultado se aplica a las matrices identidad: como son diagonales y cuadradas, también son simétricas»; ejemplos de estructura simple (S = [1 2 3; 2 4 5; 3 5 6], contraejemplo cuadrado con filas de unos, doses y treses, `N_EJ`) y pausas de 1 s y 0,8 s tras los dos contraejemplos. Ollie: «When | we transpose it» 670 ms, sustituida por la tirada 1 (misma clave). Azure 480p rehecho: es 5:47, en 5:52. 2026-11-04 (Marcos): escena 1, «podemos abreviar y decir ese número una sola vez» (antes «su orden se indica con un solo número», que sugería que no se puede repetir; fórmula del libro «abreviamos»; toma v3 injertada, las dos primeras pausaban 390-490 ms en «decir | ese número»); «Para indicar su orden hacen falta los dos números, el de filas y el de columnas» (Tristan alarga la última palabra de toda frase, 360-560 ms en diez tomas; Marcos eligió de oído la toma B1 entre siete, en `tmp/escucha_V12/`). Falta: segunda escucha de Marcos, HD, ficha, miniatura; guion en `tmp/guion_V12_{es,en}.txt`. **Siguiente paso: Marcos la escucha y después Azure 480p**. Falta: revisión
   de Marcos, Azure, HD, ficha, motivo de miniatura.
+- L02-V01 (`L02-V01-ProductoPunto.org`, Sección 2.1, primera parte; inglés `L02_V01_DotProduct`): «El producto punto». Escrito
+  el 2026-11-18 y auditado el 19. **2026-11-21 (Marcos)**: arranque más amable, con una escena nueva delante (`L02_V01_E01_Coste`):
+  Omega y sus amigos quieren conocer el coste de la compra; cantidades q = (3, 2, 1) por precios p = (1, 3, 6), 15 euros, y solo
+  entonces la voz le da nombre («Esta operación es el producto punto de los dos vectores»). El ejemplo del libro pasa a la escena 2
+  («Otro ejemplo»: «Esta operación sirve para dos vectores cualesquiera, no solo para cantidades y precios»). Las clases se
+  renumeraron (E01_Coste ... E07_Resumen; los chunks conservan su nombre). En la simetría, **sin la segunda tarjeta de la pausa**:
+  las dos piezas ya están en el panel y la voz acaba de nombrarlas, así que se recuadran mientras la voz invita a pausar. **Regla**:
+  si la pista ya está en pantalla, la tarjeta de pausa no la repite ni añade la segunda pausa. Azure es 480p:
+  `L02_V01_ProductoPunto_azure480p.mp4` (5:11); seis tomas nuevas de Tristan en `tmp/escucha_L02V01/`; copia del org anterior en
+  `tmp/L02-V01-ProductoPunto.antes_coste_20261121.org`. Inglés: solo los `tr()`. Falta: escucha de Marcos, inglés, HD, ficha; la
+  conclusión de la simetría aún enumera los usos («Hemos usado dos veces la definición...»), contra el criterio de V14 en adelante.
+  Para L02-V02: la linealidad se puede ilustrar con el mismo ejemplo (el coste de dos cestas es la suma de los costes; el de cuatro
+  raciones, cuatro veces el de una).
+- **Libro revisado y publicado, lecciones 3 a 5 (avisos del 22 y 23 de noviembre de 2026, `respuesta-desde-el-libro.md`)**, para
+  cuando se escriban esos vídeos; la numeración y las anclas de las lecciones 1 a 3 no cambian. Introducción: apartado «El escalar a
+  la derecha» (página xxv), con las ideas de la escena 9 de P00. Lección 3: la Sección 3.2 no omite el punto del producto punto;
+  Proposición 3.2.1 nueva, (aB)·c = a·(Bc), por la que aBc se escribe sin paréntesis ni punto; la transpuesta de un producto es la
+  3.2.2. Lección 4: demostración nueva del Teorema 4.2.1, que recorre las columnas de izquierda a derecha como `Elim`; ejemplo a
+  mano de 4.2.1 nuevo. Lección 5: la 5.1 acaba en la 5.1.4 (la antigua 5.1.5 no existe); la inversa de una triangular es la Sección
+  5.A y el «espejo» la 5.B; Lema 5.2.1 y Proposición 5.2.2 nuevos, propiedades del rango 5.2.3 a 5.2.8. Vocabulario del libro:
+  «secuencia» (no «sucesión») de transformaciones, «matriz intercambio», «forma pre-escalonada de A», «componente» en femenino.

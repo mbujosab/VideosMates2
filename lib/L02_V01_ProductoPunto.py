@@ -5,6 +5,9 @@ TITULO = tr("El producto punto", "The dot product")
 A_EJ = [1, 2, 3]      # el ejemplo del libro (Sección 2.1)
 B_EJ = [1, -1, 2]
 COLOR_COLUMNA = GREEN
+Q_EJ = [3, 2, 1]      # la cesta de Omega: kilos de patatas, docenas de huevos, litros de aceite
+P_EJ = [1, 3, 6]      # sus precios, en euros (por kilo, por docena, por litro)
+EJ_QP = [r"\Vect{q}\cdot\Vect{p}", "=", r"3\cdot 1", "+", r"2\cdot 3", "+", r"1\cdot 6", "=", "3", "+6", "+6", "=", "15", tr(r"\text{ euros}", r"\text{ euros}")]
 
 # Glifos de las cuentas (contados con una imagen numerada; véase cada escena)
 EJ_AB = [r"\Vect{a}\cdot\Vect{b}", "=", r"1\cdot 1", "+", r"2\cdot(-1)", "+", r"3\cdot 2", "=", "1", "-2", "+6", "=", "5"]
@@ -32,6 +35,14 @@ def matriz(filas, color=WHITE, escala=0.8, h_buff=1.0):
     m = IntegerMatrix(filas, v_buff=0.62, h_buff=h_buff)
     m.get_entries().set_color(color)
     return m.scale(escala)
+
+
+def leyenda(rotulos, v, x_der, font_size=30):
+    """Rótulos alineados a la derecha en x_der, cada uno a la altura de su componente de v (como en V08)."""
+    filas = VGroup(*[Tex(r, font_size=font_size) for r in rotulos])
+    for f, e in zip(filas, v.get_entries()):
+        f.move_to([x_der - f.width/2, e.get_y(), 0])
+    return filas
 
 
 def con_nombre(tex, mob, font_size=48):
@@ -152,6 +163,91 @@ class L02_V01_ProductoPunto(MiEscenaConVoz):
 
         self.creditos()
         titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+        intro = MathTex(r"\Vect{a}\cdot\Vect{b}", tex_template=myTemplate, font_size=72).move_to([0, 0.3, 0])
+        intro[0][0].set_color(COLOR_A); intro[0][2].set_color(COLOR_B)
+        q, p = vector_col(Q_EJ, COLOR_A), vector_col(P_EJ, COLOR_B)
+        nq, np_ = con_nombre(r"\Vect{q}=", q), con_nombre(r"\Vect{p}=", p)
+        nq[0].set_color(COLOR_A); np_[0].set_color(COLOR_B)
+        VGroup(nq, np_).arrange(RIGHT, buff=1.8).move_to([0.2, 0.75, 0])
+        ley = leyenda([tr("patatas (kilos)", "potatoes (kilos)"), tr("huevos (docenas)", "eggs (dozens)"), tr("aceite (litros)", "oil (litres)")],
+                      q, nq.get_left()[0] - 0.4)
+        rot_q = Tex(tr("cantidades", "quantities"), font_size=30).set_color(COLOR_A).next_to(q, UP, buff=0.25)
+        rot_p = Tex(tr("precios (euros)", "prices (euros)"), font_size=30).set_color(COLOR_B).next_to(p, UP, buff=0.25)
+        rot_p.align_to(rot_q, DOWN)
+        cuenta = MathTex(*EJ_QP, tex_template=myTemplate, font_size=46).move_to([-0.9, -1.75, 0])
+        cuenta[0][0].set_color(COLOR_A); cuenta[0][2].set_color(COLOR_B)
+        prods = [(cuenta[2*k + 2][0:1], cuenta[2*k + 2][2:3]) for k in range(3)]   # (cantidad, precio) de cada producto
+        for fa, fb in prods:
+            fa.set_color(COLOR_A); fb.set_color(COLOR_B)
+        eq, ep = q.get_entries(), p.get_entries()
+        marcos_par = [VGroup(marco(eq[k]), marco(ep[k])) for k in range(3)]
+        om = omega("duda", mira=LEFT).to_corner(DR, buff=0.5)
+        globo = bocadillo(tr(r"¿Cuánto cuesta\\ la compra?", r"How much does\\ the shopping cost?"), om, ancho=3.2)
+        
+        with self.voiceover(text=tr("""En este vídeo veremos una operación entre dos vectores cuyo resultado es un número: <bookmark mark='pp'/> el producto punto.""",
+                                    """In this video we will look at an operation between two vectors whose result is a number: <bookmark mark='pp'/> the dot product.""")) as tracker:
+            self.play(Write(titulo), run_time=1.2)
+            self.wait_until_bookmark("pp")
+            self.play(FadeIn(intro, scale=0.9), run_time=0.6)
+        self.wait(0.8)   # respiro tras el arranque
+        self.play(FadeOut(intro), run_time=0.4)
+        
+        with self.voiceover(text=tr("""Omega y sus amigos preparan una cena, <bookmark mark='o'/> y quieren conocer el coste de la compra.""",
+                                    """Omega and friends are preparing a dinner, <bookmark mark='o'/> and they want to know the cost of the shopping.""")) as tracker:
+            entra(self, om)
+            self.wait_until_bookmark("o")
+            self.play(FadeIn(globo, scale=0.8), run_time=0.6)
+        self.wait(0.6)
+        
+        with self.voiceover(text=tr("""Un vector <bookmark mark='q'/> tiene la cantidad de cada ingrediente de la cesta. <bookmark mark='p'/> Otro tiene sus precios, en el mismo orden.""",
+                                    """One vector <bookmark mark='q'/> holds the quantity of each ingredient in the basket. <bookmark mark='p'/> Another holds their prices, in the same order.""")) as tracker:
+            self.play(FadeOut(globo), run_time=0.4)
+            cambia(self, om, "normal", mira=UL)   # Omega atiende a la cuenta
+            self.wait_until_bookmark("q")
+            self.play(FadeIn(ley), FadeIn(nq), FadeIn(rot_q), run_time=0.8)
+            self.wait_until_bookmark("p")
+            self.play(FadeIn(np_), FadeIn(rot_p), run_time=0.8)
+        self.wait(1.0)
+        
+        with self.voiceover(text=tr("""Para calcular el coste, multiplicamos <bookmark mark='p1'/> la cantidad de patatas por su precio, <bookmark mark='p2'/> la de huevos por el suyo <bookmark mark='p3'/> y la de aceite por el suyo.""",
+                                    """To work out the cost, we multiply <bookmark mark='p1'/> the quantity of potatoes by its price, <bookmark mark='p2'/> the quantity of eggs by theirs <bookmark mark='p3'/> and the quantity of oil by its own.""")) as tracker:
+            actual = None
+            for k, marca in enumerate(["p1", "p2", "p3"]):
+                self.wait_until_bookmark(marca)
+                fa, fb = prods[k]
+                self.play(FadeIn(marcos_par[k]) if actual is None else ReplacementTransform(actual, marcos_par[k]),
+                          ley[k].animate.set_color(COLOR_ESCALAR), *([ley[k-1].animate.set_color(WHITE), FadeIn(cuenta[2*k + 1])] if k else []), run_time=0.3)
+                actual = marcos_par[k]
+                self.play(TransformFromCopy(eq[k], fa), TransformFromCopy(ep[k], fb), FadeIn(cuenta[2*k + 2][1]), run_time=0.6)
+            self.wait(0.4)
+            self.play(FadeOut(actual), ley[2].animate.set_color(WHITE), run_time=0.3)
+        
+        with self.voiceover(text=tr("""Después sumamos los tres productos: <bookmark mark='s'/> la compra cuesta <bookmark mark='r'/> quince euros.""",
+                                    """Then we add the three products: <bookmark mark='s'/> the shopping costs <bookmark mark='r'/> fifteen euros.""")) as tracker:
+            self.wait_until_bookmark("s")
+            self.play(*[FadeIn(cuenta[k]) for k in range(7, 11)], run_time=0.6)
+            self.wait_until_bookmark("r")
+            self.play(FadeIn(cuenta[11]), FadeIn(cuenta[12]), FadeIn(cuenta[13]), run_time=0.5)
+            resalta(self, [cuenta[12]], factor=1.3)
+            cambia(self, om, "alegria")
+        self.wait(1.0)
+        
+        with self.voiceover(text=tr("""Hemos multiplicado dos vectores componente a componente y hemos sumado los resultados. <bookmark mark='n'/> Esta operación es el producto punto de los dos vectores.""",
+                                    """We have multiplied two vectors component by component and added the results. <bookmark mark='n'/> This operation is the dot product of the two vectors.""")) as tracker:
+            apaga(self, [cuenta[12]], factor=1.3)
+            cambia(self, om, "normal", mira=UL)   # la alegría dura un instante
+            self.wait_until_bookmark("n")
+            self.play(FadeIn(cuenta[0]), FadeIn(cuenta[1]), run_time=0.6)
+            resalta(self, [cuenta[0][1]], factor=1.8)   # el punto
+        self.wait(0.8)
+        apaga(self, [cuenta[0][1]], factor=1.8)
+        
+        self.pausa_media()
+
+        self.play(*[FadeOut(mob) for mob in self.mobjects])  # borrado de todo
+
+        self.creditos()
+        cabecera = Tex(tr("Otro ejemplo", "Another example"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         a, b = vector_col(A_EJ, COLOR_A), vector_col(B_EJ, COLOR_B)
         na, nb = con_nombre(r"\Vect{a}=", a), con_nombre(r"\Vect{b}=", b)
         na[0].set_color(COLOR_A); nb[0].set_color(COLOR_B)
@@ -166,21 +262,18 @@ class L02_V01_ProductoPunto(MiEscenaConVoz):
         ea, eb = a.get_entries(), b.get_entries()
         marcos_par = [VGroup(marco(ea[k]), marco(eb[k])) for k in range(3)]
         marcos_fin = [VGroup(marco(ea[k]), marco(eb[k])) for k in range(3)]   # los de arriba se deforman al encadenarlos
-        intro = MathTex(r"\Vect{a}\cdot\Vect{b}", tex_template=myTemplate, font_size=72).move_to([0, 0.3, 0])
-        intro[0][0].set_color(COLOR_A); intro[0][2].set_color(COLOR_B)
         tres = [Tex(tr("3 componentes", "3 components"), font_size=30).set_color(COLOR_ESCALAR).next_to(v, DOWN, buff=0.3) for v in (a, b)]
         
-        with self.voiceover(text=tr("""En este vídeo veremos una operación entre dos vectores cuyo resultado es un número: <bookmark mark='pp'/> el producto punto.""",
-                                    """In this video we will look at an operation between two vectors whose result is a number: <bookmark mark='pp'/> the dot product.""")) as tracker:
-            self.play(Write(titulo), run_time=1.2)
-            self.wait_until_bookmark("pp")
-            self.play(FadeIn(intro, scale=0.9), run_time=0.6)
-        self.wait(0.8)   # respiro tras el arranque
-        self.play(FadeOut(intro), run_time=0.4)
+        # el arranque pasó a la escena del coste (2026-11-21); aquí, la misma operación con dos vectores cualesquiera
+        with self.voiceover(text=tr("""Esta operación sirve para <bookmark mark='v'/> dos vectores cualesquiera, no solo para cantidades y precios.""",
+                                    """This operation works for <bookmark mark='v'/> any two vectors, not only for quantities and prices.""")) as tracker:
+            self.play(Write(cabecera), run_time=1)
+            self.wait_until_bookmark("v")
+            self.play(FadeIn(na), FadeIn(nb), run_time=0.8)
+        self.wait(0.6)
         
         with self.voiceover(text=tr("""Tomemos estos dos vectores. Para calcular <bookmark mark='pp'/> su producto punto, multiplicamos <bookmark mark='p1'/> las primeras componentes, <bookmark mark='p2'/> las segundas <bookmark mark='p3'/> y las terceras.""",
                                     """Take these two vectors. To compute <bookmark mark='pp'/> their dot product, we multiply <bookmark mark='p1'/> the first components, <bookmark mark='p2'/> the second ones <bookmark mark='p3'/> and the third ones.""")) as tracker:
-            self.play(FadeIn(na), FadeIn(nb), run_time=1)
             self.wait_until_bookmark("pp")
             self.play(FadeIn(cuenta[0]), FadeIn(cuenta[1]), run_time=0.6)
             actual = None
@@ -331,11 +424,9 @@ class L02_V01_ProductoPunto(MiEscenaConVoz):
                                              r"Prove that $\Vect{a}\cdot\Vect{b}=\Vect{b}\cdot\Vect{a}$."),
                                invitacion_voz=tr("Pause el vídeo e intente demostrar que el producto punto es simétrico.",
                                                  "Pause the video and try to prove that the dot product is symmetric."),
-                               pista=tr("la definición y la propiedad conmutativa del producto de números.",
-                                        "the definition and the commutative property of multiplication."),
-                               pista_voz=tr("use la definición y la propiedad conmutativa del producto de números.",
-                                            "use the definition and the commutative property of multiplication."),
-                               al_dar_la_pista=lambda: panel.pista("def", "conm"))
+                               al_invitar=lambda: panel.pista("def", "conm"))
+        # sin la segunda tarjeta, la de la pista (Marcos, 2026-11-21): las dos piezas ya están en pantalla, en el panel, y la
+        # voz acaba de nombrarlas; se recuadran mientras la voz invita a pausar
         panel.quita_pista()
         
         with self.voiceover(text=tr("""Por la definición <bookmark mark='l0'/> podemos escribir el producto punto como una suma de productos de números.""",
@@ -574,10 +665,95 @@ class L02_V01_E00_Portada(MiEscenaConVoz):
         self.play(FadeIn(portada, shift=0.3*UP), run_time=1.5)
         self.wait(4.5)
 
-class L02_V01_E01_Ejemplo(MiEscenaConVoz):
+class L02_V01_E01_Coste(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         titulo = Title(TITULO, tex_template=myTemplate, font_size=46).set_color(COLOR_TITULO)
+        intro = MathTex(r"\Vect{a}\cdot\Vect{b}", tex_template=myTemplate, font_size=72).move_to([0, 0.3, 0])
+        intro[0][0].set_color(COLOR_A); intro[0][2].set_color(COLOR_B)
+        q, p = vector_col(Q_EJ, COLOR_A), vector_col(P_EJ, COLOR_B)
+        nq, np_ = con_nombre(r"\Vect{q}=", q), con_nombre(r"\Vect{p}=", p)
+        nq[0].set_color(COLOR_A); np_[0].set_color(COLOR_B)
+        VGroup(nq, np_).arrange(RIGHT, buff=1.8).move_to([0.2, 0.75, 0])
+        ley = leyenda([tr("patatas (kilos)", "potatoes (kilos)"), tr("huevos (docenas)", "eggs (dozens)"), tr("aceite (litros)", "oil (litres)")],
+                      q, nq.get_left()[0] - 0.4)
+        rot_q = Tex(tr("cantidades", "quantities"), font_size=30).set_color(COLOR_A).next_to(q, UP, buff=0.25)
+        rot_p = Tex(tr("precios (euros)", "prices (euros)"), font_size=30).set_color(COLOR_B).next_to(p, UP, buff=0.25)
+        rot_p.align_to(rot_q, DOWN)
+        cuenta = MathTex(*EJ_QP, tex_template=myTemplate, font_size=46).move_to([-0.9, -1.75, 0])
+        cuenta[0][0].set_color(COLOR_A); cuenta[0][2].set_color(COLOR_B)
+        prods = [(cuenta[2*k + 2][0:1], cuenta[2*k + 2][2:3]) for k in range(3)]   # (cantidad, precio) de cada producto
+        for fa, fb in prods:
+            fa.set_color(COLOR_A); fb.set_color(COLOR_B)
+        eq, ep = q.get_entries(), p.get_entries()
+        marcos_par = [VGroup(marco(eq[k]), marco(ep[k])) for k in range(3)]
+        om = omega("duda", mira=LEFT).to_corner(DR, buff=0.5)
+        globo = bocadillo(tr(r"¿Cuánto cuesta\\ la compra?", r"How much does\\ the shopping cost?"), om, ancho=3.2)
+        
+        with self.voiceover(text=tr("""En este vídeo veremos una operación entre dos vectores cuyo resultado es un número: <bookmark mark='pp'/> el producto punto.""",
+                                    """In this video we will look at an operation between two vectors whose result is a number: <bookmark mark='pp'/> the dot product.""")) as tracker:
+            self.play(Write(titulo), run_time=1.2)
+            self.wait_until_bookmark("pp")
+            self.play(FadeIn(intro, scale=0.9), run_time=0.6)
+        self.wait(0.8)   # respiro tras el arranque
+        self.play(FadeOut(intro), run_time=0.4)
+        
+        with self.voiceover(text=tr("""Omega y sus amigos preparan una cena, <bookmark mark='o'/> y quieren conocer el coste de la compra.""",
+                                    """Omega and friends are preparing a dinner, <bookmark mark='o'/> and they want to know the cost of the shopping.""")) as tracker:
+            entra(self, om)
+            self.wait_until_bookmark("o")
+            self.play(FadeIn(globo, scale=0.8), run_time=0.6)
+        self.wait(0.6)
+        
+        with self.voiceover(text=tr("""Un vector <bookmark mark='q'/> tiene la cantidad de cada ingrediente de la cesta. <bookmark mark='p'/> Otro tiene sus precios, en el mismo orden.""",
+                                    """One vector <bookmark mark='q'/> holds the quantity of each ingredient in the basket. <bookmark mark='p'/> Another holds their prices, in the same order.""")) as tracker:
+            self.play(FadeOut(globo), run_time=0.4)
+            cambia(self, om, "normal", mira=UL)   # Omega atiende a la cuenta
+            self.wait_until_bookmark("q")
+            self.play(FadeIn(ley), FadeIn(nq), FadeIn(rot_q), run_time=0.8)
+            self.wait_until_bookmark("p")
+            self.play(FadeIn(np_), FadeIn(rot_p), run_time=0.8)
+        self.wait(1.0)
+        
+        with self.voiceover(text=tr("""Para calcular el coste, multiplicamos <bookmark mark='p1'/> la cantidad de patatas por su precio, <bookmark mark='p2'/> la de huevos por el suyo <bookmark mark='p3'/> y la de aceite por el suyo.""",
+                                    """To work out the cost, we multiply <bookmark mark='p1'/> the quantity of potatoes by its price, <bookmark mark='p2'/> the quantity of eggs by theirs <bookmark mark='p3'/> and the quantity of oil by its own.""")) as tracker:
+            actual = None
+            for k, marca in enumerate(["p1", "p2", "p3"]):
+                self.wait_until_bookmark(marca)
+                fa, fb = prods[k]
+                self.play(FadeIn(marcos_par[k]) if actual is None else ReplacementTransform(actual, marcos_par[k]),
+                          ley[k].animate.set_color(COLOR_ESCALAR), *([ley[k-1].animate.set_color(WHITE), FadeIn(cuenta[2*k + 1])] if k else []), run_time=0.3)
+                actual = marcos_par[k]
+                self.play(TransformFromCopy(eq[k], fa), TransformFromCopy(ep[k], fb), FadeIn(cuenta[2*k + 2][1]), run_time=0.6)
+            self.wait(0.4)
+            self.play(FadeOut(actual), ley[2].animate.set_color(WHITE), run_time=0.3)
+        
+        with self.voiceover(text=tr("""Después sumamos los tres productos: <bookmark mark='s'/> la compra cuesta <bookmark mark='r'/> quince euros.""",
+                                    """Then we add the three products: <bookmark mark='s'/> the shopping costs <bookmark mark='r'/> fifteen euros.""")) as tracker:
+            self.wait_until_bookmark("s")
+            self.play(*[FadeIn(cuenta[k]) for k in range(7, 11)], run_time=0.6)
+            self.wait_until_bookmark("r")
+            self.play(FadeIn(cuenta[11]), FadeIn(cuenta[12]), FadeIn(cuenta[13]), run_time=0.5)
+            resalta(self, [cuenta[12]], factor=1.3)
+            cambia(self, om, "alegria")
+        self.wait(1.0)
+        
+        with self.voiceover(text=tr("""Hemos multiplicado dos vectores componente a componente y hemos sumado los resultados. <bookmark mark='n'/> Esta operación es el producto punto de los dos vectores.""",
+                                    """We have multiplied two vectors component by component and added the results. <bookmark mark='n'/> This operation is the dot product of the two vectors.""")) as tracker:
+            apaga(self, [cuenta[12]], factor=1.3)
+            cambia(self, om, "normal", mira=UL)   # la alegría dura un instante
+            self.wait_until_bookmark("n")
+            self.play(FadeIn(cuenta[0]), FadeIn(cuenta[1]), run_time=0.6)
+            resalta(self, [cuenta[0][1]], factor=1.8)   # el punto
+        self.wait(0.8)
+        apaga(self, [cuenta[0][1]], factor=1.8)
+        
+        self.pausa_media()
+
+class L02_V01_E02_Ejemplo(MiEscenaConVoz):
+    def construct(self):
+        self.creditos()
+        cabecera = Tex(tr("Otro ejemplo", "Another example"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
         a, b = vector_col(A_EJ, COLOR_A), vector_col(B_EJ, COLOR_B)
         na, nb = con_nombre(r"\Vect{a}=", a), con_nombre(r"\Vect{b}=", b)
         na[0].set_color(COLOR_A); nb[0].set_color(COLOR_B)
@@ -592,21 +768,18 @@ class L02_V01_E01_Ejemplo(MiEscenaConVoz):
         ea, eb = a.get_entries(), b.get_entries()
         marcos_par = [VGroup(marco(ea[k]), marco(eb[k])) for k in range(3)]
         marcos_fin = [VGroup(marco(ea[k]), marco(eb[k])) for k in range(3)]   # los de arriba se deforman al encadenarlos
-        intro = MathTex(r"\Vect{a}\cdot\Vect{b}", tex_template=myTemplate, font_size=72).move_to([0, 0.3, 0])
-        intro[0][0].set_color(COLOR_A); intro[0][2].set_color(COLOR_B)
         tres = [Tex(tr("3 componentes", "3 components"), font_size=30).set_color(COLOR_ESCALAR).next_to(v, DOWN, buff=0.3) for v in (a, b)]
         
-        with self.voiceover(text=tr("""En este vídeo veremos una operación entre dos vectores cuyo resultado es un número: <bookmark mark='pp'/> el producto punto.""",
-                                    """In this video we will look at an operation between two vectors whose result is a number: <bookmark mark='pp'/> the dot product.""")) as tracker:
-            self.play(Write(titulo), run_time=1.2)
-            self.wait_until_bookmark("pp")
-            self.play(FadeIn(intro, scale=0.9), run_time=0.6)
-        self.wait(0.8)   # respiro tras el arranque
-        self.play(FadeOut(intro), run_time=0.4)
+        # el arranque pasó a la escena del coste (2026-11-21); aquí, la misma operación con dos vectores cualesquiera
+        with self.voiceover(text=tr("""Esta operación sirve para <bookmark mark='v'/> dos vectores cualesquiera, no solo para cantidades y precios.""",
+                                    """This operation works for <bookmark mark='v'/> any two vectors, not only for quantities and prices.""")) as tracker:
+            self.play(Write(cabecera), run_time=1)
+            self.wait_until_bookmark("v")
+            self.play(FadeIn(na), FadeIn(nb), run_time=0.8)
+        self.wait(0.6)
         
         with self.voiceover(text=tr("""Tomemos estos dos vectores. Para calcular <bookmark mark='pp'/> su producto punto, multiplicamos <bookmark mark='p1'/> las primeras componentes, <bookmark mark='p2'/> las segundas <bookmark mark='p3'/> y las terceras.""",
                                     """Take these two vectors. To compute <bookmark mark='pp'/> their dot product, we multiply <bookmark mark='p1'/> the first components, <bookmark mark='p2'/> the second ones <bookmark mark='p3'/> and the third ones.""")) as tracker:
-            self.play(FadeIn(na), FadeIn(nb), run_time=1)
             self.wait_until_bookmark("pp")
             self.play(FadeIn(cuenta[0]), FadeIn(cuenta[1]), run_time=0.6)
             actual = None
@@ -639,7 +812,7 @@ class L02_V01_E01_Ejemplo(MiEscenaConVoz):
         
         self.pausa_media()
 
-class L02_V01_E02_Definicion(MiEscenaConVoz):
+class L02_V01_E03_Definicion(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Definición", "Definition"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -687,7 +860,7 @@ class L02_V01_E02_Definicion(MiEscenaConVoz):
         
         self.pausa_media()
 
-class L02_V01_E03_Simetria(MiEscenaConVoz):
+class L02_V01_E04_Simetria(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Simetría", "Symmetry"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -757,11 +930,9 @@ class L02_V01_E03_Simetria(MiEscenaConVoz):
                                              r"Prove that $\Vect{a}\cdot\Vect{b}=\Vect{b}\cdot\Vect{a}$."),
                                invitacion_voz=tr("Pause el vídeo e intente demostrar que el producto punto es simétrico.",
                                                  "Pause the video and try to prove that the dot product is symmetric."),
-                               pista=tr("la definición y la propiedad conmutativa del producto de números.",
-                                        "the definition and the commutative property of multiplication."),
-                               pista_voz=tr("use la definición y la propiedad conmutativa del producto de números.",
-                                            "use the definition and the commutative property of multiplication."),
-                               al_dar_la_pista=lambda: panel.pista("def", "conm"))
+                               al_invitar=lambda: panel.pista("def", "conm"))
+        # sin la segunda tarjeta, la de la pista (Marcos, 2026-11-21): las dos piezas ya están en pantalla, en el panel, y la
+        # voz acaba de nombrarlas; se recuadran mientras la voz invita a pausar
         panel.quita_pista()
         
         with self.voiceover(text=tr("""Por la definición <bookmark mark='l0'/> podemos escribir el producto punto como una suma de productos de números.""",
@@ -812,7 +983,7 @@ class L02_V01_E03_Simetria(MiEscenaConVoz):
         
         self.pausa_media()
 
-class L02_V01_E04_PorSiMismo(MiEscenaConVoz):
+class L02_V01_E05_PorSiMismo(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Un vector por sí mismo", "A vector times itself"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -875,7 +1046,7 @@ class L02_V01_E04_PorSiMismo(MiEscenaConVoz):
         
         self.pausa_media()
 
-class L02_V01_E05_Identidad(MiEscenaConVoz):
+class L02_V01_E06_Identidad(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Las columnas de la identidad", "The columns of the identity"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)
@@ -953,7 +1124,7 @@ class L02_V01_E05_Identidad(MiEscenaConVoz):
         
         self.pausa_media()
 
-class L02_V01_E06_Resumen(MiEscenaConVoz):
+class L02_V01_E07_Resumen(MiEscenaConVoz):
     def construct(self):
         self.creditos()
         cabecera = Tex(tr("Resumen", "Key Takeaways"), font_size=44).set_color(COLOR_TITULO).to_edge(UP)

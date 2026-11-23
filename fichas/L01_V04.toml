@@ -67,7 +67,7 @@ etiquetas = ["linear algebra", "vectors", "scalar multiplication", "scaling", "s
 descripcion = """
 Multiplying a vector by a scalar multiplies each component; the multiples of a nonzero vector form a line through the origin.
 
-Fourth video of the first lesson of the linear algebra course.
+Fourth video of the first lecture of the linear algebra course.
 
 00:00 Title
 00:03 Introduction
