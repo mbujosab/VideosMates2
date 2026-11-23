@@ -140,3 +140,101 @@ antiguos del confinamiento); la semana del 14 de diciembre sirve; no falta nada 
 de la publicación definitiva: actualizar `nacal` en `~/.venvs/manim`, renderizar una escena de prueba y
 comparar fotogramas, y poner al día la nota «NAcAL en los vídeos» de `CLAUDE.md`. Hasta entonces el
 entorno sigue en la 0.2.2.
+
+## Desde la 0.5.5, las matrices con fracciones separan sus filas por defecto (2026-11-21)
+
+Desde la sesión de NAcAL. Decidido por Marcos hoy, tras verlo impreso y
+en Jupyter. Es un cambio de la salida por defecto.
+
+- Qué cambia: en las matrices y vectores que contienen alguna
+  fracción, el código LaTeX lleva `\\[0.6ex]` en vez de `\\` al final
+  de cada fila. Las filas quedan un poco más separadas. Los que no
+  tienen fracciones salen exactamente igual.
+- Por qué: con fracciones en filas contiguas, el denominador de una
+  fila casi tocaba el numerador de la siguiente
+  (`nacallib/encargo-fracciones-en-matrices-desde-las-clases.md`).
+- Cómo volver a lo anterior en un documento: `fracciones('normal')`.
+  Otra separación: `fracciones('separadas', '1ex')`.
+- La 0.5.5 está instalada en el equipo de Marcos desde hoy. Lo que se
+  compile a partir de ahora sale ya con el cambio. La versión de
+  prueba `0.5.5rc1` queda preparada para PyPI; la sube Marcos.
+- La versión definitiva de diciembre será la 0.5.5 o posterior. Lleva
+  además, respecto a la 0.5.3 de la consulta: textos de `help` con
+  ejemplos comprobados, y `simplify`, `factor` y `expand` corregidos
+  para una `T`. Nada de eso cambia salidas del material.
+- Comprobado con el banco de NAcAL: de 116 casos cambian 33, y en
+  todos lo único distinto es ese espacio. Las diferencias están en
+  `~/temporal/nacal-banco-python/informes/d-trabajo--d-separadas`.
+
+Lo que toca a los vídeos:
+
+- El entorno de los vídeos (`~/.venvs/manim`) sigue en la 0.2.2 y no
+  cambia hasta que se actualice.
+- Al actualizarlo, un `Vector` o una `Matrix` con fracciones saldrá
+  con las filas algo más separadas que en los vídeos ya publicados.
+  Si en una escena conviene el aspecto anterior, basta
+  `fracciones('normal')` al principio.
+- Qué conviene hacer: al renderizar la escena de prueba prevista para
+  el día de la definitiva, elegir una que tenga fracciones.
+
+No hace falta respuesta si todo va bien. Si algo queda mal, anotarlo
+en `nacallib/respuesta-fracciones-desde-los-videos.md`, sin hacer commit de
+ese fichero.
+
+## Un vector con decimales en el vídeo V01 (2026-11-21)
+
+Desde la sesión de NAcAL. Sale de revisar qué código del material usa
+números decimales con NAcAL.
+
+Desde la 0.3.0, NAcAL convierte los decimales en racionales exactos.
+Con la 0.2.2 del entorno de los vídeos, `Vector([0.11])` se escribe
+`0.11`; con la 0.5.5 se escribe `\frac{11}{100}`.
+
+En los vídeos solo hay un caso:
+
+    c = nc.Vector([sp.pi,nc.fracc(3,4),0,0.11],'h')
+
+en `L01-V01-Vectores.org` (líneas 106 y 305), en
+`en/L01-V01-Vectors.org` (líneas 108 y 304) y en
+`lib/L01_V01_Vectores.py` (líneas 93 y 263).
+
+Con la 0.2.2 la última componente sale `0.11`. Al actualizar el
+entorno saldrá `11/100` en forma de fracción, y el vector será más
+alto. El vídeo V01 está publicado, así que solo importa si se vuelve a
+renderizar. En ese caso hay que escribir esa componente a mano en
+`MathTex`, o aceptar la fracción.
+
+No hace falta respuesta.
+
+## Poner al día la copia de `coordinacion-entre-repositorios.md` (2026-11-22)
+
+Desde la sesión de NAcAL, con el visto bueno de Marcos. Lo pidió la
+sesión de las clases
+(`nacallib/encargo-calendario-de-pypi-desde-las-clases.md`).
+
+El fichero decía que NAcAL se publica en PyPI en enero. El plan
+vigente es otro y la copia de `nacallib` ya lo recoge:
+
+- PyPI tiene una versión de prueba, la `0.5.5rc1`, que se instala con
+  `pip install nacal==0.5.5rc1` (no con `--pre`).
+- La versión definitiva se publica en la semana del 14 de diciembre de
+  2026: la 0.5.5 o la que la corrija.
+- El equipo de Marcos tiene la 0.5.5 desde el 2026-11-21.
+
+Qué se pide: copiar `nacallib/coordinacion-entre-repositorios.md`
+sobre la copia de este repositorio y hacer commit. Las cinco copias
+eran idénticas antes de este cambio, así que basta copiar el fichero
+entero. Solo cambian el punto «La versión de NAcAL que reciben los
+alumnos es la de PyPI» y el del calendario, con su párrafo final.
+
+Si este repositorio tiene anotada en otro sitio (por ejemplo, en su
+`CLAUDE.md`) la fecha de enero, conviene corregirla también.
+
+No hace falta respuesta.
+
+### Respuesta de los vídeos (2026-11-23)
+
+Recibidos los tres añadidos, con el visto bueno de Marcos. (1) Fracciones y (2) el decimal de V01: anotados en la
+nota «NAcAL en los vídeos» de `CLAUDE.md`; el entorno sigue en la 0.2.2 y la escena de prueba del día de la
+definitiva llevará fracciones. (3) `coordinacion-entre-repositorios.md` copiado de `nacallib` y confirmado en git;
+la fecha de enero de `CLAUDE.md` corregida a la semana del 14 de diciembre de 2026.

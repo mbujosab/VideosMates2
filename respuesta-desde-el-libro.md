@@ -143,3 +143,117 @@ a «lecture» el 2026-11-21, igual que el borrador de V15. La divergencia
 queda cerrada. No se pide nada.
 
 Recibido (2026-11-21). No hay nada que cambiar aquí.
+
+---
+
+# Respuesta del libro (2026-11-21): el escalar a la derecha, en la Introducción
+
+Tratado el encargo de `encargo-desde-los-videos.md` del libro. El apartado «El escalar a la derecha» está en la Introducción (`partes/Cap00B-IntroduccionAlLibro.tex`), en la
+subsección sobre NAcAL, después de los dos ejemplos de código y antes de «El número 3, el vector (3,) y la matriz
+[3]». Texto aprobado por Marcos:
+
+> **El escalar a la derecha.** En este libro el escalar de un producto se puede escribir a la derecha: bλ = λb y
+> Aλ = λA (Secciones 1.4.4 y 1.6). No es el convenio habitual. Lo adopté al programar el curso en Python, porque
+> simplifica las expresiones y, con ellas, el código. Por ejemplo, el producto Ab es la combinación lineal
+> (A|1)b_1 + ⋯ + (A|n)b_n, con cada coeficiente junto a su columna.
+>
+> En general, escribir los escalares a la izquierda o a la derecha da estructuras distintas: los módulos por la
+> izquierda y los módulos por la derecha. Si se define xa como ax, entonces (xa)b = b(ax) = (ba)x, que solo
+> coincide con x(ab) = (ab)x cuando los escalares conmutan. Aquí no hay que distinguir, porque el producto de
+> números reales es conmutativo. Con las matrices, que no conmutan, la notación sí respeta el lado.
+
+No lleva ejemplo de código. La Introducción se recoloca dentro de sus páginas (xxv a xxxiv) y las lecciones no se
+mueven. Estará en la web en la próxima publicación de `libro.pdf`.
+
+---
+
+# Aviso del libro (2026-11-22): PDF publicado
+
+El libro está publicado (commit `a28a380` de `CursoDeAlgebraLineal-SRC`,
+commit `1bcb565` del repositorio público). Incluye:
+
+- El apartado «El escalar a la derecha» de la Introducción, en la
+  página xxv.
+- La Lección 3 revisada y auditada. Cambios que importan para sus
+  futuros vídeos: la Sección 3.2 no omite el punto del producto punto;
+  hay una proposición nueva, la 3.2.1, (aB)·c = a·(Bc), y por eso aBc
+  se escribe sin paréntesis y sin punto; la transpuesta de un producto
+  pasa a ser la Proposición 3.2.2; las proposiciones de matrices
+  triangulares unitarias (3.A.2 a 3.A.4) piden matrices cuadradas; la
+  potencia cero se da como definición.
+- La numeración de secciones, definiciones y ejercicios de las
+  lecciones 1 a 3 no cambia, y no se ha renombrado ninguna ancla.
+- En la Lección 1 hay cuatro anclas nuevas con nombre (para la
+  documentación de NAcAL); las numéricas siguen valiendo.
+
+No se pide nada.
+
+---
+
+## Aviso del 2026-11-22: Lección 4 del libro revisada y publicada
+
+Para cuando se preparen los vídeos de la Lección 4 (libro publicado,
+commit `c486d96`): la demostración del Teorema 4.2.1 es nueva y
+recorre las columnas de izquierda a derecha, igual que `Elim`; el
+ejemplo a mano de 4.2.1 da los pasos en ese orden; y el libro dice
+«componente» en femenino, «secuencia» de transformaciones, «matriz
+intercambio» y «es pre-escalonada». Las anclas de la lección no han
+cambiado; las fichas siguen enlazando a los mismos sitios.
+
+## Aviso (2026-11-23): Lección 5 revisada, auditada y publicada
+
+La Lección 5 del libro está revisada y su `libro.pdf` está publicado
+en la web. Los vídeos de esta lección están por hacer, así que es un
+aviso para cuando se hagan los guiones.
+
+Cambios que conviene conocer:
+
+- **«Secuencia», no «sucesión».** El libro dice «secuencia de
+  transformaciones elementales» (y de intercambios o permutaciones) en
+  todas las lecciones.
+- **«Forma pre-escalonada de A».** La Lección 4 la define tras el
+  Teorema 4.2.1: toda matriz pre-escalonada que se obtiene de **A**
+  con una secuencia de transformaciones elementales de sus columnas.
+  Lo mismo para las formas escalonadas y escalonadas reducidas.
+- **Lección 4.** El ejemplo a mano de la Sección 4.2.1 es ahora la
+  matriz de filas (0,1,1), (2,−2,2), (2,−8,−4), que acaba en una
+  matriz pre-escalonada con la tercera columna nula y sin escalonar.
+  Una frase tras el Corolario 4.2.3 dice que el orden de las
+  transformaciones de Gauss-Jordan no es fijo y que NAcAL deja la
+  reordenación de las columnas para el final.
+- **Numeración de la Lección 5.** La Sección 5.1 acaba en la 5.1.4
+  (el método para calcular la inversa). La inversa de una matriz
+  triangular pasa al apéndice como Sección 5.A (resultados 5.A.1
+  a 5.A.6) y el «espejo» de la inversa es la Sección 5.B. En la
+  Sección 5.2 hay un Lema 5.2.1 y una Proposición 5.2.2 nuevos antes
+  de la definición de rango, y las propiedades del rango son las
+  Proposiciones 5.2.3 a 5.2.8. Las secciones 5.1.1 a 5.1.4 y 5.2
+  conservan su número y las etiquetas no cambian.
+- **Caracterización de las matrices invertibles** (Corolario 5.1.12):
+  se enuncia con «las formas pre-escalonadas de **A** no tienen
+  columnas nulas».
+- **Método de la inversa.** Se dice que, si la parte superior no tiene
+  columnas nulas, es la identidad; hay un ejemplo de matriz singular
+  de 2 por 2 hecho a mano; y se dice que `InvMat` da un error cuando
+  la matriz es singular.
+- **Rango.** Tras la definición se enuncian tres propiedades (no
+  supera el número de columnas ni el de filas, y el de una matriz
+  nula es 0), y que una matriz es invertible si y solo si es de rango
+  completo. Hay un ejemplo de rango 2 con `Elim(A,1)` y `A.rango()`.
+- **Ejercicios.** La lección solo tiene ejercicios de demostración y
+  remite al material de clase
+  (https://mbujosab.github.io/MatematicasII/) para los de cálculo.
+- **Enlace de los recuadros de código.** La etiqueta «Módulo NAcAL
+  para Python» abre el Notebook en blanco de Binder.
+- **Apéndice de resúmenes.** Los resúmenes de las lecciones 1 a 5
+  están puestos al día.
+
+Qué afecta a los vídeos: las fichas pueden enlazar a las secciones
+5.1.1 a 5.1.4, 5.2 y 5.2.1, y a las secciones 5.A y 5.B del apéndice.
+La antigua subsección 5.1.5 ya no existe.
+
+---
+
+Recibido (2026-11-23): el apartado «El escalar a la derecha» de la Introducción y los avisos de las lecciones 3, 4 y
+5. No hay nada que cambiar en los vídeos hechos; lo que importa para los guiones futuros (numeración nueva de la
+Lección 5, Proposición 3.2.1, vocabulario) queda anotado al final de `CLAUDE.md`.
