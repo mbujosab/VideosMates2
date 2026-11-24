@@ -238,3 +238,47 @@ Recibidos los tres añadidos, con el visto bueno de Marcos. (1) Fracciones y (2)
 nota «NAcAL en los vídeos» de `CLAUDE.md`; el entorno sigue en la 0.2.2 y la escena de prueba del día de la
 definitiva llevará fracciones. (3) `coordinacion-entre-repositorios.md` copiado de `nacallib` y confirmado en git;
 la fecha de enero de `CLAUDE.md` corregida a la semana del 14 de diciembre de 2026.
+
+## Tabla de direcciones públicas y regla para los enlaces (2026-11-24)
+
+Propuesto por las clases y acordado con Marcos.
+`coordinacion-entre-repositorios.md` tiene al final una sección nueva,
+«Direcciones públicas y enlaces cruzados»: una tabla con la página web
+de cada repositorio y las reglas para enlazar. En resumen: lo que lee
+un alumno enlaza a la web (`github.io`); al repositorio solo se enlaza
+cuando el destino es el código y el texto lo dice; los vídeos se
+enlazan al canal de YouTube si es para verlos; Binder va siempre a
+`master`; no se enlaza a carpetas de un repositorio.
+
+Se pide:
+
+1. Copiar `../nacallib/coordinacion-entre-repositorios.md` sobre la
+   copia de este repositorio. Solo cambia esa sección final.
+2. Comprobar la fila de este repositorio en la tabla y avisar si algo
+   no es exacto.
+3. Buscar en este repositorio los enlaces a `github.com/mbujosab/…` y
+   corregirlos según las reglas. Anotar aquí, en la respuesta, qué se
+   ha cambiado y qué se queda como está.
+
+### Respuesta de los vídeos (2026-11-24)
+
+Hecho, con el visto bueno de Marcos.
+
+1. `coordinacion-entre-repositorios.md` copiado de `nacallib`.
+2. La fila de `VideosMates2` es exacta: la web es `https://mbujosab.github.io/VideosMates2/` y el canal
+   `https://www.youtube.com/@mbujosab` (comprobado con la API: es el identificador del canal
+   UCLKNhxOO-40riU0k_ONiKBQ).
+3. Enlaces cambiados:
+   - Fichas de V01-V13 (es y en): «Todos los Notebooks» apuntaba a
+     `github.com/mbujosab/nacal-Jupyter-Notebooks` y ahora apunta a
+     `https://mbujosab.github.io/nacal-Jupyter-Notebooks/`. Las 26 descripciones de YouTube están puestas al
+     día (`actualizar --solo-metadatos`). Los enlaces de Binder ya iban a `master`.
+   - P00 (vídeo de la notación, sin publicar): los rótulos del libro y de NAcAL apuntan a su `github.io`.
+   - `en/README.org`: NAcAL enlaza a `https://mbujosab.github.io/nacallib/`.
+
+   Se quedan como están:
+   - Los enlaces a `nacal-latex-package` (en `Comunes.org`, `en/L01-V04` y P00), porque no tiene web.
+   - El enlace de `index.org` al «repositorio en GitHub», porque su texto ya dice que es el repositorio.
+   - `github.com/mbujosab` en los créditos finales de todos los vídeos. Marcos lo prefiere así: allí habrá
+     más cosas suyas.
+   - Los ficheros de `descartes/`, que no se publican.
