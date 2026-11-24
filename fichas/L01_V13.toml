@@ -1,7 +1,7 @@
 # Ficha de YouTube del vídeo L01 V13 (una sección por idioma).
 # Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
 #   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V13.toml es
-# Los capítulos son los inicios de escena que imprime el bloque `montaje` (HD es, 2026-11-23).
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (HD es y HD en, 2026-11-23).
 # Título: «Suma de matrices y producto por escalares | Álgebra lineal 1.13» tendría 63 caracteres (más de 60).
 
 [comun]
@@ -52,4 +52,48 @@ Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREg
 Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
 Música: Zeta, de Vincent Rubinetti.
 Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+youtube = "dgQOm-e1StY"   # subido por la API el 2026-11-23 (adelantado por Marcos del sábado 28)
+video = "../videoMath2/L01_V13_OperationsWithMatrices.mp4"
+subtitulos = "../videoMath2/L01_V13_OperationsWithMatrices.srt"
+idioma = "en"
+titulo = "Operations with matrices | Linear algebra 1.13"
+titulo_miniatura = "Operations\nwith matrices"
+miniatura = "miniaturas/L01_V13_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "matrices", "matrix addition", "scalar multiplication", "zero matrix",
+             "opposite matrix", "properties", "mathematics", "GECO", "UCM"]
+descripcion = """
+Matrix addition and the product of a matrix by a scalar, defined column by column, and their eight properties.
+
+Thirteenth video of the first lecture of the linear algebra course.
+
+00:00 Title
+00:06 Matrix addition
+00:53 Product of a matrix by a scalar
+01:22 Component by component
+02:15 Zero matrices and the opposite matrix
+02:39 The same definitions
+03:02 The commutative property, changing the symbols
+04:18 The property of the opposite, changing the symbols
+05:20 The eight properties
+05:41 Key takeaways
+06:29 Closing credits
+
+Two matrices of the same order are added column by column, and a matrix is multiplied by a scalar by multiplying each of its columns; therefore both operations are also done component by component. Zero matrices and the opposite matrix are defined just as for vectors. The definitions are those of vectors with capital letters, so the proofs of the properties of vectors work for matrices just by changing the symbols: we see it with the commutative property and with the property of the opposite, and the others are left as an exercise. The proofs only use rules for manipulating symbols.
+
+Corresponding book section (Section 1.5): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.5 (the book is in Spanish)
+
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.5-Eng.ipynb
+All the Jupyter Notebooks: https://github.com/mbujosab/nacal-Jupyter-Notebooks
+
+Previous video: https://youtu.be/OqIOSLtdpyo
+Next video: (added when published)
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
 """

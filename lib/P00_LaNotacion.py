@@ -219,13 +219,14 @@ class P00_E03_Precio(EscenaP00):
     def construct(self):
         self.creditos()
         cab = cabecera("El precio: todo acaba siendo una matriz", "The price: everything ends up being a matrix")
-        # los tres resultados de la escena anterior, con su orden debajo
-        r1, r2, r3 = mat([[3], [4]], 36), mat([[3]], 36), mat([[3]], 36)
-        res = VGroup(r1, r2, r3).arrange(RIGHT, buff=1.6).move_to([-2.2, 1.9, 0])
-        ords = VGroup(orden(r1, r"2\times 1"), orden(r2, r"1\times 1"), orden(r3, r"1\times 1"))
+        # dos resultados de la escena anterior, con su orden debajo: la columna (debería ser un vector) y la de orden 1 (debería
+        # ser un número). Antes eran tres, con dos [3] iguales que no se sabía de dónde venían (Marcos, 2026-11-23)
+        r1, r2 = mat([[3], [4]], 36), mat([[3]], 36)
+        res = VGroup(r1, r2).arrange(RIGHT, buff=1.6).move_to([-2.2, 1.9, 0])
+        ords = VGroup(orden(r1, r"2\times 1"), orden(r2, r"1\times 1"))
         for o in ords:
             o.set_y(ords[0].get_y())
-        res_rot = T("tres matrices: ni un vector, ni un número", "three matrices: not a vector, not a number", 30, COLOR_ESCALAR).next_to(res, RIGHT, buff=0.9)
+        res_rot = T("dos matrices: ni un vector, ni un número", "two matrices: not a vector, not a number", 30, COLOR_ESCALAR).next_to(res, RIGHT, buff=0.9)
         tipos = T(r"Enseñamos tres tipos de objetos: \quad número \quad vector \quad matriz", r"We teach three kinds of objects: \quad number \quad vector \quad matrix", 32).move_to([0, 0.1, 0])
         ident = columna([T(r"matriz con una fila o una columna $\;\longrightarrow\;$ se trata como un vector", r"matrix with one row or one column $\;\longrightarrow\;$ treated as a vector", 32),
                          T(r"matriz de orden 1 $\;\longrightarrow\;$ se trata como un número", r"matrix of order 1 $\;\longrightarrow\;$ treated as a number", 32)], -5.2, -1.2, 0.85)
@@ -237,40 +238,45 @@ class P00_E03_Precio(EscenaP00):
         preguntas = columna([T(r"¿Qué más determina un vector?", r"What else determines a vector?", 36, COLOR_ESCALAR),
                              T(r"¿Un vector es una fila o una columna?", r"Is a vector a row or a column?", 36, COLOR_ESCALAR),
                              T(r"En $\boldsymbol{y}^{T}\!A$, ¿$\boldsymbol{y}$ es un vector o una matriz?", r"In $\boldsymbol{y}^{T}\!A$, is $\boldsymbol{y}$ a vector or a matrix?", 36, COLOR_ESCALAR),
-                             T(r"¿Una matriz es una tabla de matrices?", r"Is a matrix an array of matrices?", 36, COLOR_ESCALAR)], -4.2, 1.7, 0.95)
+                             T(r"¿Una matriz es una tabla de matrices de orden 1?", r"Is a matrix an array of matrices of order 1?", 36, COLOR_ESCALAR)], -4.2, 1.7, 0.95)
         
         # La proyección de Strang (p. 209), con el orden de cada factor debajo
         aT, b, a = r"\boldsymbol{a}^{T}", r"\boldsymbol{b}", r"\boldsymbol{a}"
         f1 = MathTex(r"\boldsymbol{p}=", r"\frac{" + aT + b + "}{" + aT + a + "}", r"\," + a, font_size=38).move_to([-3.7, 2.1, 0])
         f2 = MathTex(r"\boldsymbol{p}=" + a + r"\,", r"\frac{" + aT + b + "}{" + aT + a + "}", r"=P" + b + r",\quad P=\frac{" + a + aT + "}{" + aT + a + "}", font_size=38).move_to([3.0, 2.1, 0])
         fuente = T("Strang, p. 209", None, 24, GRAY_B).to_edge(UP, buff=0.95)
-        s1 = MathTex(r"\big(", aT, b, r"\big)", a, font_size=60).move_to([-3.7, 0.2, 0])
+        # cada orden centrado bajo su factor (Marcos, 2026-11-23: antes se desplazaban hacia los paréntesis); para que no se
+        # solapen, un poco de espacio entre los factores
+        s1 = MathTex(r"\big(", aT, r"\;\;" + b, r"\big)", r"\;" + a, font_size=60).move_to([-3.7, 0.2, 0])
         o_aT, o_b = orden(s1[1], r"1\times n", 28), orden(s1[2], r"n\times 1", 28)
-        o_b.set_y(o_aT.get_y())
-        o_aT.shift(0.4*LEFT); o_b.shift(0.4*RIGHT)
+        o_aT.set_y(min(o_aT.get_y(), o_b.get_y())); o_b.set_y(o_aT.get_y())
         llave1 = Brace(VGroup(s1[0], s1[3]), DOWN, buff=0.75)
         o_p = MathTex(r"1\times 1", font_size=30).next_to(llave1, DOWN, buff=0.1)
-        o_a = MathTex(r"n\times 1", font_size=30).move_to([s1[4].get_x() + 0.25, o_p.get_y(), 0])
+        o_a = MathTex(r"n\times 1", font_size=30).move_to([s1[4].get_x(), o_p.get_y(), 0])
         mal = T(r"$(1\times 1)(n\times 1)$: los órdenes no encajan", r"$(1\times 1)(n\times 1)$: the orders do not match", 28, RED).move_to([-3.7, -2.0, 0])
         num = T(r"aquí $" + aT + b + r"$ tiene que ser un \textbf{número}", r"here $" + aT + b + r"$ has to be a \textbf{number}", 30, COLOR_ESCALAR).next_to(mal, DOWN, buff=0.3)
-        s2 = MathTex(a, r"\big(", aT, b, r"\big)", "=", r"\big(", a, aT, r"\big)", b, font_size=60).move_to([3.1, 0.2, 0])
+        s2 = MathTex(a, r"\;\big(", aT, b, r"\big)", "=", r"\big(", a, aT, r"\big)", r"\;" + b, font_size=60).move_to([3.1, 0.2, 0])
         llave2 = Brace(VGroup(s2[1], s2[4]), DOWN, buff=0.3)
         p_a = orden(s2[0], r"n\times 1", 28); p_p = MathTex(r"1\times 1", font_size=28).next_to(llave2, DOWN, buff=0.1)
         p_a.set_y(p_p.get_y())
         llave3 = Brace(VGroup(s2[6], s2[9]), DOWN, buff=0.3)
         p_n = MathTex(r"n\times n", font_size=28).next_to(llave3, DOWN, buff=0.1)
-        p_b = MathTex(r"n\times 1", font_size=28).move_to([s2[10].get_x() + 0.25, p_n.get_y(), 0])
+        p_b = MathTex(r"n\times 1", font_size=28).move_to([s2[10].get_x(), p_n.get_y(), 0])
         bien = T(r"los órdenes encajan; se reagrupa por la asociatividad", r"the orders match; regrouped by associativity", 28, GREEN).move_to([3.1, -2.0, 0])
         matz = T(r"aquí $" + aT + b + r"$ tiene que ser una \textbf{matriz}", r"here $" + aT + b + r"$ has to be a \textbf{matrix}", 30, COLOR_ESCALAR).next_to(bien, DOWN, buff=0.3)
         polya = cita([r"``It is inadmissible that the same symbol denote", r"two different objects in the same inquiry.''"], r"Polya, \emph{How to Solve It}, p. 136", 34).move_to([0, 0.3, 0])
         ctx = columna([T("El estudiante aún no tiene el contexto", "The student does not have the context yet", 32), T("Un programa no decide por el contexto", "A program cannot decide from the context", 32)], -3.4, -1.9, 0.75)
         
-        with self.voiceover(pausa=2.5, text=tr("""Esa comodidad tiene un precio. El producto de dos matrices siempre es una matriz. <bookmark mark='r'/> Por tanto, estos tres resultados son matrices: <bookmark mark='a'/> una matriz con una sola columna, <bookmark mark='b'/> y dos matrices de orden uno. <bookmark mark='n'/> Ninguno es un vector, y ninguno es un número.""",
-                                    """That convenience has a price. The product of two matrices is always a matrix. <bookmark mark='r'/> So these three results are matrices: <bookmark mark='a'/> a matrix with a single column, <bookmark mark='b'/> and two matrices of order one. <bookmark mark='n'/> None of them is a vector, and none of them is a number.""")) as tracker:
+        # la primera locución es un trozo de la toma anterior; la segunda, nueva (tirada 1)
+        with self.voiceover(pausa=0.4, text=tr("""Esa comodidad tiene un precio. El producto de dos matrices siempre es una matriz.""",
+                                    """That convenience has a price. The product of two matrices is always a matrix.""")) as tracker:
             self.play(Write(cab), run_time=1)
-            en_marca(self, "r", res)
+        
+        with self.voiceover(pausa=2.5, text=tr("""Por tanto, estos resultados son matrices: <bookmark mark='a'/> una matriz con una sola columna <bookmark mark='b'/> y una matriz de orden uno. <bookmark mark='n'/> La primera no es un vector, y la segunda no es un número.""",
+                                    """So these results are matrices: <bookmark mark='a'/> a matrix with a single column <bookmark mark='b'/> and a matrix of order one. <bookmark mark='n'/> The first is not a vector, and the second is not a number.""")) as tracker:
+            self.play(FadeIn(res), run_time=0.8)
             en_marca(self, "a", ords[0], run_time=0.5)
-            en_marca(self, "b", ords[1], ords[2], run_time=0.5)
+            en_marca(self, "b", ords[1], run_time=0.5)
             en_marca(self, "n", res_rot)
         
         with self.voiceover(text=tr("""Sin embargo, enseñamos que hay <bookmark mark='t'/> tres tipos de objetos: números, vectores y matrices. El producto punto de dos vectores es un número, y el producto de una matriz por un vector es un vector.""",
@@ -291,11 +297,17 @@ class P00_E03_Precio(EscenaP00):
             self.play(FadeIn(strang), FadeIn(filacol), run_time=0.8)
             en_marca(self, "p", poole)
         
-        with self.voiceover(pausa=2.5, text=tr("""Un estudiante atento puede hacerse entonces varias preguntas. <bookmark mark='a'/> Si dos vectores con las mismas componentes, en el mismo orden, son diferentes, algo más debe determinar un vector. <bookmark mark='b'/> No sabe si un vector es una fila o una columna. <bookmark mark='c'/> Cuando se transpone un vector, no sabe si ese símbolo representa un vector o una matriz. <bookmark mark='d'/> Y si los números son matrices de orden uno, una matriz sería una tabla de matrices.""",
-                                    """An attentive student may then ask several questions. <bookmark mark='a'/> If two vectors with the same components, in the same order, are different, something else must determine a vector. <bookmark mark='b'/> The student cannot tell whether a vector is a row or a column. <bookmark mark='c'/> When a vector is transposed, the student cannot tell whether that symbol stands for a vector or a matrix. <bookmark mark='d'/> And if numbers are matrices of order one, a matrix would be an array of matrices.""")) as tracker:
+        # la última pregunta va en una locución propia, en forma de pregunta (Marcos, 2026-11-23: «una matriz sería una tabla
+        # de matrices» se entendía mal; tirada A1, que sube al final); lo anterior es un trozo de la toma que había
+        with self.voiceover(pausa=0.5, text=tr("""Un estudiante atento puede hacerse entonces varias preguntas. <bookmark mark='a'/> Si dos vectores con las mismas componentes, en el mismo orden, son diferentes, algo más debe determinar un vector. <bookmark mark='b'/> No sabe si un vector es una fila o una columna. <bookmark mark='c'/> Cuando se transpone un vector, no sabe si ese símbolo representa un vector o una matriz.""",
+                                    """An attentive student may then ask several questions. <bookmark mark='a'/> If two vectors with the same components, in the same order, are different, something else must determine a vector. <bookmark mark='b'/> The student cannot tell whether a vector is a row or a column. <bookmark mark='c'/> When a vector is transposed, the student cannot tell whether that symbol stands for a vector or a matrix.""")) as tracker:
             limpia(self, strang, filacol, poole)
-            for m, q in zip("abcd", preguntas):
+            for m, q in zip("abc", preguntas):
                 en_marca(self, m, q, run_time=0.6)
+        
+        with self.voiceover(pausa=2.5, text=tr("""Y si los números son matrices de orden uno, ¿una matriz es una tabla de matrices de orden uno?""",
+                                    """And if numbers are matrices of order one, is a matrix an array of matrices of order one?""")) as tracker:
+            self.play(FadeIn(preguntas[3]), run_time=0.6)
         
         with self.voiceover(text=tr("""Hay un caso en el que el problema aparece dentro de una fórmula. <bookmark mark='a'/> Esta es la proyección de un vector sobre una recta, tal como la escribe Strang.""",
                                     """There is a case where the problem shows up inside a formula. <bookmark mark='a'/> This is the projection of a vector onto a line, as Strang writes it.""")) as tracker:
@@ -362,9 +374,13 @@ class P00_E04_TresObjetos(EscenaP00):
                                     """The first decision of the book is that numbers, vectors and matrices are different objects, and that the writing tells them apart.""")) as tracker:
             self.play(Write(cab), run_time=1)
         
-        with self.voiceover(text=tr("""Un vector es <bookmark mark='v'/> una lista ordenada de números, y se escribe entre paréntesis. Da igual escribir la lista en horizontal o en vertical: es el mismo vector.""",
-                                    """A vector is <bookmark mark='v'/> an ordered list of numbers, and it is written between parentheses. It does not matter whether the list is written horizontally or vertically: it is the same vector.""")) as tracker:
+        # «es la misma lista», no «el mismo vector» (Marcos, 2026-11-23); la primera frase es un trozo de la toma anterior
+        with self.voiceover(pausa=0.3, text=tr("""Un vector es <bookmark mark='v'/> una lista ordenada de números, y se escribe entre paréntesis.""",
+                                    """A vector is <bookmark mark='v'/> an ordered list of numbers, and it is written between parentheses.""")) as tracker:
             en_marca(self, "v", vec)
+        with self.voiceover(text=tr("""Da igual escribirla en horizontal o en vertical: es la misma lista.""",
+                                    """It does not matter whether it is written horizontally or vertically: it is the same list.""")) as tracker:
+            pass
         
         with self.voiceover(text=tr("""Una matriz es <bookmark mark='m'/> una lista ordenada de vectores, y se escribe entre corchetes. <bookmark mark='d'/> Una matriz con una sola columna no es un vector.""",
                                     """A matrix is <bookmark mark='m'/> an ordered list of vectors, and it is written between square brackets. <bookmark mark='d'/> A matrix with a single column is not a vector.""")) as tracker:
@@ -378,11 +394,16 @@ class P00_E04_TresObjetos(EscenaP00):
                 en_marca(self, m, t, run_time=0.5)
             en_marca(self, "p", python)
         
-        with self.voiceover(pausa=2.5, text=tr("""En consecuencia, <bookmark mark='a'/> en el libro no hay vectores fila ni vectores columna. Las filas y las columnas de una matriz son vectores, es decir, listas de números. <bookmark mark='b'/> Sí hay matrices fila y matrices columna. <bookmark mark='c'/> Y la transposición es una operación sobre matrices: ningún vector se transpone.""",
-                                    """As a consequence, <bookmark mark='a'/> in the book there are no row vectors and no column vectors. The rows and the columns of a matrix are vectors, that is, lists of numbers. <bookmark mark='b'/> There are row matrices and column matrices. <bookmark mark='c'/> And transposition is an operation on matrices: no vector is ever transposed.""")) as tracker:
+        # el final, más corto y tajante (Marcos, 2026-11-23): «…, jamás sobre un vector» (tirada v3, con pausa antes de «jamás»);
+        # lo anterior es un trozo de la toma que había
+        with self.voiceover(pausa=0.5, text=tr("""En consecuencia, <bookmark mark='a'/> en el libro no hay vectores fila ni vectores columna. Las filas y las columnas de una matriz son vectores, es decir, listas de números. <bookmark mark='b'/> Sí hay matrices fila y matrices columna.""",
+                                    """As a consequence, <bookmark mark='a'/> in the book there are no row vectors and no column vectors. The rows and the columns of a matrix are vectors, that is, lists of numbers. <bookmark mark='b'/> There are row matrices and column matrices.""")) as tracker:
             limpia(self, tres, python)
-            for m, f in zip("abc", filas):
+            for m, f in zip("ab", filas):
                 en_marca(self, m, f, run_time=0.6)
+        with self.voiceover(pausa=2.5, text=tr("""Y la transposición es una operación sobre matrices, jamás sobre un vector.<bookmark mark='v3'/>""",
+                                    """And transposition is an operation on matrices, never on a vector.""")) as tracker:
+            self.play(FadeIn(filas[2]), run_time=0.6)
         
         with self.voiceover(text=tr("""El producto punto de dos vectores <bookmark mark='p'/> se escribe con un punto, y su resultado es un número. No interviene ninguna matriz.""",
                                     """The dot product of two vectors <bookmark mark='p'/> is written with a dot, and its result is a number. No matrix is involved.""")) as tracker:
@@ -433,11 +454,33 @@ class P00_E05_Selector(EscenaP00):
             en_marca(self, "r", regla)
             en_marca(self, "p", aij)
         
-        with self.voiceover(pausa=2.5, text=tr("""El selector resuelve además una ambigüedad del subíndice. <bookmark mark='h'/> En la notación habitual, el subíndice distingue los vectores de una lista, señala las columnas de una matriz o señala las componentes de un vector. Entre unos y otros solo cambia el tipo de letra. <bookmark mark='n'/> Con el selector, cada significado tiene su escritura.""",
-                                    """The selector also resolves an ambiguity of the subscript. <bookmark mark='h'/> In the usual notation, the subscript tells apart the vectors of a list, points at the columns of a matrix, or points at the components of a vector. Only the typeface changes between them. <bookmark mark='n'/> With the selector, each meaning has its own writing.""")) as tracker:
+        # cada fila se resalta cuando la voz la nombra, primero con la escritura habitual y después con la del libro, que
+        # aparece fila a fila (Marcos, 2026-11-23: la notación es nueva para el espectador). Marcas l, c, k injertadas en la
+        # toma que había; la locución siguiente es nueva («sin selector»: Marcos; tirada 1)
+        def fila(k, *otros):
+            return [que[k].animate.set_color(COLOR_ESCALAR), *[x.animate.set_color(COLOR_ESCALAR) for x in otros]]
+        def apaga_fila(k, *otros):
+            return [que[k].animate.set_color(WHITE), *[x.animate.set_color(WHITE) for x in otros]]
+        
+        with self.voiceover(pausa=0.5, text=tr("""El selector resuelve además una ambigüedad del subíndice. <bookmark mark='h'/> En la notación habitual, el subíndice distingue <bookmark mark='l'/> los vectores de una lista, señala <bookmark mark='c'/> las columnas de una matriz o señala <bookmark mark='k'/> las componentes de un vector. Entre unos y otros solo cambia el tipo de letra. <bookmark mark='n'/> Con el selector, cada significado tiene su escritura.""",
+                                    """The selector also resolves an ambiguity of the subscript. <bookmark mark='h'/> In the usual notation, the subscript tells apart <bookmark mark='l'/> the vectors of a list, points at <bookmark mark='c'/> the columns of a matrix, or points at <bookmark mark='k'/> the components of a vector. Only the typeface changes between them. <bookmark mark='n'/> With the selector, each meaning has its own writing.""")) as tracker:
             limpia(self, selR, selL, rotR, rotL, selV, regla, aij)
             en_marca(self, "h", hab, que)
-            en_marca(self, "n", lib)
+            for k, m in enumerate("lck"):
+                self.wait_until_bookmark(m)
+                self.play(*fila(k, hab[k+1]), *(apaga_fila(k-1, hab[k]) if k else []), run_time=0.25)
+            self.wait_until_bookmark("n")
+            self.play(*apaga_fila(2, hab[3]), FadeIn(lib[0]), run_time=0.5)
+        
+        with self.voiceover(pausa=2.5, text=tr("""El subíndice sin selector queda para distinguir los vectores de una lista. <bookmark mark='c'/> La barra a la derecha de una matriz selecciona sus columnas, <bookmark mark='k'/> y a la derecha de un vector, sus componentes.""",
+                                    """The subscript without a selector is left to tell apart the vectors of a list. <bookmark mark='c'/> The bar on the right of a matrix selects its columns, <bookmark mark='k'/> and on the right of a vector, its components.""")) as tracker:
+            for k, m in enumerate([None, "c", "k"]):
+                if m:
+                    self.wait_until_bookmark(m)
+                lib[k+1].set_color(COLOR_ESCALAR)
+                self.play(FadeIn(lib[k+1]), *fila(k), *(apaga_fila(k-1, lib[k]) if k else []), run_time=0.4)
+            self.wait(0.8)
+            self.play(*apaga_fila(2, lib[3]), run_time=0.3)
         
         with self.voiceover(pausa=2.5, text=tr("""El selector cumple las mismas reglas que un factor de un producto. <bookmark mark='a'/> Se distribuye en una suma, <bookmark mark='b'/> deja fuera a los escalares, <bookmark mark='c'/> y la transposición lo cambia de lado. Quien lo trate como un factor no se equivocará.""",
                                     """The selector obeys the same rules as a factor of a product. <bookmark mark='a'/> It distributes over a sum, <bookmark mark='b'/> it leaves scalars outside, <bookmark mark='c'/> and transposition moves it to the other side. Anyone who treats it as a factor will not go wrong.""")) as tracker:
