@@ -1,0 +1,114 @@
+#+TITLE: Registro de tarjetas de YouTube
+
+Tarjetas puestas en YouTube Studio (la API no las admite; se ponen a mano o con Claude in Chrome).
+Criterio: una tarjeta donde la voz se apoya en un vídeo anterior; el minuto sale del `.srt` o de la
+transcripción del vídeo publicado. En el editor el tiempo es minutos:segundos:fotogramas («0:46:00»);
+mensaje y teaser, 30 caracteres como mucho. Ojo: una tarjeta nueva entra en el tiempo del cursor
+de reproducción y la lista se reordena por tiempo; comprobar qué fila se edita antes de cambiar un tiempo
+(con dos tarjetas en un vídeo: guardar la primera, reabrir y añadir la segunda). Añadir aquí cada tarjeta al guardarla.
+
+* Puestas
+
+| Vídeo | Idioma | Tiempo | Destino             | Mensaje                  | Teaser                    | Frase de la voz                          | Fecha      |
+|-------+--------+--------+---------------------+--------------------------+---------------------------+------------------------------------------+------------|
+| V02   | es     | 0:46   | V01 es (HWaQrbSc8WA) | La notación del selector | Vídeo 1.1: vectores       | «la notación descrita en el vídeo anterior» | 2026-11-24 |
+| V02   | en     | 0:46   | V01 en (9Je758iM6Dc) | The selector notation    | Video 1.1: vectors        | «the notation discussed in the previous video» | 2026-11-24 |
+| V02   | es     | 2:50   | V03 es (kSgd-davYhw) | Interpretación geométrica | Siguiente: vídeo 1.3     | «En el próximo vídeo daremos una interpretación geométrica de la suma» (créditos a las 2:56) | 2026-11-24 |
+| V02   | en     | 2:50   | V03 en (yrwrxVB9uto) | Geometric interpretation | Next: video 1.3          | «In the next video, we will provide a geometric interpretation» | 2026-11-24 |
+| V03   | es     | 0:05   | V02 es (LvcerzXX3IM) | Suma de vectores         | Vídeo 1.2: la conmutativa | «Que la operación suma sea... componente a componente y que sea conmutativa» | 2026-11-24 |
+| V03   | en     | 0:05   | V02 en (k-eMu1gxLRE) | Vector addition          | Video 1.2: commutativity  | «Addition is a component-wise operation. It is also commutative.» | 2026-11-24 |
+| V03   | es     | 4:03   | V01 es (HWaQrbSc8WA) | Un vector es una lista   | Vídeo 1.1: vectores       | «Pero no debe olvidar que nuestra definición de vector de Rn es una lista de números» (4:01) | 2026-11-24 |
+| V03   | en     | 4:03   | V01 en (9Je758iM6Dc) | A vector is a list       | Video 1.1: vectors        | «But remember: our definition of a vector in R n is that it is a list of numbers» (4:01) | 2026-11-24 |
+| V04   | es     | 0:47   | V02 es (LvcerzXX3IM) | La suma con el selector  | Vídeo 1.2: suma de vectores | «Como en el caso de la suma, para definir la operación en Rn...» | 2026-11-24 |
+| V04   | en     | 0:39   | V02 en (k-eMu1gxLRE) | Addition with the selector | Video 1.2: vector addition | «As with addition, in R n, we want a definition...» (narración inglesa distinta, 8:18) | 2026-11-24 |
+| V05   | es     | 0:12   | V02 es (LvcerzXX3IM) | Suma de vectores         | Vídeo 1.2                 | «En los vídeos anteriores definimos dos operaciones con vectores: la suma...» | 2026-11-24 |
+| V05   | en     | 0:13   | V02 en (k-eMu1gxLRE) | Vector addition          | Video 1.2                 | «In the previous videos we defined two operations with vectors: the sum...» | 2026-11-24 |
+| V05   | es     | 3:15   | V04 es (SG4ZwRAIQLY) | El producto con regla    | Vídeo 1.4: construcción   | «Pasemos al producto. En el vídeo anterior vimos una construcción geométrica...» | 2026-11-24 |
+| V05   | en     | 3:19   | V04 en (SHu1-X0MWk0) | Multiplying with a ruler | Video 1.4: the construction | «Let us move on to multiplication. In the previous video we saw...» | 2026-11-24 |
+| V06   | es     | 0:10   | V05 es (nfftYHyi0hU) | Propiedades de los reales | Vídeo 1.5: regla y compás | «En el vídeo anterior vimos las nueve propiedades algebraicas de los números reales» | 2026-11-24 |
+| V06   | en     | 0:10   | V05 en (gAWXJVMWO7M) | Properties of the reals  | Video 1.5: ruler and compass | «In the previous video we saw the nine algebraic properties...» | 2026-11-24 |
+| V07   | es     | 0:10   | V06 es (Hrkks90PbVE) | Propiedades de la suma   | Vídeo 1.6: demostraciones | «En el vídeo anterior demostramos cuatro propiedades de la suma de vectores» | 2026-11-24 |
+| V07   | en     | 0:10   | V06 en (WudpCJUYBiA) | Properties of addition   | Video 1.6: the proofs     | «In the previous video we proved four properties of vector addition» | 2026-11-24 |
+| V05   | es     | 7:28   | V06 es (Hrkks90PbVE) | Propiedades de la suma   | Siguiente: vídeo 1.6      | «En el próximo vídeo plantearemos la misma cuestión para los vectores» | 2026-11-24 |
+| V06   | es     | 7:26   | V07 es (GOqglYkmOiA) | Propiedades del producto | Siguiente: vídeo 1.7      | «En el próximo vídeo haremos lo mismo con el producto por escalares» | 2026-11-24 |
+| V07   | es     | 6:31   | V08 es (w62nh5CvJtM) | Vectores como datos      | Siguiente: vídeo 1.8      | «En el próximo vídeo veremos los vectores como una forma de representar datos» | 2026-11-24 |
+| V05   | en     | 7:55   | V06 en (WudpCJUYBiA) | Properties of addition   | Next: video 1.6           | «In the next video we will raise the same question» | 2026-11-24 |
+| V06   | en     | 7:26   | V07 en (cNfCZMC8QcM) | Properties of scaling    | Next: video 1.7           | «In the next video we will do the same...» | 2026-11-24 |
+| V07   | en     | 6:34   | V08 en (C2QvSW4yX-Y) | Vectors as data          | Next: video 1.8           | «In the next video we will see vectors as a way of representing data» | 2026-11-24 |
+| V08   | es     | 1:16   | V07 es (GOqglYkmOiA) | La propiedad cinco       | Vídeo 1.7: producto       | «es la propiedad cinco del vídeo anterior» | 2026-11-24 |
+| V08   | en     | 1:17   | V07 en (cNfCZMC8QcM) | Property five            | Video 1.7: scaling        | «it is property five from the previous video» | 2026-11-24 |
+| V08   | es     | 3:02   | V09 es (9w6gEv3XrTc) | Matrices                 | Siguiente: vídeo 1.9      | «En el próximo vídeo esa tabla de números tendrá nombre: una matriz» | 2026-11-24 |
+| V08   | en     | 2:58   | V09 en (t40aDUbc1oE) | Matrices                 | Next: video 1.9           | «In the next video this table of numbers will get a name: a matrix» | 2026-11-24 |
+| V09   | es     | 0:06   | V08 es (w62nh5CvJtM) | Los vectores del PIB     | Vídeo 1.8: datos          | «En el vídeo anterior pusimos uno al lado del otro...» | 2026-11-24 |
+| V09   | en     | 0:06   | V08 en (C2QvSW4yX-Y) | The GDP vectors          | Video 1.8: data           | «In the previous video we placed side by side the four vectors...» | 2026-11-24 |
+| V09   | es     | 3:44   | V10 es (gpVJnl4nAdU) | Filas, columnas, componentes | Siguiente: vídeo 1.10 | «En el próximo vídeo veremos la selección de...» | 2026-11-24 |
+| V09   | en     | 3:39   | V10 en (LTM7l1w0yY4) | Rows, columns, components | Next: video 1.10         | «In the next video we will see the selection...» | 2026-11-24 |
+| V10   | es     | 1:18   | V01 es (HWaQrbSc8WA) | El selector a cada lado  | Vídeo 1.1: vectores       | «Ya en el primer vídeo del curso admitimos que el selector puede actuar por cualquier lado» | 2026-11-24 |
+| V10   | en     | 1:16   | V01 en (9Je758iM6Dc) | The selector on either side | Video 1.1: vectors     | «in the first video of the course, we agreed that the selector can...» | 2026-11-24 |
+| V10   | es     | 2:24   | V11 es (P6B-AIrPugs) | La transposición         | Siguiente: vídeo 1.11     | «En el próximo vídeo veremos la transposición» | 2026-11-24 |
+| V10   | en     | 2:23   | V11 en (MVSR4d0SwNc) | Transposition            | Next: video 1.11          | «In the next video we will meet transposition» | 2026-11-24 |
+| V11   | es     | 1:05   | V10 es (gpVJnl4nAdU) | Da igual el orden        | Vídeo 1.10: selección     | «En el vídeo anterior vimos que da igual el orden en que se aplican los selectores» | 2026-11-24 |
+| V11   | en     | 1:07   | V10 en (LTM7l1w0yY4) | Order doesn't matter     | Video 1.10: selection     | «In the previous video we saw that the order in which the selectors...» | 2026-11-24 |
+| V11   | es     | 2:44   | V12 es (zKef0mF4YHQ) | Tipos de matrices        | Siguiente: vídeo 1.12     | «En el próximo vídeo veremos distintos tipos de matrices» | 2026-11-24 |
+| V11   | en     | 2:48   | V12 en (OqIOSLtdpyo) | Types of matrices        | Next: video 1.12          | «In the next video we will see different types of matrices» | 2026-11-24 |
+| V12   | es     | 1:46   | V11 es (P6B-AIrPugs) | La transposición         | Vídeo 1.11: transposición | «Una matriz es simétrica cuando es igual a su transpuesta» | 2026-11-24 |
+| V12   | en     | 1:46   | V11 en (MVSR4d0SwNc) | Transposition            | Video 1.11: transposition | «...is symmetric when it is equal to its transpose» | 2026-11-24 |
+| V12   | es     | 6:02   | V13 es (njXt9S3kfWU) | Operaciones con matrices | Siguiente: vídeo 1.13     | «En el próximo vídeo veremos las operaciones con matrices» | 2026-11-24 |
+| V12   | en     | 6:08   | V13 en (dgQOm-e1StY) | Operations with matrices | Next: video 1.13          | «In the next video we will look at operations...» | 2026-11-24 |
+| V13   | es     | 3:02   | V06 es (Hrkks90PbVE) | Propiedades de la suma   | Demostraciones: vídeo 1.6 | (las propiedades de la suma de vectores) | 2026-11-24 |
+| V13   | es     | 5:24   | V07 es (GOqglYkmOiA) | Propiedades del producto | Demostraciones: vídeo 1.7 | (las propiedades del producto por escalares) | 2026-11-24 |
+| V13   | en     | 3:03   | V06 en (WudpCJUYBiA) | Properties of addition   | Proofs: video 1.6         | «we proved the properties of vectors» | 2026-11-24 |
+| V13   | en     | 5:21   | V07 en (cNfCZMC8QcM) | Properties of scaling    | Proofs: video 1.7         | «Vector operations satisfy eight properties» | 2026-11-24 |
+
+* Pantallas finales
+
+Elementos: suscribirse (arriba a la izquierda), lista «Curso de Álgebra Lineal» / «Linear Algebra Course»
+(arriba a la derecha) y el vídeo siguiente (vídeo específico, debajo; los 20 últimos segundos).
+V01 y V02 ya lo tenían (puesto por Marcos); el resto solo tenía lista y suscribirse.
+**Ningún elemento empieza antes de que la imagen pase a los créditos** (Marcos, 2026-11-24): no tapar
+fórmulas ni la voz final. El «Créditos finales» de la ficha es aproximado: llevar el cursor del editor
+(campo de tiempo bajo la vista previa) a ese segundo, mirar la vista previa y ajustar. Al añadir un
+elemento, Studio lo pone en los 20 últimos segundos: corregir siempre su inicio.
+
+| Vídeo | Idioma | Vídeo siguiente en la pantalla final (inicio) | Fecha      |
+|-------+--------+--------------------------------------+------------|
+| V01   | es     | V02 (ya estaba)                       |            |
+| V02   | es     | V03 (ya estaba; 2:57)                  |            |
+| V01   | en     | V02 en (no tenía pantalla final; creada entera, 3:02) | 2026-11-24 |
+| V02   | en     | V03 en (2:57)                          | 2026-11-24 |
+| V03   | es     | V04 es (6:25; también la lista)        | 2026-11-24 |
+| V04   | es     | V05 es (10:35)                         | 2026-11-24 |
+| V05   | es     | V06 es (7:38)                          | 2026-11-24 |
+| V06   | es     | V07 es (7:33)                          | 2026-11-24 |
+| V07   | es     | V08 es (6:36)                          | 2026-11-24 |
+| V03   | en     | V04 en (6:25)                          | 2026-11-24 |
+| V04   | en     | V05 en (8:09)                          | 2026-11-24 |
+| V05   | en     | V06 en (8:05)                          | 2026-11-24 |
+| V06   | en     | V07 en (7:32)                          | 2026-11-24 |
+| V07   | en     | V08 en (6:39)                          | 2026-11-24 |
+| V08   | es     | V09 es (3:08)                          | 2026-11-24 |
+| V08   | en     | V09 en (3:03)                          | 2026-11-24 |
+| V09   | es     | V10 es (3:49,5)                        | 2026-11-24 |
+| V09   | en     | V10 en (3:44,5)                        | 2026-11-24 |
+| V10   | es     | V11 es (2:31)                          | 2026-11-24 |
+| V10   | en     | V11 en (2:30)                          | 2026-11-24 |
+| V11   | es     | V12 es (ya estaba desde 2:43, tapaba el resumen; movido a 2:48,5) | 2026-11-24 |
+| V11   | en     | V12 en (2:52)                          | 2026-11-24 |
+| V12   | es     | V13 es (6:08)                          | 2026-11-24 |
+| V12   | en     | V13 en (6:15)                          | 2026-11-24 |
+
+* Revisados sin tarjeta
+
+- V01 (es, en): primer vídeo, no se apoya en ninguno anterior.
+- V12: una sola tarjeta a V11 (definición de simétrica); «Por la propiedad de la transpuesta» (4:35) lleva al mismo vídeo.
+- V11: «lo que vimos sobre sus filas» (2:28) remite a la propia escena, sin tarjeta.
+- V08: «En los dos vídeos anteriores hemos operado con vectores» (0:06) sin tarjeta: nombra V06 y V07 a la vez y no usa nada concreto.
+- V06: el repaso de las definiciones (1:27, suma → V02, producto → V04) se deja sin tarjeta: el vídeo las pone en pantalla.
+
+* Pendientes
+
+- V13 es/en: tarjeta al siguiente y pantalla final con V14 cuando se publique.
+- **Segunda pasada (Marcos, 2026-11-24)**: en cada vídeo, (a) tarjeta al siguiente donde la voz lo anuncia
+  («En el próximo vídeo...») y (b) pantalla final con el vídeo siguiente (vídeo específico), la lista del curso
+  y suscribirse. V01-V12 hechos el 2026-11-24 (es y en). El último publicado apunta a
+  la lista hasta que salga el siguiente: al publicar uno nuevo, actualizar la pantalla final del anterior.

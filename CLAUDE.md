@@ -590,7 +590,9 @@ Al publicar un vídeo, actualizar esta tabla.
 Chrome (`/chrome` en la sesión; probado con éxito ese día). Primeras tarjetas: V13 es, 3:02 → V06 es («Propiedades de la suma» /
 «Demostraciones: vídeo 1.6») y 5:24 → V07 es («Propiedades del producto» / «Demostraciones: vídeo 1.7»). En el editor, el tiempo
 es **minutos:segundos:fotogramas** (escribir «3:02:00», no «0:03:02», que da 3 s); mensaje y teaser, 30 caracteres como mucho.
-Criterio: una tarjeta donde la voz se apoya en un vídeo anterior, buscando el minuto en el `.srt`. Más vídeos, cuando Marcos lo pida.
+Criterio: una tarjeta donde la voz se apoya en un vídeo anterior, buscando el minuto en el `.srt` (V01-V04 no lo tienen: transcripción
+de la página pública del vídeo). **Registro de todas las tarjetas en `Tarjetas.org`** (Marcos, 2026-11-24): apuntar cada una al guardarla.
+Se van poniendo en orden desde V02 (V02-V13 es/en hechas el 2026-11-24; V13 espera a V14 para la tarjeta y la pantalla final al siguiente). Además, en cada vídeo, una tarjeta al **siguiente** donde la voz lo anuncia («En el próximo vídeo...», teaser «Siguiente: vídeo 1.N» / «Next: video 1.N») y una **pantalla final** con el vídeo siguiente, la lista del curso y suscribirse; **ningún elemento empieza antes de que la imagen pase a los créditos** (Marcos: no tapar fórmulas ni la voz final; mirar la vista previa en ese segundo, la hora de la ficha es aproximada). **Al publicar un vídeo**, añadirlo a la pantalla final del anterior y poner en este la tarjeta hacia atrás si la voz se apoya en uno anterior.
 
 ## Pendiente
 
