@@ -11,7 +11,7 @@ run inside =videoMath2= (paths =lib/media/...=), so to re-render one, open it fr
 those paths.
 
 The videos follow the book [[https://mbujosab.github.io/CursoDeAlgebraLineal/][Curso de Álgebra Lineal]] and use its
-notation (LaTeX package =nacal.sty= and the Python module [[https://github.com/mbujosab/nacallib][nacal]]).
+notation (LaTeX package =nacal.sty= and the Python module [[https://mbujosab.github.io/nacallib/][nacal]]).
 Each video is an Org-mode literate file that tangles into =lib/*.py= and is
 rendered with [[https://www.manim.community/][Manim]] and [[https://github.com/ManimCommunity/manim-voiceover][manim-voiceover]].
 

@@ -690,7 +690,7 @@ class P00_E09_Programa(EscenaP00):
         cab = cabecera("Una notación que se puede programar", "A notation that can be programmed")
         def codigo(t, fs=22, color=WHITE):
             return Text(t, font="monospace", font_size=fs, color=color)
-        nacal = T(r"NAcAL, módulo de Python \quad \texttt{github.com/mbujosab/nacallib}", r"NAcAL, a Python module \quad \texttt{github.com/mbujosab/nacallib}", 28, GRAY_B).move_to([0, 2.5, 0])
+        nacal = T(r"NAcAL, módulo de Python \quad \texttt{mbujosab.github.io/nacallib}", r"NAcAL, a Python module \quad \texttt{mbujosab.github.io/nacallib}", 28, GRAY_B).move_to([0, 2.5, 0])
         # Las dos líneas de la introducción del libro; en amarillo, solo lo que coincide con la fórmula
         d1 = M(r"\elemR{(\Vect{a}+\Vect{b})}{i}=\eleVR{a}{i}+\eleVR{b}{i}", 40).move_to([0, 1.6, 0])
         c1 = Text("Vector([ (self|i) + (other|i) for i in range(1, len(self)+1) ])", font="monospace", font_size=22, color=GRAY_B,
@@ -776,7 +776,7 @@ class P00_E10_Coste(EscenaP00):
         for c, ref in zip(cabt[1:], tabla[1:3]):
             c.next_to(ref, UP, buff=0.25).align_to(ref, LEFT)
         tabla = VGroup(tabla, cabt[1:]).scale_to_fit_height(3.9).move_to([3.3, -1.2, 0])
-        recursos = columna([T(r"Libro (CC BY-SA 4.0): \texttt{github.com/mbujosab/CursoDeAlgebraLineal}", r"Book (CC BY-SA 4.0, in Spanish): \texttt{github.com/mbujosab/CursoDeAlgebraLineal}", 26),
+        recursos = columna([T(r"Libro (CC BY-SA 4.0): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", r"Book (CC BY-SA 4.0, in Spanish): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", 26),
                             T(r"Macros de \LaTeX{}: \texttt{github.com/mbujosab/nacal-latex-package}", r"\LaTeX{} macros: \texttt{github.com/mbujosab/nacal-latex-package}", 26),
                             T(r"Transparencias y vídeos del curso", r"Class slides and course videos", 26)], -6.6, -1.3, 0.6)
         balance = columna([T(r"\textbf{Inequívoca}: ningún símbolo denota objetos de dos tipos", r"\textbf{Unambiguous}: no symbol denotes objects of two kinds", 30),
@@ -819,8 +819,8 @@ class P00_E11_Cierre(EscenaP00):
                         r"Godement, \emph{Álgebra}, prefacio", 30).move_to([0, 1.9, 0])
         vanloan = VGroup(T(r"``La notación lo es todo''", r"``Notation is everything''", 56, COLOR_ESCALAR), T("Charles F. Van Loan", None, 28, GRAY_B)).arrange(DOWN, buff=0.35).move_to([0, 0.6, 0])
         polya = cita([r"``We should choose our notation carefully,", r"and have some good reason for our choice.''"], r"Polya, \emph{How to Solve It}, p. 140", 30).move_to([0, -1.2, 0])
-        enlaces = columna([T(r"Libro: \texttt{github.com/mbujosab/CursoDeAlgebraLineal}", r"Book (in Spanish): \texttt{github.com/mbujosab/CursoDeAlgebraLineal}", 26),
-                           T(r"NAcAL: \texttt{github.com/mbujosab/nacallib}", None, 26), T(r"Licencia CC BY-SA 4.0", r"Licence CC BY-SA 4.0", 26, GRAY_B)], -4.4, -1.9, 0.5)
+        enlaces = columna([T(r"Libro: \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", r"Book (in Spanish): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", 26),
+                           T(r"NAcAL: \texttt{mbujosab.github.io/nacallib}", None, 26), T(r"Licencia CC BY-SA 4.0", r"Licence CC BY-SA 4.0", 26, GRAY_B)], -4.4, -1.9, 0.5)
         
         with self.voiceover(text=tr("""Se suele pensar que el rigor y una notación precisa añaden dificultad a quien empieza. <bookmark mark='g'/> Godement respondía que, si fuera así, los principiantes entenderían mejor un texto cuanto peor escrito estuviera.""",
                                     """It is often thought that rigour and a precise notation make things harder for beginners. <bookmark mark='g'/> Godement replied that, if that were so, the worst-written textbooks would be the ones beginners understand most easily.""")) as tracker:

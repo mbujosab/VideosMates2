@@ -578,7 +578,8 @@ Después se apunta el id en la ficha y se añaden la entrada de `README.org`/`in
 **Inserción en otras webs** (2026-11-16): `videos.update` con `part=status` pone a `False` lo que no se envía, y cada `actualizar`
 dejaba el vídeo sin poder insertarse (los Notebooks en Binder mostraban «El propietario ha inhabilitado su reproducción en otros sitios
 web»). `cuerpo()` envía ya `embeddable` y `publicStatsViewable` a `True`; V01-V11 corregidos ese día. Las descripciones enlazan desde
-entonces al Notebook de la sección con Binder (V01 → 1.1, V02-V08 → 1.2, V09-V12 → 1.4, V13-V15 → 1.5) y, debajo, al repositorio.
+entonces al Notebook de la sección con Binder (V01 → 1.1, V02-V08 → 1.2, V09-V12 → 1.4, V13-V15 → 1.5) y, debajo, a la web de los Notebooks (`mbujosab.github.io/nacal-Jupyter-Notebooks/`; hasta el 2026-11-24, al
+repositorio). Reglas de enlaces entre repositorios: sección final de `coordinacion-entre-repositorios.md`.
 **Y se avisa a los Notebooks** (desde el 2026-11-21, a petición suya): fecha e identificadores de los dos idiomas, al final de
 `../NAcAL-Jupyter-Notebooks-SRC/encargo-desde-los-videos.md` (se crea si no existe), **sin confirmarlo en git**: lo confirma la sesión de
 los Notebooks cuando ha enlazado el vídeo. No anotarlo en `encargo-desde-los-notebooks.md` de este repositorio: allí su aviso automático
