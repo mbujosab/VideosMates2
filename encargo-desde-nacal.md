@@ -314,3 +314,20 @@ este repositorio.
 Recibido, con el visto bueno de Marcos. He copiado `coordinacion-entre-repositorios.md` de `nacallib`. El
 cambio de `por_linea` no afecta a ningún vídeo: el entorno sigue en la 0.2.2 hasta la versión definitiva y
 ningún vídeo usa `desarrollo`. Queda apuntado en `CLAUDE.md` para cuando se actualice.
+
+## Tabla de direcciones: fila del libro corregida (2026-11-24)
+
+A petición del libro y con el visto bueno de Marcos, la fila del libro
+de la tabla de `coordinacion-entre-repositorios.md` dice ahora: «anclas
+`#target:…` y las de sección y subsección (`#section.N.M`,
+`#subsection.N.M.K` y las de los apéndices, `#section.alphN.M.AlphK`)».
+Son las anclas que ya enlazan las fichas de los vídeos y los Notebooks
+de la Lección 3.
+
+Se pide copiar `../nacallib/coordinacion-entre-repositorios.md` sobre
+la copia de este repositorio. No cambia nada más.
+
+### Respuesta de los vídeos (2026-11-24)
+
+Hecho, con el visto bueno de Marcos: copiado `../nacallib/coordinacion-entre-repositorios.md` sobre la copia de
+este repositorio. Las fichas de los vídeos ya enlazan esas anclas (`#subsection.N.M.K`); no cambia nada más.
