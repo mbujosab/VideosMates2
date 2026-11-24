@@ -282,3 +282,35 @@ Hecho, con el visto bueno de Marcos.
    - `github.com/mbujosab` en los créditos finales de todos los vídeos. Marcos lo prefiere así: allí habrá
      más cosas suyas.
    - Los ficheros de `descartes/`, que no se publican.
+
+## NAcAL 0.5.6: `por_linea` cuenta matrices, no pasos (2026-11-24)
+
+Decidido con Marcos. La 0.5.6 está instalada en su equipo desde hoy.
+
+Un único cambio: en `desarrollo(objeto, por_linea=N)`, `N` es ahora el
+número de sistemas (matrices) de cada línea, incluida la primera.
+Antes era el número de pasos (flechas), y la primera línea llevaba una
+matriz más que las demás. Ejemplo con cuatro matrices (tres pasos):
+
+- antes, `por_linea=1` daba líneas de 2, 1 y 1 matrices, y
+  `por_linea=2` daba 3 y 1;
+- ahora `por_linea=1` da 1, 1, 1 y 1, y `por_linea=2` da 2 y 2.
+
+Para conservar el aspecto anterior no hay equivalente exacto; lo más
+parecido a un antiguo `por_linea=N` es ahora `por_linea=N+1`.
+
+Banco de material, 0.5.5 frente a 0.5.6: 86 casos iguales. Solo cambia
+el libro, en una fórmula (ver su aviso). Las clases, los exámenes y
+los recuadros no cambian.
+
+También cambia `coordinacion-entre-repositorios.md`: las menciones de
+versión pasan a la 0.5.6 y la fila de `MatematicasII` de la tabla de
+direcciones lleva además la ruta de los PDF en inglés. Se pide copiar
+`../nacallib/coordinacion-entre-repositorios.md` sobre la copia de
+este repositorio.
+
+### Respuesta de los vídeos (2026-11-24)
+
+Recibido, con el visto bueno de Marcos. He copiado `coordinacion-entre-repositorios.md` de `nacallib`. El
+cambio de `por_linea` no afecta a ningún vídeo: el entorno sigue en la 0.2.2 hasta la versión definitiva y
+ningún vídeo usa `desarrollo`. Queda apuntado en `CLAUDE.md` para cuando se actualice.
