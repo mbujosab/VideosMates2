@@ -1,6 +1,6 @@
 from vm2comun import *   # módulo común generado desde Comunes.org (LANG = "es")
 
-TITULO = tr("Otra notación para el álgebra lineal", "A different notation for linear algebra")
+TITULO = tr("Una notación asociativa para el álgebra lineal", "An associative notation for linear algebra")
 A_EJ = r"\begin{bmatrix}1&3\\2&4\end{bmatrix}"          # la matriz de los ejemplos de la introducción
 COLOR_FILA, COLOR_COLUMNA = YELLOW, GREEN
 
@@ -118,16 +118,16 @@ class P00_E01_Resultado(EscenaP00):
         self.creditos()
         titulo = Tex(TITULO, tex_template=myTemplate, font_size=40).set_color(COLOR_TITULO).to_edge(UP, buff=0.3)
         sumas = M(SUMAS, 26); sumas.scale_to_fit_width(12.6).move_to([0, 2.35, 0])
-        citas = columna([T(r"Strang, p. 73: \emph{``The direct proof is sort of awkward''}", None, 28),
-                         T(r"Poole, p. 214: composición de transformaciones lineales", r"Poole: composition of linear transformations", 28),
-                         T(r"Larson, p. 62: ejercicio", r"Larson: left as an exercise", 28)], -4.6, 0.6, 0.7)
+        citas = columna([T(r"\mbox{Strang, \emph{Introduction to Linear Algebra}, p. 73: ``The direct proof is sort of awkward''}", None, 28),
+                         T(r"Poole, \emph{Álgebra lineal}, p. 214: composición de transformaciones lineales", r"Poole, \emph{Linear Algebra: A Modern Introduction}: composition of linear transformations", 28),
+                         T(r"Larson, \emph{Álgebra lineal}, p. 62: ejercicio", r"Larson, \emph{Elementary Linear Algebra}: left as an exercise", 28)], -4.6, 0.6, 0.7)
         lineas, reglas = cadena_asociativa(fs=32, y_sup=1.25, salto=0.78)
         cuenta = VGroup(T(r"dos sumatorios", r"two summations", 28, COLOR_ESCALAR), T(r"cuatro índices: $i,\ j,\ k,\ l$", r"four indices: $i,\ j,\ k,\ l$", 28, COLOR_ESCALAR),
                         T(r"intercambiar $\sum_k\sum_l$ por $\sum_l\sum_k$", r"exchange $\sum_k\sum_l$ for $\sum_l\sum_k$", 28, COLOR_ESCALAR)).arrange(RIGHT, buff=0.9).next_to(sumas, DOWN, buff=0.35)
         pregunta = T("Las decisiones, lo que resuelven y lo que cuestan", "The decisions, what they solve and what they cost", 32, COLOR_ESCALAR).to_edge(DOWN, buff=0.4)
         
-        with self.voiceover(text=tr("""Este vídeo está dirigido a quien ya conoce el álgebra lineal, y en particular a quien la enseña. Presenta la notación del libro Curso de Álgebra Lineal y las razones que la sostienen.""",
-                                    """This video is for those who already know linear algebra, and in particular for those who teach it. It presents the notation of the book Curso de Álgebra Lineal and the reasons behind it.""")) as tracker:
+        with self.voiceover(text=tr("""Este vídeo está dirigido a quien ya conoce el álgebra lineal, y en particular a quien la enseña. Presenta la notación asociativa del libro Curso de Álgebra Lineal y las razones que la sostienen.""",
+                                    """This video is for those who already know linear algebra, and in particular for those who teach it. It presents the associative notation of the book Curso de Álgebra Lineal and the reasons behind it.""")) as tracker:
             self.play(Write(titulo), run_time=1.5)
         
         with self.voiceover(text=tr("""Empecemos por una propiedad que todos enseñamos: el producto de matrices es asociativo. <bookmark mark='d'/> Esta es la demostración por componentes. Necesita <bookmark mark='s'/> dos sumatorios <bookmark mark='i'/> y cuatro índices, y hay que <bookmark mark='o'/> intercambiar el orden de las sumas.""",
@@ -172,7 +172,7 @@ class P00_E02_Comodidad(EscenaP00):
         notas = [T(e, i, 28, c).move_to([0, ej.get_y(), 0]).align_to([-0.6, 0, 0], LEFT) for (e, i, c), ej in zip(
             [("selecciona la columna 2", "selects column 2", COLOR_COLUMNA), ("selecciona la componente de la fila 1 y la columna 2", "selects the component in row 1, column 2", COLOR_COLUMNA),
              ("resta a la fila 2 el doble de la fila 1", "subtracts twice row 1 from row 2", COLOR_COLUMNA), (r"producto punto: $1\cdot 2+1\cdot 1$", r"dot product: $1\cdot 2+1\cdot 1$", COLOR_COLUMNA)], ejs)]
-        asoc = M(r"(\Mat{A}\Mat{B})\Mat{E}=\Mat{A}(\Mat{B}\Mat{E})", 44).move_to([-3.6, -2.9, 0])
+        asoc = M(r"(\Mat{A}\Mat{B})\mathbf{e}_j=\Mat{A}(\Mat{B}\mathbf{e}_j)", 44).move_to([-3.6, -2.9, 0])
         lectura = T(r"columna de $\Mat{AB}$ = $\Mat{A}$ por columna de $\Mat{B}$", r"column of $\Mat{AB}$ = $\Mat{A}$ times column of $\Mat{B}$", 28, GRAY_B).next_to(asoc, RIGHT, buff=0.7)
         matlab = T(r"Matlab = \emph{Matrix Laboratory}: todo es una matriz", r"Matlab = \emph{Matrix Laboratory}: everything is a matrix", 30, COLOR_ESCALAR).next_to(asoc, RIGHT, buff=0.7)
         
@@ -204,15 +204,20 @@ class P00_E02_Comodidad(EscenaP00):
             pinta(self, COLOR_COLUMNA, r3.get_entries())
             self.play(FadeIn(notas[3]), run_time=0.5)
         
-        with self.voiceover(pausa=2.5, text=tr("""El producto de matrices es asociativo, así que en estas expresiones sobran los paréntesis. <bookmark mark='e'/> Esta igualdad, por ejemplo, dice que cada columna de un producto es la primera matriz por la columna correspondiente de la segunda. No hace falta demostrarlo aparte: basta la asociatividad.""",
-                                    """Matrix multiplication is associative, so in these expressions the parentheses are unnecessary. <bookmark mark='e'/> This equality, for example, says that each column of a product is the first matrix times the corresponding column of the second. It needs no separate proof: associativity is enough.""")) as tracker:
+        with self.voiceover(pausa=2.5, text=tr("""El producto de matrices es asociativo, así que en estas expresiones sobran los paréntesis. <bookmark mark='e'/> Con una columna de la identidad a la derecha, esta igualdad dice que cada columna de un producto es la primera matriz por la columna correspondiente de la segunda. No hace falta demostrarlo aparte: basta la asociatividad.""",
+                                    """Matrix multiplication is associative, so in these expressions the parentheses are unnecessary. <bookmark mark='e'/> With a column of the identity on the right, this equality says that each column of a product is the first matrix times the corresponding column of the second. It needs no separate proof: associativity is enough.""")) as tracker:
             en_marca(self, "e", asoc)
             self.play(FadeIn(lectura), run_time=0.8)
         
-        with self.voiceover(pausa=2.0, text=tr("""Es el planteamiento <bookmark mark='m'/> de Matlab. Si todos los objetos son matrices, basta una operación, y las expresiones se escriben sin paréntesis.""",
-                                    """This is the approach <bookmark mark='m'/> of Matlab. If every object is a matrix, one operation is enough, and expressions are written without parentheses.""")) as tracker:
+        with self.voiceover(pausa=2.0, text=tr("""Es el planteamiento <bookmark mark='m'/> de Matlab. Si todos los objetos son matrices, basta una operación, y las expresiones se escriben <bookmark mark='s'/> sin paréntesis.""",
+                                    """This is the approach <bookmark mark='m'/> of Matlab. If every object is a matrix, one operation is enough, and expressions are written <bookmark mark='s'/> without parentheses.""")) as tracker:
             self.wait_until_bookmark("m")
             self.play(FadeOut(lectura), FadeIn(matlab), run_time=0.8)
+            self.wait_until_bookmark("s")
+            abe = M(r"\Mat{A}\Mat{B}\mathbf{e}_j", 44).align_to(asoc, LEFT).set_y(asoc.get_y())
+            g = asoc[0]
+            self.play(*[ReplacementTransform(g[k], abe[0][j]) for j, k in enumerate((1, 2, 4, 5))],
+                      *[FadeOut(g[k]) for k in (0, 3, 6, 7, 8, 9, 10, 11, 12)], run_time=1)
 
 
 class P00_E03_Precio(EscenaP00):
@@ -230,11 +235,11 @@ class P00_E03_Precio(EscenaP00):
         tipos = T(r"Enseñamos tres tipos de objetos: \quad número \quad vector \quad matriz", r"We teach three kinds of objects: \quad number \quad vector \quad matrix", 32).move_to([0, 0.1, 0])
         ident = columna([T(r"matriz con una fila o una columna $\;\longrightarrow\;$ se trata como un vector", r"matrix with one row or one column $\;\longrightarrow\;$ treated as a vector", 32),
                          T(r"matriz de orden 1 $\;\longrightarrow\;$ se trata como un número", r"matrix of order 1 $\;\longrightarrow\;$ treated as a number", 32)], -5.2, -1.2, 0.85)
-        strang = cita([r"``The row vector $[\,1\ \,1\ -1\,]$ is absolutely different,", r"even though it has the same three components.''"], "Strang, p. 4", 32).move_to([-1.6, 1.6, 0])
+        strang = cita([r"``The row vector $[\,1\ \,1\ -1\,]$ is absolutely different,", r"even though it has the same three components.''"], r"Strang, \emph{Introduction to Linear Algebra}, p. 4", 32).move_to([-1.6, 1.6, 0])
         filacol = VGroup(mat([[1, 1, -1]], 30), M(r"\ne", 40), mat([[1], [1], [-1]], 30)).arrange(RIGHT, buff=0.3).next_to(strang, RIGHT, buff=0.7)
         poole = cita(tr([r"``Técnicamente, existe una distinción entre matrices renglón/columna", r"y vectores, pero no abundaremos en esta distinción.''"],
                         [r"A footnote: row and column matrices are, technically,", r"distinct from vectors; the distinction is not pursued."]),
-                     tr("Poole, p. 134, nota al pie", "Poole, footnote (paraphrased)"), 32).move_to([0, -1.3, 0])
+                     tr(r"Poole, \emph{Álgebra lineal}, p. 134, nota al pie", r"Poole, \emph{Linear Algebra: A Modern Introduction}, footnote (paraphrased)"), 32).move_to([0, -1.3, 0])
         preguntas = columna([T(r"¿Qué más determina un vector?", r"What else determines a vector?", 36, COLOR_ESCALAR),
                              T(r"¿Un vector es una fila o una columna?", r"Is a vector a row or a column?", 36, COLOR_ESCALAR),
                              T(r"En $\boldsymbol{y}^{T}\!A$, ¿$\boldsymbol{y}$ es un vector o una matriz?", r"In $\boldsymbol{y}^{T}\!A$, is $\boldsymbol{y}$ a vector or a matrix?", 36, COLOR_ESCALAR),
@@ -244,7 +249,7 @@ class P00_E03_Precio(EscenaP00):
         aT, b, a = r"\boldsymbol{a}^{T}", r"\boldsymbol{b}", r"\boldsymbol{a}"
         f1 = MathTex(r"\boldsymbol{p}=", r"\frac{" + aT + b + "}{" + aT + a + "}", r"\," + a, font_size=38).move_to([-3.7, 2.1, 0])
         f2 = MathTex(r"\boldsymbol{p}=" + a + r"\,", r"\frac{" + aT + b + "}{" + aT + a + "}", r"=P" + b + r",\quad P=\frac{" + a + aT + "}{" + aT + a + "}", font_size=38).move_to([3.0, 2.1, 0])
-        fuente = T("Strang, p. 209", None, 24, GRAY_B).to_edge(UP, buff=0.95)
+        fuente = T(r"Strang, \emph{Introduction to Linear Algebra}, p. 209", None, 24, GRAY_B).to_edge(UP, buff=0.95)
         # cada orden centrado bajo su factor (Marcos, 2026-11-23: antes se desplazaban hacia los paréntesis); para que no se
         # solapen, un poco de espacio entre los factores
         s1 = MathTex(r"\big(", aT, r"\;\;" + b, r"\big)", r"\;" + a, font_size=60).move_to([-3.7, 0.2, 0])
@@ -314,17 +319,24 @@ class P00_E03_Precio(EscenaP00):
             limpia(self, preguntas)
             en_marca(self, "a", f1, fuente)
         
-        with self.voiceover(pausa=3.0, text=tr("""Veamos los órdenes de los factores del numerador. <bookmark mark='t'/> El primero es una matriz con una sola fila, <bookmark mark='b'/> y el segundo, una matriz con una sola columna, <bookmark mark='p'/> así que su producto es una matriz de orden uno. <bookmark mark='c'/> Pero una matriz de orden uno no se puede multiplicar por una matriz columna: <bookmark mark='x'/> los órdenes no encajan. <bookmark mark='n'/> Para que la fórmula tenga sentido, ese producto tiene que ser un número.""",
-                                    """Let us look at the orders of the factors in the numerator. <bookmark mark='t'/> The first is a matrix with a single row, <bookmark mark='b'/> and the second, a matrix with a single column, <bookmark mark='p'/> so their product is a matrix of order one. <bookmark mark='c'/> But a matrix of order one cannot be multiplied by a column matrix: <bookmark mark='x'/> the orders do not match. <bookmark mark='n'/> For the formula to make sense, that product has to be a number.""")) as tracker:
+        with self.voiceover(pausa=0.15, text=tr("""Veamos los órdenes de los factores del numerador. <bookmark mark='t'/> El primero es una matriz con una sola fila, <bookmark mark='b'/> y el segundo, una matriz con una sola columna, <bookmark mark='p'/> así que su producto es una matriz de orden uno.""",
+                                    """Let us look at the orders of the factors in the numerator. <bookmark mark='t'/> The first is a matrix with a single row, <bookmark mark='b'/> and the second, a matrix with a single column, <bookmark mark='p'/> so their product is a matrix of order one.""")) as tracker:
             pinta(self, COLOR_ESCALAR, f1[1][0:3])
             self.play(TransformFromCopy(f1[1][0:3], VGroup(s1[1], s1[2])), TransformFromCopy(f1[2], s1[4]), FadeIn(s1[0]), FadeIn(s1[3]), run_time=1.0)
             en_marca(self, "t", o_aT, run_time=0.5)
             en_marca(self, "b", o_b, run_time=0.5)
             en_marca(self, "p", llave1, o_p, run_time=0.6)
+        
+        # Frase partida en su propia locución (Marcos, 2026-11-24: «orden uno no» sonaba pegado); las otras dos
+        # conservan su trozo de la toma anterior (tmp/parte_toma.py).
+        with self.voiceover(pausa=0.15, text=tr("""Pero no se puede multiplicar una matriz de orden uno por <bookmark mark='c'/> una matriz columna: <bookmark mark='x'/> los órdenes no encajan.""",
+                                    """But a matrix of order one cannot be multiplied by <bookmark mark='c'/> a column matrix: <bookmark mark='x'/> the orders do not match.""")) as tracker:
             en_marca(self, "c", o_a, run_time=0.5)
             self.wait_until_bookmark("x")
             self.play(FadeIn(mal), o_p.animate.set_color(RED), o_a.animate.set_color(RED), run_time=0.6)
-            self.wait_until_bookmark("n")
+        
+        with self.voiceover(pausa=3.0, text=tr("""Para que la fórmula tenga sentido, ese producto tiene que ser un número.""",
+                                    """For the formula to make sense, that product has to be a number.""")) as tracker:
             self.play(FadeIn(num), VGroup(s1[1], s1[2]).animate.set_color(COLOR_ESCALAR), run_time=0.8)
         
         with self.voiceover(pausa=3.0, text=tr("""Después, para que se vea la matriz de proyección, <bookmark mark='f'/> el cociente pasa a la derecha. <bookmark mark='o'/> Ahora los órdenes sí encajan: una matriz columna por una matriz de orden uno. <bookmark mark='r'/> Y la asociatividad permite reagrupar los factores, hasta obtener una matriz cuadrada por una matriz columna. <bookmark mark='m'/> Pero en este paso, el mismo producto tiene que ser una matriz.""",
@@ -430,9 +442,10 @@ class P00_E05_Selector(EscenaP00):
         hab = columna([T(r"Notación habitual", r"Usual notation", 28, GRAY_B), M(r"\mathbf{a}_1,\ \mathbf{a}_2", 38), M(r"\mathbf{a}_1,\ \mathbf{a}_2", 38), M(r"a_1,\ a_2", 38)], -1.0, 2.1, 0.9)
         lib = columna([T(r"Con el selector", r"With the selector", 28, GRAY_B), M(r"\Vect[1]{a},\ \Vect[2]{a}", 38), M(r"\VectC{A}{1},\ \VectC{A}{2}", 38), M(r"\eleVR{a}{1},\ \eleVR{a}{2}", 38)], 2.6, 2.1, 0.9)
         que = columna([T("vectores de una lista", "vectors of a list", 28), T("columnas de una matriz", "columns of a matrix", 28), T("componentes de un vector", "components of a vector", 28)], -6.2, 1.2, 0.9)
-        lin = columna([M(r"\elemRp{\Mat{A}+\Mat{B}}{j}=\VectC{A}{j}+\VectC{B}{j}", 36), M(r"\elemRp{\lambda\Mat{A}}{j}=\lambda\big(\VectC{A}{j}\big)", 36), M(r"\VectTF{A}{i}=\VectC{A}{i}", 36)], -5.6, -1.0, 0.85)
-        fac = columna([M(r"(\Mat{A}+\Mat{B})\Mat{E}=\Mat{A}\Mat{E}+\Mat{B}\Mat{E}", 32, GRAY_B), M(r"(\lambda\Mat{A})\Mat{E}=\lambda(\Mat{A}\Mat{E})", 32, GRAY_B)], 1.2, -1.0, 0.85)
-        cst = coste("leer una barra a la izquierda de una matriz", "reading a bar on the left of a matrix")
+        # centradas en el hueco entre la cabecera y el rótulo del coste (Marcos, 2026-11-24: estaban apretadas abajo sin motivo)
+        lin = columna([M(r"\elemRp{\Mat{A}+\Mat{B}}{j}=\VectC{A}{j}+\VectC{B}{j}", 40), M(r"\elemRp{\lambda\Mat{A}}{j}=\lambda\big(\VectC{A}{j}\big)", 40), M(r"\VectTF{A}{i}=\VectC{A}{i}", 40)], -5.6, 1.1, 1.05)
+        fac = columna([M(r"(\Mat{A}+\Mat{B})\Mat{E}=\Mat{A}\Mat{E}+\Mat{B}\Mat{E}", 36, GRAY_B), M(r"(\lambda\Mat{A})\Mat{E}=\lambda(\Mat{A}\Mat{E})", 36, GRAY_B)], 1.2, 1.1, 1.05)
+        cst = coste("leer la barra a los dos lados de una matriz o de un vector", "reading the bar on either side of a matrix or a vector")
         
         with self.voiceover(text=tr("""La segunda decisión es introducir un operador que selecciona. Se escribe con una barra vertical y un índice.""",
                                     """The second decision is to introduce an operator that selects. It is written with a vertical bar and an index.""")) as tracker:
@@ -489,9 +502,15 @@ class P00_E05_Selector(EscenaP00):
             en_marca(self, "b", lin[1], fac[1])
             en_marca(self, "c", lin[2])
         
-        with self.voiceover(text=tr("""El coste <bookmark mark='c'/> es aprender a leer una barra a la izquierda de una matriz. A cambio, las filas y las columnas ya no necesitan nombres propios.""",
-                                    """The cost <bookmark mark='c'/> is learning to read a bar on the left of a matrix. In exchange, rows and columns no longer need names of their own.""")) as tracker:
+        # «a la izquierda de una matriz» despistaba: en pantalla casi todas las barras están a la derecha, y también junto a
+        # vectores (Marcos, 2026-11-24). Locución partida: la primera frase es nueva; «A cambio...» es un trozo de la toma que
+        # había (tmp/parte_toma.py)
+        with self.voiceover(pausa=0.15, text=tr("""El coste <bookmark mark='c'/> es aprender a leer la barra a los dos lados de una matriz o de un vector.""",
+                                    """The cost <bookmark mark='c'/> is learning to read the bar on either side of a matrix or a vector.""")) as tracker:
             en_marca(self, "c", cst)
+        with self.voiceover(text=tr("""A cambio, las filas y las columnas ya no necesitan nombres propios.""",
+                                    """In exchange, rows and columns no longer need names of their own.""")) as tracker:
+            pass
         
         self.pausa_media()
 
@@ -502,7 +521,10 @@ class P00_E06_Transformaciones(EscenaP00):
         cab = cabecera("Tercera decisión: las transformaciones elementales", "Third decision: elementary transformations")
         R_EJ = r"\begin{bmatrix}1&3\\0&-2\end{bmatrix}"
         anot = M(A_EJ + r"\xrightarrow{\;R_2-2R_1\;}" + R_EJ, 36).move_to([-3.4, 1.7, 0])
-        anot_n = T("no forma parte de ninguna expresión", "not part of any expression", 26, COLOR_ESCALAR).next_to(anot, DOWN, buff=0.3)
+        anot_n = T("la anotación no forma parte de ninguna expresión algebraica", "the annotation is not part of any algebraic expression", 26, COLOR_ESCALAR).next_to(anot, DOWN, buff=0.3)
+        # la anotación R₂−2R₁: los glifos entre las dos matrices que quedan por encima de la flecha (la flecha tiene varios glifos)
+        _n_a, _n_r = len(M(A_EJ, 36)[0]), len(M(R_EJ, 36)[0])
+        etiqueta = VGroup(*[g for g in anot[0][_n_a:len(anot[0]) - _n_r] if g.get_y() > anot.get_y() + 0.05])
         elem = M(r"\begin{bmatrix}1&0\\-2&1\end{bmatrix}" + A_EJ + "=" + R_EJ, 36).move_to([3.3, 1.7, 0])
         elem_n = T(r"$\Mat{E}_1,\ \Mat{E}_2,\dots$: el nombre no dice lo que hace", r"$\Mat{E}_1,\ \Mat{E}_2,\dots$: the name does not say what it does", 26, COLOR_ESCALAR).next_to(elem, DOWN, buff=0.3)
         op = M(r"\TESF{-2}{1}{2}{" + A_EJ + "}=" + R_EJ, 40).move_to([0, -0.9, 0])
@@ -518,10 +540,19 @@ class P00_E06_Transformaciones(EscenaP00):
                                     """The third decision concerns elementary transformations. Textbooks describe them in two ways.""")) as tracker:
             self.play(Write(cab), run_time=1)
         
-        with self.voiceover(text=tr("""La primera es <bookmark mark='a'/> una anotación junto a la flecha o junto a la matriz. Indica la operación realizada, <bookmark mark='n'/> pero no forma parte de ninguna expresión, así que no se puede operar con ella.""",
-                                    """The first is <bookmark mark='a'/> an annotation next to the arrow or next to the matrix. It tells which operation was carried out, <bookmark mark='n'/> but it is not part of any expression, so we cannot operate with it.""")) as tracker:
+        # «no forma parte de ninguna expresión» parecía hablar de la flecha, que se ve escrita (Marcos, 2026-11-24): el sujeto
+        # es la anotación, que se señala al nombrarla, y la expresión es algebraica. Locución partida: la primera frase es un
+        # trozo de la toma que había (tmp/parte_toma.py); la segunda es nueva
+        with self.voiceover(pausa=0.15, text=tr("""La primera es <bookmark mark='a'/> una anotación junto a la flecha o junto a la matriz.""",
+                                    """The first is <bookmark mark='a'/> an annotation next to the arrow or next to the matrix.""")) as tracker:
             en_marca(self, "a", anot)
+        with self.voiceover(text=tr("""Indica la operación realizada, pero <bookmark mark='e'/> esta anotación <bookmark mark='n'/> no forma parte de ninguna expresión algebraica, así que no se puede operar con ella.""",
+                                    """It tells which operation was carried out, but <bookmark mark='e'/> this annotation <bookmark mark='n'/> is not part of any algebraic expression, so we cannot operate with it.""")) as tracker:
+            self.wait_until_bookmark("e")
+            self.play(etiqueta.animate.set_color(COLOR_ESCALAR).scale(1.15), run_time=0.3)
             en_marca(self, "n", anot_n)
+            self.wait(0.6)
+            self.play(etiqueta.animate.set_color(WHITE).scale(1/1.15), run_time=0.3)
         
         with self.voiceover(pausa=2.5, text=tr("""La segunda es <bookmark mark='a'/> el producto por una matriz elemental. Con el producto sí se puede operar. <bookmark mark='n'/> Pero el nombre de la matriz no indica la transformación que realiza, y su orden depende de la matriz que se transforma.""",
                                     """The second is <bookmark mark='a'/> the product by an elementary matrix. With a product we can operate. <bookmark mark='n'/> But the name of the matrix does not tell which transformation it carries out, and its order depends on the matrix being transformed.""")) as tracker:
@@ -560,11 +591,11 @@ class P00_E07_Producto(EscenaP00):
         self.creditos()
         cab = cabecera("Cuarta decisión: definir por lo que es", "Fourth decision: defining by what it is")
         larson = M(r"AB=[c_{ij}],\qquad c_{ij}=\sum_{k=1}^n a_{ik}b_{kj}", 38).move_to([0, 1.9, 0])
-        larson_n = T("Larson, p. 49", None, 24, GRAY_B).next_to(larson, DOWN, buff=0.25)
+        larson_n = T(r"Larson, \emph{Álgebra lineal}, p. 49", r"Larson, \emph{Elementary Linear Algebra}", 24, GRAY_B).next_to(larson, DOWN, buff=0.25)
         mv = M(r"\MV{A}{b} = b_1\VectCpE*{A}{1}+\cdots+b_n\VectCpE*{A}{n}", 40).move_to([0, 0.3, 0])
-        mv_n = T("Strang, p. 23", None, 24, GRAY_B).next_to(mv, DOWN, buff=0.25)
+        mv_n = T(r"Strang, \emph{Introduction to Linear Algebra}, p. 23", None, 24, GRAY_B).next_to(mv, DOWN, buff=0.25)
         defAB = M(r"\VectCp{AB}{j}=\Mat{A}\VectCpE{B}{j}", 44).move_to([-2.4, -1.5, 0])
-        asoc = M(r"(\Mat{A}\Mat{B})\Mat{E}=\Mat{A}(\Mat{B}\Mat{E})", 34, GRAY_B).move_to([3.4, -1.5, 0])
+        asoc = M(r"(\Mat{A}\Mat{B})\mathbf{e}_j=\Mat{A}(\Mat{B}\mathbf{e}_j)", 34, GRAY_B).move_to([3.4, -1.5, 0])
         # la componente del producto y sus tres lecturas, en el mismo sitio
         e0 = M(r"\eleM{AB}{i}{j}", 64).move_to([0, 1.7, 0])
         lect = [M(f, 64).move_to([0, 1.7, 0]) for f in (r"\elemL{\Mat{A}\VectCpE{B}{j}}{i}", r"\elemR{\VectFpE{A}{i}\Mat{B}}{j}", r"\dotProd{\VectFpE{A}{i}}{\VectCpE{B}{j}}")]
@@ -630,7 +661,7 @@ class P00_E08_Demostraciones(EscenaP00):
         self.creditos()
         cab = cabecera("Las demostraciones", "The proofs")
         lineas, reglas = cadena_asociativa(fs=36, x=-5.0, y_sup=1.9, salto=0.9, x_regla=0.6)
-        strang = T("El argumento: Strang, p. 82 (problema)", "The argument: Strang, p. 82 (a problem)", 24, GRAY_B).to_edge(DOWN, buff=0.5)
+        strang = T(r"El argumento: Strang, \emph{Introduction to Linear Algebra}, p. 82 (problema)", r"The argument: Strang, \emph{Introduction to Linear Algebra}, p. 82 (a problem)", 24, GRAY_B).to_edge(DOWN, buff=0.5)
         # Glifos de la cadena: ( A ( B C ) ) | j (0-8);  = A ( ( B C ) | j ) (0-9);  = A ( B ( C | j ) ) (0-9);
         #                      = ( A B ) ( C | j ) (0-9);  = ( ( A B ) C ) | j (0-9)
         PASOS = [([(1, 1), (2, 3), (3, 4), (4, 5), (5, 6)], [(0, 2), (6, 9), (7, 7), (8, 8)]),
@@ -819,8 +850,9 @@ class P00_E11_Cierre(EscenaP00):
                         r"Godement, \emph{Álgebra}, prefacio", 30).move_to([0, 1.9, 0])
         vanloan = VGroup(T(r"``La notación lo es todo''", r"``Notation is everything''", 56, COLOR_ESCALAR), T("Charles F. Van Loan", None, 28, GRAY_B)).arrange(DOWN, buff=0.35).move_to([0, 0.6, 0])
         polya = cita([r"``We should choose our notation carefully,", r"and have some good reason for our choice.''"], r"Polya, \emph{How to Solve It}, p. 140", 30).move_to([0, -1.2, 0])
-        enlaces = columna([T(r"Libro: \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", r"Book (in Spanish): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", 26),
-                           T(r"NAcAL: \texttt{mbujosab.github.io/nacallib}", None, 26), T(r"Licencia CC BY-SA 4.0", r"Licence CC BY-SA 4.0", 26, GRAY_B)], -4.4, -1.9, 0.5)
+        enlaces = columna([T(r"Libro: \emph{Curso de Álgebra Lineal con notación asociativa y un módulo de Python}", r"Book (in Spanish): \emph{Curso de Álgebra Lineal con notación asociativa y un módulo de Python}", 26),
+                           T(r"\texttt{mbujosab.github.io/CursoDeAlgebraLineal}", None, 26),
+                           T(r"NAcAL: \texttt{mbujosab.github.io/nacallib}", None, 26), T(r"Licencia CC BY-SA 4.0", r"Licence CC BY-SA 4.0", 26, GRAY_B)], -4.4, -1.5, 0.5)
         
         with self.voiceover(text=tr("""Se suele pensar que el rigor y una notación precisa añaden dificultad a quien empieza. <bookmark mark='g'/> Godement respondía que, si fuera así, los principiantes entenderían mejor un texto cuanto peor escrito estuviera.""",
                                     """It is often thought that rigour and a precise notation make things harder for beginners. <bookmark mark='g'/> Godement replied that, if that were so, the worst-written textbooks would be the ones beginners understand most easily.""")) as tracker:

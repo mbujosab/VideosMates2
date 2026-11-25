@@ -59,11 +59,15 @@ de reproducción y la lista se reordena por tiempo; comprobar qué fila se edita
 | V13   | es     | 5:24   | V07 es (GOqglYkmOiA) | Propiedades del producto | Demostraciones: vídeo 1.7 | (las propiedades del producto por escalares) | 2026-11-24 |
 | V13   | en     | 3:03   | V06 en (WudpCJUYBiA) | Properties of addition   | Proofs: video 1.6         | «we proved the properties of vectors» | 2026-11-24 |
 | V13   | en     | 5:21   | V07 en (cNfCZMC8QcM) | Properties of scaling    | Proofs: video 1.7         | «Vector operations satisfy eight properties» | 2026-11-24 |
+| V13   | es     | 6:21   | V14 es (Y1Fgr43z_cw) | Fila a fila y transposición | Siguiente: vídeo 1.14 | «En el próximo vídeo veremos que las mismas operaciones...» | 2026-11-25 |
+| V14   | es     | 0:16   | V13 es (njXt9S3kfWU) | Operaciones con matrices | Definición: vídeo 1.13    | «La suma de matrices se define columna a columna» | 2026-11-25 |
 
 * Pantallas finales
 
-Elementos: suscribirse (arriba a la izquierda), lista «Curso de Álgebra Lineal» / «Linear Algebra Course»
-(arriba a la derecha) y el vídeo siguiente (vídeo específico, debajo; los 20 últimos segundos).
+Elementos: suscribirse, lista «Curso de Álgebra Lineal» / «Linear Algebra Course» y el vídeo siguiente
+(vídeo específico). **Todos en la mitad de arriba**: la escena de créditos se rehízo para dejar el texto abajo
+y los enlaces arriba (Marcos, 2026-11-25: la plantilla de Studio pone la lista abajo a la derecha, encima de los
+créditos; moverla siempre). Comprobar en la vista previa que ningún elemento toca el texto de los créditos.
 V01 y V02 ya lo tenían (puesto por Marcos); el resto solo tenía lista y suscribirse.
 **Ningún elemento empieza antes de que la imagen pase a los créditos** (Marcos, 2026-11-24): no tapar
 fórmulas ni la voz final. El «Créditos finales» de la ficha es aproximado: llevar el cursor del editor
@@ -96,6 +100,8 @@ elemento, Studio lo pone en los 20 últimos segundos: corregir siempre su inicio
 | V11   | en     | V12 en (2:52)                          | 2026-11-24 |
 | V12   | es     | V13 es (6:08)                          | 2026-11-24 |
 | V12   | en     | V13 en (6:15)                          | 2026-11-24 |
+| V13   | es     | V14 es (6:36:34, como suscribirse)     | 2026-11-25 |
+| V14   | es     | sin vídeo siguiente: lista y suscribirse desde 5:03 (créditos a las 5:02,7) | 2026-11-25 |
 
 * Revisados sin tarjeta
 
@@ -107,7 +113,9 @@ elemento, Studio lo pone en los 20 últimos segundos: corregir siempre su inicio
 
 * Pendientes
 
-- V13 es/en: tarjeta al siguiente y pantalla final con V14 cuando se publique.
+- V13 en: tarjeta al siguiente y pantalla final con V14 en cuando se publique (sábado 28).
+- V14 es: tarjeta al siguiente (4:54) y V15 en la pantalla final cuando se publique.
+- V14 en: tarjeta a V13 en, pantalla final (lista y suscribirse) al publicarlo.
 - **Segunda pasada (Marcos, 2026-11-24)**: en cada vídeo, (a) tarjeta al siguiente donde la voz lo anuncia
   («En el próximo vídeo...») y (b) pantalla final con el vídeo siguiente (vídeo específico), la lista del curso
   y suscribirse. V01-V12 hechos el 2026-11-24 (es y en). El último publicado apunta a

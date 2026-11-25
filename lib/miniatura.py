@@ -213,9 +213,19 @@ def motivo_v13(idioma):          # suma de matrices columna a columna: cada colu
     return VGroup(a, MathTex("+", font_size=80), b, MathTex("=", font_size=80), s).arrange(RIGHT, buff=0.35)
 
 
+def motivo_v14(idioma):          # la suma de V13 mirada por filas (cada fila con su color) y la transpuesta de una suma
+    a, b, s = _matriz([[1, 3], [2, 4]]), _matriz([[5, 0], [1, 2]]), _matriz([[6, 3], [3, 6]])
+    for m in (a, b, s):
+        for fila, c in zip(m.get_rows(), (COLOR_A, COLOR_B)):
+            fila.set_color(c)
+    suma = VGroup(a, MathTex("+", font_size=80), b, MathTex("=", font_size=80), s).arrange(RIGHT, buff=0.35)
+    t = MathTex(r"(\Mat{A}+\Mat{B})^{\T}=\MatT{A}+\MatT{B}", tex_template=myTemplate, font_size=64)
+    return VGroup(suma, t).arrange(DOWN, buff=0.5)
+
+
 MOTIVOS = {f"L01_V{n:02d}": f for n, f in enumerate(
     [motivo_v01, motivo_v02, motivo_v03, motivo_v04, motivo_v05, motivo_v06, motivo_v07, motivo_v08,
-     motivo_v09, motivo_v10, motivo_v11, motivo_v12, motivo_v13], start=1)}
+     motivo_v09, motivo_v10, motivo_v11, motivo_v12, motivo_v13, motivo_v14], start=1)}
 ESCALA_EXTRA = {"L01_V11": 0.9}     # V11: la ecuación es lo más ancho; un diez por ciento menor
 
 

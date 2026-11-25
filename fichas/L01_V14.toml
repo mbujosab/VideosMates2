@@ -1,0 +1,58 @@
+# Ficha de YouTube del vídeo L01 V14 (una sección por idioma; la inglesa se añade antes de subirlo, el sábado).
+# Rutas relativas a la raíz del repositorio. Se usa con lib/subir_youtube.py:
+#   ~/.venvs/manim/bin/python lib/subir_youtube.py subir fichas/L01_V14.toml es
+# Los capítulos son los inicios de escena que imprime el bloque `montaje` (HD es, 2026-11-25).
+# Título: «Operaciones fila a fila y transposición | Álgebra lineal 1.14» tendría 61 caracteres (más de 60).
+
+[comun]
+erratas = ""   # correcciones tras publicar: comentario fijado + nota en la descripción (Comprobaciones.org, 6c)
+categoria = "27"        # Educación
+privacidad = "public"   # public | unlisted | private
+# miniatura: en cada idioma (lib/miniatura.py)
+
+[es]
+youtube = "Y1Fgr43z_cw"   # subido por la API el 2026-11-25 (adelantado por Marcos del jueves 26)
+video = "L01_V14_FilasYTransposicion.mp4"
+subtitulos = "L01_V14_FilasYTransposicion.srt"
+idioma = "es"
+titulo = "Fila a fila y transposición | Álgebra lineal 1.14"
+titulo_miniatura = "Fila a fila\ny transposición"
+miniatura = "miniaturas/L01_V14_es.png"
+lista = "Curso de Álgebra Lineal"   # título exacto de la lista (o su identificador PL...)
+etiquetas = ["álgebra lineal", "matrices", "filas", "suma de matrices", "producto por un escalar", "transposición",
+             "matriz transpuesta", "operador lineal", "matemáticas", "GECO", "UCM"]
+descripcion = """
+Las matrices también se suman y se multiplican por un escalar fila a fila, y la transposición es un operador lineal.
+
+Decimocuarto vídeo de la lección primera del curso de álgebra lineal.
+
+00:00 Título
+00:06 Un ejemplo, mirado por filas
+00:48 La suma, fila a fila
+01:57 Operadores lineales
+02:37 La transpuesta de una suma
+03:51 La transpuesta de un producto por un escalar
+04:42 Resumen
+05:02 Créditos finales
+
+En un ejemplo, cada fila de la suma de dos matrices es la suma de sus filas, y cada fila del producto por un escalar es el producto del escalar por la fila. Lo demostramos para cualquier matriz con las definiciones de suma de matrices y de vectores: el selector de filas, como el de columnas, se distribuye en las sumas y es asociativo con el producto por un escalar; es decir, es un operador lineal. Después demostramos que la transposición también lo es: da igual sumar primero y transponer después, que transponer primero y sumar después, y lo mismo con el producto por un escalar.
+
+Correspondientes secciones del libro (Secciones 1.5.3 y 1.5.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.5.3
+
+Notebook de esta sección (Binder; tarda un poco en abrirse): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Esp/Lecc01-Secc1.5.ipynb
+Todos los Notebooks de jupyter: https://mbujosab.github.io/nacal-Jupyter-Notebooks/
+
+Vídeo anterior: https://youtu.be/njXt9S3kfWU
+Siguiente vídeo: (se añade al publicarlo)
+Lista completa del curso: https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL
+
+Este curso usa la notación del libro (listas y operador selector), presentada en el primer vídeo: https://youtu.be/HWaQrbSc8WA
+Música: Zeta, de Vincent Rubinetti.
+Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.es).
+"""
+
+[en]
+# Por completar antes de subirlo el sábado: vídeo, subtítulos, etiquetas, descripción y capítulos del HD en.
+titulo = "Row by row and transposition | Linear algebra 1.14"
+titulo_miniatura = "Row by row\nand transposition"
+miniatura = "miniaturas/L01_V14_en.png"
