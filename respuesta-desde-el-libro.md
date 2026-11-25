@@ -257,3 +257,36 @@ La antigua subsección 5.1.5 ya no existe.
 Recibido (2026-11-23): el apartado «El escalar a la derecha» de la Introducción y los avisos de las lecciones 3, 4 y
 5. No hay nada que cambiar en los vídeos hechos; lo que importa para los guiones futuros (numeración nueva de la
 Lección 5, Proposición 3.2.1, vocabulario) queda anotado al final de `CLAUDE.md`.
+
+## Aviso del 2026-11-25: PDF nuevo del libro en la web
+
+La web del libro (https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf)
+sirve un `libro.pdf` nuevo (commit `adada22` de `CursoDeAlgebraLineal-SRC`
+y `d3122bc` del público; 325 páginas). Lo nuevo desde la publicación
+anterior (`92fa8e3`, 2026-11-23):
+
+- **Lección 2.** Párrafo tras el Ejercicio 11 que explica por qué la
+  propiedad (a) del producto punto se llama simetría y no
+  conmutativa; reglas de la cadena en la solución 11(a).
+- **Lección 3.** Cada sección enlaza con su Notebook (cinco enlaces).
+  Vocabulario inglés de la lección decidido (block multiplication,
+  zeroth power, split).
+- **Lección 4.** Resumen corregido: **A** e **I** con la fuente de las
+  matrices en las fórmulas de las matrices permutación.
+- **Lección 6.** Primera tanda del informe de revisión: erratas y
+  errores (conjuntos de llegada del Ejercicio 36, inyectiva,
+  composición, pares). Las tandas siguientes vendrán en otra
+  publicación.
+- **Todo el libro.** Los enlaces a los otros repositorios van a sus
+  páginas web (`github.io`), según la tabla del fichero de
+  coordinación; las salidas de NAcAL se compilan con la 0.5.6
+  (`por_linea=2`).
+
+No cambia la numeración de ninguna sección ni ningún ancla estable:
+los enlaces que ya apuntan al libro siguen valiendo.
+
+No hay nada que cambiar en los vídeos hechos.
+
+Recibido (2026-11-25): el PDF nuevo del libro. No hay nada que cambiar en los vídeos hechos: L02-V01 ya llama
+«simetría» a la propiedad (a) del producto punto, en línea con el párrafo nuevo tras el Ejercicio 11, y los enlaces de
+las fichas a `libro.pdf#...` siguen valiendo porque no cambian las anclas.
