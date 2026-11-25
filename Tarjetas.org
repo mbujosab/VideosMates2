@@ -68,6 +68,11 @@ Elementos: suscribirse, lista «Curso de Álgebra Lineal» / «Linear Algebra Co
 (vídeo específico). **Todos en la mitad de arriba**: la escena de créditos se rehízo para dejar el texto abajo
 y los enlaces arriba (Marcos, 2026-11-25: la plantilla de Studio pone la lista abajo a la derecha, encima de los
 créditos; moverla siempre). Comprobar en la vista previa que ningún elemento toca el texto de los créditos.
+Colocación usada (2026-11-25): suscribirse arriba a la izquierda, vídeo siguiente arriba en el centro y lista arriba
+a la derecha. Revisadas y corregidas ese día todas las pantallas finales de V01-V14 (es y en; V13 en y V14 es solo con
+suscribirse y lista): el vídeo siguiente, o la lista en V01-V02 es, estaba abajo encima de los créditos. En V01-V08 los
+créditos antiguos están a media altura: la fila de arriba queda justo encima del «© 2026» sin taparlo; Studio no deja
+subir más los elementos ni hacerlos más pequeños.
 V01 y V02 ya lo tenían (puesto por Marcos); el resto solo tenía lista y suscribirse.
 **Ningún elemento empieza antes de que la imagen pase a los créditos** (Marcos, 2026-11-24): no tapar
 fórmulas ni la voz final. El «Créditos finales» de la ficha es aproximado: llevar el cursor del editor
