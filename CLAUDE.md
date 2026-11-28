@@ -99,6 +99,12 @@ selector, "componente a componente", etc.).
     a mano): `emacs --batch -l lib/exporta.el --visit=FICHERO.org -f org-html-export-to-html`, con `index.org` o con el
     org del vídeo. `lib/exporta.el` carga htmlize, no evalúa bloques, pone la hoja común en vez del estilo de Org e
     inserta la barra tras el título (salvo que el documento ya la traiga, como `index.org`).
+  - **La barra va también en las páginas de los vídeos** (decisión de Marcos, 2026-11-28, comunicada a NAcAL): la regla
+    general la reserva a las portadas, pero aquí sirve para volver a la portada y saltar a las otras webs. Cuando la
+    barra cambie (aviso de otra sesión), cambiarla en tres sitios: `index.org`, `lib/exporta.el` y, con un script de
+    sustitución, los html de los vídeos ya publicados (sin reexportarlos, para no mover sus anclas). Los enlaces al
+    paquete de LaTeX van a su web (`https://mbujosab.github.io/nacal-latex-package/`); al repositorio, solo si el
+    destino es el código y el texto lo dice.
 - Comprobar visualmente: extraer fotogramas con ffmpeg (bloque
   `fotogramas`, en especial alrededor de cada unión) y mirarlos.
 - **Antes de enseñar un vídeo a Marcos, y tras cada retoque de la narración, repasar

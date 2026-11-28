@@ -150,7 +150,7 @@ COLOR_TITULO    = BLUE      # títulos y cabeceras
 
 ** Uso del paquete de \LaTeX{} con la notación del curso (=nacal.sty=)
 
-Descargable desde [[https://github.com/mbujosab/nacal-latex-package]].
+Descargable desde [[https://mbujosab.github.io/nacal-latex-package/]].
 Todo =Tex=, =MathTex= o =Title= con macros de =nacal= necesita
 =tex_template=myTemplate=. Se define una sola vez, a nivel de módulo
 (los bloques de ensamblado lo colocan tras las utilidades bilingües).

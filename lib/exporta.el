@@ -9,6 +9,9 @@
 ;; Aspecto común de las webs de Álgebra Lineal (2026-11-27; reglas en
 ;; ../coordinacion/coordinacion-entre-repositorios.md): toda página sale con la hoja única
 ;; (sin el estilo por defecto de Org) y con la barra de enlaces justo detrás del título.
+;; Las páginas de los vídeos llevan la barra por decisión de Marcos (2026-11-28), aunque la
+;; regla general la reserva a las portadas: así se vuelve de ellas a la portada y a las otras
+;; webs. Si la barra cambia, cambiarla aquí, en index.org y en los html ya publicados.
 ;; La portada (index.org) trae su propia barra y también se exporta así:
 ;;   emacs --batch -l lib/exporta.el --visit=index.org -f org-html-export-to-html
 
@@ -32,7 +35,7 @@
     <a href=\"https://mbujosab.github.io/nacal-Jupyter-Notebooks/\">Notebooks</a>
     <a href=\"https://mbujosab.github.io/VideosMates2/\" aria-current=\"page\">Vídeos</a>
     <a href=\"https://mbujosab.github.io/nacallib/\">NAcAL</a>
-    <a href=\"https://github.com/mbujosab/nacal-latex-package\">Paquete de LaTeX</a>
+    <a href=\"https://mbujosab.github.io/nacal-latex-package/\">Paquete de LaTeX</a>
     <a href=\"https://mbujosab.github.io/\">Marcos Bujosa</a>
   </div>
 </nav>

@@ -1562,7 +1562,7 @@ for c, ref in zip(cabt[1:], tabla[1:3]):
     c.next_to(ref, UP, buff=0.25).align_to(ref, LEFT)
 tabla = VGroup(tabla, cabt[1:]).scale_to_fit_height(3.9).move_to([3.3, -1.2, 0])
 recursos = columna([T(r"Libro (CC BY-SA 4.0): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", r"Book (CC BY-SA 4.0, in Spanish): \texttt{mbujosab.github.io/CursoDeAlgebraLineal}", 26),
-                    T(r"Macros de \LaTeX{}: \texttt{github.com/mbujosab/nacal-latex-package}", r"\LaTeX{} macros: \texttt{github.com/mbujosab/nacal-latex-package}", 26),
+                    T(r"Macros de \LaTeX{}: \texttt{mbujosab.github.io/nacal-latex-package}", r"\LaTeX{} macros: \texttt{mbujosab.github.io/nacal-latex-package}", 26),
                     T(r"Transparencias y vídeos del curso", r"Class slides and course videos", 26)], -6.6, -1.3, 0.6)
 balance = columna([T(r"\textbf{Inequívoca}: ningún símbolo denota objetos de dos tipos", r"\textbf{Unambiguous}: no symbol denotes objects of two kinds", 30),
                    T(r"\textbf{Fácil de recordar}: a la izquierda, filas; a la derecha, columnas", r"\textbf{Easy to remember}: on the left, rows; on the right, columns", 30),
