@@ -9,21 +9,32 @@ allí; `LEEME.txt`).
 
 ## Encargos de otras sesiones
 
-Los encargos de otras sesiones (libro, NAcAL, material de clase, Notebooks) llegan a la raíz en ficheros
-`encargo-*.md` y `respuesta-*.md`. Un fichero de esos nuevo o con cambios sin confirmar en git es un
-encargo sin tratar. Reglas completas en `coordinacion-entre-repositorios.md` (copia del fichero del libro).
+Los encargos de otras sesiones (libro, NAcAL, material de clase, Notebooks) llegan a
+`../coordinacion/para-los-videos/` en ficheros `encargo-*.md` y `respuesta-*.md` (desde el 2026-11-27; antes
+llegaban a la raíz de este repositorio, que es público). `../coordinacion/` tiene su propio repositorio git,
+que no se publica, y una subcarpeta por destinatario (`para-nacal/`, `para-el-libro/`, `para-las-clases/`,
+`para-los-notebooks/`, `para-los-videos/`). Un fichero nuevo o con cambios sin commit en nuestra subcarpeta es
+un encargo sin tratar. Reglas completas en `../coordinacion/coordinacion-entre-repositorios.md` y en `../coordinacion/LEEME.md`. Ese fichero de reglas
+tiene **una sola copia** (desde el 2026-11-27; ya no hay copia en este repositorio): quien acuerde con Marcos un cambio de las
+reglas lo escribe allí, hace commit solo de él (`git -C ../coordinacion add coordinacion-entre-repositorios.md`) y avisa a las
+demás sesiones con un encargo que diga qué ha cambiado.
 
 - Un hook (`.claude/settings.json`) lo comprueba cada vez que Marcos escribe y avisa con una línea
   «ENCARGOS SIN TRATAR». Si el aviso no aparece al empezar la sesión, hacer la comprobación a mano:
-  `git status --short -- 'encargo-*.md' 'respuesta-*.md'`.
+  `git -C ../coordinacion status --short -- para-los-videos/`. De momento el hook mira también la raíz de
+  este repositorio (sitio antiguo), por si otra sesión escribe todavía allí: si llega algo, tratarlo y
+  moverlo a la subcarpeta.
 - Si hay alguno, leerlo, decir en pantalla cuál es y de qué repositorio viene, resumir lo que pide en
   pocas líneas y preguntar a Marcos qué hacer. No cambiar nada hasta que responda. Si Marcos ha pedido
   otra cosa en ese mensaje, atenderla y dar el aviso al final.
-- Cuando el encargo esté tratado, anotar la respuesta al final del fichero y confirmarlo en git (solo ese
-  fichero: es la excepción a «no hacer commit sin que Marcos lo pida»). Mientras no se confirme, el aviso
-  seguirá saliendo.
-- Para pedir algo a otro repositorio, escribir allí un fichero con uno de esos nombres y no confirmarlo en
-  git: lo confirma quien lo recibe. Para el libro vale también `PendientesDesdeLosVideos.org`.
+- Cuando el encargo esté tratado, anotar la respuesta al final del fichero y hacer commit **en el repositorio
+  de coordinación y solo de nuestra subcarpeta**: `git -C ../coordinacion add para-los-videos/` y después el
+  commit; nunca `git add -A` allí, que se llevaría encargos de otras sesiones sin tratar (es la excepción a
+  «no hacer commit sin que Marcos lo pida»). Mientras no se haga, el aviso seguirá saliendo.
+- Para pedir algo a otra sesión, escribir el fichero en su subcarpeta de `../coordinacion/` y no hacer
+  commit: lo hace quien lo recibe. Para el libro vale también `PendientesDesdeLosVideos.org`, en su repositorio.
+- Los encargos anteriores (`encargo-desde-nacal.md`, `encargo-desde-los-notebooks.md`,
+  `respuesta-desde-el-libro.md`), que esta guía cita por su nombre, están en `../coordinacion/para-los-videos/`.
 
 ## Antes de escribir cualquier escena
 
@@ -76,17 +87,18 @@ selector, "componente a componente", etc.).
   lleva la voz a -16 LUFS con una ganancia fija medida sobre toda la voz más un limitador (desde V08, 2026-10-26: `loudnorm` en una pasada sube la ganancia poco a poco y la primera frase quedaba 5 dB más baja; V05-V07 publicados lo tienen; aplicado también a V09, que se volvió a montar, a V10 y a la plantilla), pone música solo en la portada (fundido al
   empezar la escena 1) y desde la escena `cierre` hasta el fundido a negro,
   y fusiona los `.srt` de las escenas en un único `video.srt` para YouTube.
-- Web: cada vídeo publicado lleva su entrada en `README.org` (python, html
-  del org, enlaces a YouTube es/en) y su org exportado a html. El org del
-  vídeo se exporta en batch con htmlize cargado (`emacs --batch -l
-  lib/exporta.el --visit=FICHERO.org -f org-html-export-to-html`, desde la raíz;
-  `lib/exporta.el` añade `~/.emacs.d/elpa/htmlize-*` al load-path y no evalúa
-  bloques); sale igual que el de V05. El `index.html`, en cambio, **no** se reexporta en
-  batch: el tema de la web (estilo UCM, `worg.css` incrustado) solo sale
-  con `C-c C-e h h` desde el Emacs abierto de Marcos (su configuración
-  `~/.emacs.d`, no scimax); cargar ese `init.el` en batch no lo reproduce
-  (probado 2026-10-17: algo de la sesión interactiva lo pone).
-  Se le añade la entrada a mano copiando la anterior, o lo exporta Marcos.
+- Web (`https://mbujosab.github.io/VideosMates2/`; rehecha el 2026-11-28 con el aspecto común de las webs de Álgebra
+  Lineal, apartado «Aspecto común de las webs» de `../coordinacion/coordinacion-entre-repositorios.md`): hoja única
+  `https://mbujosab.github.io/css/algebra-lineal.css` y barra común de enlaces; **ningún estilo propio** (si la hoja no
+  sirve para algo, se pide el cambio en `../coordinacion/para-nacal/`) y no se cambian direcciones de ficheros publicados.
+  - La portada sale de `index.org`, que incluye el apartado principal de `README.org`: una **tabla por lección**, con una
+    fila por vídeo (número, título de YouTube enlazado al vídeo en español, enlace al inglés, sección del libro, y fuente:
+    html del org y python). Cada vídeo publicado añade su fila (o su enlace inglés) en `README.org`; no hay apartados por
+    vídeo ni índice. Las lecciones llevan `CUSTOM_ID` (`leccion-1`) para que el ancla no cambie.
+  - Todo se exporta en batch desde la raíz, portada incluida (ya no depende del Emacs de Marcos ni se edita `index.html`
+    a mano): `emacs --batch -l lib/exporta.el --visit=FICHERO.org -f org-html-export-to-html`, con `index.org` o con el
+    org del vídeo. `lib/exporta.el` carga htmlize, no evalúa bloques, pone la hoja común en vez del estilo de Org e
+    inserta la barra tras el título (salvo que el documento ya la traiga, como `index.org`).
 - Comprobar visualmente: extraer fotogramas con ffmpeg (bloque
   `fotogramas`, en especial alrededor de cada unión) y mirarlos.
 - **Antes de enseñar un vídeo a Marcos, y tras cada retoque de la narración, repasar
@@ -103,7 +115,7 @@ selector, "componente a componente", etc.).
   PyPI y la definitiva (la 0.5.5 o la que la corrija) se publica en la **semana del 14 de diciembre de 2026**; hay una versión de
   prueba, `0.5.5rc1`, que solo se instala pidiéndola por su número. Hasta la definitiva el entorno de los vídeos se queda en la 0.2.2
   (no actualizarlo) y ningún vídeo enseña nada posterior (`desarrollo`, `idioma`, `Polinomio`, `fracciones`). Desde la 0.5.6 (aviso del 2026-11-24),
-  `desarrollo(..., por_linea=N)` cuenta matrices por línea, no pasos (un antiguo `por_linea=N` es ahora `N+1`). **El día de la
+  `desarrollo(..., por_linea=N)` cuenta matrices por línea, no pasos (un antiguo `por_linea=N` es ahora `N+1`). La 0.5.7 y la 0.5.8 (aviso del 2026-11-27) solo cambian mensajes de error de `T`; ninguna salida. **El día de la
   definitiva**: actualizar `nacal` en `~/.venvs/manim`, renderizar una escena de prueba **con fracciones** (desde la 0.5.5 las matrices
   y vectores con fracciones separan más sus filas; `fracciones('normal')` da el aspecto anterior) y comparar fotogramas, y poner al
   día esta nota. Si se vuelve a renderizar V01 con la versión nueva, la componente `0.11` de `Vector([sp.pi, fracc(3,4), 0, 0.11])`
@@ -564,7 +576,7 @@ el último repaso** a cada vídeo, unos días después de aprobarlo.
 | V11   | mié 11-11-26 | sáb 14-11-26 | **es publicado el miércoles 11 (P6B-AIrPugs, adelantado por Marcos del jueves 12)**, con los retoques de ese día (escena 2: «componente a componente», «cambia de lado los índices», toma A2), id en la ficha, «Siguiente vídeo» en V10 es, entrada en README/index y html del org; falta la pantalla final en Studio. **Inglés**: HD rehecho el 11 (3:07; dos tomas nuevas de Ollie y pausa de 2,3 s tras el ejemplo de la matriz columna), **aprobado por Marcos el 11 de noviembre** y **publicado el sábado 14 de madrugada (MVSR4d0SwNc, adelantado por Marcos de las 15:00)**, con id en la ficha, «Next video» en V10 en y enlace inglés en README/index (la descripción inglesa ya no remite al vídeo de matrices: «From a matrix A we build another matrix B...»); falta la pantalla final en Studio. Las etiquetas tardan un par de minutos en aparecer en `ver` tras una subida (salen `None` al principio). Historia anterior: la transposición (`L01-V11-Transposicion.org`, era V10 hasta el 2026-11-03; historia en «Pendiente»): **español aprobado** (Azure y HD); el 2026-11-03 la segunda frase de la escena 1 pasa a «Al presentar las matrices formamos la matriz B...» (antes «En el vídeo anterior...», ya no cierto): Azure 480p `L01_V11_Transposicion_azure480p.mp4` (3:05) y `../videoMath2/L01_V11_Transposition_azure480p.mp4` (3:04, el inglés entero sigue pendiente de su escucha); HD es rehecho (`L01_V11_Transposicion.mp4`, 3:06); falta el HD en inglés; **español aprobado por Marcos tras la partición (2026-11-03)**, **inglés aprobado también (2026-11-03)** |
 | V12   | mar 17-11-26 | sáb 21-11-26 | **es publicado el martes 17 (zKef0mF4YHQ, adelantado por Marcos del jueves 19)**, con id en la ficha, «Siguiente vídeo» en V11 es, entrada en README/index, html del org y aviso a los Notebooks; falta la pantalla final en Studio; **en publicado el sábado 21 (OqIOSLtdpyo)**, con id en la ficha, «Next video» en V11 en, enlace inglés en README/index y aviso a los Notebooks (el token había caducado: apartado a `tmp/` y reautorizado) · **último repaso de Marcos el 2026-11-16**: «cuadrada: de orden 3», el 2 y el 3 señalados en «filas»/«columnas», pausas de 1 s entre definiciones (escenas 1-2) y tras «es simétrica», A = Aᵀ resaltada en «las dos son iguales», escena 3 más centrada, respiro tras el arranque, cero del −1 en su columna; marcas injertadas sin sintetizar; dos frases nuevas por idioma (arranque «...y para describirlos aprovecharemos la notación del curso» y, en el resumen, «Cada uno de estos tipos... se describe con una igualdad corta... hemos demostrado algunas de sus propiedades»; es: tirada v3); Azure 480p es/en rehechos, franjas de fila (amarilla) y columna (verde) en cada componente de la diagonal, como el siete de V10 (marcas f1, c1, f2, c2 injertadas); **español aprobado por Marcos y HD es rehecho el 2026-11-16 (6:22), capítulos es de la ficha corregidos; inglés aprobado también y HD en rehecho (6:29), capítulos en corregidos; pausa de 1 s tras el criterio de igualdad (escena 4); «component by component» se mantiene en la voz (vocabulario del 2026-11-15)**; listo para subir el jue 19 / sáb 21 (miniatura aprobada por Marcos el 2026-11-05)  tipos de matrices (`L01-V12-TiposDeMatrices.org`, era V11): **aprobado por Marcos en los dos idiomas el 2026-11-04 (Azure 480p), HD es/en hechos ese día, ficha `fichas/L01_V12.toml` con capítulos y miniatura (matriz simétrica y S = Sᵀ, aprobada por Marcos el 2026-11-05)**; **revisado y rehecho el 2026-11-03** (seis escenas: la 3 partida en «Matrices simétricas» y «Componentes de una matriz simétrica»); prueba gTTS `L01_V12_TiposDeMatrices_prueba480p.mp4` (7:14) y `../videoMath2/L01_V12_TypesOfMatrices_prueba480p.mp4` (6:54), a la espera de la revisión de Marcos |
 | V13   | lun 23-11-26 | sáb 28-11-26 | **es publicado el lunes 23 (njXt9S3kfWU, adelantado por Marcos del jueves 26)**: título «Operaciones con matrices \| Álgebra lineal 1.13» («Suma de matrices y producto por escalares | ...» tenía 63 caracteres), ficha nueva `fichas/L01_V13.toml` (solo `[es]` por ahora) y miniatura (suma de dos matrices 2×2 por columnas); antes de subir, sin pausa tras «pause el vídeo» en la escena de las ocho propiedades (pasa sin más al resumen); HD es `L01_V13_OperacionesConMatrices.mp4` (6:51); «Siguiente vídeo» en V12 es, entrada en README/index, html del org y aviso a los Notebooks; pantalla final puesta por Marcos el 2026-11-23 · **inglés aprobado por Marcos y publicado el lunes 23 por la noche (dgQOm-e1StY, adelantado del sábado 28)**: HD `../videoMath2/L01_V13_OperationsWithMatrices.mp4` (6:44), sección `[en]` de la ficha con capítulos y miniatura, «Next video» en V12 en, enlace inglés en README/index y aviso a los Notebooks; pantalla final puesta por Marcos el 2026-11-23 |
-| V14   | mié 25-11-26 | sáb 28-11-26 | **es publicado el miércoles 25 (Y1Fgr43z_cw, adelantado por Marcos del jueves 26)** tras su último repaso: título «Fila a fila y transposición \| Álgebra lineal 1.14» (el del vídeo tenía 61 caracteres), ficha nueva `fichas/L01_V14.toml` (`[en]` solo con título y miniatura), miniatura (suma de V13 por filas y (A+B)ᵀ = Aᵀ+Bᵀ), HD es `L01_V14_FilasYTransposicion.mp4` (5:18) sin tomas nuevas; «Siguiente vídeo» en V13 es, entrada en README/index, html del org y aviso a los Notebooks. Falta en Studio: tarjeta y pantalla final de V13 es hacia V14, y las de V14. **Inglés**: el Azure 480p era del 15-11 y no tenía los retoques del 21 (Marcos, 2026-11-25); rehecho ese día (`../videoMath2/L01_V14_RowsAndTransposition_azure480p.mp4`, 5:13; 19 tomas nuevas de Ollie; «...remove the transposition by moving the index...» sustituida por la tirada 1, sin la pausa de 380 ms antes de «by»), a la espera de su escucha; después HD en, sección `[en]` de la ficha y subida el sábado |
+| V14   | mié 25-11-26 | sáb 28-11-26 | **es publicado el miércoles 25 (Y1Fgr43z_cw, adelantado por Marcos del jueves 26)** tras su último repaso: título «Fila a fila y transposición \| Álgebra lineal 1.14» (el del vídeo tenía 61 caracteres), ficha nueva `fichas/L01_V14.toml` (`[en]` solo con título y miniatura), miniatura (suma de V13 por filas y (A+B)ᵀ = Aᵀ+Bᵀ), HD es `L01_V14_FilasYTransposicion.mp4` (5:18) sin tomas nuevas; «Siguiente vídeo» en V13 es, entrada en README/index, html del org y aviso a los Notebooks. Tarjetas y pantallas finales de V13 es y V14 es puestas en Studio el 25 (elementos arriba, `Tarjetas.org`). **Inglés**: el Azure 480p era del 15-11 y no tenía los retoques del 21 (Marcos, 2026-11-25); rehecho ese día (`../videoMath2/L01_V14_RowsAndTransposition_azure480p.mp4`, 5:13; 19 tomas nuevas de Ollie; «...remove the transposition by moving the index...» sustituida por la tirada 1, sin la pausa de 380 ms antes de «by»), **aprobado por Marcos el 2026-11-25**; HD en `../videoMath2/L01_V14_RowsAndTransposition.mp4` (5:14, sin tomas nuevas) y sección `[en]` de la ficha con capítulos: listo para subir el sábado 28 (`subir fichas/L01_V14.toml en`, después «Next video» en V13 en, enlace inglés en README/index, aviso a los Notebooks y en Studio la tarjeta 0:16 → V13 en, la pantalla final de V13 en con V14 en y la de V14 en, todo arriba) |
 
 Desde el 2026-11-03 todos los vídeos publicados (V01-V08) llevan la miniatura de la serie, el título
 «Tema | Álgebra lineal 1.N» y la descripción completa; todos tienen ficha. V09 es publicado el 2026-11-03 y enlazado desde V08 es; al subir V09 en, lo mismo en la sección `[en]` de V08
@@ -581,11 +593,11 @@ Después se apunta el id en la ficha y se añaden la entrada de `README.org`/`in
 dejaba el vídeo sin poder insertarse (los Notebooks en Binder mostraban «El propietario ha inhabilitado su reproducción en otros sitios
 web»). `cuerpo()` envía ya `embeddable` y `publicStatsViewable` a `True`; V01-V11 corregidos ese día. Las descripciones enlazan desde
 entonces al Notebook de la sección con Binder (V01 → 1.1, V02-V08 → 1.2, V09-V12 → 1.4, V13-V15 → 1.5) y, debajo, a la web de los Notebooks (`mbujosab.github.io/nacal-Jupyter-Notebooks/`; hasta el 2026-11-24, al
-repositorio). Reglas de enlaces entre repositorios: sección final de `coordinacion-entre-repositorios.md`.
+repositorio). Reglas de enlaces entre repositorios: sección final de `../coordinacion/coordinacion-entre-repositorios.md`.
 **Y se avisa a los Notebooks** (desde el 2026-11-21, a petición suya): fecha e identificadores de los dos idiomas, al final de
-`../NAcAL-Jupyter-Notebooks-SRC/encargo-desde-los-videos.md` (se crea si no existe), **sin confirmarlo en git**: lo confirma la sesión de
-los Notebooks cuando ha enlazado el vídeo. No anotarlo en `encargo-desde-los-notebooks.md` de este repositorio: allí su aviso automático
-no salta (V12 es estuvo cuatro días sin enlazar). Sitios previstos: V12 en «Tipos de matrices» del Notebook 1.4; en el 1.5, V13 en «Suma
+`../coordinacion/para-los-notebooks/encargo-desde-los-videos.md` (se crea si no existe; hasta el 2026-11-27 estaba en la raíz de su
+repositorio), **sin hacer commit**: lo hace la sesión de los Notebooks cuando ha enlazado el vídeo. No anotarlo en
+`encargo-desde-los-notebooks.md` de nuestra subcarpeta: allí su aviso automático no salta (V12 es estuvo cuatro días sin enlazar). Sitios previstos: V12 en «Tipos de matrices» del Notebook 1.4; en el 1.5, V13 en «Suma
 de matrices y producto por un escalar», V14 en «Operaciones fila a fila» y V15 en un apartado nuevo sobre la Sección 1.6; si cambia la
 partición V14/V15, avisarles. En inglés, «Lección N» es *Lecture N* (vocabulario del libro): las descripciones dicen «first lecture».
 Al publicar un vídeo, actualizar esta tabla.

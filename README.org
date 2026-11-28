@@ -8,80 +8,55 @@
     :UNNUMBERED: t
     :END:  
 
-Estos videos son parte del material para el curso de [[https://www.ucm.es/fundamentos-analisis-economico2/1%C2%BA-geco-matematicas-ii][Matemáticas II]]
-del [[https://www.ucm.es/estudios/grado-economia][Grado de Economía]] de la [[https://economicasyempresariales.ucm.es][Facultad de CC. Económicas]] de la [[https://www.ucm.es/][UCM]].
+Vídeos cortos, de menos de diez minutos, que explican paso a paso el libro [[https://mbujosab.github.io/CursoDeAlgebraLineal/][Curso de Álgebra Lineal]].
+Son material de la asignatura [[https://www.ucm.es/fundamentos-analisis-economico2/1%C2%BA-geco-matematicas-ii][Matemáticas II]] del [[https://www.ucm.es/estudios/grado-economia][Grado en Economía]] de la [[https://www.ucm.es/][Universidad Complutense de Madrid]],
+pero cada vídeo se puede seguir por separado.
 
-Este repositorio contiene los ficheros fuente para generar los vídeos
-con el módulo [[https://www.manim.community/][Manim]] de python.
+Están en YouTube en dos idiomas: en español, en la lista [[https://www.youtube.com/playlist?list=PLA94O6zqDj0VREglVLepuCd0d8F0d-rnL][Curso de Álgebra Lineal]], y en inglés, en la
+lista [[https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y][Linear Algebra Course]].
 
-** Lección 1
+El curso usa la notación del libro: los vectores y las matrices son listas, y un operador selector
+extrae sus componentes, filas y columnas. Se presenta en los vídeos [[https://youtu.be/HWaQrbSc8WA][1.1]] (vectores),
+[[https://youtu.be/9w6gEv3XrTc][1.9]] (matrices) y [[https://youtu.be/gpVJnl4nAdU][1.10]] (selección de filas, columnas y componentes).
 
-*** Vídeo 1
-- Fichero de python [[./lib/L01_V01_Vectores.py][~L01_V01_Vectores.py~]]
-- Fichero [[file:L01-V01-Vectores.html][html]] con el código
-- Enlace al [[https://youtu.be/HWaQrbSc8WA][vídeo]] 
+** Lección 1: operaciones con vectores y matrices
+   :PROPERTIES:
+   :CUSTOM_ID: leccion-1
+   :END:
 
-*** Vídeo 2
-- Fichero de python [[file:lib/L01_V02_SumaDeVectores-I.py]] 
-- Fichero [[file:L01-V02-SumaDeVectores-I.html][html]] con el código
-- Enlace al [[https://youtu.be/LvcerzXX3IM][vídeo]]
+Cada fila enlaza el vídeo en español y en inglés, la sección del libro que explica y su fuente.
 
-*** Vídeo 3
-- Fichero de python [[file:lib/L01_V03_SumaDeVectores-II.py]] 
-- Fichero [[file:L01-V03-SumaDeVectores-II.html][html]] con el código
-- Enlace al [[https://youtu.be/kSgd-davYhw][vídeo]]
+| N.º | Vídeo | In English | Libro | Fuente |
+|-----+-------+------------+-------+--------|
+| 1.1 | [[https://youtu.be/HWaQrbSc8WA][Vectores]] | [[https://youtu.be/9Je758iM6Dc][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.1][1.1]] | [[file:L01-V01-Vectores.html][org]] · [[file:lib/L01_V01_Vectores.py][python]] |
+| 1.2 | [[https://youtu.be/LvcerzXX3IM][Suma de vectores]] | [[https://youtu.be/k-eMu1gxLRE][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2][1.2]] | [[file:L01-V02-SumaDeVectores-I.html][org]] · [[file:lib/L01_V02_SumaDeVectores-I.py][python]] |
+| 1.3 | [[https://youtu.be/kSgd-davYhw][Interpretación geométrica de la suma]] | [[https://youtu.be/yrwrxVB9uto][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2][1.2]] | [[file:L01-V03-SumaDeVectores-II.html][org]] · [[file:lib/L01_V03_SumaDeVectores-II.py][python]] |
+| 1.4 | [[https://youtu.be/SG4ZwRAIQLY][Multiplicar un vector por un escalar]] | [[https://youtu.be/SHu1-X0MWk0][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2][1.2]] | [[file:L01_V04-ProductoDeUnVectorPorUnEscalar.html][org]] · [[file:lib/L01_V04_ProductoDeUnVectorPorUnEscalar.py][python]] |
+| 1.5 | [[https://youtu.be/nfftYHyi0hU][Los reales con regla y compás]] | [[https://youtu.be/gAWXJVMWO7M][English]] | — | [[file:L01-V05-PropiedadesDeLosNumerosRealesConReglaYCompas.html][org]] · [[file:lib/L01_V05_PropiedadesDeLosRealesConReglaYCompas.py][python]] |
+| 1.6 | [[https://youtu.be/Hrkks90PbVE][Propiedades de la suma de vectores]] | [[https://youtu.be/WudpCJUYBiA][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2][1.2.1]] | [[file:L01-V06-PropiedadesDeLaSumaDeVectores.html][org]] · [[file:lib/L01_V06_PropiedadesDeLaSumaDeVectores.py][python]] |
+| 1.7 | [[https://youtu.be/GOqglYkmOiA][Propiedades del producto por escalares]] | [[https://youtu.be/cNfCZMC8QcM][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.2][1.2.1]] | [[file:L01-V07-PropiedadesDelProductoPorEscalares.html][org]] · [[file:lib/L01_V07_PropiedadesDelProductoPorEscalares.py][python]] |
+| 1.8 | [[https://youtu.be/w62nh5CvJtM][Los vectores como datos]] | [[https://youtu.be/C2QvSW4yX-Y][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.3][1.3]] | [[file:L01-V08-VectoresComoDatos.html][org]] · [[file:lib/L01_V08_VectoresComoDatos.py][python]] |
+| 1.9 | [[https://youtu.be/9w6gEv3XrTc][Matrices]] | [[https://youtu.be/t40aDUbc1oE][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.4][1.4]] | [[file:L01-V09-MatricesFilasYColumnas.html][org]] · [[file:lib/L01_V09_MatricesFilasYColumnas.py][python]] |
+| 1.10 | [[https://youtu.be/gpVJnl4nAdU][Filas, columnas y componentes]] | [[https://youtu.be/LTM7l1w0yY4][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.3][1.4.3]] | [[file:L01-V10-Seleccion.html][org]] · [[file:lib/L01_V10_Seleccion.py][python]] |
+| 1.11 | [[https://youtu.be/P6B-AIrPugs][La transposición]] | [[https://youtu.be/MVSR4d0SwNc][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5][1.4.5]] | [[file:L01-V11-Transposicion.html][org]] · [[file:lib/L01_V11_Transposicion.py][python]] |
+| 1.12 | [[https://youtu.be/zKef0mF4YHQ][Tipos de matrices]] | [[https://youtu.be/OqIOSLtdpyo][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6][1.4.6]] | [[file:L01-V12-TiposDeMatrices.html][org]] · [[file:lib/L01_V12_TiposDeMatrices.py][python]] |
+| 1.13 | [[https://youtu.be/njXt9S3kfWU][Operaciones con matrices]] | [[https://youtu.be/dgQOm-e1StY][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.5][1.5]] | [[file:L01-V13-OperacionesConMatrices.html][org]] · [[file:lib/L01_V13_OperacionesConMatrices.py][python]] |
+| 1.14 | [[https://youtu.be/Y1Fgr43z_cw][Fila a fila y transposición]] | — | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.5.3][1.5.3 y 1.5.4]] | [[file:L01-V14-FilasYTransposicion.html][org]] · [[file:lib/L01_V14_FilasYTransposicion.py][python]] |
 
-*** Vídeo 4
-- Fichero de python [[file:lib/L01_V04_ProductoDeUnVectorPorUnEscalar.py]] 
-- Fichero [[file:L01_V04-ProductoDeUnVectorPorUnEscalar.html][html]] con el código
-- Enlace al [[https://youtu.be/SG4ZwRAIQLY][vídeo]]
+** Cómo están hechos
+   :PROPERTIES:
+   :CUSTOM_ID: como-estan-hechos
+   :END:
 
-*** Vídeo 5
-- Fichero de python [[file:lib/L01_V05_PropiedadesDeLosRealesConReglaYCompas.py]]
-- Fichero [[file:L01-V05-PropiedadesDeLosNumerosRealesConReglaYCompas.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/nfftYHyi0hU][vídeo]] (y a la [[https://youtu.be/gAWXJVMWO7M][versión en inglés]])
+Los vídeos se generan con el módulo [[https://www.manim.community/][Manim]] de Python. Cada vídeo se escribe en un único documento
+de Org, con el guion y el código de las animaciones, y de él salen las versiones en español y en
+inglés. En la tabla, «org» es ese documento y «python» el programa que se genera a partir de él.
+Todas las fuentes están en el [[https://github.com/mbujosab/VideosMates2][repositorio de GitHub]].
 
-*** Vídeo 6
-- Fichero de python [[file:lib/L01_V06_PropiedadesDeLaSumaDeVectores.py]]
-- Fichero [[file:L01-V06-PropiedadesDeLaSumaDeVectores.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/Hrkks90PbVE][vídeo]] (y a la [[https://youtu.be/WudpCJUYBiA][versión en inglés]])
+** Licencia
+   :PROPERTIES:
+   :CUSTOM_ID: licencia
+   :END:
 
-*** Vídeo 7
-- Fichero de python [[file:lib/L01_V07_PropiedadesDelProductoPorEscalares.py]]
-- Fichero [[file:L01-V07-PropiedadesDelProductoPorEscalares.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/GOqglYkmOiA][vídeo]] (y a la [[https://youtu.be/cNfCZMC8QcM][versión en inglés]])
-
-*** Vídeo 8
-- Fichero de python [[file:lib/L01_V08_VectoresComoDatos.py]]
-- Fichero [[file:L01-V08-VectoresComoDatos.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/w62nh5CvJtM][vídeo]] (y a la [[https://youtu.be/C2QvSW4yX-Y][versión en inglés]])
-
-*** Vídeo 9
-- Fichero de python [[file:lib/L01_V09_MatricesFilasYColumnas.py]]
-- Fichero [[file:L01-V09-MatricesFilasYColumnas.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/9w6gEv3XrTc][vídeo]] (y a la [[https://youtu.be/t40aDUbc1oE][versión en inglés]])
-
-*** Vídeo 10
-- Fichero de python [[file:lib/L01_V10_Seleccion.py]]
-- Fichero [[file:L01-V10-Seleccion.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/gpVJnl4nAdU][vídeo]] (y a la [[https://youtu.be/LTM7l1w0yY4][versión en inglés]])
-
-*** Vídeo 11
-- Fichero de python [[file:lib/L01_V11_Transposicion.py]]
-- Fichero [[file:L01-V11-Transposicion.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/P6B-AIrPugs][vídeo]] (y a la [[https://youtu.be/MVSR4d0SwNc][versión en inglés]])
-
-*** Vídeo 12
-- Fichero de python [[file:lib/L01_V12_TiposDeMatrices.py]]
-- Fichero [[file:L01-V12-TiposDeMatrices.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/zKef0mF4YHQ][vídeo]] (y a la [[https://youtu.be/OqIOSLtdpyo][versión en inglés]])
-
-*** Vídeo 13
-- Fichero de python [[file:lib/L01_V13_OperacionesConMatrices.py]]
-- Fichero [[file:L01-V13-OperacionesConMatrices.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/njXt9S3kfWU][vídeo]] (y a la [[https://youtu.be/dgQOm-e1StY][versión en inglés]])
-
-*** Vídeo 14
-- Fichero de python [[file:lib/L01_V14_FilasYTransposicion.py]]
-- Fichero [[file:L01-V14-FilasYTransposicion.html][html]] con el código (fuente única bilingüe)
-- Enlace al [[https://youtu.be/Y1Fgr43z_cw][vídeo]]
+Los vídeos se publican con licencia [[https://creativecommons.org/licenses/by-sa/4.0/deed.es][Creative Commons BY-SA 4.0]]. El código de este repositorio, con
+licencia [[https://github.com/mbujosab/VideosMates2/blob/main/LICENSE][GPL v3]].

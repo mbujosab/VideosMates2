@@ -52,7 +52,41 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 """
 
 [en]
-# Por completar antes de subirlo el sábado: vídeo, subtítulos, etiquetas, descripción y capítulos del HD en.
+video = "../videoMath2/L01_V14_RowsAndTransposition.mp4"
+subtitulos = "../videoMath2/L01_V14_RowsAndTransposition.srt"
+idioma = "en"
 titulo = "Row by row and transposition | Linear algebra 1.14"
 titulo_miniatura = "Row by row\nand transposition"
 miniatura = "miniaturas/L01_V14_en.png"
+lista = "Linear Algebra Course"
+etiquetas = ["linear algebra", "matrices", "rows", "matrix addition", "scalar multiplication", "transposition",
+             "transpose matrix", "linear operator", "mathematics", "GECO", "UCM"]
+descripcion = """
+Matrices are also added and multiplied by a scalar row by row, and transposition is a linear operator.
+
+Fourteenth video of the first lecture of the linear algebra course.
+
+00:00 Title
+00:06 An example, seen by rows
+00:49 Addition, row by row
+01:53 Linear operators
+02:33 The transpose of a sum
+03:48 The transpose of a product by a scalar
+04:38 Key takeaways
+04:58 Closing credits
+
+In an example, each row of the sum of two matrices is the sum of their rows, and each row of the product by a scalar is the scalar times the row. We prove it for any matrix using the definitions of matrix addition and vector addition: the row selector, like the column selector, distributes over sums and is associative with the product by a scalar; that is, it is a linear operator. Then we prove that transposition is linear too: adding first and transposing afterwards gives the same as transposing first and adding afterwards, and the same holds for the product by a scalar.
+
+Corresponding book sections (Sections 1.5.3 and 1.5.4): https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.5.3 (the book is in Spanish)
+
+Notebook for this section (Binder; it takes a moment to start): https://mybinder.org/v2/gh/mbujosab/nacal-jupyter-notebooks/master?urlpath=lab/tree/Eng/Lecc01-Secc1.5-Eng.ipynb
+All the Jupyter Notebooks: https://mbujosab.github.io/nacal-Jupyter-Notebooks/
+
+Previous video: https://youtu.be/dgQOm-e1StY
+Next video: (added when published)
+Full course playlist: https://www.youtube.com/playlist?list=PLA94O6zqDj0UbMOTqUOucVNpy3BGCgZ0Y
+
+This course uses the notation of the book (lists and the selector operator), introduced in the first video: https://youtu.be/9Je758iM6Dc
+Music: Zeta, by Vincent Rubinetti.
+License: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/).
+"""
