@@ -52,6 +52,7 @@ Licencia: Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa
 """
 
 [en]
+youtube = "qB6fE-WuoAU"   # subido por la API el 2026-11-28 (sábado, de madrugada)
 video = "../videoMath2/L01_V14_RowsAndTransposition.mp4"
 subtitulos = "../videoMath2/L01_V14_RowsAndTransposition.srt"
 idioma = "en"

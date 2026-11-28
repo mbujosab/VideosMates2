@@ -61,6 +61,8 @@ de reproducción y la lista se reordena por tiempo; comprobar qué fila se edita
 | V13   | en     | 5:21   | V07 en (cNfCZMC8QcM) | Properties of scaling    | Proofs: video 1.7         | «Vector operations satisfy eight properties» | 2026-11-24 |
 | V13   | es     | 6:21   | V14 es (Y1Fgr43z_cw) | Fila a fila y transposición | Siguiente: vídeo 1.14 | «En el próximo vídeo veremos que las mismas operaciones...» | 2026-11-25 |
 | V14   | es     | 0:16   | V13 es (njXt9S3kfWU) | Operaciones con matrices | Definición: vídeo 1.13    | «La suma de matrices se define columna a columna» | 2026-11-25 |
+| V13   | en     | 6:15   | V14 en (qB6fE-WuoAU) | Row by row and transposition | Next: video 1.14      | «In the next video we will see that the same operations...» | 2026-11-28 |
+| V14   | en     | 0:16   | V13 en (dgQOm-e1StY) | Operations with matrices | Definition: video 1.13    | «Matrix addition is defined column by column» | 2026-11-28 |
 
 * Pantallas finales
 
@@ -107,6 +109,8 @@ elemento, Studio lo pone en los 20 últimos segundos: corregir siempre su inicio
 | V12   | en     | V13 en (6:15)                          | 2026-11-24 |
 | V13   | es     | V14 es (6:36:34, como suscribirse)     | 2026-11-25 |
 | V14   | es     | sin vídeo siguiente: lista y suscribirse desde 5:03 (créditos a las 5:02,7) | 2026-11-25 |
+| V13   | en     | V14 en (6:29:52, como suscribirse y la lista) | 2026-11-28 |
+| V14   | en     | sin vídeo siguiente: lista y suscribirse desde 4:59 (créditos a las 4:58,85) | 2026-11-28 |
 
 * Revisados sin tarjeta
 
@@ -118,9 +122,7 @@ elemento, Studio lo pone en los 20 últimos segundos: corregir siempre su inicio
 
 * Pendientes
 
-- V13 en: tarjeta al siguiente y pantalla final con V14 en cuando se publique (sábado 28).
-- V14 es: tarjeta al siguiente (4:54) y V15 en la pantalla final cuando se publique.
-- V14 en: tarjeta a V13 en, pantalla final (lista y suscribirse) al publicarlo.
+- V14 es y en: tarjeta al siguiente (es 4:54, en 4:50) y V15 en la pantalla final cuando se publique.
 - **Segunda pasada (Marcos, 2026-11-24)**: en cada vídeo, (a) tarjeta al siguiente donde la voz lo anuncia
   («En el próximo vídeo...») y (b) pantalla final con el vídeo siguiente (vídeo específico), la lista del curso
   y suscribirse. V01-V12 hechos el 2026-11-24 (es y en). El último publicado apunta a

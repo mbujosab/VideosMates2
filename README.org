@@ -41,7 +41,7 @@ Cada fila enlaza el vídeo en español y en inglés, la sección del libro que e
 | 1.11 | [[https://youtu.be/P6B-AIrPugs][La transposición]] | [[https://youtu.be/MVSR4d0SwNc][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.5][1.4.5]] | [[file:L01-V11-Transposicion.html][org]] · [[file:lib/L01_V11_Transposicion.py][python]] |
 | 1.12 | [[https://youtu.be/zKef0mF4YHQ][Tipos de matrices]] | [[https://youtu.be/OqIOSLtdpyo][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.4.6][1.4.6]] | [[file:L01-V12-TiposDeMatrices.html][org]] · [[file:lib/L01_V12_TiposDeMatrices.py][python]] |
 | 1.13 | [[https://youtu.be/njXt9S3kfWU][Operaciones con matrices]] | [[https://youtu.be/dgQOm-e1StY][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.1.5][1.5]] | [[file:L01-V13-OperacionesConMatrices.html][org]] · [[file:lib/L01_V13_OperacionesConMatrices.py][python]] |
-| 1.14 | [[https://youtu.be/Y1Fgr43z_cw][Fila a fila y transposición]] | — | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.5.3][1.5.3 y 1.5.4]] | [[file:L01-V14-FilasYTransposicion.html][org]] · [[file:lib/L01_V14_FilasYTransposicion.py][python]] |
+| 1.14 | [[https://youtu.be/Y1Fgr43z_cw][Fila a fila y transposición]] | [[https://youtu.be/qB6fE-WuoAU][English]] | [[https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#subsection.1.5.3][1.5.3 y 1.5.4]] | [[file:L01-V14-FilasYTransposicion.html][org]] · [[file:lib/L01_V14_FilasYTransposicion.py][python]] |
 
 ** Cómo están hechos
    :PROPERTIES:
