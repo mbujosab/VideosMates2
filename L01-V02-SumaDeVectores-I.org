@@ -11,7 +11,7 @@
 # Para que no ejecute todo el código al exportar a pdf
 #+PROPERTY: header-args :eval never-export
 
-\maketitle
+#+LATEX: \maketitle
 
 *** COMMENT Ajustes para la compilación de la documentación
 #+CALL: NombreEnChunksDeCodigo()
@@ -24,13 +24,13 @@
 #+END_SRC
 
 
-* Suma de Vectores de \R[n] - Vídeo 02
+* Suma de Vectores de $\mathbb{R}^{n}$ - Vídeo 02
 
 
 # ** Español
 
 
-** Escena 1 - Suma de vectores de \R[n]
+** Escena 1 - Suma de vectores de $\mathbb{R}^{n}$
 
 # <<Carga de la librería Manim y NacAL>>
 

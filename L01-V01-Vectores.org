@@ -10,7 +10,7 @@
 # Para que no ejecute todo el código al exportar a pdfL01_V02_E02_PropiedadConmutativa
 #+PROPERTY: header-args :eval never-export
 
-\maketitle
+#+LATEX: \maketitle
 
 *** COMMENT Ajustes para la compilación de la documentación
 #+CALL: NombreEnChunksDeCodigo()
@@ -23,10 +23,10 @@
 #+END_SRC
 
 
-* Vectores de \R[n] - V01
+* Vectores de $\mathbb{R}^{n}$ - V01
 
 
-** Escena 1 - Definición de vector de \R[n]
+** Escena 1 - Definición de vector de $\mathbb{R}^{n}$
 
 #+call: rodando(fichero="L01_V01_Vectores", escena="1")
 
@@ -122,7 +122,7 @@ class L01_V01_E01_VectoresDefinicion(VoiceoverScene):
 # file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E01_VectoresDefinicion.mp4
 
 
-** Escena 2 - Notación vectores de \R[n]
+** Escena 2 - Notación vectores de $\mathbb{R}^{n}$
 
 #+call: rodando(fichero="L01_V01_Vectores", escena="2")
 
@@ -251,7 +251,7 @@ class L01_V01_E02_VectoresNotacion(VoiceoverScene):
 # file:./lib/media/videos/L01_V01_Vectores/480p15/L01_V01_E02_VectoresNotacion.mp4
 
 
-** Escena 3 - Selección de elementos de un vector de \R[n]
+** Escena 3 - Selección de elementos de un vector de $\mathbb{R}^{n}$
   
 #+call: rodando(fichero="L01_V01_Vectores", escena="3")
 

@@ -11,7 +11,7 @@
 # Para que no ejecute todo el código al exportar a pdf
 #+PROPERTY: header-args :eval never-export
 
-\maketitle
+#+LATEX: \maketitle
 
 *** COMMENT Ajustes para la compilación de la documentación
 #+CALL: NombreEnChunksDeCodigo()
@@ -24,12 +24,12 @@
 #+END_SRC
 
 
-* Interpretación geométrica de la suma de Vectores de \R[n] - V03
+* Interpretación geométrica de la suma de Vectores de $\mathbb{R}^{n}$ - V03
 
 #  file:./lib/media/videos/L01_V03_SumaDeVectores-II/480p15/L01_V02_E02_PropiedadConmutativaDeLaSuma.mp4
 
 
-** Escena 1 - Interpretación geométrica de la suma en $\R[2]$
+** Escena 1 - Interpretación geométrica de la suma en $\mathbb{R}^{2}$
 
 #+call: rodando(fichero="L01_V03_SumaDeVectores-II", escena=" 1")
 #+call: rodandoHD(fichero="L01_V03_SumaDeVectores-II", escena="1")
@@ -569,7 +569,7 @@ class L01_V03_E01_SumaEnR2(MiEscenaConVoz):
 # flechab1s = Arrow(axes.c2p(*b2.coords), axes.c2p(*b.coords), buff=0, stroke_color = BLUE_A, stroke_width=4)
 # flechab2s = Arrow(axes.c2p(*b1.coords), axes.c2p(*b.coords), buff=0, stroke_color = BLUE_A, stroke_width=4)
 
-** Escena 2 - Interpretación geométrica de la suma en $\R[3]$
+** Escena 2 - Interpretación geométrica de la suma en $\mathbb{R}^{3}$
 
 #+call: rodando(fichero="L01_V03_SumaDeVectores-II", escena="3,2")
 #+call: rodandoHD(fichero="L01_V03_SumaDeVectores-II", escena="3,2")
@@ -719,7 +719,7 @@ class L01_V03_E02_SumaEnR3_3D(ThreeDScene):
 #+END_SRC
 
 
-** Escena 3 - Interpretación geométrica de la suma en $\R[n]$
+** Escena 3 - Interpretación geométrica de la suma en $\mathbb{R}^{n}$
 
 
 #+BEGIN_SRC python :noweb tangle :tangle ./lib/L01_V03_SumaDeVectores-II.py
